@@ -1,0 +1,44 @@
+Manifest-Version: 1.0
+Bundle-License: http://repository.jboss.org/licenses/cddl.txt, http://
+ repository.jboss.org/licenses/gpl-2.0-ce.txt
+Bundle-SymbolicName: org.jboss.spec.javax.transaction.jboss-transactio
+ n-api_1.2_spec
+Archiver-Version: Plexus Archiver
+Built-By: tomaz
+Bnd-LastModified: 1461588938318
+Specification-Title: JSR 907: Java Transaction API (JTA)
+Implementation-Vendor-Id: org.jboss.spec.javax.transaction
+Bundle-DocURL: http://www.jboss.org
+Import-Package: javax.enterprise.context;resolution:=optional;version=
+ "[1.1,2)",javax.enterprise.util;resolution:=optional;version="[1.1,2)
+ ",javax.interceptor;version="[1.2,2)",javax.transaction.xa;version="[
+ 1.2,2)"
+Require-Capability: osgi.ee;filter:="(&(osgi.ee=JavaSE)(version=1.7))"
+Scm-Url: https://github.com/jboss/jboss-transaction-api_spec
+Export-Package: javax.transaction;version="1.2";uses:="javax.enterpris
+ e.context,javax.enterprise.util,javax.interceptor,javax.transaction.x
+ a",javax.transaction.xa;version="1.2"
+Bundle-Name: Java Transaction API
+Implementation-Title: Java Transaction API
+Bundle-Description: The Java Transaction 1.2 API classes
+Implementation-Version: 1.0.1.Final
+Java-Version: 1.8.0_74
+Scm-Connection: scm:git:git@github.com:jboss/jboss-transaction-api_spe
+ c.git
+Specification-Vendor: Oracle, Inc.
+Os-Arch: amd64
+Bundle-ManifestVersion: 2
+Java-Vendor: Oracle Corporation
+Bundle-Vendor: JBoss by Red Hat
+Os-Name: Windows 10
+Tool: Bnd-3.0.0.201509101326
+Implementation-Vendor: JBoss by Red Hat
+Os-Version: 10.0
+Scm-Revision: 1492dce3f36bcf49228b72b1554bb6cf5e5e205f
+Bundle-Version: 1.0.1.Final
+Created-By: Apache Maven Bundle Plugin
+Build-Jdk: 1.8.0_74
+Specification-Version: 1.2
+Implementation-URL: http://www.jboss.org/jboss-transaction-api_1.2_spe
+ c
+

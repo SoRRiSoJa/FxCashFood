@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
+
+<VBox fx:id="vBox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="572.0" prefWidth="180.0" style="-fx-background-color: #ffffff;" stylesheets="@../styles/GavetaMesaCSS.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cashf.controller.menu.GavetaMesasFXMLController">
+   <children>
+      <Pane fx:id="pane" prefHeight="140.0" prefWidth="180.0" style="-fx-background-color: #0081cb;" styleClass="pane">
+         <children>
+            <Circle fx:id="circleImg" fill="WHITE" layoutX="90.0" layoutY="70.0" radius="56.0" stroke="WHITE" strokeLineCap="ROUND" strokeType="INSIDE" />
+         </children>
+      </Pane>
+      <FlowPane accessibleText="FPane" prefHeight="432.0" prefWidth="180.0">
+         <children>
+            <JFXButton accessibleText="M01" alignment="BOTTOM_CENTER" contentDisplay="TOP" prefHeight="48.0" prefWidth="90.0" text="Nº 01">
+               <graphic>
+                  <FontAwesomeIconView fx:id="iconM1" fill="#1fb904" glyphName="GLASS" size="20" />
+               </graphic>
+               <font>
+                  <Font name="System Bold" size="10.0" />
+               </font>
+            </JFXButton>
+            <JFXButton accessibleText="M02" alignment="BOTTOM_CENTER" contentDisplay="TOP" layoutX="10.0" layoutY="10.0" prefHeight="48.0" prefWidth="90.0" text="Nº 02">
+               <graphic>
+                  <FontAwesomeIconView fx:id="iconM2" fill="#1fb904" glyphName="GLASS" size="20" />
+               </graphic>
+               <font>
+                  <Font name="System Bold" size="10.0" />
+               </font>
+            </JFXButton>
+            <JFXButton accessibleText="M03" alignment="BOTTOM_CENTER" contentDisplay="TOP" layoutX="10.0" layoutY="10.0" prefHeight="48.0" prefWidth="90.0" text="Nº 03">
+               <graphic>
+                  <FontAwesomeIconView fx:id="iconM3" fill="#1fb904" glyphName="GLASS" size="20" />
+               </graphic>
+               <font>
+                  <Font name="System Bold" size="10.0" />
+               </font>
+            </JFXButton>
+            <JFXButton accessibleText="M04" alignment="BOTTOM_CENTER" contentDisplay="TOP" layoutX="100.0" layoutY="10.0" prefHeight="48.0" prefWidth="90.0" text="Nº 04">
+               <graphic>
+                  <FontAwesomeIconView fx:id="iconM4" fill="#1fb904" glyphName="GLASS" size="20" />
+               </graphic>
+               <font>
+                  <Font name="System Bold" size="10.0" />
+               </font>
+            </JFXButton>
+            <JFXButton accessibleText="M05" alignment="BOTTOM_CENTER" contentDisplay="TOP" layoutX="10.0" layoutY="53.0" prefHeight="48.0" prefWidth="90.0" text="Nº 05">
+               <graphic>
+                  <FontAwesomeIconView fx:id="iconM5" fill="#1fb904" glyphName="GLASS" size="20" />
+               </graphic>
+               <font>
+                  <Font name="System Bold" size="10.0" />
+               </font>
+            </JFXButton>
+            <JFXButton accessibleText="M06" alignment="BOTTOM_CENTER" contentDisplay="TOP" layoutX="100.0" layoutY="53.0" prefHeight="48.0" prefWidth="90.0" text="Nº 06">
+               <graphic>
+                  <FontAwesomeIconView fx:id="iconM6" fill="#1fb904" glyphName="GLASS" size="20" />
+               </graphic>
+               <font>
+                  <Font name="System Bold" size="10.0" />
+               </font>
+            </JFXButton>
+            <JFXButton accessibleText="M07" alignment="BOTTOM_CENTER" contentDisplay="TOP" layoutX="10.0" layoutY="96.0" prefHeight="48.0" prefWidth="90.0" text="Nº 07">
+               <graphic>
+                  <FontAwesomeIconView fx:id="iconM7" fill="#1fb904" glyphName="GLASS" size="20" />
+               </graphic>
+               <font>
+                  <Font name="System Bold" size="10.0" />
+               </font>
+            </JFXButton>
+            <JFXButton accessibleText="M08" alignment="BOTTOM_CENTER" contentDisplay="TOP" layoutX="100.0" layoutY="96.0" prefHeight="48.0" prefWidth="90.0" text="Nº 08">
+               <graphic>
+                  <FontAwesomeIconView fx:id="iconM8" fill="#1fb904" glyphName="GLASS" size="20" />
+               </graphic>
+               <font>
+                  <Font name="System Bold" size="10.0" />
+               </font>
+            </JFXButton>
+            <JFXButton accessibleText="M09" alignment="BOTTOM_CENTER" contentDisplay="TOP" layoutX="10.0" layoutY="139.0" prefHeight="48.0" prefWidth="90.0" text="Nº 09">
+               <graphic>
+                  <FontAwesomeIconView fx:id="iconM9" fill="#1fb904" glyphName="GLASS" size="20" />
+               </graphic>
+               <font>
+                  <Font name="System Bold" size="10.0" />
+               </font>
+            </JFXButton>
+            <JFXButton accessibleText="M10" alignment="BOTTOM_CENTER" contentDisplay="TOP" layoutX="100.0" layoutY="139.0" prefHeight="48.0" prefWidth="90.0" text="Nº 10">
+               <graphic>
+                  <FontAwesomeIconView fx:id="iconM10" fill="#1fb904" glyphName="GLASS" size="20" />
+               </graphic>
+               <font>
+                  <Font name="System Bold" size="10.0" />
+               </font>
+            </JFXButton>
+            <JFXButton accessibleText="M11" alignment="BOTTOM_CENTER" contentDisplay="TOP" layoutX="10.0" layoutY="182.0" prefHeight="48.0" prefWidth="90.0" text="Nº 11">
+               <graphic>
+                  <FontAwesomeIconView fx:id="iconM11" fill="#1fb904" glyphName="GLASS" size="20" />
+               </graphic>
+               <font>
+                  <Font name="System Bold" size="10.0" />
+               </font>
+            </JFXButton>
+            <JFXButton accessibleText="M12" alignment="BOTTOM_CENTER" contentDisplay="TOP" layoutX="100.0" layoutY="182.0" prefHeight="48.0" prefWidth="90.0" text="Nº 12">
+               <graphic>
+                  <FontAwesomeIconView fx:id="iconM12" fill="#1fb904" glyphName="GLASS" size="20" />
+               </graphic>
+               <font>
+                  <Font name="System Bold" size="10.0" />
+               </font>
+            </JFXButton>
+            <JFXButton accessibleText="M13" alignment="BOTTOM_CENTER" contentDisplay="TOP" layoutX="10.0" layoutY="225.0" prefHeight="48.0" prefWidth="90.0" text="Nº 13">
+               <graphic>
+                  <FontAwesomeIconView fx:id="iconM13" fill="#1fb904" glyphName="GLASS" size="20" />
+               </graphic>
+               <font>
+                  <Font name="System Bold" size="10.0" />
+               </font>
+            </JFXButton>
+            <JFXButton accessibleText="M14" alignment="BOTTOM_CENTER" contentDisplay="TOP" layoutX="100.0" layoutY="225.0" prefHeight="48.0" prefWidth="90.0" text="Nº 14">
+               <graphic>
+                  <FontAwesomeIconView fx:id="iconM14" fill="#1fb904" glyphName="GLASS" size="20" />
+               </graphic>
+               <font>
+                  <Font name="System Bold" size="10.0" />
+               </font>
+            </JFXButton>
+            <JFXButton accessibleText="M15" alignment="BOTTOM_CENTER" contentDisplay="TOP" layoutX="10.0" layoutY="268.0" prefHeight="48.0" prefWidth="90.0" text="Nº 15">
+               <graphic>
+                  <FontAwesomeIconView fx:id="iconM15" fill="#1fb904" glyphName="GLASS" size="20" />
+               </graphic>
+               <font>
+                  <Font name="System Bold" size="10.0" />
+               </font>
+            </JFXButton>
+            <JFXButton accessibleText="M16" alignment="BOTTOM_CENTER" contentDisplay="TOP" layoutX="100.0" layoutY="268.0" prefHeight="48.0" prefWidth="90.0" text="Nº 16">
+               <graphic>
+                  <FontAwesomeIconView fx:id="iconM16" fill="#1fb904" glyphName="GLASS" size="20" />
+               </graphic>
+               <font>
+                  <Font name="System Bold" size="10.0" />
+               </font>
+            </JFXButton>
+            <JFXButton accessibleText="M17" alignment="BOTTOM_CENTER" contentDisplay="TOP" layoutX="10.0" layoutY="311.0" prefHeight="48.0" prefWidth="90.0" text="Nº 17">
+               <graphic>
+                  <FontAwesomeIconView fx:id="iconM17" fill="#1fb904" glyphName="GLASS" size="20" />
+               </graphic>
+               <font>
+                  <Font name="System Bold" size="10.0" />
+               </font>
+            </JFXButton>
+            <JFXButton accessibleText="M18" alignment="BOTTOM_CENTER" contentDisplay="TOP" layoutX="100.0" layoutY="311.0" prefHeight="48.0" prefWidth="90.0" text="Nº 18">
+               <graphic>
+                  <FontAwesomeIconView fx:id="iconM18" fill="#1fb904" glyphName="GLASS" size="20" />
+               </graphic>
+               <font>
+                  <Font name="System Bold" size="10.0" />
+               </font>
+            </JFXButton>
+         </children>
+      </FlowPane>
+   </children>
+</VBox>

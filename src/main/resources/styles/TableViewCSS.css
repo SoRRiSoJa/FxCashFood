@@ -1,0 +1,82 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 11/09/2017, 16:20:21
+    Author     : joao
+*/
+
+.table-view{
+    -fx-tree-table-color: #80deea;
+    -fx-tree-table-rippler-color : rgba(255, 0, 0, 0.9);
+}
+.table-view:focused .table-row-cell:selected {
+    -fx-background-color: -fx-tree-table-color  ;
+    -fx-table-cell-border-color: -fx-tree-table-color;
+}
+
+.table-view:focused .table-row-cell:selected .table-cell{
+    -fx-text-fill: white;
+}
+
+
+.table-view .column-header ,
+.table-view .column-header-background,
+.table-view .column-header-background .filler{
+    -fx-background-color:TRANSPARENT;
+}
+
+.table-view .column-header{
+    -fx-border-width : 0 1 0 1;
+    -fx-border-color: #F3F3F3;
+}
+
+.table-view .column-header .label {
+    -fx-text-fill : #949494;
+    -fx-padding : 9 0 9 0 ;
+}
+
+.table-view .column-header .arrow, .table-view .column-header .sort-order-dot{ 
+    -fx-background-color : #949494;
+}
+
+.table-view .column-header:last-visible {
+    -fx-border-width: 0 2 0 1;
+}
+
+.table-view .column-header-background{
+  -fx-border-width : 0 0.0 1 0;
+  -fx-border-color:#F3F3F3;
+}
+
+.table-view .table-cell{
+    -fx-border-width:0 0 0 0;
+    -fx-padding : 4 0 4 0 ;
+}
+
+.table-view .column-overlay{
+    -fx-background-color: -fx-tree-table-color;
+}
+
+.table-view .column-resize-line, .table-view .column-drag-header{
+    -fx-background-color: -fx-tree-table-rippler-color;
+}
+
+.table-view:focused {
+    -fx-background-color: -fx-tree-table-color,-fx-box-border,-fx-control-inner-background;
+    -fx-background-insets: -1.4, 0, 1;
+    -fx-background-radius: 1.4, 0, 0;
+    /*....*/
+    -fx-padding: 1; 
+}
+
+.table-row-cell > .tree-disclosure-node > .arrow {
+    -fx-background-color: -fx-text-fill;
+    -fx-padding: 0.333333em 0.229em 0.333333em 0.229em; 
+    -fx-shape: "M 0 -3.5 L 4 0 L 0 3.5 z";
+}
+.table-row-cell .text-field{
+    -fx-focus-color: rgba(240,40,40);
+}
