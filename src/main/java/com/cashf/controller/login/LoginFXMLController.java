@@ -44,6 +44,7 @@ public class LoginFXMLController implements Initializable {
     private JFXButton btnLogin;
     //-------------------------
     Image img = new Image("/Imagens/access_denied_128.png");
+    Image imgOne = new Image("/Imagens/check-user.png");
     Notifications notificationBuilder;
 
     /**
@@ -68,9 +69,15 @@ public class LoginFXMLController implements Initializable {
             if (LoginController.getInstance().validatePassword()) {//Validando Senha
                 Pane menuPrincipal;
                 try {//Carregando Menu Principal
+                    notificationBuilder = Notifications.create().title("Login efetuado.").
+                        text("Usuário:"+LoginController.getInstance().getUsuario().getLogin()+"").
+                        hideAfter(Duration.seconds(5)).
+                        position(Pos.BOTTOM_RIGHT).
+                        darkStyle().graphic(new ImageView(imgOne));
                     LoginController.getInstance().setLoginStatus();
                     menuPrincipal = FXMLLoader.load(getClass().getResource("/fxml/MenuFXML.fxml"));
                     rootPane.getChildren().setAll(menuPrincipal);
+                    
                 } catch (IOException ex) {
                     System.out.println("Erro--->>>" + ex);
                 }
@@ -89,7 +96,7 @@ public class LoginFXMLController implements Initializable {
                     position(Pos.BOTTOM_RIGHT).
                     darkStyle().graphic(new ImageView(img));
         }
-        //notificationBuilder.show();
+        notificationBuilder.show();
     }
 
 }
