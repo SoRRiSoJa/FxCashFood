@@ -53,6 +53,7 @@ public class MenuFXMLController implements Initializable {
     private VBox gavetas;
     private HamburgerNextArrowBasicTransition burgerTask2;
     private Pane paneAux;
+    private Pane paneAnt;
     private boolean flag = false;
 
     /**
@@ -133,7 +134,9 @@ public class MenuFXMLController implements Initializable {
     private void loadContaCorrente() {
         try {
             flag = true;
+            paneAnt=paneAux;
             paneAux = FXMLLoader.load(getClass().getResource("/fxml/contaCorrente/GerenciarContasFXML.fxml"));
+            paneBody.getChildren().remove(paneAnt);
             paneBody.getChildren().add(paneAux);
         } catch (IOException ex) {
             System.out.println("Erro:" + ex);
@@ -144,7 +147,9 @@ public class MenuFXMLController implements Initializable {
     private void loadMeioPagamento() {
         try {
             flag = true;
+            paneAnt = paneAux;
             paneAux = FXMLLoader.load(getClass().getResource("/fxml/meioPagamento/MeioPagamentoFXML.fxml"));
+            paneBody.getChildren().remove(paneAnt);
             paneBody.getChildren().add(paneAux);
         } catch (IOException ex) {
             System.out.println("Erro:" + ex);
@@ -155,7 +160,9 @@ public class MenuFXMLController implements Initializable {
     private void loadFornecedor() {
         try {
             flag = true;
+            paneAnt = paneAux;
             paneAux = FXMLLoader.load(getClass().getResource("/fxml/fornecedores/GerenciarFornecedoresFXML.fxml"));
+            paneBody.getChildren().remove(paneAnt);
             paneBody.getChildren().add(paneAux);
         } catch (IOException ex) {
             System.out.println("Erro:" + ex);

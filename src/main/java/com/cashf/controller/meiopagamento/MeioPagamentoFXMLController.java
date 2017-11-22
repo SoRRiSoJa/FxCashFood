@@ -22,6 +22,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import util.PoupUpUtil;
 
 /**
  * FXML Controller class
@@ -64,18 +65,18 @@ public class MeioPagamentoFXMLController implements Initializable {
     private MeioPagamentoController controller = new MeioPagamentoController();
     private String erros;
     private boolean flagButtons;
-    private long idMeio=0;
+    private long idMeio = 0;
     private String descricao;
     private Integer prazoRecebimento;
     private BigDecimal taxa;
-    
+
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
+    }
 
     @FXML
     private void onSalvar(ActionEvent event) {
@@ -83,26 +84,39 @@ public class MeioPagamentoFXMLController implements Initializable {
 
     @FXML
     private void onNovo(ActionEvent event) {
+        setInputON();
+        clearFields();
+        btnNovo.setDisable(true);
+        btnExcluir.setDisable(true);
     }
 
     @FXML
     private void onExcluir(ActionEvent event) {
+    if (controller.getMeioPagamento()!= null) {
+            controller.delete();
+            PoupUpUtil.poupUp("Meio de Pagamento Excluído", "O Meio de Pagamento foi excluído com sucesso.", "");
+        }
+        btnExcluir.setDisable(true);
+        clearFields();
     }
 
     @FXML
     private void onLimpar(ActionEvent event) {
+        clearFields();
     }
 
     @FXML
     private void onMouseClicked(MouseEvent event) {
     }
+
     private void clearFields() {
         txtNome.clear();
         txtPrazo.clear();
         txtTaxa.clear();
         cbbContaCorrente.setValue(null);
-        
+
     }
+
     private void setUpRadioButtons() {
 
         rdbCredito.selectedProperty().addListener((observable, oldValue, newValue) -> {
@@ -117,8 +131,7 @@ public class MeioPagamentoFXMLController implements Initializable {
                 rdbDinheiro.setSelected(false);
             }
         });
-        
-        
+
         rdbDinheiro.selectedProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue) {
                 rdbCredito.setSelected(false);
@@ -126,6 +139,7 @@ public class MeioPagamentoFXMLController implements Initializable {
             }
         });
     }
+
     private void setInputOff() {
         btnExcluir.setDisable(true);
         btnLimpar.setDisable(true);
@@ -136,7 +150,8 @@ public class MeioPagamentoFXMLController implements Initializable {
         cbbContaCorrente.setDisable(true);
         flagButtons = false;
     }
-     private void setInputON() {
+
+    private void setInputON() {
         btnExcluir.setDisable(false);
         btnLimpar.setDisable(false);
         btnSalvar.setDisable(false);
@@ -146,23 +161,26 @@ public class MeioPagamentoFXMLController implements Initializable {
         cbbContaCorrente.setDisable(false);
         flagButtons = true;
     }
-     private void loadCbbContaCorrente(){
-         cbbContaCorrente.setItems(controller.getListaConta());
-     }
-     private void getData() {
-        idMeio = (controller.getMeioPagamento().getIdMeio()!= 0) ? idMeio = controller.getMeioPagamento().getIdMeio(): 0l;
+
+    private void loadCbbContaCorrente() {
+        cbbContaCorrente.setItems(controller.getListaConta());
+    }
+
+    private void getData() {
+        idMeio = (controller.getMeioPagamento().getIdMeio() != 0) ? idMeio = controller.getMeioPagamento().getIdMeio() : 0l;
         prazoRecebimento = Integer.parseUnsignedInt(txtPrazo.getText());
         taxa = new BigDecimal(txtTaxa.getText());
         descricao = txtNome.getText();
         controller.setContaCorrente(cbbContaCorrente.getSelectionModel().getSelectedItem());
     }
-     private Boolean validateFields() {
+
+    private Boolean validateFields() {
         Boolean flag = true;
         if (descricao == null || descricao.equals("") || descricao.length() < 3) {
             erros += "A Descrição do meio de pagamento deve conter um conteúdo válido! \n";
             flag = false;
         }
-        if (prazoRecebimento == null || prazoRecebimento.equals("") || prazoRecebimento.compareTo(0)==1) {
+        if (prazoRecebimento == null || prazoRecebimento.equals("") || prazoRecebimento.compareTo(0) == 1) {
             erros += "O prazo de recebimento deve ser maior que 0! \n";
             flag = false;
         }
@@ -171,7 +189,7 @@ public class MeioPagamentoFXMLController implements Initializable {
             flag = false;
         }
 
-        if (controller.getContaCorrente()== null) {
+        if (controller.getContaCorrente() == null) {
             erros += "\n Selecione uma Conta Corrente.";
             flag = false;
         }

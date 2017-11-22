@@ -88,6 +88,21 @@ public class GerenciarFornecedoresFXMLController implements Initializable {
     private JFXButton btnExcluir;
     @FXML
     private JFXButton btnLimpar;
+    //--------------------------------
+    private FornecedorController controller = new FornecedorController();
+    private String erros;
+    private boolean flagButtons;
+    private long idFornecedor = 0;
+    private String cnpj;
+    private String nomefantasia;
+    private String razaoSocial;
+    private String endereco;
+    private String complemento;
+    private int numero;
+    private String cep;
+    private String bairro;
+    private String email;
+    private String Observacao;
 
     /**
      * Initializes the controller class.
@@ -95,7 +110,7 @@ public class GerenciarFornecedoresFXMLController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
+    }
 
     @FXML
     private void onKeyReleasedCep(KeyEvent event) {
@@ -115,6 +130,10 @@ public class GerenciarFornecedoresFXMLController implements Initializable {
 
     @FXML
     private void onNovo(ActionEvent event) {
+        setInputON();
+        clearFields();
+        btnNovo.setDisable(true);
+        btnExcluir.setDisable(true);
     }
 
     @FXML
@@ -123,6 +142,63 @@ public class GerenciarFornecedoresFXMLController implements Initializable {
 
     @FXML
     private void onLimpar(ActionEvent event) {
+        clearFields();
     }
-    
+
+    private void clearFields() {
+        txtNome.clear();
+        txtRazao.clear();
+        txtEndereco.clear();
+        txtComplemento.clear();
+        txtNumero.clear();
+        txtBairro.clear();
+        txtCep.clear();
+        txtCnpj.clear();
+        txtDdd.clear();
+        txtTelefone.clear();
+        txtEmail.clear();
+        txtInscrEst.clear();
+        txtObs.clear();
+        cbbCidade.setValue(null);
+        cbbOperadora.setValue(null);
+    }
+
+    private void setInputON() {
+        txtNome.setDisable(false);
+        txtRazao.setDisable(false);
+        txtEndereco.setDisable(false);
+        txtComplemento.setDisable(false);
+        txtNumero.setDisable(false);
+        txtBairro.setDisable(false);
+        txtCep.setDisable(false);
+        txtCnpj.setDisable(false);
+        txtDdd.setDisable(false);
+        txtTelefone.setDisable(false);
+        txtEmail.setDisable(false);
+        txtInscrEst.setDisable(false);
+        txtObs.setDisable(false);
+        cbbCidade.setDisable(false);
+        cbbOperadora.setDisable(false);
+        flagButtons = true;
+    }
+
+    private void setInputOff() {
+        txtNome.setDisable(true);
+        txtRazao.setDisable(true);
+        txtEndereco.setDisable(true);
+        txtComplemento.setDisable(true);
+        txtNumero.setDisable(true);
+        txtBairro.setDisable(true);
+        txtCep.setDisable(true);
+        txtCnpj.setDisable(true);
+        txtDdd.setDisable(true);
+        txtTelefone.setDisable(true);
+        txtEmail.setDisable(true);
+        txtInscrEst.setDisable(true);
+        txtObs.setDisable(true);
+        cbbCidade.setDisable(true);
+        cbbOperadora.setDisable(true);
+        flagButtons = false;
+    }
+
 }
