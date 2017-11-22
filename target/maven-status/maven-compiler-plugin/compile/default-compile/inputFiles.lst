@@ -1,6 +1,7 @@
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/util/SafePass.java
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/util/PoupUpUtil.java
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/dao/GenericDAOIMP.java
+/home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/dao/cidade/CidadeDAO.java
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/controller/menu/MenuFXMLController.java
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cahsf/dao/fornecedor/FornecedorDAO.java
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/cashfood/MainApp.java

@@ -5,6 +5,7 @@
  */
 package com.cashf.model.fornecedor;
 
+import com.cashf.model.cidade.Cidade;
 import com.cashf.model.telefone.Telefone;
 import java.io.Serializable;
 import java.util.List;
@@ -17,6 +18,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -41,6 +43,9 @@ public class Fornecedor implements Serializable {
     private String bairro;
     private String email;
     private String Observacao;
+    @ManyToOne
+    @JoinColumn(nullable = false)
+    private Cidade cidade;
     @ManyToMany
     @JoinTable(name = "fornecedor_telefone", joinColumns
             = {
@@ -52,7 +57,7 @@ public class Fornecedor implements Serializable {
     public Fornecedor() {
     }
 
-    public Fornecedor(long id, String cnpj, String nomefantasia, String razaoSocial, String endereco, String complemento, int numero, String cep, String bairro, String email, String Observacao, List<Telefone> telefones) {
+    public Fornecedor(long id, String cnpj, String nomefantasia, String razaoSocial, String endereco, String complemento, int numero, String cep, String bairro, String email, String Observacao,Cidade cidade, List<Telefone> telefones) {
         this.idFornecedor = id;
         this.cnpj = cnpj;
         this.nomefantasia = nomefantasia;
@@ -65,6 +70,7 @@ public class Fornecedor implements Serializable {
         this.email = email;
         this.Observacao = Observacao;
         this.telefones = telefones;
+        this.cidade=cidade;
     }
 
     public long getIdFornecedor() {
@@ -156,6 +162,15 @@ public class Fornecedor implements Serializable {
     public void setObservacao(String Observacao) {
         this.Observacao = Observacao;
     }
+
+    public Cidade getCidade() {
+        return cidade;
+    }
+
+    public void setCidade(Cidade cidade) {
+        this.cidade = cidade;
+    }
+    
 
     public List<Telefone> getTelefones() {
         return telefones;
