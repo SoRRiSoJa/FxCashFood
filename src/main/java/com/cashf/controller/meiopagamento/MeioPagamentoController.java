@@ -35,7 +35,7 @@ public class MeioPagamentoController {
         this.contaCorrente = new ContaCorrente();
         this.lista = FXCollections.observableList(meioPagamentoDAO.listAll());
         this.listaConta = FXCollections.observableList(contaCorrenteDAO.listAll());
-
+        this.meioPagamento.setIdMeio(0);
     }
 
     public ObservableList<MeioPagamento> getLista() {

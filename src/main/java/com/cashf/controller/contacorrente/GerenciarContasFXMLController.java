@@ -57,13 +57,13 @@ public class GerenciarContasFXMLController implements Initializable {
 
     //---------------------------------
     ContaCorrenteController controller = new ContaCorrenteController();
-    String erros;
-    boolean flagButtons;
-    String agencia;
-    String descricao;
-    String numero;
-    long idBanco = 0;
-    long idConta;
+    private String erros;
+    private boolean flagButtons;
+    private String agencia;
+    private String descricao;
+    private String numero;
+    private long idBanco = 0;
+    private long idConta;
 
     /**
      * Initializes the controller class.
@@ -159,7 +159,6 @@ public class GerenciarContasFXMLController implements Initializable {
         txtAgencia.setDisable(true);
         cbbBanco.setDisable(true);
         flagButtons = false;
-
     }
 
     private void setInputON() {
