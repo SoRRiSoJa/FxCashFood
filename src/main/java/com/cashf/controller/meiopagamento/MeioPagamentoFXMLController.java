@@ -20,6 +20,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import util.PoupUpUtil;
@@ -76,10 +77,32 @@ public class MeioPagamentoFXMLController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        setInputOff();
+        setUptableView();
+        setUpRadioButtons();
+        loadCbbContaCorrente();
+        loadTbv();
     }
 
     @FXML
     private void onSalvar(ActionEvent event) {
+        getData();
+        if (validateFields()) {
+            setData();
+            if (controller.getMeioPagamento().getIdMeio()== 0) {
+                controller.insert();
+                PoupUpUtil.poupUp("Meio de Pagamento Cadastrado", "O Meio de Pagamento foi cadastrado com sucesso.", "");
+                
+            } else {
+                controller.update();
+                PoupUpUtil.poupUp("Meio de Pagamento Alterado", "O Meio de Pagamento foi alterado com sucesso.", "");
+            }
+            loadTbv();
+            clearFields();
+        } else {
+            PoupUpUtil.accessDenied(erros);
+            erros = "";
+        }
     }
 
     @FXML
@@ -107,6 +130,7 @@ public class MeioPagamentoFXMLController implements Initializable {
 
     @FXML
     private void onMouseClicked(MouseEvent event) {
+        controller.setMeioPagamento(tbvCartoes.getSelectionModel().getSelectedItem());
     }
 
     private void clearFields() {
@@ -123,12 +147,14 @@ public class MeioPagamentoFXMLController implements Initializable {
             if (newValue) {
                 rdbDebito.setSelected(false);
                 rdbDinheiro.setSelected(false);
+                controller.setTpPagto(TPPagto.CARTAO_CREDITO);
             }
         });
         rdbDebito.selectedProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue) {
                 rdbCredito.setSelected(false);
                 rdbDinheiro.setSelected(false);
+                controller.setTpPagto(TPPagto.CARTAO_DEBITO);
             }
         });
 
@@ -136,6 +162,7 @@ public class MeioPagamentoFXMLController implements Initializable {
             if (newValue) {
                 rdbCredito.setSelected(false);
                 rdbDebito.setSelected(false);
+                controller.setTpPagto(TPPagto.DINHEIRO);
             }
         });
     }
@@ -173,14 +200,16 @@ public class MeioPagamentoFXMLController implements Initializable {
         descricao = txtNome.getText();
         controller.setContaCorrente(cbbContaCorrente.getSelectionModel().getSelectedItem());
     }
-
+    private void setData(){
+        controller.setMeioPagamento(idMeio, descricao, prazoRecebimento, taxa, controller.getTpPagto(), controller.getContaCorrente());
+    }
     private Boolean validateFields() {
         Boolean flag = true;
         if (descricao == null || descricao.equals("") || descricao.length() < 3) {
             erros += "A Descrição do meio de pagamento deve conter um conteúdo válido! \n";
             flag = false;
         }
-        if (prazoRecebimento == null || prazoRecebimento.equals("") || prazoRecebimento.compareTo(0) == 1) {
+        if (prazoRecebimento == null || prazoRecebimento.equals("") || prazoRecebimento.compareTo(new Integer(0))<= 0) {
             erros += "O prazo de recebimento deve ser maior que 0! \n";
             flag = false;
         }
@@ -195,4 +224,13 @@ public class MeioPagamentoFXMLController implements Initializable {
         }
         return flag;
     }
+    private void setUptableView() {
+        tbcCartao.setCellValueFactory(new PropertyValueFactory<>("descricao"));
+        tbcConta.setCellValueFactory(new PropertyValueFactory<>("contaCorrente"));
+        tbvCartoes.getColumns().setAll(tbcCartao,tbcConta);
+    }
+    private void loadTbv(){
+        tbvCartoes.setItems(controller.getLista());
+    }
+
 }
