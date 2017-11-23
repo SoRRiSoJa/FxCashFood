@@ -5,6 +5,8 @@
  */
 package com.cashf.controller.produto;
 
+import com.cashf.model.produto.Categoria;
+import com.cashf.model.produto.Grupo;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
@@ -36,23 +38,23 @@ public class GerenciarGruposFXMLController implements Initializable {
     @FXML
     private JFXTextField txtDescricao;
     @FXML
-    private JFXComboBox<?> cbbCategoria;
+    private JFXComboBox<Categoria> cbbCategoria;
     @FXML
     private JFXTextField txtDescCat;
     @FXML
     private JFXButton btnAdicionar;
     @FXML
-    private TableView<?> tbvCategoria;
+    private TableView<Categoria> tbvCategoria;
     @FXML
-    private TableColumn<?, ?> tbcCod;
+    private TableColumn<Categoria, Integer> tbcCod;
     @FXML
-    private TableColumn<?, ?> tbcDescricao;
+    private TableColumn<Categoria, String> tbcDescricao;
     @FXML
-    private TableColumn<?, ?> btnDeletar;
+    private TableColumn btnDeletar;
     @FXML
-    private TableView<?> tbvGrupos;
+    private TableView<Grupo> tbvGrupos;
     @FXML
-    private TableColumn<?, ?> tbcCategoria;
+    private TableColumn<Grupo, String> tbcCategoria;
 
     /**
      * Initializes the controller class.
