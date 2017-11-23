@@ -88,6 +88,17 @@ public class GrupoController {
         grupoDAO.save(grupo);
         setItemLista(grupo);
     }
+    public void inssertCategoria(){
+        categoriaDAO.save(categoria);
+        listaCategria.add(categoria);
+    }
+    public void deleteCategoria(){
+        categoriaDAO.delete(categoria);
+        listaCategria.remove(categoria);
+    }
+    public void uppdateCategoria(){
+        categoriaDAO.update(categoria);
+    }
 
     public void delete() {
         grupoDAO.delete(grupo);
