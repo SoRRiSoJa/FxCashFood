@@ -36,6 +36,7 @@ import javafx.scene.layout.Pane;
 import javafx.util.Callback;
 import javafx.util.Duration;
 import org.controlsfx.control.Notifications;
+import util.PoupUpUtil;
 
 /**
  * FXML Controller class
@@ -112,11 +113,15 @@ public class GerenciarFornecedoresFXMLController implements Initializable {
     private String razaoSocial;
     private String endereco;
     private String complemento;
-    private int numero;
+    private Integer numero;
     private String cep;
     private String bairro;
     private String email;
     private String Observacao;
+    private String inscrEst;
+    //---
+    private String telefone;
+    private String ddd;
 
     /**
      * Initializes the controller class.
@@ -140,14 +145,42 @@ public class GerenciarFornecedoresFXMLController implements Initializable {
 
     @FXML
     private void onSelectCidade(ActionEvent event) {
+        controller.setCidade(cbbCidade.getSelectionModel().getSelectedItem());
     }
 
     @FXML
     private void onAdicionar(ActionEvent event) {
+        getDataTelefone();
+        if (validateTeleofne()) {
+            controller.setTelefone(0l, ddd, telefone);
+            controller.inserTelefone();
+        } else {
+            PoupUpUtil.accessDenied(erros);
+            erros = "";
+        }
     }
 
     @FXML
     private void onSalvar(ActionEvent event) {
+        getData();
+        if (validateFields()) {
+            controller.setFornecedor(idFornecedor, cnpj, nomefantasia, razaoSocial, endereco, complemento, numero, cep, bairro, email, Observacao, controller.getCidade(), controller.getListaTelefone());
+            if (controller.getFornecedor().getIdFornecedor()== 0) {
+                controller.insert();
+                
+                PoupUpUtil.poupUp("Fornecedor Cadastrado", "O Fornecedor foi cadastrado com sucesso.", "");
+                
+            } else {
+                controller.update();
+                PoupUpUtil.poupUp("Fornecedor Alterado", "O Fornecedor foi alterado com sucesso.", "");
+            }
+            loadTbv();
+            clearFields();
+        } else {
+            PoupUpUtil.accessDenied(erros);
+            erros = "";
+        }
+        
     }
 
     @FXML
@@ -160,6 +193,12 @@ public class GerenciarFornecedoresFXMLController implements Initializable {
 
     @FXML
     private void onExcluir(ActionEvent event) {
+        if (controller.getFornecedor() != null) {
+            controller.delete();
+            PoupUpUtil.poupUp("Fornecedor Excluído", "O fornecedor foi excluído com sucesso.", "");
+        }
+        btnExcluir.setDisable(true);
+        clearFields();
     }
 
     @FXML
@@ -229,6 +268,89 @@ public class GerenciarFornecedoresFXMLController implements Initializable {
         flagButtons = false;
     }
 
+    private void getDataTelefone() {
+        telefone = txtTelefone.getText();
+        ddd = txtDdd.getText();
+        controller.setOperadora(cbbOperadora.getSelectionModel().getSelectedItem());
+    }
+
+    private void getData() {
+        idFornecedor = (controller.getFornecedor().getIdFornecedor()!= 0) ? idFornecedor = controller.getFornecedor().getIdFornecedor(): 0l;
+        nomefantasia = txtNome.getText();;
+        razaoSocial = txtRazao.getText();;
+        endereco = txtEndereco.getText();;
+        complemento = txtComplemento.getText();;
+        numero = new Integer(txtNumero.getText());
+        bairro = txtBairro.getText();;
+        cep = txtCep.getText();;
+        cnpj = txtCnpj.getText();;
+        email = txtEmail.getText();;
+        inscrEst = txtInscrEst.getText();;
+        Observacao = txtObs.getText();;
+        controller.setCidade(cbbCidade.getSelectionModel().getSelectedItem());
+
+    }
+    private boolean validateFields() {
+        boolean flag = true;
+        if (nomefantasia == null || nomefantasia.equals("") || nomefantasia.length() < 3) {
+            erros += "O nome fantasia deve conter um conteúdo válido! \n";
+            flag = false;
+        }
+        if (razaoSocial == null || razaoSocial.equals("") || razaoSocial.length() < 3) {
+            erros += "A razão social deve conter um nome válido! \n";
+            flag = false;
+        }
+        if (endereco == null || endereco.equals("") || endereco.length() < 3) {
+            erros += "O endereço deve ser preenchido corretamente! \n";
+            flag = false;
+        }
+        
+        if (bairro == null || bairro.equals("") || bairro.length() < 3) {
+            erros += "O bairro deve ser preenchido corretamente! \n";
+            flag = false;
+        }
+        if (cep == null || cep.equals("") || cep.length() < 3) {
+            erros += "O CEP deve ser preenchido corretamente! \n";
+            flag = false;
+        }
+        if (cnpj == null || cnpj.equals("") || cnpj.length() < 3) {
+            erros += "O CNPJ deve ser preenchido corretamente! \n";
+            flag = false;
+        }
+        if (email == null || email.equals("") || email.length() < 3) {
+            erros += "O email deve ser preenchido corretamente! \n";
+            flag = false;
+        }
+        if (inscrEst == null || inscrEst.equals("") || inscrEst.length() < 3) {
+            erros += "A inscrição estadual deve ser preenchida corretamente! \n";
+            flag = false;
+        }
+
+        if (cbbCidade.getSelectionModel().getSelectedItem() == null) {
+            erros += "Você deve selecionar uma Cidade! \n";
+            flag = false;
+        }
+        return flag;
+    }
+
+    private boolean validateTeleofne() {
+        boolean flag = true;
+        if (ddd == null || ddd.equals("") || ddd.length() < 2) {
+            erros += "O DDD do telefone deve conter um número válido! \n";
+            flag = false;
+        }
+        if (telefone == null || telefone.equals("") || telefone.length() < 3) {
+            erros += "O telefone do Fornecedor deve conter um número válido! \n";
+            flag = false;
+        }
+
+        if (cbbOperadora.getSelectionModel().getSelectedItem() == null) {
+            erros += "Você deve selecionar uma operadora para este telefone! \n";
+            flag = false;
+        }
+        return flag;
+    }
+
     private void loadCbbCidade() {
         cbbCidade.setItems(controller.getListaCidade());
     }
@@ -261,9 +383,11 @@ public class GerenciarFornecedoresFXMLController implements Initializable {
     private void loadTbv() {
         tbvFornecedores.setItems(controller.getLista());
     }
-    private void loadTbvTelefone(){
+
+    private void loadTbvTelefone() {
         tbvTelefone.setItems(controller.getListaTelefone());
     }
+
     public class ButtonCellDelete extends TableCell<Disposer.Record, Boolean> {
 
         Image img;

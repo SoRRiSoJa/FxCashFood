@@ -12,6 +12,7 @@ import com.cashf.model.cidade.Cidade;
 import com.cashf.model.fornecedor.Fornecedor;
 import com.cashf.model.telefone.Operadora;
 import com.cashf.model.telefone.Telefone;
+import java.util.ArrayList;
 import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -27,17 +28,20 @@ public class FornecedorController {
     private ObservableList<Fornecedor> lista;
     private ObservableList<Telefone> listaTelefone;
     private ObservableList<Cidade> listaCidade;
+    private List<Telefone> lt ;
     private Telefone telefone;
     private Operadora operadora;
     private Fornecedor fornecedor;
     private Cidade cidade;
 
     public FornecedorController() {
+        this.lt= new ArrayList<>();
         this.cidadeDAO=new CidadeDAO(Cidade.class);
         this.telefoneDAO=new TelefoneDAO(Telefone.class);
         this.fornecedorDAO=new FornecedorDAO(Fornecedor.class);
         this.listaCidade=FXCollections.observableList(cidadeDAO.listAll());
         this.lista = FXCollections.observableList(fornecedorDAO.listAll());
+        this.listaTelefone=FXCollections.observableList(lt);
         this.telefone = new Telefone();
         this.fornecedor = new Fornecedor();
         this.cidade=new Cidade();
@@ -85,7 +89,7 @@ public class FornecedorController {
     public void setTelefone(Telefone telefone) {
         this.telefone = telefone;
     }
-    public void setTelefone(long id,Operadora operadora, String ddd,String numero) {
+    public void setTelefone(long id,String ddd,String numero) {
         this.telefone =new Telefone(id, ddd, numero, operadora);
     }
 
@@ -114,6 +118,7 @@ public class FornecedorController {
     }
     public void inserTelefone(){
         telefone.setIdTelefone(telefoneDAO.save(telefone));
+        setItemListaTelefone(telefone);
     }
     public void deleteTelefone(){
         telefoneDAO.delete(telefone);

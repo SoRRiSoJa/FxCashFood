@@ -97,6 +97,7 @@ public class MenuFXMLController implements Initializable {
 
     @FXML
     private void onGrupos(ActionEvent event) {
+        loadGrupos();
     }
 
     @FXML
@@ -134,7 +135,7 @@ public class MenuFXMLController implements Initializable {
     private void loadContaCorrente() {
         try {
             flag = true;
-            paneAnt=paneAux;
+            paneAnt = paneAux;
             paneAux = FXMLLoader.load(getClass().getResource("/fxml/contaCorrente/GerenciarContasFXML.fxml"));
             paneBody.getChildren().remove(paneAnt);
             paneBody.getChildren().add(paneAux);
@@ -162,6 +163,18 @@ public class MenuFXMLController implements Initializable {
             flag = true;
             paneAnt = paneAux;
             paneAux = FXMLLoader.load(getClass().getResource("/fxml/fornecedores/GerenciarFornecedoresFXML.fxml"));
+            paneBody.getChildren().remove(paneAnt);
+            paneBody.getChildren().add(paneAux);
+        } catch (IOException ex) {
+            System.out.println("Erro:" + ex);
+        }
+    }
+
+    private void loadGrupos() {
+        try {
+            flag = true;
+            paneAnt = paneAux;
+            paneAux = FXMLLoader.load(getClass().getResource("/fxml/produto/GerenciarGruposFXML.fxml"));
             paneBody.getChildren().remove(paneAnt);
             paneBody.getChildren().add(paneAux);
         } catch (IOException ex) {
