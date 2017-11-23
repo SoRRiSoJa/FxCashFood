@@ -48,6 +48,7 @@ com/cashf/model/telefone/Telefone_.class
 com/cahsf/controller/fornecedor/FornecedorController.class
 com/cashf/controller/contacorrente/ContaCorrenteController.class
 com/cashf/dao/banco/BancoDAO.class
+com/cashf/controller/produto/GrupoController.class
 com/cashf/cashfood/MainApp.class
 com/cashf/model/produto/AliquotasProduto.class
 com/cahsf/controller/fornecedor/GerenciarFornecedoresFXMLController$ButtonCellDelete.class

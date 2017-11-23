@@ -93,8 +93,8 @@
                   </JFXButton>
                   <TableView fx:id="tbvCategoria" layoutX="291.0" layoutY="32.0" prefHeight="113.0" prefWidth="273.0">
                      <columns>
-                        <TableColumn fx:id="tbcCod" prefWidth="74.0" text="COD" />
-                        <TableColumn fx:id="tbcDescricao" prefWidth="138.0" text="Descrição" />
+                        <TableColumn fx:id="tbcCodCat" prefWidth="74.0" text="COD" />
+                        <TableColumn fx:id="tbcDescricaoCat" prefWidth="138.0" text="Descrição" />
                         <TableColumn fx:id="btnDeletar" prefWidth="60.0" text="Excluir" />
                      </columns>
                   </TableView>
@@ -114,8 +114,9 @@
             </Pane>
             <TableView fx:id="tbvGrupos" layoutX="20.0" layoutY="45.0" onMouseClicked="#onMouseClicked" prefHeight="410.0" prefWidth="600.0">
                <columns>
-                  <TableColumn fx:id="tbcDescricao" prefWidth="273.0" text="Descrição" />
-                  <TableColumn fx:id="tbcCategoria" prefWidth="325.0" text="Categoria" />
+                  <TableColumn fx:id="tbcDescricaoGrupo" prefWidth="273.0" text="Descrição" />
+                  <TableColumn fx:id="tbcCategoriaGrupo" prefWidth="325.0" text="Categoria" />
+                  <TableColumn fx:id="tbcDescricao1" prefWidth="273.0" text="Descrição" />
                </columns>
                <effect>
                   <DropShadow />
