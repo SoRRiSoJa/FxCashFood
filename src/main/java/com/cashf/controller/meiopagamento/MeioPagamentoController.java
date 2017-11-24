@@ -86,14 +86,21 @@ public class MeioPagamentoController {
         this.meioPagamento = new MeioPagamento(id, descricao, prazoRecebimento, taxa, tipoPagto, contaCorrente);
     }
     public void insert(){
-        meioPagamentoDAO.save(meioPagamento);
+        meioPagamento.setIdMeio(meioPagamentoDAO.save(meioPagamento));
         setItemLista(meioPagamento);
+        flushMeioPagamento();
     }
     public void delete(){
         meioPagamentoDAO.delete(meioPagamento);
         lista.remove(meioPagamento);
+        flushMeioPagamento();
     }
     public void update(){
         meioPagamentoDAO.update(meioPagamento);
+        flushMeioPagamento();
+    }
+    private void flushMeioPagamento(){
+        meioPagamento=new MeioPagamento();
+        meioPagamento.setIdMeio(0l);
     }
 }

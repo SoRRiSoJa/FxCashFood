@@ -85,28 +85,41 @@ public class GrupoController {
     }
 
     public void insert() {
-        grupoDAO.save(grupo);
+        grupo.setIdGrupo(grupoDAO.save(grupo));
         setItemLista(grupo);
+        flushGrupo();
     }
     public void inssertCategoria(){
-        categoriaDAO.save(categoria);
+        categoria.setIdCategoria(categoriaDAO.save(categoria));
         listaCategria.add(categoria);
+        flushCategoria();
     }
     public void deleteCategoria(){
         categoriaDAO.delete(categoria);
         listaCategria.remove(categoria);
+        flushCategoria();
     }
     public void uppdateCategoria(){
         categoriaDAO.update(categoria);
+        flushCategoria();
     }
 
     public void delete() {
         grupoDAO.delete(grupo);
         lista.remove(grupo);
+        flushGrupo();
     }
 
     public void update() {
         grupoDAO.update(grupo);
+        flushGrupo();
     }
-
+    private void flushGrupo(){
+        grupo=new Grupo();
+        grupo.setIdGrupo(0l);
+    }
+    private void flushCategoria(){
+        categoria=new Categoria();
+        categoria.setIdCategoria(0l);
+    }
 }

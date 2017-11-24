@@ -22,29 +22,32 @@ import javafx.collections.ObservableList;
  * @author joao
  */
 public class FornecedorController {
+
     private final FornecedorDAO fornecedorDAO;
     private final TelefoneDAO telefoneDAO;
     private final CidadeDAO cidadeDAO;
     private ObservableList<Fornecedor> lista;
     private ObservableList<Telefone> listaTelefone;
     private ObservableList<Cidade> listaCidade;
-    private List<Telefone> lt ;
+    private List<Telefone> lt;
     private Telefone telefone;
     private Operadora operadora;
     private Fornecedor fornecedor;
     private Cidade cidade;
 
     public FornecedorController() {
-        this.lt= new ArrayList<>();
-        this.cidadeDAO=new CidadeDAO(Cidade.class);
-        this.telefoneDAO=new TelefoneDAO(Telefone.class);
-        this.fornecedorDAO=new FornecedorDAO(Fornecedor.class);
-        this.listaCidade=FXCollections.observableList(cidadeDAO.listAll());
+        this.lt = new ArrayList<>();
+        this.cidadeDAO = new CidadeDAO(Cidade.class);
+        this.telefoneDAO = new TelefoneDAO(Telefone.class);
+        this.fornecedorDAO = new FornecedorDAO(Fornecedor.class);
+        this.listaCidade = FXCollections.observableList(cidadeDAO.listAll());
         this.lista = FXCollections.observableList(fornecedorDAO.listAll());
-        this.listaTelefone=FXCollections.observableList(lt);
+        this.listaTelefone = FXCollections.observableList(lt);
         this.telefone = new Telefone();
         this.fornecedor = new Fornecedor();
-        this.cidade=new Cidade();
+        this.cidade = new Cidade();
+        telefone.setIdTelefone(0l);
+        fornecedor.setIdFornecedor(0l);
     }
 
     public ObservableList<Cidade> getListaCidade() {
@@ -62,7 +65,7 @@ public class FornecedorController {
     public void setCidade(Cidade cidade) {
         this.cidade = cidade;
     }
-    
+
     public ObservableList<Fornecedor> getLista() {
         return lista;
     }
@@ -78,6 +81,7 @@ public class FornecedorController {
     public void setListaTelefone(ObservableList<Telefone> listaTelefone) {
         this.listaTelefone = listaTelefone;
     }
+
     public void setItemListaTelefone(Telefone telefone) {
         this.listaTelefone.add(telefone);
     }
@@ -89,8 +93,9 @@ public class FornecedorController {
     public void setTelefone(Telefone telefone) {
         this.telefone = telefone;
     }
-    public void setTelefone(long id,String ddd,String numero) {
-        this.telefone =new Telefone(id, ddd, numero, operadora);
+
+    public void setTelefone(long id, String ddd, String numero) {
+        this.telefone = new Telefone(id, ddd, numero, operadora);
     }
 
     public Operadora getOperadora() {
@@ -108,32 +113,53 @@ public class FornecedorController {
     public void setFornecedor(Fornecedor fornecedor) {
         this.fornecedor = fornecedor;
     }
-    public void setFornecedor(long id, String cnpj, String nomefantasia, String razaoSocial, String endereco, String complemento, int numero, String cep, String bairro, String email, String Observacao,Cidade cidade, List<Telefone> telefones) {
-        this.fornecedor = new Fornecedor(id, cnpj, nomefantasia, razaoSocial, endereco, complemento, numero, cep, bairro, email, Observacao,cidade, telefones);
+
+    public void setFornecedor(long id, String cnpj, String nomefantasia, String razaoSocial, String endereco, String complemento, int numero, String cep, String bairro, String email, String Observacao, Cidade cidade, List<Telefone> telefones) {
+        this.fornecedor = new Fornecedor(id, cnpj, nomefantasia, razaoSocial, endereco, complemento, numero, cep, bairro, email, Observacao, cidade, telefones);
     }
-    
-    public void insert(){
-        fornecedorDAO.save(fornecedor);
+
+    public void insert() {
+        fornecedor.setIdFornecedor(fornecedorDAO.save(fornecedor));
         setItemLista(fornecedor);
+        flushFornecedor();
     }
-    public void inserTelefone(){
+
+    public void inserTelefone() {
         telefone.setIdTelefone(telefoneDAO.save(telefone));
         setItemListaTelefone(telefone);
+        flushTelefone();
     }
-    public void deleteTelefone(){
+
+    public void deleteTelefone() {
         telefoneDAO.delete(telefone);
         listaTelefone.remove(telefone);
+        flushTelefone();
     }
-    public void updateTelefone(){
+
+    public void updateTelefone() {
         telefoneDAO.update(telefone);
+        flushTelefone();
     }
-    public void delete(){
+
+    public void delete() {
         fornecedorDAO.delete(fornecedor);
         lista.remove(fornecedor);
+        flushFornecedor();
     }
-    public void update(){
+
+    public void update() {
         fornecedorDAO.update(fornecedor);
+        flushFornecedor();
     }
-    
-    
+
+    private void flushFornecedor() {
+        fornecedor = new Fornecedor();
+        fornecedor.setIdFornecedor(0l);
+    }
+
+    private void flushTelefone() {
+        telefone = new Telefone();
+        telefone.setIdTelefone(0l);
+    }
+
 }
