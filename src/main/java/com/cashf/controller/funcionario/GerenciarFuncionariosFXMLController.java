@@ -5,12 +5,22 @@
  */
 package com.cashf.controller.funcionario;
 
+import com.cashf.model.cidade.Cidade;
+import com.cashf.model.funcionario.Funcionario;
+import com.cashf.model.pessoa.Sexo;
+import com.cashf.model.telefone.Operadora;
+import com.cashf.model.telefone.Telefone;
+import com.cashf.model.usuario.UNivel;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
+import controller.GenericController;
+import java.math.BigDecimal;
 import java.net.URL;
+import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -30,7 +40,7 @@ public class GerenciarFuncionariosFXMLController implements Initializable {
     @FXML
     private JFXTextField txtNome;
     @FXML
-    private JFXComboBox<?> cbbSexo;
+    private JFXComboBox<Sexo> cbbSexo;
     @FXML
     private JFXDatePicker dtpDataNas;
     @FXML
@@ -44,7 +54,7 @@ public class GerenciarFuncionariosFXMLController implements Initializable {
     @FXML
     private JFXTextField txtBairro;
     @FXML
-    private JFXComboBox<?> cbbCidade;
+    private JFXComboBox<Cidade> cbbCidade;
     @FXML
     private JFXTextField txtEmail;
     @FXML
@@ -54,7 +64,7 @@ public class GerenciarFuncionariosFXMLController implements Initializable {
     @FXML
     private Pane panePhone;
     @FXML
-    private JFXComboBox<?> cbbOperadora;
+    private JFXComboBox<Operadora> cbbOperadora;
     @FXML
     private JFXTextField txtDdd;
     @FXML
@@ -62,13 +72,13 @@ public class GerenciarFuncionariosFXMLController implements Initializable {
     @FXML
     private JFXButton btnAdicionar;
     @FXML
-    private TableView<?> tbvTelefone;
+    private TableView<Telefone> tbvTelefone;
     @FXML
-    private TableColumn<?, ?> tbcDdd;
+    private TableColumn<Telefone, String> tbcDdd;
     @FXML
-    private TableColumn<?, ?> tbcTelefone;
+    private TableColumn<Telefone, String> tbcTelefone;
     @FXML
-    private TableColumn<?, ?> btnDeletar;
+    private TableColumn btnDeletar;
     @FXML
     private JFXButton btnSalvar;
     @FXML
@@ -98,15 +108,39 @@ public class GerenciarFuncionariosFXMLController implements Initializable {
     @FXML
     private JFXPasswordField txtSenha;
     @FXML
-    private JFXComboBox<?> ccbNIvel;
-
+    private JFXComboBox<UNivel> ccbNIvel;
+    //-----------------------------------
+    private String nome;
+    private String endereco;
+    private String complemento;
+    private Integer numero;
+    private String cep;
+    private String bairro;
+    private String email;
+    private String rg;
+    private String cpf;
+    private LocalDate dataNas;
+    //---
+    private String ctps;
+    private LocalDate dataAdmi;
+    private LocalDate dataDemi;
+    private BigDecimal salIni;
+    private BigDecimal vrDia;
+    private BigDecimal vtDia;
+    private BigDecimal salAtual;
+    //---
+    private String telefone;
+    private String ddd;
+    //---
+    private String login;
+    private String senha;
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
+    }
 
     @FXML
     private void onKeyReleasedCep(KeyEvent event) {
@@ -147,5 +181,12 @@ public class GerenciarFuncionariosFXMLController implements Initializable {
     @FXML
     private void onKeyReleasedLogin(KeyEvent event) {
     }
-    
+
+    private void loadCbbOperadora() {
+        cbbOperadora.getItems().addAll(Arrays.asList(Operadora.values()));
+    }
+
+    private void loadCbbUsuNivel() {
+        //cbb.getItems().addAll(Arrays.asList(UNivel.values()));
+    }
 }

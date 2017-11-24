@@ -15,6 +15,7 @@ import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTextField;
 import com.sun.prism.impl.Disposer;
 import java.net.URL;
+import java.util.Arrays;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -356,9 +357,7 @@ public class GerenciarFornecedoresFXMLController implements Initializable {
     }
 
     private void loadCbbOperadora() {
-        for (Operadora op : Operadora.values()) {
-            cbbOperadora.getItems().add(op);
-        }
+        cbbOperadora.getItems().addAll(Arrays.asList(Operadora.values()));
     }
 
     private void setUptableView() {

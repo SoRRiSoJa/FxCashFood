@@ -2,6 +2,7 @@ com\cashf\model\produto\AliquotasProduto.class
 com\cashf\cashfood\FXMLController.class
 com\cashf\controller\menu\MenuFXMLController.class
 dao\GenericDAOIMP.class
+com\cashf\controller\funcionario\FuncionarioController.class
 com\cashf\model\produto\Categoria_.class
 com\cashf\dao\produto\GrupoDAO.class
 com\cashf\model\banco\Banco.class
