@@ -114,6 +114,7 @@ public class MenuFXMLController implements Initializable {
 
     @FXML
     private void onFuncionarios(ActionEvent event) {
+    loadFuncionario();
     }
 
     @FXML
@@ -143,13 +144,24 @@ public class MenuFXMLController implements Initializable {
             System.out.println("Erro:" + ex);
         }
     }
-
     //------------------------
     private void loadMeioPagamento() {
         try {
             flag = true;
             paneAnt = paneAux;
             paneAux = FXMLLoader.load(getClass().getResource("/fxml/meioPagamento/MeioPagamentoFXML.fxml"));
+            paneBody.getChildren().remove(paneAnt);
+            paneBody.getChildren().add(paneAux);
+        } catch (IOException ex) {
+            System.out.println("Erro:" + ex);
+        }
+    }
+    //------------------------
+    private void loadFuncionario() {
+        try {
+            flag = true;
+            paneAnt = paneAux;
+            paneAux = FXMLLoader.load(getClass().getResource("/fxml/funcionario/GerenciarFuncionariosFXML.fxml"));
             paneBody.getChildren().remove(paneAnt);
             paneBody.getChildren().add(paneAux);
         } catch (IOException ex) {
