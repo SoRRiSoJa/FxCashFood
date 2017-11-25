@@ -10,8 +10,10 @@ import com.cashf.dao.funcionario.FuncionarioDAO;
 import com.cashf.dao.telefone.TelefoneDAO;
 import com.cashf.model.cidade.Cidade;
 import com.cashf.model.funcionario.Funcionario;
+import com.cashf.model.pessoa.Sexo;
 import com.cashf.model.telefone.Operadora;
 import com.cashf.model.telefone.Telefone;
+import com.cashf.model.usuario.UNivel;
 import controller.GenericController;
 import java.util.ArrayList;
 import java.util.List;
@@ -35,6 +37,8 @@ public class FuncionarioController implements GenericController<Funcionario> {
     private Telefone telefone;
     private Operadora operadora;
     private Cidade cidade;
+    private Sexo sexo;
+    private UNivel nivel;
 
     public FuncionarioController() {
         this.funcionarioDAO=new FuncionarioDAO(Funcionario.class);
@@ -94,6 +98,22 @@ public class FuncionarioController implements GenericController<Funcionario> {
         return cidade;
     }
 
+    public Sexo getSexo() {
+        return sexo;
+    }
+
+    public void setSexo(Sexo sexo) {
+        this.sexo = sexo;
+    }
+
+    public UNivel getNivel() {
+        return nivel;
+    }
+
+    public void setNivel(UNivel nivel) {
+        this.nivel = nivel;
+    }
+    
     public void setCidade(Cidade cidade) {
         this.cidade = cidade;
     }
