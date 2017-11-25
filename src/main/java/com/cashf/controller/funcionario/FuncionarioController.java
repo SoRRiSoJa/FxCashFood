@@ -162,7 +162,8 @@ public class FuncionarioController implements GenericController<Funcionario> {
         funcionario.setIdPessoa(funcionarioDAO.save(funcionario));
         lista.add(funcionario);
         flushObject();
-
+        flushUsuario();
+        flushTelefone();
     }
 
     @Override
@@ -196,6 +197,24 @@ public class FuncionarioController implements GenericController<Funcionario> {
         telefoneDAO.update(telefone);
         flushTelefone();
     }
+    public void inserUsuario() {
+        usuario.setId(usuarioDAO.save(usuario));
+    }
+
+    public void deleteUsuario() {
+        usuarioDAO.delete(usuario);
+        flushUsuario();
+    }
+
+    public void updateUsuario() {
+        usuarioDAO.update(usuario);
+        flushUsuario();
+    }
+    public void flushUsuario() {
+        usuario = new Usuario();
+        usuario.setId(0l);
+    }
+
 
     @Override
     public void flushObject() {
