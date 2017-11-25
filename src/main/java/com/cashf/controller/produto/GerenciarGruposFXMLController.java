@@ -67,6 +67,8 @@ public class GerenciarGruposFXMLController implements Initializable {
     private TableColumn<Grupo, String> tbcDescricaoGrupo;
     @FXML
     private TableColumn<Grupo, String> tbcCategoriaGrupo;
+    @FXML
+    private TableColumn<?, ?> tbcDescricao1;
 
     /**
      * Initializes the controller class.
@@ -87,8 +89,10 @@ public class GerenciarGruposFXMLController implements Initializable {
             controller.setGrupo(idGrupo, descricao);
             if (controller.getGrupo().getIdGrupo() == 0) {
                 controller.insert();
+                clearFields();
                 PoupUpUtil.poupUp("Grupo Cadastrado", "O Grupo foi cadastrado com sucesso.", "");
             } else {
+
                 controller.update();
                 PoupUpUtil.poupUp("Grupo Alterado", "O Grupo foi alterado com sucesso.", "");
             }
@@ -127,6 +131,8 @@ public class GerenciarGruposFXMLController implements Initializable {
         if (validateFieldsCategoria()) {
             controller.setCategoria(idCat, descricaoCategoria);
             controller.inssertCategoria();
+            loadCbbCategoria();
+            btnAdicionar.setDisable(true);
         } else {
             PoupUpUtil.accessDenied(erros);
             erros = "";
@@ -135,7 +141,7 @@ public class GerenciarGruposFXMLController implements Initializable {
 
     @FXML
     private void onMouseClicked(MouseEvent event) {
-    
+
     }
 
     private void clearFields() {
@@ -205,5 +211,12 @@ public class GerenciarGruposFXMLController implements Initializable {
 
     private void loadCbbCategoria() {
         cbbCategoria.setItems(controller.getListaCategria());
+    }
+
+    @FXML
+    private void onCbbCategoria(ActionEvent event) {
+        if (cbbCategoria.getSelectionModel().getSelectedItem() != null) {
+            controller.setCategoria(cbbCategoria.getSelectionModel().getSelectedItem());
+        }
     }
 }

@@ -35,6 +35,7 @@ public class GenericDAOIMP<T> implements GenericDAO<T> {
             tx = session.beginTransaction();
             id=(Long)session.save(obj);
             tx.commit();
+            session.refresh(obj);
         } catch (HibernateException e) {
             if (tx != null) {
                 tx.rollback();

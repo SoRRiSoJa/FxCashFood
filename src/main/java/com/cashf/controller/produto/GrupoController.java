@@ -69,7 +69,10 @@ public class GrupoController {
     }
 
     public void setGrupo(long id, String descricao) {
-        this.grupo = new Grupo(id, descricao, categoria);
+        this.grupo.setIdGrupo(id);
+        this.grupo.setDescricao(descricao);
+        //this.grupo.setCategoria(categoria);
+        //this.grupo = new Grupo(id, descricao, categoria);
     }
 
     public Categoria getCategoria() {
@@ -88,18 +91,23 @@ public class GrupoController {
         grupo.setIdGrupo(grupoDAO.save(grupo));
         setItemLista(grupo);
         flushGrupo();
-    }
-    public void inssertCategoria(){
-        categoria.setIdCategoria(categoriaDAO.save(categoria));
-        listaCategria.add(categoria);
         flushCategoria();
     }
-    public void deleteCategoria(){
+
+    public void inssertCategoria() {
+        categoria.setIdCategoria(categoriaDAO.save(categoria));
+        categoria = categoriaDAO.findById(categoria.getIdCategoria());
+        grupo.setCategoria(categoria);
+        listaCategria.add(categoria);
+    }
+
+    public void deleteCategoria() {
         categoriaDAO.delete(categoria);
         listaCategria.remove(categoria);
         flushCategoria();
     }
-    public void uppdateCategoria(){
+
+    public void uppdateCategoria() {
         categoriaDAO.update(categoria);
         flushCategoria();
     }
@@ -114,12 +122,14 @@ public class GrupoController {
         grupoDAO.update(grupo);
         flushGrupo();
     }
-    private void flushGrupo(){
-        grupo=new Grupo();
+
+    private void flushGrupo() {
+        grupo = new Grupo();
         grupo.setIdGrupo(0l);
     }
-    private void flushCategoria(){
-        categoria=new Categoria();
+
+    private void flushCategoria() {
+        categoria = new Categoria();
         categoria.setIdCategoria(0l);
     }
 }
