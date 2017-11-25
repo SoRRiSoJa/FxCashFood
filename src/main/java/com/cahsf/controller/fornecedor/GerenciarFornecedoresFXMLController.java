@@ -277,17 +277,17 @@ public class GerenciarFornecedoresFXMLController implements Initializable {
 
     private void getData() {
         idFornecedor = (controller.getFornecedor().getIdFornecedor()!= 0) ? idFornecedor = controller.getFornecedor().getIdFornecedor(): 0l;
-        nomefantasia = txtNome.getText();;
-        razaoSocial = txtRazao.getText();;
-        endereco = txtEndereco.getText();;
-        complemento = txtComplemento.getText();;
+        nomefantasia = txtNome.getText();
+        razaoSocial = txtRazao.getText();
+        endereco = txtEndereco.getText();
+        complemento = txtComplemento.getText();
         numero = new Integer(txtNumero.getText());
-        bairro = txtBairro.getText();;
-        cep = txtCep.getText();;
-        cnpj = txtCnpj.getText();;
-        email = txtEmail.getText();;
-        inscrEst = txtInscrEst.getText();;
-        Observacao = txtObs.getText();;
+        bairro = txtBairro.getText();
+        cep = txtCep.getText();
+        cnpj = txtCnpj.getText();
+        email = txtEmail.getText();
+        inscrEst = txtInscrEst.getText();
+        Observacao = txtObs.getText();
         controller.setCidade(cbbCidade.getSelectionModel().getSelectedItem());
 
     }

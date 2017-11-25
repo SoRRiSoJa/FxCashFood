@@ -15,7 +15,7 @@ import util.SafePass;
  */
 public class LoginController {
 
-    private UsuarioDAO usuarioDAO;
+    private final UsuarioDAO usuarioDAO;
     private Usuario usuario;
     private String login;
     private String senha;

@@ -169,7 +169,7 @@ public class GerenciarFuncionariosFXMLController implements Initializable {
 
     @FXML
     private void onAdicionar(ActionEvent event) {
-    getDataTelefone();
+        getDataTelefone();
         if (validateTeleofne()) {
             controller.setTelefone(0l, ddd, telefone);
             controller.inserTelefone();
@@ -199,12 +199,10 @@ public class GerenciarFuncionariosFXMLController implements Initializable {
     private void onLimpar(ActionEvent event) {
         clearFields();
     }
-    
 
     @FXML
     private void onKeyReleasedLogin(KeyEvent event) {
     }
-    
 
     private void loadCbbOperadora() {
         cbbOperadora.getItems().addAll(Arrays.asList(Operadora.values()));
@@ -349,14 +347,56 @@ public class GerenciarFuncionariosFXMLController implements Initializable {
         salAtual = new BigDecimal(txtsalarioF.getText());
         vtDia = new BigDecimal(txtValeT.getText());
         vrDia = new BigDecimal(txtValeR.getText());
-        login = txtLogin.getText();
-        senha = txtSenha.getText();
         cbbFunTipo.getSelectionModel().getSelectedItem();
         controller.setSexo(cbbSexo.getSelectionModel().getSelectedItem());
         controller.setCidade(cbbCidade.getSelectionModel().getSelectedItem());
-        controller.setNivel(ccbNIvel.getSelectionModel().getSelectedItem());
         controller.setCidade(cbbCidade.getSelectionModel().getSelectedItem());
         controller.setOperadora(cbbOperadora.getSelectionModel().getSelectedItem());
+    }
+
+    private void getDataUser() {
+        login = txtLogin.getText();
+        senha = txtSenha.getText();
+        controller.setNivel(ccbNIvel.getSelectionModel().getSelectedItem());
+    }
+
+    private boolean validateFields() {
+        boolean flag = true;
+        if (nome == null || nome.equals("") || nome.length() < 3) {
+            erros += "O nome deve conter um conteúdo válido! \n";
+            flag = false;
+        }
+
+        if (endereco == null || endereco.equals("") || endereco.length() < 3) {
+            erros += "O endereço deve ser preenchido corretamente! \n";
+            flag = false;
+        }
+        if (cep == null || cep.equals("") || cep.length() < 3) {
+            erros += "O CEP deve ser preenchido corretamente! \n";
+            flag = false;
+        }
+        if (bairro == null || bairro.equals("") || bairro.length() < 3) {
+            erros += "O bairro deve ser preenchido corretamente! \n";
+            flag = false;
+        }
+        if (email == null || email.equals("") || email.length() < 3) {
+            erros += "O email deve ser preenchido corretamente! \n";
+            flag = false;
+        }
+        if (cpf == null || cpf.equals("") || cpf.length() < 12) {
+            erros += "O CPF deve ser preenchido corretamente! \n";
+            flag = false;
+        }
+        if (rg == null || rg.equals("") || rg.length() < 3) {
+            erros += "A inscrição estadual deve ser preenchida corretamente! \n";
+            flag = false;
+        }
+
+        if (cbbCidade.getSelectionModel().getSelectedItem() == null) {
+            erros += "Você deve selecionar uma Cidade! \n";
+            flag = false;
+        }
+        return flag;
     }
 
     private boolean validateTeleofne() {
@@ -372,6 +412,26 @@ public class GerenciarFuncionariosFXMLController implements Initializable {
 
         if (cbbOperadora.getSelectionModel().getSelectedItem() == null) {
             erros += "Você deve selecionar uma operadora para este telefone! \n";
+            flag = false;
+        }
+        return flag;
+    }
+
+    private boolean validateUser() {
+        boolean flag = true;
+        if (login == null || login.equals("") || login.length() < 3) {
+            erros += "O login do usuário deve conter um conteúdo válido! \n";
+            flag = false;
+        }else{
+            
+        }
+        if (senha == null || senha.equals("") || senha.length() < 4) {
+            erros += "A senha deve conter 4 digitos ou mais! \n";
+            flag = false;
+        }
+
+        if (ccbNIvel.getSelectionModel().getSelectedItem() == null) {
+            erros += "Você deve selecionar uma nível para o usuário! \n";
             flag = false;
         }
         return flag;

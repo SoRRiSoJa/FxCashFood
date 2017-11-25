@@ -8,6 +8,7 @@ package com.cashf.controller.funcionario;
 import com.cashf.dao.cidade.CidadeDAO;
 import com.cashf.dao.funcionario.FuncionarioDAO;
 import com.cashf.dao.telefone.TelefoneDAO;
+import com.cashf.dao.usuario.UsuarioDAO;
 import com.cashf.model.cidade.Cidade;
 import com.cashf.model.funcionario.Funcionario;
 import com.cashf.model.pessoa.Sexo;
@@ -22,6 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import util.SafePass;
 
 /**
  *
@@ -30,6 +32,7 @@ import javafx.collections.ObservableList;
 public class FuncionarioController implements GenericController<Funcionario> {
 
     private final FuncionarioDAO funcionarioDAO;
+    private final UsuarioDAO usuarioDAO;
     private Funcionario funcionario;
     private ObservableList<Funcionario> lista;
     private final TelefoneDAO telefoneDAO;
@@ -42,9 +45,12 @@ public class FuncionarioController implements GenericController<Funcionario> {
     private Cidade cidade;
     private Sexo sexo;
     private UNivel nivel;
+    private Usuario usuario;
 
     public FuncionarioController() {
         this.funcionarioDAO = new FuncionarioDAO(Funcionario.class);
+        this.usuario = new Usuario();
+        this.usuarioDAO = new UsuarioDAO(Usuario.class);
         this.funcionario = new Funcionario();
         this.lt = new ArrayList<>();
         this.cidadeDAO = new CidadeDAO(Cidade.class);
@@ -55,6 +61,8 @@ public class FuncionarioController implements GenericController<Funcionario> {
         this.cidade = new Cidade();
         telefone.setIdTelefone(0l);
         funcionario.setIdPessoa(0l);
+        this.usuario=new Usuario();
+        usuario.setId(0l);
     }
 
     public Funcionario getFuncionario() {
@@ -71,6 +79,17 @@ public class FuncionarioController implements GenericController<Funcionario> {
 
     public ObservableList<Telefone> getListaTelefone() {
         return listaTelefone;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+    public void setUsuario(Long id,String login,String senha,UNivel nivel,Boolean status) {
+        this.usuario = new Usuario(id, login, SafePass.crypPass(senha), nivel, status);
     }
 
     public void setItemListaTelefone(Telefone telefone) {
