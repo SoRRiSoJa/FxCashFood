@@ -217,6 +217,7 @@ public class GerenciarGruposFXMLController implements Initializable {
     private void onCbbCategoria(ActionEvent event) {
         if (cbbCategoria.getSelectionModel().getSelectedItem() != null) {
             controller.setCategoria(cbbCategoria.getSelectionModel().getSelectedItem());
+            controller.getGrupo().setCategoria(controller.getCategoria());
         }
     }
 }
