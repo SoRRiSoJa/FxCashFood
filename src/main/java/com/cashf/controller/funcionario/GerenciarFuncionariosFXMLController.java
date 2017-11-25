@@ -27,6 +27,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
+import util.PoupUpUtil;
 
 /**
  * FXML Controller class
@@ -108,6 +109,7 @@ public class GerenciarFuncionariosFXMLController implements Initializable {
     @FXML
     private JFXComboBox<UNivel> ccbNIvel;
     //-----------------------------------
+    private long IdFunc;
     private String nome;
     private String endereco;
     private String complemento;
@@ -142,7 +144,11 @@ public class GerenciarFuncionariosFXMLController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        setInputOFF();
+        loadCbbOperadora();
+        loadCbbCidade();
+        loadCbbSexo();
+        loadCbbUsuNivel();
     }
 
     @FXML
@@ -163,6 +169,14 @@ public class GerenciarFuncionariosFXMLController implements Initializable {
 
     @FXML
     private void onAdicionar(ActionEvent event) {
+    getDataTelefone();
+        if (validateTeleofne()) {
+            controller.setTelefone(0l, ddd, telefone);
+            controller.inserTelefone();
+        } else {
+            PoupUpUtil.accessDenied(erros);
+            erros = "";
+        }
     }
 
     @FXML
@@ -171,6 +185,10 @@ public class GerenciarFuncionariosFXMLController implements Initializable {
 
     @FXML
     private void onNovo(ActionEvent event) {
+        setInputON();
+        clearFields();
+        btnNovo.setDisable(true);
+        btnExcluir.setDisable(true);
     }
 
     @FXML
@@ -179,18 +197,29 @@ public class GerenciarFuncionariosFXMLController implements Initializable {
 
     @FXML
     private void onLimpar(ActionEvent event) {
+        clearFields();
     }
+    
 
     @FXML
     private void onKeyReleasedLogin(KeyEvent event) {
     }
+    
 
     private void loadCbbOperadora() {
         cbbOperadora.getItems().addAll(Arrays.asList(Operadora.values()));
     }
 
+    private void loadCbbCidade() {
+        cbbCidade.getItems().addAll(controller.getListaCidade());
+    }
+
     private void loadCbbUsuNivel() {
-        //cbb.getItems().addAll(Arrays.asList(UNivel.values()));
+        ccbNIvel.getItems().addAll(Arrays.asList(UNivel.values()));
+    }
+
+    private void loadCbbSexo() {
+        cbbSexo.getItems().addAll(Arrays.asList(Sexo.values()));
     }
 
     private void clearFields() {
@@ -225,24 +254,28 @@ public class GerenciarFuncionariosFXMLController implements Initializable {
     }
 
     private void setInputON() {
+        btnExcluir.setDisable(false);
+        btnLimpar.setDisable(false);
+        btnSalvar.setDisable(false);
+
         txtNome.setDisable(false);
-        cbbSexo.setDisable(true);
-        dtpDataNas.setDisable(true);
+        cbbSexo.setDisable(false);
+        dtpDataNas.setDisable(false);
         txtEndereco.setDisable(false);
         txtNumero.setDisable(false);
         txtComplemento.setDisable(false);
         txtCep.setDisable(false);
         txtBairro.setDisable(false);
-        cbbCidade.setValue(null);
+        cbbCidade.setDisable(false);
         txtEmail.setDisable(false);
         txtRg.setDisable(false);
         txtCpf.setDisable(false);
-        cbbOperadora.setDisable(true);
+        cbbOperadora.setDisable(false);
         txtDdd.setDisable(false);
         txtNumeroTelefone.setDisable(false);
-        cbbFunTipo.setDisable(true);
-        dtpDataAdm.setDisable(true);
-        dtpDataDem.setDisable(true);
+        cbbFunTipo.setDisable(false);
+        dtpDataAdm.setDisable(false);
+        dtpDataDem.setDisable(false);
         txtCtps.setDisable(false);
         txtSalarioI.setDisable(false);
         txtsalarioF.setDisable(false);
@@ -250,12 +283,16 @@ public class GerenciarFuncionariosFXMLController implements Initializable {
         txtValeR.setDisable(false);
         txtLogin.setDisable(false);
         txtSenha.setDisable(false);
-        ccbNIvel.setDisable(true);
-        cbbCidade.setDisable(true);
-        cbbOperadora.setDisable(true);
+        ccbNIvel.setDisable(false);
+        cbbCidade.setDisable(false);
+        cbbOperadora.setDisable(false);
+        flagButtons = true;
     }
 
     private void setInputOFF() {
+        btnExcluir.setDisable(true);
+        btnLimpar.setDisable(true);
+        btnSalvar.setDisable(true);
         txtNome.setDisable(true);
         cbbSexo.setDisable(true);
         dtpDataNas.setDisable(true);
@@ -284,44 +321,60 @@ public class GerenciarFuncionariosFXMLController implements Initializable {
         ccbNIvel.setDisable(true);
         cbbCidade.setDisable(true);
         cbbOperadora.setDisable(true);
+        flagButtons = false;
+    }
+
+    private void getDataTelefone() {
+        telefone = txtNumeroTelefone.getText();
+        ddd = txtDdd.getText();
+        controller.setOperadora(cbbOperadora.getSelectionModel().getSelectedItem());
     }
 
     private void getData() {
-        
-   
-   
-     
-   
-    //---
-        nome=txtNome.getText();
-        dtpDataNas.setValue(null);
-        endereco=txtEndereco.getText();
+        IdFunc = (controller.getFuncionario().getIdPessoa() != 0l) ? controller.getFuncionario().getIdPessoa() : 0l;
+        nome = txtNome.getText();
+        dataNas = dtpDataNas.getValue();
+        endereco = txtEndereco.getText();
         txtNumero.getText();
-        complemento=txtComplemento.getText();
-        cep=txtCep.getText();
-        bairro=txtBairro.getText();
-        email=txtEmail.getText();
-        rg=txtRg.getText();
-        cpf=txtCpf.getText();
-        ddd=txtDdd.getText();
-        txtNumeroTelefone.getText();
+        complemento = txtComplemento.getText();
+        cep = txtCep.getText();
+        bairro = txtBairro.getText();
+        email = txtEmail.getText();
+        rg = txtRg.getText();
+        cpf = txtCpf.getText();
+        dataAdmi = dtpDataAdm.getValue();
+        dataDemi = dtpDataDem.getValue();
+        ctps = txtCtps.getText();
+        salIni = new BigDecimal(txtSalarioI.getText());
+        salAtual = new BigDecimal(txtsalarioF.getText());
+        vtDia = new BigDecimal(txtValeT.getText());
+        vrDia = new BigDecimal(txtValeR.getText());
+        login = txtLogin.getText();
+        senha = txtSenha.getText();
         cbbFunTipo.getSelectionModel().getSelectedItem();
-        dtpDataAdm.setValue(null);
-        dtpDataDem.setValue(null);
-        ctps=txtCtps.getText();
-        
-        txtSalarioI.getText();
-        txtsalarioF.getText();
-        txtValeT.getText();
-        txtValeR.getText();
-        login=txtLogin.getText();
-        senha=txtSenha.getText();
-        
-        controller.setOperadora(cbbOperadora.getSelectionModel().getSelectedItem());
         controller.setSexo(cbbSexo.getSelectionModel().getSelectedItem());
         controller.setCidade(cbbCidade.getSelectionModel().getSelectedItem());
         controller.setNivel(ccbNIvel.getSelectionModel().getSelectedItem());
         controller.setCidade(cbbCidade.getSelectionModel().getSelectedItem());
         controller.setOperadora(cbbOperadora.getSelectionModel().getSelectedItem());
     }
+
+    private boolean validateTeleofne() {
+        boolean flag = true;
+        if (ddd == null || ddd.equals("") || ddd.length() < 2) {
+            erros += "O DDD do telefone deve conter um número válido! \n";
+            flag = false;
+        }
+        if (telefone == null || telefone.equals("") || telefone.length() < 3) {
+            erros += "O telefone do Fornecedor deve conter um número válido! \n";
+            flag = false;
+        }
+
+        if (cbbOperadora.getSelectionModel().getSelectedItem() == null) {
+            erros += "Você deve selecionar uma operadora para este telefone! \n";
+            flag = false;
+        }
+        return flag;
+    }
+
 }
