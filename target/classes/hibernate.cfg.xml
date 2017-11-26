@@ -57,6 +57,8 @@ Contributor(s):
         <mapping class="com.cashf.model.meiopagamento.MeioPagamento" />
         <mapping class="com.cashf.model.fornecedor.Fornecedor" />
         <mapping class="com.cashf.model.telefone.Telefone" />
+        <mapping class="com.cashf.model.produto.Produto" />
+        <mapping class="com.cashf.model.produto.AliquotasProduto" />
         <mapping class="com.cashf.model.produto.Grupo" />
         <mapping class="com.cashf.model.produto.Categoria" />
         <mapping class="com.cashf.model.pessoa.Pessoa" />

@@ -21,6 +21,7 @@ com/cashf/dao/produto/AliquotasProdutoDAO.class
 com/cashf/dao/telefone/TelefoneDAO.class
 com/cashf/model/produto/Categoria_.class
 com/cashf/model/contacorrente/ContaCorrente_.class
+com/cashf/controller/cliente/GerenciarClientesFXMLController.class
 com/cashf/dao/produto/ProdutoDAO.class
 util/PoupUpUtil.class
 com/cashf/model/produto/TipoProduto.class

@@ -84,6 +84,7 @@ public class MenuFXMLController implements Initializable {
 
     @FXML
     private void onClientes(ActionEvent event) {
+        loadClientes();
     }
 
     @FXML
@@ -203,6 +204,18 @@ public class MenuFXMLController implements Initializable {
             flag = true;
             paneAnt = paneAux;
             paneAux = FXMLLoader.load(getClass().getResource("/fxml/produto/GerenciarProdutosFXML.fxml"));
+            paneBody.getChildren().remove(paneAnt);
+            paneBody.getChildren().add(paneAux);
+        } catch (IOException ex) {
+            System.out.println("Erro:" + ex);
+        }
+    }
+    //------------------------
+    private void loadClientes() {
+        try {
+            flag = true;
+            paneAnt = paneAux;
+            paneAux = FXMLLoader.load(getClass().getResource("/fxml/clientes/GerenciarClientesFXML.fxml"));
             paneBody.getChildren().remove(paneAnt);
             paneBody.getChildren().add(paneAux);
         } catch (IOException ex) {

@@ -11,6 +11,7 @@
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/dao/funcionario/FuncionarioDAO.java
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/cashfood/MainApp.java
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/model/usuario/Usuario.java
+/home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/controller/cliente/GerenciarClientesFXMLController.java
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/model/cidade/Cidade.java
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/dao/produto/GrupoDAO.java
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/controller/GenericController.java

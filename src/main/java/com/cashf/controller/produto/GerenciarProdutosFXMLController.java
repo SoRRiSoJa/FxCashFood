@@ -109,6 +109,7 @@ public class GerenciarProdutosFXMLController implements GenericViewController, I
     private String codigoReferencia;
     private String descriao;
     private int qtdeEmbalagem = 0;
+    private int qtdeProduto = 0;
     private String ncm;
     private BigDecimal preco_custo;
     private BigDecimal preco_venda;
