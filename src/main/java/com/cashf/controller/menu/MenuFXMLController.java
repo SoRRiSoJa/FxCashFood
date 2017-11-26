@@ -93,6 +93,7 @@ public class MenuFXMLController implements Initializable {
 
     @FXML
     private void onProdutos(ActionEvent event) {
+        loadProdutos();
     }
 
     @FXML
@@ -114,7 +115,7 @@ public class MenuFXMLController implements Initializable {
 
     @FXML
     private void onFuncionarios(ActionEvent event) {
-    loadFuncionario();
+        loadFuncionario();
     }
 
     @FXML
@@ -144,6 +145,7 @@ public class MenuFXMLController implements Initializable {
             System.out.println("Erro:" + ex);
         }
     }
+
     //------------------------
     private void loadMeioPagamento() {
         try {
@@ -156,6 +158,7 @@ public class MenuFXMLController implements Initializable {
             System.out.println("Erro:" + ex);
         }
     }
+
     //------------------------
     private void loadFuncionario() {
         try {
@@ -187,6 +190,19 @@ public class MenuFXMLController implements Initializable {
             flag = true;
             paneAnt = paneAux;
             paneAux = FXMLLoader.load(getClass().getResource("/fxml/produto/GerenciarGruposFXML.fxml"));
+            paneBody.getChildren().remove(paneAnt);
+            paneBody.getChildren().add(paneAux);
+        } catch (IOException ex) {
+            System.out.println("Erro:" + ex);
+        }
+    }
+
+    //------------------------
+    private void loadProdutos() {
+        try {
+            flag = true;
+            paneAnt = paneAux;
+            paneAux = FXMLLoader.load(getClass().getResource("/fxml/produto/GerenciarProdutosFXML.fxml"));
             paneBody.getChildren().remove(paneAnt);
             paneBody.getChildren().add(paneAux);
         } catch (IOException ex) {
