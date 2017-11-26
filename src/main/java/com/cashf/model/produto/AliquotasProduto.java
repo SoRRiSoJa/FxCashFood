@@ -37,11 +37,13 @@ public class AliquotasProduto implements Serializable{
     private BigDecimal cest;
     private BigDecimal aliquotaIcms;
     private BigDecimal aliquotafederal;
+    private BigDecimal aliquotaestadual;
+    private BigDecimal aliquotamunicipal;
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private SituacaoTributaria situacaoTributaria;
 
-    public AliquotasProduto(long id, BigDecimal percentualPis, BigDecimal cstpPis, BigDecimal cfop, BigDecimal cstConfins, BigDecimal percentualConfins, BigDecimal aliquotaCsosn, BigDecimal cest, BigDecimal aliquotaIcms, BigDecimal aliquotafederal, SituacaoTributaria situacaoTributaria) {
+    public AliquotasProduto(long id, BigDecimal percentualPis, BigDecimal cstpPis, BigDecimal cfop, BigDecimal cstConfins, BigDecimal percentualConfins, BigDecimal aliquotaCsosn, BigDecimal cest, BigDecimal aliquotaIcms, BigDecimal aliquotafederal,BigDecimal aliquotaestadual,BigDecimal aliquomunicipal, SituacaoTributaria situacaoTributaria) {
         this.idAliquota = id;
         this.percentualPis = percentualPis;
         this.cstpPis = cstpPis;
@@ -52,6 +54,8 @@ public class AliquotasProduto implements Serializable{
         this.cest = cest;
         this.aliquotaIcms = aliquotaIcms;
         this.aliquotafederal = aliquotafederal;
+        this.aliquotaestadual = aliquotaestadual;
+        this.aliquotamunicipal = aliquomunicipal;
         this.situacaoTributaria = situacaoTributaria;
     }
     
@@ -141,6 +145,22 @@ public class AliquotasProduto implements Serializable{
         this.aliquotafederal = aliquotafederal;
     }
 
+    public BigDecimal getAliquotaestadual() {
+        return aliquotaestadual;
+    }
+
+    public void setAliquotaestadual(BigDecimal aliquotaestadual) {
+        this.aliquotaestadual = aliquotaestadual;
+    }
+
+    public BigDecimal getAliquotamunicipal() {
+        return aliquotamunicipal;
+    }
+
+    public void setAliquotamunicipal(BigDecimal aliquotamunicipal) {
+        this.aliquotamunicipal = aliquotamunicipal;
+    }
+    
     public SituacaoTributaria getSituacaoTributaria() {
         return situacaoTributaria;
     }

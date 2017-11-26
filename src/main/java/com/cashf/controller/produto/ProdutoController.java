@@ -39,10 +39,10 @@ public class ProdutoController implements GenericController<Produto> {
 
     public ProdutoController() {
         this.produtoDAO = new ProdutoDAO(Produto.class);
-        this.grupoDAO=new GrupoDAO(Grupo.class);
-        this.aliquotasProdutoDAO=new AliquotasProdutoDAO(AliquotasProduto.class);
-        this.lista=FXCollections.observableList(produtoDAO.listAll());
-        this.listaGrupo=FXCollections.observableList(grupoDAO.listAll());
+        this.grupoDAO = new GrupoDAO(Grupo.class);
+        this.aliquotasProdutoDAO = new AliquotasProdutoDAO(AliquotasProduto.class);
+        this.lista = FXCollections.observableList(produtoDAO.listAll());
+        this.listaGrupo = FXCollections.observableList(grupoDAO.listAll());
     }
 
     public Produto getProduto() {
@@ -52,7 +52,8 @@ public class ProdutoController implements GenericController<Produto> {
     public void setProduto(Produto produto) {
         this.produto = produto;
     }
-    public void setProduto(long id, String codigoReferencia, String descriao, int qtdeEmbalagem, String ncm, BigDecimal preco_custo, BigDecimal preco_venda, Grupo grupo,UnidadeMedida unidadeMedida, TipoProduto tipo, boolean status) {
+
+    public void setProduto(long id, String codigoReferencia, String descriao, int qtdeEmbalagem, String ncm, BigDecimal preco_custo, BigDecimal preco_venda, Grupo grupo, UnidadeMedida unidadeMedida, TipoProduto tipo, boolean status) {
         this.produto.setIdProduto(id);
         this.produto.setCodigoReferencia(codigoReferencia);
         this.produto.setDescriao(descriao);
@@ -82,6 +83,7 @@ public class ProdutoController implements GenericController<Produto> {
     public void setAliquotaProduto(AliquotasProduto aliquotaProduto) {
         this.aliquotaProduto = aliquotaProduto;
     }
+
     public void setAliquotaProduto(long id, BigDecimal percentualPis, BigDecimal cstpPis, BigDecimal cfop, BigDecimal cstConfins, BigDecimal percentualConfins, BigDecimal aliquotaCsosn, BigDecimal cest, BigDecimal aliquotaIcms, BigDecimal aliquotafederal) {
         this.aliquotaProduto.setIdAliquota(id);
         this.aliquotaProduto.setPercentualPis(percentualPis);
@@ -127,39 +129,49 @@ public class ProdutoController implements GenericController<Produto> {
     public void setListaGrupo(ObservableList<Grupo> listaGrupo) {
         this.listaGrupo = listaGrupo;
     }
-    
-    public void insertAliquotaProduto() {
 
+    public void insertAliquotaProduto() {
+        aliquotaProduto.setIdAliquota(aliquotasProdutoDAO.save(aliquotaProduto));
     }
 
     public void updateAliquotaProduto() {
 
     }
-    
+
     public void flushAliquotaProduto() {
-        this.aliquotaProduto=new AliquotasProduto();
+        this.aliquotaProduto = new AliquotasProduto();
         this.aliquotaProduto.setIdAliquota(0l);
     }
 
-
     @Override
     public void insert() {
-
+        insertAliquotaProduto();
+        produto.setAliquotasProduto(aliquotaProduto);
+        produto.setIdProduto(produtoDAO.save(produto));
+        setItenLista(produto);
+        flushAliquotaProduto();
+        flushObject();
     }
 
     @Override
     public void update() {
-
+        produtoDAO.update(produto);
+        flushAliquotaProduto();
+        flushObject();
     }
 
     @Override
     public void delete() {
-
+        aliquotasProdutoDAO.delete(aliquotaProduto);
+        produtoDAO.delete(produto);
+        lista.remove(produto);
+        flushAliquotaProduto();
+        flushObject();
     }
 
     @Override
     public void flushObject() {
-        this.produto=new Produto();
+        this.produto = new Produto();
         produto.setIdProduto(0l);
     }
 
@@ -170,7 +182,7 @@ public class ProdutoController implements GenericController<Produto> {
 
     @Override
     public void setLista(ObservableList<Produto> lista) {
-        this.lista=lista;
+        this.lista = lista;
     }
 
     @Override
