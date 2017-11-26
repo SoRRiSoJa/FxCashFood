@@ -27,7 +27,7 @@ public class AliquotasProduto implements Serializable{
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(columnDefinition = "serial")
     @Id
-    private long id;
+    private long idAliquota;
     private BigDecimal percentualPis;
     private BigDecimal cstpPis;
     private BigDecimal cfop;
@@ -42,7 +42,7 @@ public class AliquotasProduto implements Serializable{
     private SituacaoTributaria situacaoTributaria;
 
     public AliquotasProduto(long id, BigDecimal percentualPis, BigDecimal cstpPis, BigDecimal cfop, BigDecimal cstConfins, BigDecimal percentualConfins, BigDecimal aliquotaCsosn, BigDecimal cest, BigDecimal aliquotaIcms, BigDecimal aliquotafederal, SituacaoTributaria situacaoTributaria) {
-        this.id = id;
+        this.idAliquota = id;
         this.percentualPis = percentualPis;
         this.cstpPis = cstpPis;
         this.cfop = cfop;
@@ -59,13 +59,15 @@ public class AliquotasProduto implements Serializable{
     public AliquotasProduto() {
     }
 
-    public long getId() {
-        return id;
+    public long getIdAliquota() {
+        return idAliquota;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setIdAliquota(long idAliquota) {
+        this.idAliquota = idAliquota;
     }
+
+    
 
     public BigDecimal getPercentualPis() {
         return percentualPis;
@@ -150,7 +152,7 @@ public class AliquotasProduto implements Serializable{
     @Override
     public int hashCode() {
         int hash = 5;
-        hash = 97 * hash + (int) (this.id ^ (this.id >>> 32));
+        hash = 97 * hash + (int) (this.idAliquota ^ (this.idAliquota >>> 32));
         return hash;
     }
 
@@ -166,7 +168,7 @@ public class AliquotasProduto implements Serializable{
             return false;
         }
         final AliquotasProduto other = (AliquotasProduto) obj;
-        if (this.id != other.id) {
+        if (this.idAliquota != other.idAliquota) {
             return false;
         }
         if (!Objects.equals(this.percentualPis, other.percentualPis)) {
@@ -177,7 +179,7 @@ public class AliquotasProduto implements Serializable{
 
     @Override
     public String toString() {
-        return  ""+id;
+        return  ""+idAliquota;
     }
     
     

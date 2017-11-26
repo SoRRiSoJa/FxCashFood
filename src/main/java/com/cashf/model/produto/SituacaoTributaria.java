@@ -9,7 +9,7 @@ package com.cashf.model.produto;
  *
  * @author joao
  */
-public enum SituacaoTributaria {
+public enum SituacaoTributaria  {
     NAO_INCIDENTE("Não Incidente"),SERVICO("Serviço"),
     SUBSTITUICAO_TRIBUTARIA("Subistituição tributária"),
     ISENTO("Isento"),
