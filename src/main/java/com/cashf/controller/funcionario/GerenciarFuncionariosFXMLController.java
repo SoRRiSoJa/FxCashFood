@@ -187,6 +187,8 @@ public class GerenciarFuncionariosFXMLController implements Initializable {
         if (validateUser() && validateFields()) {
             controller.setUsuario(IdUsu, login, senha, controller.getNivel(), true);
             controller.setFuncionario(IdFunc, nome, controller.getSexo(), dataNas, endereco, bairro, numero, complemento, cep, controller.getCidade(), cpf, rg, email, controller.getListaTelefone(), flagButtons, 0, ctps, salIni, salAtual, vrDia, vtDia, dataAdmi, dataDemi, controller.getUsuario());
+            controller.inserUsuario();
+            controller.insert();
         } else {
             PoupUpUtil.accessDenied(erros);
             erros = "";
@@ -393,7 +395,7 @@ public class GerenciarFuncionariosFXMLController implements Initializable {
             erros += "O email deve ser preenchido corretamente! \n";
             flag = false;
         }
-        if (cpf == null || cpf.equals("") || cpf.length() < 12) {
+        if (cpf == null || cpf.equals("") || cpf.length() < 3) {
             erros += "O CPF deve ser preenchido corretamente! \n";
             flag = false;
         }

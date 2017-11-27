@@ -52,6 +52,7 @@ public class FuncionarioController implements GenericController<Funcionario> {
         this.usuario = new Usuario();
         this.usuarioDAO = new UsuarioDAO(Usuario.class);
         this.funcionario = new Funcionario();
+        this.lista=FXCollections.observableList(funcionarioDAO.listAll());
         this.lt = new ArrayList<>();
         this.cidadeDAO = new CidadeDAO(Cidade.class);
         this.telefoneDAO = new TelefoneDAO(Telefone.class);
@@ -159,6 +160,7 @@ public class FuncionarioController implements GenericController<Funcionario> {
 
     @Override
     public void insert() {
+        funcionario.setUsuario(usuario);
         funcionario.setIdPessoa(funcionarioDAO.save(funcionario));
         lista.add(funcionario);
         flushObject();
