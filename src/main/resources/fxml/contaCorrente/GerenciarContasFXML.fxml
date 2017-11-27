@@ -92,9 +92,9 @@
             <TableView fx:id="tbvContas" layoutX="20.0" layoutY="45.0" onMouseClicked="#onMouseClicked" prefHeight="410.0" prefWidth="600.0" stylesheets="@../../../../../../AtenaGym/src/main/resources/styles/TableViewDefaultCSS.css">
                <columns>
                   <TableColumn fx:id="tbcDescricao" prefWidth="273.0" text="Descrição" />
-                  <TableColumn fx:id="tbcBanco" prefWidth="55.0" text="Banco" />
-                  <TableColumn fx:id="tbcAgencia" prefWidth="83.0" text="Agência" />
-                  <TableColumn fx:id="tbcConta" prefWidth="110.0" text="Nº da Conta" />
+                  <TableColumn fx:id="tbcBanco" prefWidth="93.0" text="Banco" />
+                  <TableColumn fx:id="tbcAgencia" prefWidth="84.0" text="Agência" />
+                  <TableColumn fx:id="tbcConta" prefWidth="147.0" text="Nº da Conta" />
                </columns>
                <effect>
                   <DropShadow />

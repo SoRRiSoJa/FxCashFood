@@ -124,13 +124,23 @@ public class GerenciarContasFXMLController implements Initializable {
     @FXML
     private void onMouseClickedBanco(MouseEvent event) {
         controller.setBanco(cbbBanco.getSelectionModel().getSelectedItem());
+        
     }
 
     @FXML
     private void onMouseClicked(MouseEvent event) {
+        if(tbvContas.getSelectionModel().getSelectedItem()!=null){
         controller.setContaCorrente(tbvContas.getSelectionModel().getSelectedItem());
+        loadDataToScreen();
+        }
     }
-
+     public void loadDataToScreen(){
+        txtAgencia.setText(controller.getContaCorrente().getAgencia());
+        txtDescricao.setText(controller.getContaCorrente().getDescricao());
+        txtNumero.setText(controller.getContaCorrente().getContaCorrente());
+        cbbBanco.setValue(controller.getContaCorrente().getBanco());
+        getData();
+     }
     private void clearFields() {
         txtAgencia.clear();
         txtDescricao.clear();
@@ -209,4 +219,5 @@ public class GerenciarContasFXMLController implements Initializable {
     private void loadTbv() {
         tbvContas.setItems(controller.getLista());
     }
+    
 }

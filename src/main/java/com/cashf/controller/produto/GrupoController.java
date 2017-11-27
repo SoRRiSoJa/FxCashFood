@@ -9,6 +9,8 @@ import com.cashf.dao.produto.CategoriaDAO;
 import com.cashf.dao.produto.GrupoDAO;
 import com.cashf.model.produto.Categoria;
 import com.cashf.model.produto.Grupo;
+import java.util.ArrayList;
+import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -24,12 +26,14 @@ public class GrupoController {
     private ObservableList<Categoria> listaCategria;
     private Grupo grupo;
     private Categoria categoria;
+    private List<Categoria> llaux;
 
     public GrupoController() {
         this.grupoDAO = new GrupoDAO(Grupo.class);
         this.categoriaDAO = new CategoriaDAO(Categoria.class);
         this.lista = FXCollections.observableList(grupoDAO.listAll());
-        this.listaCategria = FXCollections.observableList(categoriaDAO.listAll());
+        llaux = new ArrayList<>();
+        listaCategria = FXCollections.observableList(llaux);
         this.grupo = new Grupo();
         this.categoria = new Categoria();
         this.grupo.setIdGrupo(0);
@@ -131,5 +135,10 @@ public class GrupoController {
     private void flushCategoria() {
         categoria = new Categoria();
         categoria.setIdCategoria(0l);
+    }
+
+    public void flushListaCategoria() {
+        llaux = new ArrayList<>();
+        listaCategria = FXCollections.observableList(llaux);
     }
 }
