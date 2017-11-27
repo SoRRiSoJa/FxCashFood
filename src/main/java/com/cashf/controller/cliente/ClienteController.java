@@ -141,7 +141,9 @@ public class ClienteController implements GenericController<Cliente>{
 
     @Override
     public void update() {
-
+        updateTelefone();
+        clienteDAO.update(cliente);
+        flushObject();
     }
 
     @Override

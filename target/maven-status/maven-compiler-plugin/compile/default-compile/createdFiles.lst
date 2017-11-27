@@ -19,6 +19,7 @@ com/cashf/controller/meiopagamento/MeioPagamentoFXMLController.class
 com/cahsf/controller/fornecedor/GerenciarFornecedoresFXMLController$ButtonCellDelete$1.class
 com/cashf/dao/produto/AliquotasProdutoDAO.class
 com/cashf/dao/telefone/TelefoneDAO.class
+com/cashf/dao/cliente/ClienteDAO.class
 com/cashf/model/produto/Categoria_.class
 com/cashf/model/contacorrente/ContaCorrente_.class
 com/cashf/controller/cliente/GerenciarClientesFXMLController.class
@@ -30,7 +31,9 @@ com/cahsf/controller/fornecedor/FornecedorController.class
 com/cashf/controller/funcionario/GerenciarFuncionariosFXMLController.class
 com/cashf/dao/banco/BancoDAO.class
 com/cashf/controller/produto/GerenciarProdutosFXMLController.class
+com/cashf/model/cliente/Cliente.class
 com/cahsf/controller/fornecedor/GerenciarFornecedoresFXMLController$ButtonCellDelete.class
+com/cashf/model/cliente/Cliente_.class
 com/cashf/model/produto/UnidadeMedida.class
 com/cashf/model/produto/AliquotasProduto_.class
 com/cahsf/dao/fornecedor/FornecedorDAO.class

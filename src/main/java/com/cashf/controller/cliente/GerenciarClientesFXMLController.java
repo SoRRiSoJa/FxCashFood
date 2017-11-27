@@ -5,15 +5,20 @@
  */
 package com.cashf.controller.cliente;
 
+import com.cashf.model.cidade.Cidade;
+import com.cashf.model.cliente.Cliente;
+import com.cashf.model.pessoa.Sexo;
+import com.cashf.model.telefone.Operadora;
+import com.cashf.model.telefone.Telefone;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXTextField;
 import controller.GenericViewController;
-import java.math.BigDecimal;
 import java.net.URL;
 import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -21,6 +26,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.input.KeyEvent;
+import util.PoupUpUtil;
 
 /**
  * FXML Controller class
@@ -32,7 +38,7 @@ public class GerenciarClientesFXMLController implements GenericViewController, I
     @FXML
     private JFXTextField txtNome;
     @FXML
-    private JFXComboBox<?> cbbSexo;
+    private JFXComboBox<Sexo> cbbSexo;
     @FXML
     private JFXDatePicker dtpDataNas;
     @FXML
@@ -46,7 +52,7 @@ public class GerenciarClientesFXMLController implements GenericViewController, I
     @FXML
     private JFXTextField txtBairro;
     @FXML
-    private JFXComboBox<?> cbbCidade;
+    private JFXComboBox<Cidade> cbbCidade;
     @FXML
     private JFXTextField txtEmail;
     @FXML
@@ -54,7 +60,7 @@ public class GerenciarClientesFXMLController implements GenericViewController, I
     @FXML
     private JFXTextField txtCpf;
     @FXML
-    private JFXComboBox<?> cbbOperadora;
+    private JFXComboBox<Operadora> cbbOperadora;
     @FXML
     private JFXTextField txtDdd;
     @FXML
@@ -62,13 +68,13 @@ public class GerenciarClientesFXMLController implements GenericViewController, I
     @FXML
     private JFXButton btnAdicionar;
     @FXML
-    private TableView<?> tbvTelefones;
+    private TableView<Telefone> tbvTelefones;
     @FXML
-    private TableColumn<?, ?> tbcDDD;
+    private TableColumn<Telefone, String> tbcDDD;
     @FXML
-    private TableColumn<?, ?> tbcTelefone;
+    private TableColumn<Telefone, String> tbcTelefone;
     @FXML
-    private TableColumn<?, ?> btnDeletar;
+    private TableColumn btnDeletar;
     @FXML
     private JFXButton btnSalvar;
     @FXML
@@ -80,7 +86,7 @@ public class GerenciarClientesFXMLController implements GenericViewController, I
     @FXML
     private JFXTextField txtObservacao;
     @FXML
-    private TableView<?> tbvProdutos;
+    private TableView<Cliente> tbvProdutos;
     @FXML
     private JFXTextField txtConsultar;
     @FXML
@@ -92,6 +98,7 @@ public class GerenciarClientesFXMLController implements GenericViewController, I
     @FXML
     private JFXRadioButton rdbTodos;
     //-----------------------------------
+    private ClienteController controller = new ClienteController();
     private long IdCli;
     private String nome;
     private String endereco;
@@ -114,6 +121,10 @@ public class GerenciarClientesFXMLController implements GenericViewController, I
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        setInputOff();
+        loadCbbOperadora();
+        loadCbbCidade();
+        loadCbbSexo();
     }
 
     @FXML
@@ -122,6 +133,7 @@ public class GerenciarClientesFXMLController implements GenericViewController, I
 
     @FXML
     private void onSelectCidade(ActionEvent event) {
+        controller.setCidade(cbbCidade.getSelectionModel().getSelectedItem());
     }
 
     @FXML
@@ -134,6 +146,14 @@ public class GerenciarClientesFXMLController implements GenericViewController, I
 
     @FXML
     private void onAdicionar(ActionEvent event) {
+        getDataTelefone();
+        if (validateTeleofne()) {
+            controller.setTelefone(0l, ddd, telefone);
+            controller.inserTelefone();
+        } else {
+            PoupUpUtil.accessDenied(erros);
+            erros = "";
+        }
     }
 
     @FXML
@@ -142,6 +162,10 @@ public class GerenciarClientesFXMLController implements GenericViewController, I
 
     @FXML
     private void onNovo(ActionEvent event) {
+        setInputOn();
+        clearFields();
+        btnNovo.setDisable(true);
+        btnExcluir.setDisable(true);
     }
 
     @FXML
@@ -150,6 +174,7 @@ public class GerenciarClientesFXMLController implements GenericViewController, I
 
     @FXML
     private void onLimpar(ActionEvent event) {
+        clearFields();
     }
 
     @Override
@@ -228,7 +253,7 @@ public class GerenciarClientesFXMLController implements GenericViewController, I
     private void getDataTelefone() {
         telefone = txtNumeroTelefone.getText();
         ddd = txtDdd.getText();
-        //controller.setOperadora(cbbOperadora.getSelectionModel().getSelectedItem());
+        controller.setOperadora(cbbOperadora.getSelectionModel().getSelectedItem());
     }
 
     @Override
@@ -273,7 +298,7 @@ public class GerenciarClientesFXMLController implements GenericViewController, I
 
     @Override
     public void getData() {
-        //IdCli = (controller.getFuncionario().getIdPessoa() != 0l) ? controller.getFuncionario().getIdPessoa() : 0l;
+        IdCli = (controller.getCliente().getIdPessoa() != 0l) ? controller.getCliente().getIdPessoa() : 0l;
         nome = txtNome.getText();
         dataNas = dtpDataNas.getValue();
         endereco = txtEndereco.getText();
@@ -284,10 +309,9 @@ public class GerenciarClientesFXMLController implements GenericViewController, I
         email = txtEmail.getText();
         rg = txtRg.getText();
         cpf = txtCpf.getText();
-        //controller.setSexo(cbbSexo.getSelectionModel().getSelectedItem());
-        //controller.setCidade(cbbCidade.getSelectionModel().getSelectedItem());
-        //controller.setCidade(cbbCidade.getSelectionModel().getSelectedItem());
-        //controller.setOperadora(cbbOperadora.getSelectionModel().getSelectedItem());
+        controller.setSexo(cbbSexo.getSelectionModel().getSelectedItem());
+        controller.setCidade(cbbCidade.getSelectionModel().getSelectedItem());
+        controller.setOperadora(cbbOperadora.getSelectionModel().getSelectedItem());
     }
 
     private boolean validateTeleofne() {
@@ -306,6 +330,18 @@ public class GerenciarClientesFXMLController implements GenericViewController, I
             flag = false;
         }
         return flag;
+    }
+
+    private void loadCbbSexo() {
+        cbbSexo.getItems().addAll(Arrays.asList(Sexo.values()));
+    }
+
+    private void loadCbbCidade() {
+        cbbCidade.getItems().addAll(controller.getListaCidade());
+    }
+
+    private void loadCbbOperadora() {
+        cbbOperadora.getItems().addAll(Arrays.asList(Operadora.values()));
     }
 
     @Override

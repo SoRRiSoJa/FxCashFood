@@ -157,6 +157,7 @@ public class GerenciarFuncionariosFXMLController implements Initializable {
 
     @FXML
     private void onSelectCidade(ActionEvent event) {
+        controller.setCidade(cbbCidade.getSelectionModel().getSelectedItem());
     }
 
     @FXML
@@ -350,7 +351,7 @@ public class GerenciarFuncionariosFXMLController implements Initializable {
         cbbFunTipo.getSelectionModel().getSelectedItem();
         controller.setSexo(cbbSexo.getSelectionModel().getSelectedItem());
         controller.setCidade(cbbCidade.getSelectionModel().getSelectedItem());
-        controller.setCidade(cbbCidade.getSelectionModel().getSelectedItem());
+        
         controller.setOperadora(cbbOperadora.getSelectionModel().getSelectedItem());
     }
 
@@ -422,8 +423,8 @@ public class GerenciarFuncionariosFXMLController implements Initializable {
         if (login == null || login.equals("") || login.length() < 3) {
             erros += "O login do usuário deve conter um conteúdo válido! \n";
             flag = false;
-        }else{
-            
+        } else {
+
         }
         if (senha == null || senha.equals("") || senha.length() < 4) {
             erros += "A senha deve conter 4 digitos ou mais! \n";

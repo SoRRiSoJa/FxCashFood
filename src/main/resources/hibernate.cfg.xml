@@ -63,6 +63,7 @@ Contributor(s):
         <mapping class="com.cashf.model.produto.Categoria" />
         <mapping class="com.cashf.model.pessoa.Pessoa" />
         <mapping class="com.cashf.model.funcionario.Funcionario" />
+        <mapping class="com.cashf.model.cliente.Cliente" />
         
     </session-factory>
 </hibernate-configuration>
