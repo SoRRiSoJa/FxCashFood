@@ -128,6 +128,8 @@ public class GerenciarProdutosFXMLController implements GenericViewController, I
     private BigDecimal aliquotafederal;
     private BigDecimal aliquotaestadual;
     private BigDecimal aliquotamunicipal;
+    @FXML
+    private JFXTextField txtQtdeProd;
 
     /**
      * Initializes the controller class.
@@ -146,8 +148,8 @@ public class GerenciarProdutosFXMLController implements GenericViewController, I
     private void onSalvar(ActionEvent event) {
         getData();
         if (validateFields()) {
-            controller.setProduto(idProduto, codigoReferencia, descriao, qtdeEmbalagem, ncm, preco_custo, preco_venda, controller.getGrupo(), controller.getUnidadeMedida(), controller.getTipoProduto(), Boolean.TRUE);
-            controller.setAliquotaProduto(idAliquota, percentualPis, cstpPis, cfop, cstConfins, percentualConfins, aliquotaCsosn, cest, aliquotaIcms, aliquotafederal);
+            controller.setProduto(idProduto, codigoReferencia, descriao, qtdeEmbalagem,qtdeProduto, ncm, preco_custo, preco_venda, controller.getGrupo(), controller.getUnidadeMedida(), controller.getTipoProduto(), Boolean.TRUE);
+            controller.setAliquotaProduto(idAliquota, percentualPis, cstpPis, cfop, cstConfins, percentualConfins, aliquotaCsosn, cest, aliquotaIcms, aliquotafederal,aliquotamunicipal,aliquotaestadual);
             if (controller.getProduto().getIdProduto() == 0l) {
 
                 controller.insert();
@@ -201,6 +203,7 @@ public class GerenciarProdutosFXMLController implements GenericViewController, I
         txtPrecoVenda.clear();
         txtCodRef.clear();
         txtQtdeEmbalagem.clear();
+        txtQtdeProd.clear();
         cbbSituacaoTributaria.setValue(null);
         txtPercentualPIS.clear();
         txtAliquotaICMS.clear();
@@ -235,6 +238,7 @@ public class GerenciarProdutosFXMLController implements GenericViewController, I
         txtPrecoVenda.setDisable(true);
         txtCodRef.setDisable(true);
         txtQtdeEmbalagem.setDisable(true);
+        txtQtdeProd.setDisable(true);
         cbbSituacaoTributaria.setDisable(true);
         txtPercentualPIS.setDisable(true);
         txtAliquotaICMS.setDisable(true);
@@ -272,6 +276,7 @@ public class GerenciarProdutosFXMLController implements GenericViewController, I
         txtPrecoVenda.setDisable(false);
         txtCodRef.setDisable(false);
         txtQtdeEmbalagem.setDisable(false);
+        txtQtdeProd.setDisable(false);
         cbbSituacaoTributaria.setDisable(false);
         txtPercentualPIS.setDisable(false);
         txtAliquotaICMS.setDisable(false);
@@ -301,6 +306,10 @@ public class GerenciarProdutosFXMLController implements GenericViewController, I
         }
         if (qtdeEmbalagem <= 0) {
             erros += "informe a quantidade da embalagem! \n";
+            flag = false;
+        }
+        if (qtdeProduto <= 0) {
+            erros += "informe a quantidade em estoque! \n";
             flag = false;
         }
         if (ncm == null || ncm.equals("")) {
@@ -395,6 +404,7 @@ public class GerenciarProdutosFXMLController implements GenericViewController, I
         preco_venda = new BigDecimal(txtPrecoVenda.getText());
         codigoReferencia = txtCodRef.getText();
         qtdeEmbalagem = new Integer(txtQtdeEmbalagem.getText());
+        qtdeProduto = new Integer(txtQtdeProd.getText());
         controller.setSituacaoTributaria(cbbSituacaoTributaria.getSelectionModel().getSelectedItem());
         percentualPis = new BigDecimal(txtPercentualPIS.getText());
         aliquotaIcms = new BigDecimal(txtAliquotaICMS.getText());

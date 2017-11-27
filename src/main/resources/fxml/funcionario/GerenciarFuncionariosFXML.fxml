@@ -116,7 +116,6 @@
             <DropShadow />
          </effect>
          <children>
-            <JFXComboBox fx:id="cbbFunTipo" focusColor="#004ba0" layoutX="471.0" layoutY="60.0" prefHeight="26.0" prefWidth="155.0" promptText="Tipo Funcionário" />
             <JFXDatePicker fx:id="dtpDataAdm" defaultColor="#004ba0" layoutX="17.0" layoutY="104.0" promptText="Data de adimissão" />
             <JFXDatePicker fx:id="dtpDataDem" defaultColor="#004ba0" layoutX="257.0" layoutY="105.0" promptText="Data de Demissão" />
             <JFXTextField fx:id="txtCtps" focusColor="#004ba0" labelFloat="true" layoutX="16.0" layoutY="16.0" prefHeight="24.0" prefWidth="155.0" promptText="Nº CTPS" />

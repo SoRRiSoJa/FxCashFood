@@ -36,6 +36,7 @@
             <JFXTextField fx:id="txtPrecoVenda" focusColor="#004ba0" labelFloat="true" layoutX="243.0" layoutY="190.0" prefHeight="24.0" prefWidth="155.0" promptText="Preço de venda" />
             <JFXTextField fx:id="txtCodRef" focusColor="#004ba0" labelFloat="true" layoutX="252.0" layoutY="41.0" prefHeight="24.0" prefWidth="137.0" promptText="Código Referência" />
             <JFXTextField fx:id="txtQtdeEmbalagem" focusColor="#004ba0" labelFloat="true" layoutX="243.0" layoutY="141.0" prefHeight="24.0" prefWidth="155.0" promptText="Qtde. Embalagem" />
+            <JFXTextField fx:id="txtQtdeProd" focusColor="#004ba0" labelFloat="true" layoutX="470.0" layoutY="190.0" prefHeight="26.0" prefWidth="137.0" promptText="Qtde. em Estoque" />
          </children>
       </Pane>
       <Pane layoutX="700.0" layoutY="411.0" prefHeight="154.0" prefWidth="640.0" style="-fx-background-color: #ffffff;">

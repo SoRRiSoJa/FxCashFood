@@ -57,16 +57,17 @@ public class ProdutoController implements GenericController<Produto> {
         this.produto = produto;
     }
 
-    public void setProduto(long id, String codigoReferencia, String descriao, int qtdeEmbalagem, String ncm, BigDecimal preco_custo, BigDecimal preco_venda, Grupo grupo, UnidadeMedida unidadeMedida, TipoProduto tipo, boolean status) {
+    public void setProduto(long id, String codigoReferencia, String descriao, int qtdeEmbalagem,int qtdProd, String ncm, BigDecimal preco_custo, BigDecimal preco_venda, Grupo grupo, UnidadeMedida unidadeMedida, TipoProduto tipo, boolean status) {
         this.produto.setIdProduto(id);
         this.produto.setCodigoReferencia(codigoReferencia);
         this.produto.setDescriao(descriao);
         this.produto.setQtdeEmbalagem(qtdeEmbalagem);
+        this.produto.setQtdeProduto(qtdProd);
         this.produto.setNcm(ncm);
         this.produto.setPreco_custo(preco_custo);
         this.produto.setPreco_venda(preco_venda);
         this.produto.setGrupo(grupo);
-        //this.produto.setAliquotasProduto(aliquotasProduto);
+        
         this.produto.setUnidadeMedida(unidadeMedida);
         this.produto.setTipo(tipo);
         this.produto.setStatus(status);
@@ -88,7 +89,7 @@ public class ProdutoController implements GenericController<Produto> {
         this.aliquotaProduto = aliquotaProduto;
     }
 
-    public void setAliquotaProduto(long id, BigDecimal percentualPis, BigDecimal cstpPis, BigDecimal cfop, BigDecimal cstConfins, BigDecimal percentualConfins, BigDecimal aliquotaCsosn, BigDecimal cest, BigDecimal aliquotaIcms, BigDecimal aliquotafederal) {
+    public void setAliquotaProduto(long id, BigDecimal percentualPis, BigDecimal cstpPis, BigDecimal cfop, BigDecimal cstConfins, BigDecimal percentualConfins, BigDecimal aliquotaCsosn, BigDecimal cest, BigDecimal aliquotaIcms, BigDecimal aliquotafederal,BigDecimal aliquotamunicipal,BigDecimal aliquotaestadual) {
         this.aliquotaProduto.setIdAliquota(id);
         this.aliquotaProduto.setPercentualPis(percentualPis);
         this.aliquotaProduto.setCstpPis(cstpPis);
@@ -99,6 +100,8 @@ public class ProdutoController implements GenericController<Produto> {
         this.aliquotaProduto.setCest(cest);
         this.aliquotaProduto.setAliquotaIcms(aliquotaIcms);
         this.aliquotaProduto.setAliquotafederal(aliquotafederal);
+        this.aliquotaProduto.setAliquotaestadual(aliquotaestadual);
+        this.aliquotaProduto.setAliquotamunicipal(aliquotamunicipal);
         this.aliquotaProduto.setSituacaoTributaria(situacaoTributaria);
     }
 

@@ -87,8 +87,6 @@ public class GerenciarFuncionariosFXMLController implements Initializable {
     @FXML
     private JFXButton btnLimpar;
     @FXML
-    private JFXComboBox<?> cbbFunTipo;
-    @FXML
     private JFXDatePicker dtpDataAdm;
     @FXML
     private JFXDatePicker dtpDataDem;
@@ -110,6 +108,7 @@ public class GerenciarFuncionariosFXMLController implements Initializable {
     private JFXComboBox<UNivel> ccbNIvel;
     //-----------------------------------
     private long IdFunc;
+    
     private String nome;
     private String endereco;
     private String complemento;
@@ -132,6 +131,7 @@ public class GerenciarFuncionariosFXMLController implements Initializable {
     private String telefone;
     private String ddd;
     //---
+    private long IdUsu;
     private String login;
     private String senha;
     //---
@@ -182,6 +182,15 @@ public class GerenciarFuncionariosFXMLController implements Initializable {
 
     @FXML
     private void onSalvar(ActionEvent event) {
+        getData();
+        getDataUser();
+        if (validateUser() && validateFields()) {
+            controller.setUsuario(IdUsu, login, senha, controller.getNivel(), true);
+            controller.setFuncionario(IdFunc, nome, controller.getSexo(), dataNas, endereco, bairro, numero, complemento, cep, controller.getCidade(), cpf, rg, email, controller.getListaTelefone(), flagButtons, 0, ctps, salIni, salAtual, vrDia, vtDia, dataAdmi, dataDemi, controller.getUsuario());
+        } else {
+            PoupUpUtil.accessDenied(erros);
+            erros = "";
+        }
     }
 
     @FXML
@@ -237,7 +246,7 @@ public class GerenciarFuncionariosFXMLController implements Initializable {
         cbbOperadora.setValue(null);
         txtDdd.clear();
         txtNumeroTelefone.clear();
-        cbbFunTipo.setValue(null);
+
         dtpDataAdm.setValue(null);
         dtpDataDem.setValue(null);
         txtCtps.clear();
@@ -272,7 +281,7 @@ public class GerenciarFuncionariosFXMLController implements Initializable {
         cbbOperadora.setDisable(false);
         txtDdd.setDisable(false);
         txtNumeroTelefone.setDisable(false);
-        cbbFunTipo.setDisable(false);
+
         dtpDataAdm.setDisable(false);
         dtpDataDem.setDisable(false);
         txtCtps.setDisable(false);
@@ -307,7 +316,7 @@ public class GerenciarFuncionariosFXMLController implements Initializable {
         cbbOperadora.setDisable(true);
         txtDdd.setDisable(true);
         txtNumeroTelefone.setDisable(true);
-        cbbFunTipo.setDisable(true);
+
         dtpDataAdm.setDisable(true);
         dtpDataDem.setDisable(true);
         txtCtps.setDisable(true);
@@ -348,14 +357,14 @@ public class GerenciarFuncionariosFXMLController implements Initializable {
         salAtual = new BigDecimal(txtsalarioF.getText());
         vtDia = new BigDecimal(txtValeT.getText());
         vrDia = new BigDecimal(txtValeR.getText());
-        cbbFunTipo.getSelectionModel().getSelectedItem();
         controller.setSexo(cbbSexo.getSelectionModel().getSelectedItem());
         controller.setCidade(cbbCidade.getSelectionModel().getSelectedItem());
-        
+
         controller.setOperadora(cbbOperadora.getSelectionModel().getSelectedItem());
     }
 
     private void getDataUser() {
+        IdUsu=(controller.getUsuario().getId()!=0l)?controller.getUsuario().getId():0l;
         login = txtLogin.getText();
         senha = txtSenha.getText();
         controller.setNivel(ccbNIvel.getSelectionModel().getSelectedItem());
