@@ -132,7 +132,13 @@ public class MeioPagamentoFXMLController implements Initializable {
     private void onMouseClicked(MouseEvent event) {
         controller.setMeioPagamento(tbvCartoes.getSelectionModel().getSelectedItem());
     }
-
+    public void loadDataToScreen(){
+        txtNome.setText(controller.getMeioPagamento().getDescricao());
+        txtPrazo.setText(controller.getMeioPagamento().getPrazoRecebimento().toString());
+        txtTaxa.setText(controller.getMeioPagamento().getTaxa().toString());
+        cbbContaCorrente.setValue(controller.getMeioPagamento().getContaCorrente());
+        getData();
+    }
     private void clearFields() {
         txtNome.clear();
         txtPrazo.clear();
