@@ -74,8 +74,29 @@ public class FuncionarioController implements GenericController<Funcionario> {
         this.funcionario = funcionario;
     }
 
-    public void setFuncionario(Long id, String nome, Sexo sexo, LocalDate dataNas, String endereco, String bairro, Integer numero, String complemento, String cep, Cidade cidade, String cpf, String rg, String email, List<Telefone> telefones, Boolean status, long id_funcionario, String ctps, BigDecimal salarioIncial, BigDecimal salarioAtual, BigDecimal vrDia, BigDecimal vtDia, LocalDate dataAdimissao, LocalDate dataDemissao, Usuario usuario) {
-        this.funcionario = new Funcionario(id, nome, sexo, dataNas, endereco, bairro, numero, complemento, cep, cidade, cpf, rg, email, telefones, status, 0, ctps, salarioIncial, salarioAtual, vrDia, vtDia, dataAdimissao, dataDemissao, usuario);
+    public void setFuncionario(Long id, String nome, Sexo sexo, LocalDate dataNas, String endereco, String bairro, Integer numero, String complemento, String cep, Cidade cidade, String cpf, String rg, String email, List<Telefone> telefones, Boolean status, String ctps, BigDecimal salarioIncial, BigDecimal salarioAtual, BigDecimal vrDia, BigDecimal vtDia, LocalDate dataAdimissao, LocalDate dataDemissao, Usuario usuario) {
+        this.funcionario.setIdPessoa(id);
+        this.funcionario.setNome(nome);
+        this.funcionario.setEndereco(endereco);
+        this.funcionario.setSexo(sexo);
+        this.funcionario.setDataNas(dataNas);
+        this.funcionario.setBairro(bairro);
+        this.funcionario.setNumero(numero);
+        this.funcionario.setComplemento(complemento);
+        this.funcionario.setCep(cep);
+        this.funcionario.setCidade(cidade);
+        this.funcionario.setCpf(cpf);
+        this.funcionario.setRg(rg);
+        this.funcionario.setEmail(email);
+        //--
+        this.funcionario.setCtps(ctps);
+        this.funcionario.setDataAdimissao(dataAdimissao);
+        this.funcionario.setDataDemissao(dataDemissao);
+        this.funcionario.setSalarioIncial(salarioIncial);
+        this.funcionario.setSalarioAtual(salarioAtual);
+        this.funcionario.setVrDia(vrDia);
+        this.funcionario.setVtDia(vtDia);
+        this.funcionario.setUsuario(usuario);
     }
 
     public ObservableList<Telefone> getListaTelefone() {

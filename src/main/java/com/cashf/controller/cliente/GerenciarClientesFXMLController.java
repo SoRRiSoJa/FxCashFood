@@ -158,6 +158,21 @@ public class GerenciarClientesFXMLController implements GenericViewController, I
 
     @FXML
     private void onSalvar(ActionEvent event) {
+        getData();
+        if (validateFields()) {
+            controller.setCliente(IdCli, nome, controller.getSexo(), dataNas, endereco, bairro, numero, complemento, cep, controller.getCidade(), cpf, rg, email, flagButtons, controller.getListaTelefone(), endereco);
+            if (controller.getCliente().getIdPessoa() == 0l) {
+                //insert
+                System.out.println("Cliente:" + controller.getCliente().toString());
+            } else {
+                //update
+            }
+            //loadTbv();
+            clearFields();
+        } else {
+            PoupUpUtil.accessDenied(erros);
+            erros = "";
+        }
     }
 
     @FXML

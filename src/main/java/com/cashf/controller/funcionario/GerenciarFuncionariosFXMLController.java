@@ -108,7 +108,7 @@ public class GerenciarFuncionariosFXMLController implements Initializable {
     private JFXComboBox<UNivel> ccbNIvel;
     //-----------------------------------
     private long IdFunc;
-    
+
     private String nome;
     private String endereco;
     private String complemento;
@@ -186,13 +186,23 @@ public class GerenciarFuncionariosFXMLController implements Initializable {
         getDataUser();
         if (validateUser() && validateFields()) {
             controller.setUsuario(IdUsu, login, senha, controller.getNivel(), true);
-            controller.setFuncionario(IdFunc, nome, controller.getSexo(), dataNas, endereco, bairro, numero, complemento, cep, controller.getCidade(), cpf, rg, email, controller.getListaTelefone(), flagButtons, 0, ctps, salIni, salAtual, vrDia, vtDia, dataAdmi, dataDemi, controller.getUsuario());
-            controller.inserUsuario();
-            controller.insert();
+            controller.setFuncionario(IdFunc, nome, controller.getSexo(), dataNas, endereco, bairro, numero, complemento, cep, controller.getCidade(), cpf, rg, email, controller.getListaTelefone(), flagButtons, ctps, salIni, salAtual, vrDia, vtDia, dataAdmi, dataDemi, controller.getUsuario());
+            if (controller.getFuncionario().getIdPessoa() == 0l) {
+                controller.inserUsuario();
+                controller.insert();
+                PoupUpUtil.poupUp("Funcionario Cadastrado", "O Funcionario foi cadastrado com sucesso.", "");
+            } else {
+                controller.updateUsuario();
+                controller.update();
+                PoupUpUtil.poupUp("Funcionario Alterado", "O Funcionario foi alterado com sucesso.", "");
+            }
+            //loadTbv();
+            clearFields();
         } else {
             PoupUpUtil.accessDenied(erros);
             erros = "";
         }
+        
     }
 
     @FXML
@@ -366,7 +376,7 @@ public class GerenciarFuncionariosFXMLController implements Initializable {
     }
 
     private void getDataUser() {
-        IdUsu=(controller.getUsuario().getId()!=0l)?controller.getUsuario().getId():0l;
+        IdUsu = (controller.getUsuario().getId() != 0l) ? controller.getUsuario().getId() : 0l;
         login = txtLogin.getText();
         senha = txtSenha.getText();
         controller.setNivel(ccbNIvel.getSelectionModel().getSelectedItem());
