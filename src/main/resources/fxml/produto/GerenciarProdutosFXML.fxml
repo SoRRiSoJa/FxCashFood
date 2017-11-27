@@ -22,7 +22,7 @@
          <children>
             <JFXComboBox fx:id="cbbUnidadeFisica" focusColor="#004ba0" labelFloat="true" layoutX="35.0" layoutY="140.0" prefHeight="26.0" prefWidth="155.0" promptText="Unidade Física" />
             <JFXTextField fx:id="txtDescricao" focusColor="#004ba0" labelFloat="true" layoutX="35.0" layoutY="90.0" prefHeight="24.0" prefWidth="570.0" promptText="Descrição" />
-            <JFXComboBox fx:id="cbbGrupo" focusColor="#004ba0" labelFloat="true" layoutX="35.0" layoutY="233.0" prefHeight="26.0" prefWidth="155.0" promptText="Grupo" />
+            <JFXComboBox fx:id="cbbGrupo" focusColor="#004ba0" labelFloat="true" layoutX="35.0" layoutY="233.0" onAction="#onSelecionarGrupo" prefHeight="26.0" prefWidth="155.0" promptText="Grupo" />
             <JFXComboBox fx:id="cbbProdutos" focusColor="#004ba0" labelFloat="true" layoutX="468.0" layoutY="40.0" prefHeight="26.0" prefWidth="137.0" promptText="Tipo de produto" />
             <JFXTextField fx:id="txtNcm" focusColor="#004ba0" labelFloat="true" layoutX="35.0" layoutY="190.0" prefHeight="24.0" prefWidth="155.0" promptText="NCM" />
             <JFXTextField fx:id="txtCodigo" focusColor="#004ba0" labelFloat="true" layoutX="35.0" layoutY="40.0" prefHeight="24.0" prefWidth="137.0" promptText="Código" />

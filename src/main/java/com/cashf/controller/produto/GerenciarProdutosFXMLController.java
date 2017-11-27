@@ -144,6 +144,25 @@ public class GerenciarProdutosFXMLController implements GenericViewController, I
 
     @FXML
     private void onSalvar(ActionEvent event) {
+        getData();
+        if (validateFields()) {
+            controller.setProduto(idProduto, codigoReferencia, descriao, qtdeEmbalagem, ncm, preco_custo, preco_venda, controller.getGrupo(), controller.getUnidadeMedida(), controller.getTipoProduto(), Boolean.TRUE);
+            controller.setAliquotaProduto(idAliquota, percentualPis, cstpPis, cfop, cstConfins, percentualConfins, aliquotaCsosn, cest, aliquotaIcms, aliquotafederal);
+            if (controller.getProduto().getIdProduto() == 0l) {
+
+                controller.insert();
+                clearFields();
+                PoupUpUtil.poupUp("Produto Cadastrado", "O Produto foi cadastrado com sucesso.", "");
+            } else {
+
+                controller.update();
+                PoupUpUtil.poupUp("Produto Alterado", "O Produto foi alterado com sucesso.", "");
+            }
+        } else {
+            PoupUpUtil.accessDenied(erros);
+            erros = "";
+        }
+
     }
 
     @FXML
@@ -364,13 +383,14 @@ public class GerenciarProdutosFXMLController implements GenericViewController, I
 
     @Override
     public void getData() {
+        idProduto = (controller.getProduto().getIdProduto() != 0l) ? controller.getProduto().getIdProduto() : 0l;
+        idAliquota = (controller.getAliquotaProduto().getIdAliquota() != 0l) ? controller.getAliquotaProduto().getIdAliquota() : 0l;
         descriao = txtDescricao.getText();
         controller.setUnidadeMedida(cbbUnidadeFisica.getSelectionModel().getSelectedItem());
         descriao = txtDescricao.getText();
         controller.setGrupo(cbbGrupo.getSelectionModel().getSelectedItem());
         controller.setTipoProduto(cbbProdutos.getSelectionModel().getSelectedItem());
         ncm = txtNcm.getText();
-        txtCodigo.getText();
         preco_custo = new BigDecimal(txtPrecoCusto.getText());
         preco_venda = new BigDecimal(txtPrecoVenda.getText());
         codigoReferencia = txtCodRef.getText();
@@ -413,5 +433,13 @@ public class GerenciarProdutosFXMLController implements GenericViewController, I
 
     private void loadCbbUnidadeFisica() {
         cbbUnidadeFisica.getItems().addAll(Arrays.asList(UnidadeMedida.values()));
+    }
+
+    @FXML
+    private void onSelecionarGrupo(ActionEvent event) {
+        if (cbbGrupo.getSelectionModel().getSelectedItem() != null) {
+            controller.setGrupo(cbbGrupo.getSelectionModel().getSelectedItem());
+            cbbCategoria.setValue(controller.getGrupo().getCategoria());
+        }
     }
 }

@@ -43,6 +43,10 @@ public class ProdutoController implements GenericController<Produto> {
         this.aliquotasProdutoDAO = new AliquotasProdutoDAO(AliquotasProduto.class);
         this.lista = FXCollections.observableList(produtoDAO.listAll());
         this.listaGrupo = FXCollections.observableList(grupoDAO.listAll());
+        this.produto = new Produto();
+        produto.setIdProduto(0l);
+        this.aliquotaProduto=new AliquotasProduto();
+        this.aliquotaProduto.setIdAliquota(0l);
     }
 
     public Produto getProduto() {
@@ -155,6 +159,7 @@ public class ProdutoController implements GenericController<Produto> {
 
     @Override
     public void update() {
+        aliquotasProdutoDAO.update(aliquotaProduto);
         produtoDAO.update(produto);
         flushAliquotaProduto();
         flushObject();
