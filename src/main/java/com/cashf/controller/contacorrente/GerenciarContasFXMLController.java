@@ -146,6 +146,7 @@ public class GerenciarContasFXMLController implements Initializable {
         txtDescricao.clear();
         txtNumero.clear();
         cbbBanco.setValue(null);
+        
     }
 
     private void getData() {
@@ -205,7 +206,7 @@ public class GerenciarContasFXMLController implements Initializable {
     }
 
     private void setData() {
-        controller.setContaCorrente(idConta, descricao, agencia, erros, controller.getBanco());
+        controller.setContaCorrente(idConta, descricao, agencia, numero, controller.getBanco());
     }
 
     private void setUptableView() {
