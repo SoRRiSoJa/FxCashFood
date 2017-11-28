@@ -142,18 +142,22 @@ public class MeioPagamentoFXMLController implements Initializable {
         txtPrazo.setText(controller.getMeioPagamento().getPrazoRecebimento().toString());
         txtTaxa.setText(controller.getMeioPagamento().getTaxa().toString());
         cbbContaCorrente.setValue(controller.getMeioPagamento().getContaCorrente());
-        if (controller.getMeioPagamento().getTipoPagto().equals(TPPagto.CARTAO_CREDITO)) {
-            rdbCredito.setSelected(true);
-            rdbDinheiro.setSelected(false);
-            rdbDebito.setSelected(false);
-        } else if (controller.getMeioPagamento().getTipoPagto().equals(TPPagto.CARTAO_DEBITO)) {
-            rdbCredito.setSelected(false);
-            rdbDinheiro.setSelected(false);
-            rdbDebito.setSelected(true);
-        } else {
-            rdbCredito.setSelected(false);
-            rdbDinheiro.setSelected(true);
-            rdbDebito.setSelected(false);
+        switch (controller.getMeioPagamento().getTipoPagto()) {
+            case CARTAO_CREDITO:
+                rdbCredito.setSelected(true);
+                rdbDinheiro.setSelected(false);
+                rdbDebito.setSelected(false);
+                break;
+            case CARTAO_DEBITO:
+                rdbCredito.setSelected(false);
+                rdbDinheiro.setSelected(false);
+                rdbDebito.setSelected(true);
+                break;
+            default:
+                rdbCredito.setSelected(false);
+                rdbDinheiro.setSelected(true);
+                rdbDebito.setSelected(false);
+                break;
         }
         getData();
     }
