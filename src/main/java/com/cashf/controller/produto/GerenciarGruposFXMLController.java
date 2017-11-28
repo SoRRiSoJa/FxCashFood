@@ -209,7 +209,7 @@ public class GerenciarGruposFXMLController implements Initializable {
     }
 
     private void getDataCategoria() {
-        idCat = (controller.getCategoria().getIdCategoria() != 0) ? idCat = controller.getCategoria().getIdCategoria() : 0l;
+        idCat = (controller.getCategoria()!=null&& controller.getCategoria().getIdCategoria() != 0) ? idCat = controller.getCategoria().getIdCategoria() : 0l;
         descricaoCategoria = txtDescCat.getText();
     }
 
@@ -239,7 +239,7 @@ public class GerenciarGruposFXMLController implements Initializable {
 
     private void setUptableViewCategoria() {
         tbcCodCat.setCellValueFactory(new PropertyValueFactory<>("idCategoria"));
-        tbcDescricaoCat.setCellValueFactory(new PropertyValueFactory<>("categoria"));
+        tbcDescricaoCat.setCellValueFactory(new PropertyValueFactory<>("descricao"));
         btnDeletar.setCellFactory(new Callback<TableColumn<Disposer.Record, Boolean>, TableCell<Disposer.Record, Boolean>>() {
             @Override
             public TableCell<Disposer.Record, Boolean> call(TableColumn<Disposer.Record, Boolean> p) {
