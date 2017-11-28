@@ -89,10 +89,10 @@ public class MeioPagamentoFXMLController implements Initializable {
         getData();
         if (validateFields()) {
             setData();
-            if (controller.getMeioPagamento().getIdMeio()== 0) {
+            if (controller.getMeioPagamento().getIdMeio() == 0) {
                 controller.insert();
                 PoupUpUtil.poupUp("Meio de Pagamento Cadastrado", "O Meio de Pagamento foi cadastrado com sucesso.", "");
-                
+
             } else {
                 controller.update();
                 PoupUpUtil.poupUp("Meio de Pagamento Alterado", "O Meio de Pagamento foi alterado com sucesso.", "");
@@ -115,7 +115,7 @@ public class MeioPagamentoFXMLController implements Initializable {
 
     @FXML
     private void onExcluir(ActionEvent event) {
-    if (controller.getMeioPagamento()!= null) {
+        if (controller.getMeioPagamento() != null) {
             controller.delete();
             PoupUpUtil.poupUp("Meio de Pagamento Excluído", "O Meio de Pagamento foi excluído com sucesso.", "");
         }
@@ -130,15 +130,34 @@ public class MeioPagamentoFXMLController implements Initializable {
 
     @FXML
     private void onMouseClicked(MouseEvent event) {
-        controller.setMeioPagamento(tbvCartoes.getSelectionModel().getSelectedItem());
+        if (tbvCartoes.getSelectionModel().getSelectedItem() != null) {
+            controller.setMeioPagamento(tbvCartoes.getSelectionModel().getSelectedItem());
+            loadDataToScreen();
+            getData();
+        }
     }
-    public void loadDataToScreen(){
+
+    public void loadDataToScreen() {
         txtNome.setText(controller.getMeioPagamento().getDescricao());
         txtPrazo.setText(controller.getMeioPagamento().getPrazoRecebimento().toString());
         txtTaxa.setText(controller.getMeioPagamento().getTaxa().toString());
         cbbContaCorrente.setValue(controller.getMeioPagamento().getContaCorrente());
+        if (controller.getMeioPagamento().getTipoPagto().equals(TPPagto.CARTAO_CREDITO)) {
+            rdbCredito.setSelected(true);
+            rdbDinheiro.setSelected(false);
+            rdbDebito.setSelected(false);
+        } else if (controller.getMeioPagamento().getTipoPagto().equals(TPPagto.CARTAO_DEBITO)) {
+            rdbCredito.setSelected(false);
+            rdbDinheiro.setSelected(false);
+            rdbDebito.setSelected(true);
+        } else {
+            rdbCredito.setSelected(false);
+            rdbDinheiro.setSelected(true);
+            rdbDebito.setSelected(false);
+        }
         getData();
     }
+
     private void clearFields() {
         txtNome.clear();
         txtPrazo.clear();
@@ -206,16 +225,18 @@ public class MeioPagamentoFXMLController implements Initializable {
         descricao = txtNome.getText();
         controller.setContaCorrente(cbbContaCorrente.getSelectionModel().getSelectedItem());
     }
-    private void setData(){
+
+    private void setData() {
         controller.setMeioPagamento(idMeio, descricao, prazoRecebimento, taxa, controller.getTpPagto(), controller.getContaCorrente());
     }
+
     private Boolean validateFields() {
         Boolean flag = true;
         if (descricao == null || descricao.equals("") || descricao.length() < 3) {
             erros += "A Descrição do meio de pagamento deve conter um conteúdo válido! \n";
             flag = false;
         }
-        if (prazoRecebimento == null || prazoRecebimento.equals("") || prazoRecebimento.compareTo(new Integer(0))<= 0) {
+        if (prazoRecebimento == null || prazoRecebimento.equals("") || prazoRecebimento.compareTo(new Integer(0)) <= 0) {
             erros += "O prazo de recebimento deve ser maior que 0! \n";
             flag = false;
         }
@@ -230,12 +251,14 @@ public class MeioPagamentoFXMLController implements Initializable {
         }
         return flag;
     }
+
     private void setUptableView() {
         tbcCartao.setCellValueFactory(new PropertyValueFactory<>("descricao"));
         tbcConta.setCellValueFactory(new PropertyValueFactory<>("contaCorrente"));
-        tbvCartoes.getColumns().setAll(tbcCartao,tbcConta);
+        tbvCartoes.getColumns().setAll(tbcCartao, tbcConta);
     }
-    private void loadTbv(){
+
+    private void loadTbv() {
         tbvCartoes.setItems(controller.getLista());
     }
 
