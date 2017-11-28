@@ -18,6 +18,7 @@ import java.net.URL;
 import java.util.Arrays;
 import java.util.Optional;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -33,6 +34,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.util.Callback;
 import javafx.util.Duration;
@@ -165,12 +167,12 @@ public class GerenciarFornecedoresFXMLController implements Initializable {
     private void onSalvar(ActionEvent event) {
         getData();
         if (validateFields()) {
-            controller.setFornecedor(idFornecedor, cnpj, nomefantasia, razaoSocial, endereco, complemento, numero, cep, bairro, email, Observacao, controller.getCidade(), controller.getListaTelefone());
-            if (controller.getFornecedor().getIdFornecedor()== 0) {
+            controller.setFornecedor(idFornecedor, cnpj, inscrEst, nomefantasia, razaoSocial, endereco, complemento, numero, cep, bairro, email, Observacao, controller.getCidade(), controller.getListaTelefone());
+            if (controller.getFornecedor().getIdFornecedor() == 0) {
                 controller.insert();
-                
+
                 PoupUpUtil.poupUp("Fornecedor Cadastrado", "O Fornecedor foi cadastrado com sucesso.", "");
-                
+
             } else {
                 controller.update();
                 PoupUpUtil.poupUp("Fornecedor Alterado", "O Fornecedor foi alterado com sucesso.", "");
@@ -181,7 +183,7 @@ public class GerenciarFornecedoresFXMLController implements Initializable {
             PoupUpUtil.accessDenied(erros);
             erros = "";
         }
-        
+
     }
 
     @FXML
@@ -276,7 +278,7 @@ public class GerenciarFornecedoresFXMLController implements Initializable {
     }
 
     private void getData() {
-        idFornecedor = (controller.getFornecedor().getIdFornecedor()!= 0) ? idFornecedor = controller.getFornecedor().getIdFornecedor(): 0l;
+        idFornecedor = (controller.getFornecedor().getIdFornecedor() != 0) ? idFornecedor = controller.getFornecedor().getIdFornecedor() : 0l;
         nomefantasia = txtNome.getText();
         razaoSocial = txtRazao.getText();
         endereco = txtEndereco.getText();
@@ -291,6 +293,22 @@ public class GerenciarFornecedoresFXMLController implements Initializable {
         controller.setCidade(cbbCidade.getSelectionModel().getSelectedItem());
 
     }
+
+    public void loadDataToScreen() {
+        txtNome.setText(controller.getFornecedor().getNomefantasia());
+        txtRazao.setText(controller.getFornecedor().getRazaoSocial());
+        txtEndereco.setText(controller.getFornecedor().getEndereco());
+        txtComplemento.setText(controller.getFornecedor().getComplemento());
+        txtNumero.setText(controller.getFornecedor().getNumero() + "");
+        txtBairro.setText(controller.getFornecedor().getBairro());
+        txtCep.setText(controller.getFornecedor().getCep());
+        txtCnpj.setText(controller.getFornecedor().getCnpj());
+        txtEmail.setText(controller.getFornecedor().getEmail());
+        txtInscrEst.setText(controller.getFornecedor().getInscrEst());
+        txtObs.setText(controller.getFornecedor().getObservacao());
+        cbbCidade.setValue(controller.getFornecedor().getCidade());
+    }
+
     private boolean validateFields() {
         boolean flag = true;
         if (nomefantasia == null || nomefantasia.equals("") || nomefantasia.length() < 3) {
@@ -305,7 +323,7 @@ public class GerenciarFornecedoresFXMLController implements Initializable {
             erros += "O endereço deve ser preenchido corretamente! \n";
             flag = false;
         }
-        
+
         if (bairro == null || bairro.equals("") || bairro.length() < 3) {
             erros += "O bairro deve ser preenchido corretamente! \n";
             flag = false;
@@ -385,6 +403,17 @@ public class GerenciarFornecedoresFXMLController implements Initializable {
 
     private void loadTbvTelefone() {
         tbvTelefone.setItems(controller.getListaTelefone());
+    }
+
+    @FXML
+    private void onMouseClickedFornecedor(MouseEvent event) {
+        if (tbvFornecedores.getSelectionModel().getSelectedItem() != null) {
+            controller.setFornecedor(tbvFornecedores.getSelectionModel().getSelectedItem());
+            controller.setListaTelefone(FXCollections.observableList(controller.getFornecedor().getTelefones()));
+            loadDataToScreen();
+            loadTbvTelefone();
+            getData();
+        }
     }
 
     public class ButtonCellDelete extends TableCell<Disposer.Record, Boolean> {

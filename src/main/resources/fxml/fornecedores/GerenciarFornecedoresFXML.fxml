@@ -30,7 +30,7 @@
             <DropShadow />
          </effect>
          <children>
-            <TableView fx:id="tbvFornecedores" layoutX="18.0" layoutY="31.0" prefHeight="315.0" prefWidth="600.0">
+            <TableView fx:id="tbvFornecedores" layoutX="18.0" layoutY="31.0" onMouseClicked="#onMouseClickedFornecedor" prefHeight="315.0" prefWidth="600.0">
               <columns>
                 <TableColumn fx:id="tbcNome" prefWidth="207.0" text="Nome" />
                 <TableColumn prefWidth="205.0" text="Razão Social" />

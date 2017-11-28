@@ -16,6 +16,7 @@ public abstract class Fornecedor_ {
 	public static volatile SingularAttribute<Fornecedor, String> endereco;
 	public static volatile SingularAttribute<Fornecedor, Integer> numero;
 	public static volatile SingularAttribute<Fornecedor, String> bairro;
+	public static volatile SingularAttribute<Fornecedor, String> inscrEst;
 	public static volatile SingularAttribute<Fornecedor, String> cnpj;
 	public static volatile ListAttribute<Fornecedor, Telefone> telefones;
 	public static volatile SingularAttribute<Fornecedor, String> cep;

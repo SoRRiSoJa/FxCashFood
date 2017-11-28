@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -34,6 +35,7 @@ public class Fornecedor implements Serializable {
     @Id
     private long idFornecedor;
     private String cnpj;
+    private String inscrEst;
     private String nomefantasia;
     private String razaoSocial;
     private String endereco;
@@ -46,7 +48,7 @@ public class Fornecedor implements Serializable {
     @ManyToOne
     @JoinColumn(nullable = false)
     private Cidade cidade;
-    @ManyToMany
+    @ManyToMany(fetch=FetchType.EAGER)
     @JoinTable(name = "fornecedor_telefone", joinColumns
             = {
                 @JoinColumn(name = "id_fornecedor")}, inverseJoinColumns
@@ -57,9 +59,10 @@ public class Fornecedor implements Serializable {
     public Fornecedor() {
     }
 
-    public Fornecedor(long id, String cnpj, String nomefantasia, String razaoSocial, String endereco, String complemento, int numero, String cep, String bairro, String email, String Observacao,Cidade cidade, List<Telefone> telefones) {
+    public Fornecedor(long id, String cnpj,String inscrEst, String nomefantasia, String razaoSocial, String endereco, String complemento, int numero, String cep, String bairro, String email, String Observacao,Cidade cidade, List<Telefone> telefones) {
         this.idFornecedor = id;
         this.cnpj = cnpj;
+        this.inscrEst=inscrEst;
         this.nomefantasia = nomefantasia;
         this.razaoSocial = razaoSocial;
         this.endereco = endereco;
@@ -91,6 +94,14 @@ public class Fornecedor implements Serializable {
         this.cnpj = cnpj;
     }
 
+    public String getInscrEst() {
+        return inscrEst;
+    }
+
+    public void setInscrEst(String inscrEst) {
+        this.inscrEst = inscrEst;
+    }
+    
     public String getNomefantasia() {
         return nomefantasia;
     }

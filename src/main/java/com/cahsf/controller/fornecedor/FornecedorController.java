@@ -114,8 +114,8 @@ public class FornecedorController {
         this.fornecedor = fornecedor;
     }
 
-    public void setFornecedor(long id, String cnpj, String nomefantasia, String razaoSocial, String endereco, String complemento, int numero, String cep, String bairro, String email, String Observacao, Cidade cidade, List<Telefone> telefones) {
-        this.fornecedor = new Fornecedor(id, cnpj, nomefantasia, razaoSocial, endereco, complemento, numero, cep, bairro, email, Observacao, cidade, telefones);
+    public void setFornecedor(long id, String cnpj,String inscrEst, String nomefantasia, String razaoSocial, String endereco, String complemento, int numero, String cep, String bairro, String email, String Observacao, Cidade cidade, List<Telefone> telefones) {
+        this.fornecedor = new Fornecedor(id, cnpj,inscrEst, nomefantasia, razaoSocial, endereco, complemento, numero, cep, bairro, email, Observacao, cidade, telefones);
     }
 
     public void insert() {
