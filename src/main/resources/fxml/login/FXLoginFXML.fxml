@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.shape.Circle?>
+
+
+<StackPane fx:id="rootStackPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="612.0" prefWidth="1366.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cashf.controller.login.FXLoginFXMLController">
+   <children>
+      <Pane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="632.0" prefWidth="1366.0" style="-fx-background-color: #ffffff;">
+         <children>
+            <Pane prefHeight="316.0" prefWidth="1366.0" style="-fx-background-color: #00b0ff;" />
+            <Pane fx:id="paneLogin" layoutX="286.0" layoutY="158.0" prefHeight="316.0" prefWidth="683.0" style="-fx-background-color: #ffffff;">
+               <effect>
+                  <DropShadow />
+               </effect>
+               <children>
+                  <JFXTextField fx:id="txtLogin" layoutX="200.0" layoutY="143.0" prefHeight="24.0" prefWidth="310.0" promptText="Login do usuário" />
+                  <JFXPasswordField fx:id="txtSenha" layoutX="200.0" layoutY="203.0" prefHeight="24.0" prefWidth="310.0" promptText="Senha do usuário" />
+                  <Circle fx:id="circle" fill="#00b0ff" layoutX="357.0" layoutY="66.0" radius="52.0" stroke="WHITE" strokeLineCap="ROUND" strokeType="INSIDE" />
+                  <FontAwesomeIconView fill="WHITE" glyphName="USER" layoutX="336.0" layoutY="80.0" size="50" />
+                  <JFXButton fx:id="btnLogin" buttonType="RAISED" layoutX="298.0" layoutY="256.0" onAction="#btnLogin" prefHeight="34.0" prefWidth="155.0" ripplerFill="WHITE" style="-fx-background-color: #69e2ff;" text="Login" textFill="WHITE" />
+                  <FontAwesomeIconView glyphName="USER" layoutX="166.0" layoutY="167.0" size="20" />
+                  <FontAwesomeIconView glyphName="UNLOCK" layoutX="166.0" layoutY="226.0" size="20" />
+               </children>
+            </Pane>
+         </children>
+      </Pane>
+   </children>
+</StackPane>

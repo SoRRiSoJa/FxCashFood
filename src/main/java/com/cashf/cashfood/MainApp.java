@@ -12,7 +12,7 @@ public class MainApp extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/fxml/login/LoginFXML.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/fxml/login/FXLoginFXML.fxml"));
         Scene scene = new Scene(root);
         stage.setTitle("ERP - Cash Food v.1.0 Copyright (c) 2017 By João André Martins Dias e Silva");
         stage.setScene(scene);

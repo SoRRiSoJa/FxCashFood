@@ -5,9 +5,18 @@
  */
 package util;
 
+import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXDialog;
+import com.jfoenix.controls.JFXDialogLayout;
+import com.jfoenix.controls.events.JFXDialogEvent;
 import javafx.geometry.Pos;
+import javafx.scene.control.Label;
+import javafx.scene.effect.BoxBlur;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.util.Duration;
 import org.controlsfx.control.Notifications;
 
@@ -49,5 +58,22 @@ public class PoupUpUtil {
             System.out.println("Erro crinado imagen:" + ex);
         }
 
+    }
+
+    public static void errorMessage(Pane rootContainer, StackPane dialogContainer, String erros) {
+        BoxBlur blur = new BoxBlur(3, 3, 3);
+        JFXDialogLayout dialogLayout = new JFXDialogLayout();
+        JFXDialog dialog = new JFXDialog(dialogContainer, dialogLayout, JFXDialog.DialogTransition.TOP);
+        JFXButton button = new JFXButton("OK!");
+        button.addEventHandler(MouseEvent.MOUSE_CLICKED, (MouseEvent eve) -> {
+            dialog.close();
+        });
+        dialogLayout.setBody(new Label(erros));
+        dialogLayout.setActions(button);
+        dialog.setOnDialogClosed((JFXDialogEvent event1) -> {
+            rootContainer.setEffect(null);
+        });
+        rootContainer.setEffect(blur);
+        dialog.show();
     }
 }
