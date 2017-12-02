@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXTabPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.layout.Pane?>
+
+<Pane prefHeight="572.0" prefWidth="1366.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <JFXTabPane fx:id="tabPane" stylesheets="@../../styles/TabPaneCSS.css" tabMinHeight="30.0" tabMinWidth="678.0">
+         <tabs>
+             <Tab fx:id="tabProdutos" text="Produtos" >
+                 <fx:include source="TabProdutoFXML.fxml" />
+             </Tab>
+             <Tab fx:id="tabListaProdutos" text="Lista de Produtos" >
+                 <fx:include source="TabListaProdutosFXML.fxml" />
+             </Tab>
+         </tabs>
+      </JFXTabPane>
+   </children>
+</Pane>

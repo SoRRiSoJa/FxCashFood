@@ -56,6 +56,7 @@ public class FXMenuFXMLController implements Initializable {
     @FXML
     private JFXDrawer drawer;
     //-------------------
+    private static StackPane rootAux;
     private VBox gavetas;
     private HamburgerNextArrowBasicTransition burgerTask2;
     private Pane paneAux;
@@ -68,6 +69,7 @@ public class FXMenuFXMLController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        rootAux=rootSatackPane;
         loadDrawer();
         burgerTask2 = new HamburgerNextArrowBasicTransition(jfxHamburguer);
         burgerTask2.setRate(-1);
@@ -319,4 +321,9 @@ public class FXMenuFXMLController implements Initializable {
             }
         }
     }
+
+    public static StackPane getRootAux() {
+        return rootAux;
+    }
+
 }
