@@ -114,6 +114,56 @@ public class TabProdutoFXMLController implements GenericViewController, Initiali
     private BigDecimal aliquotafederal;
     private BigDecimal aliquotaestadual;
     private BigDecimal aliquotamunicipal;
+    //--
+    private static JFXTextField _txtCodigo;
+
+    private static JFXTextField _txtCodRef;
+
+    private static JFXComboBox<TipoProduto> _cbbProdutos;
+
+    private static JFXTextField _txtDescricao;
+
+    private static JFXComboBox<UnidadeMedida> _cbbUnidadeFisica;
+
+    private static JFXTextField _txtQtdeEmbalagem;
+
+    private static JFXTextField _txtPrecoCusto;
+
+    private static JFXTextField _txtNcm;
+
+    private static JFXTextField _txtPrecoVenda;
+
+    private static JFXTextField _txtQtdeProd;
+
+    private static JFXComboBox<Grupo> _cbbGrupo;
+
+    private static JFXComboBox<Categoria> _cbbCategoria;
+
+    private static JFXComboBox<SituacaoTributaria> _cbbSituacaoTributaria;
+
+    private static JFXTextField _txtPercentualPIS;
+
+    private static JFXTextField _txtCstPis;
+
+    private static JFXTextField _txtPercentualConfins;
+
+    private static JFXTextField _txtCfop;
+
+    private static JFXTextField _txtCstConfins;
+
+    private static JFXTextField _txtAliquotaCSOCN;
+
+    private static JFXTextField _txtCest;
+
+    private static JFXTextField _txtAliquotaICMS;
+
+    private static JFXTextField _txtCSOSN;
+
+    private static JFXTextField _txtAliquotaMunicipal;
+
+    private static JFXTextField _txtAliquotaEstadual;
+
+    private static JFXTextField _txtAliquotaFederal;
 
     /**
      * Initializes the controller class.
@@ -121,11 +171,39 @@ public class TabProdutoFXMLController implements GenericViewController, Initiali
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        _txtCodigo = txtCodigo;
+        _txtCodRef = txtCodRef;
+        _cbbProdutos = cbbProdutos;
+        _txtDescricao = txtDescricao;
+        _cbbUnidadeFisica = cbbUnidadeFisica;
+        _txtQtdeEmbalagem = txtQtdeEmbalagem;
+        _txtPrecoCusto = txtPrecoCusto;
+        _txtNcm = txtNcm;
+        _txtPrecoVenda = txtPrecoVenda;
+        _txtQtdeProd = txtQtdeProd;
+        _cbbGrupo = cbbGrupo;
+        _cbbCategoria = cbbCategoria;
+        _cbbSituacaoTributaria = cbbSituacaoTributaria;
+        _txtPercentualPIS = txtPercentualPIS;
+        _txtCstPis = txtCstPis;
+        _txtPercentualConfins = txtPercentualConfins;
+        _txtCfop = txtCfop;
+        _txtCstConfins = txtCstConfins;
+        _txtAliquotaCSOCN = txtAliquotaCSOCN;
+        _txtCest = txtCest;
+        _txtAliquotaICMS = txtAliquotaICMS;
+        _txtCSOSN = txtCSOSN;
+        _txtAliquotaMunicipal = txtAliquotaMunicipal;
+        _txtAliquotaEstadual = txtAliquotaEstadual;
+        _txtAliquotaFederal = txtAliquotaFederal;
         setInputOff();
         loadCbbGrupos();
         loadCbbSituacaoTributaria();
         loadCbbTipoProduto();
         loadCbbUnidadeFisica();
+        if (ProdutoController.getInstance().getProduto().getIdProduto() != 0l) {
+            loadDataToScreen();
+        }
     }
 
     @FXML
@@ -405,7 +483,31 @@ public class TabProdutoFXMLController implements GenericViewController, Initiali
 
     @Override
     public void loadDataToScreen() {
-
+        txtDescricao.setText(ProdutoController.getInstance().getProduto().getDescriao());
+        cbbUnidadeFisica.setValue(ProdutoController.getInstance().getProduto().getUnidadeMedida());
+        cbbGrupo.setValue(ProdutoController.getInstance().getProduto().getGrupo());
+        cbbProdutos.setValue(ProdutoController.getInstance().getProduto().getTipo());
+        txtNcm.setText(ProdutoController.getInstance().getProduto().getNcm());
+        txtCodigo.setText(ProdutoController.getInstance().getProduto().getIdProduto() + "");
+        cbbCategoria.setValue(ProdutoController.getInstance().getProduto().getGrupo().getCategoria());
+        txtPrecoCusto.setText(ProdutoController.getInstance().getProduto().getPreco_custo() + "");
+        txtPrecoVenda.setText(ProdutoController.getInstance().getProduto().getPreco_venda() + "");
+        txtCodRef.setText(ProdutoController.getInstance().getProduto().getCodigoReferencia());
+        txtQtdeEmbalagem.setText(ProdutoController.getInstance().getProduto().getQtdeEmbalagem() + "");
+        txtQtdeProd.setText(ProdutoController.getInstance().getProduto().getQtdeProduto() + "");
+        cbbSituacaoTributaria.setValue(ProdutoController.getInstance().getProduto().getAliquotasProduto().getSituacaoTributaria());
+        txtPercentualPIS.setText(ProdutoController.getInstance().getProduto().getAliquotasProduto().getPercentualPis() + "");
+        txtAliquotaICMS.setText(ProdutoController.getInstance().getProduto().getAliquotasProduto().getAliquotaIcms() + "");
+        txtCest.setText(ProdutoController.getInstance().getProduto().getAliquotasProduto().getCest() + "");
+        txtCfop.setText(ProdutoController.getInstance().getProduto().getAliquotasProduto().getCfop() + "");
+        txtAliquotaCSOCN.setText(ProdutoController.getInstance().getProduto().getAliquotasProduto().getAliquotaCsosn() + "");
+        //txtCSOSN.setText(ProdutoController.getInstance().getProduto().getAliquotasProduto().getAliquotaCsosn());
+        txtPercentualConfins.setText(ProdutoController.getInstance().getProduto().getAliquotasProduto().getPercentualConfins() + "");
+        txtCstPis.setText(ProdutoController.getInstance().getProduto().getAliquotasProduto().getCstpPis() + "");
+        txtCstConfins.setText(ProdutoController.getInstance().getProduto().getAliquotasProduto().getCstConfins() + "");
+        txtAliquotaMunicipal.setText(ProdutoController.getInstance().getProduto().getAliquotasProduto().getAliquotamunicipal() + "");
+        txtAliquotaEstadual.setText(ProdutoController.getInstance().getProduto().getAliquotasProduto().getAliquotaestadual() + "");
+        txtAliquotaFederal.setText(ProdutoController.getInstance().getProduto().getAliquotasProduto().getAliquotafederal() + "");
     }
 
     private void loadCbbGrupos() {
