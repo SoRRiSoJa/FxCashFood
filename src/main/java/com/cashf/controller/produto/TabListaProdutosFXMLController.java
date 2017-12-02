@@ -66,6 +66,9 @@ public class TabListaProdutosFXMLController implements Initializable {
 
     @FXML
     private void onSelecionarProduto(MouseEvent event) {
+        if(tbvProdutos.getSelectionModel().getSelectedItem()!=null){
+            ProdutoController.getInstance().setProduto(tbvProdutos.getSelectionModel().getSelectedItem());
+        }
     }
 
     @FXML
