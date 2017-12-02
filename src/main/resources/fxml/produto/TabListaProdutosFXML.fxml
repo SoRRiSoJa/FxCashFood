@@ -17,7 +17,7 @@
             <DropShadow />
          </effect>
          <children>
-            <TableView fx:id="tbvProdutos" layoutX="230.0" layoutY="126.0" prefHeight="333.0" prefWidth="800.0">
+            <TableView fx:id="tbvProdutos" layoutX="230.0" layoutY="126.0" onMouseClicked="#onSelecionarProduto" prefHeight="333.0" prefWidth="800.0" stylesheets="@../../styles/TableViewCSS.css">
                <columns>
                   <TableColumn fx:id="tbcCod" prefWidth="43.0" text="Cod" />
                   <TableColumn fx:id="tbcCodRef" prefWidth="69.0" text="Cod_Ref" />
@@ -33,7 +33,7 @@
                </children>
             </Pane>
             <JFXTextField fx:id="txtConsultar" focusColor="#004ba0" labelFloat="true" layoutX="230.0" layoutY="48.0" prefHeight="26.0" prefWidth="800.0" promptText="Consultar" />
-            <JFXButton fx:id="btnPesquisar" contentDisplay="GRAPHIC_ONLY" layoutX="987.0" layoutY="32.0" prefHeight="32.0" prefWidth="43.0" ripplerFill="#69e2ff" style="-fx-background-color: #ffffff;" textFill="WHITE">
+            <JFXButton fx:id="btnPesquisar" contentDisplay="GRAPHIC_ONLY" layoutX="987.0" layoutY="32.0" onAction="#onPesquisar" prefHeight="32.0" prefWidth="43.0" ripplerFill="#69e2ff" style="-fx-background-color: #ffffff;" textFill="WHITE">
                <graphic>
                   <FontAwesomeIconView glyphName="SEARCH" />
                </graphic>

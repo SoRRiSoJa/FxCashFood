@@ -12,10 +12,13 @@ import com.jfoenix.controls.JFXTextField;
 import java.math.BigDecimal;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 
 /**
  * FXML Controller class
@@ -37,7 +40,7 @@ public class TabListaProdutosFXMLController implements Initializable {
     @FXML
     private TableColumn<Produto, BigDecimal> tbcCusto;
     @FXML
-    private TableColumn<Produto, BigDecimal>tbcVenda;
+    private TableColumn<Produto, BigDecimal> tbcVenda;
     @FXML
     private TableColumn<Produto, Integer> tbcQtde;
     @FXML
@@ -57,6 +60,29 @@ public class TabListaProdutosFXMLController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
-    
+        setUpTableView();
+        loadTbv();
+    }
+
+    @FXML
+    private void onSelecionarProduto(MouseEvent event) {
+    }
+
+    @FXML
+    private void onPesquisar(ActionEvent event) {
+    }
+
+    private void setUpTableView() {
+        tbcCod.setCellValueFactory(new PropertyValueFactory<>("idProduto"));
+        tbcCodRef.setCellValueFactory(new PropertyValueFactory<>("codigoReferencia"));
+        tbcDescricao.setCellValueFactory(new PropertyValueFactory<>("descriao"));
+        tbcTipo.setCellValueFactory(new PropertyValueFactory<>("tipo"));
+        tbcCusto.setCellValueFactory(new PropertyValueFactory<>("preco_custo"));
+        tbcVenda.setCellValueFactory(new PropertyValueFactory<>("preco_venda"));
+        tbcQtde.setCellValueFactory(new PropertyValueFactory<>("qtdeProduto"));
+        tbvProdutos.getColumns().setAll(tbcCod, tbcCodRef, tbcDescricao,tbcTipo,tbcCusto,tbcVenda,tbcQtde);
+    }
+    private void loadTbv(){
+        tbvProdutos.setItems(ProdutoController.getInstance().getLista());
+    }
 }
