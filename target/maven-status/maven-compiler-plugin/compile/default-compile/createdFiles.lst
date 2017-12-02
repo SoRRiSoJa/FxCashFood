@@ -15,6 +15,7 @@ util/SafePass.class
 com/cashf/controller/login/LoginController.class
 com/cashf/dao/funcionario/FuncionarioDAO.class
 com/cashf/model/produto/Grupo_.class
+com/cashf/controller/produto/FXGerenciarProdutosFXMLController.class
 com/cashf/dao/produto/CategoriaDAO.class
 com/cashf/model/meiopagamento/TPPagto.class
 com/cashf/controller/meiopagamento/MeioPagamentoFXMLController.class
@@ -41,6 +42,7 @@ com/cashf/model/produto/UnidadeMedida.class
 com/cashf/controller/cliente/GerenciarClientesFXMLController$1.class
 com/cashf/model/produto/AliquotasProduto_.class
 com/cahsf/dao/fornecedor/FornecedorDAO.class
+com/cashf/controller/produto/TabListaProdutosFXMLController.class
 com/cashf/model/meiopagamento/MeioPagamento_.class
 com/cashf/model/banco/Banco_.class
 com/cashf/controller/funcionario/FuncionarioController.class
@@ -48,6 +50,7 @@ controller/GenericController.class
 com/cashf/model/telefone/Operadora.class
 com/cashf/model/fornecedor/Fornecedor_.class
 com/cashf/model/funcionario/Funcionario_.class
+com/cashf/controller/produto/TabProdutoFXMLController.class
 com/cashf/model/contacorrente/ContaCorrente.class
 com/cashf/model/meiopagamento/MeioPagamento.class
 com/cashf/model/usuario/Usuario_.class

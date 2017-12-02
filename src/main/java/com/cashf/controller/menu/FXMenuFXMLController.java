@@ -209,7 +209,7 @@ public class FXMenuFXMLController implements Initializable {
         try {
             flag = true;
             paneAnt = paneAux;
-            paneAux = FXMLLoader.load(getClass().getResource("/fxml/produto/GerenciarProdutosFXML.fxml"));
+            paneAux = FXMLLoader.load(getClass().getResource("/fxml/produto/FXGerenciarProdutosFXML.fxml"));
             paneBody.getChildren().remove(paneAnt);
             paneBody.getChildren().add(paneAux);
         } catch (IOException ex) {
