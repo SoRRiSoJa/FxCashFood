@@ -89,7 +89,6 @@ public class TabProdutoFXMLController implements GenericViewController, Initiali
     @FXML
     private JFXButton btnLimpar;
     //---
-    ProdutoController controller = new ProdutoController();
     private String erros;
     private boolean flagButtons;
     private long idProduto;
@@ -132,8 +131,8 @@ public class TabProdutoFXMLController implements GenericViewController, Initiali
     @FXML
     private void onSelecionarGrupo(ActionEvent event) {
         if (cbbGrupo.getSelectionModel().getSelectedItem() != null) {
-            controller.setGrupo(cbbGrupo.getSelectionModel().getSelectedItem());
-            cbbCategoria.setValue(controller.getGrupo().getCategoria());
+            ProdutoController.getInstance().setGrupo(cbbGrupo.getSelectionModel().getSelectedItem());
+            cbbCategoria.setValue(ProdutoController.getInstance().getGrupo().getCategoria());
         }
     }
 
@@ -141,16 +140,16 @@ public class TabProdutoFXMLController implements GenericViewController, Initiali
     private void onSalvar(ActionEvent event) {
         getData();
         if (validateFields()) {
-            controller.setProduto(idProduto, codigoReferencia, descriao, qtdeEmbalagem, qtdeProduto, ncm, preco_custo, preco_venda, controller.getGrupo(), controller.getUnidadeMedida(), controller.getTipoProduto(), Boolean.TRUE);
-            controller.setAliquotaProduto(idAliquota, percentualPis, cstpPis, cfop, cstConfins, percentualConfins, aliquotaCsosn, cest, aliquotaIcms, aliquotafederal, aliquotamunicipal, aliquotaestadual);
-            if (controller.getProduto().getIdProduto() == 0l) {
+            ProdutoController.getInstance().setProduto(idProduto, codigoReferencia, descriao, qtdeEmbalagem, qtdeProduto, ncm, preco_custo, preco_venda, ProdutoController.getInstance().getGrupo(), ProdutoController.getInstance().getUnidadeMedida(), ProdutoController.getInstance().getTipoProduto(), Boolean.TRUE);
+            ProdutoController.getInstance().setAliquotaProduto(idAliquota, percentualPis, cstpPis, cfop, cstConfins, percentualConfins, aliquotaCsosn, cest, aliquotaIcms, aliquotafederal, aliquotamunicipal, aliquotaestadual);
+            if (ProdutoController.getInstance().getProduto().getIdProduto() == 0l) {
 
-                controller.insert();
+                ProdutoController.getInstance().insert();
                 clearFields();
                 PoupUpUtil.poupUp("Produto Cadastrado", "O Produto foi cadastrado com sucesso.", "");
             } else {
 
-                controller.update();
+                ProdutoController.getInstance().update();
                 PoupUpUtil.poupUp("Produto Alterado", "O Produto foi alterado com sucesso.", "");
             }
         } else {
@@ -169,8 +168,8 @@ public class TabProdutoFXMLController implements GenericViewController, Initiali
 
     @FXML
     private void onExcluir(ActionEvent event) {
-        if (controller.getProduto() != null) {
-            controller.delete();
+        if (ProdutoController.getInstance().getProduto() != null) {
+            ProdutoController.getInstance().delete();
             PoupUpUtil.poupUp("Produto Excluído", "O Produto foi excluído com sucesso.", "");
         }
         btnExcluir.setDisable(true);
@@ -376,20 +375,20 @@ public class TabProdutoFXMLController implements GenericViewController, Initiali
 
     @Override
     public void getData() {
-        idProduto = (controller.getProduto().getIdProduto() != 0l) ? controller.getProduto().getIdProduto() : 0l;
-        idAliquota = (controller.getAliquotaProduto().getIdAliquota() != 0l) ? controller.getAliquotaProduto().getIdAliquota() : 0l;
+        idProduto = (ProdutoController.getInstance().getProduto().getIdProduto() != 0l) ? ProdutoController.getInstance().getProduto().getIdProduto() : 0l;
+        idAliquota = (ProdutoController.getInstance().getAliquotaProduto().getIdAliquota() != 0l) ? ProdutoController.getInstance().getAliquotaProduto().getIdAliquota() : 0l;
         descriao = txtDescricao.getText();
-        controller.setUnidadeMedida(cbbUnidadeFisica.getSelectionModel().getSelectedItem());
+        ProdutoController.getInstance().setUnidadeMedida(cbbUnidadeFisica.getSelectionModel().getSelectedItem());
         descriao = txtDescricao.getText();
-        controller.setGrupo(cbbGrupo.getSelectionModel().getSelectedItem());
-        controller.setTipoProduto(cbbProdutos.getSelectionModel().getSelectedItem());
+        ProdutoController.getInstance().setGrupo(cbbGrupo.getSelectionModel().getSelectedItem());
+        ProdutoController.getInstance().setTipoProduto(cbbProdutos.getSelectionModel().getSelectedItem());
         ncm = txtNcm.getText();
         preco_custo = new BigDecimal(txtPrecoCusto.getText());
         preco_venda = new BigDecimal(txtPrecoVenda.getText());
         codigoReferencia = txtCodRef.getText();
         qtdeEmbalagem = new Integer(txtQtdeEmbalagem.getText());
         qtdeProduto = new Integer(txtQtdeProd.getText());
-        controller.setSituacaoTributaria(cbbSituacaoTributaria.getSelectionModel().getSelectedItem());
+        ProdutoController.getInstance().setSituacaoTributaria(cbbSituacaoTributaria.getSelectionModel().getSelectedItem());
         percentualPis = new BigDecimal(txtPercentualPIS.getText());
         aliquotaIcms = new BigDecimal(txtAliquotaICMS.getText());
         cest = new BigDecimal(txtCest.getText());
@@ -410,7 +409,7 @@ public class TabProdutoFXMLController implements GenericViewController, Initiali
     }
 
     private void loadCbbGrupos() {
-        cbbGrupo.setItems(controller.getListaGrupo());
+        cbbGrupo.setItems(ProdutoController.getInstance().getListaGrupo());
     }
 
     private void loadCbbTipoProduto() {

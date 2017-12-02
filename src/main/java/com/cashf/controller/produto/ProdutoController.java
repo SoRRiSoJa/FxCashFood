@@ -24,7 +24,7 @@ import javafx.collections.ObservableList;
  * @author joao
  */
 public class ProdutoController implements GenericController<Produto> {
-
+    public static ProdutoController produtoController=null;
     private final ProdutoDAO produtoDAO;
     private final GrupoDAO grupoDAO;
     private final AliquotasProdutoDAO aliquotasProdutoDAO;
@@ -37,7 +37,7 @@ public class ProdutoController implements GenericController<Produto> {
     private ObservableList<Produto> lista;
     private ObservableList<Grupo> listaGrupo;
 
-    public ProdutoController() {
+    private ProdutoController() {
         this.produtoDAO = new ProdutoDAO(Produto.class);
         this.grupoDAO = new GrupoDAO(Grupo.class);
         this.aliquotasProdutoDAO = new AliquotasProdutoDAO(AliquotasProduto.class);
@@ -47,6 +47,12 @@ public class ProdutoController implements GenericController<Produto> {
         produto.setIdProduto(0l);
         this.aliquotaProduto=new AliquotasProduto();
         this.aliquotaProduto.setIdAliquota(0l);
+    }
+    public static synchronized ProdutoController getInstance() {
+        if (produtoController == null) {
+            produtoController = new ProdutoController();
+        }
+        return produtoController;
     }
 
     public Produto getProduto() {

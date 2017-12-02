@@ -33,7 +33,6 @@ com/cashf/dao/cidade/CidadeDAO.class
 com/cahsf/controller/fornecedor/FornecedorController.class
 com/cashf/controller/funcionario/GerenciarFuncionariosFXMLController.class
 com/cashf/dao/banco/BancoDAO.class
-com/cashf/controller/produto/GerenciarProdutosFXMLController.class
 com/cashf/controller/cliente/GerenciarClientesFXMLController$ButtonCellDelete$1.class
 com/cashf/model/cliente/Cliente.class
 com/cahsf/controller/fornecedor/GerenciarFornecedoresFXMLController$ButtonCellDelete.class
