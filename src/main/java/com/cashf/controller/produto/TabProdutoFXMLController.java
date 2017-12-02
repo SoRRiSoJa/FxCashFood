@@ -509,6 +509,33 @@ public class TabProdutoFXMLController implements GenericViewController, Initiali
         txtAliquotaEstadual.setText(ProdutoController.getInstance().getProduto().getAliquotasProduto().getAliquotaestadual() + "");
         txtAliquotaFederal.setText(ProdutoController.getInstance().getProduto().getAliquotasProduto().getAliquotafederal() + "");
     }
+    public static void ldts(){
+    _txtDescricao.setText(ProdutoController.getInstance().getProduto().getDescriao());
+        _cbbUnidadeFisica.setValue(ProdutoController.getInstance().getProduto().getUnidadeMedida());
+        _cbbGrupo.setValue(ProdutoController.getInstance().getProduto().getGrupo());
+        _cbbProdutos.setValue(ProdutoController.getInstance().getProduto().getTipo());
+        _txtNcm.setText(ProdutoController.getInstance().getProduto().getNcm());
+        _txtCodigo.setText(ProdutoController.getInstance().getProduto().getIdProduto() + "");
+        _cbbCategoria.setValue(ProdutoController.getInstance().getProduto().getGrupo().getCategoria());
+        _txtPrecoCusto.setText(ProdutoController.getInstance().getProduto().getPreco_custo() + "");
+        _txtPrecoVenda.setText(ProdutoController.getInstance().getProduto().getPreco_venda() + "");
+        _txtCodRef.setText(ProdutoController.getInstance().getProduto().getCodigoReferencia());
+        _txtQtdeEmbalagem.setText(ProdutoController.getInstance().getProduto().getQtdeEmbalagem() + "");
+        _txtQtdeProd.setText(ProdutoController.getInstance().getProduto().getQtdeProduto() + "");
+        _cbbSituacaoTributaria.setValue(ProdutoController.getInstance().getProduto().getAliquotasProduto().getSituacaoTributaria());
+        _txtPercentualPIS.setText(ProdutoController.getInstance().getProduto().getAliquotasProduto().getPercentualPis() + "");
+        _txtAliquotaICMS.setText(ProdutoController.getInstance().getProduto().getAliquotasProduto().getAliquotaIcms() + "");
+        _txtCest.setText(ProdutoController.getInstance().getProduto().getAliquotasProduto().getCest() + "");
+        _txtCfop.setText(ProdutoController.getInstance().getProduto().getAliquotasProduto().getCfop() + "");
+        _txtAliquotaCSOCN.setText(ProdutoController.getInstance().getProduto().getAliquotasProduto().getAliquotaCsosn() + "");
+        //txtCSOSN.setText(ProdutoController.getInstance().getProduto().getAliquotasProduto().getAliquotaCsosn());
+        _txtPercentualConfins.setText(ProdutoController.getInstance().getProduto().getAliquotasProduto().getPercentualConfins() + "");
+        _txtCstPis.setText(ProdutoController.getInstance().getProduto().getAliquotasProduto().getCstpPis() + "");
+        _txtCstConfins.setText(ProdutoController.getInstance().getProduto().getAliquotasProduto().getCstConfins() + "");
+        _txtAliquotaMunicipal.setText(ProdutoController.getInstance().getProduto().getAliquotasProduto().getAliquotamunicipal() + "");
+        _txtAliquotaEstadual.setText(ProdutoController.getInstance().getProduto().getAliquotasProduto().getAliquotaestadual() + "");
+        _txtAliquotaFederal.setText(ProdutoController.getInstance().getProduto().getAliquotasProduto().getAliquotafederal() + "");
+    }
 
     private void loadCbbGrupos() {
         cbbGrupo.setItems(ProdutoController.getInstance().getListaGrupo());
