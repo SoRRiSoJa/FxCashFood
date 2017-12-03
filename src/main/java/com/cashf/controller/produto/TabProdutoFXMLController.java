@@ -116,55 +116,34 @@ public class TabProdutoFXMLController implements GenericViewController, Initiali
     private BigDecimal aliquotamunicipal;
     //--
     private static JFXTextField _txtCodigo;
-
     private static JFXTextField _txtCodRef;
-
     private static JFXComboBox<TipoProduto> _cbbProdutos;
-
     private static JFXTextField _txtDescricao;
-
     private static JFXComboBox<UnidadeMedida> _cbbUnidadeFisica;
-
     private static JFXTextField _txtQtdeEmbalagem;
-
     private static JFXTextField _txtPrecoCusto;
-
     private static JFXTextField _txtNcm;
-
     private static JFXTextField _txtPrecoVenda;
-
     private static JFXTextField _txtQtdeProd;
-
     private static JFXComboBox<Grupo> _cbbGrupo;
-
     private static JFXComboBox<Categoria> _cbbCategoria;
-
     private static JFXComboBox<SituacaoTributaria> _cbbSituacaoTributaria;
-
     private static JFXTextField _txtPercentualPIS;
-
     private static JFXTextField _txtCstPis;
-
     private static JFXTextField _txtPercentualConfins;
-
     private static JFXTextField _txtCfop;
-
     private static JFXTextField _txtCstConfins;
-
     private static JFXTextField _txtAliquotaCSOCN;
-
     private static JFXTextField _txtCest;
-
     private static JFXTextField _txtAliquotaICMS;
-
     private static JFXTextField _txtCSOSN;
-
     private static JFXTextField _txtAliquotaMunicipal;
-
     private static JFXTextField _txtAliquotaEstadual;
-
     private static JFXTextField _txtAliquotaFederal;
-
+    private static JFXButton _btnSalvar;
+    private static JFXButton _btnNovo;
+    private static JFXButton _btnExcluir;
+    private static JFXButton _btnLimpar;
     /**
      * Initializes the controller class.
      */
@@ -196,6 +175,10 @@ public class TabProdutoFXMLController implements GenericViewController, Initiali
         _txtAliquotaMunicipal = txtAliquotaMunicipal;
         _txtAliquotaEstadual = txtAliquotaEstadual;
         _txtAliquotaFederal = txtAliquotaFederal;
+        _btnSalvar=btnSalvar;
+        _btnExcluir=btnExcluir;
+        _btnLimpar=btnLimpar;
+        _btnNovo=btnNovo;
         setInputOff();
         loadCbbGrupos();
         loadCbbSituacaoTributaria();
@@ -535,6 +518,7 @@ public class TabProdutoFXMLController implements GenericViewController, Initiali
         _txtAliquotaMunicipal.setText(ProdutoController.getInstance().getProduto().getAliquotasProduto().getAliquotamunicipal() + "");
         _txtAliquotaEstadual.setText(ProdutoController.getInstance().getProduto().getAliquotasProduto().getAliquotaestadual() + "");
         _txtAliquotaFederal.setText(ProdutoController.getInstance().getProduto().getAliquotasProduto().getAliquotafederal() + "");
+        _btnExcluir.setDisable(false);
     }
 
     private void loadCbbGrupos() {
