@@ -85,7 +85,7 @@ public class GerenciarContasFXMLController implements Initializable {
             if (controller.getContaCorrente().getId() == 0) {
                 controller.insert();
                 PoupUpUtil.poupUp("Conta Corrente Cadastrada", "A conta corrente foi cadastrada com sucesso.", "");
-                
+
             } else {
                 controller.update();
                 PoupUpUtil.poupUp("Conta Corrente Alterada", "A conta corrente foi alterada com sucesso.", "");
@@ -124,29 +124,32 @@ public class GerenciarContasFXMLController implements Initializable {
     @FXML
     private void onMouseClickedBanco(MouseEvent event) {
         controller.setBanco(cbbBanco.getSelectionModel().getSelectedItem());
-        
+
     }
 
     @FXML
     private void onMouseClicked(MouseEvent event) {
-        if(tbvContas.getSelectionModel().getSelectedItem()!=null){
-        controller.setContaCorrente(tbvContas.getSelectionModel().getSelectedItem());
-        loadDataToScreen();
+        if (tbvContas.getSelectionModel().getSelectedItem() != null) {
+            controller.setContaCorrente(tbvContas.getSelectionModel().getSelectedItem());
+            loadDataToScreen();
+            btnExcluir.setDisable(false);
         }
     }
-     public void loadDataToScreen(){
+
+    public void loadDataToScreen() {
         txtAgencia.setText(controller.getContaCorrente().getAgencia());
         txtDescricao.setText(controller.getContaCorrente().getDescricao());
         txtNumero.setText(controller.getContaCorrente().getContaCorrente());
         cbbBanco.setValue(controller.getContaCorrente().getBanco());
         getData();
-     }
+    }
+
     private void clearFields() {
         txtAgencia.clear();
         txtDescricao.clear();
         txtNumero.clear();
         cbbBanco.setValue(null);
-        
+
     }
 
     private void getData() {
@@ -220,5 +223,5 @@ public class GerenciarContasFXMLController implements Initializable {
     private void loadTbv() {
         tbvContas.setItems(controller.getLista());
     }
-    
+
 }

@@ -156,7 +156,7 @@ public class GerenciarGruposFXMLController implements Initializable {
 
     @FXML
     private void onMouseClicked(MouseEvent event) {
-        if(tbvGrupos.getSelectionModel().getSelectedItem()!=null){
+        if (tbvGrupos.getSelectionModel().getSelectedItem() != null) {
             controller.setGrupo(tbvGrupos.getSelectionModel().getSelectedItem());
             controller.setCategoria(controller.getGrupo().getCategoria());
             controller.flushListaCategoria();
@@ -166,6 +166,8 @@ public class GerenciarGruposFXMLController implements Initializable {
             loadTbvCategoria();
             getData();
             getDataCategoria();
+            btnExcluir.setDisable(false);
+
         }
     }
 
@@ -209,7 +211,7 @@ public class GerenciarGruposFXMLController implements Initializable {
     }
 
     private void getDataCategoria() {
-        idCat = (controller.getCategoria()!=null&& controller.getCategoria().getIdCategoria() != 0) ? idCat = controller.getCategoria().getIdCategoria() : 0l;
+        idCat = (controller.getCategoria() != null && controller.getCategoria().getIdCategoria() != 0) ? idCat = controller.getCategoria().getIdCategoria() : 0l;
         descricaoCategoria = txtDescCat.getText();
     }
 

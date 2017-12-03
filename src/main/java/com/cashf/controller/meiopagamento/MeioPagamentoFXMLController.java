@@ -134,6 +134,7 @@ public class MeioPagamentoFXMLController implements Initializable {
             controller.setMeioPagamento(tbvCartoes.getSelectionModel().getSelectedItem());
             loadDataToScreen();
             getData();
+            btnExcluir.setDisable(false);
         }
     }
 
