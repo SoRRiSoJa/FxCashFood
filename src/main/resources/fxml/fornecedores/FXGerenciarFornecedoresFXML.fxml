@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXTabPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.layout.Pane?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="572.0" prefWidth="1366.0" stylesheets="@../../styles/TabPaneCSS.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <JFXTabPane prefHeight="30.0" prefWidth="1366.0" tabClosingPolicy="UNAVAILABLE" tabMinHeight="30.0" tabMinWidth="678.0">
+            <tabs>
+                <Tab fx:id="tabFornecedores" closable="false" text="Fornecedores" >
+                 
+                </Tab>
+                <Tab fx:id="tabListaFornecedores" closable="false" text="Lista de Fornecedores" >
+                 
+                </Tab>
+            </tabs>
+        </JFXTabPane>
+    </children>
+</Pane>

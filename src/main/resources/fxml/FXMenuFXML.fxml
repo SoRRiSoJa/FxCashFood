@@ -12,11 +12,12 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.StackPane?>
 
-<StackPane fx:id="rootSatackPane" alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1366.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cashf.controller.menu.FXMenuFXMLController">
+
+<StackPane fx:id="rootSatackPane" alignment="TOP_RIGHT" prefHeight="700.0" prefWidth="1366.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cashf.controller.menu.FXMenuFXMLController">
    <children>
       <AnchorPane fx:id="rootAcnhorPane" prefHeight="700.0" prefWidth="1366.0" style="-fx-background-color: #ffffff;" stylesheets="@../styles/MenuCSS.css">
          <children>
-            <MenuBar fx:id="menuBar" prefHeight="20.0" prefWidth="1366.0" AnchorPane.topAnchor="0.0">
+            <MenuBar fx:id="menuBar" prefHeight="30.0" prefWidth="1366.0" AnchorPane.topAnchor="0.0">
                <menus>
                   <Menu mnemonicParsing="false" text="Cadastros">
                      <items>
@@ -41,18 +42,18 @@
                   </Menu>
                </menus>
             </MenuBar>
-            <Pane fx:id="paneHeader" layoutY="29.0" prefHeight="40.0" prefWidth="1366.0" styleClass="pane">
+            <Pane fx:id="paneHeader" layoutY="30.0" prefHeight="40.0" prefWidth="1366.0" styleClass="pane">
                <children>
                   <JFXHamburger fx:id="jfxHamburguer" layoutX="16.0" layoutY="10.0" />
-                  <JFXButton fx:id="btnSair" contentDisplay="GRAPHIC_ONLY" layoutX="1326.0" onAction="#onSair" prefHeight="40.0" prefWidth="40.0" ripplerFill="WHITE" text="Sair" textFill="WHITE">
+                  <JFXButton fx:id="btnSair" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" layoutX="1326.0" onAction="#onSair" prefHeight="40.0" prefWidth="40.0" ripplerFill="WHITE" text="Sair" textFill="WHITE">
                      <graphic>
                         <FontAwesomeIconView fx:id="iconSair" fill="WHITE" glyphName="SIGN_OUT" size="20" />
                      </graphic>
                   </JFXButton>
                </children>
             </Pane>
-            <HBox fx:id="hBox" layoutY="69.0" prefHeight="58.0" prefWidth="1366.0" styleClass="hBox" />
-            <Pane fx:id="paneBody" layoutY="127.0" prefHeight="572.0" prefWidth="1366.0" style="-fx-background-color: #ffffff;">
+            <HBox fx:id="hBox" layoutY="70.0" prefHeight="58.0" prefWidth="1366.0" styleClass="hBox" />
+            <Pane fx:id="paneBody" layoutY="128.0" prefHeight="572.0" prefWidth="1366.0" style="-fx-background-color: #ffffff;">
                <children>
                   <JFXDrawer fx:id="drawer" defaultDrawerSize="180.0" prefHeight="572.0" prefWidth="180.0" />
                </children>
