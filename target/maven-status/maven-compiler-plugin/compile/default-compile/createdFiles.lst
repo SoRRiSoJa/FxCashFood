@@ -10,6 +10,7 @@ com/cahsf/controller/fornecedor/GerenciarFornecedoresFXMLController.class
 com/cashf/model/pessoa/Pessoa_.class
 com/cashf/model/estado/Estado.class
 com/cashf/model/produto/Categoria.class
+com/cahsf/controller/fornecedor/TabFornecedorFXMLController$1.class
 com/cashf/controller/menu/FXMenuFXMLController.class
 util/SafePass.class
 com/cashf/controller/login/LoginController.class
@@ -26,6 +27,7 @@ com/cashf/dao/cliente/ClienteDAO.class
 com/cashf/model/produto/Categoria_.class
 com/cashf/model/contacorrente/ContaCorrente_.class
 com/cashf/controller/cliente/GerenciarClientesFXMLController.class
+com/cahsf/controller/fornecedor/TabFornecedorFXMLController$ButtonCellDelete.class
 com/cashf/dao/produto/ProdutoDAO.class
 util/PoupUpUtil.class
 com/cashf/model/produto/TipoProduto.class
@@ -74,6 +76,7 @@ util/HibernateUtil.class
 com/cashf/model/usuario/Usuario.class
 com/cashf/controller/meiopagamento/MeioPagamentoFXMLController$1.class
 com/cashf/controller/produto/GerenciarGruposFXMLController$ButtonCellDelete$1.class
+com/cahsf/controller/fornecedor/TabFornecedorFXMLController$ButtonCellDelete$1.class
 com/cashf/controller/login/FXLoginFXMLController.class
 com/cashf/model/telefone/Telefone_.class
 com/cashf/controller/contacorrente/ContaCorrenteController.class
