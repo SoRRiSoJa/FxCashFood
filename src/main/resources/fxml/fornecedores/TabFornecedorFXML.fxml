@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXDatePicker?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="542.0" prefWidth="1366.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Pane layoutX="20.0" layoutY="30.0" prefHeight="460.0" prefWidth="640.0" style="-fx-background-color: #ffffff;">
+         <effect>
+            <DropShadow />
+         </effect>
+         <children>
+            <JFXDatePicker fx:id="dtpDataCad" defaultColor="#004ba0" layoutX="375.0" layoutY="16.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="29.0" prefWidth="235.0" promptText="Data de cadastro" />
+            <JFXTextField fx:id="txtRazao" focusColor="#004ba0" labelFloat="true" layoutX="35.0" layoutY="16.0" prefHeight="24.0" prefWidth="273.0" promptText="Razão Social" />
+            <JFXTextField fx:id="txtNome" focusColor="#004ba0" labelFloat="true" layoutX="35.0" layoutY="70.0" prefHeight="24.0" prefWidth="273.0" promptText="Nome Fantasia" />
+            <JFXTextField fx:id="txtEndereco" focusColor="#004ba0" labelFloat="true" layoutX="35.0" layoutY="116.0" prefHeight="24.0" prefWidth="273.0" promptText="Endereço" />
+            <JFXTextField fx:id="txtNumero" focusColor="#004ba0" labelFloat="true" layoutX="377.0" layoutY="116.0" prefHeight="24.0" prefWidth="235.0" promptText="Nº" />
+            <JFXTextField fx:id="txtComplemento" focusColor="#004ba0" labelFloat="true" layoutX="35.0" layoutY="169.0" prefHeight="24.0" prefWidth="273.0" promptText="Complemento" />
+            <JFXTextField fx:id="txtCep" focusColor="#004ba0" labelFloat="true" layoutX="377.0" layoutY="169.0" onKeyReleased="#onKeyReleasedCep" prefHeight="24.0" prefWidth="235.0" promptText="CEP" />
+            <JFXTextField fx:id="txtBairro" focusColor="#004ba0" labelFloat="true" layoutX="35.0" layoutY="221.0" prefHeight="24.0" prefWidth="273.0" promptText="Bairro" />
+            <JFXComboBox fx:id="cbbCidade" focusColor="#004ba0" labelFloat="true" layoutX="35.0" layoutY="275.0" onAction="#onSelectCidade" prefHeight="26.0" prefWidth="273.0" promptText="Cidade" />
+            <JFXTextField fx:id="txtEmail" focusColor="#004ba0" labelFloat="true" layoutX="377.0" layoutY="275.0" prefHeight="24.0" prefWidth="235.0" promptText="e-mail" />
+            <HBox alignment="CENTER" layoutX="10.0" layoutY="366.0" prefHeight="68.0" prefWidth="621.0">
+               <children>
+                  <JFXButton fx:id="btnSalvar" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" onAction="#onSalvar" prefHeight="36.0" prefWidth="100.0" ripplerFill="WHITE" style="-fx-background-color: #2196f3;" textFill="WHITE">
+                     <HBox.margin>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </HBox.margin>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                     <graphic>
+                        <FontAwesomeIconView fill="WHITE" glyphName="PLUS" size="24" />
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton fx:id="btnNovo" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" layoutX="10.0" layoutY="10.0" onAction="#onNovo" prefHeight="36.0" prefWidth="100.0" ripplerFill="WHITE" style="-fx-background-color: #00e676;" textFill="WHITE">
+                     <HBox.margin>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </HBox.margin>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                     <graphic>
+                        <FontAwesomeIconView fill="WHITE" glyphName="EDIT" size="24" />
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton fx:id="btnExcluir" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" layoutX="100.0" layoutY="10.0" onAction="#onExcluir" prefHeight="36.0" prefWidth="100.0" ripplerFill="WHITE" style="-fx-background-color: #d32f2f;" textFill="WHITE">
+                     <HBox.margin>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </HBox.margin>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                     <graphic>
+                        <FontAwesomeIconView fill="WHITE" glyphName="TRASH" size="24" />
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton fx:id="btnLimpar" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" layoutX="190.0" layoutY="10.0" onAction="#onLimpar" prefHeight="36.0" prefWidth="100.0" ripplerFill="WHITE" style="-fx-background-color: #00251a;" textFill="WHITE">
+                     <HBox.margin>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </HBox.margin>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                     <graphic>
+                        <FontAwesomeIconView fill="WHITE" glyphName="ERASER" size="24" />
+                     </graphic>
+                  </JFXButton>
+               </children>
+            </HBox>
+         </children>
+      </Pane>
+      <Pane layoutX="675.0" layoutY="30.0" prefHeight="460.0" prefWidth="640.0" style="-fx-background-color: #ffffff;">
+         <effect>
+            <DropShadow />
+         </effect>
+         <children>
+            <JFXTextField fx:id="txtCnpj" focusColor="#004ba0" labelFloat="true" layoutX="16.0" layoutY="16.0" prefHeight="26.0" prefWidth="220.0" promptText="CNPJ" />
+            <JFXTextField fx:id="txtInscrEst" focusColor="#004ba0" layoutX="395.0" layoutY="16.0" prefHeight="26.0" prefWidth="220.0" promptText="Inscrição estadual" />
+            <JFXTextField fx:id="txtObs" focusColor="#004ba0" labelFloat="true" layoutX="16.0" layoutY="96.0" prefHeight="24.0" prefWidth="600.0" promptText="Observação" />
+            <Pane fx:id="panePhone" layoutX="30.0" layoutY="174.0" prefHeight="156.0" prefWidth="580.0" style="-fx-background-color: #ffffff;">
+               <effect>
+                  <DropShadow />
+               </effect>
+               <children>
+                  <Pane prefHeight="20.0" prefWidth="580.0" style="-fx-background-color: #0081cb;">
+                     <children>
+                        <Label layoutX="5.0" layoutY="2.0" text="Telefones:" textFill="WHITE" />
+                     </children>
+                  </Pane>
+                  <JFXComboBox fx:id="cbbOperadora" focusColor="#004ba0" labelFloat="true" layoutX="14.0" layoutY="34.0" prefHeight="26.0" prefWidth="100.0" promptText="Operadora" />
+                  <JFXTextField fx:id="txtDdd" labelFloat="true" layoutX="14.0" layoutY="76.0" prefHeight="24.0" prefWidth="100.0" promptText="DDD" />
+                  <JFXTextField fx:id="txtTelefone" focusColor="#004ba0" labelFloat="true" layoutX="133.0" layoutY="76.0" prefHeight="24.0" prefWidth="140.0" promptText="Nº TELEFONE" />
+                  <JFXButton fx:id="btnAdicionar" contentDisplay="GRAPHIC_ONLY" layoutX="16.0" layoutY="114.0" onAction="#onAdicionar" prefHeight="32.0" prefWidth="43.0" ripplerFill="WHITE" style="-fx-background-color: #2196f3;" textFill="WHITE">
+                     <graphic>
+                        <FontAwesomeIconView fill="WHITE" glyphName="PLUS" size="16" />
+                     </graphic>
+                  </JFXButton>
+                  <TableView fx:id="tbvTelefone" layoutX="291.0" layoutY="32.0" prefHeight="113.0" prefWidth="273.0">
+                     <columns>
+                        <TableColumn fx:id="tbcDdd" prefWidth="74.0" text="DDD" />
+                        <TableColumn fx:id="tbcNumero" prefWidth="138.0" text="Telefone" />
+                        <TableColumn fx:id="btnDeletar" prefWidth="60.0" text="Excluir" />
+                     </columns>
+                  </TableView>
+               </children>
+            </Pane>
+         </children>
+      </Pane>
+   </children>
+</Pane>
