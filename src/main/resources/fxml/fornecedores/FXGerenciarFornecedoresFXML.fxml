@@ -2,23 +2,21 @@
 
 <?import com.jfoenix.controls.JFXTabPane?>
 <?import javafx.scene.control.Tab?>
-<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 
-
 <Pane fx:id="paneFornecedor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="572.0" prefWidth="1366.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cahsf.controller.fornecedor.FXGerenciarFornecedoresFXMLController">
-   <children>
-      <JFXTabPane fx:id="tabPane" prefHeight="30.0" prefWidth="1366.0" stylesheets="@../styles/TabPaneCSS.css" tabClosingPolicy="UNAVAILABLE" tabMinHeight="30.0" tabMinWidth="680.0">
-         <tabs>
-            <Tab fx:id="tabFornecedor" text="Fornecedor">
-                 <fx:include source="TabFornecedorFXML.fxml" />
-            </Tab>
-            <Tab fx:id="tabListaFornecedores" text="Lista Fornecedores">
-              <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-              </content>
-            </Tab>
-         </tabs>
-      </JFXTabPane>
-   </children>
+    <children>
+        <JFXTabPane fx:id="tabPane" stylesheets="@../../styles/TabPaneCSS.css" tabMinHeight="30.0" tabMinWidth="678.0">
+            <tabs>
+                <Tab fx:id="tabFornecedor" text="Fornecedor" >
+                    <content>
+                        <fx:include source="TabFornecedorFXML.fxml" />
+                    </content>
+                </Tab>
+                <Tab fx:id="tabListaFornecedores" text="Lista Fornecedores" >
+                    
+                </Tab>
+            </tabs>
+        </JFXTabPane>
+    </children>
 </Pane>
