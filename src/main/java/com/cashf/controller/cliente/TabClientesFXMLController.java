@@ -39,6 +39,7 @@ import javafx.util.Callback;
 import javafx.util.Duration;
 import org.controlsfx.control.Notifications;
 import util.PoupUpUtil;
+import util.TextFieldFormatter;
 
 /**
  * FXML Controller class
@@ -134,6 +135,7 @@ public class TabClientesFXMLController implements GenericViewController, Initial
         if (validateTeleofne()) {
             ClienteController.getInstance().setTelefone(0l, ddd, telefone);
             ClienteController.getInstance().inserTelefone();
+            loadTbvTelefone();
         } else {
             PoupUpUtil.accessDenied(erros);
             erros = "";
@@ -142,10 +144,19 @@ public class TabClientesFXMLController implements GenericViewController, Initial
 
     @FXML
     private void onKeyReleasedCep(KeyEvent event) {
+        TextFieldFormatter tff = new TextFieldFormatter();
+        tff.setMask("#####-###");
+        tff.setCaracteresValidos("0123456789");
+        tff.setTf(txtCep);
+        tff.formatter();
     }
 
     @FXML
     private void onSelectCidade(ActionEvent event) {
+        if (cbbCidade.getSelectionModel().getSelectedItem() != null) {
+            ClienteController.getInstance().setCidade(cbbCidade.getSelectionModel().getSelectedItem());
+        }
+
     }
 
     @FXML
@@ -154,6 +165,11 @@ public class TabClientesFXMLController implements GenericViewController, Initial
 
     @FXML
     private void onKeyReleasedCpf(KeyEvent event) {
+        TextFieldFormatter tff = new TextFieldFormatter();
+        tff.setMask("###.###.###-##");
+        tff.setCaracteresValidos("0123456789");
+        tff.setTf(txtCpf);
+        tff.formatter();
     }
 
     @FXML
@@ -188,6 +204,9 @@ public class TabClientesFXMLController implements GenericViewController, Initial
 
     @FXML
     private void onExcluir(ActionEvent event) {
+        if (ClienteController.getInstance().getCliente().getIdPessoa() != 0l) {
+            ClienteController.getInstance().delete();
+        }
     }
 
     @FXML
@@ -382,6 +401,24 @@ public class TabClientesFXMLController implements GenericViewController, Initial
             }
         });
         tbvTelefones.getColumns().setAll(tbcDDD, tbcTelefone, btnDeletar);
+    }
+
+    @FXML
+    private void onKeyReleasedDDD(KeyEvent event) {
+        TextFieldFormatter tff = new TextFieldFormatter();
+        tff.setMask("(##)");
+        tff.setCaracteresValidos("0123456789");
+        tff.setTf(txtDdd);
+        tff.formatter();
+    }
+
+    @FXML
+    private void onKeyreleasedTelefone(KeyEvent event) {
+        TextFieldFormatter tff = new TextFieldFormatter();
+        tff.setMask("#####-#####");
+        tff.setCaracteresValidos("0123456789");
+        tff.setTf(txtNumeroTelefone);
+        tff.formatter();
     }
 
     public class ButtonCellDelete extends TableCell<Disposer.Record, Boolean> {

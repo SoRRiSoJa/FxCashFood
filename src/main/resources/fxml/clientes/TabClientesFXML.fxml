@@ -13,7 +13,6 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 
-
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="542.0" prefWidth="1366.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cashf.controller.cliente.TabClientesFXMLController">
    <children>
       <Pane layoutX="675.0" layoutY="30.0" prefHeight="445.0" prefWidth="640.0" style="-fx-background-color: #ffffff;">
@@ -33,8 +32,8 @@
                      </children>
                   </Pane>
                   <JFXComboBox fx:id="cbbOperadora" focusColor="#004ba0" labelFloat="true" layoutX="14.0" layoutY="34.0" prefHeight="26.0" prefWidth="100.0" promptText="Operadora" />
-                  <JFXTextField fx:id="txtDdd" labelFloat="true" layoutX="14.0" layoutY="76.0" prefHeight="24.0" prefWidth="100.0" promptText="DDD" />
-                  <JFXTextField fx:id="txtNumeroTelefone" focusColor="#004ba0" labelFloat="true" layoutX="133.0" layoutY="76.0" prefHeight="24.0" prefWidth="140.0" promptText="Nº TELEFONE" />
+                  <JFXTextField fx:id="txtDdd" labelFloat="true" layoutX="14.0" layoutY="76.0" onKeyReleased="#onKeyReleasedDDD" prefHeight="24.0" prefWidth="100.0" promptText="DDD" />
+                  <JFXTextField fx:id="txtNumeroTelefone" focusColor="#004ba0" labelFloat="true" layoutX="133.0" layoutY="76.0" onKeyReleased="#onKeyreleasedTelefone" prefHeight="24.0" prefWidth="140.0" promptText="Nº TELEFONE" />
                   <JFXButton fx:id="btnAdicionar" contentDisplay="GRAPHIC_ONLY" layoutX="16.0" layoutY="114.0" onAction="#onAdicionar" prefHeight="32.0" prefWidth="43.0" ripplerFill="WHITE" style="-fx-background-color: #2196f3;" textFill="WHITE">
                      <graphic>
                         <FontAwesomeIconView fill="WHITE" glyphName="PLUS" size="14" />
