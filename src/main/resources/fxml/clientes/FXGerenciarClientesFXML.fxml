@@ -17,7 +17,7 @@
                 </Tab>
                 <Tab fx:id="tabListaClientes" text="Lista de Clientes">
                     <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                        <fx:include source="TabListaClientesFXML.fxml" />
                     </content>
                 </Tab>
             </tabs>

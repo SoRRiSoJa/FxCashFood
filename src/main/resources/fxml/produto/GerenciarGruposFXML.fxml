@@ -112,7 +112,7 @@
                   <Label layoutX="5.0" layoutY="2.0" text="Grupos cadastrados:" textFill="WHITE" />
                </children>
             </Pane>
-            <TableView fx:id="tbvGrupos" layoutX="20.0" layoutY="45.0" onMouseClicked="#onMouseClicked" prefHeight="410.0" prefWidth="600.0">
+            <TableView fx:id="tbvGrupos" layoutX="20.0" layoutY="45.0" onMouseClicked="#onMouseClicked" prefHeight="410.0" prefWidth="600.0" stylesheets="@../../styles/TableViewCSS.css">
                <columns>
                   <TableColumn fx:id="tbcDescricaoGrupo" prefWidth="273.0" text="Descrição" />
                   <TableColumn fx:id="tbcCategoriaGrupo" prefWidth="325.0" text="Categoria" />

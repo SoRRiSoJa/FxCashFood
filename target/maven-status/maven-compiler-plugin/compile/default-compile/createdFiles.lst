@@ -27,9 +27,9 @@ com/cashf/dao/cliente/ClienteDAO.class
 com/cashf/model/produto/Categoria_.class
 com/cashf/controller/cliente/TabClientesFXMLController$ButtonCellDelete.class
 com/cashf/model/contacorrente/ContaCorrente_.class
-com/cashf/controller/cliente/GerenciarClientesFXMLController.class
 com/cahsf/controller/fornecedor/TabFornecedorFXMLController$ButtonCellDelete.class
 com/cashf/dao/produto/ProdutoDAO.class
+com/cashf/controller/cliente/TabListaClientesFXMLController.class
 util/PoupUpUtil.class
 com/cashf/model/produto/TipoProduto.class
 com/cashf/dao/cidade/CidadeDAO.class
@@ -37,11 +37,9 @@ com/cahsf/controller/fornecedor/FXGerenciarFornecedoresFXMLController.class
 com/cahsf/controller/fornecedor/FornecedorController.class
 com/cashf/controller/funcionario/GerenciarFuncionariosFXMLController.class
 com/cashf/dao/banco/BancoDAO.class
-com/cashf/controller/cliente/GerenciarClientesFXMLController$ButtonCellDelete$1.class
 com/cashf/model/cliente/Cliente.class
 com/cashf/model/cliente/Cliente_.class
 com/cashf/model/produto/UnidadeMedida.class
-com/cashf/controller/cliente/GerenciarClientesFXMLController$1.class
 com/cashf/model/produto/AliquotasProduto_.class
 com/cahsf/dao/fornecedor/FornecedorDAO.class
 com/cashf/controller/produto/TabListaProdutosFXMLController.class
@@ -85,7 +83,6 @@ com/cashf/controller/cliente/TabClientesFXMLController$ButtonCellDelete$1.class
 com/cashf/controller/produto/GrupoController.class
 com/cashf/cashfood/MainApp.class
 com/cashf/model/produto/AliquotasProduto.class
-com/cashf/controller/cliente/GerenciarClientesFXMLController$ButtonCellDelete.class
 com/cashf/dao/usuario/UsuarioDAO.class
 com/cashf/model/produto/SituacaoTributaria.class
 com/cashf/controller/produto/ProdutoController.class

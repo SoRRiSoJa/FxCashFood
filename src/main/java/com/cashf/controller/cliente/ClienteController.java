@@ -24,8 +24,9 @@ import javafx.collections.ObservableList;
  *
  * @author joao
  */
-public class ClienteController implements GenericController<Cliente>{
+public class ClienteController implements GenericController<Cliente> {
 
+    public static ClienteController clienteController = null;
     private final TelefoneDAO telefoneDAO;
     private final CidadeDAO cidadeDAO;
     private final ClienteDAO clienteDAO;
@@ -39,7 +40,7 @@ public class ClienteController implements GenericController<Cliente>{
     private Cidade cidade;
     private Sexo sexo;
 
-    public ClienteController() {
+    private ClienteController() {
         this.lt = new ArrayList<>();
         this.clienteDAO = new ClienteDAO(Cliente.class);
         this.cidadeDAO = new CidadeDAO(Cidade.class);
@@ -54,6 +55,13 @@ public class ClienteController implements GenericController<Cliente>{
         cliente.setIdPessoa(0l);
     }
 
+    public static synchronized ClienteController getInstance() {
+        if (clienteController == null) {
+            clienteController = new ClienteController();
+        }
+        return clienteController;
+    }
+
     public Cliente getCliente() {
         return cliente;
     }
@@ -61,7 +69,8 @@ public class ClienteController implements GenericController<Cliente>{
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
     }
-    public void setCliente(Long id, String nome, Sexo sexo, LocalDate dataNas, String endereco, String bairro, Integer numero, String complemento, String cep, Cidade cidade, String cpf, String rg, String email,Boolean status,List<Telefone> telefones,String observacao) {
+
+    public void setCliente(Long id, String nome, Sexo sexo, LocalDate dataNas, String endereco, String bairro, Integer numero, String complemento, String cep, Cidade cidade, String cpf, String rg, String email, Boolean status, List<Telefone> telefones, String observacao) {
         this.cliente.setIdPessoa(id);
         this.cliente.setNome(nome);
         this.cliente.setSexo(sexo);
@@ -79,6 +88,7 @@ public class ClienteController implements GenericController<Cliente>{
         this.cliente.setObservacao(observacao);
         this.cliente.setTelefones(telefones);
     }
+
     public ObservableList<Telefone> getListaTelefone() {
         return listaTelefone;
     }
@@ -86,6 +96,7 @@ public class ClienteController implements GenericController<Cliente>{
     public void setListaTelefone(ObservableList<Telefone> listaTelefone) {
         this.listaTelefone = listaTelefone;
     }
+
     public void setItemListaTelefone(Telefone telefone) {
         this.listaTelefone.add(telefone);
     }
@@ -105,9 +116,11 @@ public class ClienteController implements GenericController<Cliente>{
     public void setTelefone(Telefone telefone) {
         this.telefone = telefone;
     }
+
     public void setTelefone(long id, String ddd, String numero) {
         this.telefone = new Telefone(id, ddd, numero, operadora);
     }
+
     public Operadora getOperadora() {
         return operadora;
     }
@@ -131,7 +144,7 @@ public class ClienteController implements GenericController<Cliente>{
     public void setSexo(Sexo sexo) {
         this.sexo = sexo;
     }
-    
+
     @Override
     public void insert() {
         cliente.setIdPessoa(clienteDAO.save(cliente));
@@ -166,13 +179,14 @@ public class ClienteController implements GenericController<Cliente>{
 
     @Override
     public void setLista(ObservableList<Cliente> lista) {
-        this.lista=lista;
+        this.lista = lista;
     }
 
     @Override
     public void setItenLista(Cliente obj) {
         this.lista.add(obj);
     }
+
     public void inserTelefone() {
         telefone.setIdTelefone(telefoneDAO.save(telefone));
         setItemListaTelefone(telefone);
@@ -189,10 +203,10 @@ public class ClienteController implements GenericController<Cliente>{
         telefoneDAO.update(telefone);
         flushTelefone();
     }
+
     private void flushTelefone() {
         telefone = new Telefone();
         telefone.setIdTelefone(0l);
     }
-
 
 }

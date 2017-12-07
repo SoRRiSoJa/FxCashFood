@@ -89,7 +89,7 @@
                   <Label layoutX="5.0" layoutY="2.0" text="Contas registradas:" textFill="WHITE" />
                </children>
             </Pane>
-            <TableView fx:id="tbvContas" layoutX="20.0" layoutY="45.0" onMouseClicked="#onMouseClicked" prefHeight="410.0" prefWidth="600.0" stylesheets="@../../../../../../AtenaGym/src/main/resources/styles/TableViewDefaultCSS.css">
+            <TableView fx:id="tbvContas" layoutX="20.0" layoutY="45.0" onMouseClicked="#onMouseClicked" prefHeight="410.0" prefWidth="600.0" stylesheets="@../../styles/TableViewCSS.css">
                <columns>
                   <TableColumn fx:id="tbcDescricao" prefWidth="273.0" text="Descrição" />
                   <TableColumn fx:id="tbcBanco" prefWidth="93.0" text="Banco" />

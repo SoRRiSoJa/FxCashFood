@@ -5,6 +5,8 @@
  */
 package com.cahsf.controller.fornecedor;
 
+import com.cahsf.controller.fornecedor.FornecedorController;
+import com.cahsf.controller.fornecedor.TabFornecedorFXMLController;
 import com.cashf.model.fornecedor.Fornecedor;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXRadioButton;
@@ -43,6 +45,7 @@ public class TabListaFornecedoresFXMLController implements Initializable {
     private TableColumn<Fornecedor, String> tbcNome;
     @FXML
     private TableColumn<Fornecedor, String> tbcEmail;
+
     /**
      * Initializes the controller class.
      */
@@ -51,7 +54,7 @@ public class TabListaFornecedoresFXMLController implements Initializable {
         // TODO
         setUptableView();
         loadTbv();
-    }    
+    }
 
     @FXML
     private void onPesquisar(ActionEvent event) {
@@ -59,21 +62,19 @@ public class TabListaFornecedoresFXMLController implements Initializable {
 
     @FXML
     private void onMouseClickedFornecedor(MouseEvent event) {
-    if (tbvFornecedores.getSelectionModel().getSelectedItem() != null) {
-            FornecedorController.getInstance().setFornecedor(tbvFornecedores.getSelectionModel().getSelectedItem());
-            FornecedorController.getInstance().setListaTelefone(FXCollections.observableList(FornecedorController.getInstance().getFornecedor().getTelefones()));
-            TabFornecedorFXMLController.LDTS();
-            //loadTbvTelefone();
-            //getData();
-        }
+        FornecedorController.getInstance().setFornecedor(tbvFornecedores.getSelectionModel().getSelectedItem());
+        FornecedorController.getInstance().setListaTelefone(FXCollections.observableList(FornecedorController.getInstance().getFornecedor().getTelefones()));
+        TabFornecedorFXMLController.LDTS();
     }
+
     private void setUptableView() {
         tbcNome.setCellValueFactory(new PropertyValueFactory<>("nomefantasia"));
         tbcEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
         tbvFornecedores.getColumns().setAll(tbcNome, tbcEmail);
     }
+
     private void loadTbv() {
         tbvFornecedores.setItems(FornecedorController.getInstance().getLista());
     }
-    
+
 }

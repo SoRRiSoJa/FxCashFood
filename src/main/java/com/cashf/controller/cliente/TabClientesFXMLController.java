@@ -98,7 +98,6 @@ public class TabClientesFXMLController implements GenericViewController, Initial
     @FXML
     private JFXButton btnLimpar;
     //-----------------------------------
-    private ClienteController controller = new ClienteController();
     private long IdCli;
     private String nome;
     private String endereco;
@@ -133,8 +132,8 @@ public class TabClientesFXMLController implements GenericViewController, Initial
     private void onAdicionar(ActionEvent event) {
         getDataTelefone();
         if (validateTeleofne()) {
-            controller.setTelefone(0l, ddd, telefone);
-            controller.inserTelefone();
+            ClienteController.getInstance().setTelefone(0l, ddd, telefone);
+            ClienteController.getInstance().inserTelefone();
         } else {
             PoupUpUtil.accessDenied(erros);
             erros = "";
@@ -161,14 +160,14 @@ public class TabClientesFXMLController implements GenericViewController, Initial
     private void onSalvar(ActionEvent event) {
         getData();
         if (validateFields()) {
-            controller.setCliente(IdCli, nome, controller.getSexo(), dataNas, endereco, bairro, numero, complemento, cep, controller.getCidade(), cpf, rg, email, flagButtons, controller.getListaTelefone(), endereco);
-            if (controller.getCliente().getIdPessoa() == 0l) {
+            ClienteController.getInstance().setCliente(IdCli, nome, ClienteController.getInstance().getSexo(), dataNas, endereco, bairro, numero, complemento, cep, ClienteController.getInstance().getCidade(), cpf, rg, email, flagButtons, ClienteController.getInstance().getListaTelefone(), endereco);
+            if (ClienteController.getInstance().getCliente().getIdPessoa() == 0l) {
                 //insert
-                controller.insert();
+                ClienteController.getInstance().insert();
                 PoupUpUtil.poupUp("Cliente Cadastrado", "O Cliente foi cadastrado com sucesso.", "");
             } else {
                 //update
-                controller.update();
+                ClienteController.getInstance().update();
                 PoupUpUtil.poupUp("Cliente Alterado", "O Cliente foi alterado com sucesso.", "");
             }
             //loadTbv();
@@ -329,7 +328,7 @@ public class TabClientesFXMLController implements GenericViewController, Initial
 
     @Override
     public void getData() {
-        IdCli = (controller.getCliente().getIdPessoa() != 0l) ? controller.getCliente().getIdPessoa() : 0l;
+        IdCli = (ClienteController.getInstance().getCliente().getIdPessoa() != 0l) ? ClienteController.getInstance().getCliente().getIdPessoa() : 0l;
         nome = txtNome.getText();
         dataNas = dtpDataNas.getValue();
         endereco = txtEndereco.getText();
@@ -340,15 +339,15 @@ public class TabClientesFXMLController implements GenericViewController, Initial
         email = txtEmail.getText();
         rg = txtRg.getText();
         cpf = txtCpf.getText();
-        controller.setSexo(cbbSexo.getSelectionModel().getSelectedItem());
-        controller.setCidade(cbbCidade.getSelectionModel().getSelectedItem());
-        controller.setOperadora(cbbOperadora.getSelectionModel().getSelectedItem());
+        ClienteController.getInstance().setSexo(cbbSexo.getSelectionModel().getSelectedItem());
+        ClienteController.getInstance().setCidade(cbbCidade.getSelectionModel().getSelectedItem());
+        ClienteController.getInstance().setOperadora(cbbOperadora.getSelectionModel().getSelectedItem());
     }
 
     private void getDataTelefone() {
         telefone = txtNumeroTelefone.getText();
         ddd = txtDdd.getText();
-        controller.setOperadora(cbbOperadora.getSelectionModel().getSelectedItem());
+        ClienteController.getInstance().setOperadora(cbbOperadora.getSelectionModel().getSelectedItem());
     }
 
     @Override
@@ -357,7 +356,7 @@ public class TabClientesFXMLController implements GenericViewController, Initial
     }
 
     private void loadTbvTelefone() {
-        tbvTelefones.setItems(controller.getListaTelefone());
+        tbvTelefones.setItems(ClienteController.getInstance().getListaTelefone());
     }
 
     private void loadCbbSexo() {
@@ -365,7 +364,7 @@ public class TabClientesFXMLController implements GenericViewController, Initial
     }
 
     private void loadCbbCidade() {
-        cbbCidade.getItems().addAll(controller.getListaCidade());
+        cbbCidade.getItems().addAll(ClienteController.getInstance().getListaCidade());
     }
 
     private void loadCbbOperadora() {
@@ -404,7 +403,7 @@ public class TabClientesFXMLController implements GenericViewController, Initial
                     Telefone currentPerson = (Telefone) ButtonCellDelete.this.getTableView().getItems().get(ButtonCellDelete.this.getIndex());
                     //remove selected item from the table list
                     if (currentPerson != null) {
-                        controller.setTelefone(currentPerson);
+                        ClienteController.getInstance().setTelefone(currentPerson);
                         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                         alert.setTitle("Cofirmar Excluir Telefone!");
                         alert.setHeaderText("Deseja realmente Excluir?");
@@ -412,7 +411,7 @@ public class TabClientesFXMLController implements GenericViewController, Initial
                         Optional<ButtonType> result = alert.showAndWait();
                         if (result.get() == ButtonType.OK) {
                             // ... user chose OK
-                            controller.deleteTelefone();
+                            ClienteController.getInstance().deleteTelefone();
                             notificationBuilder = Notifications.create().title("Telefone excluído!").
                                     text("telefone Excluido com sucesso.").
                                     hideAfter(Duration.seconds(2)).
