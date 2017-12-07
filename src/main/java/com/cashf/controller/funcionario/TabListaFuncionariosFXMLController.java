@@ -53,7 +53,7 @@ public class TabListaFuncionariosFXMLController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         setUptableView();
-        //loadTbv();
+        loadTbv();
     }
 
     @FXML
