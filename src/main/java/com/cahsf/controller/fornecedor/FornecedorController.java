@@ -22,7 +22,7 @@ import javafx.collections.ObservableList;
  * @author joao
  */
 public class FornecedorController {
-
+    public static FornecedorController fornecedorController=null;
     private final FornecedorDAO fornecedorDAO;
     private final TelefoneDAO telefoneDAO;
     private final CidadeDAO cidadeDAO;
@@ -35,7 +35,7 @@ public class FornecedorController {
     private Fornecedor fornecedor;
     private Cidade cidade;
 
-    public FornecedorController() {
+    private FornecedorController() {
         this.lt = new ArrayList<>();
         this.cidadeDAO = new CidadeDAO(Cidade.class);
         this.telefoneDAO = new TelefoneDAO(Telefone.class);
@@ -49,7 +49,12 @@ public class FornecedorController {
         telefone.setIdTelefone(0l);
         fornecedor.setIdFornecedor(0l);
     }
-
+    public static synchronized FornecedorController getInstance() {
+        if (fornecedorController == null) {
+            fornecedorController = new FornecedorController();
+        }
+        return fornecedorController;
+    }
     public ObservableList<Cidade> getListaCidade() {
         return listaCidade;
     }

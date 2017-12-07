@@ -5,7 +5,7 @@
  */
 package com.cashf.controller.cliente;
 
-import com.cahsf.controller.fornecedor.GerenciarFornecedoresFXMLController;
+
 import com.cashf.model.cidade.Cidade;
 import com.cashf.model.cliente.Cliente;
 import com.cashf.model.pessoa.Sexo;

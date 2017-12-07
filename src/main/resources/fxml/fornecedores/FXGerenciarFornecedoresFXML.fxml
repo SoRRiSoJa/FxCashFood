@@ -14,7 +14,9 @@
                     </content>
                 </Tab>
                 <Tab fx:id="tabListaFornecedores" text="Lista Fornecedores" >
-                    
+                    <content>
+                        <fx:include source="TabListaFornecedoresFXML.fxml" />
+                    </content>
                 </Tab>
             </tabs>
         </JFXTabPane>

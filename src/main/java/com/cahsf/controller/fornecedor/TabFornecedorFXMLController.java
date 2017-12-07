@@ -99,7 +99,6 @@ public class TabFornecedorFXMLController implements GenericViewController, Initi
     @FXML
     private TableColumn btnDeletar;
     //--------------------------------
-    private FornecedorController controller = new FornecedorController();
     private String erros;
     private boolean flagButtons;
     private long idFornecedor = 0;
@@ -139,21 +138,21 @@ public class TabFornecedorFXMLController implements GenericViewController, Initi
 
     @FXML
     private void onSelectCidade(ActionEvent event) {
-        controller.setCidade(cbbCidade.getSelectionModel().getSelectedItem());
+        FornecedorController.getInstance().setCidade(cbbCidade.getSelectionModel().getSelectedItem());
     }
 
     @FXML
     private void onSalvar(ActionEvent event) {
         getData();
         if (validateFields()) {
-            controller.setFornecedor(idFornecedor, cnpj, inscrEst, nomefantasia, razaoSocial, endereco, complemento, numero, cep, bairro, email, Observacao, controller.getCidade(), controller.getListaTelefone());
-            if (controller.getFornecedor().getIdFornecedor() == 0) {
-                controller.insert();
+            FornecedorController.getInstance().setFornecedor(idFornecedor, cnpj, inscrEst, nomefantasia, razaoSocial, endereco, complemento, numero, cep, bairro, email, Observacao, FornecedorController.getInstance().getCidade(), FornecedorController.getInstance().getListaTelefone());
+            if (FornecedorController.getInstance().getFornecedor().getIdFornecedor() == 0) {
+                FornecedorController.getInstance().insert();
 
                 PoupUpUtil.poupUp("Fornecedor Cadastrado", "O Fornecedor foi cadastrado com sucesso.", "");
 
             } else {
-                controller.update();
+                FornecedorController.getInstance().update();
                 PoupUpUtil.poupUp("Fornecedor Alterado", "O Fornecedor foi alterado com sucesso.", "");
             }
             //loadTbv();
@@ -175,8 +174,8 @@ public class TabFornecedorFXMLController implements GenericViewController, Initi
 
     @FXML
     private void onExcluir(ActionEvent event) {
-        if (controller.getFornecedor() != null) {
-            controller.delete();
+        if (FornecedorController.getInstance().getFornecedor() != null) {
+            FornecedorController.getInstance().delete();
             PoupUpUtil.poupUp("Fornecedor Excluído", "O fornecedor foi excluído com sucesso.", "");
         }
         btnExcluir.setDisable(true);
@@ -191,8 +190,8 @@ public class TabFornecedorFXMLController implements GenericViewController, Initi
     private void onAdicionar(ActionEvent event) {
         getDataTelefone();
         if (validateTeleofne()) {
-            controller.setTelefone(0l, ddd, telefone);
-            controller.inserTelefone();
+            FornecedorController.getInstance().setTelefone(0l, ddd, telefone);
+            FornecedorController.getInstance().inserTelefone();
         } else {
             PoupUpUtil.accessDenied(erros);
             erros = "";
@@ -328,7 +327,7 @@ public class TabFornecedorFXMLController implements GenericViewController, Initi
 
     @Override
     public void getData() {
-        idFornecedor = (controller.getFornecedor().getIdFornecedor() != 0) ? idFornecedor = controller.getFornecedor().getIdFornecedor() : 0l;
+        idFornecedor = (FornecedorController.getInstance().getFornecedor().getIdFornecedor() != 0) ? idFornecedor = FornecedorController.getInstance().getFornecedor().getIdFornecedor() : 0l;
         nomefantasia = txtNome.getText();
         razaoSocial = txtRazao.getText();
         endereco = txtEndereco.getText();
@@ -340,14 +339,14 @@ public class TabFornecedorFXMLController implements GenericViewController, Initi
         email = txtEmail.getText();
         inscrEst = txtInscrEst.getText();
         Observacao = txtObs.getText();
-        controller.setCidade(cbbCidade.getSelectionModel().getSelectedItem());
+        FornecedorController.getInstance().setCidade(cbbCidade.getSelectionModel().getSelectedItem());
 
     }
 
     private void getDataTelefone() {
         telefone = txtTelefone.getText();
         ddd = txtDdd.getText();
-        controller.setOperadora(cbbOperadora.getSelectionModel().getSelectedItem());
+        FornecedorController.getInstance().setOperadora(cbbOperadora.getSelectionModel().getSelectedItem());
     }
 
     @Override
@@ -369,7 +368,7 @@ public class TabFornecedorFXMLController implements GenericViewController, Initi
     }
 
     private void loadCbbCidade() {
-        cbbCidade.setItems(controller.getListaCidade());
+        cbbCidade.setItems(FornecedorController.getInstance().getListaCidade());
     }
 
     private void loadCbbOperadora() {
@@ -377,7 +376,7 @@ public class TabFornecedorFXMLController implements GenericViewController, Initi
     }
 
     private void loadTbvTelefone() {
-        tbvTelefone.setItems(controller.getListaTelefone());
+        tbvTelefone.setItems(FornecedorController.getInstance().getListaTelefone());
     }
 
     public class ButtonCellDelete extends TableCell<Disposer.Record, Boolean> {
@@ -399,7 +398,7 @@ public class TabFornecedorFXMLController implements GenericViewController, Initi
                     Telefone currentPerson = (Telefone) ButtonCellDelete.this.getTableView().getItems().get(ButtonCellDelete.this.getIndex());
                     //remove selected item from the table list
                     if (currentPerson != null) {
-                        controller.setTelefone(currentPerson);
+                        FornecedorController.getInstance().setTelefone(currentPerson);
                         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                         alert.setTitle("Cofirmar Excluir Telefone!");
                         alert.setHeaderText("Deseja realmente Excluir?");
@@ -407,7 +406,7 @@ public class TabFornecedorFXMLController implements GenericViewController, Initi
                         Optional<ButtonType> result = alert.showAndWait();
                         if (result.get() == ButtonType.OK) {
                             // ... user chose OK
-                            controller.deleteTelefone();
+                            FornecedorController.getInstance().deleteTelefone();
                             notificationBuilder = Notifications.create().title("Telefone excluído!").
                                     text("telefone Excluido com sucesso.").
                                     hideAfter(Duration.seconds(2)).
