@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.cahsf.controller.fornecedor;
+package com.cashf.controller.fornecedor;
 
 import com.cashf.model.cidade.Cidade;
 import com.cashf.model.telefone.Operadora;

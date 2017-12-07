@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.cahsf.controller.fornecedor;
+package com.cashf.controller.fornecedor;
 
-import com.cahsf.controller.fornecedor.FornecedorController;
-import com.cahsf.controller.fornecedor.TabFornecedorFXMLController;
+import com.cashf.controller.fornecedor.FornecedorController;
+import com.cashf.controller.fornecedor.TabFornecedorFXMLController;
 import com.cashf.model.fornecedor.Fornecedor;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXRadioButton;

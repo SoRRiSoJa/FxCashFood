@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.cahsf.controller.fornecedor;
+package com.cashf.controller.fornecedor;
 
-import com.cahsf.dao.fornecedor.FornecedorDAO;
+import com.cashf.dao.fornecedor.FornecedorDAO;
 import com.cashf.dao.cidade.CidadeDAO;
 import com.cashf.dao.telefone.TelefoneDAO;
 import com.cashf.model.cidade.Cidade;

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.cahsf.dao.fornecedor;
+package com.cashf.dao.fornecedor;
 
 import com.cashf.model.fornecedor.Fornecedor;
 import dao.GenericDAOIMP;

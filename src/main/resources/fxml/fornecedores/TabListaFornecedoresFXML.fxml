@@ -10,7 +10,7 @@
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.Pane?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="542.0" prefWidth="1366.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cahsf.controller.fornecedor.TabListaFornecedoresFXMLController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="542.0" prefWidth="1366.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cashf.controller.fornecedor.TabListaFornecedoresFXMLController">
    <children>
       <Pane layoutX="30.0" layoutY="30.0" prefHeight="482.0" prefWidth="1200.0" style="-fx-background-color: #ffffff;">
          <effect>
