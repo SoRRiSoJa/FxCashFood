@@ -14,6 +14,7 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -141,7 +142,7 @@ public class Funcionario extends Pessoa implements Serializable {
             return false;
         }
         final Funcionario other = (Funcionario) obj;
-        if (this.getIdPessoa()!= other.getIdPessoa()) {
+        if (!Objects.equals(this.getIdPessoa(), other.getIdPessoa())) {
             return false;
         }
         return true;
