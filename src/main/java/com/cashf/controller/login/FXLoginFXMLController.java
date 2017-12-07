@@ -74,7 +74,7 @@ public class FXLoginFXMLController implements Initializable {
                             darkStyle().graphic(new ImageView(imgOne));
                     LoginController.getInstance().setLoginStatus();
                     menuPrincipal = FXMLLoader.load(getClass().getResource("/fxml/FXMenuFXML.fxml"));
-                    rootPane.getChildren().setAll(menuPrincipal);
+                    rootStackPane.getChildren().setAll(menuPrincipal);
 
                 } catch (IOException ex) {
                     System.out.println("Erro--->>>" + ex);

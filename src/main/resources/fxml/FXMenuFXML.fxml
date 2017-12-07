@@ -12,8 +12,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.StackPane?>
 
-
-<StackPane fx:id="rootSatackPane" alignment="TOP_RIGHT" prefHeight="700.0" prefWidth="1366.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cashf.controller.menu.FXMenuFXMLController">
+<StackPane fx:id="rootSatackPane" alignment="TOP_CENTER" prefHeight="700.0" prefWidth="1366.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cashf.controller.menu.FXMenuFXMLController">
    <children>
       <AnchorPane fx:id="rootAcnhorPane" prefHeight="700.0" prefWidth="1366.0" style="-fx-background-color: #ffffff;" stylesheets="@../styles/MenuCSS.css">
          <children>
