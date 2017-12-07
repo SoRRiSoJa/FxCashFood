@@ -222,7 +222,7 @@ public class FXMenuFXMLController implements Initializable {
         try {
             flag = true;
             paneAnt = paneAux;
-            paneAux = FXMLLoader.load(getClass().getResource("/fxml/clientes/GerenciarClientesFXML.fxml"));
+            paneAux = FXMLLoader.load(getClass().getResource("/fxml/clientes/FXGerenciarClientesFXML.fxml"));
             paneBody.getChildren().remove(paneAnt);
             paneBody.getChildren().add(paneAux);
         } catch (IOException ex) {
