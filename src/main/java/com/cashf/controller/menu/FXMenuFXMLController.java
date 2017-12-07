@@ -171,7 +171,7 @@ public class FXMenuFXMLController implements Initializable {
         try {
             flag = true;
             paneAnt = paneAux;
-            paneAux = FXMLLoader.load(getClass().getResource("/fxml/funcionario/GerenciarFuncionariosFXML.fxml"));
+            paneAux = FXMLLoader.load(getClass().getResource("/fxml/funcionario/FXGerenciarFuncionariosFXML.fxml"));
             paneBody.getChildren().remove(paneAnt);
             paneBody.getChildren().add(paneAux);
         } catch (IOException ex) {

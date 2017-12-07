@@ -34,6 +34,7 @@ com/cashf/model/produto/TipoProduto.class
 com/cashf/dao/cidade/CidadeDAO.class
 com/cashf/controller/fornecedor/TabFornecedorFXMLController.class
 com/cashf/controller/funcionario/GerenciarFuncionariosFXMLController.class
+com/cashf/controller/funcionario/TabFuncionarioFXMLController.class
 com/cashf/dao/banco/BancoDAO.class
 com/cashf/model/cliente/Cliente.class
 com/cashf/controller/fornecedor/TabFornecedorFXMLController$1.class
