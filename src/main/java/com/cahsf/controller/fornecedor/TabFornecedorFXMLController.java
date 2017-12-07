@@ -116,6 +116,28 @@ public class TabFornecedorFXMLController implements GenericViewController, Initi
     //---
     private String telefone;
     private String ddd;
+    //--
+    private static JFXDatePicker _dtpDataCad;
+    private static JFXTextField _txtRazao;
+    private static JFXTextField _txtNome;
+    private static JFXTextField _txtEndereco;
+    private static JFXTextField _txtNumero;
+    private static JFXTextField _txtComplemento;
+    private static JFXTextField _txtCep;
+    private static JFXTextField _txtBairro;
+    private static JFXComboBox<Cidade> _cbbCidade;
+    private static JFXTextField _txtEmail;
+    private static JFXButton _btnSalvar;
+    private static JFXButton _btnNovo;
+    private static JFXButton _btnExcluir;
+    private static JFXButton _btnLimpar;
+    private static JFXTextField _txtCnpj;
+    private static JFXTextField _txtInscrEst;
+    private static JFXTextField _txtObs;
+    private static JFXComboBox<Operadora> _cbbOperadora;
+    private static JFXTextField _txtDdd;
+    private static JFXTextField _txtTelefone;
+    private static JFXButton _btnAdicionar;
 
     /**
      * Initializes the controller class.
@@ -123,6 +145,26 @@ public class TabFornecedorFXMLController implements GenericViewController, Initi
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        _dtpDataCad = dtpDataCad;
+        _txtRazao = txtRazao;
+        _txtNome = txtNome;
+        _txtEndereco = txtEndereco;
+        _txtNumero = txtNumero;
+        _txtComplemento = txtComplemento;
+        _txtCep = txtCep;
+        _txtBairro = txtBairro;
+        _cbbCidade = cbbCidade;
+        _txtEmail = txtEmail;
+        _btnSalvar = btnSalvar;
+        _btnNovo = btnNovo;
+        _btnExcluir = btnExcluir;
+        _btnLimpar = btnLimpar;
+        _txtCnpj = txtCnpj;
+        _txtInscrEst = txtInscrEst;
+        _txtObs = txtObs;
+        _cbbOperadora = cbbOperadora;
+        _txtDdd = txtDdd;
+        _txtTelefone = txtTelefone;
         setInputOff();
         loadCbbCidade();
         loadCbbOperadora();
@@ -439,5 +481,6 @@ public class TabFornecedorFXMLController implements GenericViewController, Initi
             }
         }
     }
+    
 
 }
