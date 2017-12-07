@@ -138,7 +138,7 @@ public class TabFuncionarioFXMLController implements GenericViewController, Init
     //---
     private String erros;
     private boolean flagButtons;
-    FuncionarioController controller = new FuncionarioController();
+    
 
     /**
      * Initializes the controller class.
@@ -159,7 +159,7 @@ public class TabFuncionarioFXMLController implements GenericViewController, Init
 
     @FXML
     private void onSelectCidade(ActionEvent event) {
-        controller.setCidade(cbbCidade.getSelectionModel().getSelectedItem());
+        FuncionarioController.getInstance().setCidade(cbbCidade.getSelectionModel().getSelectedItem());
     }
 
     @FXML
@@ -175,15 +175,15 @@ public class TabFuncionarioFXMLController implements GenericViewController, Init
         getData();
         getDataUser();
         if (validateUser() && validateFields()) {
-            controller.setUsuario(IdUsu, login, senha, controller.getNivel(), true);
-            controller.setFuncionario(IdFunc, nome, controller.getSexo(), dataNas, endereco, bairro, numero, complemento, cep, controller.getCidade(), cpf, rg, email, controller.getListaTelefone(), flagButtons, ctps, salIni, salAtual, vrDia, vtDia, dataAdmi, dataDemi, controller.getUsuario());
-            if (controller.getFuncionario().getIdPessoa() == 0l) {
-                controller.inserUsuario();
-                controller.insert();
+            FuncionarioController.getInstance().setUsuario(IdUsu, login, senha, FuncionarioController.getInstance().getNivel(), true);
+            FuncionarioController.getInstance().setFuncionario(IdFunc, nome, FuncionarioController.getInstance().getSexo(), dataNas, endereco, bairro, numero, complemento, cep, FuncionarioController.getInstance().getCidade(), cpf, rg, email, FuncionarioController.getInstance().getListaTelefone(), flagButtons, ctps, salIni, salAtual, vrDia, vtDia, dataAdmi, dataDemi, FuncionarioController.getInstance().getUsuario());
+            if (FuncionarioController.getInstance().getFuncionario().getIdPessoa() == 0l) {
+                FuncionarioController.getInstance().inserUsuario();
+                FuncionarioController.getInstance().insert();
                 PoupUpUtil.poupUp("Funcionario Cadastrado", "O Funcionario foi cadastrado com sucesso.", "");
             } else {
-                controller.updateUsuario();
-                controller.update();
+                FuncionarioController.getInstance().updateUsuario();
+                FuncionarioController.getInstance().update();
                 PoupUpUtil.poupUp("Funcionario Alterado", "O Funcionario foi alterado com sucesso.", "");
             }
             //loadTbv();
@@ -220,8 +220,8 @@ public class TabFuncionarioFXMLController implements GenericViewController, Init
     private void onAdicionar(ActionEvent event) {
         getDataTelefone();
         if (validateTeleofne()) {
-            controller.setTelefone(0l, ddd, telefone);
-            controller.inserTelefone();
+            FuncionarioController.getInstance().setTelefone(0l, ddd, telefone);
+            FuncionarioController.getInstance().inserTelefone();
         } else {
             PoupUpUtil.accessDenied(erros);
             erros = "";
@@ -413,7 +413,7 @@ public class TabFuncionarioFXMLController implements GenericViewController, Init
 
     @Override
     public void getData() {
-        IdFunc = (controller.getFuncionario().getIdPessoa() != 0l) ? controller.getFuncionario().getIdPessoa() : 0l;
+        IdFunc = (FuncionarioController.getInstance().getFuncionario().getIdPessoa() != 0l) ? FuncionarioController.getInstance().getFuncionario().getIdPessoa() : 0l;
         nome = txtNome.getText();
         dataNas = dtpDataNas.getValue();
         endereco = txtEndereco.getText();
@@ -431,23 +431,23 @@ public class TabFuncionarioFXMLController implements GenericViewController, Init
         salAtual = new BigDecimal(txtsalarioF.getText());
         vtDia = new BigDecimal(txtValeT.getText());
         vrDia = new BigDecimal(txtValeR.getText());
-        controller.setSexo(cbbSexo.getSelectionModel().getSelectedItem());
-        controller.setCidade(cbbCidade.getSelectionModel().getSelectedItem());
+        FuncionarioController.getInstance().setSexo(cbbSexo.getSelectionModel().getSelectedItem());
+        FuncionarioController.getInstance().setCidade(cbbCidade.getSelectionModel().getSelectedItem());
 
-        controller.setOperadora(cbbOperadora.getSelectionModel().getSelectedItem());
+        FuncionarioController.getInstance().setOperadora(cbbOperadora.getSelectionModel().getSelectedItem());
     }
 
     private void getDataTelefone() {
         telefone = txtNumeroTelefone.getText();
         ddd = txtDdd.getText();
-        controller.setOperadora(cbbOperadora.getSelectionModel().getSelectedItem());
+        FuncionarioController.getInstance().setOperadora(cbbOperadora.getSelectionModel().getSelectedItem());
     }
 
     private void getDataUser() {
-        IdUsu = (controller.getUsuario().getId() != 0l) ? controller.getUsuario().getId() : 0l;
+        IdUsu = (FuncionarioController.getInstance().getUsuario().getId() != 0l) ? FuncionarioController.getInstance().getUsuario().getId() : 0l;
         login = txtLogin.getText();
         senha = txtSenha.getText();
-        controller.setNivel(ccbNIvel.getSelectionModel().getSelectedItem());
+        FuncionarioController.getInstance().setNivel(ccbNIvel.getSelectionModel().getSelectedItem());
     }
 
     @Override
@@ -460,7 +460,7 @@ public class TabFuncionarioFXMLController implements GenericViewController, Init
     }
 
     private void loadCbbCidade() {
-        cbbCidade.getItems().addAll(controller.getListaCidade());
+        cbbCidade.getItems().addAll(FuncionarioController.getInstance().getListaCidade());
     }
 
     private void loadCbbUsuNivel() {

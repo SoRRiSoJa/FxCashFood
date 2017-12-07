@@ -5,7 +5,6 @@
  */
 package com.cashf.controller.cliente;
 
-import com.cashf.controller.cliente.ClienteController;
 import com.cashf.model.cliente.Cliente;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXRadioButton;

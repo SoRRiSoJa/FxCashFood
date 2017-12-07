@@ -16,8 +16,8 @@
                     </content>
                 </Tab>
                 <Tab fx:id="tabListaFuncionarios" text="Lista Funcionarios">
-                    <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                   <content>
+                        <fx:include source="TabListaFuncionariosFXML.fxml" />
                     </content>
                 </Tab>
             </tabs>

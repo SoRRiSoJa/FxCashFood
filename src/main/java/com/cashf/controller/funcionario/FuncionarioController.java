@@ -30,7 +30,7 @@ import util.SafePass;
  * @author Aluno
  */
 public class FuncionarioController implements GenericController<Funcionario> {
-
+    public static FuncionarioController funcionarioController=null;
     private final FuncionarioDAO funcionarioDAO;
     private final UsuarioDAO usuarioDAO;
     private Funcionario funcionario;
@@ -47,7 +47,7 @@ public class FuncionarioController implements GenericController<Funcionario> {
     private UNivel nivel;
     private Usuario usuario;
 
-    public FuncionarioController() {
+    private FuncionarioController() {
         this.funcionarioDAO = new FuncionarioDAO(Funcionario.class);
         this.usuario = new Usuario();
         this.usuarioDAO = new UsuarioDAO(Usuario.class);
@@ -64,6 +64,12 @@ public class FuncionarioController implements GenericController<Funcionario> {
         funcionario.setIdPessoa(0l);
         this.usuario=new Usuario();
         usuario.setId(0l);
+    }
+    public static synchronized FuncionarioController getInstance() {
+        if (funcionarioController == null) {
+            funcionarioController = new FuncionarioController();
+        }
+        return funcionarioController;
     }
 
     public Funcionario getFuncionario() {

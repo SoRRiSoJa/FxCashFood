@@ -33,7 +33,6 @@ util/PoupUpUtil.class
 com/cashf/model/produto/TipoProduto.class
 com/cashf/dao/cidade/CidadeDAO.class
 com/cashf/controller/fornecedor/TabFornecedorFXMLController.class
-com/cashf/controller/funcionario/GerenciarFuncionariosFXMLController.class
 com/cashf/controller/funcionario/TabFuncionarioFXMLController.class
 com/cashf/dao/banco/BancoDAO.class
 com/cashf/model/cliente/Cliente.class
@@ -63,6 +62,7 @@ com/cashf/controller/cliente/TabClientesFXMLController$1.class
 com/cashf/cashfood/FXMLController.class
 com/cashf/model/funcionario/Funcionario.class
 dao/GenericDAOIMP.class
+com/cashf/controller/funcionario/TabListaFuncionariosFXMLController.class
 com/cashf/model/fornecedor/Fornecedor.class
 com/cashf/controller/produto/GerenciarGruposFXMLController$ButtonCellDelete.class
 com/cashf/model/banco/Banco.class
