@@ -5,7 +5,6 @@
  */
 package com.cahsf.controller.fornecedor;
 
-import com.cahsf.controller.fornecedor.FornecedorController;
 import com.cashf.model.fornecedor.Fornecedor;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXRadioButton;
@@ -63,7 +62,7 @@ public class TabListaFornecedoresFXMLController implements Initializable {
     if (tbvFornecedores.getSelectionModel().getSelectedItem() != null) {
             FornecedorController.getInstance().setFornecedor(tbvFornecedores.getSelectionModel().getSelectedItem());
             FornecedorController.getInstance().setListaTelefone(FXCollections.observableList(FornecedorController.getInstance().getFornecedor().getTelefones()));
-            //loadDataToScreen();
+            TabFornecedorFXMLController.LDTS();
             //loadTbvTelefone();
             //getData();
         }

@@ -395,6 +395,20 @@ public class TabFornecedorFXMLController implements GenericViewController, Initi
     public void loadDataToScreen() {
 
     }
+    public static void LDTS() {
+        _txtNome.setText(FornecedorController.getInstance().getFornecedor().getNomefantasia());
+        _txtRazao.setText(FornecedorController.getInstance().getFornecedor().getRazaoSocial());
+        _txtEndereco.setText(FornecedorController.getInstance().getFornecedor().getEndereco());
+        _txtComplemento.setText(FornecedorController.getInstance().getFornecedor().getComplemento());
+        _txtNumero.setText(FornecedorController.getInstance().getFornecedor().getNumero()+"");
+        _txtBairro.setText(FornecedorController.getInstance().getFornecedor().getBairro());
+        _txtCep.setText(FornecedorController.getInstance().getFornecedor().getCep());
+        _txtCnpj.setText(FornecedorController.getInstance().getFornecedor().getCnpj());
+        _txtEmail.setText(FornecedorController.getInstance().getFornecedor().getEmail());
+        _txtInscrEst.setText(FornecedorController.getInstance().getFornecedor().getInscrEst());
+        _txtObs.setText(FornecedorController.getInstance().getFornecedor().getObservacao());
+        _cbbCidade.setValue(FornecedorController.getInstance().getFornecedor().getCidade());
+    }
 
     private void setUptableViewTelefone() {
         tbcDdd.setCellValueFactory(new PropertyValueFactory<>("ddd"));
