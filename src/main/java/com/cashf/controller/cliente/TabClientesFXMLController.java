@@ -20,6 +20,7 @@ import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Optional;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -114,6 +115,32 @@ public class TabClientesFXMLController implements GenericViewController, Initial
     private String ddd;
     private String erros;
     private boolean flagButtons;
+    //--
+    private static JFXTextField _txtObservacao;
+    private static JFXComboBox<Operadora> _cbbOperadora;
+    private static JFXTextField _txtDdd;
+    private static JFXTextField _txtNumeroTelefone;
+    private static JFXButton _btnAdicionar;
+    private static TableView<Telefone> _tbvTelefones;
+    private static TableColumn<Telefone, String> _tbcDDD;
+    private static TableColumn<Telefone, String> _tbcTelefone;
+    private static TableColumn _btnDeletar;
+    private static JFXTextField _txtNome;
+    private static JFXComboBox<Sexo> _cbbSexo;
+    private static JFXDatePicker _dtpDataNas;
+    private static JFXTextField _txtEndereco;
+    private static JFXTextField _txtNumero;
+    private static JFXTextField _txtComplemento;
+    private static JFXTextField _txtCep;
+    private static JFXTextField _txtBairro;
+    private static JFXComboBox<Cidade> _cbbCidade;
+    private static JFXTextField _txtEmail;
+    private static JFXTextField _txtRg;
+    private static JFXTextField _txtCpf;
+    private static JFXButton _btnSalvar;
+    private static JFXButton _btnNovo;
+    private static JFXButton _btnExcluir;
+    private static JFXButton _btnLimpar;
 
     /**
      * Initializes the controller class.
@@ -121,6 +148,23 @@ public class TabClientesFXMLController implements GenericViewController, Initial
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        _txtNome=txtNome; 
+        _cbbSexo=cbbSexo;
+        _dtpDataNas=dtpDataNas; 
+        _txtEndereco =txtEndereco;
+        _txtNumero =txtNumero;
+        _txtComplemento =txtComplemento;
+        _txtCep =txtCep;
+        _txtBairro= txtBairro;
+        _cbbCidade=cbbCidade;
+        _txtEmail= txtEmail;
+        _txtRg =txtRg;
+        _txtCpf =txtCpf;
+        _cbbOperadora=cbbOperadora;
+        _txtDdd =txtDdd;
+        _txtNumeroTelefone =txtNumeroTelefone;
+        _cbbCidade=cbbCidade;
+        _cbbOperadora=cbbOperadora;
         setInputOff();
         loadCbbOperadora();
         loadCbbCidade();
@@ -281,6 +325,7 @@ public class TabClientesFXMLController implements GenericViewController, Initial
         txtCpf.setDisable(false);
         cbbOperadora.setDisable(false);
         txtDdd.setDisable(false);
+
         txtNumeroTelefone.setDisable(false);
         cbbCidade.setDisable(false);
         cbbOperadora.setDisable(false);
@@ -364,6 +409,27 @@ public class TabClientesFXMLController implements GenericViewController, Initial
     @Override
     public void loadDataToScreen() {
 
+    }
+
+    public static void LDTS() {
+        _txtNome.setText(ClienteController.getInstance().getCliente().getNome());
+        _cbbSexo.setValue(ClienteController.getInstance().getCliente().getSexo());
+        _dtpDataNas.setValue(ClienteController.getInstance().getCliente().getDataNas());
+        _txtEndereco.setText(ClienteController.getInstance().getCliente().getEndereco());
+        _txtNumero.setText(ClienteController.getInstance().getCliente().getNumero()+"");
+        _txtComplemento.setText(ClienteController.getInstance().getCliente().getComplemento());
+        _txtCep.setText(ClienteController.getInstance().getCliente().getCep());
+        _txtBairro.setText(ClienteController.getInstance().getCliente().getBairro());
+        _cbbCidade.setValue(ClienteController.getInstance().getCliente().getCidade());
+        _txtEmail.setText(ClienteController.getInstance().getCliente().getEmail());
+        _txtRg.setText(ClienteController.getInstance().getCliente().getRg());
+        _txtCpf.setText(ClienteController.getInstance().getCliente().getCpf());
+        //_cbbOperadora.setValue(ClienteController.getInstance().getCliente());
+        //_txtDdd.setText(ClienteController.getInstance().getCliente());
+        //_txtNumeroTelefone.setText(ClienteController.getInstance().getCliente());
+    }
+    public static void LDTSFone() {
+        _tbvTelefones.setItems(ClienteController.getInstance().getListaTelefone());
     }
 
     private void loadTbvTelefone() {

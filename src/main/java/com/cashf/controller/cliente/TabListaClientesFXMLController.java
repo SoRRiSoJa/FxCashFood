@@ -54,7 +54,7 @@ public class TabListaClientesFXMLController implements Initializable {
         // TODO
         setUptableView();
         loadTbv();
-    }    
+    }
 
     @FXML
     private void onPesquisar(ActionEvent event) {
@@ -62,15 +62,20 @@ public class TabListaClientesFXMLController implements Initializable {
 
     @FXML
     private void onMouseClickedCliente(MouseEvent event) {
-        ClienteController.getInstance().setCliente(tbvClientes.getSelectionModel().getSelectedItem());
-        ClienteController.getInstance().setListaTelefone(FXCollections.observableList(ClienteController.getInstance().getCliente().getTelefones()));
-        //TabClienteFXMLController.LDTS();
+        if (tbvClientes.getSelectionModel().getSelectedItem() != null) {
+            ClienteController.getInstance().setCliente(tbvClientes.getSelectionModel().getSelectedItem());
+            ClienteController.getInstance().setListaTelefone(FXCollections.observableList(ClienteController.getInstance().getCliente().getTelefones()));
+            TabClientesFXMLController.LDTS();
+            TabClientesFXMLController.LDTSFone();
+        }
+
     }
-     private void setUptableView() {
+
+    private void setUptableView() {
         tbcNome.setCellValueFactory(new PropertyValueFactory<>("nome"));
         tbcEndereco.setCellValueFactory(new PropertyValueFactory<>("endereco"));
         tbcEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
-        tbvClientes.getColumns().setAll(tbcNome,tbcEndereco ,tbcEmail);
+        tbvClientes.getColumns().setAll(tbcNome, tbcEndereco, tbcEmail);
     }
 
     private void loadTbv() {
