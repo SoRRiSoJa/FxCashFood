@@ -5,8 +5,6 @@
  */
 package com.cashf.controller.fornecedor;
 
-import com.cashf.controller.fornecedor.FornecedorController;
-import com.cashf.controller.fornecedor.TabFornecedorFXMLController;
 import com.cashf.model.fornecedor.Fornecedor;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXRadioButton;
