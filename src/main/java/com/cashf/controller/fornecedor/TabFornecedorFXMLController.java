@@ -15,6 +15,7 @@ import com.jfoenix.controls.JFXTextField;
 import com.sun.prism.impl.Disposer;
 import controller.GenericViewController;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -38,6 +39,7 @@ import javafx.util.Callback;
 import javafx.util.Duration;
 import org.controlsfx.control.Notifications;
 import util.PoupUpUtil;
+import util.TextFieldFormatter;
 
 /**
  * FXML Controller class
@@ -168,14 +170,19 @@ public class TabFornecedorFXMLController implements GenericViewController, Initi
         setInputOff();
         loadCbbCidade();
         loadCbbOperadora();
-
         setUptableViewTelefone();
-
         loadTbvTelefone();
+        _dtpDataCad.setValue(LocalDate.now());
+        _dtpDataCad.setDisable(true);
     }
 
     @FXML
     private void onKeyReleasedCep(KeyEvent event) {
+        TextFieldFormatter tff = new TextFieldFormatter();
+        tff.setMask("#####-###");
+        tff.setCaracteresValidos("0123456789");
+        tff.setTf(txtCep);
+        tff.formatter();
     }
 
     @FXML
@@ -395,12 +402,13 @@ public class TabFornecedorFXMLController implements GenericViewController, Initi
     public void loadDataToScreen() {
 
     }
+
     public static void LDTS() {
         _txtNome.setText(FornecedorController.getInstance().getFornecedor().getNomefantasia());
         _txtRazao.setText(FornecedorController.getInstance().getFornecedor().getRazaoSocial());
         _txtEndereco.setText(FornecedorController.getInstance().getFornecedor().getEndereco());
         _txtComplemento.setText(FornecedorController.getInstance().getFornecedor().getComplemento());
-        _txtNumero.setText(FornecedorController.getInstance().getFornecedor().getNumero()+"");
+        _txtNumero.setText(FornecedorController.getInstance().getFornecedor().getNumero() + "");
         _txtBairro.setText(FornecedorController.getInstance().getFornecedor().getBairro());
         _txtCep.setText(FornecedorController.getInstance().getFornecedor().getCep());
         _txtCnpj.setText(FornecedorController.getInstance().getFornecedor().getCnpj());
@@ -433,6 +441,15 @@ public class TabFornecedorFXMLController implements GenericViewController, Initi
 
     private void loadTbvTelefone() {
         tbvTelefone.setItems(FornecedorController.getInstance().getListaTelefone());
+    }
+
+    @FXML
+    private void onKeyReleasedCnpj(KeyEvent event) {
+        TextFieldFormatter tff = new TextFieldFormatter();
+        tff.setMask("##.###.###/####-##");
+        tff.setCaracteresValidos("0123456789");
+        tff.setTf(txtCnpj);
+        tff.formatter();
     }
 
     public class ButtonCellDelete extends TableCell<Disposer.Record, Boolean> {
@@ -495,6 +512,5 @@ public class TabFornecedorFXMLController implements GenericViewController, Initi
             }
         }
     }
-    
 
 }

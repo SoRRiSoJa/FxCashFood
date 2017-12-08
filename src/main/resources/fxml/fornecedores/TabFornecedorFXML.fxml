@@ -85,7 +85,7 @@
             <DropShadow />
          </effect>
          <children>
-            <JFXTextField fx:id="txtCnpj" focusColor="#004ba0" labelFloat="true" layoutX="16.0" layoutY="16.0" prefHeight="26.0" prefWidth="220.0" promptText="CNPJ" />
+            <JFXTextField fx:id="txtCnpj" focusColor="#004ba0" labelFloat="true" layoutX="16.0" layoutY="16.0" onKeyReleased="#onKeyReleasedCnpj" prefHeight="26.0" prefWidth="220.0" promptText="CNPJ" />
             <JFXTextField fx:id="txtInscrEst" focusColor="#004ba0" layoutX="395.0" layoutY="16.0" prefHeight="26.0" prefWidth="220.0" promptText="Inscrição estadual" />
             <JFXTextField fx:id="txtObs" focusColor="#004ba0" labelFloat="true" layoutX="16.0" layoutY="96.0" prefHeight="24.0" prefWidth="600.0" promptText="Observação" />
             <Pane fx:id="panePhone" layoutX="30.0" layoutY="174.0" prefHeight="156.0" prefWidth="580.0" style="-fx-background-color: #ffffff;">

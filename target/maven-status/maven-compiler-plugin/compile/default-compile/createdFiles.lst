@@ -1,4 +1,5 @@
 com/cashf/controller/produto/GerenciarGruposFXMLController$1.class
+util/BDInsert.class
 com/cashf/dao/produto/GrupoDAO.class
 com/cashf/model/pessoa/Pessoa.class
 com/cashf/dao/contacorrente/ContaCorrenteDAO.class
@@ -29,6 +30,7 @@ com/cashf/model/contacorrente/ContaCorrente_.class
 com/cashf/controller/fornecedor/TabFornecedorFXMLController$ButtonCellDelete$1.class
 com/cashf/dao/produto/ProdutoDAO.class
 com/cashf/controller/cliente/TabListaClientesFXMLController.class
+util/TextFieldFormatter.class
 util/PoupUpUtil.class
 com/cashf/model/produto/TipoProduto.class
 com/cashf/dao/cidade/CidadeDAO.class

@@ -311,14 +311,6 @@ public class TabClientesFXMLController implements GenericViewController, Initial
             erros += "O email deve ser preenchido corretamente! \n";
             flag = false;
         }
-        if (cpf == null || cpf.equals("") || cpf.length() < 12) {
-            erros += "O CPF deve ser preenchido corretamente! \n";
-            flag = false;
-        }
-        if (rg == null || rg.equals("") || rg.length() < 3) {
-            erros += "A inscrição estadual deve ser preenchida corretamente! \n";
-            flag = false;
-        }
 
         if (cbbCidade.getSelectionModel().getSelectedItem() == null) {
             erros += "Você deve selecionar uma Cidade! \n";
