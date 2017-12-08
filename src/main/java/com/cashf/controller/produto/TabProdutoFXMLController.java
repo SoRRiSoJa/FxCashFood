@@ -21,7 +21,9 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.input.KeyEvent;
 import util.PoupUpUtil;
+import util.TextFieldFormatter;
 
 /**
  * FXML Controller class
@@ -144,6 +146,7 @@ public class TabProdutoFXMLController implements GenericViewController, Initiali
     private static JFXButton _btnNovo;
     private static JFXButton _btnExcluir;
     private static JFXButton _btnLimpar;
+
     /**
      * Initializes the controller class.
      */
@@ -175,10 +178,10 @@ public class TabProdutoFXMLController implements GenericViewController, Initiali
         _txtAliquotaMunicipal = txtAliquotaMunicipal;
         _txtAliquotaEstadual = txtAliquotaEstadual;
         _txtAliquotaFederal = txtAliquotaFederal;
-        _btnSalvar=btnSalvar;
-        _btnExcluir=btnExcluir;
-        _btnLimpar=btnLimpar;
-        _btnNovo=btnNovo;
+        _btnSalvar = btnSalvar;
+        _btnExcluir = btnExcluir;
+        _btnLimpar = btnLimpar;
+        _btnNovo = btnNovo;
         setInputOff();
         loadCbbGrupos();
         loadCbbSituacaoTributaria();
@@ -352,13 +355,11 @@ public class TabProdutoFXMLController implements GenericViewController, Initiali
             erros += "informe a quantidade da embalagem! \n";
             flag = false;
         }
-        if (qtdeProduto <= 0) {
+        if (qtdeProduto < 0) {
             erros += "informe a quantidade em estoque! \n";
             flag = false;
         }
-        if (ncm == null || ncm.equals("")) {
-            ncm = "N/D";
-        }
+        
         if (preco_custo == null || preco_custo.compareTo(BigDecimal.ZERO) <= 0) {
             erros += "O preço de custo deve ser maio que 0! \n";
             flag = false;
@@ -492,8 +493,9 @@ public class TabProdutoFXMLController implements GenericViewController, Initiali
         txtAliquotaEstadual.setText(ProdutoController.getInstance().getProduto().getAliquotasProduto().getAliquotaestadual() + "");
         txtAliquotaFederal.setText(ProdutoController.getInstance().getProduto().getAliquotasProduto().getAliquotafederal() + "");
     }
-    public static void ldts(){
-    _txtDescricao.setText(ProdutoController.getInstance().getProduto().getDescriao());
+
+    public static void ldts() {
+        _txtDescricao.setText(ProdutoController.getInstance().getProduto().getDescriao());
         _cbbUnidadeFisica.setValue(ProdutoController.getInstance().getProduto().getUnidadeMedida());
         _cbbGrupo.setValue(ProdutoController.getInstance().getProduto().getGrupo());
         _cbbProdutos.setValue(ProdutoController.getInstance().getProduto().getTipo());
@@ -536,6 +538,123 @@ public class TabProdutoFXMLController implements GenericViewController, Initiali
 
     private void loadCbbUnidadeFisica() {
         cbbUnidadeFisica.getItems().addAll(Arrays.asList(UnidadeMedida.values()));
+    }
+
+    @FXML
+    private void onKeyReleasedPrecoCusto(KeyEvent event) {
+        TextFieldFormatter tff = new TextFieldFormatter();
+        tff.setMask("###.##");
+        tff.setCaracteresValidos("0123456789");
+        tff.setTf(txtPrecoCusto);
+        tff.formatter();
+    }
+
+    @FXML
+    private void onKeyReleasedPrecoVenda(KeyEvent event) {
+        TextFieldFormatter tff = new TextFieldFormatter();
+        tff.setMask("###.##");
+        tff.setCaracteresValidos("0123456789");
+        tff.setTf(txtPrecoVenda);
+        tff.formatter();
+    }
+
+    @FXML
+    private void onKeyReleasedPisPercent(KeyEvent event) {
+        TextFieldFormatter tff = new TextFieldFormatter();
+        tff.setMask("##.###");
+        tff.setCaracteresValidos("0123456789");
+        tff.setTf(txtPercentualPIS);
+        tff.formatter();
+    }
+
+    @FXML
+    private void onKeyReleasedconfisnPercent(KeyEvent event) {
+        TextFieldFormatter tff = new TextFieldFormatter();
+        tff.setMask("##.###");
+        tff.setCaracteresValidos("0123456789");
+        tff.setTf(txtPercentualConfins);
+        tff.formatter();
+    }
+
+    @FXML
+    private void onKeyReleasedCFOP(KeyEvent event) {
+        TextFieldFormatter tff = new TextFieldFormatter();
+        tff.setMask("##.###");
+        tff.setCaracteresValidos("0123456789");
+        tff.setTf(txtCfop);
+        tff.formatter();
+    }
+
+    @FXML
+    private void onKeyReleasedCstConfins(KeyEvent event) {
+        TextFieldFormatter tff = new TextFieldFormatter();
+        tff.setMask("##.###");
+        tff.setCaracteresValidos("0123456789");
+        tff.setTf(txtCstConfins);
+        tff.formatter();
+    }
+
+    @FXML
+    private void onKeyReleasedALCsosn(KeyEvent event) {
+        TextFieldFormatter tff = new TextFieldFormatter();
+        tff.setMask("##.###");
+        tff.setCaracteresValidos("0123456789");
+        tff.setTf(txtAliquotaCSOCN);
+        tff.formatter();
+    }
+
+    @FXML
+    private void onKeyReleasedCest(KeyEvent event) {
+        TextFieldFormatter tff = new TextFieldFormatter();
+        tff.setMask("##.###");
+        tff.setCaracteresValidos("0123456789");
+        tff.setTf(txtCest);
+        tff.formatter();
+    }
+
+    @FXML
+    private void onKeyReleasedALIcms(KeyEvent event) {
+        TextFieldFormatter tff = new TextFieldFormatter();
+        tff.setMask("##.###");
+        tff.setCaracteresValidos("0123456789");
+        tff.setTf(txtAliquotaICMS);
+        tff.formatter();
+    }
+
+    @FXML
+    private void onKeyReleasedCsosn(KeyEvent event) {
+        TextFieldFormatter tff = new TextFieldFormatter();
+        tff.setMask("##.###");
+        tff.setCaracteresValidos("0123456789");
+        tff.setTf(txtCSOSN);
+        tff.formatter();
+    }
+
+    @FXML
+    private void onKeyReleasedALMunicipal(KeyEvent event) {
+        TextFieldFormatter tff = new TextFieldFormatter();
+        tff.setMask("##.###");
+        tff.setCaracteresValidos("0123456789");
+        tff.setTf(txtAliquotaMunicipal);
+        tff.formatter();
+    }
+
+    @FXML
+    private void onKeyReleasedALEstadual(KeyEvent event) {
+        TextFieldFormatter tff = new TextFieldFormatter();
+        tff.setMask("##.###");
+        tff.setCaracteresValidos("0123456789");
+        tff.setTf(txtAliquotaEstadual);
+        tff.formatter();
+    }
+
+    @FXML
+    private void onKeyReleasedAlFederal(KeyEvent event) {
+        TextFieldFormatter tff = new TextFieldFormatter();
+        tff.setMask("##.###");
+        tff.setCaracteresValidos("0123456789");
+        tff.setTf(txtAliquotaFederal);
+        tff.formatter();
     }
 
 }
