@@ -28,6 +28,14 @@ public class Estado implements Serializable {
     @NotEmpty
     private String nome;
 
+    public Estado() {
+    }
+
+    public Estado(String uf, String nome) {
+        this.uf = uf;
+        this.nome = nome;
+    }
+
     public String getUf() {
         return uf;
     }
