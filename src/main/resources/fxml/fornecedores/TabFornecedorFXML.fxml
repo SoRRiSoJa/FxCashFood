@@ -99,8 +99,8 @@
                      </children>
                   </Pane>
                   <JFXComboBox fx:id="cbbOperadora" focusColor="#004ba0" labelFloat="true" layoutX="14.0" layoutY="34.0" prefHeight="26.0" prefWidth="100.0" promptText="Operadora" />
-                  <JFXTextField fx:id="txtDdd" labelFloat="true" layoutX="14.0" layoutY="76.0" prefHeight="24.0" prefWidth="100.0" promptText="DDD" />
-                  <JFXTextField fx:id="txtTelefone" focusColor="#004ba0" labelFloat="true" layoutX="133.0" layoutY="76.0" prefHeight="24.0" prefWidth="140.0" promptText="Nº TELEFONE" />
+                  <JFXTextField fx:id="txtDdd" labelFloat="true" layoutX="14.0" layoutY="76.0" onKeyReleased="#onKeyreleasedDdd" prefHeight="24.0" prefWidth="100.0" promptText="DDD" />
+                  <JFXTextField fx:id="txtTelefone" focusColor="#004ba0" labelFloat="true" layoutX="133.0" layoutY="76.0" onKeyReleased="#onKeyreleasedTelefone" prefHeight="24.0" prefWidth="140.0" promptText="Nº TELEFONE" />
                   <JFXButton fx:id="btnAdicionar" contentDisplay="GRAPHIC_ONLY" layoutX="16.0" layoutY="114.0" onAction="#onAdicionar" prefHeight="32.0" prefWidth="43.0" ripplerFill="WHITE" style="-fx-background-color: #2196f3;" textFill="WHITE">
                      <graphic>
                         <FontAwesomeIconView fill="WHITE" glyphName="PLUS" size="16" />

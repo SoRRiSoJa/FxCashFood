@@ -31,7 +31,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.util.Callback;
 import javafx.util.Duration;
-import jdk.nashorn.internal.runtime.ListAdapter;
 import org.controlsfx.control.Notifications;
 import util.PoupUpUtil;
 
@@ -105,6 +104,7 @@ public class GerenciarGruposFXMLController implements Initializable {
                 controller.insert();
                 clearFields();
                 PoupUpUtil.poupUp("Grupo Cadastrado", "O Grupo foi cadastrado com sucesso.", "");
+                loadCbbCategoria();
             } else {
                 controller.update();
                 PoupUpUtil.poupUp("Grupo Alterado", "O Grupo foi alterado com sucesso.", "");

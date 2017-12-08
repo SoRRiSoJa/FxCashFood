@@ -233,6 +233,7 @@ public class TabFornecedorFXMLController implements GenericViewController, Initi
 
     @FXML
     private void onLimpar(ActionEvent event) {
+        clearFields();
     }
 
     @FXML
@@ -449,6 +450,24 @@ public class TabFornecedorFXMLController implements GenericViewController, Initi
         tff.setMask("##.###.###/####-##");
         tff.setCaracteresValidos("0123456789");
         tff.setTf(txtCnpj);
+        tff.formatter();
+    }
+
+    @FXML
+    private void onKeyreleasedDdd(KeyEvent event) {
+        TextFieldFormatter tff = new TextFieldFormatter();
+        tff.setMask("(##)");
+        tff.setCaracteresValidos("0123456789");
+        tff.setTf(txtDdd);
+        tff.formatter();
+    }
+
+    @FXML
+    private void onKeyreleasedTelefone(KeyEvent event) {
+        TextFieldFormatter tff = new TextFieldFormatter();
+        tff.setMask("#####-#####");
+        tff.setCaracteresValidos("0123456789");
+        tff.setTf(txtTelefone);
         tff.formatter();
     }
 
