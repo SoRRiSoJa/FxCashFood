@@ -27,6 +27,15 @@ public class Banco implements Serializable{
     private Long idBanco;
     private String nome;
 
+    public Banco() {
+    }
+
+    public Banco(Long idBanco, String nome) {
+        this.idBanco = idBanco;
+        this.nome = nome;
+    }
+    
+
     public Long getId() {
         return idBanco;
     }
