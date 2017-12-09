@@ -5,6 +5,7 @@
  */
 package com.cashf.controller.funcionario;
 
+import com.cashf.controller.fornecedor.TabFornecedorFXMLController;
 import com.cashf.model.funcionario.Funcionario;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXRadioButton;
@@ -62,15 +63,18 @@ public class TabListaFuncionariosFXMLController implements Initializable {
 
     @FXML
     private void onMouseClickedCliente(MouseEvent event) {
-        FuncionarioController.getInstance().setFuncionario(tbvFuncionarios.getSelectionModel().getSelectedItem());
-        FuncionarioController.getInstance().setListaTelefone(FXCollections.observableList(FuncionarioController.getInstance().getFuncionario().getTelefones()));
+        if (tbvFuncionarios.getSelectionModel().getSelectedItem() != null) {
+            FuncionarioController.getInstance().setFuncionario(tbvFuncionarios.getSelectionModel().getSelectedItem());
+            FuncionarioController.getInstance().setListaTelefone(FXCollections.observableList(FuncionarioController.getInstance().getFuncionario().getTelefones()));
+            TabFornecedorFXMLController.LDTS();
+        }
     }
 
     private void setUptableView() {
         tbcNome.setCellValueFactory(new PropertyValueFactory<>("nome"));
         tbcEndereco.setCellValueFactory(new PropertyValueFactory<>("endereco"));
         tbcEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
-        tbvFuncionarios.getColumns().setAll(tbcNome,tbcEndereco ,tbcEmail);
+        tbvFuncionarios.getColumns().setAll(tbcNome, tbcEndereco, tbcEmail);
     }
 
     private void loadTbv() {

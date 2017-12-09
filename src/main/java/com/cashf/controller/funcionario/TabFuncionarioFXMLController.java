@@ -138,7 +138,41 @@ public class TabFuncionarioFXMLController implements GenericViewController, Init
     //---
     private String erros;
     private boolean flagButtons;
-    
+    //--
+    private static JFXTextField _txtNome;
+    private static JFXComboBox<Sexo> _cbbSexo;
+    private static JFXDatePicker _dtpDataNas;
+    private static JFXTextField _txtEndereco;
+    private static JFXTextField _txtNumero;
+    private static JFXTextField _txtComplemento;
+    private static JFXTextField _txtCep;
+    private static JFXTextField _txtBairro;
+    private static JFXComboBox<Cidade> _cbbCidade;
+    private static JFXTextField _txtEmail;
+    private static JFXTextField _txtRg;
+    private static JFXTextField _txtCpf;
+    private static JFXButton _btnSalvar;
+    private static JFXButton _btnNovo;
+    private static JFXButton _btnExcluir;
+    private static JFXButton _btnLimpar;
+    private static JFXDatePicker _dtpDataAdm;
+    private static JFXDatePicker _dtpDataDem;
+    private static JFXTextField _txtCtps;
+    private static JFXTextField _txtSalarioI;
+    private static JFXTextField _txtsalarioF;
+    private static JFXTextField _txtValeT;
+    private static JFXTextField _txtValeR;
+    private static JFXTextField _txtLogin;
+    private static JFXPasswordField _txtSenha;
+    private static JFXComboBox<UNivel> _ccbNIvel;
+    private static JFXComboBox<Operadora> _cbbOperadora;
+    private static JFXTextField _txtDdd;
+    private static JFXTextField _txtNumeroTelefone;
+    private static JFXButton _btnAdicionar;
+    private static TableView<Telefone> _tbvTelefone;
+    private static TableColumn<Telefone, String> _tbcDdd;
+    private static TableColumn<Telefone, String> _tbcTelefone;
+    private static TableColumn _btnDeletar;
 
     /**
      * Initializes the controller class.
@@ -146,6 +180,40 @@ public class TabFuncionarioFXMLController implements GenericViewController, Init
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        _txtNome = txtNome;
+        _cbbSexo = cbbSexo;
+        _dtpDataNas = dtpDataNas;
+        _txtEndereco = txtEndereco;
+        _txtNumero = txtNumero;
+        _txtComplemento = txtComplemento;
+        _txtCep = txtCep;
+        _txtBairro = txtBairro;
+        _cbbCidade = cbbCidade;
+        _txtEmail = txtEmail;
+        _txtRg = txtRg;
+        _txtCpf = txtCpf;
+        _btnSalvar = btnSalvar;
+        _btnNovo = btnNovo;
+        _btnExcluir = btnExcluir;
+        _btnLimpar = btnLimpar;
+        _dtpDataAdm = dtpDataAdm;
+        _dtpDataDem = dtpDataDem;
+        _txtCtps = txtCtps;
+        _txtSalarioI = txtSalarioI;
+        _txtsalarioF = txtsalarioF;
+        _txtValeT = txtValeT;
+        _txtValeR = txtValeR;
+        _txtLogin = txtLogin;
+        _txtSenha = txtSenha;
+        ccbNIvel = ccbNIvel;
+        _cbbOperadora = cbbOperadora;
+        _txtDdd = txtDdd;
+        _txtNumeroTelefone = txtNumeroTelefone;
+        _btnAdicionar = btnAdicionar;
+        _tbvTelefone = tbvTelefone;
+        _tbcDdd = tbcDdd;
+        _tbcTelefone = tbcTelefone;
+        _btnDeletar = btnDeletar;
         setInputOff();
         loadCbbOperadora();
         loadCbbCidade();
@@ -453,6 +521,24 @@ public class TabFuncionarioFXMLController implements GenericViewController, Init
     @Override
     public void loadDataToScreen() {
 
+    }
+
+    public static void LDTS() {
+        _txtNome.setText(FuncionarioController.getInstance().getFuncionario().getNome());
+        _cbbSexo.setValue(FuncionarioController.getInstance().getFuncionario().getSexo());
+        _dtpDataNas.setValue(FuncionarioController.getInstance().getFuncionario().getDataNas());
+        _txtEndereco.setText(FuncionarioController.getInstance().getFuncionario().getEndereco());
+        _txtNumero.setText(FuncionarioController.getInstance().getFuncionario().getNumero() + "");
+        _txtComplemento.setText(FuncionarioController.getInstance().getFuncionario().getComplemento());
+        _txtCep.setText(FuncionarioController.getInstance().getFuncionario().getCep());
+        _txtBairro.setText(FuncionarioController.getInstance().getFuncionario().getBairro());
+        _cbbCidade.setValue(FuncionarioController.getInstance().getFuncionario().getCidade());
+        _txtEmail.setText(FuncionarioController.getInstance().getFuncionario().getEmail());
+        _txtRg.setText(FuncionarioController.getInstance().getFuncionario().getRg());
+        _txtCpf.setText(FuncionarioController.getInstance().getFuncionario().getCpf());
+        //_cbbOperadora.setValue(FuncionarioController.getInstance().getFuncionario());
+        //_txtDdd.setText(FuncionarioController.getInstance().getFuncionario());
+        //_txtNumeroTelefone.setText(FuncionarioController.getInstance().getFuncionario());
     }
 
     private void loadCbbOperadora() {
