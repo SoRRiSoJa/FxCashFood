@@ -55,7 +55,7 @@ public class LoginController {
 
     public void setSenha(String senha) {
         this.senha = SafePass.crypPass(senha);
-        System.out.println("Nova Senha:"+this.senha);
+        System.out.println("Nova Senha:" + this.senha);
     }
 
     public int getLoginStatus() {
@@ -63,15 +63,20 @@ public class LoginController {
     }
 
     public void setLoginStatus() {
-        this.loginStatus=usuario.getNivel().ordinal();
+        this.loginStatus = usuario.getNivel().ordinal();
     }
 
     public boolean validateUser() {
         boolean flag = false;
-        usuario = usuarioDAO.findByLogin(login);
-        flag = (usuario.getLogin().isEmpty());
-        System.out.println(""+usuario.getLogin());
-        return !flag;
+        try {
+            usuario = usuarioDAO.findByLogin(login);
+            flag = (usuario != null);
+            System.out.println("" + usuario.getLogin());
+        } catch (Exception ex) {
+            System.out.println("Erro:" + ex);
+        }
+
+        return flag;
     }
 
     public boolean validatePassword() {
@@ -79,6 +84,5 @@ public class LoginController {
         flag = (usuario.getSenha().equalsIgnoreCase(senha));
         return flag;
     }
-    
 
 }

@@ -27,9 +27,10 @@ public class UsuarioDAO extends GenericDAOIMP<Usuario> {
             Query query = session.createQuery(hql);
             query.setParameter("userLogin", login);
             return (Usuario) query.getSingleResult();
-        } catch (HibernateException e) {
-
+        } catch (Exception e) {
+            System.out.println("Erro:" + e);
+            return null;
         }
-        return null;
+
     }
 }

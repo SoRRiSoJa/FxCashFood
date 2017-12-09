@@ -6,6 +6,7 @@
 package com.cashf.controller.cliente;
 
 import com.cashf.model.cliente.Cliente;
+import com.cashf.model.telefone.Telefone;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXTextField;
@@ -65,8 +66,13 @@ public class TabListaClientesFXMLController implements Initializable {
         if (tbvClientes.getSelectionModel().getSelectedItem() != null) {
             ClienteController.getInstance().setCliente(tbvClientes.getSelectionModel().getSelectedItem());
             ClienteController.getInstance().setListaTelefone(FXCollections.observableList(ClienteController.getInstance().getCliente().getTelefones()));
+            //for(Telefone tel :ClienteController.getInstance().getCliente().getTelefones()){
+           //    System.out.println("Telefone"+tel.getNumero());
+           // }
+                    
+            
             TabClientesFXMLController.LDTS();
-            TabClientesFXMLController.LDTSFone();
+            //TabClientesFXMLController.LDTSFone();
         }
 
     }

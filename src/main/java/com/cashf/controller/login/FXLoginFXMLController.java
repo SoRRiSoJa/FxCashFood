@@ -63,7 +63,7 @@ public class FXLoginFXMLController implements Initializable {
         LoginController.getInstance().setLogin(txtLogin.getText().trim());
         LoginController.getInstance().setSenha(txtSenha.getText().trim());
 
-        if (LoginController.getInstance().validateUser() == true) {//Validando Usuario
+        if (LoginController.getInstance().validateUser()) {//Validando Usuario
             if (LoginController.getInstance().validatePassword()) {//Validando Senha
                 StackPane menuPrincipal;
                 try {//Carregando Menu Principal
