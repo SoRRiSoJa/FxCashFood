@@ -5,6 +5,7 @@
  */
 package com.cashf.controller.parametrizacao;
 
+import com.cashf.dao.cidade.CidadeDAO;
 import com.cashf.dao.parametros.ParametrosDAO;
 import com.cashf.dao.usuario.UsuarioDAO;
 import com.cashf.model.cidade.Cidade;
@@ -24,19 +25,30 @@ public class ParametrosController implements GenericController<Parametros> {
     public static ParametrosController parametrosController = null;
     private final ParametrosDAO parametrosDAO;
     private final UsuarioDAO usuarioDAO;
+    private final CidadeDAO cidadeDAO;
     private ObservableList<Parametros> lista;
+    private ObservableList<Cidade> listaCidade;
+    private Cidade cidade;
     private Parametros parametro;
     private Usuario usuario;
-    
 
     private ParametrosController() {
         this.parametrosDAO = new ParametrosDAO(Parametros.class);
         this.usuarioDAO = new UsuarioDAO(Usuario.class);
+        this.cidadeDAO = new CidadeDAO(Cidade.class);
         this.lista = FXCollections.observableList(parametrosDAO.listAll());
         this.parametro = new Parametros();
         this.usuario = new Usuario();
         this.parametro.setIdParametro(0l);
         this.usuario.setId(0l);
+        this.cidade = new Cidade();
+    }
+
+    public static synchronized ParametrosController getInstance() {
+        if (parametrosController == null) {
+            parametrosController = new ParametrosController();
+        }
+        return parametrosController;
     }
 
     public Parametros getParametro() {
@@ -58,8 +70,25 @@ public class ParametrosController implements GenericController<Parametros> {
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
+
     public void setUsuario(Long id, String login, String senha, UNivel nivel, Boolean status) {
         this.usuario = new Usuario(id, login, senha, nivel, status);
+    }
+
+    public ObservableList<Cidade> getListaCidade() {
+        return listaCidade;
+    }
+
+    public void setListaCidade(ObservableList<Cidade> listaCidade) {
+        this.listaCidade = listaCidade;
+    }
+
+    public Cidade getCidade() {
+        return cidade;
+    }
+
+    public void setCidade(Cidade cidade) {
+        this.cidade = cidade;
     }
 
     @Override
