@@ -17,11 +17,15 @@ import java.util.List;
  */
 public class BDInsert {
 
-    public static List<Estado> estados = new ArrayList<>();
-    public static List<Cidade> cidades = new ArrayList<>();
-    public static List<Banco> bancos = new ArrayList<>();
+    private List<Estado> estados = new ArrayList<>();
+    private List<Cidade> cidades = new ArrayList<>();
+    private List<Banco> bancos = new ArrayList<>();
 
-    public void inserData() {
+    public BDInsert() {
+        this.estados = new ArrayList<>();
+        this.cidades = new ArrayList<>();
+        this.bancos = new ArrayList<>();
+
         estados.add(new Estado("AC", "Acre"));
         estados.add(new Estado("AL", "Alagoas"));
         estados.add(new Estado("AM", "Amazonas"));
@@ -111,6 +115,18 @@ public class BDInsert {
         bancos.add(new Banco(341l, "Itaú Unibanco"));
         bancos.add(new Banco(756l, "Banco Cooperativo do Brasil - BANCOOB"));
         bancos.add(new Banco(748l, "Banco Cooperativo Sicredi - BANSICREDI"));
+    }
+
+    public List<Estado> getEstados() {
+        return estados;
+    }
+
+    public List<Cidade> getCidades() {
+        return cidades;
+    }
+
+    public List<Banco> getBancos() {
+        return bancos;
     }
 
 }
