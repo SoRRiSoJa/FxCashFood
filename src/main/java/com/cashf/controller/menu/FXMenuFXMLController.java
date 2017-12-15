@@ -5,6 +5,7 @@
  */
 package com.cashf.controller.menu;
 
+import com.cashf.cashfood.MainApp;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXHamburger;
@@ -69,6 +70,7 @@ public class FXMenuFXMLController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        MainApp.paneRoot=rootSatackPane;
         rootAux=rootSatackPane;
         loadDrawer();
         burgerTask2 = new HamburgerNextArrowBasicTransition(jfxHamburguer);

@@ -1,3 +1,4 @@
+com/cashf/dao/ajusteestoque/AjusteEstoqueDAO.class
 com/cashf/controller/produto/GerenciarGruposFXMLController$1.class
 util/BDInsert.class
 com/cashf/dao/produto/GrupoDAO.class
@@ -11,6 +12,7 @@ dao/GenericDAO.class
 com/cashf/model/pessoa/Pessoa_.class
 com/cashf/controller/cliente/FXGerenciarClientesFXMLController.class
 com/cashf/model/estado/Estado.class
+com/cashf/model/ajusteestoque/AjusteEstoque_.class
 com/cashf/model/produto/Categoria.class
 com/cashf/controller/menu/FXMenuFXMLController.class
 util/SafePass.class
@@ -39,6 +41,7 @@ com/cashf/model/produto/TipoProduto.class
 com/cashf/dao/cidade/CidadeDAO.class
 com/cashf/controller/fornecedor/TabFornecedorFXMLController.class
 com/cashf/controller/funcionario/TabFuncionarioFXMLController.class
+com/cashf/model/ajusteestoque/AjusteEstoque.class
 com/cashf/dao/banco/BancoDAO.class
 com/cashf/model/cliente/Cliente.class
 com/cashf/controller/parametrizacao/ParametrosController.class
@@ -56,6 +59,7 @@ com/cashf/controller/funcionario/FuncionarioController.class
 controller/GenericController.class
 com/cashf/model/telefone/Operadora.class
 com/cashf/model/fornecedor/Fornecedor_.class
+com/cashf/model/ajusteestoque/TipoAjuste.class
 com/cashf/model/funcionario/Funcionario_.class
 com/cashf/controller/produto/TabProdutoFXMLController.class
 com/cashf/model/contacorrente/ContaCorrente.class
@@ -67,7 +71,6 @@ com/cashf/model/cidade/Cidade.class
 com/cashf/controller/fornecedor/FXGerenciarFornecedoresFXMLController.class
 controller/GenericViewController.class
 com/cashf/controller/cliente/TabClientesFXMLController$1.class
-com/cashf/cashfood/FXMLController.class
 com/cashf/model/funcionario/Funcionario.class
 dao/GenericDAOIMP.class
 com/cashf/controller/funcionario/TabListaFuncionariosFXMLController.class

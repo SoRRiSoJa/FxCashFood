@@ -5,13 +5,15 @@ import static javafx.application.Application.launch;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 
 public class MainApp extends Application {
-
+    public static StackPane paneRoot;
     @Override
     public void start(Stage stage) throws Exception {
+        
         Parent root = FXMLLoader.load(getClass().getResource("/fxml/login/FXLoginFXML.fxml"));
         Scene scene = new Scene(root);
         stage.setTitle("ERP - Cash Food v.1.0 Copyright (c) 2017 By João André Martins Dias e Silva");

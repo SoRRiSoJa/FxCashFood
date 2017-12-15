@@ -5,6 +5,7 @@
  */
 package com.cashf.controller.fornecedor;
 
+import com.cashf.cashfood.MainApp;
 import com.cashf.model.cidade.Cidade;
 import com.cashf.model.telefone.Operadora;
 import com.cashf.model.telefone.Telefone;
@@ -140,6 +141,8 @@ public class TabFornecedorFXMLController implements GenericViewController, Initi
     private static JFXTextField _txtDdd;
     private static JFXTextField _txtTelefone;
     private static JFXButton _btnAdicionar;
+    @FXML
+    private Pane paneRoot;
 
     /**
      * Initializes the controller class.
@@ -207,7 +210,7 @@ public class TabFornecedorFXMLController implements GenericViewController, Initi
             //loadTbv();
             clearFields();
         } else {
-            PoupUpUtil.accessDenied(erros);
+            PoupUpUtil.errorMessage(paneRoot, MainApp.paneRoot, erros);
             erros = "";
         }
 
