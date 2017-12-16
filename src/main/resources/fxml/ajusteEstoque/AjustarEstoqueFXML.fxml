@@ -81,7 +81,6 @@
                <font>
                   <Font name="System Bold" size="13.0" />
                </font></JFXTextField>
-            <Separator layoutX="350.0" layoutY="319.0" prefWidth="200.0" style="-fx-background-color: #000000;" />
             <JFXTextField fx:id="txtSaldo" editable="false" focusColor="#004ba0" labelFloat="true" layoutX="350.0" layoutY="338.0" prefHeight="24.0" prefWidth="200.0" promptText="Saldo de produtos">
                <font>
                   <Font name="System Bold" size="13.0" />
