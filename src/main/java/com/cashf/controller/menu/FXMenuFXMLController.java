@@ -63,6 +63,16 @@ public class FXMenuFXMLController implements Initializable {
     private Pane paneAux;
     private Pane paneAnt;
     private boolean flag = false;
+    @FXML
+    private JFXButton btnPrePreparo;
+    @FXML
+    private JFXButton btnAjustarEstoque;
+    @FXML
+    private JFXButton btnNaUm;
+    @FXML
+    private JFXButton btnNaDois;
+    @FXML
+    private JFXButton btnNATres;
 
     /**
      * Initializes the controller class.
@@ -232,6 +242,20 @@ public class FXMenuFXMLController implements Initializable {
         }
     }
     //---------------------------------------------
+    //------------------------
+    private void loadAjustarEstoque() {
+        try {
+            flag = true;
+            paneAnt = paneAux;
+            
+            paneAux = FXMLLoader.load(getClass().getResource("/fxml/ajusteEstoque/AjustarEstoqueFXML.fxml"));
+            paneBody.getChildren().remove(paneAnt);
+            paneBody.getChildren().add(paneAux);
+        } catch (IOException ex) {
+            System.out.println("Erro:" + ex);
+        }
+    }
+    //---------------------------------------------
 
     private void menuButtonsControl() {
         for (Node node : gavetas.getChildren()) {
@@ -326,6 +350,27 @@ public class FXMenuFXMLController implements Initializable {
 
     public static StackPane getRootAux() {
         return rootAux;
+    }
+
+    @FXML
+    private void onPrePreparo(ActionEvent event) {
+    }
+
+    @FXML
+    private void onAjustarEstoque(ActionEvent event) {
+        loadAjustarEstoque();
+    }
+
+    @FXML
+    private void onNa(ActionEvent event) {
+    }
+
+    @FXML
+    private void onNaDois(ActionEvent event) {
+    }
+
+    @FXML
+    private void OnNaTres(ActionEvent event) {
     }
 
 }

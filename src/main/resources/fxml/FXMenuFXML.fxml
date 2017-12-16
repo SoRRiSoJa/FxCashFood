@@ -4,6 +4,7 @@
 <?import com.jfoenix.controls.JFXDrawer?>
 <?import com.jfoenix.controls.JFXHamburger?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
@@ -51,7 +52,49 @@
                   </JFXButton>
                </children>
             </Pane>
-            <HBox fx:id="hBox" layoutY="70.0" prefHeight="58.0" prefWidth="1366.0" styleClass="hBox" />
+            <HBox fx:id="hBox" layoutY="70.0" prefHeight="58.0" prefWidth="1366.0" styleClass="hBox">
+               <children>
+                  <JFXButton fx:id="btnPrePreparo" contentDisplay="TOP" onAction="#onPrePreparo" prefHeight="58.0" prefWidth="273.0" ripplerFill="WHITE" style="-fx-background-color: #00b0ff;" text="Lançar Pré-Preparo" textFill="WHITE">
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                     <graphic>
+                        <FontAwesomeIconView fill="WHITE" glyphName="FILE_TEXT_ALT" size="24" />
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton fx:id="btnAjustarEstoque" contentDisplay="TOP" layoutX="10.0" layoutY="10.0" onAction="#onAjustarEstoque" prefHeight="58.0" prefWidth="273.0" ripplerFill="WHITE" style="-fx-background-color: #00b0ff;" text="Ajustar Estoque" textFill="WHITE">
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                     <graphic>
+                        <FontAwesomeIconView fill="WHITE" glyphName="BALANCE_SCALE" size="24" />
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton fx:id="btnNaUm" contentDisplay="TOP" layoutX="10.0" layoutY="10.0" onAction="#onNa" prefHeight="58.0" prefWidth="273.0" ripplerFill="WHITE" style="-fx-background-color: #00b0ff;" text="N/A" textFill="WHITE">
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                     <graphic>
+                        <FontAwesomeIconView fill="WHITE" glyphName="CUTLERY" size="24" />
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton fx:id="btnNaDois" contentDisplay="TOP" layoutX="283.0" layoutY="10.0" onAction="#onNaDois" prefHeight="58.0" prefWidth="273.0" ripplerFill="WHITE" style="-fx-background-color: #00b0ff;" text="N/A" textFill="WHITE">
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                     <graphic>
+                        <FontAwesomeIconView fill="WHITE" glyphName="COFFEE" size="24" />
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton fx:id="btnNATres" contentDisplay="TOP" layoutX="829.0" layoutY="10.0" onAction="#OnNaTres" prefHeight="58.0" prefWidth="273.0" ripplerFill="WHITE" style="-fx-background-color: #00b0ff;" text="N/A" textFill="WHITE">
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                     <graphic>
+                        <FontAwesomeIconView fill="WHITE" glyphName="CREDIT_CARD" size="24" />
+                     </graphic>
+                  </JFXButton>
+               </children></HBox>
             <Pane fx:id="paneBody" layoutY="128.0" prefHeight="572.0" prefWidth="1366.0" style="-fx-background-color: #ffffff;">
                <children>
                   <JFXDrawer fx:id="drawer" defaultDrawerSize="180.0" prefHeight="572.0" prefWidth="180.0" />

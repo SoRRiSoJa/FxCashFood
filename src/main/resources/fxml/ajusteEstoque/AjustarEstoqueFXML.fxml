@@ -15,6 +15,7 @@
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
 
 <Pane fx:id="paneRoot" layoutX="20.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="632.0" prefWidth="1366.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cashf.controller.ajusteestoque.AjustarEstoqueFXMLController">
    <children>
@@ -68,19 +69,25 @@
                   </JFXButton>
                </children>
             </HBox>
-            <JFXTextField fx:id="txtDescricao" focusColor="#004ba0" labelFloat="true" layoutX="90.0" layoutY="95.0" prefHeight="24.0" prefWidth="460.0" promptText="Descrição do Produto:" />
-            <JFXTextField fx:id="txtQtdeAjuste" focusColor="#004ba0" labelFloat="true" layoutX="350.0" layoutY="257.0" prefHeight="24.0" prefWidth="200.0" promptText="Qtde. Ajuste" />
-            <JFXComboBox fx:id="cbbTipoAjuste" focusColor="#004ba0" labelFloat="true" layoutX="90.0" layoutY="49.0" onMouseClicked="#onMouseClickedBanco" prefHeight="26.0" prefWidth="460.0" promptText="Tipo de Ajuste" />
+            <JFXTextField fx:id="txtDescricao" editable="false" focusColor="#004ba0" labelFloat="true" layoutX="90.0" layoutY="49.0" prefHeight="24.0" prefWidth="460.0" promptText="Descrição do Produto:" />
+            <JFXTextField fx:id="txtQtdeAjuste" focusColor="#eb0f03" labelFloat="true" layoutX="350.0" layoutY="263.0" prefHeight="24.0" prefWidth="200.0" promptText="Qtde. Ajuste" />
+            <JFXComboBox fx:id="cbbTipoAjuste" focusColor="#004ba0" labelFloat="true" layoutX="90.0" layoutY="95.0" onMouseClicked="#onMouseClickedTipo" prefHeight="26.0" prefWidth="460.0" promptText="Tipo de Ajuste" />
             <Pane prefHeight="20.0" prefWidth="640.0" style="-fx-background-color: #0081cb;">
                <children>
                   <Label layoutX="5.0" layoutY="2.0" text="Ajustar quantidade de produtos do estoque" textFill="WHITE" />
                </children>
             </Pane>
-            <JFXTextField fx:id="txtQtdeAtual" focusColor="#004ba0" labelFloat="true" layoutX="350.0" layoutY="210.0" prefHeight="24.0" prefWidth="200.0" promptText="Qtde. Atual" />
-            <Separator layoutX="350.0" layoutY="313.0" prefWidth="200.0" />
-            <JFXTextField fx:id="txtSaldo" focusColor="#004ba0" labelFloat="true" layoutX="350.0" layoutY="332.0" prefHeight="24.0" prefWidth="200.0" promptText="Saldo de produtos" />
-            <JFXDatePicker fx:id="dtpDataAjuste" defaultColor="#004ba0" layoutX="90.0" layoutY="146.0" prefHeight="26.0" prefWidth="200.0" promptText="Data do ajuste" />
-            <JFXTimePicker fx:id="dtpHoraAjuste" defaultColor="#004ba0" layoutX="350.0" layoutY="146.0" prefHeight="26.0" prefWidth="200.0" promptText="Hora do Ajuste" />
+            <JFXTextField fx:id="txtQtdeAtual" editable="false" focusColor="#004ba0" labelFloat="true" layoutX="350.0" layoutY="216.0" prefHeight="24.0" prefWidth="200.0" promptText="Qtde. Atual">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font></JFXTextField>
+            <Separator layoutX="350.0" layoutY="319.0" prefWidth="200.0" style="-fx-background-color: #000000;" />
+            <JFXTextField fx:id="txtSaldo" editable="false" focusColor="#004ba0" labelFloat="true" layoutX="350.0" layoutY="338.0" prefHeight="24.0" prefWidth="200.0" promptText="Saldo de produtos">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font></JFXTextField>
+            <JFXDatePicker fx:id="dtpDataAjuste" defaultColor="#004ba0" editable="false" layoutX="90.0" layoutY="146.0" overLay="true" prefHeight="26.0" prefWidth="200.0" promptText="Data do ajuste" />
+            <JFXTimePicker fx:id="dtpHoraAjuste" defaultColor="#004ba0" layoutX="350.0" layoutY="146.0" overLay="true" prefHeight="26.0" prefWidth="200.0" promptText="Hora do Ajuste" />
             <Separator layoutX="90.0" layoutY="199.0" prefHeight="3.0" prefWidth="460.0" />
          </children>
       </Pane>
