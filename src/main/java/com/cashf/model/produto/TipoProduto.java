@@ -10,7 +10,7 @@ package com.cashf.model.produto;
  * @author joao
  */
 public enum TipoProduto {
-    FICHA_TECNICA("Ficha Técnica"),INSUMO("insumo"),
+    FICHA_TECNICA("Ficha Técnica"),INSUMO("Insumo"),
     MERCADORIA("Mercadoria"),
     PRE_PREPARO("Pré-preparo");
     

@@ -7,7 +7,6 @@ package com.cashf.dao.usuario;
 
 import com.cashf.model.usuario.Usuario;
 import dao.GenericDAOIMP;
-import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 

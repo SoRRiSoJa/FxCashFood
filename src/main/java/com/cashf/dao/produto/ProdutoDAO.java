@@ -7,6 +7,8 @@ package com.cashf.dao.produto;
 
 import com.cashf.model.produto.Produto;
 import dao.GenericDAOIMP;
+import java.util.List;
+import org.hibernate.Session;
 
 /**
  *
@@ -17,5 +19,17 @@ public class ProdutoDAO extends GenericDAOIMP<Produto> {
     public ProdutoDAO(Class<Produto> clazz) {
         super(Produto.class);
     }
-    
+
+    public List<Produto> listInsumosAndPrepreparo() {
+        try (Session session = sessionFactory.openSession()) {
+            String hql = "from Produto prod where prod.tipo like 'INSUMO' or prod.tipo like 'PRE_PREPARO' ";
+            List<Produto> roleList = session.createQuery(hql).list();
+            return roleList;
+        } catch (Exception e) {
+            System.out.println("Erro:" + e);
+            return null;
+        }
+
+    }
+
 }
