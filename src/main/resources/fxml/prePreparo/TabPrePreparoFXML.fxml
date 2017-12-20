@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="542.0" prefWidth="1366.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="542.0" prefWidth="1366.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxml.prePreparo.TabPrePreparoFXMLController">
    <children>
       <Pane layoutX="20.0" layoutY="30.0" prefHeight="445.0" prefWidth="640.0" style="-fx-background-color: #ffffff;">
          <effect>
@@ -36,18 +36,18 @@
                         <Label layoutX="5.0" layoutY="2.0" text="Seleção de Ítens:" textFill="WHITE" />
                      </children>
                   </Pane>
-                  <JFXTextField fx:id="txtCtps2111" focusColor="#004ba0" labelFloat="true" layoutX="395.0" layoutY="77.0" prefHeight="24.0" prefWidth="160.0" promptText="Quantidade" />
-                  <Label layoutX="16.0" layoutY="40.0" text="Produtos:" />
-                  <JFXComboBox editable="true" labelFloat="true" layoutX="16.0" layoutY="77.0" prefHeight="26.0" prefWidth="330.0" promptText="Descrição Produto" />
-                  <Label layoutX="16.0" layoutY="117.0" text="Filtros:" />
-                  <JFXRadioButton layoutX="186.0" layoutY="140.0" style="-jfx-selected-color: #69e2ff;" text="Descrição" />
-                  <JFXRadioButton layoutX="66.0" layoutY="140.0" style="-jfx-selected-color: #69e2ff;" text="Código" />
+                  <JFXComboBox fx:id="ccbItens" editable="true" labelFloat="true" layoutX="16.0" layoutY="77.0" prefHeight="26.0" prefWidth="330.0" promptText="Descrição Produto" />
+                  <JFXComboBox fx:id="cbbUnidadeMedida" editable="true" labelFloat="true" layoutX="395.0" layoutY="37.0" prefHeight="26.0" prefWidth="160.0" promptText="Unidade Medida" />
+                  <JFXTextField fx:id="txtqtde" focusColor="#004ba0" labelFloat="true" layoutX="395.0" layoutY="77.0" prefHeight="24.0" prefWidth="160.0" promptText="Quantidade" />
                   <JFXButton fx:id="btnAdicionar" contentDisplay="GRAPHIC_ONLY" layoutX="512.0" layoutY="124.0" onAction="#onAdicionar" prefHeight="30.0" prefWidth="40.0" ripplerFill="WHITE" style="-fx-background-color: #2196f3;" textFill="WHITE">
                      <graphic>
                         <FontAwesomeIconView fill="WHITE" glyphName="PLUS" size="12" />
                      </graphic>
                   </JFXButton>
-                  <JFXComboBox editable="true" labelFloat="true" layoutX="395.0" layoutY="37.0" prefHeight="26.0" prefWidth="160.0" promptText="Unidade Medida" />
+                  <JFXRadioButton fx:id="rbtCodigo" layoutX="66.0" layoutY="140.0" style="-jfx-selected-color: #69e2ff;" text="Código" />
+                  <JFXRadioButton fx:id="rbtDescricao" layoutX="186.0" layoutY="140.0" style="-jfx-selected-color: #69e2ff;" text="Descrição" />
+                  <Label layoutX="16.0" layoutY="40.0" text="Produtos:" />
+                  <Label layoutX="16.0" layoutY="117.0" text="Filtros:" />
                </children>
             </Pane>
             <Pane layoutX="20.0" layoutY="220.0" prefHeight="214.0" prefWidth="600.0" style="-fx-background-color: #ffffff;">
@@ -60,13 +60,13 @@
                         <Label layoutX="5.0" layoutY="2.0" text="Ítens selecionados:" textFill="WHITE" />
                      </children>
                   </Pane>
-                  <TableView layoutX="14.0" layoutY="30.0" prefHeight="174.0" prefWidth="570.0">
+                  <TableView fx:id="tbvItens" layoutX="14.0" layoutY="30.0" prefHeight="174.0" prefWidth="570.0">
                      <columns>
-                        <TableColumn prefWidth="289.0" text="Produto" />
-                        <TableColumn minWidth="9.0" prefWidth="93.0" text="Quantidade" />
-                        <TableColumn prefWidth="67.0" text="Unidade" />
-                        <TableColumn prefWidth="59.0" text="Custo" />
-                        <TableColumn minWidth="9.0" prefWidth="61.0" text="Excluir" />
+                        <TableColumn fx:id="tbcItem" prefWidth="289.0" text="Produto" />
+                        <TableColumn fx:id="tbcQtdIten" minWidth="9.0" prefWidth="93.0" text="Quantidade" />
+                        <TableColumn fx:id="tbcUnidadeItem" prefWidth="67.0" text="Unidade" />
+                        <TableColumn fx:id="tbcCustoItem" prefWidth="59.0" text="Custo" />
+                        <TableColumn fx:id="btnExcluir" minWidth="9.0" prefWidth="61.0" text="Excluir" />
                      </columns>
                   </TableView>
                </children>
@@ -131,11 +131,11 @@
                   </JFXButton>
                </children>
             </HBox>
-            <TableView layoutX="14.0" layoutY="128.0" prefHeight="179.0" prefWidth="610.0">
+            <TableView fx:id="tbvReceita" layoutX="14.0" layoutY="128.0" prefHeight="179.0" prefWidth="610.0">
                <columns>
-                  <TableColumn prefWidth="391.0" text="Produto" />
-                  <TableColumn minWidth="9.0" prefWidth="139.0" text="Quantidade" />
-                  <TableColumn prefWidth="79.0" text="Unidade" />
+                  <TableColumn fx:id="tbcProduto" prefWidth="391.0" text="Produto" />
+                  <TableColumn fx:id="tbcQtde" minWidth="9.0" prefWidth="139.0" text="Quantidade" />
+                  <TableColumn fx:id="tbcUnidade" prefWidth="79.0" text="Unidade" />
                </columns>
             </TableView>
             <Label layoutX="467.0" layoutY="317.0" text="Custo total:">
@@ -143,11 +143,16 @@
                   <Font name="System Bold" size="13.0" />
                </font>
             </Label>
-            <JFXTextField fx:id="txtCtps21111" focusColor="#004ba0" labelFloat="true" layoutX="15.0" layoutY="79.0" prefHeight="24.0" prefWidth="158.0" promptText="Rendimento da receita" />
-            <JFXComboBox editable="true" labelFloat="true" layoutX="14.0" layoutY="31.0" prefHeight="26.0" prefWidth="330.0" promptText="Produto Principal" />
+            <JFXComboBox fx:id="cbbProduto" editable="true" labelFloat="true" layoutX="14.0" layoutY="31.0" prefHeight="26.0" prefWidth="330.0" promptText="Produto Principal" />
+            <JFXTextField fx:id="txtRendimento" focusColor="#004ba0" labelFloat="true" layoutX="15.0" layoutY="79.0" prefHeight="24.0" prefWidth="158.0" promptText="Rendimento da receita" />
+            <JFXRadioButton fx:id="rbtCod" layoutX="415.0" layoutY="63.0" style="-jfx-selected-color: #69e2ff;" text="Código" />
+            <JFXRadioButton fx:id="rbtDesc" layoutX="501.0" layoutY="63.0" style="-jfx-selected-color: #69e2ff;" text="Descrição" />
             <Label layoutX="393.0" layoutY="36.0" text="Filtros:" />
-            <JFXRadioButton layoutX="501.0" layoutY="63.0" style="-jfx-selected-color: #69e2ff;" text="Descrição" />
-            <JFXRadioButton layoutX="415.0" layoutY="63.0" style="-jfx-selected-color: #69e2ff;" text="Código" />
+            <Label fx:id="lblCustoTotal" layoutX="563.0" layoutY="317.0" prefHeight="16.0" prefWidth="60.0">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </Label>
          </children>
       </Pane>
    </children>
