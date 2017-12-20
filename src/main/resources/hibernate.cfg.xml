@@ -65,6 +65,8 @@ Contributor(s):
         <mapping class="com.cashf.model.funcionario.Funcionario" />
         <mapping class="com.cashf.model.cliente.Cliente" />
         <mapping class="com.cashf.model.parametros.Parametros" />
+        <mapping class="com.cashf.model.ajusteestoque.AjusteEstoque" />
+        <mapping class="com.cashf.model.prepreparo.PrePreparo" />
         
     </session-factory>
 </hibernate-configuration>

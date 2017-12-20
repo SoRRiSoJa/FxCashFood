@@ -32,6 +32,7 @@
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/controller/GenericViewController.java
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/model/parametros/Parametros.java
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/controller/parametrizacao/TabParametrosSisFXMLController.java
+/home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/model/prepreparo/PrePreparo.java
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/util/HibernateUtil.java
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/controller/ajusteestoque/AjusteEstoqueController.java
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/controller/funcionario/TabListaFuncionariosFXMLController.java
@@ -41,11 +42,13 @@
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/controller/cliente/FXGerenciarClientesFXMLController.java
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/util/SafePass.java
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/util/PoupUpUtil.java
+/home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/dao/prepreparo/PrePreparoDAO.java
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/controller/fornecedor/FXGerenciarFornecedoresFXMLController.java
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/controller/produto/FXGerenciarProdutosFXMLController.java
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/controller/parametrizacao/GerenciarParametrizacaoFXMLController.java
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/dao/cliente/ClienteDAO.java
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/dao/ajusteestoque/AjusteEstoqueDAO.java
+/home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/core/atualizarestoque/AtualizarEstoque.java
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/controller/login/FXLoginFXMLController.java
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/controller/produto/GerenciarGruposFXMLController.java
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/model/telefone/Operadora.java

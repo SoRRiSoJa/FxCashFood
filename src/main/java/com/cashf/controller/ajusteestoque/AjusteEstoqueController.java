@@ -30,7 +30,7 @@ public class AjusteEstoqueController implements GenericController<AjusteEstoque>
     public AjusteEstoqueController() {
         this.produtoDAO = new ProdutoDAO(Produto.class);
         this.ajusteEstoqueDAO=new AjusteEstoqueDAO(AjusteEstoque.class);
-        this.listaProduto = FXCollections.observableList(produtoDAO.listInsumosAndPrepreparo());
+        this.listaProduto = FXCollections.observableList(produtoDAO.listProdNotFicha());
         this.produto = new Produto();
         produto.setIdProduto(0l);
     }

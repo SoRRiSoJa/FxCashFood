@@ -5,7 +5,6 @@
  */
 package com.cashf.model.ajusteestoque;
 
-import com.cashf.model.cidade.Cidade;
 import com.cashf.model.produto.Produto;
 import com.cashf.model.usuario.Usuario;
 import java.io.Serializable;

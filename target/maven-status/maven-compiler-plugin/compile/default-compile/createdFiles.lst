@@ -9,12 +9,14 @@ com/cashf/model/produto/Grupo.class
 com/cashf/model/estado/Estado_.class
 com/cashf/controller/contacorrente/GerenciarContasFXMLController.class
 dao/GenericDAO.class
+com/cashf/model/prepreparo/PrePreparo_.class
 com/cashf/model/pessoa/Pessoa_.class
 com/cashf/controller/cliente/FXGerenciarClientesFXMLController.class
 com/cashf/model/estado/Estado.class
 com/cashf/model/ajusteestoque/AjusteEstoque_.class
 com/cashf/model/produto/Categoria.class
 com/cashf/controller/menu/FXMenuFXMLController.class
+com/cashf/dao/prepreparo/PrePreparoDAO.class
 util/SafePass.class
 com/cashf/controller/login/LoginController.class
 com/cashf/dao/funcionario/FuncionarioDAO.class
@@ -62,6 +64,7 @@ com/cashf/model/fornecedor/Fornecedor_.class
 com/cashf/model/ajusteestoque/TipoAjuste.class
 com/cashf/model/funcionario/Funcionario_.class
 com/cashf/controller/produto/TabProdutoFXMLController.class
+com/cashf/core/atualizarestoque/AtualizarEstoque.class
 com/cashf/model/contacorrente/ContaCorrente.class
 com/cashf/model/meiopagamento/MeioPagamento.class
 com/cashf/model/usuario/Usuario_.class
@@ -102,6 +105,7 @@ com/cashf/model/produto/SituacaoTributaria.class
 com/cashf/controller/produto/ProdutoController.class
 com/cashf/controller/fornecedor/TabFornecedorFXMLController$ButtonCellDelete.class
 com/cashf/controller/meiopagamento/MeioPagamentoController.class
+com/cashf/model/prepreparo/PrePreparo.class
 com/cashf/model/pessoa/Sexo.class
 com/cashf/model/produto/Produto.class
 com/cashf/model/cidade/Cidade_.class
