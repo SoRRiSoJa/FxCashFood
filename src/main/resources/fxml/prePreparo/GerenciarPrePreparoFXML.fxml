@@ -6,21 +6,21 @@
 <?import javafx.scene.layout.Pane?>
 
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="672.0" prefWidth="1366.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
-   <children>
-      <JFXTabPane prefHeight="30.0" prefWidth="1366.0" stylesheets="@../../styles/TabPaneCSS.css" tabMinHeight="30.0" tabMinWidth="678.0">
-         <tabs>
-            <Tab text="Pre Preparo">
-              <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-              </content>
-            </Tab>
-            <Tab text="LIsta de Pre Preparo">
-              <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-              </content>
-            </Tab>
-         </tabs>
-      </JFXTabPane>
-   </children>
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="672.0" prefWidth="1366.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cashf.controller.prepreparo.GerenciarPrePreparoFXMLController">
+    <children>
+        <JFXTabPane fx:id="tabPane" stylesheets="@../../styles/TabPaneCSS.css" tabMinHeight="30.0" tabMinWidth="678.0">
+            <tabs>
+                <Tab text="Pre Preparo">
+                    <content>
+                        <fx:include source="TabPrePreparoFXML.fxml" />
+                    </content>
+                </Tab>
+                <Tab text="LIsta de Pre Preparo">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                    </content>
+                </Tab>
+            </tabs>
+        </JFXTabPane>
+    </children>
 </Pane>
