@@ -80,8 +80,8 @@ public class FXMenuFXMLController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        MainApp.paneRoot=rootSatackPane;
-        rootAux=rootSatackPane;
+        MainApp.paneRoot = rootSatackPane;
+        rootAux = rootSatackPane;
         loadDrawer();
         burgerTask2 = new HamburgerNextArrowBasicTransition(jfxHamburguer);
         burgerTask2.setRate(-1);
@@ -104,37 +104,37 @@ public class FXMenuFXMLController implements Initializable {
 
     @FXML
     private void onClientes(ActionEvent event) {
-    loadClientes();
+        loadClientes();
     }
 
     @FXML
     private void onFornecedores(ActionEvent event) {
-    loadFornecedor();
+        loadFornecedor();
     }
 
     @FXML
     private void onProdutos(ActionEvent event) {
-    loadProdutos();
+        loadProdutos();
     }
 
     @FXML
     private void onGrupos(ActionEvent event) {
-    loadGrupos();
+        loadGrupos();
     }
 
     @FXML
     private void onContaCorrente(ActionEvent event) {
-    loadContaCorrente();
+        loadContaCorrente();
     }
 
     @FXML
     private void onMeioPagamento(ActionEvent event) {
-    loadMeioPagamento();
+        loadMeioPagamento();
     }
 
     @FXML
     private void onFuncionarios(ActionEvent event) {
-    loadFuncionario();
+        loadFuncionario();
     }
 
     @FXML
@@ -241,14 +241,29 @@ public class FXMenuFXMLController implements Initializable {
             System.out.println("Erro:" + ex);
         }
     }
+
     //---------------------------------------------
     //------------------------
     private void loadAjustarEstoque() {
         try {
             flag = true;
             paneAnt = paneAux;
-            
+
             paneAux = FXMLLoader.load(getClass().getResource("/fxml/ajusteEstoque/AjustarEstoqueFXML.fxml"));
+            paneBody.getChildren().remove(paneAnt);
+            paneBody.getChildren().add(paneAux);
+        } catch (IOException ex) {
+            System.out.println("Erro:" + ex);
+        }
+    }
+
+    //---------------------------------------------
+    //------------------------
+    private void loadPrePreparo() {
+        try {
+            flag = true;
+            paneAnt = paneAux;
+            paneAux = FXMLLoader.load(getClass().getResource("/fxml/prePreparo/GerenciarPrePreparoFXML.fxml"));
             paneBody.getChildren().remove(paneAnt);
             paneBody.getChildren().add(paneAux);
         } catch (IOException ex) {
@@ -354,6 +369,7 @@ public class FXMenuFXMLController implements Initializable {
 
     @FXML
     private void onPrePreparo(ActionEvent event) {
+        loadPrePreparo();
     }
 
     @FXML

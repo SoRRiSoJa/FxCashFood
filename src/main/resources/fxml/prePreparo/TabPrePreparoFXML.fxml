@@ -16,7 +16,7 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="542.0" prefWidth="1366.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cashf.controller.prepreparo.TabPrePreparoFXMLController">
    <children>
-      <Pane layoutX="20.0" layoutY="30.0" prefHeight="445.0" prefWidth="640.0" style="-fx-background-color: #ffffff;">
+      <Pane layoutX="10.0" layoutY="30.0" prefHeight="445.0" prefWidth="640.0" style="-fx-background-color: #ffffff;">
          <effect>
             <DropShadow />
          </effect>
@@ -66,14 +66,14 @@
                         <TableColumn fx:id="tbcQtdIten" minWidth="9.0" prefWidth="93.0" text="Quantidade" />
                         <TableColumn fx:id="tbcUnidadeItem" prefWidth="67.0" text="Unidade" />
                         <TableColumn fx:id="tbcCustoItem" prefWidth="59.0" text="Custo" />
-                        <TableColumn fx:id="btnExcluir" minWidth="9.0" prefWidth="61.0" text="Excluir" />
+                        <TableColumn fx:id="btnExcluirItem" minWidth="9.0" prefWidth="61.0" text="Excluir" />
                      </columns>
                   </TableView>
                </children>
             </Pane>
          </children>
       </Pane>
-      <Pane layoutX="678.0" layoutY="30.0" prefHeight="445.0" prefWidth="640.0" style="-fx-background-color: #ffffff;">
+      <Pane layoutX="668.0" layoutY="30.0" prefHeight="445.0" prefWidth="640.0" style="-fx-background-color: #ffffff;">
          <effect>
             <DropShadow />
          </effect>

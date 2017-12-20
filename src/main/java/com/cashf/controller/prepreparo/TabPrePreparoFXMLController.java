@@ -52,7 +52,7 @@ public class TabPrePreparoFXMLController implements GenericViewController, Initi
     @FXML
     private TableColumn<Produto, BigDecimal> tbcCustoItem;
     @FXML
-    private TableColumn btnExcluir;
+    private JFXButton btnExcluir;
     @FXML
     private JFXButton btnSalvar;
     @FXML
@@ -77,6 +77,8 @@ public class TabPrePreparoFXMLController implements GenericViewController, Initi
     private JFXRadioButton rbtDesc;
     @FXML
     private Label lblCustoTotal;
+    @FXML
+    private TableColumn<?, ?> btnExcluirItem;
 
     /**
      * Initializes the controller class.

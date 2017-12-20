@@ -23,6 +23,7 @@
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/dao/banco/BancoDAO.java
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/util/BDInsert.java
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/dao/parametros/ParametrosDAO.java
+/home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/controller/prepreparo/TabPrePreparoFXMLController.java
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/controller/parametrizacao/ParametrosController.java
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/model/estado/Estado.java
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/dao/telefone/TelefoneDAO.java
@@ -51,6 +52,7 @@
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/core/atualizarestoque/AtualizarEstoque.java
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/controller/login/FXLoginFXMLController.java
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/controller/produto/GerenciarGruposFXMLController.java
+/home/joao/NetBeansProjects/FXCashFood/src/main/java/util/UnitConverter.java
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/model/telefone/Operadora.java
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/controller/contacorrente/GerenciarContasFXMLController.java
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/dao/produto/ProdutoDAO.java
@@ -65,6 +67,7 @@
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/model/produto/Grupo.java
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/model/telefone/Telefone.java
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/model/produto/AliquotasProduto.java
+/home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/controller/prepreparo/GerenciarPrePreparoFXMLController.java
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/dao/contacorrente/ContaCorrenteDAO.java
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/model/ajusteestoque/AjusteEstoque.java
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/dao/usuario/UsuarioDAO.java

@@ -11,6 +11,7 @@ com/cashf/controller/contacorrente/GerenciarContasFXMLController.class
 dao/GenericDAO.class
 com/cashf/model/prepreparo/PrePreparo_.class
 com/cashf/model/pessoa/Pessoa_.class
+com/cashf/controller/prepreparo/TabPrePreparoFXMLController.class
 com/cashf/controller/cliente/FXGerenciarClientesFXMLController.class
 com/cashf/model/estado/Estado.class
 com/cashf/model/ajusteestoque/AjusteEstoque_.class
@@ -40,11 +41,13 @@ com/cashf/model/parametros/Parametros.class
 util/TextFieldFormatter.class
 util/PoupUpUtil.class
 com/cashf/model/produto/TipoProduto.class
+util/UnitConverter.class
 com/cashf/dao/cidade/CidadeDAO.class
 com/cashf/controller/fornecedor/TabFornecedorFXMLController.class
 com/cashf/controller/funcionario/TabFuncionarioFXMLController.class
 com/cashf/model/ajusteestoque/AjusteEstoque.class
 com/cashf/dao/banco/BancoDAO.class
+com/cashf/controller/prepreparo/GerenciarPrePreparoFXMLController.class
 com/cashf/model/cliente/Cliente.class
 com/cashf/controller/parametrizacao/ParametrosController.class
 com/cashf/controller/fornecedor/TabFornecedorFXMLController$1.class
@@ -52,6 +55,7 @@ com/cashf/controller/fornecedor/FornecedorController.class
 com/cashf/model/cliente/Cliente_.class
 com/cashf/controller/parametrizacao/TabParametrosSisFXMLController.class
 com/cashf/model/produto/UnidadeMedida.class
+util/UnitConverter$1.class
 com/cashf/model/produto/AliquotasProduto_.class
 util/ImageHandler.class
 com/cashf/controller/produto/TabListaProdutosFXMLController.class
