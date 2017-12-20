@@ -10,10 +10,11 @@ package com.cashf.model.produto;
  * @author joao
  */
 public enum UnidadeMedida {
-    l("Litro(l)"),ml("MiliLitro(ml)"),
+    l("Litro(l)"),
+    ml("MiliLitro(ml)"),
     Kg("Quilograma(Kg)"),
-    cm("Centímetro (cm)"),
-    g("Grama(g)");
+    g("Grama(g)"),
+    mg("MiliGrama(mg)");;
     
     private final String descricao;
 
