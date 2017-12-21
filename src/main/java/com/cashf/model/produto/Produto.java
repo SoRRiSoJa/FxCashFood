@@ -5,9 +5,12 @@
  */
 package com.cashf.model.produto;
 
+import com.cashf.model.prepreparo.ProdutoPrePreparo;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.Objects;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -17,6 +20,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -50,13 +54,13 @@ public class Produto implements Serializable {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private TipoProduto tipo;
-
     private boolean status;
-
+    @OneToMany(mappedBy = "produto", cascade = CascadeType.ALL)
+    private List<ProdutoPrePreparo> listaProdutos;
     public Produto() {
     }
 
-    public Produto(long id, String codigoReferencia, String descriao, int qtdeEmbalagem,int qtdeProd, String ncm, BigDecimal preco_custo, BigDecimal preco_venda, Grupo grupo, AliquotasProduto aliquotasProduto, UnidadeMedida unidadeMedida, TipoProduto tipo, boolean status) {
+    public Produto(long id, String codigoReferencia, String descriao, int qtdeEmbalagem,int qtdeProd, String ncm, BigDecimal preco_custo, BigDecimal preco_venda, Grupo grupo, AliquotasProduto aliquotasProduto, UnidadeMedida unidadeMedida, TipoProduto tipo,List<ProdutoPrePreparo> listaProdutos, boolean status) {
         this.idProduto = id;
         this.codigoReferencia = codigoReferencia;
         this.descriao = descriao;
@@ -70,6 +74,7 @@ public class Produto implements Serializable {
         this.unidadeMedida = unidadeMedida;
         this.tipo = tipo;
         this.status = status;
+        this.listaProdutos=listaProdutos;
     }
 
     public long getIdProduto() {
@@ -176,6 +181,14 @@ public class Produto implements Serializable {
         this.tipo = tipo;
     }
 
+    public List<ProdutoPrePreparo> getListaProdutos() {
+        return listaProdutos;
+    }
+
+    public void setListaProdutos(List<ProdutoPrePreparo> listaProdutos) {
+        this.listaProdutos = listaProdutos;
+    }
+    
     @Override
     public int hashCode() {
         int hash = 5;

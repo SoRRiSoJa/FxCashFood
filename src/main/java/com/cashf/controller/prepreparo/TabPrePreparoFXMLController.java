@@ -5,6 +5,7 @@
  */
 package com.cashf.controller.prepreparo;
 
+import com.cashf.cashfood.MainApp;
 import com.cashf.model.produto.Produto;
 import com.cashf.model.produto.UnidadeMedida;
 import com.jfoenix.controls.JFXButton;
@@ -22,6 +23,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.Pane;
+import util.PoupUpUtil;
 
 /**
  * FXML Controller class
@@ -108,6 +112,8 @@ public class TabPrePreparoFXMLController implements GenericViewController, Initi
     private BigDecimal custoReceita;
     private String custoTotal;
     private boolean flagButtons;
+    @FXML
+    private Pane paneRoot;
 
     /**
      * Initializes the controller class.
@@ -141,6 +147,13 @@ public class TabPrePreparoFXMLController implements GenericViewController, Initi
 
     @FXML
     private void onAdicionar(ActionEvent event) {
+        getDataItem();
+        if (validateItemFields()) {
+            tbvItens.setItems(PrePreparoController.getInstance().getListaItens());
+        } else {
+            PoupUpUtil.errorMessage(paneRoot, MainApp.paneRoot, erros);
+            erros = "";
+        }
     }
 
     @FXML
@@ -181,7 +194,34 @@ public class TabPrePreparoFXMLController implements GenericViewController, Initi
 
     @Override
     public void getData() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        rendimento = txtRendimento.getText();
+        PrePreparoController.getInstance().setProdutoPrincipal(cbbProduto.getSelectionModel().getSelectedItem());
+    }
+
+    public void getDataItem() {
+        PrePreparoController.getInstance().setUnidadeMedida(cbbUnidadeMedida.getSelectionModel().getSelectedItem());
+        try {
+            qtdeItem = Integer.parseInt(qtde);
+        } catch (NumberFormatException e) {
+            qtdeItem = 0;
+        }
+        if (ccbItens.getSelectionModel().getSelectedItem() != null) {
+            PrePreparoController.getInstance().setListaItens(ccbItens.getSelectionModel().getSelectedItem());
+        }
+    }
+
+    public Boolean validateItemFields() {
+        boolean flag = true;
+        if (PrePreparoController.getInstance().getListaItens().isEmpty()) {
+            erros += "Você deve selecionar um item para inserir na receita! \n";
+            flag = false;
+        }
+        if (qtdeItem <= 0) {
+            erros += "a quatidade do item deve ser maior que 0 \n";
+            flag = false;
+        }
+
+        return flag;
     }
 
     @Override
@@ -199,5 +239,9 @@ public class TabPrePreparoFXMLController implements GenericViewController, Initi
 
     private void loadCbbItens() {
         ccbItens.setItems(PrePreparoController.getInstance().getListaProduto());
+    }
+
+    private void setUpTableViewItens() {
+        
     }
 }

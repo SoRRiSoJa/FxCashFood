@@ -68,12 +68,14 @@ com/cashf/model/fornecedor/Fornecedor_.class
 com/cashf/model/ajusteestoque/TipoAjuste.class
 com/cashf/model/funcionario/Funcionario_.class
 com/cashf/controller/produto/TabProdutoFXMLController.class
+com/cashf/model/prepreparo/ProdutoPrePreparo.class
 com/cashf/core/atualizarestoque/AtualizarEstoque.class
 com/cashf/model/contacorrente/ContaCorrente.class
 com/cashf/model/meiopagamento/MeioPagamento.class
 com/cashf/model/usuario/Usuario_.class
 com/cashf/model/produto/Produto_.class
 com/cashf/dao/fornecedor/FornecedorDAO.class
+com/cashf/model/prepreparo/ProdutoPrePreparo_.class
 com/cashf/model/cidade/Cidade.class
 com/cashf/controller/fornecedor/FXGerenciarFornecedoresFXMLController.class
 com/cashf/controller/ajusteestoque/AjustarEstoqueFXMLController.class

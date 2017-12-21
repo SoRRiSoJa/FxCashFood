@@ -31,8 +31,7 @@ public class PrePreparoController implements GenericController<PrePreparo> {
     private PrePreparo prePreparo;
     private UnidadeMedida unidadeMedida;
     private Produto produtoPrincipal;
-    private Produto itemAtual;
-
+    
     private PrePreparoController() {
         this.produtoDAO = new ProdutoDAO(Produto.class);
         this.prePreparoDAO = new PrePreparoDAO(PrePreparo.class);
@@ -44,8 +43,6 @@ public class PrePreparoController implements GenericController<PrePreparo> {
         this.prePreparo.setIdPrepreparo(0l);
         this.produtoPrincipal = new Produto();
         produtoPrincipal.setIdProduto(0l);
-        this.itemAtual = new Produto();
-        itemAtual.setIdProduto(0l);
     }
 
     public static synchronized PrePreparoController getInstance() {
@@ -74,8 +71,6 @@ public class PrePreparoController implements GenericController<PrePreparo> {
     public void flushObject() {
         this.produtoPrincipal = new Produto();
         produtoPrincipal.setIdProduto(0l);
-        this.itemAtual = new Produto();
-        itemAtual.setIdProduto(0l);
         this.prePreparo = new PrePreparo();
         this.prePreparo.setIdPrepreparo(0l);
     }
@@ -161,14 +156,6 @@ public class PrePreparoController implements GenericController<PrePreparo> {
 
     public void setProdutoPrincipal(Produto produtoPrincipal) {
         this.produtoPrincipal = produtoPrincipal;
-    }
-
-    public Produto getItemAtual() {
-        return itemAtual;
-    }
-
-    public void setItemAtual(Produto itemAtual) {
-        this.itemAtual = itemAtual;
     }
 
 }

@@ -11,6 +11,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -21,6 +22,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -43,19 +45,14 @@ public class PrePreparo implements Serializable {
     private LocalDate dataProducao;
     private BigDecimal rendimento;
     private BigDecimal custoTotal;
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "produto_pre_preparo", joinColumns
-            = {
-                @JoinColumn(name = "id_prepreparo")}, inverseJoinColumns
-            = {
-                @JoinColumn(name = "id_produto")})
-    private List<Produto> listaProdutos;
+    @OneToMany(mappedBy = "prePreparo", cascade = CascadeType.ALL)
+    private List<ProdutoPrePreparo> listaProdutos;
     private Boolean status;
 
     public PrePreparo() {
     }
 
-    public PrePreparo(long idPrepreparo, Produto produtoPrincipal, String descricao, LocalDate dataProducao, BigDecimal rendimento, BigDecimal custoTotal, List<Produto> listaProdutos, Boolean status) {
+    public PrePreparo(long idPrepreparo, Produto produtoPrincipal, String descricao, LocalDate dataProducao, BigDecimal rendimento, BigDecimal custoTotal, List<ProdutoPrePreparo> listaProdutos, Boolean status) {
         this.idPrepreparo = idPrepreparo;
         this.produtoPrincipal = produtoPrincipal;
         this.descricao = descricao;
@@ -114,11 +111,11 @@ public class PrePreparo implements Serializable {
         this.custoTotal = custoTotal;
     }
 
-    public List<Produto> getListaProdutos() {
+    public List<ProdutoPrePreparo> getListaProdutos() {
         return listaProdutos;
     }
 
-    public void setListaProdutos(List<Produto> listaProdutos) {
+    public void setListaProdutos(List<ProdutoPrePreparo> listaProdutos) {
         this.listaProdutos = listaProdutos;
     }
 
