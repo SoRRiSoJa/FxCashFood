@@ -102,6 +102,7 @@ com/cashf/controller/contacorrente/ContaCorrenteController.class
 com/cashf/controller/cliente/TabClientesFXMLController$ButtonCellDelete$1.class
 com/cashf/controller/produto/GrupoController.class
 com/cashf/controller/ajusteestoque/AjusteEstoqueController.class
+com/cashf/controller/prepreparo/PrePreparoController.class
 com/cashf/cashfood/MainApp.class
 com/cashf/model/produto/AliquotasProduto.class
 com/cashf/dao/usuario/UsuarioDAO.class
