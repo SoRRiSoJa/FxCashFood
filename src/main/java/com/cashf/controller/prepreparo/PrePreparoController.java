@@ -11,6 +11,7 @@ import com.cashf.model.prepreparo.PrePreparo;
 import com.cashf.model.produto.Produto;
 import com.cashf.model.produto.UnidadeMedida;
 import controller.GenericController;
+import java.util.ArrayList;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -24,6 +25,7 @@ public class PrePreparoController implements GenericController<PrePreparo> {
     private PrePreparoDAO prePreparoDAO;
     private ProdutoDAO produtoDAO;
     private ObservableList<PrePreparo> lista;
+    private ObservableList<Produto> listaPrePreparo;
     private ObservableList<Produto> listaProduto;
     private ObservableList<Produto> listaItens;
     private PrePreparo prePreparo;
@@ -34,13 +36,23 @@ public class PrePreparoController implements GenericController<PrePreparo> {
     private PrePreparoController() {
         this.produtoDAO = new ProdutoDAO(Produto.class);
         this.prePreparoDAO = new PrePreparoDAO(PrePreparo.class);
-        this.listaProduto = FXCollections.observableList(produtoDAO.listProdNotFicha());
+        this.lista = FXCollections.observableList(prePreparoDAO.listAll());
+        this.listaProduto = FXCollections.observableList(produtoDAO.listProdInsumos());
+        this.listaPrePreparo = FXCollections.observableList(produtoDAO.listProdPrePreparo());
+        this.listaItens = FXCollections.observableList(new ArrayList<>());
         this.prePreparo = new PrePreparo();
         this.prePreparo.setIdPrepreparo(0l);
         this.produtoPrincipal = new Produto();
         produtoPrincipal.setIdProduto(0l);
         this.itemAtual = new Produto();
         itemAtual.setIdProduto(0l);
+    }
+
+    public static synchronized PrePreparoController getInstance() {
+        if (prePreparoController == null) {
+            prePreparoController = new PrePreparoController();
+        }
+        return prePreparoController;
     }
 
     @Override
@@ -70,17 +82,93 @@ public class PrePreparoController implements GenericController<PrePreparo> {
 
     @Override
     public ObservableList<PrePreparo> getLista() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return lista;
     }
 
     @Override
     public void setLista(ObservableList<PrePreparo> lista) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.lista = lista;
     }
 
     @Override
     public void setItenLista(PrePreparo obj) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        lista.add(obj);
+    }
+
+    public PrePreparoDAO getPrePreparoDAO() {
+        return prePreparoDAO;
+    }
+
+    public void setPrePreparoDAO(PrePreparoDAO prePreparoDAO) {
+        this.prePreparoDAO = prePreparoDAO;
+    }
+
+    public ProdutoDAO getProdutoDAO() {
+        return produtoDAO;
+    }
+
+    public void setProdutoDAO(ProdutoDAO produtoDAO) {
+        this.produtoDAO = produtoDAO;
+    }
+
+    public ObservableList<Produto> getListaPrePreparo() {
+        return listaPrePreparo;
+    }
+
+    public void setListaPrePreparo(ObservableList<Produto> listaPrePreparo) {
+        this.listaPrePreparo = listaPrePreparo;
+    }
+
+    public ObservableList<Produto> getListaProduto() {
+        return listaProduto;
+    }
+
+    public void setListaProduto(ObservableList<Produto> listaProduto) {
+        this.listaProduto = listaProduto;
+    }
+
+    public ObservableList<Produto> getListaItens() {
+        return listaItens;
+    }
+
+    public void setListaItens(ObservableList<Produto> listaItens) {
+        this.listaItens = listaItens;
+    }
+
+    public void setListaItens(Produto item) {
+        this.listaItens.add(item);
+    }
+
+    public PrePreparo getPrePreparo() {
+        return prePreparo;
+    }
+
+    public void setPrePreparo(PrePreparo prePreparo) {
+        this.prePreparo = prePreparo;
+    }
+
+    public UnidadeMedida getUnidadeMedida() {
+        return unidadeMedida;
+    }
+
+    public void setUnidadeMedida(UnidadeMedida unidadeMedida) {
+        this.unidadeMedida = unidadeMedida;
+    }
+
+    public Produto getProdutoPrincipal() {
+        return produtoPrincipal;
+    }
+
+    public void setProdutoPrincipal(Produto produtoPrincipal) {
+        this.produtoPrincipal = produtoPrincipal;
+    }
+
+    public Produto getItemAtual() {
+        return itemAtual;
+    }
+
+    public void setItemAtual(Produto itemAtual) {
+        this.itemAtual = itemAtual;
     }
 
 }

@@ -131,24 +131,24 @@
                   </JFXButton>
                </children>
             </HBox>
-            <TableView fx:id="tbvReceita" layoutX="14.0" layoutY="128.0" prefHeight="179.0" prefWidth="610.0">
+            <TableView fx:id="tbvReceita" layoutX="14.0" layoutY="134.0" prefHeight="179.0" prefWidth="610.0">
                <columns>
                   <TableColumn fx:id="tbcProduto" prefWidth="391.0" text="Produto" />
                   <TableColumn fx:id="tbcQtde" minWidth="9.0" prefWidth="139.0" text="Quantidade" />
                   <TableColumn fx:id="tbcUnidade" prefWidth="79.0" text="Unidade" />
                </columns>
             </TableView>
-            <Label layoutX="467.0" layoutY="317.0" text="Custo total:">
+            <Label layoutX="467.0" layoutY="323.0" text="Custo total:">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>
             </Label>
-            <JFXComboBox fx:id="cbbProduto" editable="true" labelFloat="true" layoutX="14.0" layoutY="31.0" prefHeight="26.0" prefWidth="330.0" promptText="Produto Principal" />
-            <JFXTextField fx:id="txtRendimento" focusColor="#004ba0" labelFloat="true" layoutX="15.0" layoutY="79.0" prefHeight="24.0" prefWidth="158.0" promptText="Rendimento da receita" />
-            <JFXRadioButton fx:id="rbtCod" layoutX="415.0" layoutY="63.0" style="-jfx-selected-color: #69e2ff;" text="Código" />
-            <JFXRadioButton fx:id="rbtDesc" layoutX="501.0" layoutY="63.0" style="-jfx-selected-color: #69e2ff;" text="Descrição" />
-            <Label layoutX="393.0" layoutY="36.0" text="Filtros:" />
-            <Label fx:id="lblCustoTotal" layoutX="563.0" layoutY="317.0" prefHeight="16.0" prefWidth="60.0">
+            <JFXComboBox fx:id="cbbProduto" editable="true" labelFloat="true" layoutX="14.0" layoutY="37.0" prefHeight="26.0" prefWidth="330.0" promptText="Produto Principal" />
+            <JFXTextField fx:id="txtRendimento" focusColor="#004ba0" labelFloat="true" layoutX="15.0" layoutY="85.0" prefHeight="24.0" prefWidth="158.0" promptText="Rendimento da receita" />
+            <JFXRadioButton fx:id="rbtCod" layoutX="415.0" layoutY="68.0" style="-jfx-selected-color: #69e2ff;" text="Código" />
+            <JFXRadioButton fx:id="rbtDesc" layoutX="501.0" layoutY="68.0" style="-jfx-selected-color: #69e2ff;" text="Descrição" />
+            <Label layoutX="393.0" layoutY="41.0" text="Filtros:" />
+            <Label fx:id="lblCustoTotal" layoutX="563.0" layoutY="323.0" prefHeight="16.0" prefWidth="60.0">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>

@@ -14,6 +14,7 @@ import com.jfoenix.controls.JFXTextField;
 import controller.GenericViewController;
 import java.math.BigDecimal;
 import java.net.URL;
+import java.util.Arrays;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -78,7 +79,35 @@ public class TabPrePreparoFXMLController implements GenericViewController, Initi
     @FXML
     private Label lblCustoTotal;
     @FXML
-    private TableColumn<?, ?> btnExcluirItem;
+    private TableColumn btnExcluirItem;
+    //-----
+    private static JFXComboBox<Produto> _ccbItens;
+    private static JFXComboBox<UnidadeMedida> _cbbUnidadeMedida;
+    private static JFXTextField _txtqtde;
+    private static JFXButton _btnAdicionar;
+    private static JFXRadioButton _rbtCodigo;
+    private static JFXRadioButton _rbtDescricao;
+    private static TableView<Produto> _tbvItens;
+    private static JFXButton _btnExcluir;
+    private static JFXButton _btnSalvar;
+    private static JFXButton _btnNovo;
+    private static JFXButton _btnLimpar;
+    private static TableView<Produto> _tbvReceita;
+    private static JFXComboBox<Produto> _cbbProduto;
+    private static JFXTextField _txtRendimento;
+    private static JFXRadioButton _rbtCod;
+    private static JFXRadioButton _rbtDesc;
+    private static Label _lblCustoTotal;
+    private static TableColumn _btnExcluirItem;
+    //--
+    private String erros;
+    private String qtde;
+    private int qtdeItem;
+    private String rendimento;
+    private BigDecimal rendimentoReceita;
+    private BigDecimal custoReceita;
+    private String custoTotal;
+    private boolean flagButtons;
 
     /**
      * Initializes the controller class.
@@ -86,7 +115,29 @@ public class TabPrePreparoFXMLController implements GenericViewController, Initi
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
+        _ccbItens = ccbItens;
+        _cbbUnidadeMedida = cbbUnidadeMedida;
+        _txtqtde = txtqtde;
+        _btnAdicionar = btnAdicionar;
+        _rbtCodigo = rbtCodigo;
+        _rbtDescricao = rbtDescricao;
+        _tbvItens = tbvItens;
+        _btnExcluir = btnExcluir;
+        _btnSalvar = btnSalvar;
+        _btnNovo = btnNovo;
+        _btnLimpar = btnLimpar;
+        _tbvReceita = tbvReceita;
+        _cbbProduto = cbbProduto;
+        _txtRendimento = txtRendimento;
+        _rbtCod = rbtCod;
+        _rbtDesc = rbtDesc;
+        _lblCustoTotal = lblCustoTotal;
+        _btnExcluirItem = btnExcluirItem;
+
+        loadCbbItens();
+        loadCbbProdutos();
+        loadCbbUnidadeMedida();
+    }
 
     @FXML
     private void onAdicionar(ActionEvent event) {
@@ -137,5 +188,16 @@ public class TabPrePreparoFXMLController implements GenericViewController, Initi
     public void loadDataToScreen() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
+    private void loadCbbUnidadeMedida() {
+        cbbUnidadeMedida.getItems().addAll(Arrays.asList(UnidadeMedida.values()));
+    }
+
+    private void loadCbbProdutos() {
+        cbbProduto.setItems(PrePreparoController.getInstance().getListaPrePreparo());
+    }
+
+    private void loadCbbItens() {
+        ccbItens.setItems(PrePreparoController.getInstance().getListaProduto());
+    }
 }
