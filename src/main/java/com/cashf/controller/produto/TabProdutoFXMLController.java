@@ -97,7 +97,7 @@ public class TabProdutoFXMLController implements GenericViewController, Initiali
     private String codigoReferencia;
     private String descriao;
     private int qtdeEmbalagem = 0;
-    private int qtdeProduto = 0;
+    private BigDecimal qtdeProduto = BigDecimal.ZERO;
     private String ncm;
     private BigDecimal preco_custo;
     private BigDecimal preco_venda;
@@ -355,7 +355,7 @@ public class TabProdutoFXMLController implements GenericViewController, Initiali
             erros += "informe a quantidade da embalagem! \n";
             flag = false;
         }
-        if (qtdeProduto < 0) {
+        if (qtdeProduto.compareTo(BigDecimal.ZERO) <= 0) {
             erros += "informe a quantidade em estoque! \n";
             flag = false;
         }
@@ -449,7 +449,7 @@ public class TabProdutoFXMLController implements GenericViewController, Initiali
         preco_venda = new BigDecimal(txtPrecoVenda.getText());
         codigoReferencia = txtCodRef.getText();
         qtdeEmbalagem = new Integer(txtQtdeEmbalagem.getText());
-        qtdeProduto = new Integer(txtQtdeProd.getText());
+        qtdeProduto = new BigDecimal(txtQtdeProd.getText());
         ProdutoController.getInstance().setSituacaoTributaria(cbbSituacaoTributaria.getSelectionModel().getSelectedItem());
         percentualPis = new BigDecimal(txtPercentualPIS.getText());
         aliquotaIcms = new BigDecimal(txtAliquotaICMS.getText());
