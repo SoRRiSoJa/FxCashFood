@@ -6,6 +6,7 @@
 package com.cashf.controller.prepreparo;
 
 import com.cashf.cashfood.MainApp;
+import com.cashf.model.prepreparo.ProdutoPrePreparo;
 import com.cashf.model.produto.Produto;
 import com.cashf.model.produto.UnidadeMedida;
 import com.jfoenix.controls.JFXButton;
@@ -23,7 +24,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
 import util.PoupUpUtil;
 
@@ -47,15 +47,15 @@ public class TabPrePreparoFXMLController implements GenericViewController, Initi
     @FXML
     private JFXRadioButton rbtDescricao;
     @FXML
-    private TableView<Produto> tbvItens;
+    private TableView<ProdutoPrePreparo> tbvItens;
     @FXML
-    private TableColumn<Produto, String> tbcItem;
+    private TableColumn<ProdutoPrePreparo, String> tbcItem;
     @FXML
-    private TableColumn<Produto, Integer> tbcQtdIten;
+    private TableColumn<ProdutoPrePreparo, BigDecimal> tbcQtdIten;
     @FXML
-    private TableColumn<Produto, String> tbcUnidadeItem;
+    private TableColumn<ProdutoPrePreparo, String> tbcUnidadeItem;
     @FXML
-    private TableColumn<Produto, BigDecimal> tbcCustoItem;
+    private TableColumn<ProdutoPrePreparo, BigDecimal> tbcCustoItem;
     @FXML
     private JFXButton btnExcluir;
     @FXML
@@ -65,13 +65,13 @@ public class TabPrePreparoFXMLController implements GenericViewController, Initi
     @FXML
     private JFXButton btnLimpar;
     @FXML
-    private TableView<Produto> tbvReceita;
+    private TableView<ProdutoPrePreparo> tbvReceita;
     @FXML
-    private TableColumn<Produto, String> tbcProduto;
+    private TableColumn<ProdutoPrePreparo, String> tbcProduto;
     @FXML
-    private TableColumn<Produto, Integer> tbcQtde;
+    private TableColumn<ProdutoPrePreparo, BigDecimal> tbcQtde;
     @FXML
-    private TableColumn<Produto, String> tbcUnidade;
+    private TableColumn<ProdutoPrePreparo, String> tbcUnidade;
     @FXML
     private JFXComboBox<Produto> cbbProduto;
     @FXML
@@ -91,12 +91,12 @@ public class TabPrePreparoFXMLController implements GenericViewController, Initi
     private static JFXButton _btnAdicionar;
     private static JFXRadioButton _rbtCodigo;
     private static JFXRadioButton _rbtDescricao;
-    private static TableView<Produto> _tbvItens;
+    private static TableView<ProdutoPrePreparo> _tbvItens;
     private static JFXButton _btnExcluir;
     private static JFXButton _btnSalvar;
     private static JFXButton _btnNovo;
     private static JFXButton _btnLimpar;
-    private static TableView<Produto> _tbvReceita;
+    private static TableView<ProdutoPrePreparo> _tbvReceita;
     private static JFXComboBox<Produto> _cbbProduto;
     private static JFXTextField _txtRendimento;
     private static JFXRadioButton _rbtCod;
@@ -206,7 +206,7 @@ public class TabPrePreparoFXMLController implements GenericViewController, Initi
             qtdeItem = 0;
         }
         if (ccbItens.getSelectionModel().getSelectedItem() != null) {
-            PrePreparoController.getInstance().setListaItens(ccbItens.getSelectionModel().getSelectedItem());
+            PrePreparoController.getInstance().setItemAtual(ccbItens.getSelectionModel().getSelectedItem());
         }
     }
 

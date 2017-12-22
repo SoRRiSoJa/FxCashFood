@@ -8,6 +8,7 @@ package com.cashf.controller.prepreparo;
 import com.cashf.dao.prepreparo.PrePreparoDAO;
 import com.cashf.dao.produto.ProdutoDAO;
 import com.cashf.model.prepreparo.PrePreparo;
+import com.cashf.model.prepreparo.ProdutoPrePreparo;
 import com.cashf.model.produto.Produto;
 import com.cashf.model.produto.UnidadeMedida;
 import controller.GenericController;
@@ -25,24 +26,27 @@ public class PrePreparoController implements GenericController<PrePreparo> {
     private PrePreparoDAO prePreparoDAO;
     private ProdutoDAO produtoDAO;
     private ObservableList<PrePreparo> lista;
-    private ObservableList<Produto> listaPrePreparo;
-    private ObservableList<Produto> listaProduto;
-    private ObservableList<Produto> listaItens;
+    private ObservableList<Produto> listaCbbPrePreparo;
+    private ObservableList<Produto> listaCbbItens;
+    private ObservableList<ProdutoPrePreparo> listaItens;
+    private Produto produtoPrincipal;
+    private Produto itemAtual;
     private PrePreparo prePreparo;
     private UnidadeMedida unidadeMedida;
-    private Produto produtoPrincipal;
-    
+
     private PrePreparoController() {
         this.produtoDAO = new ProdutoDAO(Produto.class);
         this.prePreparoDAO = new PrePreparoDAO(PrePreparo.class);
         this.lista = FXCollections.observableList(prePreparoDAO.listAll());
-        this.listaProduto = FXCollections.observableList(produtoDAO.listProdInsumos());
-        this.listaPrePreparo = FXCollections.observableList(produtoDAO.listProdPrePreparo());
+        this.listaCbbItens = FXCollections.observableList(produtoDAO.listProdInsumos());
+        this.listaCbbPrePreparo = FXCollections.observableList(produtoDAO.listProdPrePreparo());
         this.listaItens = FXCollections.observableList(new ArrayList<>());
         this.prePreparo = new PrePreparo();
         this.prePreparo.setIdPrepreparo(0l);
         this.produtoPrincipal = new Produto();
         produtoPrincipal.setIdProduto(0l);
+        this.itemAtual = new Produto();
+        itemAtual.setIdProduto(0l);
     }
 
     public static synchronized PrePreparoController getInstance() {
@@ -107,30 +111,30 @@ public class PrePreparoController implements GenericController<PrePreparo> {
     }
 
     public ObservableList<Produto> getListaPrePreparo() {
-        return listaPrePreparo;
+        return listaCbbPrePreparo;
     }
 
     public void setListaPrePreparo(ObservableList<Produto> listaPrePreparo) {
-        this.listaPrePreparo = listaPrePreparo;
+        this.listaCbbPrePreparo = listaPrePreparo;
     }
 
     public ObservableList<Produto> getListaProduto() {
-        return listaProduto;
+        return listaCbbItens;
     }
 
     public void setListaProduto(ObservableList<Produto> listaProduto) {
-        this.listaProduto = listaProduto;
+        this.listaCbbItens = listaProduto;
     }
 
-    public ObservableList<Produto> getListaItens() {
+    public ObservableList<ProdutoPrePreparo> getListaItens() {
         return listaItens;
     }
 
-    public void setListaItens(ObservableList<Produto> listaItens) {
+    public void setListaItens(ObservableList<ProdutoPrePreparo> listaItens) {
         this.listaItens = listaItens;
     }
 
-    public void setListaItens(Produto item) {
+    public void setListaItens(ProdutoPrePreparo item) {
         this.listaItens.add(item);
     }
 
@@ -157,5 +161,14 @@ public class PrePreparoController implements GenericController<PrePreparo> {
     public void setProdutoPrincipal(Produto produtoPrincipal) {
         this.produtoPrincipal = produtoPrincipal;
     }
+
+    public Produto getItemAtual() {
+        return itemAtual;
+    }
+
+    public void setItemAtual(Produto itemAtual) {
+        this.itemAtual = itemAtual;
+    }
+    
 
 }
