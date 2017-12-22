@@ -104,37 +104,37 @@ public class FXMenuFXMLController implements Initializable {
 
     @FXML
     private void onClientes(ActionEvent event) {
-        loadClientes();
+        loadFXML("/fxml/clientes/FXGerenciarClientesFXML.fxml");
     }
 
     @FXML
     private void onFornecedores(ActionEvent event) {
-        loadFornecedor();
+        loadFXML("/fxml/fornecedores/FXGerenciarFornecedoresFXML.fxml");
     }
 
     @FXML
     private void onProdutos(ActionEvent event) {
-        loadProdutos();
+        loadFXML("/fxml/produto/FXGerenciarProdutosFXML.fxml");
     }
 
     @FXML
     private void onGrupos(ActionEvent event) {
-        loadGrupos();
+        loadFXML("/fxml/produto/GerenciarGruposFXML.fxml");
     }
 
     @FXML
     private void onContaCorrente(ActionEvent event) {
-        loadContaCorrente();
+        loadFXML("/fxml/contaCorrente/GerenciarContasFXML.fxml");
     }
 
     @FXML
     private void onMeioPagamento(ActionEvent event) {
-        loadMeioPagamento();
+        loadFXML("/fxml/meioPagamento/MeioPagamentoFXML.fxml");
     }
 
     @FXML
     private void onFuncionarios(ActionEvent event) {
-        loadFuncionario();
+        loadFXML("/fxml/funcionario/FXGerenciarFuncionariosFXML.fxml");
     }
 
     @FXML
@@ -153,117 +153,11 @@ public class FXMenuFXMLController implements Initializable {
     }
 
     //------------------------
-    private void loadContaCorrente() {
+    private void loadFXML(String path) {
         try {
             flag = true;
             paneAnt = paneAux;
-            paneAux = FXMLLoader.load(getClass().getResource("/fxml/contaCorrente/GerenciarContasFXML.fxml"));
-            paneBody.getChildren().remove(paneAnt);
-            paneBody.getChildren().add(paneAux);
-        } catch (IOException ex) {
-            System.out.println("Erro:" + ex);
-        }
-    }
-
-    //------------------------
-    private void loadMeioPagamento() {
-        try {
-            flag = true;
-            paneAnt = paneAux;
-            paneAux = FXMLLoader.load(getClass().getResource("/fxml/meioPagamento/MeioPagamentoFXML.fxml"));
-            paneBody.getChildren().remove(paneAnt);
-            paneBody.getChildren().add(paneAux);
-        } catch (IOException ex) {
-            System.out.println("Erro:" + ex);
-        }
-    }
-
-    //------------------------
-    private void loadFuncionario() {
-        try {
-            flag = true;
-            paneAnt = paneAux;
-            paneAux = FXMLLoader.load(getClass().getResource("/fxml/funcionario/FXGerenciarFuncionariosFXML.fxml"));
-            paneBody.getChildren().remove(paneAnt);
-            paneBody.getChildren().add(paneAux);
-        } catch (IOException ex) {
-            System.out.println("Erro:" + ex);
-        }
-    }
-
-    //------------------------
-    private void loadFornecedor() {
-        try {
-            flag = true;
-            paneAnt = paneAux;
-            paneAux = FXMLLoader.load(getClass().getResource("/fxml/fornecedores/FXGerenciarFornecedoresFXML.fxml"));
-            paneBody.getChildren().remove(paneAnt);
-            paneBody.getChildren().add(paneAux);
-        } catch (IOException ex) {
-            System.out.println("Erro:" + ex);
-        }
-    }
-
-    private void loadGrupos() {
-        try {
-            flag = true;
-            paneAnt = paneAux;
-            paneAux = FXMLLoader.load(getClass().getResource("/fxml/produto/GerenciarGruposFXML.fxml"));
-            paneBody.getChildren().remove(paneAnt);
-            paneBody.getChildren().add(paneAux);
-        } catch (IOException ex) {
-            System.out.println("Erro:" + ex);
-        }
-    }
-
-    //------------------------
-    private void loadProdutos() {
-        try {
-            flag = true;
-            paneAnt = paneAux;
-            paneAux = FXMLLoader.load(getClass().getResource("/fxml/produto/FXGerenciarProdutosFXML.fxml"));
-            paneBody.getChildren().remove(paneAnt);
-            paneBody.getChildren().add(paneAux);
-        } catch (IOException ex) {
-            System.out.println("Erro:" + ex);
-        }
-    }
-
-    //------------------------
-    private void loadClientes() {
-        try {
-            flag = true;
-            paneAnt = paneAux;
-            paneAux = FXMLLoader.load(getClass().getResource("/fxml/clientes/FXGerenciarClientesFXML.fxml"));
-            paneBody.getChildren().remove(paneAnt);
-            paneBody.getChildren().add(paneAux);
-        } catch (IOException ex) {
-            System.out.println("Erro:" + ex);
-        }
-    }
-
-    //---------------------------------------------
-    //------------------------
-    private void loadAjustarEstoque() {
-        try {
-            flag = true;
-            paneAnt = paneAux;
-
-            paneAux = FXMLLoader.load(getClass().getResource("/fxml/ajusteEstoque/AjustarEstoqueFXML.fxml"));
-            paneBody.getChildren().remove(paneAnt);
-            paneBody.getChildren().add(paneAux);
-        } catch (IOException ex) {
-            System.out.println("Erro:" + ex);
-        }
-    }
-
-    //---------------------------------------------
-    //------------------------
-    private void loadPrePreparo() {
-        try {
-            flag = true;
-            paneAnt = paneAux;
-            paneAux = FXMLLoader.load(getClass().getResource("/fxml/prePreparo/GerenciarPrePreparoFXML.fxml"));
+            paneAux = FXMLLoader.load(getClass().getResource(path));
             paneBody.getChildren().remove(paneAnt);
             paneBody.getChildren().add(paneAux);
         } catch (IOException ex) {
@@ -271,7 +165,7 @@ public class FXMenuFXMLController implements Initializable {
         }
     }
     //---------------------------------------------
-
+    
     private void menuButtonsControl() {
         for (Node node : gavetas.getChildren()) {
             if (node.getAccessibleText() != null) {
@@ -369,12 +263,12 @@ public class FXMenuFXMLController implements Initializable {
 
     @FXML
     private void onPrePreparo(ActionEvent event) {
-        loadPrePreparo();
+        loadFXML("/fxml/prePreparo/GerenciarPrePreparoFXML.fxml");
     }
 
     @FXML
     private void onAjustarEstoque(ActionEvent event) {
-        loadAjustarEstoque();
+        loadFXML("/fxml/ajusteEstoque/AjustarEstoqueFXML.fxml");
     }
 
     @FXML
