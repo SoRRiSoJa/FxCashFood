@@ -68,7 +68,7 @@
                   </JFXButton>
                </children>
             </HBox>
-            <JFXTextField fx:id="txtDescricao" focusColor="#d05ce3" labelFloat="true" layoutX="29.0" layoutY="59.0" prefHeight="26.0" prefWidth="580.0" promptText="Descrição do Grupo" />
+            <JFXTextField fx:id="txtDescricao" focusColor="#004ba0" labelFloat="true" layoutX="29.0" layoutY="59.0" prefHeight="26.0" prefWidth="580.0" promptText="Descrição do Grupo" />
             <Pane prefHeight="20.0" prefWidth="640.0" style="-fx-background-color: #0081cb;">
                <children>
                   <Label layoutX="5.0" layoutY="2.0" text="Registrar novo Grupo" textFill="WHITE" />
@@ -91,7 +91,7 @@
                         <FontAwesomeIconView fill="WHITE" glyphName="PLUS" size="18" />
                      </graphic>
                   </JFXButton>
-                  <TableView fx:id="tbvCategoria" layoutX="291.0" layoutY="32.0" prefHeight="113.0" prefWidth="273.0">
+                  <TableView fx:id="tbvCategoria" layoutX="291.0" layoutY="32.0" prefHeight="113.0" prefWidth="273.0" stylesheets="@../../styles/TableViewCSS.css">
                      <columns>
                         <TableColumn fx:id="tbcCodCat" prefWidth="74.0" text="COD" />
                         <TableColumn fx:id="tbcDescricaoCat" prefWidth="138.0" text="Descrição" />

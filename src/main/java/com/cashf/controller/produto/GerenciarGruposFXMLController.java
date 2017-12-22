@@ -12,8 +12,10 @@ import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 import com.sun.prism.impl.Disposer;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Optional;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -102,9 +104,10 @@ public class GerenciarGruposFXMLController implements Initializable {
             controller.setGrupo(idGrupo, descricao);
             if (controller.getGrupo().getIdGrupo() == 0) {
                 controller.insert();
+                controller.setListaCategria(FXCollections.observableList(new ArrayList<>()));
                 clearFields();
-                PoupUpUtil.poupUp("Grupo Cadastrado", "O Grupo foi cadastrado com sucesso.", "");
                 loadCbbCategoria();
+                PoupUpUtil.poupUp("Grupo Cadastrado", "O Grupo foi cadastrado com sucesso.", "");
             } else {
                 controller.update();
                 PoupUpUtil.poupUp("Grupo Alterado", "O Grupo foi alterado com sucesso.", "");
@@ -175,6 +178,7 @@ public class GerenciarGruposFXMLController implements Initializable {
         txtDescricao.clear();
         txtDescCat.clear();
         cbbCategoria.setValue(null);
+        tbvCategoria.setItems(FXCollections.observableList(new ArrayList<>()));
     }
 
     private void setInputON() {
@@ -260,7 +264,7 @@ public class GerenciarGruposFXMLController implements Initializable {
     }
 
     private void loadCbbCategoria() {
-        cbbCategoria.setItems(controller.getListaCategria());
+        cbbCategoria.setItems(controller.getListaCbbCategria());
     }
 
     @FXML
