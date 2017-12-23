@@ -18,7 +18,7 @@
             <DropShadow />
          </effect>
          <children>
-            <JFXTextField fx:id="txtCodigo" focusColor="#004ba0" labelFloat="true" layoutX="35.0" layoutY="40.0" prefHeight="24.0" prefWidth="137.0" promptText="Código" />
+            <JFXTextField fx:id="txtCodigo" editable="false" focusColor="#004ba0" labelFloat="true" layoutX="35.0" layoutY="40.0" prefHeight="24.0" prefWidth="137.0" promptText="Código" />
             <JFXTextField fx:id="txtCodRef" focusColor="#004ba0" labelFloat="true" layoutX="252.0" layoutY="41.0" prefHeight="24.0" prefWidth="137.0" promptText="Código Referência" />
             <JFXComboBox fx:id="cbbProdutos" focusColor="#004ba0" labelFloat="true" layoutX="468.0" layoutY="40.0" prefHeight="26.0" prefWidth="137.0" promptText="Tipo de produto" />
             <JFXTextField fx:id="txtDescricao" focusColor="#004ba0" labelFloat="true" layoutX="35.0" layoutY="92.0" prefHeight="24.0" prefWidth="570.0" promptText="Descrição" />
@@ -27,7 +27,7 @@
             <JFXTextField fx:id="txtPrecoCusto" focusColor="#004ba0" labelFloat="true" layoutX="468.0" layoutY="145.0" onKeyReleased="#onKeyReleasedPrecoCusto" prefHeight="24.0" prefWidth="137.0" promptText="Preço de custo" />
             <JFXTextField fx:id="txtNcm" focusColor="#004ba0" labelFloat="true" layoutX="35.0" layoutY="198.0" prefHeight="24.0" prefWidth="155.0" promptText="NCM" />
             <JFXTextField fx:id="txtPrecoVenda" focusColor="#004ba0" labelFloat="true" layoutX="243.0" layoutY="198.0" onKeyReleased="#onKeyReleasedPrecoVenda" prefHeight="24.0" prefWidth="155.0" promptText="Preço de venda" />
-            <JFXTextField fx:id="txtQtdeProd" focusColor="#004ba0" labelFloat="true" layoutX="470.0" layoutY="198.0" prefHeight="26.0" prefWidth="137.0" promptText="Qtde. em Estoque" />
+            <JFXTextField fx:id="txtQtdeProd" focusColor="#004ba0" labelFloat="true" layoutX="470.0" layoutY="198.0" onKeyReleased="#onKeyReleasedQtde" prefHeight="26.0" prefWidth="137.0" promptText="Qtde. em Estoque" />
             <JFXComboBox fx:id="cbbGrupo" focusColor="#004ba0" labelFloat="true" layoutX="35.0" layoutY="253.0" onAction="#onSelecionarGrupo" prefHeight="26.0" prefWidth="155.0" promptText="Grupo" />
             <JFXComboBox fx:id="cbbCategoria" focusColor="#004ba0" labelFloat="true" layoutX="245.0" layoutY="253.0" prefHeight="26.0" prefWidth="155.0" promptText="Categoria" />
             <Pane prefHeight="20.0" prefWidth="640.0" style="-fx-background-color: #0081cb;">
@@ -80,8 +80,8 @@
          </effect>
          <children>
             <JFXComboBox fx:id="cbbSituacaoTributaria" focusColor="#004ba0" labelFloat="true" layoutX="35.0" layoutY="44.0" prefHeight="26.0" prefWidth="155.0" promptText="Situação Tributária" />
-            <JFXTextField fx:id="txtPercentualPIS" focusColor="#004ba0" labelFloat="true" layoutX="35.0" layoutY="96.0" prefHeight="24.0" prefWidth="137.0" promptText="\% PIS" />
-            <JFXTextField fx:id="txtCstPis" focusColor="#004ba0" labelFloat="true" layoutX="243.0" layoutY="96.0" onKeyReleased="#onKeyReleasedPisPercent" prefHeight="24.0" prefWidth="137.0" promptText="Cst PIS" />
+            <JFXTextField fx:id="txtPercentualPIS" focusColor="#004ba0" labelFloat="true" layoutX="35.0" layoutY="96.0" onKeyReleased="#onKeyReleasedPISPercent" prefHeight="24.0" prefWidth="137.0" promptText="\% PIS" />
+            <JFXTextField fx:id="txtCstPis" focusColor="#004ba0" labelFloat="true" layoutX="243.0" layoutY="96.0" onKeyReleased="#onKeyReleasedCSTPis" prefHeight="24.0" prefWidth="137.0" promptText="Cst PIS" />
             <JFXTextField fx:id="txtPercentualConfins" focusColor="#004ba0" labelFloat="true" layoutX="468.0" layoutY="96.0" onKeyReleased="#onKeyReleasedconfisnPercent" prefHeight="24.0" prefWidth="137.0" promptText="\% CONFINS" />
             <JFXTextField fx:id="txtCfop" focusColor="#004ba0" labelFloat="true" layoutX="35.0" layoutY="152.0" onKeyReleased="#onKeyReleasedCFOP" prefHeight="24.0" prefWidth="137.0" promptText="CFOP" />
             <JFXTextField fx:id="txtCstConfins" focusColor="#004ba0" labelFloat="true" layoutX="243.0" layoutY="152.0" onKeyReleased="#onKeyReleasedCstConfins" prefHeight="24.0" prefWidth="137.0" promptText="Cst CONFINS" />

@@ -68,10 +68,10 @@
                   </JFXButton>
                </children>
             </HBox>
-            <JFXTextField fx:id="txtDescricao" focusColor="#d05ce3" labelFloat="true" layoutX="90.0" layoutY="41.0" prefHeight="24.0" prefWidth="460.0" promptText="Descrição da Conta" />
-            <JFXTextField fx:id="txtAgencia" focusColor="#d05ce3" labelFloat="true" layoutX="90.0" layoutY="93.0" prefHeight="24.0" prefWidth="200.0" promptText="Agencia" />
-            <JFXTextField fx:id="txtNumero" focusColor="#d05ce3" labelFloat="true" layoutX="350.0" layoutY="93.0" prefHeight="24.0" prefWidth="200.0" promptText="Nº da Conta" />
-            <JFXComboBox fx:id="cbbBanco" focusColor="#d05ce3" labelFloat="true" layoutX="90.0" layoutY="145.0" onMouseClicked="#onMouseClickedBanco" prefHeight="26.0" prefWidth="460.0" promptText="Banco" />
+            <JFXTextField fx:id="txtDescricao" focusColor="#004ba0" labelFloat="true" layoutX="90.0" layoutY="41.0" prefHeight="24.0" prefWidth="460.0" promptText="Descrição da Conta" />
+            <JFXTextField fx:id="txtAgencia" focusColor="#004ba0" labelFloat="true" layoutX="90.0" layoutY="93.0" prefHeight="24.0" prefWidth="200.0" promptText="Agencia" />
+            <JFXTextField fx:id="txtNumero" focusColor="#004ba0" labelFloat="true" layoutX="350.0" layoutY="93.0" prefHeight="24.0" prefWidth="200.0" promptText="Nº da Conta" />
+            <JFXComboBox fx:id="cbbBanco" focusColor="#004ba0" labelFloat="true" layoutX="90.0" layoutY="145.0" onMouseClicked="#onMouseClickedBanco" prefHeight="26.0" prefWidth="460.0" promptText="Banco" />
             <Pane prefHeight="20.0" prefWidth="640.0" style="-fx-background-color: #0081cb;">
                <children>
                   <Label layoutX="5.0" layoutY="2.0" text="Registrar nova Conta Corrente:" textFill="WHITE" />

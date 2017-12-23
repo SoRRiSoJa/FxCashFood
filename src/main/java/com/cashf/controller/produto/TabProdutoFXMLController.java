@@ -359,7 +359,7 @@ public class TabProdutoFXMLController implements GenericViewController, Initiali
             erros += "informe a quantidade em estoque! \n";
             flag = false;
         }
-        
+
         if (preco_custo == null || preco_custo.compareTo(BigDecimal.ZERO) <= 0) {
             erros += "O preço de custo deve ser maio que 0! \n";
             flag = false;
@@ -558,7 +558,6 @@ public class TabProdutoFXMLController implements GenericViewController, Initiali
         tff.formatter();
     }
 
-    @FXML
     private void onKeyReleasedPisPercent(KeyEvent event) {
         TextFieldFormatter tff = new TextFieldFormatter();
         tff.setMask("##.###");
@@ -654,6 +653,28 @@ public class TabProdutoFXMLController implements GenericViewController, Initiali
         tff.setMask("##.###");
         tff.setCaracteresValidos("0123456789");
         tff.setTf(txtAliquotaFederal);
+        tff.formatter();
+    }
+
+    @FXML
+    private void onKeyReleasedQtde(KeyEvent event) {
+    }
+
+    @FXML
+    private void onKeyReleasedPISPercent(KeyEvent event) {
+        TextFieldFormatter tff = new TextFieldFormatter();
+        tff.setMask("##.###");
+        tff.setCaracteresValidos("0123456789");
+        tff.setTf(txtPercentualPIS);
+        tff.formatter();
+    }
+
+    @FXML
+    private void onKeyReleasedCSTPis(KeyEvent event) {
+        TextFieldFormatter tff = new TextFieldFormatter();
+        tff.setMask("##.###");
+        tff.setCaracteresValidos("0123456789");
+        tff.setTf(txtCstPis);
         tff.formatter();
     }
 
