@@ -36,7 +36,7 @@ public class AtualizarEstoque {
         prePreparo.setIdPrepreparo(0l);
     }
 
-    public Boolean ajustarEstoqueProduto(Produto produto, BigDecimal qtdeAjuste, UnidadeMedida unidadeMedida) {
+    public Boolean AjustarEstoqueProduto(Produto produto, BigDecimal qtdeAjuste, UnidadeMedida unidadeMedida) {
         boolean flag = true;
         BigDecimal qtdeAtual = produto.getQtdeProduto();
         if (produto.getUnidadeMedida().equals(unidadeMedida)) {
