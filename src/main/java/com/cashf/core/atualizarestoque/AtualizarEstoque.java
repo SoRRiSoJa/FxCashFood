@@ -13,6 +13,7 @@ import com.cashf.model.prepreparo.PrePreparo;
 import com.cashf.model.produto.Produto;
 import com.cashf.model.produto.UnidadeMedida;
 import java.math.BigDecimal;
+import util.UnitConverter;
 
 /**
  *
@@ -36,15 +37,41 @@ public class AtualizarEstoque {
         prePreparo.setIdPrepreparo(0l);
     }
 
-    public Boolean AjustarEstoqueProduto(Produto produto, BigDecimal qtdeAjuste, UnidadeMedida unidadeMedida) {
+    public Boolean retirarProduto(Produto produto, BigDecimal qtdeAjuste, UnidadeMedida unidadeMedida) {
         boolean flag = true;
-        BigDecimal qtdeAtual = produto.getQtdeProduto();
-        if (produto.getUnidadeMedida().equals(unidadeMedida)) {
-            if (qtdeAtual.compareTo(qtdeAjuste) >= 0) {//Se unidades iguáis e qtde>= a ajuste
-                produto.setQtdeProduto(produto.getQtdeProduto().subtract(qtdeAjuste));
+        try {
+            BigDecimal qtdeAtual = produto.getQtdeProduto();
+            if (produto.getUnidadeMedida().equals(unidadeMedida)) {
+                if (qtdeAtual.compareTo(qtdeAjuste) >= 0) {//Se unidades iguáis e qtde>= a ajuste
+                    produto.setQtdeProduto(qtdeAtual.subtract(qtdeAjuste));
+                }
+            } else {
+                produto.setQtdeProduto(qtdeAtual.subtract(UnitConverter.convertTo(produto.getUnidadeMedida(), unidadeMedida, qtdeAjuste)));
             }
-        } else {
+            
+            produtoDAO.update(produto);
+        } catch (Exception ex) {
+            System.out.println("Erro ao retirar Produto:--->>>> " + ex);
+            flag = false;
+        }
+        return flag;
+    }
 
+    public Boolean adicionarProduto(Produto produto, BigDecimal qtdeAjuste, UnidadeMedida unidadeMedida) {
+        boolean flag = true;
+        try {
+            BigDecimal qtdeAtual = produto.getQtdeProduto();
+            if (produto.getUnidadeMedida().equals(unidadeMedida)) {
+                if (qtdeAjuste.compareTo(BigDecimal.ZERO) > 0) {// qtdeAjuste>= 0
+                    produto.setQtdeProduto(qtdeAtual.add(qtdeAjuste));
+                }
+            } else {
+                produto.setQtdeProduto(qtdeAtual.add(UnitConverter.convertTo(produto.getUnidadeMedida(), unidadeMedida, qtdeAjuste)));
+            }
+            produtoDAO.update(produto);
+        } catch (Exception ex) {
+            System.out.println("Erro ao adicionar Produto:--->>>> " + ex);
+            flag = false;
         }
         return flag;
     }
