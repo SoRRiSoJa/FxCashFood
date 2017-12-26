@@ -5,6 +5,7 @@
  */
 package com.cashf.core.atualizarestoque;
 
+import com.cashf.controller.login.LoginController;
 import com.cashf.dao.ajusteestoque.AjusteEstoqueDAO;
 import com.cashf.dao.produto.ProdutoDAO;
 import com.cashf.model.ajusteestoque.AjusteEstoque;
@@ -12,7 +13,10 @@ import com.cashf.model.ajusteestoque.TipoAjuste;
 import com.cashf.model.prepreparo.PrePreparo;
 import com.cashf.model.produto.Produto;
 import com.cashf.model.produto.UnidadeMedida;
+import com.cashf.model.usuario.Usuario;
 import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import util.UnitConverter;
 
 /**
@@ -48,7 +52,7 @@ public class AtualizarEstoque {
             } else {
                 produto.setQtdeProduto(qtdeAtual.subtract(UnitConverter.convertTo(produto.getUnidadeMedida(), unidadeMedida, qtdeAjuste)));
             }
-            
+
             produtoDAO.update(produto);
         } catch (Exception ex) {
             System.out.println("Erro ao retirar Produto:--->>>> " + ex);
@@ -98,6 +102,15 @@ public class AtualizarEstoque {
 
     public void setAjusteEstoque(AjusteEstoque ajusteEstoque) {
         this.ajusteEstoque = ajusteEstoque;
+    }
+
+    public void setAjusteEstoque(String motivo, LocalDate dataAjuste, LocalTime horaAjuste, BigDecimal qtdeAjustada) {
+        this.ajusteEstoque.setMotivo(motivo);
+        this.ajusteEstoque.setDataAjuste(dataAjuste);
+        this.ajusteEstoque.setHoraAjuste(horaAjuste);
+        this.ajusteEstoque.setProduto(produto);
+        this.ajusteEstoque.setUsuario(LoginController.getInstance().getUsuario());
+        this.ajusteEstoque.setTipoAjuste(tipoAjuste);
     }
 
     public TipoAjuste getTipoAjuste() {

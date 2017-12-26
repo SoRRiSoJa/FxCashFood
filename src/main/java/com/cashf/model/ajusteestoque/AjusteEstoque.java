@@ -8,6 +8,7 @@ package com.cashf.model.ajusteestoque;
 import com.cashf.model.produto.Produto;
 import com.cashf.model.usuario.Usuario;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Objects;
@@ -42,7 +43,7 @@ public class AjusteEstoque implements Serializable {
     @ManyToOne
     @JoinColumn(nullable = false)
     private Produto produto;
-    private int qtdeAjustada;
+    private BigDecimal qtdeAjustada;
     @ManyToOne
     @JoinColumn(nullable = false)
     private Usuario usuario;
@@ -53,7 +54,7 @@ public class AjusteEstoque implements Serializable {
     public AjusteEstoque() {
     }
 
-    public AjusteEstoque(Long idAjuste, String motivo, LocalDate dataAjuste, LocalTime horaAjuste, Produto produto, int qtdeAjustada, Usuario usuario, TipoAjuste tipoAjuste) {
+    public AjusteEstoque(Long idAjuste, String motivo, LocalDate dataAjuste, LocalTime horaAjuste, Produto produto, BigDecimal qtdeAjustada, Usuario usuario, TipoAjuste tipoAjuste) {
         this.idAjuste = idAjuste;
         this.motivo = motivo;
         this.dataAjuste = dataAjuste;
@@ -104,11 +105,11 @@ public class AjusteEstoque implements Serializable {
         this.produto = produto;
     }
 
-    public int getQtdeAjustada() {
+    public BigDecimal getQtdeAjustada() {
         return qtdeAjustada;
     }
 
-    public void setQtdeAjustada(int qtdeAjustada) {
+    public void setQtdeAjustada(BigDecimal qtdeAjustada) {
         this.qtdeAjustada = qtdeAjustada;
     }
 

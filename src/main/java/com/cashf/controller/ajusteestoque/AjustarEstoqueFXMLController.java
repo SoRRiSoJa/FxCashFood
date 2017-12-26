@@ -8,6 +8,7 @@ package com.cashf.controller.ajusteestoque;
 import com.cashf.cashfood.MainApp;
 import com.cashf.model.ajusteestoque.TipoAjuste;
 import com.cashf.model.produto.Produto;
+import com.cashf.model.produto.UnidadeMedida;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDatePicker;
@@ -24,12 +25,15 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import util.PoupUpUtil;
+import util.TextFieldFormatter;
 
 /**
  * FXML Controller class
@@ -37,7 +41,7 @@ import util.PoupUpUtil;
  * @author joao
  */
 public class AjustarEstoqueFXMLController implements GenericViewController, Initializable {
-
+    
     @FXML
     private Pane paneRoot;
     @FXML
@@ -72,7 +76,6 @@ public class AjustarEstoqueFXMLController implements GenericViewController, Init
     private JFXComboBox<TipoAjuste> cbbTipoAjuste;
     @FXML
     private JFXTextField txtQtdeAtual;
-    @FXML
     private JFXTextField txtSaldo;
     @FXML
     private JFXDatePicker dtpDataAjuste;
@@ -81,9 +84,18 @@ public class AjustarEstoqueFXMLController implements GenericViewController, Init
     //--
     private String erros;
     private String qtdeAjusteTxt;
+    private String motivoAjuste;
     private BigDecimal qtdeAjuste;
     private boolean flagButtons;
     private AjusteEstoqueController controller = new AjusteEstoqueController();
+    @FXML
+    private JFXButton btnLimpar;
+    @FXML
+    private Label lblSaldo;
+    @FXML
+    private JFXComboBox<UnidadeMedida> cbbUnidadeMedida;
+    @FXML
+    private JFXTextField txtMotivo;
 
     /**
      * Initializes the controller class.
@@ -96,9 +108,10 @@ public class AjustarEstoqueFXMLController implements GenericViewController, Init
         dtpHoraAjuste.setValue(LocalTime.now());
         setUpTableView();
         loadCbbTipo();
+        loadCbbUnidadeFisica();
         loadTbv();
     }
-
+    
     @FXML
     private void onSelecionarProduto(MouseEvent event) {
         if (tbvProdutos.getSelectionModel().getSelectedItem() != null) {
@@ -106,11 +119,11 @@ public class AjustarEstoqueFXMLController implements GenericViewController, Init
             loadDataToScreen();
         }
     }
-
+    
     @FXML
     private void onPesquisar(ActionEvent event) {
     }
-
+    
     @FXML
     private void onSalvar(ActionEvent event) {
         if (validateFields()) {
@@ -127,15 +140,15 @@ public class AjustarEstoqueFXMLController implements GenericViewController, Init
                     break;
             }
             controller.refreshListaPRod();
-            txtSaldo.setText(controller.getProduto().getQtdeProduto()+"");
+            lblSaldo.setText(controller.getProduto().getQtdeProduto() + "");
             tbvProdutos.refresh();
         } else {
             PoupUpUtil.errorMessage(paneRoot, MainApp.paneRoot, erros);
             erros = "";
         }
-
+        
     }
-
+    
     @Override
     public void clearFields() {
         txtConsultar.clear();
@@ -144,14 +157,15 @@ public class AjustarEstoqueFXMLController implements GenericViewController, Init
         rdbTodos.selectedProperty().setValue(false);
         txtDescricao.clear();
         txtQtdeAjuste.clear();
+        txtMotivo.clear();
         cbbTipoAjuste.setValue(null);
         txtQtdeAtual.clear();
-        txtSaldo.clear();
+        lblSaldo.setText("");
         dtpDataAjuste.setValue(LocalDate.now());
         dtpHoraAjuste.setValue(LocalTime.now());
-
+        
     }
-
+    
     @Override
     public void setInputOff() {
         tbvProdutos.setDisable(true);
@@ -165,12 +179,12 @@ public class AjustarEstoqueFXMLController implements GenericViewController, Init
         txtQtdeAjuste.setDisable(true);
         cbbTipoAjuste.setDisable(true);
         txtQtdeAtual.setDisable(true);
-        txtSaldo.setDisable(true);
+        lblSaldo.setDisable(true);
         dtpDataAjuste.setDisable(true);
         dtpHoraAjuste.setDisable(true);
         flagButtons = false;
     }
-
+    
     @Override
     public void setInputOn() {
         tbvProdutos.setDisable(false);
@@ -187,52 +201,58 @@ public class AjustarEstoqueFXMLController implements GenericViewController, Init
         txtSaldo.setDisable(false);
         dtpDataAjuste.setDisable(false);
         dtpHoraAjuste.setDisable(false);
+        lblSaldo.setDisable(false);
         flagButtons = true;
-
+        
     }
-
+    
     @Override
     public Boolean validateFields() {
         boolean flag = true;
         if (txtQtdeAjuste.getText() == null || txtQtdeAjuste.getText().equals("")) {
-            erros = "A quntidade a ser ajustada deve ser informada!\n";
+            erros += "A quntidade a ser ajustada deve ser informada!\n";
             flag = false;
         }
         if (txtQtdeAjuste.getText().contains("-") || txtQtdeAjuste.getText().equals("0")) {
-            erros = "A quantidade a ser ajustada deve positiva e maior que 0!\n";
+            erros += "A quantidade a ser ajustada deve positiva e maior que 0!\n";
             flag = false;
         }
         if (cbbTipoAjuste.getSelectionModel().getSelectedItem() == null) {
-            erros = "Voce deve selecionar o Tipo de ajuste a realizar Entrada/Saída !\n";
+            erros += "Voce deve selecionar o Tipo de ajuste a realizar Entrada/Saída !\n";
+            flag = false;
+        }
+        if (txtMotivo.getText() == null || txtMotivo.getText().equals("")) {
+            erros += "Voce deve informar um motivo par ao ajuste !\n";
             flag = false;
         }
         return flag;
     }
-
+    
     @Override
     public void getData() {
         qtdeAjuste = new BigDecimal(txtQtdeAjuste.getText());
-
+        motivoAjuste = txtMotivo.getText();
+        
     }
-
+    
     @Override
     public void loadDataToScreen() {
         txtDescricao.setText(controller.getProduto().getDescriao());
         txtQtdeAtual.setText(controller.getProduto().getQtdeProduto() + "");
-
+        
     }
-
+    
     @FXML
     private void onMouseClickedTipo(MouseEvent event) {
         if (cbbTipoAjuste.getSelectionModel().getSelectedItem() != null) {
             controller.setTipoAjuste(cbbTipoAjuste.getSelectionModel().getSelectedItem());
         }
     }
-
+    
     private void loadCbbTipo() {
         cbbTipoAjuste.getItems().addAll(Arrays.asList(TipoAjuste.values()));
     }
-
+    
     private void setUpTableView() {
         tbcCod.setCellValueFactory(new PropertyValueFactory<>("idProduto"));
         tbcCodRef.setCellValueFactory(new PropertyValueFactory<>("codigoReferencia"));
@@ -241,8 +261,33 @@ public class AjustarEstoqueFXMLController implements GenericViewController, Init
         tbcQtde.setCellValueFactory(new PropertyValueFactory<>("qtdeProduto"));
         tbvProdutos.getColumns().setAll(tbcCod, tbcCodRef, tbcDescricao, tbcTipo, tbcQtde);
     }
-
+    
     private void loadTbv() {
         tbvProdutos.setItems(controller.getListaProduto());
+    }
+    
+    @FXML
+    private void onLimpar(ActionEvent event) {
+        clearFields();
+    }
+    
+    @FXML
+    private void onKeyReleasedQtdeAjuste(KeyEvent event) {
+        TextFieldFormatter tff = new TextFieldFormatter();
+        tff.setMask("###.##");
+        tff.setCaracteresValidos("0123456789");
+        tff.setTf(txtQtdeAjuste);
+        tff.formatter();
+    }
+    
+    private void loadCbbUnidadeFisica() {
+        cbbUnidadeMedida.getItems().addAll(Arrays.asList(UnidadeMedida.values()));
+    }
+    
+    @FXML
+    private void onMouseClickedMedida(MouseEvent event) {
+        if (cbbUnidadeMedida.getSelectionModel().getSelectedItem() != null) {
+            controller.setUnidadeMedida(cbbUnidadeMedida.getSelectionModel().getSelectedItem());
+        }
     }
 }
