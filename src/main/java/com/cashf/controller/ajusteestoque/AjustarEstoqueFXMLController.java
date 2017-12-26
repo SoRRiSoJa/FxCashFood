@@ -116,6 +116,7 @@ public class AjustarEstoqueFXMLController implements GenericViewController, Init
     private void onSelecionarProduto(MouseEvent event) {
         if (tbvProdutos.getSelectionModel().getSelectedItem() != null) {
             controller.setProduto(tbvProdutos.getSelectionModel().getSelectedItem());
+            controller.setUnidadeMedida(controller.getProduto().getUnidadeMedida());
             loadDataToScreen();
         }
     }
@@ -130,6 +131,7 @@ public class AjustarEstoqueFXMLController implements GenericViewController, Init
             getData();
             controller.setTipoAjuste(cbbTipoAjuste.getSelectionModel().getSelectedItem());
             TipoAjuste aux = controller.getTipoAjuste();
+            controller.setUnidadeMedida(cbbUnidadeMedida.getSelectionModel().getSelectedItem());
             controller.setQtdeAjuste(qtdeAjuste);
             switch (aux) {
                 case E:
@@ -225,6 +227,10 @@ public class AjustarEstoqueFXMLController implements GenericViewController, Init
             erros += "Voce deve informar um motivo par ao ajuste !\n";
             flag = false;
         }
+        if (cbbUnidadeMedida.getSelectionModel().getSelectedItem()==null) {
+            erros += "Voce deve informar uma unidade de medida !\n";
+            flag = false;
+        }
         return flag;
     }
     
@@ -239,7 +245,7 @@ public class AjustarEstoqueFXMLController implements GenericViewController, Init
     public void loadDataToScreen() {
         txtDescricao.setText(controller.getProduto().getDescriao());
         txtQtdeAtual.setText(controller.getProduto().getQtdeProduto() + "");
-        
+        cbbUnidadeMedida.getSelectionModel().select(controller.getProduto().getUnidadeMedida());
     }
     
     @FXML

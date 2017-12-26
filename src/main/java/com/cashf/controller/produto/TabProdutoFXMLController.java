@@ -21,6 +21,7 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.input.KeyEvent;
 import util.PoupUpUtil;
 import util.TextFieldFormatter;
@@ -146,6 +147,8 @@ public class TabProdutoFXMLController implements GenericViewController, Initiali
     private static JFXButton _btnNovo;
     private static JFXButton _btnExcluir;
     private static JFXButton _btnLimpar;
+    @FXML
+    private Label lblTotal;
 
     /**
      * Initializes the controller class.

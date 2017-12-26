@@ -38,6 +38,7 @@ public class Produto implements Serializable {
     private String codigoReferencia;
     private String descriao;
     private int qtdeEmbalagem;
+    private BigDecimal unidadesEstoque;
     private BigDecimal qtdeProduto;
     private String ncm;
     private BigDecimal preco_custo;
@@ -57,15 +58,17 @@ public class Produto implements Serializable {
     private boolean status;
     @OneToMany(mappedBy = "produto", cascade = CascadeType.ALL)
     private List<ProdutoPrePreparo> listaProdutos;
+
     public Produto() {
     }
 
-    public Produto(long id, String codigoReferencia, String descriao, int qtdeEmbalagem,BigDecimal qtdeProd, String ncm, BigDecimal preco_custo, BigDecimal preco_venda, Grupo grupo, AliquotasProduto aliquotasProduto, UnidadeMedida unidadeMedida, TipoProduto tipo,List<ProdutoPrePreparo> listaProdutos, boolean status) {
+    public Produto(long id, String codigoReferencia, String descriao, int qtdeEmbalagem, BigDecimal unidadesEstoque, BigDecimal qtdeProd, String ncm, BigDecimal preco_custo, BigDecimal preco_venda, Grupo grupo, AliquotasProduto aliquotasProduto, UnidadeMedida unidadeMedida, TipoProduto tipo, List<ProdutoPrePreparo> listaProdutos, boolean status) {
         this.idProduto = id;
         this.codigoReferencia = codigoReferencia;
         this.descriao = descriao;
         this.qtdeEmbalagem = qtdeEmbalagem;
-        this.qtdeProduto=qtdeProd;
+        this.unidadesEstoque = unidadesEstoque;
+        this.qtdeProduto = qtdeProd;
         this.ncm = ncm;
         this.preco_custo = preco_custo;
         this.preco_venda = preco_venda;
@@ -74,7 +77,7 @@ public class Produto implements Serializable {
         this.unidadeMedida = unidadeMedida;
         this.tipo = tipo;
         this.status = status;
-        this.listaProdutos=listaProdutos;
+        this.listaProdutos = listaProdutos;
     }
 
     public long getIdProduto() {
@@ -116,7 +119,7 @@ public class Produto implements Serializable {
     public void setQtdeProduto(BigDecimal qtdeProduto) {
         this.qtdeProduto = qtdeProduto;
     }
-    
+
     public String getNcm() {
         return ncm;
     }
@@ -188,7 +191,7 @@ public class Produto implements Serializable {
     public void setListaProdutos(List<ProdutoPrePreparo> listaProdutos) {
         this.listaProdutos = listaProdutos;
     }
-    
+
     @Override
     public int hashCode() {
         int hash = 5;

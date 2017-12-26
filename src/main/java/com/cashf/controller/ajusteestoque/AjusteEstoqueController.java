@@ -140,10 +140,10 @@ public class AjusteEstoqueController implements GenericController<AjusteEstoque>
     }
 
     public void adicionarProduto() {
-        atualizarEstoque.adicionarProduto(produto, qtdeAjuste, produto.getUnidadeMedida());
+        atualizarEstoque.adicionarProduto(produto, qtdeAjuste, unidadeMedida);
     }
 
     public void retirarProduto() {
-        atualizarEstoque.retirarProduto(produto, qtdeAjuste, produto.getUnidadeMedida());
+        atualizarEstoque.retirarProduto(produto, qtdeAjuste, unidadeMedida);
     }
 }
