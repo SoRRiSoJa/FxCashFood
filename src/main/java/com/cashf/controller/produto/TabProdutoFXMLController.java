@@ -516,7 +516,7 @@ public class TabProdutoFXMLController implements GenericViewController, Initiali
         _txtPrecoVenda.setText(ProdutoController.getInstance().getProduto().getPreco_venda() + "");
         _txtCodRef.setText(ProdutoController.getInstance().getProduto().getCodigoReferencia());
         _txtQtdeEmbalagem.setText(ProdutoController.getInstance().getProduto().getQtdeEmbalagem() + "");
-        _txtQtdeProd.setText(ProdutoController.getInstance().getProduto().getQtdeProduto() + "");
+        _txtQtdeProd.setText(ProdutoController.getInstance().getProduto().getUnidadesEstoque() + "");
         _cbbSituacaoTributaria.setValue(ProdutoController.getInstance().getProduto().getAliquotasProduto().getSituacaoTributaria());
         _txtPercentualPIS.setText(ProdutoController.getInstance().getProduto().getAliquotasProduto().getPercentualPis() + "");
         _txtAliquotaICMS.setText(ProdutoController.getInstance().getProduto().getAliquotasProduto().getAliquotaIcms() + "");
@@ -530,6 +530,7 @@ public class TabProdutoFXMLController implements GenericViewController, Initiali
         _txtAliquotaMunicipal.setText(ProdutoController.getInstance().getProduto().getAliquotasProduto().getAliquotamunicipal() + "");
         _txtAliquotaEstadual.setText(ProdutoController.getInstance().getProduto().getAliquotasProduto().getAliquotaestadual() + "");
         _txtAliquotaFederal.setText(ProdutoController.getInstance().getProduto().getAliquotasProduto().getAliquotafederal() + "");
+        _lblTotal.setText(ProdutoController.getInstance().getProduto().getQtdeProduto()+"");
         _btnExcluir.setDisable(false);
     }
 
