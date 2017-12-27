@@ -96,6 +96,10 @@ public class AjustarEstoqueFXMLController implements GenericViewController, Init
     private JFXComboBox<UnidadeMedida> cbbUnidadeMedida;
     @FXML
     private JFXTextField txtMotivo;
+    @FXML
+    private JFXRadioButton rdbQtdeTotal;
+    @FXML
+    private JFXRadioButton rdbUnidadesEstoque;
 
     /**
      * Initializes the controller class.

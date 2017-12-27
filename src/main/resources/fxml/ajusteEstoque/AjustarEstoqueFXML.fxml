@@ -15,6 +15,7 @@
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
 <Pane fx:id="paneRoot" layoutX="20.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="632.0" prefWidth="1366.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cashf.controller.ajusteestoque.AjustarEstoqueFXMLController">
@@ -99,6 +100,17 @@
             </Label>
             <JFXComboBox fx:id="cbbUnidadeMedida" focusColor="#004ba0" labelFloat="true" layoutX="90.0" layoutY="129.0" onMouseClicked="#onMouseClickedMedida" prefHeight="26.0" prefWidth="460.0" promptText="Unidade Medida" />
             <JFXTextField fx:id="txtMotivo" focusColor="#004ba0" labelFloat="true" layoutX="90.0" layoutY="176.0" prefHeight="24.0" prefWidth="460.0" promptText="Motivo do ajuste:" />
+            <VBox alignment="CENTER_LEFT" layoutX="90.0" layoutY="307.0" prefHeight="68.0" prefWidth="200.0" spacing="10.0">
+               <children>
+                  <JFXRadioButton fx:id="rdbQtdeTotal" style="-jfx-selected-color: #004ba0;" text="Qtde total" />
+                  <JFXRadioButton fx:id="rdbUnidadesEstoque" style="-jfx-selected-color: #004ba0;" text="Unidades em estoque" />
+               </children>
+            </VBox>
+            <Label layoutX="101.0" layoutY="282.0" text="Ajustar:">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </Label>
          </children>
       </Pane>
    </children>
