@@ -20,6 +20,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Point2D;
 import javafx.geometry.Pos;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
@@ -230,9 +231,11 @@ public class GerenciarGruposFXMLController implements Initializable {
 
     private boolean validateFieldsCategoria() {
         boolean flag = true;
-        if (descricaoCategoria == null || descricaoCategoria.equals("") || descricaoCategoria.length() < 3) {
-            erros += "A Descrição da categoria do grupo de produtos deve conter um conteúdo válido! \n";
-            flag = false;
+        if (cbbCategoria.getSelectionModel().getSelectedItem() == null) {
+            if (descricaoCategoria == null || descricaoCategoria.equals("") || descricaoCategoria.length() < 3) {
+                erros += "A Descrição da categoria do grupo de produtos deve conter um conteúdo válido! \n";
+                flag = false;
+            }
         }
         return flag;
     }
@@ -272,6 +275,7 @@ public class GerenciarGruposFXMLController implements Initializable {
         if (cbbCategoria.getSelectionModel().getSelectedItem() != null) {
             controller.setCategoria(cbbCategoria.getSelectionModel().getSelectedItem());
             controller.getGrupo().setCategoria(controller.getCategoria());
+            txtDescCat.setText(controller.getCategoria().getDescricao());
         }
     }
 
