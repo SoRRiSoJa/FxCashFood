@@ -120,6 +120,14 @@ public class Produto implements Serializable {
         this.qtdeProduto = qtdeProduto;
     }
 
+    public BigDecimal getUnidadesEstoque() {
+        return unidadesEstoque;
+    }
+
+    public void setUnidadesEstoque(BigDecimal unidadesEstoque) {
+        this.unidadesEstoque = unidadesEstoque;
+    }
+
     public String getNcm() {
         return ncm;
     }

@@ -23,27 +23,35 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "aliquotas_produto")
-public class AliquotasProduto implements Serializable{
+public class AliquotasProduto implements Serializable {
+
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(columnDefinition = "serial")
     @Id
     private long idAliquota;
+    @Column(precision = 8, scale = 4)
     private BigDecimal percentualPis;
     private BigDecimal cstpPis;
     private BigDecimal cfop;
     private BigDecimal cstConfins;
+    @Column(precision = 8, scale = 4)
     private BigDecimal percentualConfins;
+    @Column(precision = 8, scale = 4)
     private BigDecimal aliquotaCsosn;
     private BigDecimal cest;
+    @Column(precision = 8, scale = 4)
     private BigDecimal aliquotaIcms;
+    @Column(precision = 8, scale = 4)
     private BigDecimal aliquotafederal;
+    @Column(precision = 8, scale = 4)
     private BigDecimal aliquotaestadual;
+    @Column(precision = 8, scale = 4)
     private BigDecimal aliquotamunicipal;
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private SituacaoTributaria situacaoTributaria;
 
-    public AliquotasProduto(long id, BigDecimal percentualPis, BigDecimal cstpPis, BigDecimal cfop, BigDecimal cstConfins, BigDecimal percentualConfins, BigDecimal aliquotaCsosn, BigDecimal cest, BigDecimal aliquotaIcms, BigDecimal aliquotafederal,BigDecimal aliquotaestadual,BigDecimal aliquomunicipal, SituacaoTributaria situacaoTributaria) {
+    public AliquotasProduto(long id, BigDecimal percentualPis, BigDecimal cstpPis, BigDecimal cfop, BigDecimal cstConfins, BigDecimal percentualConfins, BigDecimal aliquotaCsosn, BigDecimal cest, BigDecimal aliquotaIcms, BigDecimal aliquotafederal, BigDecimal aliquotaestadual, BigDecimal aliquomunicipal, SituacaoTributaria situacaoTributaria) {
         this.idAliquota = id;
         this.percentualPis = percentualPis;
         this.cstpPis = cstpPis;
@@ -58,8 +66,7 @@ public class AliquotasProduto implements Serializable{
         this.aliquotamunicipal = aliquomunicipal;
         this.situacaoTributaria = situacaoTributaria;
     }
-    
-    
+
     public AliquotasProduto() {
     }
 
@@ -70,8 +77,6 @@ public class AliquotasProduto implements Serializable{
     public void setIdAliquota(long idAliquota) {
         this.idAliquota = idAliquota;
     }
-
-    
 
     public BigDecimal getPercentualPis() {
         return percentualPis;
@@ -160,7 +165,7 @@ public class AliquotasProduto implements Serializable{
     public void setAliquotamunicipal(BigDecimal aliquotamunicipal) {
         this.aliquotamunicipal = aliquotamunicipal;
     }
-    
+
     public SituacaoTributaria getSituacaoTributaria() {
         return situacaoTributaria;
     }
@@ -199,9 +204,7 @@ public class AliquotasProduto implements Serializable{
 
     @Override
     public String toString() {
-        return  ""+idAliquota;
+        return "" + idAliquota;
     }
-    
-    
-    
+
 }
