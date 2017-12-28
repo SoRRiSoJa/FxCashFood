@@ -142,10 +142,21 @@ public class AjustarEstoqueFXMLController implements GenericViewController, Init
             controller.setQtdeAjuste(qtdeAjuste);
             switch (aux) {
                 case E:
-                    controller.adicionarProduto();
+                    if (rdbUnidadesEstoque.isSelected()) {
+                        //controller.();
+
+                    } else {
+                        controller.adicionarProduto();
+                    }
                     break;
                 case S:
-                    controller.retirarProduto();
+                    if (rdbUnidadesEstoque.isSelected()) {
+                        //controller.();
+
+                    } else {
+                        controller.retirarProduto();
+                    }
+
                     break;
             }
             controller.refreshListaPRod();
