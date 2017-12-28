@@ -13,8 +13,8 @@ import com.cashf.model.ajusteestoque.TipoAjuste;
 import com.cashf.model.prepreparo.PrePreparo;
 import com.cashf.model.produto.Produto;
 import com.cashf.model.produto.UnidadeMedida;
-import com.cashf.model.usuario.Usuario;
 import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import util.UnitConverter;
@@ -71,6 +71,42 @@ public class AtualizarEstoque {
                 }
             } else {
                 produto.setQtdeProduto(qtdeAtual.add(UnitConverter.convertTo(produto.getUnidadeMedida(), unidadeMedida, qtdeAjuste)));
+            }
+            produtoDAO.update(produto);
+        } catch (Exception ex) {
+            System.out.println("Erro ao adicionar Produto:--->>>> " + ex);
+            flag = false;
+        }
+        return flag;
+    }
+
+    public Boolean adicionarUnidadesEstoque(Produto produto, BigDecimal qtdeAjuste, UnidadeMedida unidadeMedida) {
+        boolean flag = true;
+        try {
+            BigDecimal qtdeAtual = produto.getQtdeProduto();
+            BigDecimal qtdeEmbalagem = new BigDecimal(produto.getQtdeEmbalagem());
+            BigDecimal unidadesEstoque = produto.getUnidadesEstoque();
+            if (qtdeAjuste.compareTo(BigDecimal.ZERO) > 0) {// qtdeAjuste>= 0
+                produto.setUnidadesEstoque(unidadesEstoque.add(qtdeAjuste));
+                produto.setQtdeProduto(qtdeAtual.add(qtdeAjuste.multiply(qtdeEmbalagem)));
+            }
+            produtoDAO.update(produto);
+        } catch (Exception ex) {
+            System.out.println("Erro ao adicionar Produto:--->>>> " + ex);
+            flag = false;
+        }
+        return flag;
+    }
+
+    public Boolean retirarUnidadesEstoque(Produto produto, BigDecimal qtdeAjuste, UnidadeMedida unidadeMedida) {
+        boolean flag = true;
+        try {
+            BigDecimal qtdeAtual = produto.getQtdeProduto();
+            BigDecimal qtdeEmbalagem = new BigDecimal(produto.getQtdeEmbalagem());
+            BigDecimal unidadesEstoque = produto.getUnidadesEstoque();
+            if (qtdeAjuste.compareTo(BigDecimal.ZERO) > 0) {// qtdeAjuste>= 0
+                produto.setUnidadesEstoque(unidadesEstoque.subtract(qtdeAjuste));
+                produto.setQtdeProduto(qtdeAtual.subtract(qtdeAjuste.multiply(qtdeEmbalagem)));
             }
             produtoDAO.update(produto);
         } catch (Exception ex) {

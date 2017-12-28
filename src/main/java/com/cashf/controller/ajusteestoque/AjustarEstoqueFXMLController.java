@@ -7,6 +7,7 @@ package com.cashf.controller.ajusteestoque;
 
 import com.cashf.cashfood.MainApp;
 import com.cashf.model.ajusteestoque.TipoAjuste;
+import com.cashf.model.meiopagamento.TPPagto;
 import com.cashf.model.produto.Produto;
 import com.cashf.model.produto.UnidadeMedida;
 import com.jfoenix.controls.JFXButton;
@@ -41,7 +42,7 @@ import util.TextFieldFormatter;
  * @author joao
  */
 public class AjustarEstoqueFXMLController implements GenericViewController, Initializable {
-    
+
     @FXML
     private Pane paneRoot;
     @FXML
@@ -111,11 +112,13 @@ public class AjustarEstoqueFXMLController implements GenericViewController, Init
         dtpDataAjuste.setValue(LocalDate.now());
         dtpHoraAjuste.setValue(LocalTime.now());
         setUpTableView();
+        setUpRadioButtons();
         loadCbbTipo();
         loadCbbUnidadeFisica();
         loadTbv();
+        rdbQtdeTotal.setSelected(true);
     }
-    
+
     @FXML
     private void onSelecionarProduto(MouseEvent event) {
         if (tbvProdutos.getSelectionModel().getSelectedItem() != null) {
@@ -124,11 +127,11 @@ public class AjustarEstoqueFXMLController implements GenericViewController, Init
             loadDataToScreen();
         }
     }
-    
+
     @FXML
     private void onPesquisar(ActionEvent event) {
     }
-    
+
     @FXML
     private void onSalvar(ActionEvent event) {
         if (validateFields()) {
@@ -152,9 +155,9 @@ public class AjustarEstoqueFXMLController implements GenericViewController, Init
             PoupUpUtil.errorMessage(paneRoot, MainApp.paneRoot, erros);
             erros = "";
         }
-        
+
     }
-    
+
     @Override
     public void clearFields() {
         txtConsultar.clear();
@@ -169,9 +172,9 @@ public class AjustarEstoqueFXMLController implements GenericViewController, Init
         lblSaldo.setText("");
         dtpDataAjuste.setValue(LocalDate.now());
         dtpHoraAjuste.setValue(LocalTime.now());
-        
+
     }
-    
+
     @Override
     public void setInputOff() {
         tbvProdutos.setDisable(true);
@@ -190,7 +193,7 @@ public class AjustarEstoqueFXMLController implements GenericViewController, Init
         dtpHoraAjuste.setDisable(true);
         flagButtons = false;
     }
-    
+
     @Override
     public void setInputOn() {
         tbvProdutos.setDisable(false);
@@ -209,9 +212,9 @@ public class AjustarEstoqueFXMLController implements GenericViewController, Init
         dtpHoraAjuste.setDisable(false);
         lblSaldo.setDisable(false);
         flagButtons = true;
-        
+
     }
-    
+
     @Override
     public Boolean validateFields() {
         boolean flag = true;
@@ -231,38 +234,42 @@ public class AjustarEstoqueFXMLController implements GenericViewController, Init
             erros += "Voce deve informar um motivo par ao ajuste !\n";
             flag = false;
         }
-        if (cbbUnidadeMedida.getSelectionModel().getSelectedItem()==null) {
+        if (cbbUnidadeMedida.getSelectionModel().getSelectedItem() == null) {
             erros += "Voce deve informar uma unidade de medida !\n";
             flag = false;
         }
         return flag;
     }
-    
+
     @Override
     public void getData() {
         qtdeAjuste = new BigDecimal(txtQtdeAjuste.getText());
         motivoAjuste = txtMotivo.getText();
-        
+
     }
-    
+
     @Override
     public void loadDataToScreen() {
         txtDescricao.setText(controller.getProduto().getDescriao());
-        txtQtdeAtual.setText(controller.getProduto().getQtdeProduto() + "");
+        if (rdbQtdeTotal.selectedProperty().getValue()) {
+            txtQtdeAtual.setText(controller.getProduto().getQtdeProduto() + "");
+        } else {
+            txtQtdeAtual.setText(controller.getProduto().getUnidadesEstoque() + "");
+        }
         cbbUnidadeMedida.getSelectionModel().select(controller.getProduto().getUnidadeMedida());
     }
-    
+
     @FXML
     private void onMouseClickedTipo(MouseEvent event) {
         if (cbbTipoAjuste.getSelectionModel().getSelectedItem() != null) {
             controller.setTipoAjuste(cbbTipoAjuste.getSelectionModel().getSelectedItem());
         }
     }
-    
+
     private void loadCbbTipo() {
         cbbTipoAjuste.getItems().addAll(Arrays.asList(TipoAjuste.values()));
     }
-    
+
     private void setUpTableView() {
         tbcCod.setCellValueFactory(new PropertyValueFactory<>("idProduto"));
         tbcCodRef.setCellValueFactory(new PropertyValueFactory<>("codigoReferencia"));
@@ -271,16 +278,31 @@ public class AjustarEstoqueFXMLController implements GenericViewController, Init
         tbcQtde.setCellValueFactory(new PropertyValueFactory<>("qtdeProduto"));
         tbvProdutos.getColumns().setAll(tbcCod, tbcCodRef, tbcDescricao, tbcTipo, tbcQtde);
     }
-    
+
+    private void setUpRadioButtons() {
+        rdbQtdeTotal.selectedProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue) {
+                rdbUnidadesEstoque.setSelected(false);
+                txtQtdeAtual.setText(controller.getProduto().getQtdeProduto() + "");
+            }
+        });
+        rdbUnidadesEstoque.selectedProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue) {
+                rdbQtdeTotal.setSelected(false);
+                txtQtdeAtual.setText(controller.getProduto().getUnidadesEstoque() + "");
+            }
+        });
+    }
+
     private void loadTbv() {
         tbvProdutos.setItems(controller.getListaProduto());
     }
-    
+
     @FXML
     private void onLimpar(ActionEvent event) {
         clearFields();
     }
-    
+
     @FXML
     private void onKeyReleasedQtdeAjuste(KeyEvent event) {
         TextFieldFormatter tff = new TextFieldFormatter();
@@ -289,11 +311,11 @@ public class AjustarEstoqueFXMLController implements GenericViewController, Init
         tff.setTf(txtQtdeAjuste);
         tff.formatter();
     }
-    
+
     private void loadCbbUnidadeFisica() {
         cbbUnidadeMedida.getItems().addAll(Arrays.asList(UnidadeMedida.values()));
     }
-    
+
     @FXML
     private void onMouseClickedMedida(MouseEvent event) {
         if (cbbUnidadeMedida.getSelectionModel().getSelectedItem() != null) {
