@@ -14,7 +14,8 @@ public enum UnidadeMedida {
     ml("MiliLitro(ml)"),
     Kg("Quilograma(Kg)"),
     g("Grama(g)"),
-    mg("MiliGrama(mg)");;
+    mg("MiliGrama(mg)"),
+    UN("Unidade(UN)");
     
     private final String descricao;
 

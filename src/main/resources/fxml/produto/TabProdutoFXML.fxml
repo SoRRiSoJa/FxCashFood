@@ -23,7 +23,7 @@
             <JFXComboBox fx:id="cbbProdutos" focusColor="#004ba0" labelFloat="true" layoutX="468.0" layoutY="40.0" prefHeight="26.0" prefWidth="137.0" promptText="Tipo de produto" />
             <JFXTextField fx:id="txtDescricao" focusColor="#004ba0" labelFloat="true" layoutX="35.0" layoutY="92.0" prefHeight="24.0" prefWidth="570.0" promptText="Descrição" />
             <JFXComboBox fx:id="cbbUnidadeFisica" focusColor="#004ba0" labelFloat="true" layoutX="35.0" layoutY="144.0" prefHeight="26.0" prefWidth="155.0" promptText="Unidade Física" />
-            <JFXTextField fx:id="txtQtdeEmbalagem" focusColor="#004ba0" labelFloat="true" layoutX="235.0" layoutY="145.0" prefHeight="24.0" prefWidth="155.0" promptText="Qtde. Embalagem" />
+            <JFXTextField fx:id="txtQtdeEmbalagem" focusColor="#004ba0" labelFloat="true" layoutX="235.0" layoutY="145.0" prefHeight="24.0" prefWidth="155.0" promptText="Embalagem compra" />
             <JFXTextField fx:id="txtPrecoCusto" focusColor="#004ba0" labelFloat="true" layoutX="450.0" layoutY="145.0" onKeyReleased="#onKeyReleasedPrecoCusto" prefHeight="26.0" prefWidth="155.0" promptText="Preço de custo" />
             <JFXTextField fx:id="txtNcm" focusColor="#004ba0" labelFloat="true" layoutX="35.0" layoutY="198.0" prefHeight="24.0" prefWidth="155.0" promptText="NCM" />
             <JFXTextField fx:id="txtPrecoVenda" focusColor="#004ba0" labelFloat="true" layoutX="235.0" layoutY="198.0" onKeyReleased="#onKeyReleasedPrecoVenda" prefHeight="24.0" prefWidth="155.0" promptText="Preço de venda" />

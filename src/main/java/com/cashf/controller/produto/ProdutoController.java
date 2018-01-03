@@ -63,7 +63,7 @@ public class ProdutoController implements GenericController<Produto> {
         this.produto = produto;
     }
 
-    public void setProduto(long id, String codigoReferencia, String descriao, int qtdeEmbalagem,BigDecimal unidadesEstoque,BigDecimal qtdProd, String ncm, BigDecimal preco_custo, BigDecimal preco_venda, Grupo grupo, UnidadeMedida unidadeMedida, TipoProduto tipo, boolean status) {
+    public void setProduto(long id, String codigoReferencia, String descriao, BigDecimal qtdeEmbalagem,BigDecimal unidadesEstoque,BigDecimal qtdProd, String ncm, BigDecimal preco_custo, BigDecimal preco_venda, Grupo grupo, UnidadeMedida unidadeMedida, TipoProduto tipo, boolean status) {
         this.produto.setIdProduto(id);
         this.produto.setCodigoReferencia(codigoReferencia);
         this.produto.setDescriao(descriao);

@@ -92,12 +92,12 @@ public class TabProdutoFXMLController implements GenericViewController, Initiali
     @FXML
     private JFXButton btnLimpar;
     //---
-    private String erros;
+    private String erros="";
     private boolean flagButtons;
     private long idProduto;
     private String codigoReferencia;
     private String descriao;
-    private int qtdeEmbalagem = 0;
+    private BigDecimal qtdeEmbalagem = BigDecimal.ZERO;
     private BigDecimal unidadesEstoque = BigDecimal.ZERO;
     private BigDecimal qtdeProduto = BigDecimal.ZERO;
     private String ncm;
@@ -359,7 +359,7 @@ public class TabProdutoFXMLController implements GenericViewController, Initiali
             erros += "A descrição do produto deve ser preenchida corretamente! \n";
             flag = false;
         }
-        if (qtdeEmbalagem <= 0) {
+        if (qtdeEmbalagem.compareTo(BigDecimal.ZERO) <= 0) {
             erros += "informe a quantidade da embalagem! \n";
             flag = false;
         }
@@ -456,9 +456,9 @@ public class TabProdutoFXMLController implements GenericViewController, Initiali
         preco_custo = new BigDecimal(txtPrecoCusto.getText());
         preco_venda = new BigDecimal(txtPrecoVenda.getText());
         codigoReferencia = txtCodRef.getText();
-        qtdeEmbalagem = new Integer(txtQtdeEmbalagem.getText());
+        qtdeEmbalagem = new BigDecimal(txtQtdeEmbalagem.getText());
         unidadesEstoque = new BigDecimal(txtQtdeProd.getText());
-        qtdeProduto = unidadesEstoque.multiply(new BigDecimal(qtdeEmbalagem));
+        qtdeProduto = unidadesEstoque.multiply(qtdeEmbalagem);
         ProdutoController.getInstance().setSituacaoTributaria(cbbSituacaoTributaria.getSelectionModel().getSelectedItem());
         percentualPis = new BigDecimal(txtPercentualPIS.getText());
         aliquotaIcms = new BigDecimal(txtAliquotaICMS.getText());
@@ -643,7 +643,7 @@ public class TabProdutoFXMLController implements GenericViewController, Initiali
     @FXML
     private void onKeyReleasedALMunicipal(KeyEvent event) {
         TextFieldFormatter tff = new TextFieldFormatter();
-        tff.setMask("##.####");
+        tff.setMask("##.###");
         tff.setCaracteresValidos("0123456789");
         tff.setTf(txtAliquotaMunicipal);
         tff.formatter();
@@ -652,7 +652,7 @@ public class TabProdutoFXMLController implements GenericViewController, Initiali
     @FXML
     private void onKeyReleasedALEstadual(KeyEvent event) {
         TextFieldFormatter tff = new TextFieldFormatter();
-        tff.setMask("##.####");
+        tff.setMask("##.###");
         tff.setCaracteresValidos("0123456789");
         tff.setTf(txtAliquotaEstadual);
         tff.formatter();
@@ -661,7 +661,7 @@ public class TabProdutoFXMLController implements GenericViewController, Initiali
     @FXML
     private void onKeyReleasedAlFederal(KeyEvent event) {
         TextFieldFormatter tff = new TextFieldFormatter();
-        tff.setMask("##.####");
+        tff.setMask("##.###");
         tff.setCaracteresValidos("0123456789");
         tff.setTf(txtAliquotaFederal);
         tff.formatter();

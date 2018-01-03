@@ -43,6 +43,12 @@ public class UnitConverter {
                     return valIn.divide(BigDecimal.valueOf(1000));
                 }
                 break;
+            case UN:
+                if (uOut.equals(UnidadeMedida.UN)) {
+                    return valIn.multiply(BigDecimal.ONE);
+                }
+                break;
+
         }
         return null;
     }

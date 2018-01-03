@@ -97,10 +97,6 @@ public class AjustarEstoqueFXMLController implements GenericViewController, Init
     private JFXComboBox<UnidadeMedida> cbbUnidadeMedida;
     @FXML
     private JFXTextField txtMotivo;
-    @FXML
-    private JFXRadioButton rdbQtdeTotal;
-    @FXML
-    private JFXRadioButton rdbUnidadesEstoque;
 
     /**
      * Initializes the controller class.
@@ -112,11 +108,10 @@ public class AjustarEstoqueFXMLController implements GenericViewController, Init
         dtpDataAjuste.setValue(LocalDate.now());
         dtpHoraAjuste.setValue(LocalTime.now());
         setUpTableView();
-        setUpRadioButtons();
         loadCbbTipo();
         loadCbbUnidadeFisica();
         loadTbv();
-        rdbQtdeTotal.setSelected(true);
+
     }
 
     @FXML
@@ -142,21 +137,10 @@ public class AjustarEstoqueFXMLController implements GenericViewController, Init
             controller.setQtdeAjuste(qtdeAjuste);
             switch (aux) {
                 case E:
-                    if (rdbUnidadesEstoque.isSelected()) {
-                        //controller.();
-
-                    } else {
-                        controller.adicionarProduto();
-                    }
+                    controller.adicionarProduto();
                     break;
                 case S:
-                    if (rdbUnidadesEstoque.isSelected()) {
-                        //controller.();
-
-                    } else {
-                        controller.retirarProduto();
-                    }
-
+                    controller.retirarProduto();
                     break;
             }
             controller.refreshListaPRod();
@@ -262,11 +246,7 @@ public class AjustarEstoqueFXMLController implements GenericViewController, Init
     @Override
     public void loadDataToScreen() {
         txtDescricao.setText(controller.getProduto().getDescriao());
-        if (rdbQtdeTotal.selectedProperty().getValue()) {
-            txtQtdeAtual.setText(controller.getProduto().getQtdeProduto() + "");
-        } else {
-            txtQtdeAtual.setText(controller.getProduto().getUnidadesEstoque() + "");
-        }
+        txtQtdeAtual.setText(controller.getProduto().getQtdeProduto() + "");
         cbbUnidadeMedida.getSelectionModel().select(controller.getProduto().getUnidadeMedida());
     }
 
@@ -288,21 +268,6 @@ public class AjustarEstoqueFXMLController implements GenericViewController, Init
         tbcTipo.setCellValueFactory(new PropertyValueFactory<>("tipo"));
         tbcQtde.setCellValueFactory(new PropertyValueFactory<>("qtdeProduto"));
         tbvProdutos.getColumns().setAll(tbcCod, tbcCodRef, tbcDescricao, tbcTipo, tbcQtde);
-    }
-
-    private void setUpRadioButtons() {
-        rdbQtdeTotal.selectedProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue) {
-                rdbUnidadesEstoque.setSelected(false);
-                txtQtdeAtual.setText(controller.getProduto().getQtdeProduto() + "");
-            }
-        });
-        rdbUnidadesEstoque.selectedProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue) {
-                rdbQtdeTotal.setSelected(false);
-                txtQtdeAtual.setText(controller.getProduto().getUnidadesEstoque() + "");
-            }
-        });
     }
 
     private void loadTbv() {

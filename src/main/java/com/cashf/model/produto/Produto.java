@@ -37,7 +37,7 @@ public class Produto implements Serializable {
     private long idProduto;
     private String codigoReferencia;
     private String descriao;
-    private int qtdeEmbalagem;
+    private BigDecimal qtdeEmbalagem;
     private BigDecimal unidadesEstoque;
     private BigDecimal qtdeProduto;
     private String ncm;
@@ -62,7 +62,7 @@ public class Produto implements Serializable {
     public Produto() {
     }
 
-    public Produto(long id, String codigoReferencia, String descriao, int qtdeEmbalagem, BigDecimal unidadesEstoque, BigDecimal qtdeProd, String ncm, BigDecimal preco_custo, BigDecimal preco_venda, Grupo grupo, AliquotasProduto aliquotasProduto, UnidadeMedida unidadeMedida, TipoProduto tipo, List<ProdutoPrePreparo> listaProdutos, boolean status) {
+    public Produto(long id, String codigoReferencia, String descriao, BigDecimal qtdeEmbalagem, BigDecimal unidadesEstoque, BigDecimal qtdeProd, String ncm, BigDecimal preco_custo, BigDecimal preco_venda, Grupo grupo, AliquotasProduto aliquotasProduto, UnidadeMedida unidadeMedida, TipoProduto tipo, List<ProdutoPrePreparo> listaProdutos, boolean status) {
         this.idProduto = id;
         this.codigoReferencia = codigoReferencia;
         this.descriao = descriao;
@@ -104,11 +104,11 @@ public class Produto implements Serializable {
         this.descriao = descriao;
     }
 
-    public int getQtdeEmbalagem() {
+    public BigDecimal getQtdeEmbalagem() {
         return qtdeEmbalagem;
     }
 
-    public void setQtdeEmbalagem(int qtdeEmbalagem) {
+    public void setQtdeEmbalagem(BigDecimal qtdeEmbalagem) {
         this.qtdeEmbalagem = qtdeEmbalagem;
     }
 
