@@ -49,7 +49,7 @@ public class AtualizarEstoque {
                     produto.setQtdeProduto(qtdeAtual.subtract(qtdeAjuste));
                 }
             } else {
-                produto.setQtdeProduto(qtdeAtual.subtract(UnitConverter.convertTo(produto.getUnidadeMedida(), unidadeMedida, qtdeAjuste)));
+                produto.setQtdeProduto(qtdeAtual.subtract(UnitConverter.convertTo(unidadeMedida,produto.getUnidadeMedida(), qtdeAjuste)));
             }
 
             produtoDAO.update(produto);
@@ -69,7 +69,7 @@ public class AtualizarEstoque {
                     produto.setQtdeProduto(qtdeAtual.add(qtdeAjuste));
                 }
             } else {
-                produto.setQtdeProduto(qtdeAtual.add(UnitConverter.convertTo(produto.getUnidadeMedida(), unidadeMedida, qtdeAjuste)));
+                produto.setQtdeProduto(qtdeAtual.add(UnitConverter.convertTo(unidadeMedida,produto.getUnidadeMedida(), qtdeAjuste)));
             }
             produtoDAO.update(produto);
         } catch (Exception ex) {
