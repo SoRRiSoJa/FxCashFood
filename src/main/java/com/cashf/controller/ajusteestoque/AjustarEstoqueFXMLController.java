@@ -143,6 +143,9 @@ public class AjustarEstoqueFXMLController implements GenericViewController, Init
                     controller.retirarProduto();
                     break;
             }
+            controller.getAtualizarEstoque().setTipoAjuste(controller.getTipoAjuste());
+            controller.getAtualizarEstoque().setAjusteEstoque(motivoAjuste, LocalDate.now(), LocalTime.now(),  qtdeAjuste);
+            controller.insert();
             controller.refreshListaPRod();
             lblSaldo.setText(controller.getProduto().getQtdeProduto() + "");
             tbvProdutos.refresh();

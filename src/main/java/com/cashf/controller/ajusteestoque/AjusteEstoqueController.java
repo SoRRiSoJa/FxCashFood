@@ -6,7 +6,6 @@
 package com.cashf.controller.ajusteestoque;
 
 import com.cashf.core.atualizarestoque.AtualizarEstoque;
-import com.cashf.dao.ajusteestoque.AjusteEstoqueDAO;
 import com.cashf.dao.produto.ProdutoDAO;
 import com.cashf.model.ajusteestoque.AjusteEstoque;
 import com.cashf.model.ajusteestoque.TipoAjuste;
@@ -23,30 +22,25 @@ import javafx.collections.ObservableList;
  */
 public class AjusteEstoqueController implements GenericController<AjusteEstoque> {
 
-    private final AjusteEstoqueDAO ajusteEstoqueDAO;
     private final ProdutoDAO produtoDAO;
     private ObservableList<Produto> listaProduto;
     private Produto produto;
-    private AjusteEstoque ajusteEstoque;
     private TipoAjuste tipoAjuste;
     private UnidadeMedida unidadeMedida;
     private BigDecimal qtdeAjuste;
-    private AtualizarEstoque atualizarEstoque;
+    private final AtualizarEstoque atualizarEstoque;
 
     public AjusteEstoqueController() {
         this.produtoDAO = new ProdutoDAO(Produto.class);
-        this.ajusteEstoqueDAO = new AjusteEstoqueDAO(AjusteEstoque.class);
         this.listaProduto = FXCollections.observableList(produtoDAO.listProdNotFicha());
         this.atualizarEstoque = new AtualizarEstoque();
-        this.ajusteEstoque = new AjusteEstoque();
-        this.ajusteEstoque.setIdAjuste(0l);
         this.produto = new Produto();
         produto.setIdProduto(0l);
     }
 
     @Override
     public void insert() {
-
+        atualizarEstoque.atualizar();
     }
 
     @Override
@@ -95,14 +89,6 @@ public class AjusteEstoqueController implements GenericController<AjusteEstoque>
         this.produto = produto;
     }
 
-    public AjusteEstoque getAjusteEstoque() {
-        return ajusteEstoque;
-    }
-
-    public void setAjusteEstoque(AjusteEstoque ajusteEstoque) {
-        this.ajusteEstoque = ajusteEstoque;
-    }
-
     public TipoAjuste getTipoAjuste() {
         return tipoAjuste;
     }
@@ -121,10 +107,6 @@ public class AjusteEstoqueController implements GenericController<AjusteEstoque>
 
     public AtualizarEstoque getAtualizarEstoque() {
         return atualizarEstoque;
-    }
-
-    public void setAtualizarEstoque(AtualizarEstoque atualizarEstoque) {
-        this.atualizarEstoque = atualizarEstoque;
     }
 
     public UnidadeMedida getUnidadeMedida() {
@@ -146,5 +128,5 @@ public class AjusteEstoqueController implements GenericController<AjusteEstoque>
     public void retirarProduto() {
         atualizarEstoque.retirarProduto(produto, qtdeAjuste, unidadeMedida);
     }
-    
+
 }

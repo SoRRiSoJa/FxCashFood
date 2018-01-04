@@ -30,6 +30,7 @@ public class AtualizarEstoque {
     private PrePreparo prePreparo;
     private AjusteEstoque ajusteEstoque;
     private TipoAjuste tipoAjuste;
+    
 
     public AtualizarEstoque() {
         this.produtoDAO = new ProdutoDAO(Produto.class);
@@ -120,5 +121,7 @@ public class AtualizarEstoque {
     public void setTipoAjuste(TipoAjuste tipoAjuste) {
         this.tipoAjuste = tipoAjuste;
     }
-
+    public void atualizar(){
+        ajusteEstoqueDAO.save(ajusteEstoque);
+    }
 }
