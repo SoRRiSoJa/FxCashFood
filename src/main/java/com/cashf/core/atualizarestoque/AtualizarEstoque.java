@@ -39,9 +39,11 @@ public class AtualizarEstoque {
         produto.setIdProduto(0l);
         this.prePreparo = new PrePreparo();
         prePreparo.setIdPrepreparo(0l);
+        this.ajusteEstoque=new AjusteEstoque();
+        this.ajusteEstoque.setIdAjuste(0l);
     }
 
-    public Boolean retirarProduto(Produto produto, BigDecimal qtdeAjuste, UnidadeMedida unidadeMedida) {
+    public Boolean retirarProduto(BigDecimal qtdeAjuste, UnidadeMedida unidadeMedida) {
         boolean flag = true;
         try {
             BigDecimal qtdeAtual = produto.getQtdeProduto();
@@ -61,7 +63,7 @@ public class AtualizarEstoque {
         return flag;
     }
 
-    public Boolean adicionarProduto(Produto produto, BigDecimal qtdeAjuste, UnidadeMedida unidadeMedida) {
+    public Boolean adicionarProduto(BigDecimal qtdeAjuste, UnidadeMedida unidadeMedida) {
         boolean flag = true;
         try {
             BigDecimal qtdeAtual = produto.getQtdeProduto();
@@ -112,6 +114,7 @@ public class AtualizarEstoque {
         this.ajusteEstoque.setProduto(produto);
         this.ajusteEstoque.setUsuario(LoginController.getInstance().getUsuario());
         this.ajusteEstoque.setTipoAjuste(tipoAjuste);
+        this.ajusteEstoque.setQtdeAjustada(qtdeAjustada);
     }
 
     public TipoAjuste getTipoAjuste() {
