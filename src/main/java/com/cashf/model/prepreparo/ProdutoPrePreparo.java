@@ -5,7 +5,6 @@
  */
 package com.cashf.model.prepreparo;
 
-import com.cashf.model.prepreparo.PrePreparo;
 import com.cashf.model.produto.Produto;
 import java.io.Serializable;
 import java.math.BigDecimal;

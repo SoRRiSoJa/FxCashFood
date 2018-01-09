@@ -6,6 +6,7 @@
 package com.cashf.controller.prepreparo;
 
 import com.cashf.cashfood.MainApp;
+import com.cashf.model.prepreparo.PrePreparo;
 import com.cashf.model.prepreparo.ProdutoPrePreparo;
 import com.cashf.model.produto.Produto;
 import com.cashf.model.produto.UnidadeMedida;
@@ -106,7 +107,7 @@ public class TabPrePreparoFXMLController implements GenericViewController, Initi
     //--
     private String erros;
     private String qtde;
-    private int qtdeItem;
+    private BigDecimal qtdeItem;
     private String rendimento;
     private BigDecimal rendimentoReceita;
     private BigDecimal custoReceita;
@@ -149,6 +150,8 @@ public class TabPrePreparoFXMLController implements GenericViewController, Initi
     private void onAdicionar(ActionEvent event) {
         getDataItem();
         if (validateItemFields()) {
+            ProdutoPrePreparo pp = new ProdutoPrePreparo(0l, PrePreparoController.getInstance().getItemAtual(), qtdeItem);
+            
             tbvItens.setItems(PrePreparoController.getInstance().getListaItens());
         } else {
             PoupUpUtil.errorMessage(paneRoot, MainApp.paneRoot, erros);
@@ -201,9 +204,9 @@ public class TabPrePreparoFXMLController implements GenericViewController, Initi
     public void getDataItem() {
         PrePreparoController.getInstance().setUnidadeMedida(cbbUnidadeMedida.getSelectionModel().getSelectedItem());
         try {
-            qtdeItem = Integer.parseInt(qtde);
+            qtdeItem = new BigDecimal(qtde);
         } catch (NumberFormatException e) {
-            qtdeItem = 0;
+            qtdeItem = BigDecimal.ZERO;
         }
         if (ccbItens.getSelectionModel().getSelectedItem() != null) {
             PrePreparoController.getInstance().setItemAtual(ccbItens.getSelectionModel().getSelectedItem());
@@ -216,7 +219,7 @@ public class TabPrePreparoFXMLController implements GenericViewController, Initi
             erros += "Você deve selecionar um item para inserir na receita! \n";
             flag = false;
         }
-        if (qtdeItem <= 0) {
+        if (qtdeItem.compareTo(BigDecimal.ZERO) <= 0) {
             erros += "a quatidade do item deve ser maior que 0 \n";
             flag = false;
         }
