@@ -113,7 +113,7 @@ public class TabPrePreparoFXMLController implements GenericViewController, Initi
     private void onAdicionar(ActionEvent event) {
         getDataItem();
         if (validateItemFields()) {
-            PrePreparoController.getInstance().setItemAtual(ccbItens.getSelectionModel().getSelectedItem());
+            PrePreparoController.getInstance().setItemAtual(ccbItens.getItems().get(ccbItens.getSelectionModel().getSelectedIndex()));
             PrePreparoController.getInstance().setListaItens(qtdeItem);
             tbvItens.setItems(PrePreparoController.getInstance().getListaItens());
             PrePreparoController.getInstance().setItemAtual(null);
@@ -173,16 +173,14 @@ public class TabPrePreparoFXMLController implements GenericViewController, Initi
             qtdeItem = BigDecimal.ZERO;
         }
         if (ccbItens.getSelectionModel().getSelectedItem() != null) {
-            PrePreparoController.getInstance().setItemAtual(ccbItens.getSelectionModel().getSelectedItem());
+            PrePreparoController.getInstance().setItemAtual(ccbItens.getItems().get(ccbItens.getSelectionModel().getSelectedIndex()));
+            //PrePreparoController.getInstance().setItemAtual(ccbItens.getSelectionModel().getSelectedItem());
         }
     }
 
     public Boolean validateItemFields() {
         boolean flag = true;
-        if (PrePreparoController.getInstance().getListaItens().isEmpty()) {
-            erros += "Você deve selecionar um item para inserir na receita! \n";
-            flag = false;
-        }
+        
         if (qtdeItem.compareTo(BigDecimal.ZERO) <= 0) {
             erros += "a quatidade do item deve ser maior que 0 \n";
             flag = false;
