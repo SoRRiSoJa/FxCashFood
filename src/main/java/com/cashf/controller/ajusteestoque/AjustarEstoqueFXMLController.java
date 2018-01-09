@@ -7,7 +7,6 @@ package com.cashf.controller.ajusteestoque;
 
 import com.cashf.cashfood.MainApp;
 import com.cashf.model.ajusteestoque.TipoAjuste;
-import com.cashf.model.meiopagamento.TPPagto;
 import com.cashf.model.produto.Produto;
 import com.cashf.model.produto.UnidadeMedida;
 import com.jfoenix.controls.JFXButton;

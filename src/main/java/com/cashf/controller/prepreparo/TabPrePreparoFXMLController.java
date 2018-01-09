@@ -38,6 +38,8 @@ public class TabPrePreparoFXMLController implements GenericViewController, Initi
     @FXML
     private JFXComboBox<Produto> ccbItens;
     @FXML
+    private JFXComboBox<Produto> cbbProduto;
+    @FXML
     private JFXComboBox<UnidadeMedida> cbbUnidadeMedida;
     @FXML
     private JFXTextField txtqtde;
@@ -73,8 +75,7 @@ public class TabPrePreparoFXMLController implements GenericViewController, Initi
     private TableColumn<ProdutoPrePreparo, BigDecimal> tbcQtde;
     @FXML
     private TableColumn<ProdutoPrePreparo, String> tbcUnidade;
-    @FXML
-    private JFXComboBox<Produto> cbbProduto;
+
     @FXML
     private JFXTextField txtRendimento;
     @FXML
@@ -86,27 +87,8 @@ public class TabPrePreparoFXMLController implements GenericViewController, Initi
     @FXML
     private TableColumn btnExcluirItem;
     //-----
-    private static JFXComboBox<Produto> _ccbItens;
-    private static JFXComboBox<UnidadeMedida> _cbbUnidadeMedida;
-    private static JFXTextField _txtqtde;
-    private static JFXButton _btnAdicionar;
-    private static JFXRadioButton _rbtCodigo;
-    private static JFXRadioButton _rbtDescricao;
-    private static TableView<ProdutoPrePreparo> _tbvItens;
-    private static JFXButton _btnExcluir;
-    private static JFXButton _btnSalvar;
-    private static JFXButton _btnNovo;
-    private static JFXButton _btnLimpar;
-    private static TableView<ProdutoPrePreparo> _tbvReceita;
-    private static JFXComboBox<Produto> _cbbProduto;
-    private static JFXTextField _txtRendimento;
-    private static JFXRadioButton _rbtCod;
-    private static JFXRadioButton _rbtDesc;
-    private static Label _lblCustoTotal;
-    private static TableColumn _btnExcluirItem;
     //--
     private String erros;
-    private String qtde;
     private BigDecimal qtdeItem;
     private String rendimento;
     private BigDecimal rendimentoReceita;
@@ -122,25 +104,6 @@ public class TabPrePreparoFXMLController implements GenericViewController, Initi
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        _ccbItens = ccbItens;
-        _cbbUnidadeMedida = cbbUnidadeMedida;
-        _txtqtde = txtqtde;
-        _btnAdicionar = btnAdicionar;
-        _rbtCodigo = rbtCodigo;
-        _rbtDescricao = rbtDescricao;
-        _tbvItens = tbvItens;
-        _btnExcluir = btnExcluir;
-        _btnSalvar = btnSalvar;
-        _btnNovo = btnNovo;
-        _btnLimpar = btnLimpar;
-        _tbvReceita = tbvReceita;
-        _cbbProduto = cbbProduto;
-        _txtRendimento = txtRendimento;
-        _rbtCod = rbtCod;
-        _rbtDesc = rbtDesc;
-        _lblCustoTotal = lblCustoTotal;
-        _btnExcluirItem = btnExcluirItem;
-
         loadCbbItens();
         loadCbbProdutos();
         loadCbbUnidadeMedida();
@@ -150,9 +113,10 @@ public class TabPrePreparoFXMLController implements GenericViewController, Initi
     private void onAdicionar(ActionEvent event) {
         getDataItem();
         if (validateItemFields()) {
-            ProdutoPrePreparo pp = new ProdutoPrePreparo(0l, PrePreparoController.getInstance().getItemAtual(), qtdeItem);
-            
+            PrePreparoController.getInstance().setItemAtual(ccbItens.getSelectionModel().getSelectedItem());
+            PrePreparoController.getInstance().setListaItens(qtdeItem);
             tbvItens.setItems(PrePreparoController.getInstance().getListaItens());
+            PrePreparoController.getInstance().setItemAtual(null);
         } else {
             PoupUpUtil.errorMessage(paneRoot, MainApp.paneRoot, erros);
             erros = "";
@@ -177,17 +141,17 @@ public class TabPrePreparoFXMLController implements GenericViewController, Initi
 
     @Override
     public void clearFields() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
     }
 
     @Override
     public void setInputOff() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
     }
 
     @Override
     public void setInputOn() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
     }
 
     @Override
@@ -202,9 +166,9 @@ public class TabPrePreparoFXMLController implements GenericViewController, Initi
     }
 
     public void getDataItem() {
-        PrePreparoController.getInstance().setUnidadeMedida(cbbUnidadeMedida.getSelectionModel().getSelectedItem());
+        PrePreparoController.getInstance().setUnidadeMedida(UnidadeMedida.Kg);
         try {
-            qtdeItem = new BigDecimal(qtde);
+            qtdeItem = new BigDecimal(txtqtde.getText());
         } catch (NumberFormatException e) {
             qtdeItem = BigDecimal.ZERO;
         }
@@ -229,7 +193,7 @@ public class TabPrePreparoFXMLController implements GenericViewController, Initi
 
     @Override
     public void loadDataToScreen() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
     }
 
     private void loadCbbUnidadeMedida() {
@@ -245,6 +209,6 @@ public class TabPrePreparoFXMLController implements GenericViewController, Initi
     }
 
     private void setUpTableViewItens() {
-        
+
     }
 }

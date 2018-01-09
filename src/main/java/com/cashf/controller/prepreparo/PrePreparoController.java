@@ -12,6 +12,7 @@ import com.cashf.model.prepreparo.ProdutoPrePreparo;
 import com.cashf.model.produto.Produto;
 import com.cashf.model.produto.UnidadeMedida;
 import controller.GenericController;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -134,8 +135,8 @@ public class PrePreparoController implements GenericController<PrePreparo> {
         this.listaItens = listaItens;
     }
 
-    public void setListaItens(ProdutoPrePreparo item) {
-        this.listaItens.add(item);
+    public void setListaItens(BigDecimal qtdeProduto) {
+        this.listaItens.add(new ProdutoPrePreparo(0l, itemAtual, qtdeProduto));
     }
 
     public PrePreparo getPrePreparo() {
