@@ -6,6 +6,7 @@
 package com.cashf.model.prepreparo;
 
 import com.cashf.model.produto.Produto;
+import com.cashf.model.produto.UnidadeMedida;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Objects;
@@ -36,16 +37,19 @@ public class ProdutoPrePreparo implements Serializable {
     @ManyToOne
     @JoinColumn(name = "idproduto")
     private Produto produto;
+    private UnidadeMedida unidadeMedida;
     private BigDecimal qtdeProduto;
     private BigDecimal valorPorcao;
 
     public ProdutoPrePreparo() {
     }
 
-    public ProdutoPrePreparo(Long idProdutoPrepreparo, Produto produto, BigDecimal qtdeProduto) {
+    public ProdutoPrePreparo(Long idProdutoPrepreparo, Produto produto,UnidadeMedida unidadeMedida, BigDecimal qtdeProduto,BigDecimal valorPorcao) {
         this.idProdutoPrepreparo = idProdutoPrepreparo;
         this.produto = produto;
         this.qtdeProduto = qtdeProduto;
+        this.unidadeMedida=unidadeMedida;
+        this.valorPorcao=valorPorcao;
     }
 
     public Long getIdProdutoPrepreparo() {
@@ -71,6 +75,24 @@ public class ProdutoPrePreparo implements Serializable {
     public void setQtdeProduto(BigDecimal qtdeProduto) {
         this.qtdeProduto = qtdeProduto;
     }
+
+    public UnidadeMedida getUnidadeMedida() {
+        return unidadeMedida;
+    }
+
+    public void setUnidadeMedida(UnidadeMedida unidadeMedida) {
+        this.unidadeMedida = unidadeMedida;
+    }
+
+    public BigDecimal getValorPorcao() {
+        return valorPorcao;
+    }
+
+    public void setValorPorcao(BigDecimal valorPorcao) {
+        this.valorPorcao = valorPorcao;
+    }
+    
+    
 
     @Override
     public int hashCode() {

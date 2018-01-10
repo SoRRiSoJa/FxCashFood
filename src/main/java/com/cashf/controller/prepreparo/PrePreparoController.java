@@ -135,8 +135,8 @@ public class PrePreparoController implements GenericController<PrePreparo> {
         this.listaItens = listaItens;
     }
 
-    public void setListaItens(BigDecimal qtdeProduto) {
-        this.listaItens.add(new ProdutoPrePreparo(0l, itemAtual, qtdeProduto));
+    public void setListaItens(BigDecimal qtdeProduto,BigDecimal valorPorcao) {
+        this.listaItens.add(new ProdutoPrePreparo(0l, itemAtual,unidadeMedida,qtdeProduto,valorPorcao));
     }
 
     public PrePreparo getPrePreparo() {

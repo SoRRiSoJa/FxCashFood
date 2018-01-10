@@ -64,6 +64,7 @@ com/cashf/model/banco/Banco_.class
 com/cashf/controller/funcionario/FuncionarioController.class
 controller/GenericController.class
 com/cashf/model/telefone/Operadora.class
+util/ProdCalcUtil.class
 com/cashf/model/fornecedor/Fornecedor_.class
 com/cashf/model/ajusteestoque/TipoAjuste.class
 com/cashf/model/funcionario/Funcionario_.class

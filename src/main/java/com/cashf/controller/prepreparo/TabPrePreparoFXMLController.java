@@ -6,7 +6,6 @@
 package com.cashf.controller.prepreparo;
 
 import com.cashf.cashfood.MainApp;
-import com.cashf.model.prepreparo.PrePreparo;
 import com.cashf.model.prepreparo.ProdutoPrePreparo;
 import com.cashf.model.produto.Produto;
 import com.cashf.model.produto.UnidadeMedida;
@@ -114,7 +113,7 @@ public class TabPrePreparoFXMLController implements GenericViewController, Initi
         getDataItem();
         if (validateItemFields()) {
             PrePreparoController.getInstance().setItemAtual(ccbItens.getItems().get(ccbItens.getSelectionModel().getSelectedIndex()));
-            PrePreparoController.getInstance().setListaItens(qtdeItem);
+            PrePreparoController.getInstance().setListaItens(qtdeItem,BigDecimal.ONE);
             tbvItens.setItems(PrePreparoController.getInstance().getListaItens());
             PrePreparoController.getInstance().setItemAtual(null);
         } else {
