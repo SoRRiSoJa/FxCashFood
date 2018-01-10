@@ -102,6 +102,10 @@ public class TabPrePreparoFXMLController implements GenericViewController, Initi
     private Label lblCustoTotal;
     @FXML
     private TableColumn btnExcluirItem;
+    @FXML
+    private Pane paneRoot;
+    @FXML
+    private JFXComboBox<UnidadeMedida> cbbUnidadeMedidaProd;
     //-----
     //--
     private String erros;
@@ -111,8 +115,6 @@ public class TabPrePreparoFXMLController implements GenericViewController, Initi
     private BigDecimal custoReceita;
     private String custoTotal;
     private boolean flagButtons;
-    @FXML
-    private Pane paneRoot;
 
     /**
      * Initializes the controller class.
@@ -123,6 +125,7 @@ public class TabPrePreparoFXMLController implements GenericViewController, Initi
         loadCbbItens();
         loadCbbProdutos();
         loadCbbUnidadeMedida();
+        loadCbbUnidadeMedidaProd();
         setUpTableViewItens();
     }
 
@@ -219,6 +222,10 @@ public class TabPrePreparoFXMLController implements GenericViewController, Initi
         cbbUnidadeMedida.getItems().addAll(Arrays.asList(UnidadeMedida.values()));
     }
 
+    private void loadCbbUnidadeMedidaProd() {
+        cbbUnidadeMedidaProd.getItems().addAll(Arrays.asList(UnidadeMedida.values()));
+    }
+
     private void loadCbbProdutos() {
         cbbProduto.setItems(PrePreparoController.getInstance().getListaPrePreparo());
     }
@@ -239,8 +246,9 @@ public class TabPrePreparoFXMLController implements GenericViewController, Initi
                 return new ButtonCellDelete();
             }
         });
-        tbvItens.getColumns().setAll(tbcItem, tbcQtdIten, tbcUnidadeItem,tbcCustoItem,btnExcluirItem);
+        tbvItens.getColumns().setAll(tbcItem, tbcQtdIten, tbcUnidadeItem, tbcCustoItem, btnExcluirItem);
     }
+
     public class ButtonCellDelete extends TableCell<Disposer.Record, Boolean> {
 
         Image img;
@@ -261,7 +269,7 @@ public class TabPrePreparoFXMLController implements GenericViewController, Initi
                     Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                     alert.setTitle("Cofirmar Excluir Telefone!");
                     alert.setHeaderText("Deseja realmente Excluir?");
-                    alert.setContentText("Produto:(" + currentPerson.getProduto().getDescriao()+ ")");
+                    alert.setContentText("Produto:(" + currentPerson.getProduto().getDescriao() + ")");
                     Optional<ButtonType> result = alert.showAndWait();
                     if (result.get() == ButtonType.OK) {
                         // ... user chose OK
