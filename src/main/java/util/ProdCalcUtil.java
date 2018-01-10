@@ -26,6 +26,5 @@ public class ProdCalcUtil {
             System.out.println("Erro ao calcular---------->>>>>>>>" + ex);
             return BigDecimal.ZERO;
         }
-
     }
 }
