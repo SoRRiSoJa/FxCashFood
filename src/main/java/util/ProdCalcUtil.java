@@ -18,9 +18,9 @@ public class ProdCalcUtil {
     public static BigDecimal valorPorcao(Produto prod, UnidadeMedida uIn, BigDecimal qtde) {
         try {
             if (prod.getUnidadeMedida().equals(uIn)) {
-                return (qtde.multiply(prod.getPreco_custo())).divide(prod.getQtdeProduto());
+                return (qtde.multiply(prod.getPreco_custo())).divide(prod.getQtdeEmbalagem());
             } else {
-                return (UnitConverter.convertTo(uIn, prod.getUnidadeMedida(), qtde).multiply(prod.getPreco_custo())).divide(prod.getQtdeProduto());
+                return (UnitConverter.convertTo(uIn, prod.getUnidadeMedida(), qtde).multiply(prod.getPreco_custo())).divide(prod.getQtdeEmbalagem());
             }
         } catch (Exception ex) {
             System.out.println("Erro ao calcular---------->>>>>>>>" + ex);

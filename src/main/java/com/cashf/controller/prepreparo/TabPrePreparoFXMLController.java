@@ -6,12 +6,9 @@
 package com.cashf.controller.prepreparo;
 
 import com.cashf.cashfood.MainApp;
-import com.cashf.controller.cliente.ClienteController;
-import com.cashf.controller.cliente.TabClientesFXMLController;
 import com.cashf.model.prepreparo.ProdutoPrePreparo;
 import com.cashf.model.produto.Produto;
 import com.cashf.model.produto.UnidadeMedida;
-import com.cashf.model.telefone.Telefone;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXRadioButton;
@@ -24,7 +21,6 @@ import java.util.Arrays;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
@@ -43,6 +39,7 @@ import javafx.util.Callback;
 import javafx.util.Duration;
 import org.controlsfx.control.Notifications;
 import util.PoupUpUtil;
+import util.ProdCalcUtil;
 
 /**
  * FXML Controller class
@@ -133,8 +130,9 @@ public class TabPrePreparoFXMLController implements GenericViewController, Initi
     private void onAdicionar(ActionEvent event) {
         getDataItem();
         if (validateItemFields()) {
+            
             PrePreparoController.getInstance().setItemAtual(ccbItens.getItems().get(ccbItens.getSelectionModel().getSelectedIndex()));
-            PrePreparoController.getInstance().setListaItens(qtdeItem, BigDecimal.ONE);
+            PrePreparoController.getInstance().setListaItens(qtdeItem,ProdCalcUtil.valorPorcao(PrePreparoController.getInstance().getItemAtual(),PrePreparoController.getInstance().getUnidadeMedida(), qtdeItem));
             tbvItens.setItems(PrePreparoController.getInstance().getListaItens());
             PrePreparoController.getInstance().setItemAtual(null);
         } else {
