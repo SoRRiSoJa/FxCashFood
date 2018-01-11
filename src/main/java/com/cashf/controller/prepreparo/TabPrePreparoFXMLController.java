@@ -298,7 +298,7 @@ public class TabPrePreparoFXMLController implements GenericViewController, Initi
                         lblCustoTotal.setText(nf.format(PrePreparoController.getInstance().getCustoTotal()));
                         notificationBuilder = Notifications.create().title("Produto excluído!").
                                 text("Produto Excluido com sucesso.").
-                                hideAfter(Duration.seconds(2)).
+                                hideAfter(Duration.seconds(1)).
                                 position(Pos.TOP_RIGHT).
                                 darkStyle();
                         notificationBuilder.showInformation();

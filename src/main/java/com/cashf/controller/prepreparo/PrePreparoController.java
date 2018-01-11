@@ -174,6 +174,7 @@ public class PrePreparoController implements GenericController<PrePreparo> {
     }
 
     public BigDecimal getCustoTotal() {
+        custoTotal=BigDecimal.ZERO;
         listaItens.forEach((custUnit) -> {
             custoTotal = custoTotal.add(custUnit.getValorPorcao());
         });
