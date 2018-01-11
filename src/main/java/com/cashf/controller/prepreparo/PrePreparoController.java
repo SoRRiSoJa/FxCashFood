@@ -34,6 +34,7 @@ public class PrePreparoController implements GenericController<PrePreparo> {
     private Produto itemAtual;
     private PrePreparo prePreparo;
     private UnidadeMedida unidadeMedida;
+    private BigDecimal custoTotal;
 
     private PrePreparoController() {
         this.produtoDAO = new ProdutoDAO(Produto.class);
@@ -48,6 +49,7 @@ public class PrePreparoController implements GenericController<PrePreparo> {
         produtoPrincipal.setIdProduto(0l);
         this.itemAtual = new Produto();
         itemAtual.setIdProduto(0l);
+        this.custoTotal = BigDecimal.ZERO;
     }
 
     public static synchronized PrePreparoController getInstance() {
@@ -135,8 +137,8 @@ public class PrePreparoController implements GenericController<PrePreparo> {
         this.listaItens = listaItens;
     }
 
-    public void setListaItens(BigDecimal qtdeProduto,BigDecimal valorPorcao) {
-        this.listaItens.add(new ProdutoPrePreparo(0l, itemAtual,unidadeMedida,qtdeProduto,valorPorcao));
+    public void setListaItens(BigDecimal qtdeProduto, BigDecimal valorPorcao) {
+        this.listaItens.add(new ProdutoPrePreparo(0l, itemAtual, unidadeMedida, qtdeProduto, valorPorcao));
     }
 
     public PrePreparo getPrePreparo() {
@@ -170,6 +172,12 @@ public class PrePreparoController implements GenericController<PrePreparo> {
     public void setItemAtual(Produto itemAtual) {
         this.itemAtual = itemAtual;
     }
-    
+
+    public BigDecimal getCustoTotal() {
+        listaItens.forEach((custUnit) -> {
+            custoTotal = custoTotal.add(custUnit.getValorPorcao());
+        });
+        return custoTotal;
+    }
 
 }

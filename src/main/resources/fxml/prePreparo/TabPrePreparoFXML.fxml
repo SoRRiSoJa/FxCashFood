@@ -36,18 +36,18 @@
                         <Label layoutX="5.0" layoutY="2.0" text="Seleção de Ítens:" textFill="WHITE" />
                      </children>
                   </Pane>
-                  <JFXComboBox fx:id="ccbItens" editable="true" labelFloat="true" layoutX="16.0" layoutY="72.0" prefHeight="26.0" prefWidth="330.0" promptText="Descrição Produto" />
-                  <JFXComboBox fx:id="cbbUnidadeMedida" editable="true" labelFloat="true" layoutX="395.0" layoutY="32.0" prefHeight="26.0" prefWidth="160.0" promptText="Unidade Medida" />
-                  <JFXTextField fx:id="txtqtde" focusColor="#004ba0" labelFloat="true" layoutX="395.0" layoutY="72.0" prefHeight="24.0" prefWidth="160.0" promptText="Quantidade" />
-                  <JFXButton fx:id="btnAdicionar" contentDisplay="GRAPHIC_ONLY" layoutX="512.0" layoutY="119.0" onAction="#onAdicionar" prefHeight="30.0" prefWidth="40.0" ripplerFill="WHITE" style="-fx-background-color: #2196f3;" textFill="WHITE">
+                  <JFXComboBox fx:id="ccbItens" editable="true" labelFloat="true" layoutX="16.0" layoutY="74.0" prefHeight="26.0" prefWidth="330.0" promptText="Descrição Produto" />
+                  <JFXComboBox fx:id="cbbUnidadeMedida" editable="true" labelFloat="true" layoutX="395.0" layoutY="34.0" prefHeight="26.0" prefWidth="160.0" promptText="Unidade Medida" />
+                  <JFXTextField fx:id="txtqtde" focusColor="#004ba0" labelFloat="true" layoutX="395.0" layoutY="74.0" prefHeight="24.0" prefWidth="160.0" promptText="Quantidade" />
+                  <JFXButton fx:id="btnAdicionar" contentDisplay="GRAPHIC_ONLY" layoutX="512.0" layoutY="121.0" onAction="#onAdicionar" prefHeight="30.0" prefWidth="40.0" ripplerFill="WHITE" style="-fx-background-color: #2196f3;" textFill="WHITE">
                      <graphic>
                         <FontAwesomeIconView fill="WHITE" glyphName="PLUS" size="12" />
                      </graphic>
                   </JFXButton>
-                  <JFXRadioButton fx:id="rbtCodigo" layoutX="66.0" layoutY="135.0" style="-jfx-selected-color: #69e2ff;" text="Código" />
-                  <JFXRadioButton fx:id="rbtDescricao" layoutX="186.0" layoutY="135.0" style="-jfx-selected-color: #69e2ff;" text="Descrição" />
-                  <Label layoutX="16.0" layoutY="35.0" text="Produtos:" />
-                  <Label layoutX="16.0" layoutY="112.0" text="Filtros:" />
+                  <JFXRadioButton fx:id="rbtCodigo" layoutX="66.0" layoutY="137.0" style="-jfx-selected-color: #69e2ff;" text="Código" />
+                  <JFXRadioButton fx:id="rbtDescricao" layoutX="186.0" layoutY="137.0" style="-jfx-selected-color: #69e2ff;" text="Descrição" />
+                  <Label layoutX="16.0" layoutY="37.0" text="Produtos:" />
+                  <Label layoutX="16.0" layoutY="114.0" text="Filtros:" />
                </children>
             </Pane>
             <Pane layoutX="20.0" layoutY="214.0" prefHeight="220.0" prefWidth="600.0" style="-fx-background-color: #ffffff;">
@@ -60,13 +60,13 @@
                         <Label layoutX="5.0" layoutY="2.0" text="Ítens selecionados:" textFill="WHITE" />
                      </children>
                   </Pane>
-                  <TableView fx:id="tbvItens" layoutX="14.0" layoutY="30.0" prefHeight="180.0" prefWidth="570.0" stylesheets="@../../styles/TableViewCSS.css">
+                  <TableView fx:id="tbvItens" layoutX="10.0" layoutY="30.0" prefHeight="180.0" prefWidth="580.0" stylesheets="@../../styles/TableViewCSS.css">
                      <columns>
-                        <TableColumn fx:id="tbcItem" prefWidth="306.0" text="Produto" />
-                        <TableColumn fx:id="tbcQtdIten" minWidth="9.0" prefWidth="55.0" text="Qtde." />
-                        <TableColumn fx:id="tbcUnidadeItem" prefWidth="88.0" text="Unidade" />
-                        <TableColumn fx:id="tbcCustoItem" prefWidth="59.0" text="Custo" />
-                        <TableColumn fx:id="btnExcluirItem" minWidth="9.0" prefWidth="61.0" text="Excluir" />
+                        <TableColumn fx:id="tbcItem" prefWidth="343.0" text="Produto" />
+                        <TableColumn fx:id="tbcQtdIten" minWidth="9.0" prefWidth="53.0" text="Qtde." />
+                        <TableColumn fx:id="tbcUnidadeItem" prefWidth="71.0" text="Unidade" />
+                        <TableColumn fx:id="tbcCustoItem" prefWidth="52.0" text="Custo" />
+                        <TableColumn fx:id="btnExcluirItem" minWidth="9.0" prefWidth="60.0" text="Excluir" />
                      </columns>
                   </TableView>
                </children>
@@ -131,14 +131,7 @@
                   </JFXButton>
                </children>
             </HBox>
-            <TableView fx:id="tbvReceita" layoutX="14.0" layoutY="134.0" prefHeight="179.0" prefWidth="610.0">
-               <columns>
-                  <TableColumn fx:id="tbcProduto" prefWidth="391.0" text="Produto" />
-                  <TableColumn fx:id="tbcQtde" minWidth="9.0" prefWidth="139.0" text="Quantidade" />
-                  <TableColumn fx:id="tbcUnidade" prefWidth="79.0" text="Unidade" />
-               </columns>
-            </TableView>
-            <Label layoutX="467.0" layoutY="323.0" text="Custo total:">
+            <Label layoutX="449.0" layoutY="340.0" text="Custo total:">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>
@@ -148,12 +141,20 @@
             <JFXRadioButton fx:id="rbtCod" layoutX="415.0" layoutY="68.0" style="-jfx-selected-color: #69e2ff;" text="Código" />
             <JFXRadioButton fx:id="rbtDesc" layoutX="501.0" layoutY="68.0" style="-jfx-selected-color: #69e2ff;" text="Descrição" />
             <Label layoutX="393.0" layoutY="41.0" text="Filtros:" />
-            <Label fx:id="lblCustoTotal" layoutX="563.0" layoutY="323.0" prefHeight="16.0" prefWidth="60.0">
+            <Label fx:id="lblCustoTotal" layoutX="539.0" layoutY="340.0" prefHeight="16.0" prefWidth="78.0" textFill="#d32f2f">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>
             </Label>
             <JFXComboBox fx:id="cbbUnidadeMedidaProd" editable="true" labelFloat="true" layoutX="184.0" layoutY="85.0" prefHeight="26.0" prefWidth="160.0" promptText="Unidade Medida" />
+            <TableView fx:id="tbvReceita" layoutX="16.0" layoutY="130.0" prefHeight="200.0" prefWidth="600.0" stylesheets="@../../styles/TableViewCSS.css">
+               <columns>
+                  <TableColumn fx:id="tbcProduto" prefWidth="423.0" text="Produto" />
+                  <TableColumn fx:id="tbcQtde" minWidth="9.0" prefWidth="55.0" text="Qtde." />
+                  <TableColumn fx:id="tbcUnidade" prefWidth="69.0" text="Unidade" />
+                  <TableColumn fx:id="tbcCusto" prefWidth="52.0" text="Custo" />
+               </columns>
+            </TableView>
          </children>
       </Pane>
    </children>

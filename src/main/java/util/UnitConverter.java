@@ -13,7 +13,13 @@ import java.math.BigDecimal;
  * @author joao
  */
 public class UnitConverter {
-
+/**
+     * Converte e retorna o valor de entrada para uma unidade de medida informada 
+     * UnidadeMedida de um objeto Produto.
+     * @param uIn UnidadeMedida em que a o valor inicial está representado
+     * @param uOut UnidadeMedida   paraqual se deseja converter o valor
+     * @return  Retorna o valor da da convertido de uIn em uOut
+ */
     public static BigDecimal convertTo(UnidadeMedida uIn, UnidadeMedida uOut, BigDecimal valIn) {
         switch (uIn) {
             case l:

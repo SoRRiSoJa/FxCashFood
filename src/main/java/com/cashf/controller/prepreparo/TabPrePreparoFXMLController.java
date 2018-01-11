@@ -17,6 +17,7 @@ import com.sun.prism.impl.Disposer;
 import controller.GenericViewController;
 import java.math.BigDecimal;
 import java.net.URL;
+import java.text.NumberFormat;
 import java.util.Arrays;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -81,15 +82,6 @@ public class TabPrePreparoFXMLController implements GenericViewController, Initi
     @FXML
     private JFXButton btnLimpar;
     @FXML
-    private TableView<ProdutoPrePreparo> tbvReceita;
-    @FXML
-    private TableColumn<ProdutoPrePreparo, String> tbcProduto;
-    @FXML
-    private TableColumn<ProdutoPrePreparo, BigDecimal> tbcQtde;
-    @FXML
-    private TableColumn<ProdutoPrePreparo, String> tbcUnidade;
-
-    @FXML
     private JFXTextField txtRendimento;
     @FXML
     private JFXRadioButton rbtCod;
@@ -103,6 +95,16 @@ public class TabPrePreparoFXMLController implements GenericViewController, Initi
     private Pane paneRoot;
     @FXML
     private JFXComboBox<UnidadeMedida> cbbUnidadeMedidaProd;
+    @FXML
+    private TableView<ProdutoPrePreparo> tbvReceita;
+    @FXML
+    private TableColumn<ProdutoPrePreparo, String> tbcProduto;
+    @FXML
+    private TableColumn<ProdutoPrePreparo, BigDecimal> tbcQtde;
+    @FXML
+    private TableColumn<ProdutoPrePreparo, String> tbcUnidade;
+    @FXML
+    private TableColumn<ProdutoPrePreparo, BigDecimal> tbcCusto;
     //-----
     //--
     private String erros;
@@ -112,6 +114,7 @@ public class TabPrePreparoFXMLController implements GenericViewController, Initi
     private BigDecimal custoReceita;
     private String custoTotal;
     private boolean flagButtons;
+    private NumberFormat nf = NumberFormat.getCurrencyInstance();
 
     /**
      * Initializes the controller class.
@@ -124,20 +127,24 @@ public class TabPrePreparoFXMLController implements GenericViewController, Initi
         loadCbbUnidadeMedida();
         loadCbbUnidadeMedidaProd();
         setUpTableViewItens();
+        setuUpTbleViewReceita();
     }
 
     @FXML
     private void onAdicionar(ActionEvent event) {
         getDataItem();
         if (validateItemFields()) {
-            
+
             PrePreparoController.getInstance().setItemAtual(ccbItens.getItems().get(ccbItens.getSelectionModel().getSelectedIndex()));
-            PrePreparoController.getInstance().setListaItens(qtdeItem,ProdCalcUtil.valorPorcao(PrePreparoController.getInstance().getItemAtual(),PrePreparoController.getInstance().getUnidadeMedida(), qtdeItem));
+            PrePreparoController.getInstance().setListaItens(qtdeItem, ProdCalcUtil.valorPorcao(PrePreparoController.getInstance().getItemAtual(), PrePreparoController.getInstance().getUnidadeMedida(), qtdeItem));
             tbvItens.setItems(PrePreparoController.getInstance().getListaItens());
+            tbvReceita.setItems(PrePreparoController.getInstance().getListaItens());
+            lblCustoTotal.setText(nf.format(PrePreparoController.getInstance().getCustoTotal()));
             //--
             txtqtde.clear();
             ccbItens.setValue(null);
             PrePreparoController.getInstance().setItemAtual(null);
+
             //--
         } else {
             PoupUpUtil.errorMessage(paneRoot, MainApp.paneRoot, erros);
@@ -236,6 +243,18 @@ public class TabPrePreparoFXMLController implements GenericViewController, Initi
         ccbItens.setItems(PrePreparoController.getInstance().getListaProduto());
     }
 
+    private void loadTbvReceita() {
+        tbvReceita.setItems(PrePreparoController.getInstance().getListaItens());
+    }
+
+    private void setuUpTbleViewReceita() {
+        tbcProduto.setCellValueFactory(new PropertyValueFactory<>("produto"));
+        tbcQtde.setCellValueFactory(new PropertyValueFactory<>("qtdeProduto"));
+        tbcUnidade.setCellValueFactory(new PropertyValueFactory<>("unidadeMedida"));
+        tbcCusto.setCellValueFactory(new PropertyValueFactory<>("valorPorcao"));
+        tbvReceita.getColumns().setAll(tbcProduto, tbcQtde, tbcUnidade, tbcCusto);
+    }
+
     private void setUpTableViewItens() {
         tbcItem.setCellValueFactory(new PropertyValueFactory<>("produto"));
         tbcQtdIten.setCellValueFactory(new PropertyValueFactory<>("qtdeProduto"));
@@ -269,13 +288,14 @@ public class TabPrePreparoFXMLController implements GenericViewController, Initi
                 //remove selected item from the table list
                 if (currentPerson != null) {
                     Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-                    alert.setTitle("Cofirmar Excluir Telefone!");
+                    alert.setTitle("Cofirmar Excluir Item da Lista!");
                     alert.setHeaderText("Deseja realmente Excluir?");
                     alert.setContentText("Produto:(" + currentPerson.getProduto().getDescriao() + ")");
                     Optional<ButtonType> result = alert.showAndWait();
                     if (result.get() == ButtonType.OK) {
                         // ... user chose OK
                         PrePreparoController.getInstance().getListaItens().remove(currentPerson);
+                        lblCustoTotal.setText(nf.format(PrePreparoController.getInstance().getCustoTotal()));
                         notificationBuilder = Notifications.create().title("Produto excluído!").
                                 text("Produto Excluido com sucesso.").
                                 hideAfter(Duration.seconds(2)).
