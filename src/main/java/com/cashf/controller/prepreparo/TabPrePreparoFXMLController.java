@@ -134,7 +134,11 @@ public class TabPrePreparoFXMLController implements GenericViewController, Initi
             PrePreparoController.getInstance().setItemAtual(ccbItens.getItems().get(ccbItens.getSelectionModel().getSelectedIndex()));
             PrePreparoController.getInstance().setListaItens(qtdeItem,ProdCalcUtil.valorPorcao(PrePreparoController.getInstance().getItemAtual(),PrePreparoController.getInstance().getUnidadeMedida(), qtdeItem));
             tbvItens.setItems(PrePreparoController.getInstance().getListaItens());
+            //--
+            txtqtde.clear();
+            ccbItens.setValue(null);
             PrePreparoController.getInstance().setItemAtual(null);
+            //--
         } else {
             PoupUpUtil.errorMessage(paneRoot, MainApp.paneRoot, erros);
             erros = "";
