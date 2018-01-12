@@ -37,7 +37,6 @@ public class PrePreparo implements Serializable {
     @ManyToOne
     @JoinColumn(nullable = false)
     private Produto produtoPrincipal;
-    private String descricao;
     @Column(columnDefinition = "DATE")
     private LocalDate dataProducao;
     private BigDecimal rendimento;
@@ -49,10 +48,9 @@ public class PrePreparo implements Serializable {
     public PrePreparo() {
     }
 
-    public PrePreparo(long idPrepreparo, Produto produtoPrincipal, String descricao, LocalDate dataProducao, BigDecimal rendimento, BigDecimal custoTotal, List<ProdutoPrePreparo> listaProdutos, Boolean status) {
+    public PrePreparo(long idPrepreparo, Produto produtoPrincipal, LocalDate dataProducao, BigDecimal rendimento, BigDecimal custoTotal, List<ProdutoPrePreparo> listaProdutos, Boolean status) {
         this.idPrepreparo = idPrepreparo;
         this.produtoPrincipal = produtoPrincipal;
-        this.descricao = descricao;
         this.dataProducao = dataProducao;
         this.rendimento = rendimento;
         this.custoTotal = custoTotal;
@@ -76,14 +74,7 @@ public class PrePreparo implements Serializable {
         this.produtoPrincipal = produtoPrincipal;
     }
 
-    public String getDescricao() {
-        return descricao;
-    }
-
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
-    }
-
+   
     public LocalDate getDataProducao() {
         return dataProducao;
     }
@@ -155,7 +146,7 @@ public class PrePreparo implements Serializable {
 
     @Override
     public String toString() {
-        return this.descricao;
+        return this.produtoPrincipal.getDescriao();
     }
 
 }

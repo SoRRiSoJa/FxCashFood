@@ -30,7 +30,6 @@ public class AtualizarEstoque {
     private PrePreparo prePreparo;
     private AjusteEstoque ajusteEstoque;
     private TipoAjuste tipoAjuste;
-    
 
     public AtualizarEstoque() {
         this.produtoDAO = new ProdutoDAO(Produto.class);
@@ -39,7 +38,7 @@ public class AtualizarEstoque {
         produto.setIdProduto(0l);
         this.prePreparo = new PrePreparo();
         prePreparo.setIdPrepreparo(0l);
-        this.ajusteEstoque=new AjusteEstoque();
+        this.ajusteEstoque = new AjusteEstoque();
         this.ajusteEstoque.setIdAjuste(0l);
     }
 
@@ -52,7 +51,7 @@ public class AtualizarEstoque {
                     produto.setQtdeProduto(qtdeAtual.subtract(qtdeAjuste));
                 }
             } else {
-                produto.setQtdeProduto(qtdeAtual.subtract(UnitConverter.convertTo(unidadeMedida,produto.getUnidadeMedida(), qtdeAjuste)));
+                produto.setQtdeProduto(qtdeAtual.subtract(UnitConverter.convertTo(unidadeMedida, produto.getUnidadeMedida(), qtdeAjuste)));
             }
 
             produtoDAO.update(produto);
@@ -72,7 +71,7 @@ public class AtualizarEstoque {
                     produto.setQtdeProduto(qtdeAtual.add(qtdeAjuste));
                 }
             } else {
-                produto.setQtdeProduto(qtdeAtual.add(UnitConverter.convertTo(unidadeMedida,produto.getUnidadeMedida(), qtdeAjuste)));
+                produto.setQtdeProduto(qtdeAtual.add(UnitConverter.convertTo(unidadeMedida, produto.getUnidadeMedida(), qtdeAjuste)));
             }
             produtoDAO.update(produto);
         } catch (Exception ex) {
@@ -82,7 +81,30 @@ public class AtualizarEstoque {
         return flag;
     }
 
-    
+    public Boolean adicionarPrePreparo() {
+        boolean flag = true;
+        try {
+            prePreparo.getListaProdutos().forEach((itemAtual) -> {
+                produto = produtoDAO.findById(itemAtual.getProduto().getIdProduto());
+                if (itemAtual.getUnidadeMedida().equals(produto.getUnidadeMedida())) {
+                    produto.setQtdeProduto(produto.getQtdeProduto().subtract(itemAtual.getQtdeProduto()));
+                } else {
+                    produto.setQtdeProduto(produto.getQtdeProduto().subtract(UnitConverter.convertTo(itemAtual.getUnidadeMedida(), produto.getUnidadeMedida(), itemAtual.getQtdeProduto())));
+                }
+                produtoDAO.update(produto);
+            });
+            produto = produtoDAO.findById(prePreparo.getProdutoPrincipal().getIdProduto());
+            produto.setQtdeProduto(prePreparo.getRendimento());
+            produto.setPreco_custo(prePreparo.getCustoTotal());
+            produto.setPreco_venda(prePreparo.getCustoTotal());
+            produtoDAO.update(produto);
+        } catch (Exception ex) {
+            System.out.println("Erro ao adicionar Ppre-preparo:--->>>> " + ex);
+            flag = false;
+        }
+        return flag;
+    }
+
     public PrePreparo getPrePreparo() {
         return prePreparo;
     }
@@ -124,7 +146,8 @@ public class AtualizarEstoque {
     public void setTipoAjuste(TipoAjuste tipoAjuste) {
         this.tipoAjuste = tipoAjuste;
     }
-    public void atualizar(){
+
+    public void atualizar() {
         ajusteEstoqueDAO.save(ajusteEstoque);
     }
 }

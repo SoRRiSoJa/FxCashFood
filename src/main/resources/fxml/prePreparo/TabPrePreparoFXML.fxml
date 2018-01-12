@@ -136,7 +136,7 @@
                   <Font name="System Bold" size="13.0" />
                </font>
             </Label>
-            <JFXComboBox fx:id="cbbProduto" editable="true" labelFloat="true" layoutX="14.0" layoutY="37.0" prefHeight="26.0" prefWidth="330.0" promptText="Produto Principal" />
+            <JFXComboBox fx:id="cbbProduto" editable="true" labelFloat="true" layoutX="14.0" layoutY="37.0" onAction="#onSelecionarProdPrincipal" prefHeight="26.0" prefWidth="330.0" promptText="Produto Principal" />
             <JFXTextField fx:id="txtRendimento" focusColor="#004ba0" labelFloat="true" layoutX="15.0" layoutY="85.0" prefHeight="26.0" prefWidth="135.0" promptText="Rendimento total" />
             <JFXRadioButton fx:id="rbtCod" layoutX="415.0" layoutY="68.0" style="-jfx-selected-color: #69e2ff;" text="Código" />
             <JFXRadioButton fx:id="rbtDesc" layoutX="501.0" layoutY="68.0" style="-jfx-selected-color: #69e2ff;" text="Descrição" />

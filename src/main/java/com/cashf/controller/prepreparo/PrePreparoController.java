@@ -5,6 +5,7 @@
  */
 package com.cashf.controller.prepreparo;
 
+import com.cashf.core.atualizarestoque.AtualizarEstoque;
 import com.cashf.dao.prepreparo.PrePreparoDAO;
 import com.cashf.dao.produto.ProdutoDAO;
 import com.cashf.model.prepreparo.PrePreparo;
@@ -13,7 +14,9 @@ import com.cashf.model.produto.Produto;
 import com.cashf.model.produto.UnidadeMedida;
 import controller.GenericController;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -24,8 +27,9 @@ import javafx.collections.ObservableList;
 public class PrePreparoController implements GenericController<PrePreparo> {
 
     public static PrePreparoController prePreparoController = null;
-    private PrePreparoDAO prePreparoDAO;
-    private ProdutoDAO produtoDAO;
+    private final PrePreparoDAO prePreparoDAO;
+    private final ProdutoDAO produtoDAO;
+    private AtualizarEstoque atualizarEstoque;
     private ObservableList<PrePreparo> lista;
     private ObservableList<Produto> listaCbbPrePreparo;
     private ObservableList<Produto> listaCbbItens;
@@ -39,6 +43,7 @@ public class PrePreparoController implements GenericController<PrePreparo> {
     private PrePreparoController() {
         this.produtoDAO = new ProdutoDAO(Produto.class);
         this.prePreparoDAO = new PrePreparoDAO(PrePreparo.class);
+        this.atualizarEstoque = new AtualizarEstoque();
         this.lista = FXCollections.observableList(prePreparoDAO.listAll());
         this.listaCbbItens = FXCollections.observableList(produtoDAO.listProdInsumos());
         this.listaCbbPrePreparo = FXCollections.observableList(produtoDAO.listProdPrePreparo());
@@ -61,7 +66,8 @@ public class PrePreparoController implements GenericController<PrePreparo> {
 
     @Override
     public void insert() {
-
+        prePreparoDAO.update(prePreparo);
+        atualizarQtdeIntensEstoque();
     }
 
     @Override
@@ -97,22 +103,6 @@ public class PrePreparoController implements GenericController<PrePreparo> {
         lista.add(obj);
     }
 
-    public PrePreparoDAO getPrePreparoDAO() {
-        return prePreparoDAO;
-    }
-
-    public void setPrePreparoDAO(PrePreparoDAO prePreparoDAO) {
-        this.prePreparoDAO = prePreparoDAO;
-    }
-
-    public ProdutoDAO getProdutoDAO() {
-        return produtoDAO;
-    }
-
-    public void setProdutoDAO(ProdutoDAO produtoDAO) {
-        this.produtoDAO = produtoDAO;
-    }
-
     public ObservableList<Produto> getListaPrePreparo() {
         return listaCbbPrePreparo;
     }
@@ -138,7 +128,7 @@ public class PrePreparoController implements GenericController<PrePreparo> {
     }
 
     public void setListaItens(BigDecimal qtdeProduto, BigDecimal valorPorcao) {
-        this.listaItens.add(new ProdutoPrePreparo(0l, itemAtual, unidadeMedida, qtdeProduto, valorPorcao));
+        this.listaItens.add(new ProdutoPrePreparo(0l,prePreparo,itemAtual, unidadeMedida, qtdeProduto, valorPorcao));
     }
 
     public PrePreparo getPrePreparo() {
@@ -147,6 +137,16 @@ public class PrePreparoController implements GenericController<PrePreparo> {
 
     public void setPrePreparo(PrePreparo prePreparo) {
         this.prePreparo = prePreparo;
+    }
+
+    public void setPrePreparo(long idPrepreparo, Produto produtoPrincipal, LocalDate dataProducao, BigDecimal rendimento, BigDecimal custoTotal, List<ProdutoPrePreparo> listaProdutos, Boolean status) {
+        prePreparo.setIdPrepreparo(idPrepreparo);
+        prePreparo.setProdutoPrincipal(produtoPrincipal);
+        prePreparo.setDataProducao(dataProducao);
+        prePreparo.setRendimento(rendimento);
+        prePreparo.setCustoTotal(custoTotal);
+        prePreparo.setListaProdutos(listaProdutos);
+        prePreparo.setStatus(status);
     }
 
     public UnidadeMedida getUnidadeMedida() {
@@ -174,11 +174,16 @@ public class PrePreparoController implements GenericController<PrePreparo> {
     }
 
     public BigDecimal getCustoTotal() {
-        custoTotal=BigDecimal.ZERO;
+        custoTotal = BigDecimal.ZERO;
         listaItens.forEach((custUnit) -> {
             custoTotal = custoTotal.add(custUnit.getValorPorcao());
         });
         return custoTotal;
+    }
+
+    private void atualizarQtdeIntensEstoque() {
+        atualizarEstoque.setPrePreparo(prePreparo);
+        atualizarEstoque.adicionarPrePreparo();
     }
 
 }

@@ -53,7 +53,7 @@ public class GenericDAOIMP<T> implements GenericDAO<T> {
         Transaction tx = null;
         try {
             tx = session.beginTransaction();
-            session.saveOrUpdate(obj);
+            session.merge(obj);
             tx.commit();
         } catch (HibernateException e) {
             if (tx != null) {

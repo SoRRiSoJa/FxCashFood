@@ -26,7 +26,6 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "produto_prepreparo")
 public class ProdutoPrePreparo implements Serializable {
-
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Id
     @Column(columnDefinition = "serial")
@@ -44,13 +43,15 @@ public class ProdutoPrePreparo implements Serializable {
     public ProdutoPrePreparo() {
     }
 
-    public ProdutoPrePreparo(Long idProdutoPrepreparo, Produto produto,UnidadeMedida unidadeMedida, BigDecimal qtdeProduto,BigDecimal valorPorcao) {
+    public ProdutoPrePreparo(Long idProdutoPrepreparo,PrePreparo prePreparo, Produto produto,UnidadeMedida unidadeMedida, BigDecimal qtdeProduto,BigDecimal valorPorcao) {
         this.idProdutoPrepreparo = idProdutoPrepreparo;
+        this.prePreparo=prePreparo;
         this.produto = produto;
         this.qtdeProduto = qtdeProduto;
         this.unidadeMedida=unidadeMedida;
         this.valorPorcao=valorPorcao;
     }
+     
 
     public Long getIdProdutoPrepreparo() {
         return idProdutoPrepreparo;
