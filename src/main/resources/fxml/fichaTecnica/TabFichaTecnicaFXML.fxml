@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXRadioButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.Pane?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="542.0" prefWidth="1366.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Pane layoutX="10.0" layoutY="30.0" prefHeight="445.0" prefWidth="640.0" style="-fx-background-color: #ffffff;">
+         <effect>
+            <DropShadow />
+         </effect>
+         <children>
+            <Pane prefHeight="20.0" prefWidth="640.0" style="-fx-background-color: #0081cb;">
+               <children>
+                  <Label layoutX="5.0" layoutY="2.0" text="Materiais Utilizados" textFill="WHITE" />
+               </children>
+            </Pane>
+            <Label layoutX="14.0" layoutY="38.0" text="Produtos:" />
+            <JFXComboBox fx:id="ccbItens" editable="true" labelFloat="true" layoutX="14.0" layoutY="82.0" prefHeight="26.0" prefWidth="330.0" promptText="Descrição Produto" />
+            <JFXRadioButton fx:id="rbtCodigo" layoutX="64.0" layoutY="156.0" style="-jfx-selected-color: #69e2ff;" text="Código" />
+            <JFXRadioButton fx:id="rbtDescricao" layoutX="184.0" layoutY="156.0" style="-jfx-selected-color: #69e2ff;" text="Descrição" />
+            <Label layoutX="14.0" layoutY="133.0" text="Filtros:" />
+            <JFXComboBox fx:id="cbbUnidadeMedida" editable="true" labelFloat="true" layoutX="455.0" layoutY="38.0" prefHeight="26.0" prefWidth="160.0" promptText="Unidade Medida" />
+            <JFXTextField fx:id="txtqtde" focusColor="#004ba0" labelFloat="true" layoutX="455.0" layoutY="78.0" prefHeight="24.0" prefWidth="160.0" promptText="Quantidade" />
+            <JFXButton fx:id="btnAdicionar" contentDisplay="GRAPHIC_ONLY" layoutX="572.0" layoutY="125.0" onAction="#onAdicionar" prefHeight="30.0" prefWidth="40.0" ripplerFill="WHITE" style="-fx-background-color: #2196f3;" textFill="WHITE">
+               <graphic>
+                  <FontAwesomeIconView fill="WHITE" glyphName="PLUS" size="12" />
+               </graphic>
+            </JFXButton>
+         </children>
+      </Pane>
+      <Pane layoutX="662.0" layoutY="30.0" prefHeight="445.0" prefWidth="640.0" style="-fx-background-color: #ffffff;">
+         <effect>
+            <DropShadow />
+         </effect>
+      </Pane>
+   </children>
+</Pane>
