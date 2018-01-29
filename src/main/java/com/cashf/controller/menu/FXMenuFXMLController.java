@@ -165,7 +165,7 @@ public class FXMenuFXMLController implements Initializable {
         }
     }
     //---------------------------------------------
-    
+
     private void menuButtonsControl() {
         for (Node node : gavetas.getChildren()) {
             if (node.getAccessibleText() != null) {
@@ -272,7 +272,9 @@ public class FXMenuFXMLController implements Initializable {
     }
 
     @FXML
-    private void onNa(ActionEvent event) {
+    private void onFichaTecnica(ActionEvent event) {
+        
+        loadFXML("/fxml/fichaTecnica/GerenciarFichasTecnicasFXML.fxml");
     }
 
     @FXML

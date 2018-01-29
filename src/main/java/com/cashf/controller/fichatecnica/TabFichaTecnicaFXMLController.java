@@ -5,10 +5,15 @@
  */
 package com.cashf.controller.fichatecnica;
 
+import com.cashf.model.fichatecnica.ProdutoFichaTecnica;
+import com.cashf.model.produto.Produto;
+import com.cashf.model.produto.UnidadeMedida;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXTextField;
+import controller.GenericViewController;
+import java.math.BigDecimal;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -24,12 +29,12 @@ import javafx.scene.layout.Pane;
  *
  * @author joao
  */
-public class TabFichaTecnicaFXMLController implements Initializable {
+public class TabFichaTecnicaFXMLController implements Initializable,GenericViewController {
 
     @FXML
     private Pane paneRoot;
     @FXML
-    private JFXComboBox<?> ccbFichaTecnica;
+    private JFXComboBox<Produto> ccbFichaTecnica;
     @FXML
     private JFXButton btnSalvar;
     @FXML
@@ -39,21 +44,21 @@ public class TabFichaTecnicaFXMLController implements Initializable {
     @FXML
     private JFXButton btnLimpar;
     @FXML
-    private TableView<?> tbvFicha;
+    private TableView<ProdutoFichaTecnica> tbvFicha;
     @FXML
-    private TableColumn<?, ?> tbcProduto;
+    private TableColumn<ProdutoFichaTecnica, String> tbcProduto;
     @FXML
-    private TableColumn<?, ?> tbcUnidade;
+    private TableColumn<ProdutoFichaTecnica, UnidadeMedida> tbcUnidade;
     @FXML
-    private TableColumn<?, ?> tbcQtde;
+    private TableColumn<ProdutoFichaTecnica, BigDecimal> tbcQtde;
     @FXML
-    private TableColumn<?, ?> tbcValor;
+    private TableColumn<ProdutoFichaTecnica, BigDecimal> tbcValor;
     @FXML
     private Label lblCustoTotal;
     @FXML
-    private JFXComboBox<?> ccbItens;
+    private JFXComboBox<Produto> ccbItens;
     @FXML
-    private JFXComboBox<?> cbbUnidadeMedida;
+    private JFXComboBox<UnidadeMedida> cbbUnidadeMedida;
     @FXML
     private JFXTextField txtqtde;
     @FXML
@@ -63,17 +68,17 @@ public class TabFichaTecnicaFXMLController implements Initializable {
     @FXML
     private JFXRadioButton rbtDescricao;
     @FXML
-    private TableView<?> tbvFichaItens;
+    private TableView<ProdutoFichaTecnica> tbvFichaItens;
     @FXML
-    private TableColumn<?, ?> tbcProdItem;
+    private TableColumn<ProdutoFichaTecnica, String> tbcProdItem;
     @FXML
-    private TableColumn<?, ?> tbcUnidadeItem;
+    private TableColumn<ProdutoFichaTecnica, UnidadeMedida> tbcUnidadeItem;
     @FXML
-    private TableColumn<?, ?> tbcQtdeItem;
+    private TableColumn<ProdutoFichaTecnica, BigDecimal> tbcQtdeItem;
     @FXML
-    private TableColumn<?, ?> tbcValorItem;
+    private TableColumn<ProdutoFichaTecnica, BigDecimal> tbcValorItem;
     @FXML
-    private TableColumn<?, ?> btnExcluirItem;
+    private TableColumn btnExcluirItem;
 
     /**
      * Initializes the controller class.
@@ -105,6 +110,36 @@ public class TabFichaTecnicaFXMLController implements Initializable {
 
     @FXML
     private void onAdicionar(ActionEvent event) {
+    }
+
+    @Override
+    public void clearFields() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void setInputOff() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void setInputOn() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Boolean validateFields() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void getData() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void loadDataToScreen() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }
