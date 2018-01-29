@@ -68,6 +68,7 @@ Contributor(s):
         <mapping class="com.cashf.model.ajusteestoque.AjusteEstoque" />
         <mapping class="com.cashf.model.prepreparo.PrePreparo" />
         <mapping class="com.cashf.model.prepreparo.ProdutoPrePreparo" />
-        
+        <mapping class="com.cashf.model.fichatecnica.FichaTecnica" />
+        <mapping class="com.cashf.model.fichatecnica.ProdutoFichaTecnica" />
     </session-factory>
 </hibernate-configuration>
