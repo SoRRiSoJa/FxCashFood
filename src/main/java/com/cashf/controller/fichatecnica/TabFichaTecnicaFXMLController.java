@@ -15,6 +15,7 @@ import com.jfoenix.controls.JFXTextField;
 import controller.GenericViewController;
 import java.math.BigDecimal;
 import java.net.URL;
+import java.util.Arrays;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -86,6 +87,9 @@ public class TabFichaTecnicaFXMLController implements Initializable,GenericViewC
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        loadCbbUnidadeMedida();
+        loadCbbFicha();
+        loadCbbItens();
     }    
 
     @FXML
@@ -141,5 +145,13 @@ public class TabFichaTecnicaFXMLController implements Initializable,GenericViewC
     public void loadDataToScreen() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+    private void loadCbbItens() {
+        ccbItens.setItems(FichaTecnicaController.getInstance().getComboBoxItensFicha());
+    }
+    private void loadCbbFicha() {
+        ccbFichaTecnica.setItems(FichaTecnicaController.getInstance().getComboBoxFichaTecnica());
+    }
+    private void loadCbbUnidadeMedida() {
+        cbbUnidadeMedida.getItems().addAll(Arrays.asList(UnidadeMedida.values()));
+    }
 }
