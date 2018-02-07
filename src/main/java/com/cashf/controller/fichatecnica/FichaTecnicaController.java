@@ -12,7 +12,6 @@ import com.cashf.model.fichatecnica.ProdutoFichaTecnica;
 import com.cashf.model.produto.Produto;
 import com.cashf.model.produto.UnidadeMedida;
 import controller.GenericController;
-import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -25,15 +24,18 @@ public class FichaTecnicaController implements GenericController<FichaTecnica> {
     private FichaTecnicaDAO fichaTecnicaDAO;
     private ProdutoDAO produtoDAO;
     private FichaTecnica fichaTecnica;
+    private Produto itemAtual = new Produto();
     private ObservableList<ProdutoFichaTecnica> listaItensFicha;
     private ObservableList<FichaTecnica> lista;
     private ObservableList<Produto> comboBoxItensFicha;
     private UnidadeMedida unidadeMedida;
+    
     private FichaTecnicaController(){
         this.fichaTecnicaDAO=new FichaTecnicaDAO(FichaTecnica.class);
         this.produtoDAO=new ProdutoDAO(Produto.class);
         this.lista=FXCollections.observableList(fichaTecnicaDAO.listAll());
         this.comboBoxItensFicha=FXCollections.observableList(produtoDAO.listProdNotFicha());
+        this.itemAtual = new Produto();
     }
     public static synchronized FichaTecnicaController getInstance() {
         if (controller == null) {
@@ -80,6 +82,14 @@ public class FichaTecnicaController implements GenericController<FichaTecnica> {
         return fichaTecnica;
     }
 
+    public Produto getItemAtual() {
+        return itemAtual;
+    }
+
+    public void setItemAtual(Produto itemAtual) {
+        this.itemAtual = itemAtual;
+    }
+
     public void setFichaTecnica(FichaTecnica fichaTecnica) {
         this.fichaTecnica = fichaTecnica;
     }
@@ -97,6 +107,14 @@ public class FichaTecnicaController implements GenericController<FichaTecnica> {
 
     public void setUnidadeMedida(UnidadeMedida unidadeMedida) {
         this.unidadeMedida = unidadeMedida;
+    }
+
+    public ObservableList<ProdutoFichaTecnica> getListaItensFicha() {
+        return listaItensFicha;
+    }
+
+    public void setListaItensFicha(ObservableList<ProdutoFichaTecnica> listaItensFicha) {
+        this.listaItensFicha = listaItensFicha;
     }
     
 
