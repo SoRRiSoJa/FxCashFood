@@ -5,6 +5,8 @@
  */
 package com.cashf.controller.fichatecnica;
 
+import com.cashf.cashfood.MainApp;
+import com.cashf.controller.prepreparo.PrePreparoController;
 import com.cashf.controller.prepreparo.TabPrePreparoFXMLController;
 import com.cashf.model.fichatecnica.ProdutoFichaTecnica;
 import com.cashf.model.produto.Produto;
@@ -39,6 +41,7 @@ import javafx.scene.layout.Pane;
 import javafx.util.Callback;
 import javafx.util.Duration;
 import org.controlsfx.control.Notifications;
+import util.PoupUpUtil;
 
 /**
  * FXML Controller class
@@ -96,7 +99,7 @@ public class TabFichaTecnicaFXMLController implements Initializable, GenericView
     @FXML
     private TableColumn btnExcluirItem;
     //---
-    BigDecimal qtdeItem=  BigDecimal.ZERO;
+    BigDecimal qtdeItem = BigDecimal.ZERO;
     private String erros;
     private boolean flagButtons;
 
@@ -115,6 +118,10 @@ public class TabFichaTecnicaFXMLController implements Initializable, GenericView
 
     @FXML
     private void onFichaTecnica(ActionEvent event) {
+        if (ccbFichaTecnica.getSelectionModel().getSelectedItem() != null) {
+            FichaTecnicaController.getInstance().setProdutoPrincipal(ccbFichaTecnica.getSelectionModel().getSelectedItem());
+            FichaTecnicaController.getInstance().getFichaTecnica().setProdutoPrincipal(FichaTecnicaController.getInstance().getProdutoPrincipal());
+        }
     }
 
     @FXML
@@ -131,10 +138,23 @@ public class TabFichaTecnicaFXMLController implements Initializable, GenericView
 
     @FXML
     private void onLimpar(ActionEvent event) {
+        clearFields();
     }
 
     @FXML
     private void onAdicionar(ActionEvent event) {
+        getDataItem();
+        if (validateItemFields()) {
+            FichaTecnicaController.getInstance().setItemAtual(ccbItens.getSelectionModel().getSelectedItem());
+            
+            //--
+            txtqtde.clear();
+            ccbItens.setValue(null);
+            PrePreparoController.getInstance().setItemAtual(null);
+        } else {
+            PoupUpUtil.errorMessage(paneRoot, MainApp.paneRoot, erros);
+            erros = "";
+        }
     }
 
     public Boolean validateItemFields() {
@@ -150,6 +170,7 @@ public class TabFichaTecnicaFXMLController implements Initializable, GenericView
 
         return flag;
     }
+
     public void getDataItem() {
         FichaTecnicaController.getInstance().setUnidadeMedida(cbbUnidadeMedida.getItems().get(cbbUnidadeMedida.getSelectionModel().getSelectedIndex()));
         try {
@@ -164,7 +185,10 @@ public class TabFichaTecnicaFXMLController implements Initializable, GenericView
 
     @Override
     public void clearFields() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        txtqtde.clear();
+        ccbItens.setValue(null);
+        cbbUnidadeMedida.setValue(null);
+        ccbFichaTecnica.setValue(null);
     }
 
     @Override

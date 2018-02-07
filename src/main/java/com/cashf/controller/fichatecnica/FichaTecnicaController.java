@@ -12,6 +12,7 @@ import com.cashf.model.fichatecnica.ProdutoFichaTecnica;
 import com.cashf.model.produto.Produto;
 import com.cashf.model.produto.UnidadeMedida;
 import controller.GenericController;
+import java.math.BigDecimal;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -25,6 +26,7 @@ public class FichaTecnicaController implements GenericController<FichaTecnica> {
     private ProdutoDAO produtoDAO;
     private FichaTecnica fichaTecnica;
     private Produto itemAtual = new Produto();
+    private Produto produtoPrincipal = new Produto();
     private ObservableList<ProdutoFichaTecnica> listaItensFicha;
     private ObservableList<FichaTecnica> lista;
     private ObservableList<Produto> comboBoxItensFicha;
@@ -35,7 +37,10 @@ public class FichaTecnicaController implements GenericController<FichaTecnica> {
         this.produtoDAO=new ProdutoDAO(Produto.class);
         this.lista=FXCollections.observableList(fichaTecnicaDAO.listAll());
         this.comboBoxItensFicha=FXCollections.observableList(produtoDAO.listProdNotFicha());
+        this.fichaTecnica=new FichaTecnica();
         this.itemAtual = new Produto();
+        this.produtoPrincipal = new Produto();
+        this.fichaTecnica.setIdFichaTecnica(0l);
     }
     public static synchronized FichaTecnicaController getInstance() {
         if (controller == null) {
@@ -77,6 +82,9 @@ public class FichaTecnicaController implements GenericController<FichaTecnica> {
     public void setItenLista(FichaTecnica obj) {
         
     }
+    public void setListaItens(BigDecimal qtdeProduto, BigDecimal valorPorcao) {
+        this.listaItensFicha.add(new ProdutoFichaTecnica(0l,fichaTecnica,itemAtual, unidadeMedida, qtdeProduto, valorPorcao));
+    }
 
     public FichaTecnica getFichaTecnica() {
         return fichaTecnica;
@@ -116,9 +124,14 @@ public class FichaTecnicaController implements GenericController<FichaTecnica> {
     public void setListaItensFicha(ObservableList<ProdutoFichaTecnica> listaItensFicha) {
         this.listaItensFicha = listaItensFicha;
     }
-    
 
-   
+    public Produto getProdutoPrincipal() {
+        return produtoPrincipal;
+    }
+
+    public void setProdutoPrincipal(Produto produtoPrincipal) {
+        this.produtoPrincipal = produtoPrincipal;
+    }
     
     
 }
