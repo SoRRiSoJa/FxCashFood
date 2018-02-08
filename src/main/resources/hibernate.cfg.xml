@@ -47,7 +47,7 @@ Contributor(s):
         <property name="hibernate.connection.username">postgres</property>
         <property name="hibernate.connection.password">73684985</property>
         <property name="hibernate.hbm2ddl.auto">update</property>
-        <property name="hibernate.connection.pool_size">10</property>
+        <property name="hibernate.connection.pool_size">200</property>
         <property name="show_sql">true</property>
         <mapping class="com.cashf.model.banco.Banco" />
         <mapping class="com.cashf.model.cidade.Cidade" />

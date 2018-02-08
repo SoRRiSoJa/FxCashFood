@@ -28,12 +28,12 @@ public class GenericDAOIMP<T> implements GenericDAO<T> {
 
     @Override
     public Long save(T obj) {
-        Long id=0L;
+        Long id = 0L;
         Session session = sessionFactory.openSession();
         Transaction tx = null;
         try {
             tx = session.beginTransaction();
-            id=(Long)session.save(obj);
+            id = (Long) session.save(obj);
             tx.commit();
             session.refresh(obj);
         } catch (HibernateException e) {
@@ -41,9 +41,7 @@ public class GenericDAOIMP<T> implements GenericDAO<T> {
                 tx.rollback();
             }
             e.printStackTrace();
-        } finally {
-            session.close();
-        }
+        } 
         return id;
     }
 
@@ -60,9 +58,7 @@ public class GenericDAOIMP<T> implements GenericDAO<T> {
                 tx.rollback();
             }
             e.printStackTrace();
-        } finally {
-            session.close();
-        }
+        } 
 
     }
 
@@ -79,9 +75,7 @@ public class GenericDAOIMP<T> implements GenericDAO<T> {
                 tx.rollback();
             }
             e.printStackTrace();
-        } finally {
-            session.close();
-        }
+        } 
 
     }
 
@@ -95,18 +89,15 @@ public class GenericDAOIMP<T> implements GenericDAO<T> {
             obj = session.load(clazz, id);
             tx.commit();
         } catch (HibernateException e) {
-
-        } finally {
-//            
+           
         }
         return (T) obj;
     }
 
     @Override
     public List<T> listAll() {
-        try (Session session = sessionFactory.openSession()) {
-
-            List<T> roleList = session.createQuery("from " + clazz.getName() + "").list();
+        try (Session sessionn = sessionFactory.openSession()) {
+            List<T> roleList = sessionn.createQuery("from " + clazz.getName() + "").list();
             return roleList;
 
         } catch (HibernateException e) {
@@ -114,7 +105,5 @@ public class GenericDAOIMP<T> implements GenericDAO<T> {
         }
         return null;
     }
-
-   
 
 }
