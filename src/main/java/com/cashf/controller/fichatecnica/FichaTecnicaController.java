@@ -31,6 +31,7 @@ public class FichaTecnicaController implements GenericController<FichaTecnica> {
     private ObservableList<FichaTecnica> lista;
     private ObservableList<Produto> comboBoxItensFicha;
     private UnidadeMedida unidadeMedida;
+    private BigDecimal custoTotal;
     
     private FichaTecnicaController(){
         this.fichaTecnicaDAO=new FichaTecnicaDAO(FichaTecnica.class);
@@ -41,6 +42,7 @@ public class FichaTecnicaController implements GenericController<FichaTecnica> {
         this.itemAtual = new Produto();
         this.produtoPrincipal = new Produto();
         this.fichaTecnica.setIdFichaTecnica(0l);
+        this.custoTotal=BigDecimal.ZERO;
     }
     public static synchronized FichaTecnicaController getInstance() {
         if (controller == null) {
@@ -131,6 +133,13 @@ public class FichaTecnicaController implements GenericController<FichaTecnica> {
 
     public void setProdutoPrincipal(Produto produtoPrincipal) {
         this.produtoPrincipal = produtoPrincipal;
+    }
+     public BigDecimal getCustoTotal() {
+        custoTotal = BigDecimal.ZERO;
+        listaItensFicha.forEach((custUnit) -> {
+            custoTotal = custoTotal.add(custUnit.getValorPorcao());
+        });
+        return custoTotal;
     }
     
     

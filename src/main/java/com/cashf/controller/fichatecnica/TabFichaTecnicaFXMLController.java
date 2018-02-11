@@ -119,7 +119,7 @@ public class TabFichaTecnicaFXMLController implements Initializable, GenericView
     @FXML
     private void onFichaTecnica(ActionEvent event) {
         if (ccbFichaTecnica.getSelectionModel().getSelectedItem() != null) {
-            FichaTecnicaController.getInstance().setProdutoPrincipal(ccbFichaTecnica.getSelectionModel().getSelectedItem());
+            FichaTecnicaController.getInstance().setProdutoPrincipal(ccbFichaTecnica.getItems().get(ccbFichaTecnica.getSelectionModel().getSelectedIndex()));
             FichaTecnicaController.getInstance().getFichaTecnica().setProdutoPrincipal(FichaTecnicaController.getInstance().getProdutoPrincipal());
         }
     }
@@ -145,7 +145,7 @@ public class TabFichaTecnicaFXMLController implements Initializable, GenericView
     private void onAdicionar(ActionEvent event) {
         getDataItem();
         if (validateItemFields()) {
-            FichaTecnicaController.getInstance().setItemAtual(ccbItens.getSelectionModel().getSelectedItem());
+            FichaTecnicaController.getInstance().setItemAtual(ccbItens.getItems().get(ccbItens.getSelectionModel().getSelectedIndex()));
             
             //--
             txtqtde.clear();
@@ -180,6 +180,7 @@ public class TabFichaTecnicaFXMLController implements Initializable, GenericView
         }
         if (ccbItens.getSelectionModel().getSelectedItem() != null) {
             FichaTecnicaController.getInstance().setItemAtual(ccbItens.getItems().get(ccbItens.getSelectionModel().getSelectedIndex()));
+            
         }
     }
 
@@ -198,7 +199,7 @@ public class TabFichaTecnicaFXMLController implements Initializable, GenericView
 
     @Override
     public void setInputOn() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
     }
 
     @Override
@@ -208,7 +209,7 @@ public class TabFichaTecnicaFXMLController implements Initializable, GenericView
 
     @Override
     public void getData() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
     }
 
     @Override
