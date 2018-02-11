@@ -42,6 +42,7 @@ import javafx.util.Callback;
 import javafx.util.Duration;
 import org.controlsfx.control.Notifications;
 import util.PoupUpUtil;
+import util.ProdCalcUtil;
 
 /**
  * FXML Controller class
@@ -146,7 +147,9 @@ public class TabFichaTecnicaFXMLController implements Initializable, GenericView
         getDataItem();
         if (validateItemFields()) {
             FichaTecnicaController.getInstance().setItemAtual(ccbItens.getItems().get(ccbItens.getSelectionModel().getSelectedIndex()));
-            
+            FichaTecnicaController.getInstance().setListaItens(qtdeItem, ProdCalcUtil.valorPorcao(FichaTecnicaController.getInstance().getItemAtual(),FichaTecnicaController.getInstance().getUnidadeMedida(),qtdeItem));
+            tbvFichaItens.setItems(FichaTecnicaController.getInstance().getListaItensFicha());
+            tbvFicha.setItems(FichaTecnicaController.getInstance().getListaItensFicha());
             //--
             txtqtde.clear();
             ccbItens.setValue(null);

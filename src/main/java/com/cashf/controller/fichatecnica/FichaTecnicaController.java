@@ -13,6 +13,7 @@ import com.cashf.model.produto.Produto;
 import com.cashf.model.produto.UnidadeMedida;
 import controller.GenericController;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -43,6 +44,7 @@ public class FichaTecnicaController implements GenericController<FichaTecnica> {
         this.produtoPrincipal = new Produto();
         this.fichaTecnica.setIdFichaTecnica(0l);
         this.custoTotal=BigDecimal.ZERO;
+        this.listaItensFicha=FXCollections.observableList(new ArrayList<>());
     }
     public static synchronized FichaTecnicaController getInstance() {
         if (controller == null) {
