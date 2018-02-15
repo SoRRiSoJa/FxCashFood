@@ -19,6 +19,7 @@ import com.sun.prism.impl.Disposer;
 import controller.GenericViewController;
 import java.math.BigDecimal;
 import java.net.URL;
+import java.text.NumberFormat;
 import java.util.Arrays;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -102,8 +103,9 @@ public class TabFichaTecnicaFXMLController implements Initializable, GenericView
     //---
     BigDecimal qtdeItem = BigDecimal.ZERO;
     private String erros;
+    private BigDecimal custoReceita;
     private boolean flagButtons;
-
+    private NumberFormat nf = NumberFormat.getCurrencyInstance();
     /**
      * Initializes the controller class.
      */
@@ -150,6 +152,7 @@ public class TabFichaTecnicaFXMLController implements Initializable, GenericView
             FichaTecnicaController.getInstance().setListaItens(qtdeItem, ProdCalcUtil.valorPorcao(FichaTecnicaController.getInstance().getItemAtual(),FichaTecnicaController.getInstance().getUnidadeMedida(),qtdeItem));
             tbvFichaItens.setItems(FichaTecnicaController.getInstance().getListaItensFicha());
             tbvFicha.setItems(FichaTecnicaController.getInstance().getListaItensFicha());
+            lblCustoTotal.setText(nf.format(FichaTecnicaController.getInstance().getCustoTotal()));
             //--
             txtqtde.clear();
             ccbItens.setValue(null);
