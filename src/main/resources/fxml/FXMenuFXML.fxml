@@ -78,7 +78,7 @@
                         <FontAwesomeIconView fill="WHITE" glyphName="BOOK" size="24" />
                      </graphic>
                   </JFXButton>
-                  <JFXButton fx:id="btnNaDois" contentDisplay="TOP" layoutX="283.0" layoutY="10.0" onAction="#onNaDois" prefHeight="58.0" prefWidth="273.0" ripplerFill="WHITE" style="-fx-background-color: #00b0ff;" text="N/A" textFill="WHITE">
+                  <JFXButton fx:id="btnNaDois" contentDisplay="TOP" layoutX="283.0" layoutY="10.0" onAction="#onNaDois" prefHeight="58.0" prefWidth="273.0" ripplerFill="WHITE" style="-fx-background-color: #00b0ff;" text="Receber Pedido" textFill="WHITE">
                      <padding>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </padding>

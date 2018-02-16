@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXDatePicker?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="542.0" prefWidth="1366.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cashf.controller.receberpedido.ReceberPedidoFXMLController">
+   <children>
+      <Pane layoutX="20.0" layoutY="30.0" prefHeight="445.0" prefWidth="640.0" style="-fx-background-color: #ffffff;">
+         <effect>
+            <DropShadow />
+         </effect>
+         <children>
+            <Pane prefHeight="20.0" prefWidth="640.0" style="-fx-background-color: #0081cb;">
+               <children>
+                  <Label layoutX="5.0" layoutY="2.0" text="Informações da Nota:" textFill="WHITE" />
+               </children>
+            </Pane>
+            <HBox alignment="CENTER" layoutX="9.0" layoutY="366.0" prefHeight="68.0" prefWidth="621.0">
+               <children>
+                  <JFXButton fx:id="btnSalvar" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" onAction="#onSalvar" prefHeight="36.0" prefWidth="100.0" ripplerFill="WHITE" style="-fx-background-color: #2196f3;" textFill="WHITE">
+                     <HBox.margin>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </HBox.margin>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                     <graphic>
+                        <FontAwesomeIconView fill="WHITE" glyphName="PLUS" size="24" />
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton fx:id="btnNovo" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" layoutX="10.0" layoutY="10.0" onAction="#onNovo" prefHeight="36.0" prefWidth="100.0" ripplerFill="WHITE" style="-fx-background-color: #00e676;" textFill="WHITE">
+                     <HBox.margin>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </HBox.margin>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                     <graphic>
+                        <FontAwesomeIconView fill="WHITE" glyphName="EDIT" size="24" />
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton fx:id="btnExcluir" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" layoutX="100.0" layoutY="10.0" onAction="#onExcluir" prefHeight="36.0" prefWidth="100.0" ripplerFill="WHITE" style="-fx-background-color: #d32f2f;" textFill="WHITE">
+                     <HBox.margin>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </HBox.margin>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                     <graphic>
+                        <FontAwesomeIconView fill="WHITE" glyphName="TRASH" size="24" />
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton fx:id="btnLimpar" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" layoutX="190.0" layoutY="10.0" onAction="#onLimpar" prefHeight="36.0" prefWidth="100.0" ripplerFill="WHITE" style="-fx-background-color: #00251a;" textFill="WHITE">
+                     <HBox.margin>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </HBox.margin>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                     <graphic>
+                        <FontAwesomeIconView fill="WHITE" glyphName="ERASER" size="24" />
+                     </graphic>
+                  </JFXButton>
+               </children>
+            </HBox>
+            <JFXComboBox fx:id="cbbFornecedor" focusColor="#004ba0" labelFloat="true" layoutX="35.0" layoutY="33.0" prefHeight="26.0" prefWidth="280.0" promptText="Fornecedor" />
+            <JFXDatePicker fx:id="dtpDataNota" defaultColor="#004ba0" layoutX="445.0" layoutY="33.0" prefHeight="24.0" prefWidth="160.0" promptText="Data da nota" />
+            <Separator layoutX="35.0" layoutY="85.0" prefHeight="0.0" prefWidth="570.0" />
+            <JFXTextField fx:id="txtNumeroNota" focusColor="#004ba0" labelFloat="true" layoutX="35.0" layoutY="100.0" prefHeight="24.0" prefWidth="160.0" promptText="Número da nota" />
+            <JFXTextField fx:id="txtValorIcms" focusColor="#004ba0" labelFloat="true" layoutX="35.0" layoutY="150.0" prefHeight="24.0" prefWidth="160.0" promptText="Valor do ICMS" />
+            <JFXTextField fx:id="txtBaseCalculoIcms" focusColor="#004ba0" labelFloat="true" layoutX="244.0" layoutY="150.0" prefHeight="24.0" prefWidth="160.0" promptText="Base de cálculo ICMS" />
+            <JFXTextField fx:id="txtValorTotalIpi" focusColor="#004ba0" labelFloat="true" layoutX="456.0" layoutY="150.0" prefHeight="24.0" prefWidth="160.0" promptText="Valor total IPI" />
+            <JFXTextField fx:id="txtBaseIcmsSubst" focusColor="#004ba0" labelFloat="true" layoutX="35.0" layoutY="200.0" prefHeight="24.0" prefWidth="160.0" promptText="Base ICMS subst." />
+            <JFXTextField fx:id="txtValorIcmsSubst" focusColor="#004ba0" labelFloat="true" layoutX="244.0" layoutY="200.0" prefHeight="24.0" prefWidth="160.0" promptText="Valor do ICMS Subst" />
+            <JFXTextField fx:id="txtOutrasDespesas" focusColor="#004ba0" labelFloat="true" layoutX="456.0" layoutY="200.0" prefHeight="24.0" prefWidth="160.0" promptText="Outras despesas" />
+            <JFXTextField fx:id="txtDesconto" focusColor="#004ba0" labelFloat="true" layoutX="35.0" layoutY="248.0" prefHeight="24.0" prefWidth="160.0" promptText="Desconto" />
+            <JFXTextField fx:id="txtValorTotalProdutos" focusColor="#004ba0" labelFloat="true" layoutX="244.0" layoutY="248.0" prefHeight="24.0" prefWidth="160.0" promptText="Valor total Produtos" />
+            <JFXTextField fx:id="txtValorTotalNota" focusColor="#004ba0" labelFloat="true" layoutX="456.0" layoutY="248.0" prefHeight="24.0" prefWidth="160.0" promptText="Valor total da nota" />
+            <JFXTextField fx:id="txtObservacao" focusColor="#004ba0" labelFloat="true" layoutX="35.0" layoutY="310.0" prefHeight="24.0" prefWidth="570.0" promptText="Observação" />
+         </children>
+      </Pane>
+      <Pane layoutX="669.0" layoutY="30.0" prefHeight="445.0" prefWidth="640.0" style="-fx-background-color: #ffffff;">
+         <effect>
+            <DropShadow />
+         </effect>
+         <children>
+            <Pane prefHeight="20.0" prefWidth="640.0" style="-fx-background-color: #0081cb;">
+               <children>
+                  <Label layoutX="5.0" layoutY="2.0" text="Produtos da Nota Fiscal" textFill="WHITE" />
+               </children>
+            </Pane>
+            <JFXComboBox fx:id="cbbProduto" focusColor="#004ba0" labelFloat="true" layoutX="35.0" layoutY="33.0" prefHeight="26.0" prefWidth="280.0" promptText="Produto" />
+            <JFXComboBox fx:id="cbbUnidadeFisica" focusColor="#004ba0" labelFloat="true" layoutX="456.0" layoutY="33.0" prefHeight="26.0" prefWidth="160.0" promptText="Unidade Física" />
+            <JFXTextField fx:id="txtValorIpi" focusColor="#004ba0" labelFloat="true" layoutX="254.0" layoutY="93.0" prefHeight="24.0" prefWidth="160.0" promptText="Valor IPI" />
+            <JFXTextField fx:id="txtValorIcmsSubstProd" focusColor="#004ba0" labelFloat="true" layoutX="456.0" layoutY="93.0" prefHeight="24.0" prefWidth="160.0" promptText="Valor do ICMS Subst" />
+            <JFXTextField fx:id="txtQtdeCompra" focusColor="#004ba0" labelFloat="true" layoutX="33.0" layoutY="142.0" prefHeight="24.0" prefWidth="160.0" promptText="Qunatidade de compra" />
+            <JFXTextField fx:id="txtQtdeRecebida" focusColor="#004ba0" labelFloat="true" layoutX="254.0" layoutY="142.0" prefHeight="24.0" prefWidth="160.0" promptText="Qunatidade de recebida" />
+            <JFXTextField fx:id="txtPrcoCompra" focusColor="#004ba0" labelFloat="true" layoutX="456.0" layoutY="142.0" prefHeight="24.0" prefWidth="160.0" promptText="Preço de compra" />
+            <JFXTextField fx:id="txtOutrasDespesasProd" focusColor="#004ba0" labelFloat="true" layoutX="33.0" layoutY="191.0" prefHeight="24.0" prefWidth="160.0" promptText="Outras despesas" />
+            <JFXTextField fx:id="txtDescontoProd" focusColor="#004ba0" labelFloat="true" layoutX="254.0" layoutY="191.0" prefHeight="24.0" prefWidth="160.0" promptText="Desconto" />
+            <JFXTextField fx:id="txtEmbalagemDeCompra" focusColor="#004ba0" labelFloat="true" layoutX="33.0" layoutY="93.0" prefHeight="24.0" prefWidth="160.0" promptText="Embalagem de compra" />
+            <Separator layoutX="35.0" layoutY="244.0" prefHeight="0.0" prefWidth="570.0" />
+            <JFXButton fx:id="btnAdicionar" contentDisplay="GRAPHIC_ONLY" layoutX="560.0" layoutY="257.0" onAction="#onAdicionar" prefHeight="32.0" prefWidth="43.0" ripplerFill="WHITE" style="-fx-background-color: #2196f3;" textFill="WHITE">
+               <graphic>
+                  <ImageView fitHeight="17.0" fitWidth="25.0" pickOnBounds="true">
+                     <image>
+                        <Image url="@../../../../../../CashFood/src/main/resources/Imagens/plus.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </JFXButton>
+            <TableView fx:id="tbvProdutos" layoutX="29.0" layoutY="300.0" prefHeight="134.0" prefWidth="580.0" stylesheets="@../../styles/TableViewCSS.css">
+               <columns>
+                  <TableColumn fx:id="tbcProduto" prefWidth="343.0" text="Produto" />
+                  <TableColumn fx:id="tbcQtde" minWidth="9.0" prefWidth="53.0" text="Qtde." />
+                  <TableColumn fx:id="tbcUnidade" prefWidth="71.0" text="Unidade" />
+                  <TableColumn fx:id="tbcTotal" prefWidth="52.0" text="Total" />
+                  <TableColumn fx:id="btnExcluir" minWidth="9.0" prefWidth="60.0" text="Excluir" />
+               </columns>
+            </TableView>
+         </children>
+      </Pane>
+   </children>
+</Pane>

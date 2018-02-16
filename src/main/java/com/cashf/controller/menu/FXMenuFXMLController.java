@@ -279,6 +279,7 @@ public class FXMenuFXMLController implements Initializable {
 
     @FXML
     private void onNaDois(ActionEvent event) {
+     loadFXML("/fxml/receberPedido/ReceberPedidoFXML.fxml");
     }
 
     @FXML

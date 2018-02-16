@@ -17,6 +17,7 @@ com/cashf/model/pessoa/Pessoa_.class
 com/cashf/controller/prepreparo/TabPrePreparoFXMLController.class
 com/cashf/controller/fichatecnica/FichaTecnicaController.class
 com/cashf/controller/cliente/FXGerenciarClientesFXMLController.class
+com/cashf/controller/receberpedido/ReceberPedidoFXMLController.class
 com/cashf/model/estado/Estado.class
 com/cashf/model/ajusteestoque/AjusteEstoque_.class
 com/cashf/model/produto/Categoria.class
