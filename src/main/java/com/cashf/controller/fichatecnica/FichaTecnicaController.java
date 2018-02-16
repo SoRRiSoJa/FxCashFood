@@ -13,7 +13,9 @@ import com.cashf.model.produto.Produto;
 import com.cashf.model.produto.UnidadeMedida;
 import controller.GenericController;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -54,7 +56,7 @@ public class FichaTecnicaController implements GenericController<FichaTecnica> {
     }
     @Override
     public void insert() {
-        
+        fichaTecnicaDAO.update(fichaTecnica);
     }
 
     @Override
@@ -104,6 +106,14 @@ public class FichaTecnicaController implements GenericController<FichaTecnica> {
 
     public void setFichaTecnica(FichaTecnica fichaTecnica) {
         this.fichaTecnica = fichaTecnica;
+    }
+    public void setFichaTecnica(long idFichaTecnica,Produto  produtoPrincipal,Boolean status) {
+        this.fichaTecnica.setIdFichaTecnica(idFichaTecnica);
+        this.fichaTecnica.setProdutoPrincipal(produtoPrincipal);
+        this.fichaTecnica.setDataProducao(LocalDate.now());
+        this.fichaTecnica.setCustoTotal(getCustoTotal());
+        this.fichaTecnica.setListaProdutos(listaItensFicha);
+        this.fichaTecnica.setStatus(status);
     }
 
     public ObservableList<Produto> getComboBoxItensFicha() {

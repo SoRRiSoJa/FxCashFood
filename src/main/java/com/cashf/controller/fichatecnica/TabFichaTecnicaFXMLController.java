@@ -106,6 +106,7 @@ public class TabFichaTecnicaFXMLController implements Initializable, GenericView
     private BigDecimal custoReceita;
     private boolean flagButtons;
     private NumberFormat nf = NumberFormat.getCurrencyInstance();
+
     /**
      * Initializes the controller class.
      */
@@ -129,6 +130,15 @@ public class TabFichaTecnicaFXMLController implements Initializable, GenericView
 
     @FXML
     private void onSalvar(ActionEvent event) {
+        getData();
+        if (validateFields()) {
+            FichaTecnicaController.getInstance().setFichaTecnica(0l, FichaTecnicaController.getInstance().getProdutoPrincipal(), Boolean.TRUE);
+            FichaTecnicaController.getInstance().insert();
+            PoupUpUtil.poupUp("Ficha Técnica Cadastrada", "A Ficha Técnica foi cadastrada com sucesso.", "");
+        } else {
+            PoupUpUtil.errorMessage(paneRoot, MainApp.paneRoot, erros);
+            erros = "";
+        }
     }
 
     @FXML
@@ -149,7 +159,7 @@ public class TabFichaTecnicaFXMLController implements Initializable, GenericView
         getDataItem();
         if (validateItemFields()) {
             FichaTecnicaController.getInstance().setItemAtual(ccbItens.getItems().get(ccbItens.getSelectionModel().getSelectedIndex()));
-            FichaTecnicaController.getInstance().setListaItens(qtdeItem, ProdCalcUtil.valorPorcao(FichaTecnicaController.getInstance().getItemAtual(),FichaTecnicaController.getInstance().getUnidadeMedida(),qtdeItem));
+            FichaTecnicaController.getInstance().setListaItens(qtdeItem, ProdCalcUtil.valorPorcao(FichaTecnicaController.getInstance().getItemAtual(), FichaTecnicaController.getInstance().getUnidadeMedida(), qtdeItem));
             tbvFichaItens.setItems(FichaTecnicaController.getInstance().getListaItensFicha());
             tbvFicha.setItems(FichaTecnicaController.getInstance().getListaItensFicha());
             lblCustoTotal.setText(nf.format(FichaTecnicaController.getInstance().getCustoTotal()));
@@ -186,7 +196,7 @@ public class TabFichaTecnicaFXMLController implements Initializable, GenericView
         }
         if (ccbItens.getSelectionModel().getSelectedItem() != null) {
             FichaTecnicaController.getInstance().setItemAtual(ccbItens.getItems().get(ccbItens.getSelectionModel().getSelectedIndex()));
-            
+
         }
     }
 
@@ -205,17 +215,27 @@ public class TabFichaTecnicaFXMLController implements Initializable, GenericView
 
     @Override
     public void setInputOn() {
-        
+
     }
 
     @Override
     public Boolean validateFields() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Boolean flag = true;
+
+        if (ccbFichaTecnica.getSelectionModel().getSelectedItem() == null) {
+            erros += "Voce deve selecionar o produto principal da receita.\n";
+            flag = false;
+        }
+        return flag;
     }
 
     @Override
     public void getData() {
-        
+        if (ccbFichaTecnica.getSelectionModel().getSelectedItem() != null) {
+            FichaTecnicaController.getInstance().setProdutoPrincipal(ccbFichaTecnica.getItems().get(ccbFichaTecnica.getSelectionModel().getSelectedIndex()));
+
+        }
+
     }
 
     @Override

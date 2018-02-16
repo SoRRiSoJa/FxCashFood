@@ -39,20 +39,17 @@ public class FichaTecnica implements Serializable {
     private Produto produtoPrincipal;
     @Column(columnDefinition = "DATE")
     private LocalDate dataProducao;
-    private BigDecimal quantidade;
     private BigDecimal custoTotal;
     @OneToMany(mappedBy = "fichaTecnica", cascade = CascadeType.ALL)
     private List<ProdutoFichaTecnica> listaProdutos;
     private Boolean status;
-
     public FichaTecnica() {
     }
 
-    public FichaTecnica(long idFichaTecnica, Produto produtoPrincipal, LocalDate dataProducao, BigDecimal quantidade, BigDecimal custoTotal, List<ProdutoFichaTecnica> listaProdutos, Boolean status) {
+    public FichaTecnica(long idFichaTecnica, Produto produtoPrincipal, LocalDate dataProducao, BigDecimal custoTotal, List<ProdutoFichaTecnica> listaProdutos, Boolean status) {
         this.idFichaTecnica = idFichaTecnica;
         this.produtoPrincipal = produtoPrincipal;
         this.dataProducao = dataProducao;
-        this.quantidade = quantidade;
         this.custoTotal = custoTotal;
         this.listaProdutos = listaProdutos;
         this.status = status;
@@ -82,13 +79,6 @@ public class FichaTecnica implements Serializable {
         this.dataProducao = dataProducao;
     }
 
-    public BigDecimal getQuantidade() {
-        return quantidade;
-    }
-
-    public void setQuantidade(BigDecimal quantidade) {
-        this.quantidade = quantidade;
-    }
 
     public BigDecimal getCustoTotal() {
         return custoTotal;
