@@ -70,5 +70,9 @@ Contributor(s):
         <mapping class="com.cashf.model.prepreparo.ProdutoPrePreparo" />
         <mapping class="com.cashf.model.fichatecnica.FichaTecnica" />
         <mapping class="com.cashf.model.fichatecnica.ProdutoFichaTecnica" />
+        <mapping class="com.cashf.model.notafiscal.NotaFiscal" />
+        <mapping class="com.cashf.model.notafiscal.ProdutoNotaFiscal" />
+        
+        
     </session-factory>
 </hibernate-configuration>
