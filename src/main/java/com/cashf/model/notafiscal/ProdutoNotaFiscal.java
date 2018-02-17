@@ -5,7 +5,6 @@
  */
 package com.cashf.model.notafiscal;
 
-import com.cashf.model.prepreparo.PrePreparo;
 import com.cashf.model.produto.Produto;
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -37,13 +36,13 @@ public class ProdutoNotaFiscal implements Serializable {
     @ManyToOne
     @JoinColumn(name = "idproduto")
     private Produto produto;
-    private BigDecimal qtdeProduto;
+    private Integer qtdeProduto;
     private BigDecimal valorUnitario;
 
     public ProdutoNotaFiscal() {
     }
 
-    public ProdutoNotaFiscal(Long idProdutoNotaFiscal, NotaFiscal notaFiscal, Produto produto, BigDecimal qtdeProduto, BigDecimal valoruUnitario) {
+    public ProdutoNotaFiscal(Long idProdutoNotaFiscal, NotaFiscal notaFiscal, Produto produto, Integer qtdeProduto, BigDecimal valoruUnitario) {
         this.idProdutoNotaFiscal = idProdutoNotaFiscal;
         this.notaFiscal = notaFiscal;
         this.produto = produto;
@@ -75,11 +74,11 @@ public class ProdutoNotaFiscal implements Serializable {
         this.produto = produto;
     }
 
-    public BigDecimal getQtdeProduto() {
+    public Integer getQtdeProduto() {
         return qtdeProduto;
     }
 
-    public void setQtdeProduto(BigDecimal qtdeProduto) {
+    public void setQtdeProduto(Integer qtdeProduto) {
         this.qtdeProduto = qtdeProduto;
     }
 

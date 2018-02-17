@@ -6,6 +6,7 @@
 package com.cashf.controller.receberpedido;
 
 import com.cashf.model.fornecedor.Fornecedor;
+import com.cashf.model.notafiscal.ProdutoNotaFiscal;
 import com.cashf.model.produto.Produto;
 import com.cashf.model.produto.UnidadeMedida;
 import com.jfoenix.controls.JFXButton;
@@ -13,6 +14,7 @@ import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTextField;
 import controller.GenericViewController;
+import java.math.BigDecimal;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -83,15 +85,15 @@ public class ReceberPedidoFXMLController implements GenericViewController, Initi
     @FXML
     private JFXTextField txtEmbalagemDeCompra;
     @FXML
-    private TableView<?> tbvProdutos;
+    private TableView<ProdutoNotaFiscal> tbvProdutos;
     @FXML
-    private TableColumn<?, ?> tbcProduto;
+    private TableColumn<ProdutoNotaFiscal, String> tbcProduto;
     @FXML
-    private TableColumn<?, ?> tbcQtde;
+    private TableColumn<ProdutoNotaFiscal, Integer> tbcQtde;
     @FXML
-    private TableColumn<?, ?> tbcValUnid;
+    private TableColumn<ProdutoNotaFiscal, BigDecimal> tbcValUnid;
     @FXML
-    private TableColumn<?, ?> tbcTotal;
+    private TableColumn<ProdutoNotaFiscal, BigDecimal> tbcTotal;
     @FXML
     private TableColumn btnExcluirProd;
     @FXML
