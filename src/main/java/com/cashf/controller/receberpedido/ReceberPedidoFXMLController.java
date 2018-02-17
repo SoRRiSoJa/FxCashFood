@@ -16,12 +16,14 @@ import com.jfoenix.controls.JFXTextField;
 import controller.GenericViewController;
 import java.math.BigDecimal;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import org.apache.derby.client.am.DateTime;
 
 /**
  * FXML Controller class
@@ -200,7 +202,7 @@ public class ReceberPedidoFXMLController implements GenericViewController, Initi
         txtDescontoProd.setDisable(true);
         txtEmbalagemDeCompra.setDisable(true);
         btnSalvar.setDisable(true);
-        btnNovo.setDisable(true);
+        //btnNovo.setDisable(true);
         btnLimpar.setDisable(true);
         tbvProdutos.setDisable(true);
         btnAdicionar.setDisable(true);
@@ -248,12 +250,62 @@ public class ReceberPedidoFXMLController implements GenericViewController, Initi
 
     @Override
     public void getData() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        cbbFornecedor.getValue();
+        dtpDataNota.getValue();;
+        txtNumeroNota.getText();;
+        txtValorIcms.getText();;
+        txtBaseCalculoIcms.getText();;
+        txtValorTotalIpi.getText();;
+        txtBaseIcmsSubst.getText();;
+        txtValorIcmsSubst.getText();;
+        txtOutrasDespesas.getText();;
+        txtDesconto.getText();;
+        txtValorTotalProdutos.getText();;
+        txtValorTotalNota.getText();;
+        txtObservacao.getText();;
+        dtpDataRecebimento.setValue(null);;
+
+    }
+
+    public void getDataProd() {
+        cbbProduto.getSelectionModel().getSelectedItem();
+        cbbUnidadeFisica.getSelectionModel().getSelectedItem();
+        txtValorIpi.getText();;
+        txtValorIcmsSubstProd.getText();;
+        txtQtdeCompra.getText();;
+        txtQtdeRecebida.getText();;
+        txtPrcoCompra.getText();;
+        txtOutrasDespesasProd.getText();;
+        txtDescontoProd.getText();;
+        txtEmbalagemDeCompra.getText();;
     }
 
     @Override
     public void loadDataToScreen() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        //cbbFornecedor.setValue();
+        //dtpDataNota.setValue();;
+        //txtNumeroNota.setText();;
+        //txtValorIcms.setText();;
+        //txtBaseCalculoIcms.setText();;
+        //txtValorTotalIpi.setText();;
+        //txtBaseIcmsSubst.setText();;
+        //txtValorIcmsSubst.setText();;
+        //txtOutrasDespesas.setText();;
+        //txtDesconto.setText();;
+        //txtValorTotalProdutos.setText();;
+        //txtValorTotalNota.setText();;
+        //txtObservacao.setText();;
+        //dtpDataRecebimento.setValue(null);;
+        //cbbProduto.setValue(null);
+        //cbbUnidadeFisica.setValue(null);
+        //txtValorIpi.setText();;
+        //txtValorIcmsSubstProd.setText();;
+        // txtQtdeCompra.setText();;
+        // txtQtdeRecebida.setText();;
+        // txtPrcoCompra.setText();;
+        // txtOutrasDespesasProd.setText();;
+        //txtDescontoProd.setText();;
+        //txtEmbalagemDeCompra.setText();;
     }
 
     private void loadCbbProdutos() {
