@@ -26,7 +26,7 @@
                   <Label layoutX="5.0" layoutY="2.0" text="Informações da Nota:" textFill="WHITE" />
                </children>
             </Pane>
-            <HBox alignment="CENTER" layoutX="9.0" layoutY="397.0" prefHeight="68.0" prefWidth="621.0">
+            <HBox alignment="CENTER" layoutX="9.0" layoutY="391.0" prefHeight="68.0" prefWidth="621.0">
                <children>
                   <JFXButton fx:id="btnSalvar" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" onAction="#onSalvar" prefHeight="36.0" prefWidth="100.0" ripplerFill="WHITE" style="-fx-background-color: #2196f3;" textFill="WHITE">
                      <HBox.margin>
@@ -48,17 +48,6 @@
                      </padding>
                      <graphic>
                         <FontAwesomeIconView fill="WHITE" glyphName="EDIT" size="24" />
-                     </graphic>
-                  </JFXButton>
-                  <JFXButton fx:id="btnExcluir" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" layoutX="100.0" layoutY="10.0" onAction="#onExcluir" prefHeight="36.0" prefWidth="100.0" ripplerFill="WHITE" style="-fx-background-color: #d32f2f;" textFill="WHITE">
-                     <HBox.margin>
-                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                     </HBox.margin>
-                     <padding>
-                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                     </padding>
-                     <graphic>
-                        <FontAwesomeIconView fill="WHITE" glyphName="TRASH" size="24" />
                      </graphic>
                   </JFXButton>
                   <JFXButton fx:id="btnLimpar" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" layoutX="190.0" layoutY="10.0" onAction="#onLimpar" prefHeight="36.0" prefWidth="100.0" ripplerFill="WHITE" style="-fx-background-color: #00251a;" textFill="WHITE">
@@ -88,6 +77,7 @@
             <JFXTextField fx:id="txtValorTotalProdutos" focusColor="#004ba0" labelFloat="true" layoutX="244.0" layoutY="243.0" prefHeight="24.0" prefWidth="160.0" promptText="Valor total Produtos" />
             <JFXTextField fx:id="txtValorTotalNota" focusColor="#004ba0" labelFloat="true" layoutX="456.0" layoutY="243.0" prefHeight="24.0" prefWidth="160.0" promptText="Valor total da nota" />
             <JFXTextField fx:id="txtObservacao" focusColor="#004ba0" labelFloat="true" layoutX="35.0" layoutY="305.0" prefHeight="24.0" prefWidth="570.0" promptText="Observação" />
+            <JFXDatePicker fx:id="dtpDataRecebimento" defaultColor="#004ba0" layoutX="244.0" layoutY="95.0" prefHeight="26.0" prefWidth="175.0" promptText="Data da recebimento" />
          </children>
       </Pane>
       <Pane layoutX="669.0" layoutY="30.0" prefHeight="475.0" prefWidth="640.0" style="-fx-background-color: #ffffff;">
@@ -113,11 +103,11 @@
             <Separator layoutX="35.0" layoutY="244.0" prefHeight="0.0" prefWidth="570.0" />
             <TableView fx:id="tbvProdutos" layoutX="29.0" layoutY="300.0" prefHeight="164.0" prefWidth="580.0" stylesheets="@../../styles/TableViewCSS.css">
                <columns>
-                  <TableColumn fx:id="tbcProduto" prefWidth="343.0" text="Produto" />
-                  <TableColumn fx:id="tbcQtde" minWidth="9.0" prefWidth="53.0" text="Qtde." />
-                  <TableColumn fx:id="tbcUnidade" prefWidth="71.0" text="Unidade" />
-                  <TableColumn fx:id="tbcTotal" prefWidth="52.0" text="Total" />
-                  <TableColumn fx:id="btnExcluirProd" minWidth="9.0" prefWidth="60.0" text="Excluir" />
+                  <TableColumn fx:id="tbcProduto" prefWidth="295.0" text="Produto" />
+                  <TableColumn fx:id="tbcQtde" minWidth="9.0" prefWidth="57.0" text="Qtde." />
+                  <TableColumn fx:id="tbcValUnid" prefWidth="81.0" text="Val. Unid." />
+                  <TableColumn fx:id="tbcTotal" prefWidth="82.0" text="Val. Total" />
+                  <TableColumn fx:id="btnExcluirProd" prefWidth="64.0" text="Excluir" />
                </columns>
             </TableView>
             <JFXButton fx:id="btnAdicionar" contentDisplay="GRAPHIC_ONLY" layoutX="564.0" layoutY="256.0" onAction="#onAdicionar" prefHeight="30.0" prefWidth="40.0" ripplerFill="WHITE" style="-fx-background-color: #2196f3;" textFill="WHITE">

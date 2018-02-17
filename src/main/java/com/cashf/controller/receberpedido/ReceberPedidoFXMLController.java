@@ -12,6 +12,7 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTextField;
+import controller.GenericViewController;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -25,14 +26,12 @@ import javafx.scene.control.TableView;
  *
  * @author joao
  */
-public class ReceberPedidoFXMLController implements Initializable {
+public class ReceberPedidoFXMLController implements GenericViewController, Initializable {
 
     @FXML
     private JFXButton btnSalvar;
     @FXML
     private JFXButton btnNovo;
-    @FXML
-    private JFXButton btnExcluir;
     @FXML
     private JFXButton btnLimpar;
     @FXML
@@ -62,6 +61,8 @@ public class ReceberPedidoFXMLController implements Initializable {
     @FXML
     private JFXTextField txtObservacao;
     @FXML
+    private JFXDatePicker dtpDataRecebimento;
+    @FXML
     private JFXComboBox<Produto> cbbProduto;
     @FXML
     private JFXComboBox<UnidadeMedida> cbbUnidadeFisica;
@@ -82,25 +83,35 @@ public class ReceberPedidoFXMLController implements Initializable {
     @FXML
     private JFXTextField txtEmbalagemDeCompra;
     @FXML
-    private JFXButton btnAdicionar;
-    @FXML
     private TableView<?> tbvProdutos;
     @FXML
     private TableColumn<?, ?> tbcProduto;
     @FXML
     private TableColumn<?, ?> tbcQtde;
     @FXML
-    private TableColumn<?, ?> tbcUnidade;
+    private TableColumn<?, ?> tbcValUnid;
     @FXML
     private TableColumn<?, ?> tbcTotal;
-
+    @FXML
+    private TableColumn btnExcluirProd;
+    @FXML
+    private JFXButton btnAdicionar;
+    //----
+    private String erros;
+    private boolean flagButtons;
+    private final ReceberPedidoController controller = new ReceberPedidoController();
+    //----
+    
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
+        loadCbbFornecedor();
+        loadCbbProdutos();
+        loadCbbUnidadeMedida();
+    }
 
     @FXML
     private void onSalvar(ActionEvent event) {
@@ -111,15 +122,51 @@ public class ReceberPedidoFXMLController implements Initializable {
     }
 
     @FXML
-    private void onExcluir(ActionEvent event) {
-    }
-
-    @FXML
     private void onLimpar(ActionEvent event) {
     }
 
     @FXML
     private void onAdicionar(ActionEvent event) {
     }
-    
+
+    @Override
+    public void clearFields() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void setInputOff() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void setInputOn() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Boolean validateFields() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void getData() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void loadDataToScreen() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    private void loadCbbProdutos() {
+        cbbProduto.setItems(controller.loadComboProduto());
+    }
+
+    private void loadCbbFornecedor() {
+        cbbFornecedor.setItems(controller.loadComboFornecedor());
+    }
+    private void loadCbbUnidadeMedida() {
+        cbbUnidadeFisica.getItems().addAll(controller.loadComboUnidadeMedida());
+    }
 }
