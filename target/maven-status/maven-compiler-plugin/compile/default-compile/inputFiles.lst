@@ -7,6 +7,7 @@
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/controller/fichatecnica/TabFichaTecnicaFXMLController.java
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/controller/GenericController.java
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/model/produto/UnidadeMedida.java
+/home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/model/notafiscal/ProdutoNotaFiscal.java
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/dao/banco/BancoDAO.java
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/util/BDInsert.java
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/dao/parametros/ParametrosDAO.java
@@ -38,6 +39,7 @@
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/controller/meiopagamento/MeioPagamentoController.java
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/controller/login/LoginController.java
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/controller/cliente/TabListaClientesFXMLController.java
+/home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/model/notafiscal/NotaFiscal.java
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/model/prepreparo/ProdutoPrePreparo.java
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/dao/GenericDAOIMP.java
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/model/funcionario/Funcionario.java
@@ -84,6 +86,7 @@
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/dao/meiopagamento/MeioPagamentoDAO.java
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/model/produto/Grupo.java
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/model/telefone/Telefone.java
+/home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/dao/notafiscal/NotaFiscalDAO.java
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/controller/prepreparo/GerenciarPrePreparoFXMLController.java
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/dao/contacorrente/ContaCorrenteDAO.java
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/controller/meiopagamento/MeioPagamentoFXMLController.java

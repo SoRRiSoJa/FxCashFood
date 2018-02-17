@@ -32,6 +32,7 @@ com/cashf/dao/parametros/ParametrosDAO.class
 com/cashf/model/fichatecnica/ProdutoFichaTecnica.class
 com/cashf/model/produto/Grupo_.class
 com/cashf/controller/cliente/TabClientesFXMLController.class
+com/cashf/model/notafiscal/ProdutoNotaFiscal_.class
 com/cashf/controller/produto/FXGerenciarProdutosFXMLController.class
 com/cashf/dao/produto/CategoriaDAO.class
 com/cashf/model/meiopagamento/TPPagto.class
@@ -56,12 +57,15 @@ com/cashf/controller/fornecedor/TabFornecedorFXMLController.class
 com/cashf/controller/funcionario/TabFuncionarioFXMLController.class
 com/cashf/model/ajusteestoque/AjusteEstoque.class
 com/cashf/dao/banco/BancoDAO.class
+com/cashf/model/notafiscal/ProdutoNotaFiscal.class
 com/cashf/controller/prepreparo/GerenciarPrePreparoFXMLController.class
 com/cashf/model/cliente/Cliente.class
+com/cashf/dao/notafiscal/NotaFiscalDAO.class
 com/cashf/controller/parametrizacao/ParametrosController.class
 com/cashf/controller/fornecedor/TabFornecedorFXMLController$1.class
 com/cashf/controller/fornecedor/FornecedorController.class
 com/cashf/model/cliente/Cliente_.class
+com/cashf/model/notafiscal/NotaFiscal_.class
 com/cashf/controller/parametrizacao/TabParametrosSisFXMLController.class
 com/cashf/model/produto/UnidadeMedida.class
 util/UnitConverter$1.class
@@ -72,6 +76,7 @@ com/cashf/model/meiopagamento/MeioPagamento_.class
 com/cashf/model/banco/Banco_.class
 com/cashf/controller/funcionario/FuncionarioController.class
 com/cashf/controller/fichatecnica/TabFichaTecnicaFXMLController.class
+com/cashf/model/notafiscal/NotaFiscal.class
 com/cashf/controller/fichatecnica/GerenciarFichasTecnicasFXMLController.class
 controller/GenericController.class
 com/cashf/model/telefone/Operadora.class

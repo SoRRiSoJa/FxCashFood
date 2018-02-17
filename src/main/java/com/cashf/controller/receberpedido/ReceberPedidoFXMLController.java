@@ -99,11 +99,20 @@ public class ReceberPedidoFXMLController implements GenericViewController, Initi
     @FXML
     private JFXButton btnAdicionar;
     //----
+    private BigDecimal valorIpi;
+    private BigDecimal valorIcmsSubstProd;
+    private Integer qtdeCompra;
+    private Integer qtdeRecebida;
+    private BigDecimal prcoCompra;
+    private BigDecimal outrasDespesasProd;
+    private BigDecimal descontoProd;
+    private BigDecimal embalagemDeCompra;
+
     private String erros;
     private boolean flagButtons;
     private final ReceberPedidoController controller = new ReceberPedidoController();
     //----
-    
+
     /**
      * Initializes the controller class.
      */
@@ -113,6 +122,7 @@ public class ReceberPedidoFXMLController implements GenericViewController, Initi
         loadCbbFornecedor();
         loadCbbProdutos();
         loadCbbUnidadeMedida();
+        setInputOff();
     }
 
     @FXML
@@ -121,10 +131,14 @@ public class ReceberPedidoFXMLController implements GenericViewController, Initi
 
     @FXML
     private void onNovo(ActionEvent event) {
+        setInputOn();
+        clearFields();
+        btnNovo.setDisable(true);
     }
 
     @FXML
     private void onLimpar(ActionEvent event) {
+        clearFields();
     }
 
     @FXML
@@ -133,17 +147,98 @@ public class ReceberPedidoFXMLController implements GenericViewController, Initi
 
     @Override
     public void clearFields() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        cbbFornecedor.setValue(null);
+        dtpDataNota.setValue(null);;
+        txtNumeroNota.clear();
+        txtValorIcms.clear();
+        txtBaseCalculoIcms.clear();
+        txtValorTotalIpi.clear();
+        txtBaseIcmsSubst.clear();
+        txtValorIcmsSubst.clear();
+        txtOutrasDespesas.clear();
+        txtDesconto.clear();
+        txtValorTotalProdutos.clear();
+        txtValorTotalNota.clear();
+        txtObservacao.clear();
+        dtpDataRecebimento.setValue(null);;
+        cbbProduto.setValue(null);
+        cbbUnidadeFisica.setValue(null);
+        txtValorIpi.clear();
+        txtValorIcmsSubstProd.clear();
+        txtQtdeCompra.clear();
+        txtQtdeRecebida.clear();
+        txtPrcoCompra.clear();
+        txtOutrasDespesasProd.clear();
+        txtDescontoProd.clear();
+        txtEmbalagemDeCompra.clear();
     }
 
     @Override
     public void setInputOff() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        cbbFornecedor.setDisable(true);
+        dtpDataNota.setDisable(true);
+        txtNumeroNota.setDisable(true);
+        txtValorIcms.setDisable(true);
+        txtBaseCalculoIcms.setDisable(true);
+        txtValorTotalIpi.setDisable(true);
+        txtBaseIcmsSubst.setDisable(true);
+        txtValorIcmsSubst.setDisable(true);
+        txtOutrasDespesas.setDisable(true);
+        txtDesconto.setDisable(true);
+        txtValorTotalProdutos.setDisable(true);
+        txtValorTotalNota.setDisable(true);
+        txtObservacao.setDisable(true);
+        dtpDataRecebimento.setDisable(true);
+        cbbProduto.setDisable(true);
+        cbbUnidadeFisica.setDisable(true);
+        txtValorIpi.setDisable(true);
+        txtValorIcmsSubstProd.setDisable(true);
+        txtQtdeCompra.setDisable(true);
+        txtQtdeRecebida.setDisable(true);
+        txtPrcoCompra.setDisable(true);
+        txtOutrasDespesasProd.setDisable(true);
+        txtDescontoProd.setDisable(true);
+        txtEmbalagemDeCompra.setDisable(true);
+        btnSalvar.setDisable(true);
+        btnNovo.setDisable(true);
+        btnLimpar.setDisable(true);
+        tbvProdutos.setDisable(true);
+        btnAdicionar.setDisable(true);
+        flagButtons = false;
     }
 
     @Override
     public void setInputOn() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        cbbFornecedor.setDisable(false);
+        dtpDataNota.setDisable(false);
+        txtNumeroNota.setDisable(false);
+        txtValorIcms.setDisable(false);
+        txtBaseCalculoIcms.setDisable(false);
+        txtValorTotalIpi.setDisable(false);
+        txtBaseIcmsSubst.setDisable(false);
+        txtValorIcmsSubst.setDisable(false);
+        txtOutrasDespesas.setDisable(false);
+        txtDesconto.setDisable(false);
+        txtValorTotalProdutos.setDisable(false);
+        txtValorTotalNota.setDisable(false);
+        txtObservacao.setDisable(false);
+        dtpDataRecebimento.setDisable(false);
+        cbbProduto.setDisable(false);
+        cbbUnidadeFisica.setDisable(false);
+        txtValorIpi.setDisable(false);
+        txtValorIcmsSubstProd.setDisable(false);
+        txtQtdeCompra.setDisable(false);
+        txtQtdeRecebida.setDisable(false);
+        txtPrcoCompra.setDisable(false);
+        txtOutrasDespesasProd.setDisable(false);
+        txtDescontoProd.setDisable(false);
+        txtEmbalagemDeCompra.setDisable(false);
+        btnSalvar.setDisable(false);
+        btnNovo.setDisable(false);
+        btnLimpar.setDisable(false);
+        tbvProdutos.setDisable(false);
+        btnAdicionar.setDisable(false);
+        flagButtons = true;
     }
 
     @Override
@@ -168,6 +263,7 @@ public class ReceberPedidoFXMLController implements GenericViewController, Initi
     private void loadCbbFornecedor() {
         cbbFornecedor.setItems(controller.loadComboFornecedor());
     }
+
     private void loadCbbUnidadeMedida() {
         cbbUnidadeFisica.getItems().addAll(controller.loadComboUnidadeMedida());
     }
