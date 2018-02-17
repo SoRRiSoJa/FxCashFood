@@ -70,7 +70,7 @@
                   </JFXButton>
                </children>
             </HBox>
-            <TableView fx:id="tbvFicha" layoutX="10.0" layoutY="119.0" prefHeight="220.0" prefWidth="621.0">
+            <TableView fx:id="tbvFicha" layoutX="10.0" layoutY="119.0" prefHeight="220.0" prefWidth="621.0" stylesheets="@../../styles/TableViewCSS.css">
               <columns>
                 <TableColumn fx:id="tbcProduto" prefWidth="415.0" text="PRODUTO" />
                 <TableColumn fx:id="tbcUnidade" prefWidth="74.0" text="UNIDADE" />
@@ -118,7 +118,7 @@
             <JFXRadioButton fx:id="rbtDescricao" layoutX="184.0" layoutY="146.0" style="-jfx-selected-color: #69e2ff;" text="Descrição" />
             <Label layoutX="14.0" layoutY="38.0" text="Produtos:" />
             <Label layoutX="14.0" layoutY="123.0" text="Filtros:" />
-            <TableView fx:id="tbvFichaItens" layoutX="14.0" layoutY="180.0" prefHeight="253.0" prefWidth="604.0">
+            <TableView fx:id="tbvFichaItens" layoutX="14.0" layoutY="180.0" prefHeight="253.0" prefWidth="604.0" stylesheets="@../../styles/TableViewCSS.css">
               <columns>
                 <TableColumn fx:id="tbcProdItem" prefWidth="330.0" text="PRODUTO" />
                   <TableColumn fx:id="tbcUnidadeItem" prefWidth="77.0" text="UNIDADE" />
