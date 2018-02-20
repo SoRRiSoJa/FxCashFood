@@ -15,7 +15,6 @@ import controller.GenericController;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -71,7 +70,12 @@ public class FichaTecnicaController implements GenericController<FichaTecnica> {
 
     @Override
     public void flushObject() {
-        
+        this.fichaTecnica=new FichaTecnica();
+        this.itemAtual = new Produto();
+        this.produtoPrincipal = new Produto();
+        this.fichaTecnica.setIdFichaTecnica(0l);
+        this.custoTotal=BigDecimal.ZERO;
+        this.listaItensFicha=FXCollections.observableList(new ArrayList<>());
     }
 
     @Override

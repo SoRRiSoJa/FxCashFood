@@ -7,7 +7,6 @@ package com.cashf.controller.fichatecnica;
 
 import com.cashf.cashfood.MainApp;
 import com.cashf.controller.prepreparo.PrePreparoController;
-import com.cashf.controller.prepreparo.TabPrePreparoFXMLController;
 import com.cashf.model.fichatecnica.ProdutoFichaTecnica;
 import com.cashf.model.produto.Produto;
 import com.cashf.model.produto.UnidadeMedida;
@@ -135,6 +134,7 @@ public class TabFichaTecnicaFXMLController implements Initializable, GenericView
             FichaTecnicaController.getInstance().setFichaTecnica(0l, FichaTecnicaController.getInstance().getProdutoPrincipal(), Boolean.TRUE);
             FichaTecnicaController.getInstance().insert();
             PoupUpUtil.poupUp("Ficha Técnica Cadastrada", "A Ficha Técnica foi cadastrada com sucesso.", "");
+            FichaTecnicaController.getInstance().flushObject();
         } else {
             PoupUpUtil.errorMessage(paneRoot, MainApp.paneRoot, erros);
             erros = "";

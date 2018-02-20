@@ -25,7 +25,6 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.geometry.Point2D;
 import javafx.geometry.Pos;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
@@ -165,6 +164,7 @@ public class TabPrePreparoFXMLController implements GenericViewController, Initi
 
             PrePreparoController.getInstance().insert();
             PoupUpUtil.poupUp("Pré-Preparo Cadastrado", "O Pré-Preparo foi cadastrado com sucesso.", "");
+            PrePreparoController.getInstance().flushObject();
         } else {
             PoupUpUtil.errorMessage(paneRoot, MainApp.paneRoot, erros);
             erros = "";

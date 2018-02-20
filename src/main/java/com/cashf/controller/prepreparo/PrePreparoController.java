@@ -82,10 +82,13 @@ public class PrePreparoController implements GenericController<PrePreparo> {
 
     @Override
     public void flushObject() {
-        this.produtoPrincipal = new Produto();
-        produtoPrincipal.setIdProduto(0l);
+        this.listaItens = FXCollections.observableList(new ArrayList<>());
         this.prePreparo = new PrePreparo();
         this.prePreparo.setIdPrepreparo(0l);
+        this.produtoPrincipal = new Produto();
+        produtoPrincipal.setIdProduto(0l);
+        this.itemAtual = new Produto();
+        itemAtual.setIdProduto(0l);
     }
 
     @Override
