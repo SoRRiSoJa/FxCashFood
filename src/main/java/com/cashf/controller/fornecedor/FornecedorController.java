@@ -166,5 +166,15 @@ public class FornecedorController {
         telefone = new Telefone();
         telefone.setIdTelefone(0l);
     }
+    public void flushObject() {
+        fornecedor = new Fornecedor();
+        fornecedor.setIdFornecedor(0l);
+        telefone = new Telefone();
+        telefone.setIdTelefone(0l);
+        lt=new ArrayList<>();
+        this.listaTelefone = FXCollections.observableList(lt);
+        this.listaCidade = FXCollections.observableList(cidadeDAO.listAll());
+        this.lista = FXCollections.observableList(fornecedorDAO.listAll());
+    }
 
 }

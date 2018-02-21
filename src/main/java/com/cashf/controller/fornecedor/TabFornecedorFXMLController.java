@@ -199,15 +199,17 @@ public class TabFornecedorFXMLController implements GenericViewController, Initi
         if (validateFields()) {
             FornecedorController.getInstance().setFornecedor(idFornecedor, cnpj, inscrEst, nomefantasia, razaoSocial, endereco, complemento, numero, cep, bairro, email, Observacao, FornecedorController.getInstance().getCidade(), FornecedorController.getInstance().getListaTelefone());
             if (FornecedorController.getInstance().getFornecedor().getIdFornecedor() == 0) {
-                FornecedorController.getInstance().insert();
-
+                //FornecedorController.getInstance().insert();
                 PoupUpUtil.poupUp("Fornecedor Cadastrado", "O Fornecedor foi cadastrado com sucesso.", "");
-
+                
             } else {
                 FornecedorController.getInstance().update();
                 PoupUpUtil.poupUp("Fornecedor Alterado", "O Fornecedor foi alterado com sucesso.", "");
             }
             //loadTbv();
+            FornecedorController.getInstance().flushObject();
+            loadTbvTelefone();
+            System.out.println("CLear---->>>>>>>>>>>>");
             clearFields();
         } else {
             PoupUpUtil.errorMessage(paneRoot, MainApp.paneRoot, erros);
@@ -393,7 +395,7 @@ public class TabFornecedorFXMLController implements GenericViewController, Initi
         inscrEst = txtInscrEst.getText();
         Observacao = txtObs.getText();
         FornecedorController.getInstance().setCidade(cbbCidade.getSelectionModel().getSelectedItem());
-
+        
     }
 
     private void getDataTelefone() {
