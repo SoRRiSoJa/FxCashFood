@@ -141,6 +141,7 @@ public class TabFornecedorFXMLController implements GenericViewController, Initi
     private static JFXTextField _txtDdd;
     private static JFXTextField _txtTelefone;
     private static JFXButton _btnAdicionar;
+    private static TableView<Telefone> _tbvTelefone;
     @FXML
     private Pane paneRoot;
 
@@ -170,6 +171,8 @@ public class TabFornecedorFXMLController implements GenericViewController, Initi
         _cbbOperadora = cbbOperadora;
         _txtDdd = txtDdd;
         _txtTelefone = txtTelefone;
+        _tbvTelefone=tbvTelefone;
+        
         setInputOff();
         loadCbbCidade();
         loadCbbOperadora();
@@ -199,17 +202,15 @@ public class TabFornecedorFXMLController implements GenericViewController, Initi
         if (validateFields()) {
             FornecedorController.getInstance().setFornecedor(idFornecedor, cnpj, inscrEst, nomefantasia, razaoSocial, endereco, complemento, numero, cep, bairro, email, Observacao, FornecedorController.getInstance().getCidade(), FornecedorController.getInstance().getListaTelefone());
             if (FornecedorController.getInstance().getFornecedor().getIdFornecedor() == 0) {
-                //FornecedorController.getInstance().insert();
+                FornecedorController.getInstance().insert();
                 PoupUpUtil.poupUp("Fornecedor Cadastrado", "O Fornecedor foi cadastrado com sucesso.", "");
                 
             } else {
                 FornecedorController.getInstance().update();
                 PoupUpUtil.poupUp("Fornecedor Alterado", "O Fornecedor foi alterado com sucesso.", "");
             }
-            //loadTbv();
             FornecedorController.getInstance().flushObject();
             loadTbvTelefone();
-            System.out.println("CLear---->>>>>>>>>>>>");
             clearFields();
         } else {
             PoupUpUtil.errorMessage(paneRoot, MainApp.paneRoot, erros);
@@ -422,6 +423,9 @@ public class TabFornecedorFXMLController implements GenericViewController, Initi
         _txtInscrEst.setText(FornecedorController.getInstance().getFornecedor().getInscrEst());
         _txtObs.setText(FornecedorController.getInstance().getFornecedor().getObservacao());
         _cbbCidade.setValue(FornecedorController.getInstance().getFornecedor().getCidade());
+    }
+    public static void LDTSPhone() {
+        _tbvTelefone.setItems(FornecedorController.getInstance().getListaTelefone());
     }
 
     private void setUptableViewTelefone() {
