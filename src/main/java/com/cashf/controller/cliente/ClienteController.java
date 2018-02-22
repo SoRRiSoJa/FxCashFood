@@ -168,8 +168,16 @@ public class ClienteController implements GenericController<Cliente> {
 
     @Override
     public void flushObject() {
+        this.lt = new ArrayList<>();
+        this.lista = FXCollections.observableList(clienteDAO.listAll());
+        this.listaCidade = FXCollections.observableList(cidadeDAO.listAll());
+        this.listaTelefone = FXCollections.observableList(lt);
+        this.telefone = new Telefone();
+        this.cidade = new Cidade();
+        telefone.setIdTelefone(0l);
         this.cliente = new Cliente();
         cliente.setIdPessoa(0l);
+        
     }
 
     @Override

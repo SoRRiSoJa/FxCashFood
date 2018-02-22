@@ -20,7 +20,6 @@ import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Optional;
 import java.util.ResourceBundle;
-import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -115,6 +114,7 @@ public class TabClientesFXMLController implements GenericViewController, Initial
     private String ddd;
     private String erros;
     private boolean flagButtons;
+    private String observacao;
     //--
     private static JFXTextField _txtObservacao;
     private static JFXComboBox<Operadora> _cbbOperadora;
@@ -141,6 +141,7 @@ public class TabClientesFXMLController implements GenericViewController, Initial
     private static JFXButton _btnNovo;
     private static JFXButton _btnExcluir;
     private static JFXButton _btnLimpar;
+    
 
     /**
      * Initializes the controller class.
@@ -225,12 +226,14 @@ public class TabClientesFXMLController implements GenericViewController, Initial
                 //insert
                 ClienteController.getInstance().insert();
                 PoupUpUtil.poupUp("Cliente Cadastrado", "O Cliente foi cadastrado com sucesso.", "");
+                
             } else {
                 //update
                 ClienteController.getInstance().update();
                 PoupUpUtil.poupUp("Cliente Alterado", "O Cliente foi alterado com sucesso.", "");
             }
-            //loadTbv();
+            ClienteController.getInstance().flushObject();
+            loadTbvTelefone();
             clearFields();
         } else {
             PoupUpUtil.accessDenied(erros);
@@ -272,6 +275,7 @@ public class TabClientesFXMLController implements GenericViewController, Initial
         txtEmail.clear();
         txtRg.clear();
         txtCpf.clear();
+        txtObservacao.clear();
         cbbOperadora.setValue(null);
         txtDdd.clear();
         txtNumeroTelefone.clear();
@@ -395,6 +399,7 @@ public class TabClientesFXMLController implements GenericViewController, Initial
         email = txtEmail.getText();
         rg = txtRg.getText();
         cpf = txtCpf.getText();
+        observacao=txtObservacao.getText();
         ClienteController.getInstance().setSexo(cbbSexo.getSelectionModel().getSelectedItem());
         ClienteController.getInstance().setCidade(cbbCidade.getSelectionModel().getSelectedItem());
         ClienteController.getInstance().setOperadora(cbbOperadora.getSelectionModel().getSelectedItem());
@@ -424,9 +429,7 @@ public class TabClientesFXMLController implements GenericViewController, Initial
         _txtEmail.setText(ClienteController.getInstance().getCliente().getEmail());
         _txtRg.setText(ClienteController.getInstance().getCliente().getRg());
         _txtCpf.setText(ClienteController.getInstance().getCliente().getCpf());
-        //_cbbOperadora.setValue(ClienteController.getInstance().getCliente());
-        //_txtDdd.setText(ClienteController.getInstance().getCliente());
-        //_txtNumeroTelefone.setText(ClienteController.getInstance().getCliente());
+        _txtObservacao.setText(ClienteController.getInstance().getCliente().getObservacao());
     }
     public static void LDTSFone() {
         _tbvTelefones.setItems(ClienteController.getInstance().getListaTelefone());
