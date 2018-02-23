@@ -253,8 +253,27 @@ public class TabClientesFXMLController implements GenericViewController, Initial
     @FXML
     private void onExcluir(ActionEvent event) {
         if (ClienteController.getInstance().getCliente().getIdPessoa() != 0l) {
-            ClienteController.getInstance().delete();
+         Notifications notificationBuilder;
+         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                        alert.setTitle("Cofirmar Excluir Cliente!");
+                        alert.setHeaderText("Deseja realmente Excluir?");
+                        alert.setContentText("Nome:(" + ClienteController.getInstance().getCliente().getNome() + ")");
+                        Optional<ButtonType> result = alert.showAndWait();
+                        if (result.get() == ButtonType.OK) {
+                             ClienteController.getInstance().delete();
+                            // ... user chose OK
+                            ClienteController.getInstance().deleteTelefone();
+                            notificationBuilder = Notifications.create().title("Cliente excluído!").
+                                    text("Cliente Excluido com sucesso.").
+                                    hideAfter(Duration.seconds(2)).
+                                    position(Pos.TOP_RIGHT).
+                                    darkStyle();
+                            notificationBuilder.showInformation();
+                        } else {
+                            alert.close();
+                        }
         }
+        
     }
 
     @FXML

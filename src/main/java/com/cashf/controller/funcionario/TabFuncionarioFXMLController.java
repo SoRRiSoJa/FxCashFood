@@ -20,14 +20,20 @@ import java.math.BigDecimal;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.Arrays;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
+import javafx.util.Duration;
+import org.controlsfx.control.Notifications;
 import util.PoupUpUtil;
 import util.TextFieldFormatter;
 
@@ -286,6 +292,27 @@ public class TabFuncionarioFXMLController implements GenericViewController, Init
 
     @FXML
     private void onExcluir(ActionEvent event) {
+    if(FuncionarioController.getInstance().getFuncionario().getIdPessoa()!=0){
+    Notifications notificationBuilder;
+         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                        alert.setTitle("Cofirmar Excluir Funcionário!");
+                        alert.setHeaderText("Deseja realmente Excluir?");
+                        alert.setContentText("Nome:(" + FuncionarioController.getInstance().getFuncionario().getNome() + ")");
+                        Optional<ButtonType> result = alert.showAndWait();
+                        if (result.get() == ButtonType.OK) {
+                             FuncionarioController.getInstance().delete();
+                            // ... user chose OK
+                            FuncionarioController.getInstance().deleteTelefone();
+                            notificationBuilder = Notifications.create().title("Funcionário excluído!").
+                                    text("Funcionário Excluido com sucesso.").
+                                    hideAfter(Duration.seconds(2)).
+                                    position(Pos.TOP_RIGHT).
+                                    darkStyle();
+                            notificationBuilder.showInformation();
+                        } else {
+                            alert.close();
+                        }
+    }
     }
 
     @FXML
