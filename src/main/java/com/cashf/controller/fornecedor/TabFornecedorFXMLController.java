@@ -248,6 +248,7 @@ public class TabFornecedorFXMLController implements GenericViewController, Initi
         if (validateTeleofne()) {
             FornecedorController.getInstance().setTelefone(0l, ddd, telefone);
             FornecedorController.getInstance().inserTelefone();
+            
         } else {
             PoupUpUtil.accessDenied(erros);
             erros = "";

@@ -29,6 +29,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import util.PoupUpUtil;
+import util.TextFieldFormatter;
 
 /**
  * FXML Controller class
@@ -209,6 +210,7 @@ public class TabFuncionarioFXMLController implements GenericViewController, Init
         _cbbOperadora = cbbOperadora;
         _txtDdd = txtDdd;
         _txtNumeroTelefone = txtNumeroTelefone;
+        _tbvTelefone = tbvTelefone;
         _btnAdicionar = btnAdicionar;
         _tbvTelefone = tbvTelefone;
         _tbcDdd = tbcDdd;
@@ -223,6 +225,11 @@ public class TabFuncionarioFXMLController implements GenericViewController, Init
 
     @FXML
     private void onKeyReleasedCep(KeyEvent event) {
+        TextFieldFormatter tff = new TextFieldFormatter();
+        tff.setMask("#####-###");
+        tff.setCaracteresValidos("0123456789");
+        tff.setTf(txtCep);
+        tff.formatter();
     }
 
     @FXML
@@ -236,6 +243,11 @@ public class TabFuncionarioFXMLController implements GenericViewController, Init
 
     @FXML
     private void onKeyReleasedCpf(KeyEvent event) {
+        TextFieldFormatter tff = new TextFieldFormatter();
+        tff.setMask("###.###.###-##");
+        tff.setCaracteresValidos("0123456789");
+        tff.setTf(txtCpf);
+        tff.formatter();
     }
 
     @FXML
@@ -244,7 +256,7 @@ public class TabFuncionarioFXMLController implements GenericViewController, Init
         getDataUser();
         if (validateUser() && validateFields()) {
             FuncionarioController.getInstance().setUsuario(IdUsu, login, senha, FuncionarioController.getInstance().getNivel(), true);
-            FuncionarioController.getInstance().setFuncionario(IdFunc, nome, FuncionarioController.getInstance().getSexo(), dataNas, endereco, bairro, numero, complemento, cep, FuncionarioController.getInstance().getCidade(), cpf, rg, email, FuncionarioController.getInstance().getListaTelefone(), flagButtons, ctps, salIni, salAtual, vrDia, vtDia, dataAdmi, dataDemi, FuncionarioController.getInstance().getUsuario());
+            FuncionarioController.getInstance().setFuncionario(IdFunc, nome, FuncionarioController.getInstance().getSexo(), dataNas, endereco, bairro, numero, complemento, cep, FuncionarioController.getInstance().getCidade(), cpf, rg, email, FuncionarioController.getInstance().getListaTelefone(), true, ctps, salIni, salAtual, vrDia, vtDia, dataAdmi, dataDemi, FuncionarioController.getInstance().getUsuario());
             if (FuncionarioController.getInstance().getFuncionario().getIdPessoa() == 0l) {
                 FuncionarioController.getInstance().inserUsuario();
                 FuncionarioController.getInstance().insert();
@@ -254,7 +266,8 @@ public class TabFuncionarioFXMLController implements GenericViewController, Init
                 FuncionarioController.getInstance().update();
                 PoupUpUtil.poupUp("Funcionario Alterado", "O Funcionario foi alterado com sucesso.", "");
             }
-            //loadTbv();
+            FuncionarioController.getInstance().flushObject();
+            loadTbvTelefone();
             clearFields();
         } else {
             PoupUpUtil.accessDenied(erros);
@@ -290,6 +303,7 @@ public class TabFuncionarioFXMLController implements GenericViewController, Init
         if (validateTeleofne()) {
             FuncionarioController.getInstance().setTelefone(0l, ddd, telefone);
             FuncionarioController.getInstance().inserTelefone();
+            loadTbvTelefone();
         } else {
             PoupUpUtil.accessDenied(erros);
             erros = "";
@@ -536,9 +550,12 @@ public class TabFuncionarioFXMLController implements GenericViewController, Init
         _txtEmail.setText(FuncionarioController.getInstance().getFuncionario().getEmail());
         _txtRg.setText(FuncionarioController.getInstance().getFuncionario().getRg());
         _txtCpf.setText(FuncionarioController.getInstance().getFuncionario().getCpf());
-        //_cbbOperadora.setValue(FuncionarioController.getInstance().getFuncionario());
-        //_txtDdd.setText(FuncionarioController.getInstance().getFuncionario());
-        //_txtNumeroTelefone.setText(FuncionarioController.getInstance().getFuncionario());
+        _btnExcluir.setDisable(false);
+
+    }
+
+    public static void LDTSPhone() {
+        _tbvTelefone.setItems(FuncionarioController.getInstance().getListaTelefone());
     }
 
     private void loadCbbOperadora() {
@@ -555,6 +572,48 @@ public class TabFuncionarioFXMLController implements GenericViewController, Init
 
     private void loadCbbSexo() {
         cbbSexo.getItems().addAll(Arrays.asList(Sexo.values()));
+    }
+
+    private void loadTbvTelefone() {
+        tbvTelefone.setItems(FuncionarioController.getInstance().getListaTelefone());
+    }
+
+    @FXML
+    private void onKeyreleasedCtps(KeyEvent event) {
+    }
+
+    @FXML
+    private void onKeyreleasedSalIni(KeyEvent event) {
+    }
+
+    @FXML
+    private void onKeyreleasedSalAtual(KeyEvent event) {
+    }
+
+    @FXML
+    private void onKeyreleasedValeTrans(KeyEvent event) {
+    }
+
+    @FXML
+    private void onKeyreleasedValeRef(KeyEvent event) {
+    }
+
+    @FXML
+    private void onKeyreleasedDdd(KeyEvent event) {
+        TextFieldFormatter tff = new TextFieldFormatter();
+        tff.setMask("(##)");
+        tff.setCaracteresValidos("0123456789");
+        tff.setTf(txtDdd);
+        tff.formatter();
+    }
+
+    @FXML
+    private void onKeyreleasedTelefone(KeyEvent event) {
+        TextFieldFormatter tff = new TextFieldFormatter();
+        tff.setMask("#####-#####");
+        tff.setCaracteresValidos("0123456789");
+        tff.setTf(txtNumeroTelefone);
+        tff.formatter();
     }
 
 }

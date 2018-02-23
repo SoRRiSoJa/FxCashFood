@@ -15,7 +15,6 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 
-
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="542.0" prefWidth="1366.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cashf.controller.funcionario.TabFuncionarioFXMLController">
    <children>
       <Pane layoutX="20.0" layoutY="30.0" prefHeight="445.0" prefWidth="640.0" style="-fx-background-color: #ffffff;">
@@ -92,11 +91,11 @@
          <children>
             <JFXDatePicker fx:id="dtpDataAdm" defaultColor="#004ba0" layoutX="17.0" layoutY="104.0" promptText="Data de adimissão" />
             <JFXDatePicker fx:id="dtpDataDem" defaultColor="#004ba0" layoutX="257.0" layoutY="105.0" promptText="Data de Demissão" />
-            <JFXTextField fx:id="txtCtps" focusColor="#004ba0" labelFloat="true" layoutX="16.0" layoutY="16.0" prefHeight="24.0" prefWidth="155.0" promptText="Nº CTPS" />
-            <JFXTextField fx:id="txtSalarioI" focusColor="#004ba0" layoutX="16.0" layoutY="60.0" prefHeight="24.0" prefWidth="155.0" promptText="Salário Inicial" />
-            <JFXTextField fx:id="txtsalarioF" focusColor="#004ba0" layoutX="256.0" layoutY="61.0" prefHeight="24.0" prefWidth="155.0" promptText="Salário Atual" />
-            <JFXTextField fx:id="txtValeT" focusColor="#004ba0" layoutX="471.0" layoutY="16.0" promptText="Vale Transporte (dia)" />
-            <JFXTextField fx:id="txtValeR" focusColor="#004ba0" layoutX="258.0" layoutY="17.0" prefHeight="24.0" prefWidth="155.0" promptText="Vale refeição (dia)" />
+            <JFXTextField fx:id="txtCtps" focusColor="#004ba0" labelFloat="true" layoutX="16.0" layoutY="16.0" onKeyReleased="#onKeyreleasedCtps" prefHeight="24.0" prefWidth="155.0" promptText="Nº CTPS" />
+            <JFXTextField fx:id="txtSalarioI" focusColor="#004ba0" layoutX="16.0" layoutY="60.0" onKeyReleased="#onKeyreleasedSalIni" prefHeight="24.0" prefWidth="155.0" promptText="Salário Inicial" />
+            <JFXTextField fx:id="txtsalarioF" focusColor="#004ba0" layoutX="256.0" layoutY="61.0" onKeyReleased="#onKeyreleasedSalAtual" prefHeight="24.0" prefWidth="155.0" promptText="Salário Atual" />
+            <JFXTextField fx:id="txtValeT" focusColor="#004ba0" layoutX="471.0" layoutY="16.0" onKeyReleased="#onKeyreleasedValeTrans" promptText="Vale Transporte (dia)" />
+            <JFXTextField fx:id="txtValeR" focusColor="#004ba0" layoutX="258.0" layoutY="17.0" onKeyReleased="#onKeyreleasedValeRef" prefHeight="24.0" prefWidth="155.0" promptText="Vale refeição (dia)" />
             <JFXTextField fx:id="txtLogin" focusColor="#004ba0" labelFloat="true" layoutX="17.0" layoutY="173.0" onKeyReleased="#onKeyReleasedLogin" prefHeight="24.0" prefWidth="192.0" promptText="Login" />
             <JFXPasswordField fx:id="txtSenha" focusColor="#004ba0" labelFloat="true" layoutX="16.0" layoutY="221.0" prefHeight="24.0" prefWidth="192.0" promptText="Senha" />
             <Separator layoutX="14.0" layoutY="158.0" prefHeight="0.0" prefWidth="600.0" />
@@ -112,8 +111,8 @@
                      </children>
                   </Pane>
                   <JFXComboBox fx:id="cbbOperadora" focusColor="#004ba0" labelFloat="true" layoutX="14.0" layoutY="30.0" prefHeight="26.0" prefWidth="100.0" promptText="Operadora" />
-                  <JFXTextField fx:id="txtDdd" labelFloat="true" layoutX="14.0" layoutY="72.0" prefHeight="24.0" prefWidth="100.0" promptText="DDD" />
-                  <JFXTextField fx:id="txtNumeroTelefone" focusColor="#004ba0" labelFloat="true" layoutX="133.0" layoutY="72.0" prefHeight="24.0" prefWidth="140.0" promptText="Nº TELEFONE" />
+                  <JFXTextField fx:id="txtDdd" labelFloat="true" layoutX="14.0" layoutY="72.0" onKeyReleased="#onKeyreleasedDdd" prefHeight="24.0" prefWidth="100.0" promptText="DDD" />
+                  <JFXTextField fx:id="txtNumeroTelefone" focusColor="#004ba0" labelFloat="true" layoutX="133.0" layoutY="72.0" onKeyReleased="#onKeyreleasedTelefone" prefHeight="24.0" prefWidth="140.0" promptText="Nº TELEFONE" />
                   <JFXButton fx:id="btnAdicionar" contentDisplay="GRAPHIC_ONLY" layoutX="16.0" layoutY="110.0" onAction="#onAdicionar" prefHeight="32.0" prefWidth="43.0" ripplerFill="WHITE" style="-fx-background-color: #2196f3;" textFill="WHITE">
                      <graphic>
                         <FontAwesomeIconView fill="WHITE" glyphName="PLUS" size="16" />

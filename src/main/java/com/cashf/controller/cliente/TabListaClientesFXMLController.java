@@ -59,6 +59,7 @@ public class TabListaClientesFXMLController implements Initializable {
 
     @FXML
     private void onPesquisar(ActionEvent event) {
+    
     }
 
     @FXML
@@ -66,12 +67,8 @@ public class TabListaClientesFXMLController implements Initializable {
         if (tbvClientes.getSelectionModel().getSelectedItem() != null) {
             ClienteController.getInstance().setCliente(tbvClientes.getSelectionModel().getSelectedItem());
             ClienteController.getInstance().setListaTelefone(FXCollections.observableList(ClienteController.getInstance().getCliente().getTelefones()));
-            for(Telefone tel :ClienteController.getInstance().getCliente().getTelefones()){
-                System.out.println("Telefone:--------------->"+tel.getNumero());
-            }
-            TabClientesFXMLController.LDTS();
             TabClientesFXMLController.LDTSFone();
-            
+            TabClientesFXMLController.LDTS();
         }
 
     }

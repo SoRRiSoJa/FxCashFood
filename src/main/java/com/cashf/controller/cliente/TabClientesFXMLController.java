@@ -141,7 +141,6 @@ public class TabClientesFXMLController implements GenericViewController, Initial
     private static JFXButton _btnNovo;
     private static JFXButton _btnExcluir;
     private static JFXButton _btnLimpar;
-    
 
     /**
      * Initializes the controller class.
@@ -149,23 +148,25 @@ public class TabClientesFXMLController implements GenericViewController, Initial
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        _txtNome=txtNome; 
-        _cbbSexo=cbbSexo;
-        _dtpDataNas=dtpDataNas; 
-        _txtEndereco =txtEndereco;
-        _txtNumero =txtNumero;
-        _txtComplemento =txtComplemento;
-        _txtCep =txtCep;
-        _txtBairro= txtBairro;
-        _cbbCidade=cbbCidade;
-        _txtEmail= txtEmail;
-        _txtRg =txtRg;
-        _txtCpf =txtCpf;
-        _cbbOperadora=cbbOperadora;
-        _txtDdd =txtDdd;
-        _txtNumeroTelefone =txtNumeroTelefone;
-        _cbbCidade=cbbCidade;
-        _cbbOperadora=cbbOperadora;
+        _txtNome = txtNome;
+        _cbbSexo = cbbSexo;
+        _dtpDataNas = dtpDataNas;
+        _txtEndereco = txtEndereco;
+        _txtNumero = txtNumero;
+        _txtComplemento = txtComplemento;
+        _txtCep = txtCep;
+        _txtBairro = txtBairro;
+        _cbbCidade = cbbCidade;
+        _txtEmail = txtEmail;
+        _txtRg = txtRg;
+        _txtCpf = txtCpf;
+        _cbbOperadora = cbbOperadora;
+        _txtDdd = txtDdd;
+        _txtNumeroTelefone = txtNumeroTelefone;
+        _cbbCidade = cbbCidade;
+        _cbbOperadora = cbbOperadora;
+        _tbvTelefones=tbvTelefones;
+        _txtObservacao=txtObservacao;
         setInputOff();
         loadCbbOperadora();
         loadCbbCidade();
@@ -221,12 +222,12 @@ public class TabClientesFXMLController implements GenericViewController, Initial
     private void onSalvar(ActionEvent event) {
         getData();
         if (validateFields()) {
-            ClienteController.getInstance().setCliente(IdCli, nome, ClienteController.getInstance().getSexo(), dataNas, endereco, bairro, numero, complemento, cep, ClienteController.getInstance().getCidade(), cpf, rg, email, flagButtons, ClienteController.getInstance().getListaTelefone(), endereco);
+            ClienteController.getInstance().setCliente(IdCli, nome, ClienteController.getInstance().getSexo(), dataNas, endereco, bairro, numero, complemento, cep, ClienteController.getInstance().getCidade(), cpf, rg, email, flagButtons, ClienteController.getInstance().getListaTelefone(), observacao);
             if (ClienteController.getInstance().getCliente().getIdPessoa() == 0l) {
                 //insert
                 ClienteController.getInstance().insert();
                 PoupUpUtil.poupUp("Cliente Cadastrado", "O Cliente foi cadastrado com sucesso.", "");
-                
+
             } else {
                 //update
                 ClienteController.getInstance().update();
@@ -392,14 +393,18 @@ public class TabClientesFXMLController implements GenericViewController, Initial
         nome = txtNome.getText();
         dataNas = dtpDataNas.getValue();
         endereco = txtEndereco.getText();
-        txtNumero.getText();
+        try {
+            numero = Integer.parseInt(txtNumero.getText());
+        } catch (Exception ex) {
+
+        }
         complemento = txtComplemento.getText();
         cep = txtCep.getText();
         bairro = txtBairro.getText();
         email = txtEmail.getText();
         rg = txtRg.getText();
         cpf = txtCpf.getText();
-        observacao=txtObservacao.getText();
+        observacao = txtObservacao.getText();
         ClienteController.getInstance().setSexo(cbbSexo.getSelectionModel().getSelectedItem());
         ClienteController.getInstance().setCidade(cbbCidade.getSelectionModel().getSelectedItem());
         ClienteController.getInstance().setOperadora(cbbOperadora.getSelectionModel().getSelectedItem());
@@ -421,7 +426,7 @@ public class TabClientesFXMLController implements GenericViewController, Initial
         _cbbSexo.setValue(ClienteController.getInstance().getCliente().getSexo());
         _dtpDataNas.setValue(ClienteController.getInstance().getCliente().getDataNas());
         _txtEndereco.setText(ClienteController.getInstance().getCliente().getEndereco());
-        _txtNumero.setText(ClienteController.getInstance().getCliente().getNumero()+"");
+        _txtNumero.setText(ClienteController.getInstance().getCliente().getNumero() + "");
         _txtComplemento.setText(ClienteController.getInstance().getCliente().getComplemento());
         _txtCep.setText(ClienteController.getInstance().getCliente().getCep());
         _txtBairro.setText(ClienteController.getInstance().getCliente().getBairro());
@@ -431,6 +436,7 @@ public class TabClientesFXMLController implements GenericViewController, Initial
         _txtCpf.setText(ClienteController.getInstance().getCliente().getCpf());
         _txtObservacao.setText(ClienteController.getInstance().getCliente().getObservacao());
     }
+
     public static void LDTSFone() {
         _tbvTelefones.setItems(ClienteController.getInstance().getListaTelefone());
     }
