@@ -15,6 +15,7 @@ import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
+import com.sun.prism.impl.Disposer;
 import controller.GenericViewController;
 import java.math.BigDecimal;
 import java.net.URL;
@@ -23,15 +24,22 @@ import java.util.Arrays;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.ContentDisplay;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
+import javafx.util.Callback;
 import javafx.util.Duration;
 import org.controlsfx.control.Notifications;
 import util.PoupUpUtil;
@@ -227,6 +235,7 @@ public class TabFuncionarioFXMLController implements GenericViewController, Init
         loadCbbCidade();
         loadCbbSexo();
         loadCbbUsuNivel();
+        setUptableViewTelefone();
     }
 
     @FXML
@@ -292,27 +301,27 @@ public class TabFuncionarioFXMLController implements GenericViewController, Init
 
     @FXML
     private void onExcluir(ActionEvent event) {
-    if(FuncionarioController.getInstance().getFuncionario().getIdPessoa()!=0){
-    Notifications notificationBuilder;
-         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-                        alert.setTitle("Cofirmar Excluir Funcionário!");
-                        alert.setHeaderText("Deseja realmente Excluir?");
-                        alert.setContentText("Nome:(" + FuncionarioController.getInstance().getFuncionario().getNome() + ")");
-                        Optional<ButtonType> result = alert.showAndWait();
-                        if (result.get() == ButtonType.OK) {
-                             FuncionarioController.getInstance().delete();
-                            // ... user chose OK
-                            FuncionarioController.getInstance().deleteTelefone();
-                            notificationBuilder = Notifications.create().title("Funcionário excluído!").
-                                    text("Funcionário Excluido com sucesso.").
-                                    hideAfter(Duration.seconds(2)).
-                                    position(Pos.TOP_RIGHT).
-                                    darkStyle();
-                            notificationBuilder.showInformation();
-                        } else {
-                            alert.close();
-                        }
-    }
+        if (FuncionarioController.getInstance().getFuncionario().getIdPessoa() != 0) {
+            Notifications notificationBuilder;
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Cofirmar Excluir Funcionário!");
+            alert.setHeaderText("Deseja realmente Excluir?");
+            alert.setContentText("Nome:(" + FuncionarioController.getInstance().getFuncionario().getNome() + ")");
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.get() == ButtonType.OK) {
+                FuncionarioController.getInstance().delete();
+                // ... user chose OK
+                FuncionarioController.getInstance().deleteTelefone();
+                notificationBuilder = Notifications.create().title("Funcionário excluído!").
+                        text("Funcionário Excluido com sucesso.").
+                        hideAfter(Duration.seconds(2)).
+                        position(Pos.TOP_RIGHT).
+                        darkStyle();
+                notificationBuilder.showInformation();
+            } else {
+                alert.close();
+            }
+        }
     }
 
     @FXML
@@ -581,6 +590,19 @@ public class TabFuncionarioFXMLController implements GenericViewController, Init
 
     }
 
+    private void setUptableViewTelefone() {
+        tbcDdd.setCellValueFactory(new PropertyValueFactory<>("ddd"));
+        tbcTelefone.setCellValueFactory(new PropertyValueFactory<>("numero"));
+        btnDeletar.setCellFactory(
+                new Callback<TableColumn<Disposer.Record, Boolean>, TableCell<Disposer.Record, Boolean>>() {
+            @Override
+            public TableCell<Disposer.Record, Boolean> call(TableColumn<Disposer.Record, Boolean> p) {
+                return new ButtonCellDelete();
+            }
+        });
+        tbvTelefone.getColumns().setAll(tbcDdd, tbcTelefone, btnDeletar);
+    }
+
     public static void LDTSPhone() {
         _tbvTelefone.setItems(FuncionarioController.getInstance().getListaTelefone());
     }
@@ -641,6 +663,67 @@ public class TabFuncionarioFXMLController implements GenericViewController, Init
         tff.setCaracteresValidos("0123456789");
         tff.setTf(txtNumeroTelefone);
         tff.formatter();
+    }
+
+    public class ButtonCellDelete extends TableCell<Disposer.Record, Boolean> {
+
+        Image img;
+        ImageView imgv;
+        JFXButton cellButton = new JFXButton("Desativar");
+        Notifications notificationBuilder;
+
+        public ButtonCellDelete() {
+            this.img = new Image("Imagens/ic_delete_forever_black_24dp_1x.png");
+            this.imgv = new ImageView(img);
+            cellButton.setGraphic(imgv);
+            cellButton.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
+            cellButton.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent t) {
+                    // get Selected Item
+                    Telefone currentPerson = (Telefone) ButtonCellDelete.this.getTableView().getItems().get(ButtonCellDelete.this.getIndex());
+                    //remove selected item from the table list
+                    if (currentPerson != null) {
+                        FuncionarioController.getInstance().setTelefone(currentPerson);
+                        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                        alert.setTitle("Cofirmar Excluir Telefone!");
+                        alert.setHeaderText("Deseja realmente Excluir?");
+                        alert.setContentText("Numero:(" + currentPerson.getDdd() + ") - " + currentPerson.getNumero() + "");
+                        Optional<ButtonType> result = alert.showAndWait();
+                        if (result.get() == ButtonType.OK) {
+                            // ... user chose OK
+                            FuncionarioController.getInstance().deleteTelefone();
+                            notificationBuilder = Notifications.create().title("Telefone excluído!").
+                                    text("telefone Excluido com sucesso.").
+                                    hideAfter(Duration.seconds(2)).
+                                    position(Pos.TOP_RIGHT).
+                                    darkStyle();
+                            notificationBuilder.showInformation();
+                        } else {
+                            alert.close();
+                        }
+                    } else {
+                        notificationBuilder = Notifications.create().title("Nenhum item selecionado!").
+                                text("Você deve selecionar Uma conta para Cancelar.").
+                                hideAfter(Duration.seconds(2)).
+                                position(Pos.TOP_RIGHT).
+                                darkStyle();
+                        notificationBuilder.showConfirm();
+                    }
+
+                }
+            });
+        }
+
+        @Override
+        protected void updateItem(Boolean t, boolean empty) {
+            super.updateItem(t, empty);
+            if (!empty) {
+                setGraphic(cellButton);
+            } else {
+                setGraphic(null);
+            }
+        }
     }
 
 }

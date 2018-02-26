@@ -6,7 +6,6 @@
 package com.cashf.controller.cliente;
 
 import com.cashf.model.cliente.Cliente;
-import com.cashf.model.telefone.Telefone;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXTextField;
