@@ -66,6 +66,7 @@ com/cashf/model/cliente/Cliente.class
 com/cashf/dao/notafiscal/NotaFiscalDAO.class
 com/cashf/controller/parametrizacao/ParametrosController.class
 com/cashf/controller/fornecedor/TabFornecedorFXMLController$1.class
+com/cashf/controller/parametrizacao/ParametrosInicioFXMLController.class
 com/cashf/controller/fornecedor/FornecedorController.class
 com/cashf/model/cliente/Cliente_.class
 com/cashf/model/notafiscal/NotaFiscal_.class
