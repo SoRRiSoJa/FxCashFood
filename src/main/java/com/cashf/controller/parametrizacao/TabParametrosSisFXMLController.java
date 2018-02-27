@@ -16,15 +16,22 @@ import com.jfoenix.controls.JFXTextField;
 import controller.GenericViewController;
 import java.net.URL;
 import java.time.LocalDate;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
+import javafx.util.Duration;
+import org.controlsfx.control.Notifications;
 import util.ImageHandler;
+import util.PoupUpUtil;
 import util.SafePass;
 import util.TextFieldFormatter;
 
@@ -176,9 +183,14 @@ public class TabParametrosSisFXMLController implements GenericViewController, In
         getDataUser();
         if (validateFields() && validateFieldsUser()) {
             ParametrosController.getInstance().setUsuario(0l, login, senha, UNivel.ADMINISTRADOR, true);
-            ParametrosController.getInstance().setParametro(0l, cnpj, inscrEst, nomefantasia, razaoSocial, endereco, complemento, 0, cep, bairro, email, telefone, ParametrosController.getInstance().getCidade(), ImageHandler.fileToByteArray(ParametrosController.getInstance().getArquivoLogo()));
+            ParametrosController.getInstance().setParametro(0l, cnpj, inscrEst, nomefantasia, razaoSocial, endereco, complemento, numero, cep, bairro, email, telefone, ParametrosController.getInstance().getCidade(), ImageHandler.fileToByteArray(ParametrosController.getInstance().getArquivoLogo()));
+            ParametrosController.getInstance().insert();
+            clearFields();
+            PoupUpUtil.poupUp("Parâmetros do Sistema", "O sistema está Parametrizado.", "");
+            reinicia();
         } else {
-
+            PoupUpUtil.accessDenied(erros);
+            erros = "";
         }
     }
 
@@ -235,6 +247,10 @@ public class TabParametrosSisFXMLController implements GenericViewController, In
         txtEmail.clear();
         txtInscrEst.clear();
         cbbCidade.setValue(null);
+        txtSenha.clear();
+        txtLogin.clear();
+        txtConfirmaSenha.clear();
+        imgLogo.setImage(null);
     }
 
     @Override
@@ -330,7 +346,12 @@ public class TabParametrosSisFXMLController implements GenericViewController, In
         razaoSocial = txtRazao.getText();
         endereco = txtEndereco.getText();
         complemento = txtComplemento.getText();
-        numero = new Integer(txtNumero.getText());
+        try {
+            numero = new Integer(txtNumero.getText());
+        } catch (NumberFormatException ex) {
+            System.out.println("Erri ao converter:" + ex);
+        }
+
         bairro = txtBairro.getText();
         cep = txtCep.getText();
         cnpj = txtCnpj.getText();
@@ -381,6 +402,27 @@ public class TabParametrosSisFXMLController implements GenericViewController, In
     private void onAddLogo(ActionEvent event) {
         ParametrosController.getInstance().setArquivoLogo(fileChooser.showOpenDialog(MainApp.janelaAberta));
         imgLogo.setImage(ParametrosController.getInstance().getArquivoLogoImage());
+    }
+     private void reinicia() {
+        Notifications notificationBuilder;
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Sistema Parametrizado!");
+        alert.setHeaderText("Encerre o Sistema para que as alterações tenham efeito!");
+        alert.setContentText("Para que as opções tenham efeito o sistema deve ser encerrado e reiniciado");
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == ButtonType.OK) {
+            // ... user chose OK
+            notificationBuilder = Notifications.create().title("Encerrando Sistema !").
+                    text("Reinicie o sistema após o encerramento.").
+                    hideAfter(Duration.seconds(2)).
+                    position(Pos.TOP_RIGHT).
+                    darkStyle();
+            notificationBuilder.showInformation();
+            MainApp.janelaAberta.close();
+            System.exit(0);
+        } else {
+            alert.close();
+        }
     }
 
 }
