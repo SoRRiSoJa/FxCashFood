@@ -51,11 +51,19 @@ public class TabListaFornecedoresFXMLController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         setUptableView();
+        setUpRadioButtons();
         loadTbv();
     }
 
     @FXML
     private void onPesquisar(ActionEvent event) {
+        if (FornecedorController.getInstance().getTipoConsulta() == 1) {
+            FornecedorController.getInstance().buscaNome(txtConsultar.getText());
+            loadTbv();
+        } else {
+            FornecedorController.getInstance().buscaRazao(txtConsultar.getText());
+            loadTbv();
+        }
     }
 
     @FXML
@@ -76,4 +84,29 @@ public class TabListaFornecedoresFXMLController implements Initializable {
         tbvFornecedores.setItems(FornecedorController.getInstance().getLista());
     }
 
+    private void setUpRadioButtons() {
+
+        rdbNome.selectedProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue) {
+                rdbRazao.setSelected(false);
+                rdbTodos.setSelected(false);
+                FornecedorController.getInstance().setTipoConsulta(1);//todos
+            }
+        });
+        rdbRazao.selectedProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue) {
+                rdbNome.setSelected(false);
+                rdbTodos.setSelected(false);
+                FornecedorController.getInstance().setTipoConsulta(2);//todos
+            }
+        });
+
+        rdbTodos.selectedProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue) {
+                rdbRazao.setSelected(false);
+                rdbNome.setSelected(false);
+                FornecedorController.getInstance().setTipoConsulta(0);//todos
+            }
+        });
+    }
 }

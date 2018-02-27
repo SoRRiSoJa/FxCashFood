@@ -66,7 +66,7 @@ public class TabListaFuncionariosFXMLController implements Initializable {
             FuncionarioController.getInstance().buscaNome(txtConsultar.getText());
             loadTbv();
         }else{
-        FuncionarioController.getInstance().buscaNome(txtConsultar.getText());
+        FuncionarioController.getInstance().buscaCpf(txtConsultar.getText());
             loadTbv();
         }
     }

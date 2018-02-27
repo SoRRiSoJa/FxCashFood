@@ -34,6 +34,7 @@ public class FornecedorController {
     private Operadora operadora;
     private Fornecedor fornecedor;
     private Cidade cidade;
+    private int tipoConsulta;
 
     private FornecedorController() {
         this.lt = new ArrayList<>();
@@ -175,6 +176,20 @@ public class FornecedorController {
         this.listaTelefone = FXCollections.observableList(lt);
         this.listaCidade = FXCollections.observableList(cidadeDAO.listAll());
         this.lista = FXCollections.observableList(fornecedorDAO.listAll());
+    }
+
+    public int getTipoConsulta() {
+        return tipoConsulta;
+    }
+
+    public void setTipoConsulta(int tipoConsulta) {
+        this.tipoConsulta = tipoConsulta;
+    }
+    public void buscaNome(String nome){
+        lista=FXCollections.observableList(fornecedorDAO.listByName(nome));
+    }
+    public void buscaRazao(String cpf){
+        lista=FXCollections.observableList(fornecedorDAO.listByRazao(cpf));
     }
 
 }
