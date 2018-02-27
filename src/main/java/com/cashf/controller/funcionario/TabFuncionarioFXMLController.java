@@ -587,6 +587,17 @@ public class TabFuncionarioFXMLController implements GenericViewController, Init
         _txtRg.setText(FuncionarioController.getInstance().getFuncionario().getRg());
         _txtCpf.setText(FuncionarioController.getInstance().getFuncionario().getCpf());
         _btnExcluir.setDisable(false);
+        ///------
+        _dtpDataAdm.setValue(FuncionarioController.getInstance().getFuncionario().getDataAdimissao());
+        _dtpDataDem.setValue(FuncionarioController.getInstance().getFuncionario().getDataDemissao());
+        _txtCtps.setText(FuncionarioController.getInstance().getFuncionario().getCtps());
+        _txtSalarioI.setText(FuncionarioController.getInstance().getFuncionario().getSalarioIncial().toString());
+        _txtsalarioF.setText(FuncionarioController.getInstance().getFuncionario().getSalarioAtual().toString());
+        _txtValeT.setText(FuncionarioController.getInstance().getFuncionario().getVtDia().toString());
+        _txtValeR.setText(FuncionarioController.getInstance().getFuncionario().getVrDia().toString());
+        _txtLogin.setText(FuncionarioController.getInstance().getFuncionario().getUsuario().getLogin());
+        //_txtSenha.setText(FuncionarioController.getInstance().getFuncionario();
+        _ccbNIvel.setValue(FuncionarioController.getInstance().getFuncionario().getUsuario().getNivel());
 
     }
 

@@ -36,7 +36,7 @@ public class ProdutoController implements GenericController<Produto> {
     private UnidadeMedida unidadeMedida;
     private ObservableList<Produto> lista;
     private ObservableList<Grupo> listaGrupo;
-
+    private int tipoConsulta;
     private ProdutoController() {
         this.produtoDAO = new ProdutoDAO(Produto.class);
         this.grupoDAO = new GrupoDAO(Grupo.class);
@@ -203,6 +203,20 @@ public class ProdutoController implements GenericController<Produto> {
     @Override
     public void setItenLista(Produto obj) {
         this.lista.add(obj);
+    }
+
+    public int getTipoConsulta() {
+        return tipoConsulta;
+    }
+
+    public void setTipoConsulta(int tipoConsulta) {
+        this.tipoConsulta = tipoConsulta;
+    }
+    public void buscaDesc(String desc){
+        lista=FXCollections.observableList(produtoDAO.listByDesc(desc));
+    }
+    public void buscaGrupo(String grupo){
+        lista=FXCollections.observableList(produtoDAO.listByGrupo(grupo));
     }
 
 }

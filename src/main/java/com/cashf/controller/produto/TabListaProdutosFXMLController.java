@@ -61,12 +61,13 @@ public class TabListaProdutosFXMLController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         setUpTableView();
+        setUpRadioButtons();
         loadTbv();
     }
 
     @FXML
     private void onSelecionarProduto(MouseEvent event) {
-        if(tbvProdutos.getSelectionModel().getSelectedItem()!=null){
+        if (tbvProdutos.getSelectionModel().getSelectedItem() != null) {
             ProdutoController.getInstance().setProduto(tbvProdutos.getSelectionModel().getSelectedItem());
             TabProdutoFXMLController.ldts();
         }
@@ -74,6 +75,14 @@ public class TabListaProdutosFXMLController implements Initializable {
 
     @FXML
     private void onPesquisar(ActionEvent event) {
+        if (ProdutoController.getInstance().getTipoConsulta() == 1) {
+            ProdutoController.getInstance().buscaDesc(txtConsultar.getText());
+            loadTbv();
+        } else {
+            ProdutoController.getInstance().buscaGrupo(txtConsultar.getText());
+            loadTbv();
+        }
+
     }
 
     private void setUpTableView() {
@@ -84,9 +93,36 @@ public class TabListaProdutosFXMLController implements Initializable {
         tbcCusto.setCellValueFactory(new PropertyValueFactory<>("preco_custo"));
         tbcVenda.setCellValueFactory(new PropertyValueFactory<>("preco_venda"));
         tbcQtde.setCellValueFactory(new PropertyValueFactory<>("qtdeProduto"));
-        tbvProdutos.getColumns().setAll(tbcCod, tbcCodRef, tbcDescricao,tbcTipo,tbcCusto,tbcVenda,tbcQtde);
+        tbvProdutos.getColumns().setAll(tbcCod, tbcCodRef, tbcDescricao, tbcTipo, tbcCusto, tbcVenda, tbcQtde);
     }
-    private void loadTbv(){
+
+    private void loadTbv() {
         tbvProdutos.setItems(ProdutoController.getInstance().getLista());
+    }
+
+    private void setUpRadioButtons() {
+
+        rdbDesc.selectedProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue) {
+                rdbGrupo.setSelected(false);
+                rdbTodos.setSelected(false);
+                ProdutoController.getInstance().setTipoConsulta(1);//todos
+            }
+        });
+        rdbGrupo.selectedProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue) {
+                rdbDesc.setSelected(false);
+                rdbTodos.setSelected(false);
+                ProdutoController.getInstance().setTipoConsulta(2);//todos
+            }
+        });
+
+        rdbTodos.selectedProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue) {
+                rdbGrupo.setSelected(false);
+                rdbDesc.setSelected(false);
+                ProdutoController.getInstance().setTipoConsulta(0);//todos
+            }
+        });
     }
 }
