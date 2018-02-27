@@ -226,10 +226,20 @@ public class TabParametrosSisFXMLController implements GenericViewController, In
 
     @FXML
     private void onKeyreleasedDdd(KeyEvent event) {
+        TextFieldFormatter tff = new TextFieldFormatter();
+        tff.setMask("(##)");
+        tff.setCaracteresValidos("0123456789");
+        tff.setTf(txtDdd);
+        tff.formatter();
     }
 
     @FXML
     private void onKeyreleasedTelefone(KeyEvent event) {
+        TextFieldFormatter tff = new TextFieldFormatter();
+        tff.setMask("#####-#####");
+        tff.setCaracteresValidos("0123456789");
+        tff.setTf(txtTelefone);
+        tff.formatter();
     }
 
     @Override
@@ -403,7 +413,8 @@ public class TabParametrosSisFXMLController implements GenericViewController, In
         ParametrosController.getInstance().setArquivoLogo(fileChooser.showOpenDialog(MainApp.janelaAberta));
         imgLogo.setImage(ParametrosController.getInstance().getArquivoLogoImage());
     }
-     private void reinicia() {
+
+    private void reinicia() {
         Notifications notificationBuilder;
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Sistema Parametrizado!");
