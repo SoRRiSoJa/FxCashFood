@@ -13,8 +13,11 @@ import com.cashf.model.parametros.Parametros;
 import com.cashf.model.usuario.UNivel;
 import com.cashf.model.usuario.Usuario;
 import controller.GenericController;
+import java.io.File;
+import java.net.MalformedURLException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.image.Image;
 
 /**
  *
@@ -31,12 +34,14 @@ public class ParametrosController implements GenericController<Parametros> {
     private Cidade cidade;
     private Parametros parametro;
     private Usuario usuario;
+    private File arquivoLogo;
 
     private ParametrosController() {
         this.parametrosDAO = new ParametrosDAO(Parametros.class);
         this.usuarioDAO = new UsuarioDAO(Usuario.class);
         this.cidadeDAO = new CidadeDAO(Cidade.class);
         this.lista = FXCollections.observableList(parametrosDAO.listAll());
+        this.listaCidade=FXCollections.observableList(cidadeDAO.listAll());
         this.parametro = new Parametros();
         this.usuario = new Usuario();
         this.parametro.setIdParametro(0l);
@@ -93,6 +98,7 @@ public class ParametrosController implements GenericController<Parametros> {
 
     @Override
     public void insert() {
+        usuarioDAO.save(usuario);
         parametrosDAO.save(parametro);
     }
 
@@ -128,4 +134,21 @@ public class ParametrosController implements GenericController<Parametros> {
     public void setItenLista(Parametros obj) {
         this.lista.add(obj);
     }
+
+    public File getArquivoLogo() {
+        return arquivoLogo;
+    }
+     public Image getArquivoLogoImage() {
+        try {            
+            return new Image(arquivoLogo.toURI().toURL().toString());
+        } catch (MalformedURLException ex) {
+            System.out.println("Erro-->>" + ex);
+        }
+        return null;
+    }
+
+    public void setArquivoLogo(File arquivoLogo) {
+        this.arquivoLogo = arquivoLogo;
+    }
+    
 }

@@ -11,12 +11,12 @@ import javafx.stage.Stage;
 
 
 public class MainApp extends Application {
+    public static Stage janelaAberta, janelaAnterior;
     public static StackPane paneRoot;
     @Override
     public void start(Stage stage) throws Exception {
         Parent root;
         if(ParametrosController.getInstance().getLista().isEmpty()){
-            
             root = FXMLLoader.load(getClass().getResource("/fxml/parametrizacao/ParametrosInicioFXML.fxml"));
         }else{
              root = FXMLLoader.load(getClass().getResource("/fxml/login/FXLoginFXML.fxml"));
@@ -24,6 +24,8 @@ public class MainApp extends Application {
         Scene scene = new Scene(root);
         stage.setTitle("ERP - Cash Food v.1.0 Copyright (c) 2017 By João André Martins Dias e Silva");
         stage.setScene(scene);
+        janelaAnterior = janelaAberta;
+        janelaAberta = stage;
         stage.show();
     }
 

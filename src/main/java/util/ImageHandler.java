@@ -5,8 +5,10 @@
  */
 package util;
 
+import com.sun.org.apache.xerces.internal.impl.dv.util.Base64;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -66,5 +68,22 @@ public class ImageHandler {
             System.out.println("Erro-->>"+ex);
         }
         return image;
+    }
+     public static byte[] fileToByteArray(File fileImg) {
+        try {
+            String base64String;
+            try (ByteArrayOutputStream baos = new ByteArrayOutputStream((int)fileImg.length())) {
+                BufferedImage img = ImageIO.read(fileImg);
+                ImageIO.write(img, "jpg", baos);
+                baos.flush();
+                base64String = Base64.encode(baos.toByteArray());
+            }
+            
+            byte[] bytearray = Base64.decode(base64String);
+            return bytearray;
+        } catch (IOException ex) {
+            System.out.println("Erro ao converter imagem:"+ex);
+        }
+        return null;
     }
 }

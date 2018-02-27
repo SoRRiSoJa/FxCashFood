@@ -5,8 +5,9 @@
  */
 package com.cashf.controller.parametrizacao;
 
-import com.cashf.controller.fornecedor.FornecedorController;
+import com.cashf.cashfood.MainApp;
 import com.cashf.model.cidade.Cidade;
+import com.cashf.model.usuario.UNivel;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDatePicker;
@@ -21,6 +22,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.Pane;
+import javafx.stage.FileChooser;
+import util.ImageHandler;
+import util.SafePass;
 import util.TextFieldFormatter;
 
 /**
@@ -94,6 +99,11 @@ public class TabParametrosSisFXMLController implements GenericViewController, In
     private String inscrEst;
     //---
     private String telefone;
+    //---
+    private String senha;
+    private String login;
+    private String confirma;
+    private FileChooser fileChooser;
     private static JFXDatePicker _dtpDataCad;
     private static JFXTextField _txtRazao;
     private static JFXTextField _txtNome;
@@ -111,6 +121,8 @@ public class TabParametrosSisFXMLController implements GenericViewController, In
     private static JFXTextField _txtCnpj;
     private static JFXTextField _txtInscrEst;
     private static JFXTextField _txtTelefone;
+    @FXML
+    private Pane paneRoot;
 
     /**
      * Initializes the controller class.
@@ -118,6 +130,8 @@ public class TabParametrosSisFXMLController implements GenericViewController, In
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        this.fileChooser = new FileChooser();
+        //this.fileChooser.setInitialFileName("D:\\ControlGym\\src\\Imagens\\produto_sem_foto.gif");
         _dtpDataCad = dtpDataCad;
         _txtRazao = txtRazao;
         _txtNome = txtNome;
@@ -137,6 +151,7 @@ public class TabParametrosSisFXMLController implements GenericViewController, In
         _txtTelefone = txtTelefone;
         setInputOff();
         loadCbbCidade();
+        setUpFileCoser();
         _dtpDataCad.setValue(LocalDate.now());
         _dtpDataCad.setDisable(true);
     }
@@ -157,6 +172,14 @@ public class TabParametrosSisFXMLController implements GenericViewController, In
 
     @FXML
     private void onSalvar(ActionEvent event) {
+        getData();
+        getDataUser();
+        if (validateFields() && validateFieldsUser()) {
+            ParametrosController.getInstance().setUsuario(0l, login, senha, UNivel.ADMINISTRADOR, true);
+            ParametrosController.getInstance().setParametro(0l, cnpj, inscrEst, nomefantasia, razaoSocial, endereco, complemento, 0, cep, bairro, email, telefone, ParametrosController.getInstance().getCidade(), ImageHandler.fileToByteArray(ParametrosController.getInstance().getArquivoLogo()));
+        } else {
+
+        }
     }
 
     @FXML
@@ -316,6 +339,29 @@ public class TabParametrosSisFXMLController implements GenericViewController, In
         ParametrosController.getInstance().setCidade(cbbCidade.getSelectionModel().getSelectedItem());
     }
 
+    private void getDataUser() {
+        login = txtLogin.getText();
+        senha = SafePass.crypPass(txtSenha.getText());
+        confirma = senha = SafePass.crypPass(txtConfirmaSenha.getText());
+    }
+
+    public Boolean validateFieldsUser() {
+        boolean flag = true;
+        if (login == null || nomefantasia.equals("") || nomefantasia.length() < 3) {
+            erros += "O Login deve conter um conteúdo válido! \n";
+            flag = false;
+        }
+        if (senha == null || senha.equals("")) {
+            erros += "A senha deve ser preenchida! \n";
+            flag = false;
+        }
+        if (confirma == null || confirma.equals("") || !confirma.equals(senha)) {
+            erros += "A senha não pode ser confirmada! \n";
+            flag = false;
+        }
+        return flag;
+    }
+
     @Override
     public void loadDataToScreen() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -323,6 +369,18 @@ public class TabParametrosSisFXMLController implements GenericViewController, In
 
     private void loadCbbCidade() {
         cbbCidade.setItems(ParametrosController.getInstance().getListaCidade());
+    }
+
+    private void setUpFileCoser() {
+        fileChooser.setTitle("Selecionar Imagem do Logo");
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.gif"));
+    }
+
+    @FXML
+    private void onAddLogo(ActionEvent event) {
+        ParametrosController.getInstance().setArquivoLogo(fileChooser.showOpenDialog(MainApp.janelaAberta));
+        imgLogo.setImage(ParametrosController.getInstance().getArquivoLogoImage());
     }
 
 }
