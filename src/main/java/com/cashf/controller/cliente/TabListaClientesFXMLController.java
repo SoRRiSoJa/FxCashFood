@@ -54,11 +54,18 @@ public class TabListaClientesFXMLController implements Initializable {
         // TODO
         setUptableView();
         loadTbv();
+        setUpRadioButtons();
     }
 
     @FXML
     private void onPesquisar(ActionEvent event) {
-    
+        if(ClienteController.getInstance().getTipoConsulta()==1){
+            ClienteController.getInstance().buscaNome(txtConsultar.getText());
+            loadTbv();
+        }else{
+        ClienteController.getInstance().buscaNome(txtConsultar.getText());
+            loadTbv();
+        }
     }
 
     @FXML
@@ -81,5 +88,30 @@ public class TabListaClientesFXMLController implements Initializable {
 
     private void loadTbv() {
         tbvClientes.setItems(ClienteController.getInstance().getLista());
+    }
+     private void setUpRadioButtons() {
+
+        rdbNome.selectedProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue) {
+                rdbCpf.setSelected(false);
+                rdbTodos.setSelected(false);
+                ClienteController.getInstance().setTipoConsulta(1);//nome
+            }
+        });
+        rdbCpf.selectedProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue) {
+                rdbNome.setSelected(false);
+                rdbTodos.setSelected(false);
+                ClienteController.getInstance().setTipoConsulta(2);//cpf
+            }
+        });
+
+        rdbTodos.selectedProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue) {
+                rdbCpf.setSelected(false);
+                rdbNome.setSelected(false);
+                ClienteController.getInstance().setTipoConsulta(0);//todos
+            }
+        });
     }
 }
