@@ -46,6 +46,7 @@ public class FuncionarioController implements GenericController<Funcionario> {
     private Sexo sexo;
     private UNivel nivel;
     private Usuario usuario;
+    private int tipoConsulta;
 
     private FuncionarioController() {
         this.funcionarioDAO = new FuncionarioDAO(Funcionario.class);
@@ -276,6 +277,20 @@ public class FuncionarioController implements GenericController<Funcionario> {
     @Override
     public void setItenLista(Funcionario obj) {
 
+    }
+
+    public int getTipoConsulta() {
+        return tipoConsulta;
+    }
+
+    public void setTipoConsulta(int tipoConsulta) {
+        this.tipoConsulta = tipoConsulta;
+    }
+    public void buscaNome(String nome){
+        lista=FXCollections.observableList(funcionarioDAO.listByName(nome));
+    }
+    public void buscaCpf(String cpf){
+        lista=FXCollections.observableList(funcionarioDAO.listByCPF(cpf));
     }
 
 }

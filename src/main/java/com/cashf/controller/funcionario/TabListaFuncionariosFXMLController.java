@@ -5,6 +5,7 @@
  */
 package com.cashf.controller.funcionario;
 
+import com.cashf.controller.cliente.ClienteController;
 import com.cashf.model.funcionario.Funcionario;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXRadioButton;
@@ -55,11 +56,19 @@ public class TabListaFuncionariosFXMLController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         setUptableView();
+        setUpRadioButtons();
         loadTbv();
     }
 
     @FXML
     private void onPesquisar(ActionEvent event) {
+    if(FuncionarioController.getInstance().getTipoConsulta()==1){
+            FuncionarioController.getInstance().buscaNome(txtConsultar.getText());
+            loadTbv();
+        }else{
+        FuncionarioController.getInstance().buscaNome(txtConsultar.getText());
+            loadTbv();
+        }
     }
 
     @FXML
@@ -83,5 +92,31 @@ public class TabListaFuncionariosFXMLController implements Initializable {
 
     private void loadTbv() {
         tbvFuncionarios.setItems(FuncionarioController.getInstance().getLista());
+    }
+    private void setUpRadioButtons() {
+
+        rdbNome.selectedProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue) {
+                rdbCpf.setSelected(false);
+                rdbTodos.setSelected(false);
+                FuncionarioController.getInstance().setTipoConsulta(1);//todos
+            }
+        });
+        rdbCpf.selectedProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue) {
+                rdbNome.setSelected(false);
+                rdbTodos.setSelected(false);
+                FuncionarioController.getInstance().setTipoConsulta(2);//todos
+            }
+        });
+
+        rdbTodos.selectedProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue) {
+                rdbCpf.setSelected(false);
+                rdbNome.setSelected(false);
+                FuncionarioController.getInstance().setTipoConsulta(0);//todos
+            }
+            
+        });
     }
 }
