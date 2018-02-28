@@ -737,4 +737,7 @@ public class TabFuncionarioFXMLController implements GenericViewController, Init
         }
     }
 
+    public static void setBtnEX(Boolean sta) {
+        _btnExcluir.setDisable(sta);
+    }
 }

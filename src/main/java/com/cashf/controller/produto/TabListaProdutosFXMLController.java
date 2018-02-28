@@ -70,6 +70,8 @@ public class TabListaProdutosFXMLController implements Initializable {
         if (tbvProdutos.getSelectionModel().getSelectedItem() != null) {
             ProdutoController.getInstance().setProduto(tbvProdutos.getSelectionModel().getSelectedItem());
             TabProdutoFXMLController.ldts();
+            TabProdutoFXMLController.setBtnEX(Boolean.FALSE);
+            
         }
     }
 

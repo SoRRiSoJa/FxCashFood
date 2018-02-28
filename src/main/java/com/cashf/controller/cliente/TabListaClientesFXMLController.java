@@ -75,6 +75,7 @@ public class TabListaClientesFXMLController implements Initializable {
             ClienteController.getInstance().setListaTelefone(FXCollections.observableList(ClienteController.getInstance().getCliente().getTelefones()));
             TabClientesFXMLController.LDTSFone();
             TabClientesFXMLController.LDTS();
+            TabClientesFXMLController.setBtnEX(Boolean.TRUE);
         }
 
     }

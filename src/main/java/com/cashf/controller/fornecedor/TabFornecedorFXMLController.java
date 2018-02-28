@@ -171,8 +171,8 @@ public class TabFornecedorFXMLController implements GenericViewController, Initi
         _cbbOperadora = cbbOperadora;
         _txtDdd = txtDdd;
         _txtTelefone = txtTelefone;
-        _tbvTelefone=tbvTelefone;
-        
+        _tbvTelefone = tbvTelefone;
+
         setInputOff();
         loadCbbCidade();
         loadCbbOperadora();
@@ -204,7 +204,7 @@ public class TabFornecedorFXMLController implements GenericViewController, Initi
             if (FornecedorController.getInstance().getFornecedor().getIdFornecedor() == 0) {
                 FornecedorController.getInstance().insert();
                 PoupUpUtil.poupUp("Fornecedor Cadastrado", "O Fornecedor foi cadastrado com sucesso.", "");
-                
+
             } else {
                 FornecedorController.getInstance().update();
                 PoupUpUtil.poupUp("Fornecedor Alterado", "O Fornecedor foi alterado com sucesso.", "");
@@ -248,7 +248,7 @@ public class TabFornecedorFXMLController implements GenericViewController, Initi
         if (validateTeleofne()) {
             FornecedorController.getInstance().setTelefone(0l, ddd, telefone);
             FornecedorController.getInstance().inserTelefone();
-            
+
         } else {
             PoupUpUtil.accessDenied(erros);
             erros = "";
@@ -397,7 +397,7 @@ public class TabFornecedorFXMLController implements GenericViewController, Initi
         inscrEst = txtInscrEst.getText();
         Observacao = txtObs.getText();
         FornecedorController.getInstance().setCidade(cbbCidade.getSelectionModel().getSelectedItem());
-        
+
     }
 
     private void getDataTelefone() {
@@ -425,6 +425,7 @@ public class TabFornecedorFXMLController implements GenericViewController, Initi
         _txtObs.setText(FornecedorController.getInstance().getFornecedor().getObservacao());
         _cbbCidade.setValue(FornecedorController.getInstance().getFornecedor().getCidade());
     }
+
     public static void LDTSPhone() {
         _tbvTelefone.setItems(FornecedorController.getInstance().getListaTelefone());
     }
@@ -542,4 +543,7 @@ public class TabFornecedorFXMLController implements GenericViewController, Initi
         }
     }
 
+    public static void setBtnEX(Boolean sta) {
+        _btnExcluir.setDisable(sta);
+    }
 }

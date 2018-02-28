@@ -77,7 +77,7 @@ public class TabListaFuncionariosFXMLController implements Initializable {
             FuncionarioController.getInstance().setListaTelefone(FXCollections.observableList(FuncionarioController.getInstance().getFuncionario().getTelefones()));
             TabFuncionarioFXMLController.LDTS();
             TabFuncionarioFXMLController.LDTSPhone();
-            
+            TabFuncionarioFXMLController.setBtnEX(Boolean.FALSE);
             
         }
     }

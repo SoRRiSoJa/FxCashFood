@@ -72,6 +72,7 @@ public class TabListaFornecedoresFXMLController implements Initializable {
         FornecedorController.getInstance().setListaTelefone(FXCollections.observableList(FornecedorController.getInstance().getFornecedor().getTelefones()));
         TabFornecedorFXMLController.LDTS();
         TabFornecedorFXMLController.LDTSPhone();
+        TabFornecedorFXMLController.setBtnEX(Boolean.FALSE);
     }
 
     private void setUptableView() {

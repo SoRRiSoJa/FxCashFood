@@ -92,7 +92,7 @@ public class TabProdutoFXMLController implements GenericViewController, Initiali
     @FXML
     private JFXButton btnLimpar;
     //---
-    private String erros="";
+    private String erros = "";
     private boolean flagButtons;
     private long idProduto;
     private String codigoReferencia;
@@ -530,7 +530,7 @@ public class TabProdutoFXMLController implements GenericViewController, Initiali
         _txtAliquotaMunicipal.setText(ProdutoController.getInstance().getProduto().getAliquotasProduto().getAliquotamunicipal() + "");
         _txtAliquotaEstadual.setText(ProdutoController.getInstance().getProduto().getAliquotasProduto().getAliquotaestadual() + "");
         _txtAliquotaFederal.setText(ProdutoController.getInstance().getProduto().getAliquotasProduto().getAliquotafederal() + "");
-        _lblTotal.setText(ProdutoController.getInstance().getProduto().getQtdeProduto()+"");
+        _lblTotal.setText(ProdutoController.getInstance().getProduto().getQtdeProduto() + "");
         _btnExcluir.setDisable(false);
     }
 
@@ -702,4 +702,7 @@ public class TabProdutoFXMLController implements GenericViewController, Initiali
         tff.formatter();
     }
 
+    public static void setBtnEX(Boolean sta) {
+        _btnExcluir.setDisable(sta);
+    }
 }
