@@ -167,6 +167,7 @@ public class TabClientesFXMLController implements GenericViewController, Initial
         _cbbOperadora = cbbOperadora;
         _tbvTelefones = tbvTelefones;
         _txtObservacao = txtObservacao;
+        _btnExcluir=btnExcluir;
         setInputOff();
         loadCbbOperadora();
         loadCbbCidade();
@@ -260,9 +261,11 @@ public class TabClientesFXMLController implements GenericViewController, Initial
             alert.setContentText("Nome:(" + ClienteController.getInstance().getCliente().getNome() + ")");
             Optional<ButtonType> result = alert.showAndWait();
             if (result.get() == ButtonType.OK) {
-                ClienteController.getInstance().delete();
-                // ... user chose OK
                 ClienteController.getInstance().deleteTelefone();
+                ClienteController.getInstance().delete();
+                TabListaClientesFXMLController.loadTbvCli();
+                // ... user chose OK
+                
                 notificationBuilder = Notifications.create().title("Cliente excluído!").
                         text("Cliente Excluido com sucesso.").
                         hideAfter(Duration.seconds(2)).

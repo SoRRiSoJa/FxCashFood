@@ -45,7 +45,7 @@ public class TabListaClientesFXMLController implements Initializable {
     private TableColumn<Cliente, String> tbcEmail;
     @FXML
     private TableColumn<Cliente, String> tbcEndereco;
-
+    private static TableView<Cliente> _tbvClientes;
     /**
      * Initializes the controller class.
      */
@@ -55,6 +55,7 @@ public class TabListaClientesFXMLController implements Initializable {
         setUptableView();
         loadTbv();
         setUpRadioButtons();
+        _tbvClientes=tbvClientes;
     }
 
     @FXML
@@ -67,7 +68,9 @@ public class TabListaClientesFXMLController implements Initializable {
             loadTbv();
         }
     }
-
+    public static void loadTbvCli(){
+        _tbvClientes.setItems(ClienteController.getInstance().getLista());
+    }
     @FXML
     private void onMouseClickedCliente(MouseEvent event) {
         if (tbvClientes.getSelectionModel().getSelectedItem() != null) {
@@ -75,7 +78,7 @@ public class TabListaClientesFXMLController implements Initializable {
             ClienteController.getInstance().setListaTelefone(FXCollections.observableList(ClienteController.getInstance().getCliente().getTelefones()));
             TabClientesFXMLController.LDTSFone();
             TabClientesFXMLController.LDTS();
-            TabClientesFXMLController.setBtnEX(Boolean.TRUE);
+            TabClientesFXMLController.setBtnEX(Boolean.FALSE);
         }
 
     }
