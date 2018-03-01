@@ -32,7 +32,7 @@ public class Telefone implements Serializable {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     Operadora operadora;
-
+    
     public Telefone() {
     }
 

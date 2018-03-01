@@ -10,6 +10,7 @@ import com.cashf.model.telefone.Telefone;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -48,7 +49,7 @@ public class Fornecedor implements Serializable {
     @ManyToOne
     @JoinColumn(nullable = false)
     private Cidade cidade;
-    @ManyToMany(fetch=FetchType.EAGER)
+    @ManyToMany(fetch=FetchType.EAGER,cascade = CascadeType.ALL)
     @JoinTable(name = "fornecedor_telefone", joinColumns
             = {
                 @JoinColumn(name = "id_fornecedor")}, inverseJoinColumns
