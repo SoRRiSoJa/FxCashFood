@@ -219,8 +219,11 @@ public class FuncionarioController implements GenericController<Funcionario> {
     }
 
     public void deleteTelefone() {
-        telefoneDAO.delete(telefone);
         listaTelefone.remove(telefone);
+        funcionario.getTelefones().clear();
+        funcionario.setTelefones(listaTelefone);
+        funcionarioDAO.update(funcionario);
+        telefoneDAO.delete(telefone);
         flushTelefone();
     }
 

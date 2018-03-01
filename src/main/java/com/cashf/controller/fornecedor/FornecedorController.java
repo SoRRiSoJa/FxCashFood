@@ -137,8 +137,11 @@ public class FornecedorController {
     }
 
     public void deleteTelefone() {
-        telefoneDAO.delete(telefone);
         listaTelefone.remove(telefone);
+        fornecedor.getTelefones().clear();
+        fornecedor.setTelefones(listaTelefone);
+        fornecedorDAO.update(fornecedor);
+        telefoneDAO.delete(telefone);
         flushTelefone();
     }
 

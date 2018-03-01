@@ -203,8 +203,11 @@ public class ClienteController implements GenericController<Cliente> {
     }
 
     public void deleteTelefone() {
-        telefoneDAO.delete(telefone);
         listaTelefone.remove(telefone);
+        cliente.getTelefones().clear();
+        cliente.setTelefones(listaTelefone);
+        clienteDAO.update(cliente);
+        telefoneDAO.delete(telefone);
         flushTelefone();
     }
 

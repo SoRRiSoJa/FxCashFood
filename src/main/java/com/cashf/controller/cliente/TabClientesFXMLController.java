@@ -262,8 +262,8 @@ public class TabClientesFXMLController implements GenericViewController, Initial
             Optional<ButtonType> result = alert.showAndWait();
             if (result.get() == ButtonType.OK) {
                 ClienteController.getInstance().delete();                
+                clearFields();
                 TabListaClientesFXMLController.loadTbvCli();
-                
             // ... user chose OK
                 
                 notificationBuilder = Notifications.create().title("Cliente excluído!").
