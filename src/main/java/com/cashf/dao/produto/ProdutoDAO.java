@@ -66,7 +66,7 @@ public class ProdutoDAO extends GenericDAOIMP<Produto> {
     }
      public List<Produto> listByDesc(String desc) {
         try (Session session = sessionFactory.openSession()) {
-            String hql = "from Produto prod where prod.descricao like '" + desc + "%'";
+            String hql = "from Produto prod where prod.descriao like '" + desc + "%'";
             List<Produto> roleList = session.createQuery(hql).list();
             return roleList;
         } catch (Exception e) {
@@ -76,7 +76,7 @@ public class ProdutoDAO extends GenericDAOIMP<Produto> {
     }
      public List<Produto> listByGrupo(String grup) {
         try (Session session = sessionFactory.openSession()) {
-            String hql = "from Produto prod where prod.grupo like '" + grup + "%'";
+            String hql = "from Produto prod where prod.grupo.descricao like '" + grup + "%'";
             List<Produto> roleList = session.createQuery(hql).list();
             return roleList;
         } catch (Exception e) {

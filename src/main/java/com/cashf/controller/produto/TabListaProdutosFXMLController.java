@@ -71,18 +71,25 @@ public class TabListaProdutosFXMLController implements Initializable {
             ProdutoController.getInstance().setProduto(tbvProdutos.getSelectionModel().getSelectedItem());
             TabProdutoFXMLController.ldts();
             TabProdutoFXMLController.setBtnEX(Boolean.FALSE);
-            
+
         }
     }
 
     @FXML
     private void onPesquisar(ActionEvent event) {
-        if (ProdutoController.getInstance().getTipoConsulta() == 1) {
-            ProdutoController.getInstance().buscaDesc(txtConsultar.getText());
-            loadTbv();
-        } else {
-            ProdutoController.getInstance().buscaGrupo(txtConsultar.getText());
-            loadTbv();
+        switch (ProdutoController.getInstance().getTipoConsulta()) {
+            case 1:
+                ProdutoController.getInstance().buscaDesc(txtConsultar.getText());
+                loadTbv();
+                break;
+            case 2:
+                ProdutoController.getInstance().buscaGrupo(txtConsultar.getText());
+                loadTbv();
+                break;
+            default:
+                ProdutoController.getInstance().buscaTodos();
+                loadTbv();
+                break;
         }
 
     }

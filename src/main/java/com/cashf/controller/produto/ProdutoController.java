@@ -218,5 +218,7 @@ public class ProdutoController implements GenericController<Produto> {
     public void buscaGrupo(String grupo){
         lista=FXCollections.observableList(produtoDAO.listByGrupo(grupo));
     }
-
+    public void buscaTodos(){
+        lista=FXCollections.observableList(produtoDAO.listAll());
+    }
 }
