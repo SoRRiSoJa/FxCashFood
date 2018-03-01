@@ -5,6 +5,7 @@
  */
 package com.cashf.controller.cliente;
 
+import com.cashf.controller.produto.ProdutoController;
 import com.cashf.model.cliente.Cliente;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXRadioButton;
@@ -46,6 +47,7 @@ public class TabListaClientesFXMLController implements Initializable {
     @FXML
     private TableColumn<Cliente, String> tbcEndereco;
     private static TableView<Cliente> _tbvClientes;
+
     /**
      * Initializes the controller class.
      */
@@ -55,22 +57,32 @@ public class TabListaClientesFXMLController implements Initializable {
         setUptableView();
         loadTbv();
         setUpRadioButtons();
-        _tbvClientes=tbvClientes;
+        _tbvClientes = tbvClientes;
     }
 
     @FXML
     private void onPesquisar(ActionEvent event) {
-        if(ClienteController.getInstance().getTipoConsulta()==1){
-            ClienteController.getInstance().buscaNome(txtConsultar.getText());
-            loadTbv();
-        }else{
-        ClienteController.getInstance().buscaNome(txtConsultar.getText());
-            loadTbv();
+        switch (ClienteController.getInstance().getTipoConsulta()) {
+            case 1:
+                ClienteController.getInstance().buscaNome(txtConsultar.getText());
+                loadTbv();
+                break;
+            case 2:
+                ClienteController.getInstance().buscaCpf(txtConsultar.getText());
+                loadTbv();
+                break;
+            default:
+                ClienteController.getInstance().buscaTodos();
+                loadTbv();
+                break;
         }
+
     }
-    public static void loadTbvCli(){
+
+    public static void loadTbvCli() {
         _tbvClientes.setItems(ClienteController.getInstance().getLista());
     }
+
     @FXML
     private void onMouseClickedCliente(MouseEvent event) {
         if (tbvClientes.getSelectionModel().getSelectedItem() != null) {
@@ -93,7 +105,8 @@ public class TabListaClientesFXMLController implements Initializable {
     private void loadTbv() {
         tbvClientes.setItems(ClienteController.getInstance().getLista());
     }
-     private void setUpRadioButtons() {
+
+    private void setUpRadioButtons() {
 
         rdbNome.selectedProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue) {

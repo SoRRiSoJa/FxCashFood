@@ -22,7 +22,8 @@ import javafx.collections.ObservableList;
  * @author joao
  */
 public class FornecedorController {
-    public static FornecedorController fornecedorController=null;
+
+    public static FornecedorController fornecedorController = null;
     private final FornecedorDAO fornecedorDAO;
     private final TelefoneDAO telefoneDAO;
     private final CidadeDAO cidadeDAO;
@@ -50,12 +51,14 @@ public class FornecedorController {
         telefone.setIdTelefone(0l);
         fornecedor.setIdFornecedor(0l);
     }
+
     public static synchronized FornecedorController getInstance() {
         if (fornecedorController == null) {
             fornecedorController = new FornecedorController();
         }
         return fornecedorController;
     }
+
     public ObservableList<Cidade> getListaCidade() {
         return listaCidade;
     }
@@ -120,8 +123,8 @@ public class FornecedorController {
         this.fornecedor = fornecedor;
     }
 
-    public void setFornecedor(long id, String cnpj,String inscrEst, String nomefantasia, String razaoSocial, String endereco, String complemento, int numero, String cep, String bairro, String email, String Observacao, Cidade cidade, List<Telefone> telefones) {
-        this.fornecedor = new Fornecedor(id, cnpj,inscrEst, nomefantasia, razaoSocial, endereco, complemento, numero, cep, bairro, email, Observacao, cidade, telefones);
+    public void setFornecedor(long id, String cnpj, String inscrEst, String nomefantasia, String razaoSocial, String endereco, String complemento, int numero, String cep, String bairro, String email, String Observacao, Cidade cidade, List<Telefone> telefones) {
+        this.fornecedor = new Fornecedor(id, cnpj, inscrEst, nomefantasia, razaoSocial, endereco, complemento, numero, cep, bairro, email, Observacao, cidade, telefones);
     }
 
     public void insert() {
@@ -169,12 +172,13 @@ public class FornecedorController {
         telefone = new Telefone();
         telefone.setIdTelefone(0l);
     }
+
     public void flushObject() {
         fornecedor = new Fornecedor();
         fornecedor.setIdFornecedor(0l);
         telefone = new Telefone();
         telefone.setIdTelefone(0l);
-        lt=new ArrayList<>();
+        lt = new ArrayList<>();
         this.listaTelefone = FXCollections.observableList(lt);
         this.listaCidade = FXCollections.observableList(cidadeDAO.listAll());
         this.lista = FXCollections.observableList(fornecedorDAO.listAll());
@@ -187,11 +191,17 @@ public class FornecedorController {
     public void setTipoConsulta(int tipoConsulta) {
         this.tipoConsulta = tipoConsulta;
     }
-    public void buscaNome(String nome){
-        lista=FXCollections.observableList(fornecedorDAO.listByName(nome));
+
+    public void buscaNome(String nome) {
+        lista = FXCollections.observableList(fornecedorDAO.listByName(nome));
     }
-    public void buscaRazao(String cpf){
-        lista=FXCollections.observableList(fornecedorDAO.listByRazao(cpf));
+
+    public void buscaRazao(String cpf) {
+        lista = FXCollections.observableList(fornecedorDAO.listByRazao(cpf));
+    }
+
+    public void buscaTodos() {
+        lista = FXCollections.observableList(fornecedorDAO.listAll());
     }
 
 }

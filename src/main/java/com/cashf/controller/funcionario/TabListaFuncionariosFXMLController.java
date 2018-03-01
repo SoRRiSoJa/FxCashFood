@@ -48,6 +48,7 @@ public class TabListaFuncionariosFXMLController implements Initializable {
 
     /**
      * Initializes the controller class.
+     *
      * @param url
      * @param rb
      */
@@ -61,12 +62,19 @@ public class TabListaFuncionariosFXMLController implements Initializable {
 
     @FXML
     private void onPesquisar(ActionEvent event) {
-    if(FuncionarioController.getInstance().getTipoConsulta()==1){
-            FuncionarioController.getInstance().buscaNome(txtConsultar.getText());
-            loadTbv();
-        }else{
-        FuncionarioController.getInstance().buscaCpf(txtConsultar.getText());
-            loadTbv();
+        switch (FuncionarioController.getInstance().getTipoConsulta()) {
+            case 1:
+                FuncionarioController.getInstance().buscaNome(txtConsultar.getText());
+                loadTbv();
+                break;
+            case 2:
+                FuncionarioController.getInstance().buscaCpf(txtConsultar.getText());
+                loadTbv();
+                break;
+            default:
+                FuncionarioController.getInstance().buscaTodos();
+                loadTbv();
+                break;
         }
     }
 
@@ -78,7 +86,7 @@ public class TabListaFuncionariosFXMLController implements Initializable {
             TabFuncionarioFXMLController.LDTS();
             TabFuncionarioFXMLController.LDTSPhone();
             TabFuncionarioFXMLController.setBtnEX(Boolean.FALSE);
-            
+
         }
     }
 
@@ -92,6 +100,7 @@ public class TabListaFuncionariosFXMLController implements Initializable {
     private void loadTbv() {
         tbvFuncionarios.setItems(FuncionarioController.getInstance().getLista());
     }
+
     private void setUpRadioButtons() {
 
         rdbNome.selectedProperty().addListener((observable, oldValue, newValue) -> {
@@ -115,7 +124,7 @@ public class TabListaFuncionariosFXMLController implements Initializable {
                 rdbNome.setSelected(false);
                 FuncionarioController.getInstance().setTipoConsulta(0);//todos
             }
-            
+
         });
     }
 }

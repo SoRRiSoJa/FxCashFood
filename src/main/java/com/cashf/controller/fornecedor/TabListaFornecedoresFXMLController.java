@@ -57,12 +57,18 @@ public class TabListaFornecedoresFXMLController implements Initializable {
 
     @FXML
     private void onPesquisar(ActionEvent event) {
-        if (FornecedorController.getInstance().getTipoConsulta() == 1) {
-            FornecedorController.getInstance().buscaNome(txtConsultar.getText());
-            loadTbv();
-        } else {
-            FornecedorController.getInstance().buscaRazao(txtConsultar.getText());
-            loadTbv();
+        switch (FornecedorController.getInstance().getTipoConsulta()) {
+            case 1:
+                FornecedorController.getInstance().buscaNome(txtConsultar.getText());
+                loadTbv();
+                break;
+            case 2:
+                FornecedorController.getInstance().buscaRazao(txtConsultar.getText());
+                loadTbv();
+                break;
+            default:
+                FornecedorController.getInstance().buscaTodos();
+                break;
         }
     }
 

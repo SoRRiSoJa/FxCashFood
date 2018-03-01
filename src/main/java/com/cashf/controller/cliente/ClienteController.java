@@ -234,5 +234,7 @@ public class ClienteController implements GenericController<Cliente> {
     public void buscaCpf(String cpf){
         lista=FXCollections.observableList(clienteDAO.listByCPF(cpf));
     }
-
+        public void buscaTodos(){
+        lista=FXCollections.observableList(clienteDAO.listAll());
+    }
 }

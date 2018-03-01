@@ -30,7 +30,8 @@ import util.SafePass;
  * @author Aluno
  */
 public class FuncionarioController implements GenericController<Funcionario> {
-    public static FuncionarioController funcionarioController=null;
+
+    public static FuncionarioController funcionarioController = null;
     private final FuncionarioDAO funcionarioDAO;
     private final UsuarioDAO usuarioDAO;
     private Funcionario funcionario;
@@ -53,7 +54,7 @@ public class FuncionarioController implements GenericController<Funcionario> {
         this.usuario = new Usuario();
         this.usuarioDAO = new UsuarioDAO(Usuario.class);
         this.funcionario = new Funcionario();
-        this.lista=FXCollections.observableList(funcionarioDAO.listAll());
+        this.lista = FXCollections.observableList(funcionarioDAO.listAll());
         this.lt = new ArrayList<>();
         this.cidadeDAO = new CidadeDAO(Cidade.class);
         this.telefoneDAO = new TelefoneDAO(Telefone.class);
@@ -63,9 +64,10 @@ public class FuncionarioController implements GenericController<Funcionario> {
         this.cidade = new Cidade();
         telefone.setIdTelefone(0l);
         funcionario.setIdPessoa(0l);
-        this.usuario=new Usuario();
+        this.usuario = new Usuario();
         usuario.setId(0l);
     }
+
     public static synchronized FuncionarioController getInstance() {
         if (funcionarioController == null) {
             funcionarioController = new FuncionarioController();
@@ -117,7 +119,8 @@ public class FuncionarioController implements GenericController<Funcionario> {
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
-    public void setUsuario(Long id,String login,String senha,UNivel nivel,Boolean status) {
+
+    public void setUsuario(Long id, String login, String senha, UNivel nivel, Boolean status) {
         this.usuario = new Usuario(id, login, SafePass.crypPass(senha), nivel, status);
     }
 
@@ -230,6 +233,7 @@ public class FuncionarioController implements GenericController<Funcionario> {
         telefoneDAO.update(telefone);
         flushTelefone();
     }
+
     public void inserUsuario() {
         usuario.setId(usuarioDAO.save(usuario));
     }
@@ -243,15 +247,15 @@ public class FuncionarioController implements GenericController<Funcionario> {
         usuarioDAO.update(usuario);
         flushUsuario();
     }
+
     public void flushUsuario() {
         usuario = new Usuario();
         usuario.setId(0l);
     }
 
-
     @Override
     public void flushObject() {
-        this.lista=FXCollections.observableList(funcionarioDAO.listAll());
+        this.lista = FXCollections.observableList(funcionarioDAO.listAll());
         this.lt = new ArrayList<>();
         this.listaCidade = FXCollections.observableList(cidadeDAO.listAll());
         this.listaTelefone = FXCollections.observableList(lt);
@@ -262,7 +266,7 @@ public class FuncionarioController implements GenericController<Funcionario> {
         this.cidade = new Cidade();
         telefone.setIdTelefone(0l);
         funcionario.setIdPessoa(0l);
-        this.usuario=new Usuario();
+        this.usuario = new Usuario();
         usuario.setId(0l);
     }
 
@@ -288,11 +292,17 @@ public class FuncionarioController implements GenericController<Funcionario> {
     public void setTipoConsulta(int tipoConsulta) {
         this.tipoConsulta = tipoConsulta;
     }
-    public void buscaNome(String nome){
-        lista=FXCollections.observableList(funcionarioDAO.listByName(nome));
+
+    public void buscaNome(String nome) {
+        lista = FXCollections.observableList(funcionarioDAO.listByName(nome));
     }
-    public void buscaCpf(String cpf){
-        lista=FXCollections.observableList(funcionarioDAO.listByCPF(cpf));
+
+    public void buscaCpf(String cpf) {
+        lista = FXCollections.observableList(funcionarioDAO.listByCPF(cpf));
+    }
+
+    public void buscaTodos() {
+        lista = FXCollections.observableList(funcionarioDAO.listAll());
     }
 
 }
