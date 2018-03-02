@@ -27,7 +27,7 @@
             <JFXTextField fx:id="txtPrecoCusto" focusColor="#004ba0" labelFloat="true" layoutX="450.0" layoutY="145.0" onKeyReleased="#onKeyReleasedPrecoCusto" prefHeight="26.0" prefWidth="155.0" promptText="Preço de custo" />
             <JFXTextField fx:id="txtNcm" focusColor="#004ba0" labelFloat="true" layoutX="35.0" layoutY="198.0" prefHeight="24.0" prefWidth="155.0" promptText="NCM" />
             <JFXTextField fx:id="txtPrecoVenda" focusColor="#004ba0" labelFloat="true" layoutX="235.0" layoutY="198.0" onKeyReleased="#onKeyReleasedPrecoVenda" prefHeight="24.0" prefWidth="155.0" promptText="Preço de venda" />
-            <JFXTextField fx:id="txtQtdeProd" focusColor="#004ba0" labelFloat="true" layoutX="452.0" layoutY="198.0" onKeyReleased="#onKeyReleasedQtde" prefHeight="26.0" prefWidth="155.0" promptText="Unid.em Estoque" />
+            <JFXTextField fx:id="txtQtdeProd" focusColor="#004ba0" labelFloat="true" layoutX="452.0" layoutY="198.0" onKeyReleased="#onKeyReleasedQtde" prefHeight="26.0" prefWidth="155.0" promptText="Qtde. Compra." />
             <JFXComboBox fx:id="cbbGrupo" focusColor="#004ba0" labelFloat="true" layoutX="35.0" layoutY="253.0" onAction="#onSelecionarGrupo" prefHeight="26.0" prefWidth="155.0" promptText="Grupo" />
             <JFXComboBox fx:id="cbbCategoria" focusColor="#004ba0" labelFloat="true" layoutX="237.0" layoutY="253.0" prefHeight="26.0" prefWidth="155.0" promptText="Categoria" />
             <Pane prefHeight="20.0" prefWidth="640.0" style="-fx-background-color: #0081cb;">
