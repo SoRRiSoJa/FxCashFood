@@ -281,9 +281,11 @@ public class TabFuncionarioFXMLController implements GenericViewController, Init
                 FuncionarioController.getInstance().update();
                 PoupUpUtil.poupUp("Funcionario Alterado", "O Funcionario foi alterado com sucesso.", "");
             }
-            FuncionarioController.getInstance().flushObject();
-            loadTbvTelefone();
             clearFields();
+            FuncionarioController.getInstance().flushObject();
+            TabListaFuncionariosFXMLController.loadTbvFun();
+            loadTbvTelefone();
+            
         } else {
             PoupUpUtil.accessDenied(erros);
             erros = "";
@@ -596,8 +598,7 @@ public class TabFuncionarioFXMLController implements GenericViewController, Init
         _txtValeT.setText(FuncionarioController.getInstance().getFuncionario().getVtDia().toString());
         _txtValeR.setText(FuncionarioController.getInstance().getFuncionario().getVrDia().toString());
         _txtLogin.setText(FuncionarioController.getInstance().getFuncionario().getUsuario().getLogin());
-        //_txtSenha.setText(FuncionarioController.getInstance().getFuncionario();
-        _ccbNIvel.setValue(FuncionarioController.getInstance().getFuncionario().getUsuario().getNivel());
+        //s_ccbNIvel.setValue(FuncionarioController.getInstance().getFuncionario().getUsuario().getNivel());
 
     }
 

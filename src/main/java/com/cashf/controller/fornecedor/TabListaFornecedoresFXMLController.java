@@ -43,7 +43,7 @@ public class TabListaFornecedoresFXMLController implements Initializable {
     private TableColumn<Fornecedor, String> tbcNome;
     @FXML
     private TableColumn<Fornecedor, String> tbcEmail;
-
+    private static TableView<Fornecedor> _tbvFornecedores;
     /**
      * Initializes the controller class.
      */
@@ -53,6 +53,7 @@ public class TabListaFornecedoresFXMLController implements Initializable {
         setUptableView();
         setUpRadioButtons();
         loadTbv();
+        _tbvFornecedores=tbvFornecedores;
     }
 
     @FXML
@@ -89,6 +90,9 @@ public class TabListaFornecedoresFXMLController implements Initializable {
 
     private void loadTbv() {
         tbvFornecedores.setItems(FornecedorController.getInstance().getLista());
+    }
+    public static void loadTbvFornecedor() {
+        _tbvFornecedores.setItems(FornecedorController.getInstance().getLista());
     }
 
     private void setUpRadioButtons() {

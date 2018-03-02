@@ -234,9 +234,12 @@ public class TabClientesFXMLController implements GenericViewController, Initial
                 ClienteController.getInstance().update();
                 PoupUpUtil.poupUp("Cliente Alterado", "O Cliente foi alterado com sucesso.", "");
             }
-            ClienteController.getInstance().flushObject();
-            loadTbvTelefone();
             clearFields();
+            ClienteController.getInstance().flushObject();
+            TabListaClientesFXMLController.loadTbvCli();
+            loadTbvTelefone();
+            
+            
         } else {
             PoupUpUtil.accessDenied(erros);
             erros = "";

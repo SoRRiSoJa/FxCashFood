@@ -209,9 +209,11 @@ public class TabFornecedorFXMLController implements GenericViewController, Initi
                 FornecedorController.getInstance().update();
                 PoupUpUtil.poupUp("Fornecedor Alterado", "O Fornecedor foi alterado com sucesso.", "");
             }
-            FornecedorController.getInstance().flushObject();
-            loadTbvTelefone();
             clearFields();
+            FornecedorController.getInstance().flushObject();
+            TabListaFornecedoresFXMLController.loadTbvFornecedor();
+            loadTbvTelefone();
+            
         } else {
             PoupUpUtil.errorMessage(paneRoot, MainApp.paneRoot, erros);
             erros = "";
