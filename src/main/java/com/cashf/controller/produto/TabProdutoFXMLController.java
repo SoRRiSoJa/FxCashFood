@@ -232,9 +232,14 @@ public class TabProdutoFXMLController implements GenericViewController, Initiali
     @FXML
     private void onNovo(ActionEvent event) {
         setInputOn();
-        clearFields();
         btnNovo.setDisable(true);
-        btnExcluir.setDisable(true);
+        if (ProdutoController.getInstance().getProduto().getIdProduto() == 0) {
+            btnExcluir.setDisable(true);
+            clearFields();
+        } else {
+            btnExcluir.setDisable(false);
+        }
+
     }
 
     @FXML

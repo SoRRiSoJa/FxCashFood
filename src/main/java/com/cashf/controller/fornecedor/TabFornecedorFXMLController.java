@@ -225,8 +225,12 @@ public class TabFornecedorFXMLController implements GenericViewController, Initi
     private void onNovo(ActionEvent event) {
         setInputOn();
         clearFields();
-        btnNovo.setDisable(true);
-        btnExcluir.setDisable(true);
+        if (FornecedorController.getInstance().getFornecedor().getIdFornecedor()== 0) {
+            btnExcluir.setDisable(true);
+            clearFields();
+        } else {
+            btnExcluir.setDisable(false);
+        }
     }
 
     @FXML

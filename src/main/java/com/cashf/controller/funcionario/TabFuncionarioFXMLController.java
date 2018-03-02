@@ -296,9 +296,13 @@ public class TabFuncionarioFXMLController implements GenericViewController, Init
     @FXML
     private void onNovo(ActionEvent event) {
         setInputOn();
-        clearFields();
         btnNovo.setDisable(true);
-        btnExcluir.setDisable(true);
+        if (FuncionarioController.getInstance().getFuncionario().getIdPessoa() == 0) {
+            btnExcluir.setDisable(true);
+            clearFields();
+        } else {
+            btnExcluir.setDisable(false);
+        }        
     }
 
     @FXML

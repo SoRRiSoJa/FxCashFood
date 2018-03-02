@@ -167,7 +167,7 @@ public class TabClientesFXMLController implements GenericViewController, Initial
         _cbbOperadora = cbbOperadora;
         _tbvTelefones = tbvTelefones;
         _txtObservacao = txtObservacao;
-        _btnExcluir=btnExcluir;
+        _btnExcluir = btnExcluir;
         setInputOff();
         loadCbbOperadora();
         loadCbbCidade();
@@ -238,8 +238,7 @@ public class TabClientesFXMLController implements GenericViewController, Initial
             ClienteController.getInstance().flushObject();
             TabListaClientesFXMLController.loadTbvCli();
             loadTbvTelefone();
-            
-            
+
         } else {
             PoupUpUtil.accessDenied(erros);
             erros = "";
@@ -249,9 +248,13 @@ public class TabClientesFXMLController implements GenericViewController, Initial
     @FXML
     private void onNovo(ActionEvent event) {
         setInputOn();
-        clearFields();
         btnNovo.setDisable(true);
-        btnExcluir.setDisable(true);
+        if (ClienteController.getInstance().getCliente().getIdPessoa() == 0) {
+            btnExcluir.setDisable(true);
+            clearFields();
+        } else {
+            btnExcluir.setDisable(false);
+        }
     }
 
     @FXML
@@ -264,11 +267,11 @@ public class TabClientesFXMLController implements GenericViewController, Initial
             alert.setContentText("Nome:(" + ClienteController.getInstance().getCliente().getNome() + ")");
             Optional<ButtonType> result = alert.showAndWait();
             if (result.get() == ButtonType.OK) {
-                ClienteController.getInstance().delete();                
+                ClienteController.getInstance().delete();
                 clearFields();
                 TabListaClientesFXMLController.loadTbvCli();
-            // ... user chose OK
-                
+                // ... user chose OK
+
                 notificationBuilder = Notifications.create().title("Cliente excluído!").
                         text("Cliente Excluido com sucesso.").
                         hideAfter(Duration.seconds(2)).
