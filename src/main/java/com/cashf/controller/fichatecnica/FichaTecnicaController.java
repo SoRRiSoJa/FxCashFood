@@ -34,6 +34,7 @@ public class FichaTecnicaController implements GenericController<FichaTecnica> {
     private ObservableList<Produto> comboBoxItensFicha;
     private UnidadeMedida unidadeMedida;
     private BigDecimal custoTotal;
+    private int tipoConsulta;
     
     private FichaTecnicaController(){
         this.fichaTecnicaDAO=new FichaTecnicaDAO(FichaTecnica.class);
@@ -80,7 +81,7 @@ public class FichaTecnicaController implements GenericController<FichaTecnica> {
 
     @Override
     public ObservableList<FichaTecnica> getLista() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return lista;
     }
 
     @Override
@@ -156,6 +157,14 @@ public class FichaTecnicaController implements GenericController<FichaTecnica> {
             custoTotal = custoTotal.add(custUnit.getValorPorcao());
         });
         return custoTotal;
+    }
+
+    public int getTipoConsulta() {
+        return tipoConsulta;
+    }
+
+    public void setTipoConsulta(int tipoConsulta) {
+        this.tipoConsulta = tipoConsulta;
     }
     
     

@@ -22,6 +22,7 @@ import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Optional;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -114,6 +115,26 @@ public class TabPrePreparoFXMLController implements GenericViewController, Initi
     private BigDecimal custoReceita;
     private boolean flagButtons;
     private NumberFormat nf = NumberFormat.getCurrencyInstance();
+    //-----
+    private static JFXComboBox<Produto> _cbbItens;
+    private static JFXComboBox<Produto> _cbbProduto;
+    private static JFXComboBox<UnidadeMedida> _cbbUnidadeMedida;
+    private static JFXTextField _txtqtde;
+    private static JFXButton _btnAdicionar;
+    private static JFXRadioButton _rbtCodigo;
+    private static JFXRadioButton _rbtDescricao;
+    private static TableView<ProdutoPrePreparo> _tbvItens;
+    private static JFXButton _btnExcluir;
+    private static JFXButton _btnSalvar;
+    private static JFXButton _btnNovo;
+    private static JFXButton _btnLimpar;
+    private static JFXTextField _txtRendimento;
+    private static JFXRadioButton _rbtCod;
+    private static JFXRadioButton _rbtDesc;
+    private static Label _lblCustoTotal;
+    private static TableColumn _btnExcluirItem;
+    private static JFXComboBox<UnidadeMedida> _cbbUnidadeMedidaProd;
+    private static TableView<ProdutoPrePreparo> _tbvReceita;
 
     /**
      * Initializes the controller class.
@@ -121,6 +142,25 @@ public class TabPrePreparoFXMLController implements GenericViewController, Initi
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        _cbbItens = ccbItens;
+        _cbbProduto = cbbProduto;
+        _cbbUnidadeMedida = cbbUnidadeMedida;
+        _txtqtde = txtqtde;
+        _rbtCodigo = rbtCodigo;
+        _rbtDescricao = rbtDescricao;
+        _tbvItens = tbvItens;
+        _btnExcluir = btnExcluir;
+        _btnSalvar = btnSalvar;
+        _btnNovo = btnNovo;
+        _btnLimpar = btnLimpar;
+        _txtRendimento = txtRendimento;
+        _rbtCod = rbtCod;
+        _rbtDesc = rbtDesc;
+        _lblCustoTotal = lblCustoTotal;
+        _btnExcluirItem = _btnExcluirItem;
+        _cbbUnidadeMedidaProd = cbbUnidadeMedidaProd;
+        _tbvReceita = tbvReceita;
+
         loadCbbItens();
         loadCbbProdutos();
         loadCbbUnidadeMedida();
@@ -259,6 +299,19 @@ public class TabPrePreparoFXMLController implements GenericViewController, Initi
 
     @Override
     public void loadDataToScreen() {
+
+    }
+
+    public static void LDTS() {
+        //_cbbItens.setValue();
+        _cbbProduto.setValue(PrePreparoController.getInstance().getPrePreparo().getProdutoPrincipal());
+        _cbbUnidadeMedida.setValue(PrePreparoController.getInstance().getPrePreparo().getProdutoPrincipal().getUnidadeMedida());
+        _txtqtde.setText(PrePreparoController.getInstance().getProdutoPrincipal().getQtdeProduto().toString());
+        _tbvItens.setItems(FXCollections.observableList(PrePreparoController.getInstance().getPrePreparo().getListaProdutos()));
+        _txtRendimento.setText(PrePreparoController.getInstance().getPrePreparo().getRendimento().toString());
+        _lblCustoTotal.setText(PrePreparoController.getInstance().getPrePreparo().getCustoTotal().toString());
+        //_cbbUnidadeMedidaProd.setValue();
+        _tbvReceita.setItems(PrePreparoController.getInstance().getListaItens());
 
     }
 

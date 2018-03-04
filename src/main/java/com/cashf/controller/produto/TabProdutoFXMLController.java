@@ -381,7 +381,27 @@ public class TabProdutoFXMLController implements GenericViewController, Initiali
             erros += "O preço de venda deve ser maio que 0! \n";
             flag = false;
         }
+
         //--
+        if (cbbUnidadeFisica.getSelectionModel().getSelectedItem() == null) {
+            erros += "Você deve selecionar uma Unidade física para o produto! \n";
+            flag = false;
+        }
+        if (cbbProdutos.getSelectionModel().getSelectedItem() == null) {
+            erros += "Você deve selecionar uma tipo para este produto! \n";
+            flag = false;
+        }
+        if (cbbGrupo.getSelectionModel().getSelectedItem() == null) {
+            erros += "Você deve selecionar uma Grupo! \n";
+            flag = false;
+        }
+        return flag;
+
+    }
+
+    public boolean validateTax() {
+        boolean flag = true;
+        //-------
         if (percentualConfins == null || percentualConfins.compareTo(BigDecimal.ZERO) < 0) {
             erros += "O preço de venda deve ser maio que 0! \n";
             flag = false;
@@ -426,26 +446,11 @@ public class TabProdutoFXMLController implements GenericViewController, Initiali
             erros += "O valor da aliquota deve ser maior ou igual a 0! \n";
             flag = false;
         }
-        //--
-
         if (cbbSituacaoTributaria.getSelectionModel().getSelectedItem() == null) {
             erros += "Você deve selecionar uma Situação tirubutária! \n";
             flag = false;
         }
-        if (cbbUnidadeFisica.getSelectionModel().getSelectedItem() == null) {
-            erros += "Você deve selecionar uma Unidade física para o produto! \n";
-            flag = false;
-        }
-        if (cbbProdutos.getSelectionModel().getSelectedItem() == null) {
-            erros += "Você deve selecionar uma tipo para este produto! \n";
-            flag = false;
-        }
-        if (cbbGrupo.getSelectionModel().getSelectedItem() == null) {
-            erros += "Você deve selecionar uma Grupo! \n";
-            flag = false;
-        }
         return flag;
-
     }
 
     @Override

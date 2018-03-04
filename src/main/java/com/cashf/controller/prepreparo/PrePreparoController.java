@@ -39,6 +39,7 @@ public class PrePreparoController implements GenericController<PrePreparo> {
     private PrePreparo prePreparo;
     private UnidadeMedida unidadeMedida;
     private BigDecimal custoTotal;
+    private int tipoConsulta;
 
     private PrePreparoController() {
         this.produtoDAO = new ProdutoDAO(Produto.class);
@@ -187,6 +188,26 @@ public class PrePreparoController implements GenericController<PrePreparo> {
     private void atualizarQtdeIntensEstoque() {
         atualizarEstoque.setPrePreparo(prePreparo);
         atualizarEstoque.adicionarPrePreparo();
+    }
+
+    public int getTipoConsulta() {
+        return tipoConsulta;
+    }
+
+    public void setTipoConsulta(int tipoConsulta) {
+        this.tipoConsulta = tipoConsulta;
+    }
+
+    void buscaDesc(String text) {
+        lista=FXCollections.observableList(prePreparoDAO.listByDesc(text));
+    }
+
+    void buscaData(LocalDate Data) {
+     lista=FXCollections.observableList(prePreparoDAO.listByDate(Data));
+    }
+
+    void buscaTodos() {
+     lista=FXCollections.observableList(prePreparoDAO.listAll());
     }
 
 }

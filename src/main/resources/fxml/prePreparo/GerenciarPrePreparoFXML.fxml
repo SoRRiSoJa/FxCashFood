@@ -10,14 +10,14 @@
     <children>
         <JFXTabPane fx:id="tabPane" stylesheets="@../../styles/TabPaneCSS.css" tabMinHeight="30.0" tabMinWidth="678.0">
             <tabs>
-                <Tab text="Pre Preparo">
+                <Tab text="Pré-Preparo">
                     <content>
                         <fx:include source="TabPrePreparoFXML.fxml" />
                     </content>
                 </Tab>
-                <Tab text="LIsta de Pre Preparo">
+                <Tab text="Lista de Pré-Preparo">
                     <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                        <fx:include source="TapListaPrePreparoFXML.fxml" />
                     </content>
                 </Tab>
             </tabs>
