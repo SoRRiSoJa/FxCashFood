@@ -14,6 +14,7 @@ import java.math.BigDecimal;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -61,6 +62,11 @@ public class TabListaFichaTecnicaFXMLController implements Initializable {
 
     @FXML
     private void onSelecionarProduto(MouseEvent event) {
+    if (tbvProdutos.getSelectionModel().getSelectedItem() != null) {
+            FichaTecnicaController.getInstance().setFichaTecnica(tbvProdutos.getItems().get(tbvProdutos.getSelectionModel().getSelectedIndex()));
+            FichaTecnicaController.getInstance().setListaItensFicha(FXCollections.observableList(FichaTecnicaController.getInstance().getFichaTecnica().getListaProdutos()));
+            
+        }
     }
 
     @FXML

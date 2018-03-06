@@ -6,7 +6,6 @@
 package com.cashf.controller.prepreparo;
 
 import com.cashf.model.prepreparo.PrePreparo;
-import com.cashf.model.prepreparo.ProdutoPrePreparo;
 import com.cashf.model.produto.Produto;
 import com.cashf.model.produto.UnidadeMedida;
 import com.jfoenix.controls.JFXButton;

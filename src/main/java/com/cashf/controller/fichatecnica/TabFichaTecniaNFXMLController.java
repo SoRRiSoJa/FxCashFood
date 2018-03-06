@@ -22,7 +22,6 @@ import java.text.NumberFormat;
 import java.util.Arrays;
 import java.util.Optional;
 import java.util.ResourceBundle;
-import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -111,7 +110,9 @@ public class TabFichaTecniaNFXMLController implements Initializable, GenericView
     private BigDecimal custoReceita;
     private boolean flagButtons;
     private final NumberFormat nf = NumberFormat.getCurrencyInstance();
-
+    //----
+    private static TableView<ProdutoFichaTecnica> _tbvFicha;
+    private static JFXComboBox<Produto> _ccbFichaTecnica;
     /**
      * Initializes the controller class.
      */
@@ -133,7 +134,13 @@ public class TabFichaTecniaNFXMLController implements Initializable, GenericView
             FichaTecnicaController.getInstance().getFichaTecnica().setProdutoPrincipal(FichaTecnicaController.getInstance().getProdutoPrincipal());
         }
     }
-
+    public static void LDTS() {
+        //_cbbUnidadeMedidaProd.setValue(PrePreparoController.getInstance().getPrePreparo().getProdutoPrincipal().getUnidadeMedida());
+        
+       // _tbvFicha.setItems(FichaTecnicaController.getInstance().getFichaTecnica());
+        //_txtRendimento.setText(PrePreparoController.getInstance().getPrePreparo().getRendimento().toString());
+        //_lblCustoTotal.setText(PrePreparoController.getInstance().getPrePreparo().getCustoTotal().toString());
+    }
     @FXML
     private void onSalvar(ActionEvent event) {
         getData();
