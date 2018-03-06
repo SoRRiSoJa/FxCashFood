@@ -180,6 +180,7 @@ public class TabPrePreparoNFXMLController implements GenericViewController, Init
     private void onSalvar(ActionEvent event) {
         getData();
         if (validateFields()) {
+            
             PrePreparoController.getInstance().setPrePreparo(0l,
                     PrePreparoController.getInstance().getProdutoPrincipal(),
                     LocalDate.now(),

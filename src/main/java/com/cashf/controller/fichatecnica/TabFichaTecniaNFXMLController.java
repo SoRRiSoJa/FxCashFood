@@ -154,6 +154,29 @@ public class TabFichaTecniaNFXMLController implements Initializable, GenericView
 
     @FXML
     private void onExcluir(ActionEvent event) {
+        if (FichaTecnicaController.getInstance().getFichaTecnica().getIdFichaTecnica() != 0l) {
+            Notifications notificationBuilder;
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Cofirmar Excluir FichaTecnica!");
+            alert.setHeaderText("Deseja realmente Excluir?");
+            alert.setContentText("Nome:(" + FichaTecnicaController.getInstance().getFichaTecnica().getProdutoPrincipal().getDescriao() + ")");
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.get() == ButtonType.OK) {
+                FichaTecnicaController.getInstance().delete();
+                clearFields();
+                //TabListaFichaTecnicasFXMLController.loadTbvCli();
+                // ... user chose OK
+
+                notificationBuilder = Notifications.create().title("FichaTecnica excluído!").
+                        text("FichaTecnica Excluido com sucesso.").
+                        hideAfter(Duration.seconds(2)).
+                        position(Pos.TOP_RIGHT).
+                        darkStyle();
+                notificationBuilder.showInformation();
+            } else {
+                alert.close();
+            }
+        }
     }
 
     @FXML
