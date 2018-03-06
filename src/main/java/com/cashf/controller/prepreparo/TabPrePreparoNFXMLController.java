@@ -112,8 +112,6 @@ public class TabPrePreparoNFXMLController implements GenericViewController, Init
     @FXML
     private JFXRadioButton rbtTodos;
     //-----
-    private static JFXComboBox<Produto> _cbbItens;
-    private static JFXComboBox<Produto> _cbbProduto;
     private static JFXComboBox<UnidadeMedida> _cbbUnidadeMedida;
     private static JFXTextField _txtqtde;
     private static JFXButton _btnAdicionar;
@@ -130,7 +128,7 @@ public class TabPrePreparoNFXMLController implements GenericViewController, Init
     private static Label _lblCustoTotal;
     private static TableColumn _btnExcluirItem;
     private static JFXComboBox<UnidadeMedida> _cbbUnidadeMedidaProd;
-    private static TableView<ProdutoPrePreparo> _tbvReceita;
+    
     //--
     private String erros;
     private String pesquisa;
@@ -146,6 +144,7 @@ public class TabPrePreparoNFXMLController implements GenericViewController, Init
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        _cbbUnidadeMedidaProd = cbbUnidadeMedidaProd;
         _cbbUnidadeMedida = cbbUnidadeMedida;
         _txtqtde = txtqtde;
         _rbtCodigo = rbtCodigo;
@@ -158,8 +157,8 @@ public class TabPrePreparoNFXMLController implements GenericViewController, Init
         _rbtCod = rbtCod;
         _rbtDesc = rbtDesc;
         _lblCustoTotal = lblCustoTotal;
-        _btnExcluirItem = _btnExcluirItem;
-        _tbvReceita = tbvItens;
+        _btnExcluirItem = btnExcluirItem;
+        _tbvItens = tbvItens;
         loadCbbProdutos();
         loadCbbUnidadeMedida();
         loadCbbUnidadeMedidaProd();
@@ -410,9 +409,8 @@ public class TabPrePreparoNFXMLController implements GenericViewController, Init
     }
 
     public static void LDTS() {
-        _cbbUnidadeMedida.setValue(PrePreparoController.getInstance().getPrePreparo().getProdutoPrincipal().getUnidadeMedida());
-        _txtqtde.setText(PrePreparoController.getInstance().getProdutoPrincipal().getQtdeProduto().toString());
-        _tbvItens.setItems(FXCollections.observableList(PrePreparoController.getInstance().getPrePreparo().getListaProdutos()));
+        _cbbUnidadeMedidaProd.setValue(PrePreparoController.getInstance().getPrePreparo().getProdutoPrincipal().getUnidadeMedida());
+        _tbvItens.setItems(PrePreparoController.getInstance().getListaItens());
         _txtRendimento.setText(PrePreparoController.getInstance().getPrePreparo().getRendimento().toString());
         _lblCustoTotal.setText(PrePreparoController.getInstance().getPrePreparo().getCustoTotal().toString());
     }

@@ -14,6 +14,7 @@ import java.util.Objects;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -40,7 +41,7 @@ public class FichaTecnica implements Serializable {
     @Column(columnDefinition = "DATE")
     private LocalDate dataProducao;
     private BigDecimal custoTotal;
-    @OneToMany(mappedBy = "fichaTecnica", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "fichaTecnica", cascade = CascadeType.ALL,fetch=FetchType.EAGER)
     private List<ProdutoFichaTecnica> listaProdutos;
     private Boolean status;
     public FichaTecnica() {

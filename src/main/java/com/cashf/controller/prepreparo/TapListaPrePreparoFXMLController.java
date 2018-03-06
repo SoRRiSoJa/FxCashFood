@@ -6,6 +6,7 @@
 package com.cashf.controller.prepreparo;
 
 import com.cashf.model.prepreparo.PrePreparo;
+import com.cashf.model.prepreparo.ProdutoPrePreparo;
 import com.cashf.model.produto.Produto;
 import com.cashf.model.produto.UnidadeMedida;
 import com.jfoenix.controls.JFXButton;
@@ -15,6 +16,7 @@ import java.math.BigDecimal;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -59,14 +61,23 @@ public class TapListaPrePreparoFXMLController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        
+
         setUpRadioButtons();
         setUpTableView();
         loadTbv();
-    }    
+    }
 
     @FXML
     private void onSelecionarProduto(MouseEvent event) {
+        if (tbvProdutos.getSelectionModel().getSelectedItem() != null) {
+            PrePreparoController.getInstance().setPrePreparo(tbvProdutos.getItems().get(tbvProdutos.getSelectionModel().getSelectedIndex()));
+            System.out.println("Aqui---...............>>>>"+PrePreparoController.getInstance().getPrePreparo().toString());
+            PrePreparoController.getInstance().getPrePreparo().getListaProdutos().forEach((pp) -> {
+                System.out.println("PR:"+pp.getProduto().getDescriao()+"- qtde:"+pp.getQtdeProduto());
+            });
+            PrePreparoController.getInstance().setListaItens(FXCollections.observableList(PrePreparoController.getInstance().getPrePreparo().getListaProdutos()));
+            TabPrePreparoNFXMLController.LDTS();
+        }
     }
 
     @FXML
@@ -86,11 +97,12 @@ public class TapListaPrePreparoFXMLController implements Initializable {
                 break;
         }
     }
-     private void setUpTableView() {
+
+    private void setUpTableView() {
         tbcDescricao.setCellValueFactory(new PropertyValueFactory<>("produtoPrincipal"));
         tbcData.setCellValueFactory(new PropertyValueFactory<>("dataProducao"));
-        tbcCusto.setCellValueFactory(new PropertyValueFactory<>("tipo"));
-        tbcUnidade.setCellValueFactory(new PropertyValueFactory<>("unidadeMedida"));
+        tbcCusto.setCellValueFactory(new PropertyValueFactory<>("custoTotal"));
+        tbcUnidade.setCellValueFactory(new PropertyValueFactory<>("produtoPrincipal.unidadeMedida"));
         tbcQtde.setCellValueFactory(new PropertyValueFactory<>("produtoPrincipal.qtdeProduto"));
         tbvProdutos.getColumns().setAll(tbcDescricao, tbcData, tbcCusto, tbcUnidade, tbcQtde);
     }
@@ -124,5 +136,5 @@ public class TapListaPrePreparoFXMLController implements Initializable {
             }
         });
     }
-    
+
 }
