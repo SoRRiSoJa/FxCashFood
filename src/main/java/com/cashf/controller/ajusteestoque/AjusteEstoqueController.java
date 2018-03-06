@@ -28,6 +28,7 @@ public class AjusteEstoqueController implements GenericController<AjusteEstoque>
     private UnidadeMedida unidadeMedida;
     private BigDecimal qtdeAjuste;
     private final AtualizarEstoque atualizarEstoque;
+    private int tipoConsulta;
 
     public AjusteEstoqueController() {
         this.produtoDAO = new ProdutoDAO(Produto.class);
@@ -125,5 +126,22 @@ public class AjusteEstoqueController implements GenericController<AjusteEstoque>
     public void retirarProduto() {
         atualizarEstoque.retirarProduto(qtdeAjuste, unidadeMedida);
     }
+    void buscaCodRef(String text) {
+        this.listaProduto = FXCollections.observableList(produtoDAO.listProdInsumosCodRef(text));
+    }
+    void buscaInsumosDesc(String text) {
+        this.listaProduto = FXCollections.observableList(produtoDAO.listProdInsumosDesc(text));
+    }
+    void buscaInsumosTodos() {
+        this.listaProduto = FXCollections.observableList(produtoDAO.listProdInsumos());
+    }
 
+    public int getTipoConsulta() {
+        return tipoConsulta;
+    }
+
+    public void setTipoConsulta(int tipoConsulta) {
+        this.tipoConsulta = tipoConsulta;
+    }
+    
 }

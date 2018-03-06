@@ -22,6 +22,8 @@ import java.text.NumberFormat;
 import java.util.Arrays;
 import java.util.Optional;
 import java.util.ResourceBundle;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -108,7 +110,7 @@ public class TabFichaTecniaNFXMLController implements Initializable, GenericView
     private String erros;
     private BigDecimal custoReceita;
     private boolean flagButtons;
-    private NumberFormat nf = NumberFormat.getCurrencyInstance();
+    private final NumberFormat nf = NumberFormat.getCurrencyInstance();
 
     /**
      * Initializes the controller class.
@@ -302,7 +304,7 @@ public class TabFichaTecniaNFXMLController implements Initializable, GenericView
             }
         });
 
-        rbtTodos.selectedProperty().addListener((observable, oldValue, newValue) -> {
+        rbtTodos.selectedProperty().addListener((ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) -> {
             if (newValue) {
                 rbtCodigo.setSelected(false);
                 rbtDescricao.setSelected(false);
