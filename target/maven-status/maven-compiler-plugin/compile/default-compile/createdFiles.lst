@@ -13,6 +13,7 @@ com/cashf/controller/fichatecnica/TabFichaTecnicaFXMLController$1.class
 com/cashf/dao/funcionario/FuncionarioDAO.class
 com/cashf/dao/parametros/ParametrosDAO.class
 com/cashf/controller/produto/FXGerenciarProdutosFXMLController.class
+com/cashf/controller/prepreparo/TabPrePreparoNFXMLController$ButtonCellDelete.class
 com/cashf/controller/meiopagamento/MeioPagamentoFXMLController.class
 com/cashf/dao/telefone/TelefoneDAO.class
 com/cashf/model/produto/Categoria_.class
@@ -100,6 +101,7 @@ util/TextFieldFormatter.class
 com/cashf/model/produto/TipoProduto.class
 com/cashf/dao/cidade/CidadeDAO.class
 com/cashf/controller/fornecedor/TabFornecedorFXMLController.class
+com/cashf/controller/prepreparo/TabPrePreparoNFXMLController.class
 com/cashf/controller/funcionario/TabFuncionarioFXMLController.class
 com/cashf/model/ajusteestoque/AjusteEstoque.class
 com/cashf/model/notafiscal/ProdutoNotaFiscal.class
@@ -109,6 +111,7 @@ com/cashf/dao/notafiscal/NotaFiscalDAO.class
 com/cashf/controller/fornecedor/TabFornecedorFXMLController$1.class
 com/cashf/controller/parametrizacao/ParametrosInicioFXMLController.class
 com/cashf/model/notafiscal/NotaFiscal_.class
+com/cashf/controller/prepreparo/TabPrePreparoNFXMLController$1.class
 util/ImageHandler.class
 com/cashf/model/meiopagamento/MeioPagamento_.class
 com/cashf/model/banco/Banco_.class

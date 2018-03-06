@@ -5,6 +5,7 @@
  */
 package com.cashf.controller.prepreparo;
 
+import com.cashf.cashfood.MainApp;
 import com.cashf.model.prepreparo.ProdutoPrePreparo;
 import com.cashf.model.produto.Produto;
 import com.cashf.model.produto.UnidadeMedida;
@@ -17,9 +18,11 @@ import controller.GenericViewController;
 import java.math.BigDecimal;
 import java.net.URL;
 import java.text.NumberFormat;
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Optional;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -40,6 +43,8 @@ import javafx.scene.layout.Pane;
 import javafx.util.Callback;
 import javafx.util.Duration;
 import org.controlsfx.control.Notifications;
+import util.PoupUpUtil;
+import util.ProdCalcUtil;
 
 /**
  * FXML Controller class
@@ -155,6 +160,13 @@ public class TabPrePreparoNFXMLController implements GenericViewController, Init
         _lblCustoTotal = lblCustoTotal;
         _btnExcluirItem = _btnExcluirItem;
         _tbvReceita = tbvItens;
+        loadCbbProdutos();
+        loadCbbUnidadeMedida();
+        loadCbbUnidadeMedidaProd();
+        setUpTableViewItens();
+        setUpTableView();
+        setUpRadioButtons();
+        loadTbv();
     }
 
     @FXML
@@ -167,10 +179,29 @@ public class TabPrePreparoNFXMLController implements GenericViewController, Init
 
     @FXML
     private void onSalvar(ActionEvent event) {
+        getData();
+        if (validateFields()) {
+            PrePreparoController.getInstance().setPrePreparo(0l,
+                    PrePreparoController.getInstance().getProdutoPrincipal(),
+                    LocalDate.now(),
+                    rendimentoReceita,
+                    PrePreparoController.getInstance().getCustoTotal(),
+                    PrePreparoController.getInstance().getListaItens(),
+                    true);
+
+            PrePreparoController.getInstance().insert();
+            PoupUpUtil.poupUp("Pré-Preparo Cadastrado", "O Pré-Preparo foi cadastrado com sucesso.", "");
+            PrePreparoController.getInstance().flushObject();
+        } else {
+            PoupUpUtil.errorMessage(paneRoot, MainApp.paneRoot, erros);
+            erros = "";
+        }
     }
 
     @FXML
     private void onNovo(ActionEvent event) {
+        setInputOn();
+        clearFields();
     }
 
     @FXML
@@ -179,18 +210,53 @@ public class TabPrePreparoNFXMLController implements GenericViewController, Init
 
     @FXML
     private void onLimpar(ActionEvent event) {
+        clearFields();
     }
 
     @FXML
     private void onAdicionar(ActionEvent event) {
+        getDataItem();
+        if (validateItemFields()) {
+            PrePreparoController.getInstance().setItemAtual(tbvProdutos.getSelectionModel().getSelectedItem());
+            PrePreparoController.getInstance().setListaItens(qtdeItem, ProdCalcUtil.valorPorcao(PrePreparoController.getInstance().getItemAtual(), PrePreparoController.getInstance().getUnidadeMedida(), qtdeItem));
+            tbvItens.setItems(PrePreparoController.getInstance().getListaItens());
+            lblCustoTotal.setText(nf.format(PrePreparoController.getInstance().getCustoTotal()));
+            //--
+            txtqtde.clear();
+            PrePreparoController.getInstance().setItemAtual(null);
+            //--
+        } else {
+            PoupUpUtil.errorMessage(paneRoot, MainApp.paneRoot, erros);
+            erros = "";
+        }
     }
 
     @FXML
     private void onSelecionarProduto(MouseEvent event) {
+        if (tbvProdutos.getSelectionModel().getSelectedItem() != null) {
+            PrePreparoController.getInstance().setItemAtual(tbvProdutos.getSelectionModel().getSelectedItem());
+            txtPesquisar.setText(PrePreparoController.getInstance().getItemAtual().getDescriao());
+        }
     }
 
     @FXML
     private void onKeyReleasedPesquisar(KeyEvent event) {
+        if (txtPesquisar.getText() != null && txtPesquisar.getText().length() > 1) {
+            switch (PrePreparoController.getInstance().getTipoConsulta()) {
+                case 1:
+                    PrePreparoController.getInstance().buscaCodRef(txtPesquisar.getText());
+                    loadTbv();
+                    break;
+                case 2:
+                    PrePreparoController.getInstance().buscaInsumosDesc(txtPesquisar.getText());
+                    loadTbv();
+                    break;
+                default:
+                    PrePreparoController.getInstance().buscaInsumosTodos();
+                    loadTbv();
+                    break;
+            }
+        }
     }
 
     @Override
@@ -280,6 +346,55 @@ public class TabPrePreparoNFXMLController implements GenericViewController, Init
 
     private void loadCbbProdutos() {
         cbbProduto.setItems(PrePreparoController.getInstance().getListaPrePreparo());
+    }
+
+    private void setUpTableView() {
+        tbcCodRef.setCellValueFactory(new PropertyValueFactory<>("codigoReferencia"));
+        tbcDescricao.setCellValueFactory(new PropertyValueFactory<>("descriao"));
+        tbcTipo.setCellValueFactory(new PropertyValueFactory<>("tipo"));
+        tbcQtde.setCellValueFactory(new PropertyValueFactory<>("qtdeProduto"));
+        tbvProdutos.getColumns().setAll(tbcCodRef, tbcDescricao, tbcTipo, tbcQtde);
+    }
+
+    private void setUpRadioButtons() {
+
+        rbtCodigo.selectedProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue) {
+                rbtDescricao.setSelected(false);
+                rbtTodos.setSelected(false);
+                PrePreparoController.getInstance().setTipoConsulta(1);//todos
+            }
+        });
+        rbtDescricao.selectedProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue) {
+                rbtCodigo.setSelected(false);
+                rbtTodos.setSelected(false);
+                PrePreparoController.getInstance().setTipoConsulta(2);//todos
+            }
+        });
+
+        rbtTodos.selectedProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue) {
+                rbtCodigo.setSelected(false);
+                rbtDescricao.setSelected(false);
+                PrePreparoController.getInstance().setTipoConsulta(0);//todos
+                PrePreparoController.getInstance().buscaInsumosTodos();
+                PrePreparoController.getInstance().buscaInsumosTodos();
+                loadTbv();
+            }
+        });
+    }
+
+    public static void LDTS() {
+        _cbbUnidadeMedida.setValue(PrePreparoController.getInstance().getPrePreparo().getProdutoPrincipal().getUnidadeMedida());
+        _txtqtde.setText(PrePreparoController.getInstance().getProdutoPrincipal().getQtdeProduto().toString());
+        _tbvItens.setItems(FXCollections.observableList(PrePreparoController.getInstance().getPrePreparo().getListaProdutos()));
+        _txtRendimento.setText(PrePreparoController.getInstance().getPrePreparo().getRendimento().toString());
+        _lblCustoTotal.setText(PrePreparoController.getInstance().getPrePreparo().getCustoTotal().toString());
+    }
+
+    private void loadTbv() {
+        tbvProdutos.setItems(PrePreparoController.getInstance().getListaProduto());
     }
 
     private void setUpTableViewItens() {

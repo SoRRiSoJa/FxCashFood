@@ -197,7 +197,15 @@ public class PrePreparoController implements GenericController<PrePreparo> {
     public void setTipoConsulta(int tipoConsulta) {
         this.tipoConsulta = tipoConsulta;
     }
-
+    void buscaCodRef(String text) {
+        this.listaCbbItens = FXCollections.observableList(produtoDAO.listProdInsumosCodRef(text));
+    }
+    void buscaInsumosDesc(String text) {
+        this.listaCbbItens = FXCollections.observableList(produtoDAO.listProdInsumosDesc(text));
+    }
+    void buscaInsumosTodos() {
+        this.listaCbbItens = FXCollections.observableList(produtoDAO.listProdInsumos());
+    }
     void buscaDesc(String text) {
         lista=FXCollections.observableList(prePreparoDAO.listByDesc(text));
     }

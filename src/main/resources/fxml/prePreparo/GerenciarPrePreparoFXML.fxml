@@ -12,7 +12,7 @@
             <tabs>
                 <Tab text="Pré-Preparo">
                     <content>
-                        <fx:include source="TabPrePreparoFXML.fxml" />
+                        <fx:include source="TabPrePreparoNFXML.fxml" />
                     </content>
                 </Tab>
                 <Tab text="Lista de Pré-Preparo">
