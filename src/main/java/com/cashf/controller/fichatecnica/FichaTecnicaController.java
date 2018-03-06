@@ -24,8 +24,8 @@ import javafx.collections.ObservableList;
  */
 public class FichaTecnicaController implements GenericController<FichaTecnica> {
     public static FichaTecnicaController controller;
-    private FichaTecnicaDAO fichaTecnicaDAO;
-    private ProdutoDAO produtoDAO;
+    private final FichaTecnicaDAO fichaTecnicaDAO;
+    private final ProdutoDAO produtoDAO;
     private FichaTecnica fichaTecnica;
     private Produto itemAtual = new Produto();
     private Produto produtoPrincipal = new Produto();
@@ -165,6 +165,15 @@ public class FichaTecnicaController implements GenericController<FichaTecnica> {
 
     public void setTipoConsulta(int tipoConsulta) {
         this.tipoConsulta = tipoConsulta;
+    }
+    void buscaCodRef(String text) {
+        this.comboBoxItensFicha = FXCollections.observableList(produtoDAO.listProdInsumosCodRef(text));
+    }
+    void buscaInsumosDesc(String text) {
+        this.comboBoxItensFicha = FXCollections.observableList(produtoDAO.listProdInsumosDesc(text));
+    }
+    void buscaInsumosTodos() {
+        this.comboBoxItensFicha = FXCollections.observableList(produtoDAO.listProdInsumos());
     }
     
     

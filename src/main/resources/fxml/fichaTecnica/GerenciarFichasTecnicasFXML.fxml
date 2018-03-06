@@ -10,7 +10,7 @@
             <tabs>
                 <Tab text="Ficha Tecnica">
                     <content>
-                        <fx:include source="TabFichaTecnicaFXML.fxml" />
+                        <fx:include source="TabFichaTecniaNFXML.fxml" />
                     </content>
                 </Tab>
                 <Tab text="Lista de Fichas Tecnicas">
