@@ -206,6 +206,30 @@ public class TabPrePreparoNFXMLController implements GenericViewController, Init
 
     @FXML
     private void onExcluir(ActionEvent event) {
+        if (PrePreparoController.getInstance().getPrePreparo().getIdPrepreparo()!= 0l) {
+            Notifications notificationBuilder;
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Cofirmar Excluir PrePreparo!");
+            alert.setHeaderText("Deseja realmente Excluir?");
+            alert.setContentText("Nome:(" + PrePreparoController.getInstance().getPrePreparo().getProdutoPrincipal().getDescriao() + ")");
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.get() == ButtonType.OK) {
+                PrePreparoController.getInstance().delete();
+                clearFields();
+                //TabListaPrePreparosFXMLController.loadTbvCli();
+                // ... user chose OK
+
+                notificationBuilder = Notifications.create().title("PrePreparo excluído!").
+                        text("PrePreparo Excluido com sucesso.").
+                        hideAfter(Duration.seconds(2)).
+                        position(Pos.TOP_RIGHT).
+                        darkStyle();
+                notificationBuilder.showInformation();
+            } else {
+                alert.close();
+            }
+        }
+
     }
 
     @FXML

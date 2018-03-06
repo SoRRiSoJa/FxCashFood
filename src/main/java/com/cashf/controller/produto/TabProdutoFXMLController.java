@@ -17,12 +17,18 @@ import controller.GenericViewController;
 import java.math.BigDecimal;
 import java.net.URL;
 import java.util.Arrays;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyEvent;
+import javafx.util.Duration;
+import org.controlsfx.control.Notifications;
 import util.PoupUpUtil;
 import util.TextFieldFormatter;
 
@@ -244,10 +250,30 @@ public class TabProdutoFXMLController implements GenericViewController, Initiali
 
     @FXML
     private void onExcluir(ActionEvent event) {
-        if (ProdutoController.getInstance().getProduto() != null) {
-            ProdutoController.getInstance().delete();
-            PoupUpUtil.poupUp("Produto Excluído", "O Produto foi excluído com sucesso.", "");
+        if (ProdutoController.getInstance().getProduto().getIdProduto() != 0l) {
+            Notifications notificationBuilder;
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Cofirmar Excluir Produto!");
+            alert.setHeaderText("Deseja realmente Excluir?");
+            alert.setContentText("Nome:(" + ProdutoController.getInstance().getProduto().getDescriao() + ")");
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.get() == ButtonType.OK) {
+                ProdutoController.getInstance().delete();
+                clearFields();
+                //TabListaProdutosFXMLController.loadTbvCli();
+                // ... user chose OK
+
+                notificationBuilder = Notifications.create().title("Produto excluído!").
+                        text("Produto Excluido com sucesso.").
+                        hideAfter(Duration.seconds(2)).
+                        position(Pos.TOP_RIGHT).
+                        darkStyle();
+                notificationBuilder.showInformation();
+            } else {
+                alert.close();
+            }
         }
+
         btnExcluir.setDisable(true);
         clearFields();
     }

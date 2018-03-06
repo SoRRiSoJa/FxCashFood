@@ -213,7 +213,7 @@ public class TabFornecedorFXMLController implements GenericViewController, Initi
             FornecedorController.getInstance().flushObject();
             TabListaFornecedoresFXMLController.loadTbvFornecedor();
             loadTbvTelefone();
-            
+
         } else {
             PoupUpUtil.errorMessage(paneRoot, MainApp.paneRoot, erros);
             erros = "";
@@ -225,7 +225,7 @@ public class TabFornecedorFXMLController implements GenericViewController, Initi
     private void onNovo(ActionEvent event) {
         setInputOn();
         clearFields();
-        if (FornecedorController.getInstance().getFornecedor().getIdFornecedor()== 0) {
+        if (FornecedorController.getInstance().getFornecedor().getIdFornecedor() == 0) {
             btnExcluir.setDisable(true);
             clearFields();
         } else {
@@ -235,10 +235,30 @@ public class TabFornecedorFXMLController implements GenericViewController, Initi
 
     @FXML
     private void onExcluir(ActionEvent event) {
-        if (FornecedorController.getInstance().getFornecedor() != null) {
-            FornecedorController.getInstance().delete();
-            PoupUpUtil.poupUp("Fornecedor Excluído", "O fornecedor foi excluído com sucesso.", "");
+        if (FornecedorController.getInstance().getFornecedor().getIdFornecedor() != 0l) {
+            Notifications notificationBuilder;
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Cofirmar Excluir Fornecedor!");
+            alert.setHeaderText("Deseja realmente Excluir?");
+            alert.setContentText("Nome:(" + FornecedorController.getInstance().getFornecedor().getNomefantasia()+ ")");
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.get() == ButtonType.OK) {
+                FornecedorController.getInstance().delete();
+                clearFields();
+                //TabListaFornecedorsFXMLController.loadTbvCli();
+                // ... user chose OK
+
+                notificationBuilder = Notifications.create().title("Fornecedor excluído!").
+                        text("Fornecedor Excluido com sucesso.").
+                        hideAfter(Duration.seconds(2)).
+                        position(Pos.TOP_RIGHT).
+                        darkStyle();
+                notificationBuilder.showInformation();
+            } else {
+                alert.close();
+            }
         }
+
         btnExcluir.setDisable(true);
         clearFields();
     }
