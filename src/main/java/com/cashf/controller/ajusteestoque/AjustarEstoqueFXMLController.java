@@ -6,7 +6,6 @@
 package com.cashf.controller.ajusteestoque;
 
 import com.cashf.cashfood.MainApp;
-import com.cashf.controller.prepreparo.PrePreparoController;
 import com.cashf.model.ajusteestoque.TipoAjuste;
 import com.cashf.model.produto.Produto;
 import com.cashf.model.produto.UnidadeMedida;
@@ -165,6 +164,7 @@ public class AjustarEstoqueFXMLController implements GenericViewController, Init
             controller.insert();
             controller.refreshListaPRod();
             lblSaldo.setText(controller.getProduto().getQtdeProduto() + "");
+            txtQtdeAtual.setText(controller.getProduto().getQtdeProduto() + "");
             tbvProdutos.refresh();
         } else {
             PoupUpUtil.errorMessage(paneRoot, MainApp.paneRoot, erros);
