@@ -113,12 +113,16 @@ public class TabFichaTecniaNFXMLController implements Initializable, GenericView
     //----
     private static TableView<ProdutoFichaTecnica> _tbvFicha;
     private static JFXComboBox<Produto> _ccbFichaTecnica;
+    private static Label _lblCustoTotal;
+
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        _lblCustoTotal = lblCustoTotal;
+        _tbvFicha = tbvFicha;
         setUpTableView();
         setUpTableViewItens();
         setUpRadioButtons();
@@ -134,13 +138,12 @@ public class TabFichaTecniaNFXMLController implements Initializable, GenericView
             FichaTecnicaController.getInstance().getFichaTecnica().setProdutoPrincipal(FichaTecnicaController.getInstance().getProdutoPrincipal());
         }
     }
+
     public static void LDTS() {
-        //_cbbUnidadeMedidaProd.setValue(PrePreparoController.getInstance().getPrePreparo().getProdutoPrincipal().getUnidadeMedida());
-        
-       // _tbvFicha.setItems(FichaTecnicaController.getInstance().getFichaTecnica());
-        //_txtRendimento.setText(PrePreparoController.getInstance().getPrePreparo().getRendimento().toString());
-        //_lblCustoTotal.setText(PrePreparoController.getInstance().getPrePreparo().getCustoTotal().toString());
+        _tbvFicha.setItems(FichaTecnicaController.getInstance().getListaItensFicha());
+        _lblCustoTotal.setText(FichaTecnicaController.getInstance().getFichaTecnica().getCustoTotal().toString());
     }
+
     @FXML
     private void onSalvar(ActionEvent event) {
         getData();
@@ -149,6 +152,8 @@ public class TabFichaTecniaNFXMLController implements Initializable, GenericView
             FichaTecnicaController.getInstance().insert();
             PoupUpUtil.poupUp("Ficha Técnica Cadastrada", "A Ficha Técnica foi cadastrada com sucesso.", "");
             FichaTecnicaController.getInstance().flushObject();
+            clearFields();
+            loadTbv();
         } else {
             PoupUpUtil.errorMessage(paneRoot, MainApp.paneRoot, erros);
             erros = "";
@@ -242,6 +247,7 @@ public class TabFichaTecniaNFXMLController implements Initializable, GenericView
         txtPesquisar.clear();
         txtqtde.clear();
         cbbUnidadeMedida.setValue(null);
+        
     }
 
     @Override

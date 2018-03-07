@@ -48,7 +48,8 @@ public class TabListaFichaTecnicaFXMLController implements Initializable {
     private JFXRadioButton rdbData;
     @FXML
     private JFXRadioButton rdbTodos;
-
+    //----
+    private static TableView<FichaTecnica> _tbvProdutos;
     /**
      * Initializes the controller class.
      */
@@ -65,8 +66,8 @@ public class TabListaFichaTecnicaFXMLController implements Initializable {
     if (tbvProdutos.getSelectionModel().getSelectedItem() != null) {
             FichaTecnicaController.getInstance().setFichaTecnica(tbvProdutos.getItems().get(tbvProdutos.getSelectionModel().getSelectedIndex()));
             FichaTecnicaController.getInstance().setListaItensFicha(FXCollections.observableList(FichaTecnicaController.getInstance().getFichaTecnica().getListaProdutos()));
-            
-        }
+            TabFichaTecniaNFXMLController.LDTS();
+    }
     }
 
     @FXML
@@ -79,7 +80,9 @@ public class TabListaFichaTecnicaFXMLController implements Initializable {
         tbcCusto.setCellValueFactory(new PropertyValueFactory<>("custoTotal"));
         tbvProdutos.getColumns().setAll(tbcDescricao, tbcData, tbcCusto);
     }
-
+    public static void loadTbvFT() {
+        _tbvProdutos.setItems(FichaTecnicaController.getInstance().getLista());
+    }
     private void loadTbv() {
         tbvProdutos.setItems(FichaTecnicaController.getInstance().getLista());
     }

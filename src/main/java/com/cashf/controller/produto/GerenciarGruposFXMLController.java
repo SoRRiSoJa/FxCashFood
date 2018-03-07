@@ -130,9 +130,33 @@ public class GerenciarGruposFXMLController implements Initializable {
 
     @FXML
     private void onExcluir(ActionEvent event) {
-        if (controller.getGrupo() != null) {
-            controller.delete();
-            PoupUpUtil.poupUp("Grupo Excluído", "O Grupo foi excluído com sucesso.", "");
+        if (controller.getGrupo().getIdGrupo() != 0l) {
+            Notifications notificationBuilder;
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Cofirmar Excluir Grupo!");
+            alert.setHeaderText("Deseja realmente Excluir?");
+            alert.setContentText("Nome:(" + controller.getGrupo().getDescricao() + ")");
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.get() == ButtonType.OK) {
+                try {
+                    controller.delete();
+                    PoupUpUtil.poupUp("Grupo Excluído", "O Grupo foi excluído com sucesso.", "");
+                    // ... user chose OK
+                    notificationBuilder = Notifications.create().title("Grupo excluído!").
+                            text("Grupo Excluido com sucesso.").
+                            hideAfter(Duration.seconds(2)).
+                            position(Pos.TOP_RIGHT).
+                            darkStyle();
+                    notificationBuilder.showInformation();
+                } catch (Exception e) {
+                    erros="Você não pode Excluir este Grupo \n"
+                            + "Existem produtos asssociados a ele";
+                    PoupUpUtil.accessDenied(erros);
+                }
+
+            } else {
+                alert.close();
+            }
         }
         btnExcluir.setDisable(true);
         clearFields();

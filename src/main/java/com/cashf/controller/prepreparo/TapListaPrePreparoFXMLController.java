@@ -53,6 +53,8 @@ public class TapListaPrePreparoFXMLController implements Initializable {
     private JFXRadioButton rdbData;
     @FXML
     private JFXRadioButton rdbTodos;
+    //----
+    private static TableView<PrePreparo> _tbvProdutos;
 
     /**
      * Initializes the controller class.
@@ -60,7 +62,7 @@ public class TapListaPrePreparoFXMLController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-
+        _tbvProdutos = tbvProdutos;
         setUpRadioButtons();
         setUpTableView();
         loadTbv();
@@ -70,9 +72,9 @@ public class TapListaPrePreparoFXMLController implements Initializable {
     private void onSelecionarProduto(MouseEvent event) {
         if (tbvProdutos.getSelectionModel().getSelectedItem() != null) {
             PrePreparoController.getInstance().setPrePreparo(tbvProdutos.getItems().get(tbvProdutos.getSelectionModel().getSelectedIndex()));
-            System.out.println("Aqui---...............>>>>"+PrePreparoController.getInstance().getPrePreparo().toString());
+            System.out.println("Aqui---...............>>>>" + PrePreparoController.getInstance().getPrePreparo().toString());
             PrePreparoController.getInstance().getPrePreparo().getListaProdutos().forEach((pp) -> {
-                System.out.println("PR:"+pp.getProduto().getDescriao()+"- qtde:"+pp.getQtdeProduto());
+                System.out.println("PR:" + pp.getProduto().getDescriao() + "- qtde:" + pp.getQtdeProduto());
             });
             PrePreparoController.getInstance().setListaItens(FXCollections.observableList(PrePreparoController.getInstance().getPrePreparo().getListaProdutos()));
             TabPrePreparoNFXMLController.LDTS();
@@ -105,7 +107,9 @@ public class TapListaPrePreparoFXMLController implements Initializable {
         tbcQtde.setCellValueFactory(new PropertyValueFactory<>("produtoPrincipal.qtdeProduto"));
         tbvProdutos.getColumns().setAll(tbcDescricao, tbcData, tbcCusto, tbcUnidade, tbcQtde);
     }
-
+    public static void loadTbvPP() {
+        _tbvProdutos.setItems(PrePreparoController.getInstance().getLista());
+    }
     private void loadTbv() {
         tbvProdutos.setItems(PrePreparoController.getInstance().getLista());
     }
@@ -136,4 +140,5 @@ public class TapListaPrePreparoFXMLController implements Initializable {
         });
     }
 
+    
 }
