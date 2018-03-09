@@ -5,23 +5,39 @@
  */
 package com.cashf.controller.receberpedido;
 
+import com.cashf.controller.prepreparo.PrePreparoController;
 import com.cashf.model.fornecedor.Fornecedor;
 import com.cashf.model.notafiscal.ProdutoNotaFiscal;
+import com.cashf.model.prepreparo.ProdutoPrePreparo;
 import com.cashf.model.produto.Produto;
 import com.cashf.model.produto.UnidadeMedida;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTextField;
+import com.sun.prism.impl.Disposer;
 import controller.GenericViewController;
 import java.math.BigDecimal;
 import java.net.URL;
+import java.time.LocalDate;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.ContentDisplay;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.util.Callback;
+import javafx.util.Duration;
+import org.controlsfx.control.Notifications;
 
 /**
  * FXML Controller class
@@ -99,14 +115,27 @@ public class ReceberPedidoFXMLController implements GenericViewController, Initi
     @FXML
     private JFXButton btnAdicionar;
     //----
-    private BigDecimal valorIpi;
-    private BigDecimal valorIcmsSubstProd;
-    private Integer qtdeCompra;
-    private Integer qtdeRecebida;
+    private LocalDate dataNota;
+    private LocalDate dataRecebimento;
+    private String numeroNota;
+    private String observacao;
+    private BigDecimal qtdeCompra;
+    private BigDecimal qtdeRecebida;
     private BigDecimal prcoCompra;
+    private BigDecimal embalagemDeCompra;
+    private BigDecimal valorIcms;
+    private BigDecimal baseCalculoIcms;
+    private BigDecimal valorTotalIpi;
+    private BigDecimal valorIpi;
+    private BigDecimal baseIcmsSubst;
+    private BigDecimal valorIcmsSubst;
+    private BigDecimal outrasDespesas;
+    private BigDecimal desconto;
+    private BigDecimal valorTotalProdutos;
+    private BigDecimal valorTotalNota;
+    private BigDecimal valorIcmsSubstProd;
     private BigDecimal outrasDespesasProd;
     private BigDecimal descontoProd;
-    private BigDecimal embalagemDeCompra;
 
     private String erros;
     private boolean flagButtons;
@@ -123,6 +152,7 @@ public class ReceberPedidoFXMLController implements GenericViewController, Initi
         loadCbbProdutos();
         loadCbbUnidadeMedida();
         setInputOff();
+        setUpTableViewItens();
     }
 
     @FXML
@@ -143,6 +173,17 @@ public class ReceberPedidoFXMLController implements GenericViewController, Initi
 
     @FXML
     private void onAdicionar(ActionEvent event) {
+        getDataProd();
+        if (validateFieldsProd()) {
+            controller.setListaProdutosNota(0l, qtdeRecebida.intValue(), prcoCompra);
+            controller.getListaProdutosNota().forEach((pn) -> {
+                System.out.println("PN:" + pn.toString());
+            });
+            System.out.println("aquit ---->>>>>>");
+            tbvProdutos.setItems(controller.getListaProdutosNota());
+        } else {
+
+        }
     }
 
     @Override
@@ -246,36 +287,120 @@ public class ReceberPedidoFXMLController implements GenericViewController, Initi
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    public Boolean validateFieldsProd() {
+        boolean flag = true;
+        if (valorIpi.compareTo(BigDecimal.ZERO) < 0) {
+            erros += "O Valor do IPI do produto ser maior ou = 0 \n";
+            flag = false;
+        }
+        if (valorIcmsSubstProd.compareTo(BigDecimal.ZERO) < 0) {
+            erros += "O Valor do ICMS Subst do produto ser maior ou = 0 \n";
+            flag = false;
+        }
+        if (qtdeCompra.compareTo(BigDecimal.ZERO) <= 0) {
+            erros += "O Valor da quantidade de compra do produto ser maior que 0 \n";
+            flag = false;
+        }
+        if (qtdeRecebida.compareTo(BigDecimal.ZERO) <= 0) {
+            erros += "O Valor da quantidade recebida do produto ser maior que 0 \n";
+            flag = false;
+        }
+        if (prcoCompra.compareTo(BigDecimal.ZERO) <= 0) {
+            erros += "O Valor de compra do produto deve ser maior que 0 \n";
+            flag = false;
+        }
+        if (outrasDespesasProd.compareTo(BigDecimal.ZERO) < 0) {
+            erros += "O Valor da das despesas não pode ser negativo  \n";
+            flag = false;
+        }
+        if (descontoProd.compareTo(BigDecimal.ZERO) < 0) {
+            erros += "O Valor do desconto não pode ser negativo.  \n";
+            flag = false;
+        }
+        if (embalagemDeCompra.compareTo(BigDecimal.ZERO) <= 0) {
+            erros += "O Valor da embalagem de compra nao pode ser 0 . \n";
+            flag = false;
+        }
+        if (cbbProduto.getSelectionModel().getSelectedItem() == null) {
+            erros += "Você deve selecionar Um Produto para adicionar a lista \n";
+            flag = false;
+        }
+        if (cbbUnidadeFisica.getSelectionModel().getSelectedItem() == null) {
+            erros += "Você deve selecionar Uma unidade de medida para o produto \n";
+            flag = false;
+        }
+        return flag;
+    }
+
     @Override
     public void getData() {
-        cbbFornecedor.getValue();
-        dtpDataNota.getValue();;
-        txtNumeroNota.getText();;
-        txtValorIcms.getText();;
-        txtBaseCalculoIcms.getText();;
-        txtValorTotalIpi.getText();;
-        txtBaseIcmsSubst.getText();;
-        txtValorIcmsSubst.getText();;
-        txtOutrasDespesas.getText();;
-        txtDesconto.getText();;
-        txtValorTotalProdutos.getText();;
-        txtValorTotalNota.getText();;
-        txtObservacao.getText();;
-        dtpDataRecebimento.setValue(null);;
-
+        controller.setFornecedor(cbbFornecedor.getValue());
+        dataNota = dtpDataNota.getValue();
+        numeroNota = txtNumeroNota.getText();
+        valorIcms = new BigDecimal(txtValorIcms.getText());
+        baseCalculoIcms = new BigDecimal(txtBaseCalculoIcms.getText());
+        valorTotalIpi = new BigDecimal(txtValorTotalIpi.getText());
+        baseIcmsSubst = new BigDecimal(txtBaseIcmsSubst.getText());
+        valorIcmsSubst = new BigDecimal(txtValorIcmsSubst.getText());
+        outrasDespesas = new BigDecimal(txtOutrasDespesas.getText());
+        desconto = new BigDecimal(txtDesconto.getText());
+        valorTotalProdutos = new BigDecimal(txtValorTotalProdutos.getText());
+        valorTotalNota = new BigDecimal(txtValorTotalNota.getText());
+        observacao = txtObservacao.getText();
+        dataRecebimento = dtpDataRecebimento.getValue();
     }
 
     public void getDataProd() {
-        cbbProduto.getSelectionModel().getSelectedItem();
-        cbbUnidadeFisica.getSelectionModel().getSelectedItem();
-        txtValorIpi.getText();;
-        txtValorIcmsSubstProd.getText();;
-        txtQtdeCompra.getText();;
-        txtQtdeRecebida.getText();;
-        txtPrcoCompra.getText();;
-        txtOutrasDespesasProd.getText();;
-        txtDescontoProd.getText();;
-        txtEmbalagemDeCompra.getText();;
+        controller.setProdutoAtual(cbbProduto.getSelectionModel().getSelectedItem());
+        controller.setUnidadeMedida(cbbUnidadeFisica.getSelectionModel().getSelectedItem());
+        try {
+            valorIpi = new BigDecimal(txtValorIpi.getText());
+        } catch (Exception ex) {
+            System.out.println("Erro ao converter --->>> IPI Prod:" + ex);
+            valorIpi = BigDecimal.ZERO;
+        }
+        try {
+            valorIcmsSubstProd = new BigDecimal(txtValorIcmsSubstProd.getText());
+        } catch (Exception ex) {
+            System.out.println("Erro ao converter --->>> icms subs Prod:" + ex);
+            valorIcmsSubstProd = BigDecimal.ZERO;
+        }
+        try {
+            qtdeCompra = new BigDecimal(txtQtdeCompra.getText());
+        } catch (Exception ex) {
+            System.out.println("Erro ao converter --->>> qtde comp Prod:" + ex);
+            qtdeCompra = BigDecimal.ZERO;
+        }
+        try {
+            qtdeRecebida = new BigDecimal(txtQtdeRecebida.getText());
+        } catch (Exception ex) {
+            System.out.println("Erro ao converter --->>> qtde rece:" + ex);
+            qtdeRecebida = BigDecimal.ZERO;
+        }
+        try {
+            prcoCompra = new BigDecimal(txtPrcoCompra.getText());
+        } catch (Exception ex) {
+            System.out.println("Erro ao converter --->>> preco comp:" + ex);
+            prcoCompra = BigDecimal.ZERO;
+        }
+        try {
+            outrasDespesasProd = new BigDecimal(txtOutrasDespesasProd.getText());
+        } catch (Exception ex) {
+            System.out.println("Erro ao converter --->>> despesas outras:" + ex);
+            outrasDespesasProd = BigDecimal.ZERO;
+        }
+        try {
+            descontoProd = new BigDecimal(txtDescontoProd.getText());
+        } catch (Exception ex) {
+            System.out.println("Erro ao converter --->>> desconto prod:" + ex);
+            descontoProd = BigDecimal.ZERO;
+        }
+        try {
+            embalagemDeCompra = new BigDecimal(txtEmbalagemDeCompra.getText());
+        } catch (Exception ex) {
+            System.out.println("Erro ao converter --->>> embalagem comp:" + ex);
+            embalagemDeCompra = BigDecimal.ZERO;
+        }
     }
 
     @Override
@@ -316,5 +441,77 @@ public class ReceberPedidoFXMLController implements GenericViewController, Initi
 
     private void loadCbbUnidadeMedida() {
         cbbUnidadeFisica.getItems().addAll(controller.loadComboUnidadeMedida());
+    }
+
+    private void setUpTableViewItens() {
+        tbcProduto.setCellValueFactory(new PropertyValueFactory<>("produto"));
+        tbcQtde.setCellValueFactory(new PropertyValueFactory<>("qtdeProduto"));
+        tbcValUnid.setCellValueFactory(new PropertyValueFactory<>("valorUnitario"));
+        tbcTotal.setCellValueFactory(new PropertyValueFactory<>("valorTotal"));
+        btnExcluirProd.setCellFactory(
+                new Callback<TableColumn<Disposer.Record, Boolean>, TableCell<Disposer.Record, Boolean>>() {
+            @Override
+            public TableCell<Disposer.Record, Boolean> call(TableColumn<Disposer.Record, Boolean> p) {
+                return new ButtonCellDelete();
+            }
+        });
+        tbvProdutos.getColumns().setAll(tbcProduto, tbcQtde, tbcValUnid, tbcTotal, btnExcluirProd);
+    }
+
+    public class ButtonCellDelete extends TableCell<Disposer.Record, Boolean> {
+
+        Image img;
+        ImageView imgv;
+        JFXButton cellButton = new JFXButton("Desativar");
+        Notifications notificationBuilder;
+
+        public ButtonCellDelete() {
+            this.img = new Image("Imagens/ic_delete_forever_black_24dp_1x.png");
+            this.imgv = new ImageView(img);
+            cellButton.setGraphic(imgv);
+            cellButton.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
+            cellButton.setOnAction((ActionEvent t) -> {
+                // get Selected Item
+                ProdutoNotaFiscal currentPerson = (ProdutoNotaFiscal) ButtonCellDelete.this.getTableView().getItems().get(ButtonCellDelete.this.getIndex());
+                //remove selected item from the table list
+                if (currentPerson != null) {
+                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                    alert.setTitle("Cofirmar Excluir Item da Lista!");
+                    alert.setHeaderText("Deseja realmente Excluir?");
+                    alert.setContentText("Produto:(" + currentPerson.getProduto().getDescriao() + ")");
+                    Optional<ButtonType> result = alert.showAndWait();
+                    if (result.get() == ButtonType.OK) {
+                        // ... user chose OK
+                        controller.getListaProdutosNota().remove(currentPerson);
+                        //lblCustoTotal.setText(nf.format(PrePreparoController.getInstance().getCustoTotal()));
+                        notificationBuilder = Notifications.create().title("Produto excluído!").
+                                text("Produto Excluido com sucesso.").
+                                hideAfter(Duration.seconds(1)).
+                                position(Pos.TOP_RIGHT).
+                                darkStyle();
+                        notificationBuilder.showInformation();
+                    } else {
+                        alert.close();
+                    }
+                } else {
+                    notificationBuilder = Notifications.create().title("Nenhum item selecionado!").
+                            text("Você deve selecionar Um produto para Cancelar.").
+                            hideAfter(Duration.seconds(2)).
+                            position(Pos.TOP_RIGHT).
+                            darkStyle();
+                    notificationBuilder.showConfirm();
+                }
+            });
+        }
+
+        @Override
+        protected void updateItem(Boolean t, boolean empty) {
+            super.updateItem(t, empty);
+            if (!empty) {
+                setGraphic(cellButton);
+            } else {
+                setGraphic(null);
+            }
+        }
     }
 }

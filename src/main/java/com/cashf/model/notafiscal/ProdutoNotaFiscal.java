@@ -38,16 +38,17 @@ public class ProdutoNotaFiscal implements Serializable {
     private Produto produto;
     private Integer qtdeProduto;
     private BigDecimal valorUnitario;
-
+    private BigDecimal valorTotal;
     public ProdutoNotaFiscal() {
     }
 
-    public ProdutoNotaFiscal(Long idProdutoNotaFiscal, NotaFiscal notaFiscal, Produto produto, Integer qtdeProduto, BigDecimal valoruUnitario) {
+    public ProdutoNotaFiscal(Long idProdutoNotaFiscal, NotaFiscal notaFiscal, Produto produto, Integer qtdeProduto, BigDecimal valoruUnitario,BigDecimal valorTotal) {
         this.idProdutoNotaFiscal = idProdutoNotaFiscal;
         this.notaFiscal = notaFiscal;
         this.produto = produto;
         this.qtdeProduto = qtdeProduto;
         this.valorUnitario = valoruUnitario;
+        this.valorTotal=valorTotal;
     }
 
     public Long getIdProdutoNotaFiscal() {
@@ -90,6 +91,14 @@ public class ProdutoNotaFiscal implements Serializable {
         this.valorUnitario = valorUnitario;
     }
 
+    public BigDecimal getValorTotal() {
+        return valorTotal;
+    }
+
+    public void setValorTotal(BigDecimal valorTotal) {
+        this.valorTotal = valorTotal;
+    }
+    
     @Override
     public int hashCode() {
         int hash = 3;
@@ -117,6 +126,11 @@ public class ProdutoNotaFiscal implements Serializable {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public String toString() {
+        return  produto.getDescriao();
     }
 
 }

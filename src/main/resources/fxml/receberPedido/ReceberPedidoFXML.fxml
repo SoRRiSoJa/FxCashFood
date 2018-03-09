@@ -96,7 +96,7 @@
             <JFXTextField fx:id="txtValorIcmsSubstProd" focusColor="#004ba0" labelFloat="true" layoutX="456.0" layoutY="93.0" prefHeight="24.0" prefWidth="160.0" promptText="Valor do ICMS Subst" />
             <JFXTextField fx:id="txtQtdeCompra" focusColor="#004ba0" labelFloat="true" layoutX="33.0" layoutY="142.0" prefHeight="24.0" prefWidth="160.0" promptText="Qunatidade de compra" />
             <JFXTextField fx:id="txtQtdeRecebida" focusColor="#004ba0" labelFloat="true" layoutX="254.0" layoutY="142.0" prefHeight="24.0" prefWidth="160.0" promptText="Qunatidade de recebida" />
-            <JFXTextField fx:id="txtPrcoCompra" focusColor="#004ba0" labelFloat="true" layoutX="456.0" layoutY="142.0" prefHeight="24.0" prefWidth="160.0" promptText="Preço de compra" />
+            <JFXTextField fx:id="txtPrcoCompra" focusColor="#004ba0" labelFloat="true" layoutX="456.0" layoutY="142.0" prefHeight="24.0" prefWidth="160.0" promptText="Valor Unitario Compra" />
             <JFXTextField fx:id="txtOutrasDespesasProd" focusColor="#004ba0" labelFloat="true" layoutX="33.0" layoutY="191.0" prefHeight="24.0" prefWidth="160.0" promptText="Outras despesas" />
             <JFXTextField fx:id="txtDescontoProd" focusColor="#004ba0" labelFloat="true" layoutX="254.0" layoutY="191.0" prefHeight="24.0" prefWidth="160.0" promptText="Desconto" />
             <JFXTextField fx:id="txtEmbalagemDeCompra" focusColor="#004ba0" labelFloat="true" layoutX="33.0" layoutY="93.0" prefHeight="24.0" prefWidth="160.0" promptText="Embalagem de compra" />
