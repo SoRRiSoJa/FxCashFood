@@ -38,6 +38,7 @@ import javafx.scene.image.ImageView;
 import javafx.util.Callback;
 import javafx.util.Duration;
 import org.controlsfx.control.Notifications;
+import util.PoupUpUtil;
 
 /**
  * FXML Controller class
@@ -157,6 +158,14 @@ public class ReceberPedidoFXMLController implements GenericViewController, Initi
 
     @FXML
     private void onSalvar(ActionEvent event) {
+        getData();
+        if (validateFields()) {
+            controller.setNotaFiscal(0l, numeroNota, dataNota, dataRecebimento, baseCalculoIcms, valorIcms, baseIcmsSubst, valorIcmsSubst, outrasDespesas, desconto, valorTotalProdutos, valorTotalNota, observacao);
+            System.out.println("NOTA:"+controller.getNotaFiscal().toString());
+        } else {
+            PoupUpUtil.accessDenied(erros);
+            erros = "";
+        }
     }
 
     @FXML
@@ -175,14 +184,18 @@ public class ReceberPedidoFXMLController implements GenericViewController, Initi
     private void onAdicionar(ActionEvent event) {
         getDataProd();
         if (validateFieldsProd()) {
-            controller.setListaProdutosNota(0l, qtdeRecebida.intValue(), prcoCompra);
+            controller.setListaProdutosNota(0l, qtdeRecebida.intValue(),valorIpi,valorIcmsSubstProd, prcoCompra,outrasDespesasProd,descontoProd);
             controller.getListaProdutosNota().forEach((pn) -> {
-                System.out.println("PN:" + pn.toString());
+                System.out.println("P.Nota:" + pn.toString());
             });
-            System.out.println("aquit ---->>>>>>");
+            controller.setProdutoAtual(null);
+            System.out.println("Fim lista ---->>>>>>");
+            System.out.println("Tott IPI ----:"+controller.getValTotalIPI());
+            txtValorTotalIpi.setText(controller.getValTotalIPI().toString());
             tbvProdutos.setItems(controller.getListaProdutosNota());
         } else {
-
+            PoupUpUtil.accessDenied(erros);
+            erros = "";
         }
     }
 
@@ -284,7 +297,47 @@ public class ReceberPedidoFXMLController implements GenericViewController, Initi
 
     @Override
     public Boolean validateFields() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        boolean flag = true;
+
+        //dataNota 
+        //numeroNota 
+        if (cbbProduto.getSelectionModel().getSelectedItem() == null) {
+            erros += "Você deve selecionar um produto para adicionar a lista. \n";
+            flag = false;
+        }
+        if (numeroNota == null || numeroNota.isEmpty()) {
+            erros += "O Número da nota deve ser informado. \n";
+            flag = false;
+        }
+        if (valorIcms.compareTo(BigDecimal.ZERO) < 0) {
+            erros += "O Valor do ICMS do produto ser maior ou = 0 \n";
+            flag = false;
+        }
+        if (baseCalculoIcms.compareTo(BigDecimal.ZERO) < 0) {
+            erros += "O Valor da Base de Calculo ICMS Nota deve ser maior ou = 0 \n";
+            flag = false;
+        }
+        if (baseIcmsSubst.compareTo(BigDecimal.ZERO) < 0) {
+            erros += "O Valor da Base de ICMS Subst da Nota deve ser maior ou = 0 \n";
+            flag = false;
+        }
+        if (valorIcmsSubst.compareTo(BigDecimal.ZERO) < 0) {
+            erros += "O Valor do ICMS Subst da Nota deve ser maior ou = 0 \n";
+            flag = false;
+        }
+        if (outrasDespesas.compareTo(BigDecimal.ZERO) < 0) {
+            erros += "O Valor de outras despesas deve ser maior ou = 0 \n";
+            flag = false;
+        }
+        if (desconto.compareTo(BigDecimal.ZERO) < 0) {
+            erros += "O Valor do desconto deve ser maior ou = 0 \n";
+            flag = false;
+        }
+        //valorTotalProdutos 
+        //valorTotalNota 
+        //observacao 
+        //dataRecebimento
+        return flag;
     }
 
     public Boolean validateFieldsProd() {

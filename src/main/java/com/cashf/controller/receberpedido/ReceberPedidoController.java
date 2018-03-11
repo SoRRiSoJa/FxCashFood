@@ -7,6 +7,7 @@ package com.cashf.controller.receberpedido;
 
 import com.cashf.dao.fornecedor.FornecedorDAO;
 import com.cashf.dao.produto.ProdutoDAO;
+import com.cashf.model.contasPagar.ContaPagar;
 import com.cashf.model.fornecedor.Fornecedor;
 import com.cashf.model.notafiscal.NotaFiscal;
 import com.cashf.model.notafiscal.ProdutoNotaFiscal;
@@ -14,6 +15,7 @@ import com.cashf.model.produto.Produto;
 import com.cashf.model.produto.UnidadeMedida;
 import controller.GenericController;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -24,14 +26,18 @@ import javafx.collections.ObservableList;
  *
  * @author joao
  */
-public class ReceberPedidoController implements GenericController<NotaFiscal>{
+public class ReceberPedidoController implements GenericController<NotaFiscal> {
 
     private final ProdutoDAO produtoDAO;
     private final FornecedorDAO fornecedorDAO;
     private Fornecedor fornecedor;
     private Produto produtoAtual;
     private NotaFiscal notaFiscal;
+    private ContaPagar contaPagar;
     private UnidadeMedida unidadeMedida;
+    private BigDecimal valTotalNota;
+    private BigDecimal valTotalProd;
+    private BigDecimal valTotalIPI;
     private ObservableList<ProdutoNotaFiscal> listaProdutosNota;
 
     public ReceberPedidoController() {
@@ -39,11 +45,21 @@ public class ReceberPedidoController implements GenericController<NotaFiscal>{
         this.fornecedorDAO = new FornecedorDAO(Fornecedor.class);
         this.fornecedor = new Fornecedor();
         this.produtoAtual = new Produto();
-        this.listaProdutosNota=FXCollections.observableList(new ArrayList<>());
-        this.notaFiscal=new NotaFiscal();
+        this.listaProdutosNota = FXCollections.observableList(new ArrayList<>());
+        this.contaPagar = new ContaPagar();
+        this.notaFiscal = new NotaFiscal();
         this.notaFiscal.setIdNota(0l);
         this.produtoAtual.setIdProduto(0l);
         this.fornecedor.setIdFornecedor(0l);
+
+    }
+
+    public ContaPagar getContaPagar() {
+        return contaPagar;
+    }
+
+    public void setContaPagar(ContaPagar contaPagar) {
+        this.contaPagar = contaPagar;
     }
 
     public Fornecedor getFornecedor() {
@@ -93,8 +109,8 @@ public class ReceberPedidoController implements GenericController<NotaFiscal>{
     public void flushObject() {
         this.fornecedor = new Fornecedor();
         this.produtoAtual = new Produto();
-        this.listaProdutosNota=FXCollections.observableList(new ArrayList<>());
-        this.notaFiscal=new NotaFiscal();
+        this.listaProdutosNota = FXCollections.observableList(new ArrayList<>());
+        this.notaFiscal = new NotaFiscal();
         this.notaFiscal.setIdNota(0l);
         this.produtoAtual.setIdProduto(0l);
         this.fornecedor.setIdFornecedor(0l);
@@ -123,6 +139,10 @@ public class ReceberPedidoController implements GenericController<NotaFiscal>{
         this.notaFiscal = notaFiscal;
     }
 
+    public void setNotaFiscal(long idNota, String numero_nota, LocalDate dataNota, LocalDate dataRecebimento, BigDecimal base_calc_icms, BigDecimal valor_icms, BigDecimal base_icms_subst, BigDecimal valor_icms_subst, BigDecimal outrasDespesas, BigDecimal desconto, BigDecimal valorTotalProdutos, BigDecimal valorTotalNota, String observacao) {
+        this.notaFiscal = new NotaFiscal(idNota, numero_nota, fornecedor, contaPagar, dataNota, dataRecebimento, base_calc_icms, valor_icms, base_icms_subst, valor_icms_subst, outrasDespesas, desconto, valorTotalProdutos, valorTotalNota, observacao, listaProdutosNota);
+    }
+
     public ObservableList<ProdutoNotaFiscal> getListaProdutosNota() {
         return listaProdutosNota;
     }
@@ -130,8 +150,9 @@ public class ReceberPedidoController implements GenericController<NotaFiscal>{
     public void setListaProdutosNota(ObservableList<ProdutoNotaFiscal> listaProdutosNota) {
         this.listaProdutosNota = listaProdutosNota;
     }
-    public void setListaProdutosNota(Long idProdutoNotaFiscal,Integer qtdeProduto, BigDecimal valoruUnitario) {
-        this.listaProdutosNota.add(new ProdutoNotaFiscal(idProdutoNotaFiscal, notaFiscal, produtoAtual, qtdeProduto,valoruUnitario,valoruUnitario.multiply(BigDecimal.valueOf(qtdeProduto.doubleValue()))));
+
+    public void setListaProdutosNota(Long idProdutoNotaFiscal, Integer qtdeProduto,BigDecimal valorIpi, BigDecimal valorIcmsSubst, BigDecimal valoruUnitario,BigDecimal despesas, BigDecimal descontos) {
+        this.listaProdutosNota.add(new ProdutoNotaFiscal(idProdutoNotaFiscal, notaFiscal, produtoAtual, qtdeProduto,valorIpi,valorIcmsSubst, valoruUnitario,despesas,descontos, valoruUnitario.multiply(BigDecimal.valueOf(qtdeProduto.doubleValue()))));
     }
 
     public UnidadeMedida getUnidadeMedida() {
@@ -140,6 +161,22 @@ public class ReceberPedidoController implements GenericController<NotaFiscal>{
 
     public void setUnidadeMedida(UnidadeMedida unidadeMedida) {
         this.unidadeMedida = unidadeMedida;
+    }
+
+    public BigDecimal getValTotalNota() {
+        return valTotalNota;
+    }
+
+    public BigDecimal getValTotalProd() {
+        return valTotalProd;
+    }
+
+    public BigDecimal getValTotalIPI() {
+        valTotalIPI = BigDecimal.ZERO;
+        for (ProdutoNotaFiscal prod : listaProdutosNota) {
+            valTotalIPI = valTotalIPI.add((prod.getValorIpi().multiply(prod.getValorTotal().subtract(prod.getDescontos()).add(prod.getDespesas()))));
+        }
+        return valTotalIPI;
     }
 
 }

@@ -34,7 +34,7 @@ public class NotaFiscal implements Serializable {
     @Id
     @Column(columnDefinition = "serial")
     private long idNota;
-    private int numero_nota;
+    private String numero_nota;
     @ManyToOne
     @JoinColumn(nullable = false)
     private Fornecedor fornecedor;
@@ -60,7 +60,7 @@ public class NotaFiscal implements Serializable {
     public NotaFiscal() {
     }
 
-    public NotaFiscal(long idNota, int numero_nota, Fornecedor fornecedor, ContaPagar contaPagar, LocalDate dataNota, LocalDate dataRecebimento, BigDecimal base_calc_icms, BigDecimal valor_icms, BigDecimal base_icms_subst, BigDecimal valor_icms_subst, BigDecimal outrasDespesas, BigDecimal desconto, BigDecimal valorTotalProdutos, BigDecimal valorTotalNota, String observacao, List<ProdutoNotaFiscal> listaProdutos) {
+    public NotaFiscal(long idNota, String numero_nota, Fornecedor fornecedor, ContaPagar contaPagar, LocalDate dataNota, LocalDate dataRecebimento, BigDecimal base_calc_icms, BigDecimal valor_icms, BigDecimal base_icms_subst, BigDecimal valor_icms_subst, BigDecimal outrasDespesas, BigDecimal desconto, BigDecimal valorTotalProdutos, BigDecimal valorTotalNota, String observacao, List<ProdutoNotaFiscal> listaProdutos) {
         this.idNota = idNota;
         this.numero_nota = numero_nota;
         this.fornecedor = fornecedor;
@@ -87,11 +87,11 @@ public class NotaFiscal implements Serializable {
         this.idNota = idNota;
     }
 
-    public int getNumero_nota() {
+    public String getNumero_nota() {
         return numero_nota;
     }
 
-    public void setNumero_nota(int numero_nota) {
+    public void setNumero_nota(String numero_nota) {
         this.numero_nota = numero_nota;
     }
 
@@ -211,7 +211,6 @@ public class NotaFiscal implements Serializable {
     public int hashCode() {
         int hash = 5;
         hash = 71 * hash + (int) (this.idNota ^ (this.idNota >>> 32));
-        hash = 71 * hash + this.numero_nota;
         return hash;
     }
 
@@ -227,7 +226,7 @@ public class NotaFiscal implements Serializable {
             return false;
         }
         final NotaFiscal other = (NotaFiscal) obj;
-        if (this.numero_nota != other.numero_nota) {
+        if (this.numero_nota == null ? other.numero_nota != null : !this.numero_nota.equals(other.numero_nota)) {
             return false;
         }
         return true;

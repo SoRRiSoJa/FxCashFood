@@ -37,18 +37,28 @@ public class ProdutoNotaFiscal implements Serializable {
     @JoinColumn(name = "idproduto")
     private Produto produto;
     private Integer qtdeProduto;
+    private BigDecimal valorIpi;
+    private BigDecimal valorIcmsSubst;
     private BigDecimal valorUnitario;
+    private BigDecimal despesas;
+    private BigDecimal descontos;
     private BigDecimal valorTotal;
+
     public ProdutoNotaFiscal() {
     }
 
-    public ProdutoNotaFiscal(Long idProdutoNotaFiscal, NotaFiscal notaFiscal, Produto produto, Integer qtdeProduto, BigDecimal valoruUnitario,BigDecimal valorTotal) {
+    public ProdutoNotaFiscal(Long idProdutoNotaFiscal, NotaFiscal notaFiscal, Produto produto, Integer qtdeProduto, BigDecimal valorIpi, BigDecimal valorIcmsSubst, BigDecimal valoruUnitario, BigDecimal despesas, BigDecimal descontos, BigDecimal valorTotal) {
         this.idProdutoNotaFiscal = idProdutoNotaFiscal;
         this.notaFiscal = notaFiscal;
         this.produto = produto;
         this.qtdeProduto = qtdeProduto;
         this.valorUnitario = valoruUnitario;
-        this.valorTotal=valorTotal;
+        this.valorTotal = valorTotal;
+        this.valorIpi = valorIpi;
+        this.valorIcmsSubst = valorIcmsSubst;
+        this.despesas = despesas;
+        this.descontos = descontos;
+
     }
 
     public Long getIdProdutoNotaFiscal() {
@@ -98,7 +108,40 @@ public class ProdutoNotaFiscal implements Serializable {
     public void setValorTotal(BigDecimal valorTotal) {
         this.valorTotal = valorTotal;
     }
+
+    public BigDecimal getValorIpi() {
+        return valorIpi;
+    }
+
+    public void setValorIpi(BigDecimal valorIpi) {
+        this.valorIpi = valorIpi;
+    }
+
+    public BigDecimal getValorIcmsSubst() {
+        return valorIcmsSubst;
+    }
+
+    public void setValorIcmsSubst(BigDecimal valorIcmsSubst) {
+        this.valorIcmsSubst = valorIcmsSubst;
+    }
+
+    public BigDecimal getDespesas() {
+        return despesas;
+    }
+
+    public void setDespesas(BigDecimal despesas) {
+        this.despesas = despesas;
+    }
+
+    public BigDecimal getDescontos() {
+        return descontos;
+    }
+
+    public void setDescontos(BigDecimal descontos) {
+        this.descontos = descontos;
+    }
     
+
     @Override
     public int hashCode() {
         int hash = 3;
@@ -130,7 +173,7 @@ public class ProdutoNotaFiscal implements Serializable {
 
     @Override
     public String toString() {
-        return  produto.getDescriao();
+        return produto.getDescriao();
     }
 
 }
