@@ -5,10 +5,8 @@
  */
 package com.cashf.controller.receberpedido;
 
-import com.cashf.controller.prepreparo.PrePreparoController;
 import com.cashf.model.fornecedor.Fornecedor;
 import com.cashf.model.notafiscal.ProdutoNotaFiscal;
-import com.cashf.model.prepreparo.ProdutoPrePreparo;
 import com.cashf.model.produto.Produto;
 import com.cashf.model.produto.UnidadeMedida;
 import com.jfoenix.controls.JFXButton;
@@ -161,7 +159,7 @@ public class ReceberPedidoFXMLController implements GenericViewController, Initi
         getData();
         if (validateFields()) {
             controller.setNotaFiscal(0l, numeroNota, dataNota, dataRecebimento, baseCalculoIcms, valorIcms, baseIcmsSubst, valorIcmsSubst, outrasDespesas, desconto, valorTotalProdutos, valorTotalNota, observacao);
-            System.out.println("NOTA:"+controller.getNotaFiscal().toString());
+            System.out.println("NOTA:" + controller.getNotaFiscal().toString());
         } else {
             PoupUpUtil.accessDenied(erros);
             erros = "";
@@ -184,14 +182,19 @@ public class ReceberPedidoFXMLController implements GenericViewController, Initi
     private void onAdicionar(ActionEvent event) {
         getDataProd();
         if (validateFieldsProd()) {
-            controller.setListaProdutosNota(0l, qtdeRecebida.intValue(),valorIpi,valorIcmsSubstProd, prcoCompra,outrasDespesasProd,descontoProd);
+            controller.setListaProdutosNota(0l, qtdeRecebida.intValue(), valorIpi, valorIcmsSubstProd, prcoCompra, outrasDespesasProd, descontoProd);
             controller.getListaProdutosNota().forEach((pn) -> {
                 System.out.println("P.Nota:" + pn.toString());
             });
             controller.setProdutoAtual(null);
+            controller.calcValTotalIcmsProd();
+            controller.calcValTotalProd();
             System.out.println("Fim lista ---->>>>>>");
-            System.out.println("Tott IPI ----:"+controller.getValTotalIPI());
-            System.out.println("Tott icms ----:"+controller.getValTotalIcmsProd());
+            System.out.println("Total IPI ----:" + controller.getValTotalIPI());
+            
+            System.out.println("Total ICMS ----:" +controller.getValTotalIcms() );
+            System.out.println("Total ICMS Subst ----:" +controller.getValTotalIcmsSubst());
+            System.out.println("Total Produtos ----:" +controller.getValTotalProd());
             tbvProdutos.setItems(controller.getListaProdutosNota());
         } else {
             PoupUpUtil.accessDenied(erros);
@@ -333,6 +336,11 @@ public class ReceberPedidoFXMLController implements GenericViewController, Initi
             erros += "O Valor do desconto deve ser maior ou = 0 \n";
             flag = false;
         }
+        if (valorTotalProdutos.compareTo(BigDecimal.ZERO) <= 0) {
+            erros += "O Valor dos produtos deve ser maior > 0 \n";
+            flag = false;
+        }
+        
         //valorTotalProdutos 
         //valorTotalNota 
         //observacao 
@@ -390,15 +398,60 @@ public class ReceberPedidoFXMLController implements GenericViewController, Initi
         controller.setFornecedor(cbbFornecedor.getValue());
         dataNota = dtpDataNota.getValue();
         numeroNota = txtNumeroNota.getText();
-        valorIcms = new BigDecimal(txtValorIcms.getText());
-        baseCalculoIcms = new BigDecimal(txtBaseCalculoIcms.getText());
-        valorTotalIpi = new BigDecimal(txtValorTotalIpi.getText());
-        baseIcmsSubst = new BigDecimal(txtBaseIcmsSubst.getText());
-        valorIcmsSubst = new BigDecimal(txtValorIcmsSubst.getText());
-        outrasDespesas = new BigDecimal(txtOutrasDespesas.getText());
-        desconto = new BigDecimal(txtDesconto.getText());
-        valorTotalProdutos = new BigDecimal(txtValorTotalProdutos.getText());
-        valorTotalNota = new BigDecimal(txtValorTotalNota.getText());
+        try {
+            valorIcms = new BigDecimal(txtValorIcms.getText());
+        } catch (Exception ex) {
+            System.out.println("Erro ao converter --->>> icms nota:" + ex);
+            valorIcms = BigDecimal.ZERO;
+        }
+        try {
+            baseCalculoIcms = new BigDecimal(txtBaseCalculoIcms.getText());
+        } catch (Exception ex) {
+            System.out.println("Erro ao converter --->>> baseCalculoIcms nota:" + ex);
+            baseCalculoIcms = BigDecimal.ZERO;
+        }
+        try {
+            valorTotalIpi = new BigDecimal(txtValorTotalIpi.getText());
+        } catch (Exception ex) {
+            System.out.println("Erro ao converter --->>> valorTotalIpi nota:" + ex);
+            valorTotalIpi = BigDecimal.ZERO;
+        }
+        try {
+            baseIcmsSubst = new BigDecimal(txtBaseIcmsSubst.getText());
+        } catch (Exception ex) {
+            System.out.println("Erro ao converter --->>> baseIcmsSubst nota:" + ex);
+            baseIcmsSubst = BigDecimal.ZERO;
+        }
+        try {
+            valorIcmsSubst = new BigDecimal(txtValorIcmsSubst.getText());
+        } catch (Exception ex) {
+            System.out.println("Erro ao converter --->>> valorIcmsSubst nota:" + ex);
+            valorIcmsSubst = BigDecimal.ZERO;
+        }
+        try {
+            outrasDespesas = new BigDecimal(txtOutrasDespesas.getText());
+        } catch (Exception ex) {
+            System.out.println("Erro ao converter --->>> outrasDespesas nota:" + ex);
+            outrasDespesas = BigDecimal.ZERO;
+        }
+        try {
+            desconto = new BigDecimal(txtDesconto.getText());
+        } catch (Exception ex) {
+            System.out.println("Erro ao converter --->>> desconto nota:" + ex);
+            desconto = BigDecimal.ZERO;
+        }
+        try {
+            valorTotalProdutos = new BigDecimal(txtValorTotalProdutos.getText());
+        } catch (Exception ex) {
+            System.out.println("Erro ao converter --->>> valorTotalProdutos nota:" + ex);
+            valorTotalProdutos = BigDecimal.ZERO;
+        }
+        try {
+            valorTotalNota = new BigDecimal(txtValorTotalNota.getText());
+        } catch (Exception ex) {
+            System.out.println("Erro ao converter --->>> valorTotalNota nota:" + ex);
+            valorTotalNota = BigDecimal.ZERO;
+        }
         observacao = txtObservacao.getText();
         dataRecebimento = dtpDataRecebimento.getValue();
     }

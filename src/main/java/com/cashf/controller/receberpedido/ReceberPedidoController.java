@@ -39,6 +39,7 @@ public class ReceberPedidoController implements GenericController<NotaFiscal> {
     private BigDecimal valTotalProd;
     private BigDecimal valTotalIPI;
     private BigDecimal valTotalIcms;
+    private BigDecimal valTotalIcmsSubst;
     private ObservableList<ProdutoNotaFiscal> listaProdutosNota;
 
     public ReceberPedidoController() {
@@ -172,6 +173,21 @@ public class ReceberPedidoController implements GenericController<NotaFiscal> {
         return valTotalProd;
     }
 
+    public BigDecimal getValTotalIcms() {
+        return valTotalIcms;
+    }
+
+    public BigDecimal getValTotalIcmsSubst() {
+        return valTotalIcmsSubst;
+    }
+
+    /**
+     * Retorna o valor total do IPI para os produtos de uma Nota Fiscal Calcula
+     * o valor od IPI utilizando o valor informado na Nota Fiscal do produto
+     * efetuando sua soma através de um acumulador que é retornado pela função.
+     *
+     * @return BigDecimal contendo o valot total do IPI dos produtos.
+     */
     public BigDecimal getValTotalIPI() {
         valTotalIPI = BigDecimal.ZERO;
         listaProdutosNota.forEach((prod) -> {
@@ -179,12 +195,30 @@ public class ReceberPedidoController implements GenericController<NotaFiscal> {
         });
         return valTotalIPI;
     }
-    public BigDecimal getValTotalIcmsProd() {
+
+    /**
+     * Calcula o valor total do Icms para os produtos de uma Nota Fiscal Calcula
+     * o valor od ICMS utilizando a aliquota informada no cadastro do produto ou
+     * utiliza o valor do ICMS Subst se informado.
+     *
+     */
+    public void calcValTotalIcmsProd() {
         valTotalIcms = BigDecimal.ZERO;
+        valTotalIcmsSubst = BigDecimal.ZERO;
         listaProdutosNota.forEach((prod) -> {
-            valTotalIcms = valTotalIcms.add(((prod.getProduto().getAliquotasProduto().getAliquotaIcms().divide(BigDecimal.valueOf(100))).multiply((prod.getValorUnitario().subtract(prod.getDescontos()))).add(prod.getDespesas())).multiply(BigDecimal.valueOf(prod.getQtdeProduto())));
+            if (prod.getValorIcmsSubst().compareTo(BigDecimal.ZERO) == 0) {
+                valTotalIcms = valTotalIcms.add(((prod.getProduto().getAliquotasProduto().getAliquotaIcms().divide(BigDecimal.valueOf(100))).multiply((prod.getValorUnitario().subtract(prod.getDescontos()))).add(prod.getDespesas())).multiply(BigDecimal.valueOf(prod.getQtdeProduto())));
+            } else {
+                valTotalIcmsSubst = valTotalIcmsSubst.add(prod.getValorIcmsSubst());
+            }
         });
-        return valTotalIcms;
+    }
+
+    public void calcValTotalProd() {
+        valTotalProd = BigDecimal.ZERO;
+        listaProdutosNota.forEach((prod) -> {
+            valTotalProd = valTotalProd.add(prod.getValorUnitario().multiply(BigDecimal.valueOf(prod.getQtdeProduto().doubleValue())).add(prod.getDespesas()).subtract(prod.getDescontos()));
+        });
     }
 
 }
