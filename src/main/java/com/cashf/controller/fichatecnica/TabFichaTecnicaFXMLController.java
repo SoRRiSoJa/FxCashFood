@@ -135,6 +135,9 @@ public class TabFichaTecnicaFXMLController implements Initializable, GenericView
             FichaTecnicaController.getInstance().insert();
             PoupUpUtil.poupUp("Ficha Técnica Cadastrada", "A Ficha Técnica foi cadastrada com sucesso.", "");
             FichaTecnicaController.getInstance().flushObject();
+            TabListaFichaTecnicaFXMLController.loadTbvFT();
+            loadTbv();
+            clearFields();
         } else {
             PoupUpUtil.errorMessage(paneRoot, MainApp.paneRoot, erros);
             erros = "";
@@ -261,6 +264,9 @@ public class TabFichaTecnicaFXMLController implements Initializable, GenericView
         tbcUnidade.setCellValueFactory(new PropertyValueFactory<>("unidadeMedida"));
         tbcValor.setCellValueFactory(new PropertyValueFactory<>("valorPorcao"));
         tbvFicha.getColumns().setAll(tbcProduto, tbcQtde, tbcUnidade, tbcValor);
+    }
+    private void loadTbv(){
+        tbvFicha.setItems(FichaTecnicaController.getInstance().getListaItensFicha());
     }
 
     private void setUpTableViewItens() {

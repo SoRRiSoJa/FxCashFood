@@ -205,6 +205,8 @@ public class TabPrePreparoFXMLController implements GenericViewController, Initi
             PrePreparoController.getInstance().insert();
             PoupUpUtil.poupUp("Pré-Preparo Cadastrado", "O Pré-Preparo foi cadastrado com sucesso.", "");
             PrePreparoController.getInstance().flushObject();
+            loadTbvReceita();
+            clearFields();
         } else {
             PoupUpUtil.errorMessage(paneRoot, MainApp.paneRoot, erros);
             erros = "";

@@ -399,13 +399,25 @@ public class TabProdutoFXMLController implements GenericViewController, Initiali
             flag = false;
         }
 
-        if (preco_custo == null || preco_custo.compareTo(BigDecimal.ZERO) <= 0) {
-            erros += "O preço de custo deve ser maio que 0! \n";
+        if (preco_custo.compareTo(BigDecimal.ZERO) < 0) {
+            erros += "O preço de custo não pode ser negativo! \n";
             flag = false;
         }
-        if (preco_venda == null || preco_venda.compareTo(BigDecimal.ZERO) <= 0) {
-            erros += "O preço de venda deve ser maio que 0! \n";
+        if (preco_venda.compareTo(BigDecimal.ZERO) < 0) {
+            erros += "O preço de venda nao pode ser negativo! \n";
             flag = false;
+        }
+
+        if ((cbbProdutos.getSelectionModel().getSelectedItem().equals(TipoProduto.FICHA_TECNICA) || cbbProdutos.getSelectionModel().getSelectedItem().equals(TipoProduto.PRE_PREPARO))) {
+        } else {
+            if ((preco_custo.compareTo(BigDecimal.ZERO) == 0)) {
+                erros += "O preço de custo deve ser maio que 0! \n";
+                flag = false;
+            }
+            if (preco_venda.compareTo(BigDecimal.ZERO) == 0) {
+                erros += "O preço de venda deve ser maio que 0! \n";
+                flag = false;
+            }
         }
 
         //--
@@ -489,12 +501,32 @@ public class TabProdutoFXMLController implements GenericViewController, Initiali
         ProdutoController.getInstance().setGrupo(cbbGrupo.getSelectionModel().getSelectedItem());
         ProdutoController.getInstance().setTipoProduto(cbbProdutos.getSelectionModel().getSelectedItem());
         ncm = txtNcm.getText();
-        preco_custo = new BigDecimal(txtPrecoCusto.getText());
-        preco_venda = new BigDecimal(txtPrecoVenda.getText());
+        try {
+            preco_custo = new BigDecimal(txtPrecoCusto.getText());
+        } catch (Exception ex) {
+            preco_custo = BigDecimal.ZERO;
+        }
+        try {
+            preco_venda = new BigDecimal(txtPrecoVenda.getText());
+        } catch (Exception ex) {
+            preco_venda = BigDecimal.ZERO;
+        }
         codigoReferencia = txtCodRef.getText();
-        qtdeEmbalagem = new BigDecimal(txtQtdeEmbalagem.getText());
-        unidadesEstoque = new BigDecimal(txtQtdeProd.getText());
-        qtdeProduto = unidadesEstoque.multiply(qtdeEmbalagem);
+        try {
+            qtdeEmbalagem = new BigDecimal(txtQtdeEmbalagem.getText());
+        } catch (Exception ex) {
+            qtdeEmbalagem = BigDecimal.ZERO;
+        }
+        try {
+            unidadesEstoque = new BigDecimal(txtQtdeProd.getText());
+        } catch (Exception ex) {
+            unidadesEstoque = BigDecimal.ZERO;
+        }
+        try {
+            qtdeProduto = unidadesEstoque.multiply(qtdeEmbalagem);
+        } catch (Exception ex) {
+            qtdeProduto = BigDecimal.ZERO;
+        }
         ProdutoController.getInstance().setSituacaoTributaria(cbbSituacaoTributaria.getSelectionModel().getSelectedItem());
         percentualPis = new BigDecimal(txtPercentualPIS.getText());
         aliquotaIcms = new BigDecimal(txtAliquotaICMS.getText());

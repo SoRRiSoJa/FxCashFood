@@ -77,6 +77,8 @@ public class FichaTecnicaController implements GenericController<FichaTecnica> {
         this.fichaTecnica.setIdFichaTecnica(0l);
         this.custoTotal=BigDecimal.ZERO;
         this.listaItensFicha=FXCollections.observableList(new ArrayList<>());
+        this.lista=FXCollections.observableList(fichaTecnicaDAO.listAll());
+        this.comboBoxItensFicha=FXCollections.observableList(produtoDAO.listProdNotFicha());
     }
 
     @Override

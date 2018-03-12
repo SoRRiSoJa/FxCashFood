@@ -38,6 +38,7 @@ public class ReceberPedidoController implements GenericController<NotaFiscal> {
     private BigDecimal valTotalNota;
     private BigDecimal valTotalProd;
     private BigDecimal valTotalIPI;
+    private BigDecimal valTotalIcms;
     private ObservableList<ProdutoNotaFiscal> listaProdutosNota;
 
     public ReceberPedidoController() {
@@ -151,8 +152,8 @@ public class ReceberPedidoController implements GenericController<NotaFiscal> {
         this.listaProdutosNota = listaProdutosNota;
     }
 
-    public void setListaProdutosNota(Long idProdutoNotaFiscal, Integer qtdeProduto,BigDecimal valorIpi, BigDecimal valorIcmsSubst, BigDecimal valoruUnitario,BigDecimal despesas, BigDecimal descontos) {
-        this.listaProdutosNota.add(new ProdutoNotaFiscal(idProdutoNotaFiscal, notaFiscal, produtoAtual, qtdeProduto,valorIpi,valorIcmsSubst, valoruUnitario,despesas,descontos, valoruUnitario.multiply(BigDecimal.valueOf(qtdeProduto.doubleValue()))));
+    public void setListaProdutosNota(Long idProdutoNotaFiscal, Integer qtdeProduto, BigDecimal valorIpi, BigDecimal valorIcmsSubst, BigDecimal valoruUnitario, BigDecimal despesas, BigDecimal descontos) {
+        this.listaProdutosNota.add(new ProdutoNotaFiscal(idProdutoNotaFiscal, notaFiscal, produtoAtual, qtdeProduto, valorIpi, valorIcmsSubst, valoruUnitario, despesas, descontos, valoruUnitario.multiply(BigDecimal.valueOf(qtdeProduto.doubleValue()))));
     }
 
     public UnidadeMedida getUnidadeMedida() {
@@ -173,10 +174,17 @@ public class ReceberPedidoController implements GenericController<NotaFiscal> {
 
     public BigDecimal getValTotalIPI() {
         valTotalIPI = BigDecimal.ZERO;
-        for (ProdutoNotaFiscal prod : listaProdutosNota) {
-            valTotalIPI = valTotalIPI.add((prod.getValorIpi().multiply(prod.getValorTotal().subtract(prod.getDescontos()).add(prod.getDespesas()))));
-        }
+        listaProdutosNota.forEach((prod) -> {
+            valTotalIPI = valTotalIPI.add((prod.getValorIpi()));
+        });
         return valTotalIPI;
+    }
+    public BigDecimal getValTotalIcmsProd() {
+        valTotalIcms = BigDecimal.ZERO;
+        listaProdutosNota.forEach((prod) -> {
+            valTotalIcms = valTotalIcms.add(((prod.getProduto().getAliquotasProduto().getAliquotaIcms().divide(BigDecimal.valueOf(100))).multiply((prod.getValorUnitario().subtract(prod.getDescontos()))).add(prod.getDespesas())).multiply(BigDecimal.valueOf(prod.getQtdeProduto())));
+        });
+        return valTotalIcms;
     }
 
 }
