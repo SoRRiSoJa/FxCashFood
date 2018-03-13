@@ -73,6 +73,8 @@ public class FXMenuFXMLController implements Initializable {
     private JFXButton btnNaDois;
     @FXML
     private JFXButton btnNATres;
+    @FXML
+    private JFXButton btnCaixa;
 
     /**
      * Initializes the controller class.
@@ -284,6 +286,12 @@ public class FXMenuFXMLController implements Initializable {
 
     @FXML
     private void OnNaTres(ActionEvent event) {
+    loadFXML("/fxml/contasPagar/ContasPagarFXML.fxml");
+    }
+
+    @FXML
+    private void OnCaixa(ActionEvent event) {
+    loadFXML("/fxml/caixa/GerenciarCaixaFXML.fxml");
     }
 
 }

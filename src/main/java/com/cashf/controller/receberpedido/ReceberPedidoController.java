@@ -226,10 +226,10 @@ public class ReceberPedidoController implements GenericController<NotaFiscal> {
         this.valTotalIPI = getValTotalIPI();
         calcValTotalIcmsProd();
         calcValTotalProd();
-        valTotalNota.add(valTotalIPI);
-        valTotalNota.add(valTotalIcms);
-        valTotalNota.add(valTotalIcmsSubst);
-        valTotalNota.add(valTotalProd);
+        valTotalNota=valTotalNota.add(valTotalIPI);
+        valTotalNota=valTotalNota.add(valTotalIcms);
+        valTotalNota=valTotalNota.add(valTotalIcmsSubst);
+        valTotalNota=valTotalNota.add(valTotalProd);
     }
 
 }

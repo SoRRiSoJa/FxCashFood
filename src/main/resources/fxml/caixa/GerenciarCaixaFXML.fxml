@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<Pane fx:id="paneRoot" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="632.0" prefWidth="1366.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cashf.controller.caixa.GerenciarCaixaFXMLController">
+   <children>
+      <Pane layoutX="20.0" layoutY="20.0" prefHeight="477.0" prefWidth="640.0" style="-fx-background-color: #ffffff;">
+         <effect>
+            <DropShadow />
+         </effect>
+         <children>
+            <Pane prefHeight="20.0" prefWidth="640.0" style="-fx-background-color: #0081cb;">
+               <children>
+                  <Label layoutX="5.0" layoutY="2.0" text="Gerenciar Caixa:" textFill="WHITE" />
+               </children>
+            </Pane>
+            <TableView fx:id="tbvMovimentacoes" layoutX="15.0" layoutY="51.0" prefHeight="211.0" prefWidth="601.0" stylesheets="@../../styles/TableViewCSS.css">
+               <columns>
+                  <TableColumn fx:id="tbcDescricao" prefWidth="420.0" text="Descrição" />
+                  <TableColumn fx:id="tbcTipo" minWidth="9.0" prefWidth="64.0" text="Tipo" />
+                  <TableColumn fx:id="tbcValor" prefWidth="52.0" text="Valor" />
+                  <TableColumn fx:id="tbcSaldo" prefWidth="64.0" text="Saldo" />
+               </columns>
+            </TableView>
+            <HBox alignment="TOP_CENTER" layoutX="18.0" layoutY="406.0" prefHeight="60.0" prefWidth="601.0">
+               <children>
+                  <JFXButton fx:id="btnAbrirCaixa" contentDisplay="TOP" onAction="#onSalvar" prefHeight="26.0" prefWidth="100.0" ripplerFill="WHITE" style="-fx-background-color: #2196f3;" text="ABRIR CAIXA" textFill="WHITE">
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin>
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                     <graphic>
+                        <MaterialDesignIconView fill="WHITE" glyphName="PLUS" size="29" />
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton fx:id="btnSuprir" contentDisplay="TOP" layoutX="10.0" layoutY="10.0" onAction="#onNovo" prefHeight="26.0" prefWidth="100.0" ripplerFill="WHITE" style="-fx-background-color: #00e676;" text="SUPRIR CAIXA" textFill="WHITE">
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin>
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                     <graphic>
+                        <MaterialDesignIconView fill="WHITE" glyphName="TRENDING_UP" size="29" />
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton fx:id="btnSangrar" contentDisplay="TOP" layoutX="100.0" layoutY="10.0" onAction="#onExcluir" prefHeight="26.0" prefWidth="108.0" ripplerFill="WHITE" style="-fx-background-color: #d32f2f;" text="SANGRAR CAIXA" textFill="WHITE">
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin>
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                     <graphic>
+                        <MaterialDesignIconView fill="WHITE" glyphName="TRENDING_DOWN" size="29" />
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton fx:id="btnFecharCaixa" contentDisplay="TOP" layoutX="190.0" layoutY="10.0" onAction="#onLimpar" prefHeight="26.0" prefWidth="100.0" ripplerFill="WHITE" style="-fx-background-color: #00251a;" text="FECHAR CAIXA" textFill="WHITE">
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin>
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                     <graphic>
+                        <MaterialDesignIconView fill="WHITE" glyphName="CLIPBOARD_CHECK" size="29" />
+                     </graphic>
+                  </JFXButton>
+               </children>
+            </HBox>
+            <Separator layoutX="17.0" layoutY="280.0" prefHeight="0.0" prefWidth="600.0" />
+            <Label layoutX="28.0" layoutY="290.0" text="Total Recebido:" />
+            <Label layoutX="28.0" layoutY="330.0" text="Total Pago:" />
+            <Label layoutX="28.0" layoutY="370.0" text="Saldo Atual:" />
+            <Separator layoutX="17.0" layoutY="395.0" prefHeight="0.0" prefWidth="600.0" />
+            <Separator layoutX="16.0" layoutY="281.0" orientation="VERTICAL" prefHeight="114.0" prefWidth="0.0" />
+            <Separator layoutX="615.0" layoutY="281.0" orientation="VERTICAL" prefHeight="114.0" prefWidth="0.0" />
+            <Label fx:id="lblTotalRecebido" layoutX="139.0" layoutY="290.0" text="Label" />
+            <Label fx:id="lblTotalPago" layoutX="139.0" layoutY="330.0" text="Label" />
+            <Label fx:id="lblSaldo" layoutX="139.0" layoutY="370.0" text="Label" />
+         </children>
+      </Pane>
+      <Pane layoutX="672.0" layoutY="20.0" prefHeight="477.0" prefWidth="640.0" style="-fx-background-color: #ffffff;">
+         <effect>
+            <DropShadow />
+         </effect>
+         <children>
+            <Pane prefHeight="20.0" prefWidth="640.0" style="-fx-background-color: #0081cb;">
+               <children>
+                  <Label layoutX="5.0" layoutY="2.0" text="Caixas Anteriores:" textFill="WHITE" />
+               </children>
+            </Pane>
+            <TableView fx:id="tbvLista" layoutX="15.0" layoutY="51.0" prefHeight="211.0" prefWidth="601.0" stylesheets="@../../styles/TableViewCSS.css">
+               <columns>
+                  <TableColumn fx:id="tbcDataAb" prefWidth="159.0" text="Data Abertura" />
+                  <TableColumn fx:id="tbcDataFe" minWidth="9.0" prefWidth="136.0" text="Data Fechamento" />
+               </columns>
+            </TableView>
+         </children>
+      </Pane>
+   </children>
+</Pane>

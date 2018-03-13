@@ -73,6 +73,8 @@ Contributor(s):
         <mapping class="com.cashf.model.notafiscal.NotaFiscal" />
         <mapping class="com.cashf.model.notafiscal.ProdutoNotaFiscal" />
         <mapping class="com.cashf.model.contasPagar.ContaPagar" />
+        <mapping class="com.cashf.model.caixa.Caixa" />
+        <mapping class="com.cashf.model.caixa.CaixaMovimento" />
         
     </session-factory>
 </hibernate-configuration>
