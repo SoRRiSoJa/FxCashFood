@@ -187,14 +187,14 @@ public class ReceberPedidoFXMLController implements GenericViewController, Initi
                 System.out.println("P.Nota:" + pn.toString());
             });
             controller.setProdutoAtual(null);
-            controller.calcValTotalIcmsProd();
-            controller.calcValTotalProd();
+            controller.calcValTotalNota();
             System.out.println("Fim lista ---->>>>>>");
             System.out.println("Total IPI ----:" + controller.getValTotalIPI());
             
             System.out.println("Total ICMS ----:" +controller.getValTotalIcms() );
             System.out.println("Total ICMS Subst ----:" +controller.getValTotalIcmsSubst());
             System.out.println("Total Produtos ----:" +controller.getValTotalProd());
+            System.out.println("Total Nota ----:" +controller.getValTotalNota());
             tbvProdutos.setItems(controller.getListaProdutosNota());
         } else {
             PoupUpUtil.accessDenied(erros);

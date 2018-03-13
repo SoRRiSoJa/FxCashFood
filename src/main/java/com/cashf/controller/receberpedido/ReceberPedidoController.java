@@ -154,7 +154,7 @@ public class ReceberPedidoController implements GenericController<NotaFiscal> {
     }
 
     public void setListaProdutosNota(Long idProdutoNotaFiscal, Integer qtdeProduto, BigDecimal valorIpi, BigDecimal valorIcmsSubst, BigDecimal valoruUnitario, BigDecimal despesas, BigDecimal descontos) {
-        this.listaProdutosNota.add(new ProdutoNotaFiscal(idProdutoNotaFiscal, notaFiscal, produtoAtual, qtdeProduto, valorIpi, valorIcmsSubst, valoruUnitario, despesas, descontos, valoruUnitario.multiply(BigDecimal.valueOf(qtdeProduto.doubleValue()))));
+        this.listaProdutosNota.add(new ProdutoNotaFiscal(idProdutoNotaFiscal, notaFiscal, produtoAtual, qtdeProduto, valorIpi, valorIcmsSubst, valoruUnitario, despesas, descontos, valoruUnitario.multiply(BigDecimal.valueOf(qtdeProduto.doubleValue())).subtract(descontos).add(despesas)));
     }
 
     public UnidadeMedida getUnidadeMedida() {
@@ -202,7 +202,7 @@ public class ReceberPedidoController implements GenericController<NotaFiscal> {
      * utiliza o valor do ICMS Subst se informado.
      *
      */
-    public void calcValTotalIcmsProd() {
+    private void calcValTotalIcmsProd() {
         valTotalIcms = BigDecimal.ZERO;
         valTotalIcmsSubst = BigDecimal.ZERO;
         listaProdutosNota.forEach((prod) -> {
@@ -214,11 +214,22 @@ public class ReceberPedidoController implements GenericController<NotaFiscal> {
         });
     }
 
-    public void calcValTotalProd() {
+    private void calcValTotalProd() {
         valTotalProd = BigDecimal.ZERO;
         listaProdutosNota.forEach((prod) -> {
             valTotalProd = valTotalProd.add(prod.getValorUnitario().multiply(BigDecimal.valueOf(prod.getQtdeProduto().doubleValue())).add(prod.getDespesas()).subtract(prod.getDescontos()));
         });
+    }
+
+    public void calcValTotalNota() {
+        valTotalNota = BigDecimal.ZERO;
+        this.valTotalIPI = getValTotalIPI();
+        calcValTotalIcmsProd();
+        calcValTotalProd();
+        valTotalNota.add(valTotalIPI);
+        valTotalNota.add(valTotalIcms);
+        valTotalNota.add(valTotalIcmsSubst);
+        valTotalNota.add(valTotalProd);
     }
 
 }

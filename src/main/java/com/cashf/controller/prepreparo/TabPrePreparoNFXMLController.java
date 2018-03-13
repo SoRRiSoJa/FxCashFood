@@ -127,7 +127,7 @@ public class TabPrePreparoNFXMLController implements GenericViewController, Init
     private static Label _lblCustoTotal;
     private static TableColumn _btnExcluirItem;
     private static JFXComboBox<UnidadeMedida> _cbbUnidadeMedidaProd;
-    
+
     //--
     private String erros;
     private String pesquisa;
@@ -179,7 +179,7 @@ public class TabPrePreparoNFXMLController implements GenericViewController, Init
     private void onSalvar(ActionEvent event) {
         getData();
         if (validateFields()) {
-            
+
             PrePreparoController.getInstance().setPrePreparo(0l,
                     PrePreparoController.getInstance().getProdutoPrincipal(),
                     LocalDate.now(),
@@ -189,9 +189,11 @@ public class TabPrePreparoNFXMLController implements GenericViewController, Init
                     true);
 
             PrePreparoController.getInstance().insert();
-            
+
             PoupUpUtil.poupUp("Pré-Preparo Cadastrado", "O Pré-Preparo foi cadastrado com sucesso.", "");
             PrePreparoController.getInstance().flushObject();
+            loadTbv();
+            clearFields();
         } else {
             PoupUpUtil.errorMessage(paneRoot, MainApp.paneRoot, erros);
             erros = "";
@@ -207,7 +209,7 @@ public class TabPrePreparoNFXMLController implements GenericViewController, Init
 
     @FXML
     private void onExcluir(ActionEvent event) {
-        if (PrePreparoController.getInstance().getPrePreparo().getIdPrepreparo()!= 0l) {
+        if (PrePreparoController.getInstance().getPrePreparo().getIdPrepreparo() != 0l) {
             Notifications notificationBuilder;
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Cofirmar Excluir PrePreparo!");
@@ -311,6 +313,10 @@ public class TabPrePreparoNFXMLController implements GenericViewController, Init
             erros += "O Rendimento da receita deve ser Informado.\n";
             flag = false;
         }
+        if (cbbUnidadeMedidaProd.getSelectionModel().getSelectedItem() == null) {
+            erros += "Voce deve selecionar uma unidade de medida para a receita.\n";
+            flag = false;
+        }
         if (cbbProduto.getSelectionModel().getSelectedItem() == null) {
             erros += "Voce deve selecionar o produto principal da receita.\n";
             flag = false;
@@ -328,6 +334,7 @@ public class TabPrePreparoNFXMLController implements GenericViewController, Init
             erros += "Você deve selecionar Um Produto para adicionar a lista \n";
             flag = false;
         }
+        
 
         return flag;
     }
@@ -341,6 +348,9 @@ public class TabPrePreparoNFXMLController implements GenericViewController, Init
         }
         if (cbbProduto.getSelectionModel().getSelectedItem() != null) {
             PrePreparoController.getInstance().setProdutoPrincipal(cbbProduto.getItems().get(cbbProduto.getSelectionModel().getSelectedIndex()));
+        }
+        if (cbbUnidadeMedidaProd.getSelectionModel().getSelectedItem() != null) {
+            PrePreparoController.getInstance().setUnidadeMedidaProd(cbbUnidadeMedidaProd.getItems().get(cbbUnidadeMedidaProd.getSelectionModel().getSelectedIndex()));
         }
     }
 

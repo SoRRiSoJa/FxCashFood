@@ -30,6 +30,7 @@ public class AtualizarEstoque {
     private PrePreparo prePreparo;
     private AjusteEstoque ajusteEstoque;
     private TipoAjuste tipoAjuste;
+    private UnidadeMedida unidadeMEdida;
 
     public AtualizarEstoque() {
         this.produtoDAO = new ProdutoDAO(Produto.class);
@@ -95,11 +96,12 @@ public class AtualizarEstoque {
             });
             produto = produtoDAO.findById(prePreparo.getProdutoPrincipal().getIdProduto());
             produto.setQtdeProduto(prePreparo.getRendimento());
-            produto.setPreco_custo(prePreparo.getCustoTotal());
-            produto.setPreco_venda(prePreparo.getCustoTotal());
+            produto.setUnidadeMedida(unidadeMEdida);
+            produto.setPreco_custo(prePreparo.getCustoTotal().divide(prePreparo.getRendimento()));
+            produto.setPreco_venda(prePreparo.getCustoTotal().divide(prePreparo.getRendimento()));
             produtoDAO.update(produto);
         } catch (Exception ex) {
-            System.out.println("Erro ao adicionar Ppre-preparo:--->>>> " + ex);
+            System.out.println("Erro ao adicionar Pre-preparo:--->>>> " + ex);
             flag = false;
         }
         return flag;
@@ -127,6 +129,14 @@ public class AtualizarEstoque {
 
     public void setAjusteEstoque(AjusteEstoque ajusteEstoque) {
         this.ajusteEstoque = ajusteEstoque;
+    }
+
+    public UnidadeMedida getUnidadeMEdida() {
+        return unidadeMEdida;
+    }
+
+    public void setUnidadeMEdida(UnidadeMedida unidadeMEdida) {
+        this.unidadeMEdida = unidadeMEdida;
     }
 
     public void setAjusteEstoque(String motivo, LocalDate dataAjuste, LocalTime horaAjuste, BigDecimal qtdeAjustada) {

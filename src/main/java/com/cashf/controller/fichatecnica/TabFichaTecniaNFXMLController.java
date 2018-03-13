@@ -129,6 +129,7 @@ public class TabFichaTecniaNFXMLController implements Initializable, GenericView
         loadCbbFicha();
         loadCbbUnidadeMedida();
         loadTbv();
+        loadTbvFicha();
     }
 
     @FXML
@@ -153,7 +154,7 @@ public class TabFichaTecniaNFXMLController implements Initializable, GenericView
             PoupUpUtil.poupUp("Ficha Técnica Cadastrada", "A Ficha Técnica foi cadastrada com sucesso.", "");
             FichaTecnicaController.getInstance().flushObject();
             clearFields();
-            loadTbv();
+            loadTbvFicha();
         } else {
             PoupUpUtil.errorMessage(paneRoot, MainApp.paneRoot, erros);
             erros = "";
@@ -321,6 +322,9 @@ public class TabFichaTecniaNFXMLController implements Initializable, GenericView
 
     private void loadTbv() {
         tbvProdutos.setItems(FichaTecnicaController.getInstance().getComboBoxItensFicha());
+    }
+    private void loadTbvFicha() {
+        tbvFicha.setItems(FichaTecnicaController.getInstance().getListaItensFicha());
     }
 
     private void setUpRadioButtons() {
