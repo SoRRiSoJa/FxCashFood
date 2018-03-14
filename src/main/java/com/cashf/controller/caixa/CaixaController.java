@@ -10,7 +10,6 @@ import com.cashf.dao.caixa.CaixaDAO;
 import com.cashf.dao.caixamovimento.CaixaMovimentoDAO;
 import com.cashf.model.caixa.Caixa;
 import com.cashf.model.caixa.CaixaMovimento;
-import com.cashf.model.caixa.Caixa_;
 import com.cashf.model.caixa.TPMov;
 import com.cashf.model.usuario.Usuario;
 import controller.GenericController;
@@ -170,8 +169,10 @@ public class CaixaController implements GenericController<Caixa> {
     }
 
     public void abrirCaixa(LocalDate dataAbertura,LocalTime horaAbertura, BigDecimal valorInicial) {
+        System.out.println("USu Carai"+LoginController.getInstance().getUsuario().toString());
         setCaixaAberto(0l, dataAbertura,horaAbertura, null,null, valorInicial, LoginController.getInstance().getUsuario());
-        this.caixaAberto.setIdCaixa(caixaDAO.save(caixa));
+        
+        this.caixaAberto.setIdCaixa(caixaDAO.save(caixaAberto));
         setCaixaMovimento(0l, dataAbertura, "* LANÇAMENTO INICIAL - ABERTURA CAIXA *", valorInicial, TPMov.CREDITO, getCaixaAberto());
         this.caixaMovimento.setIdCaixaMovimento(caixaMovimentoDAO.save(caixaMovimento));
         listaMov.add(caixaMovimento);

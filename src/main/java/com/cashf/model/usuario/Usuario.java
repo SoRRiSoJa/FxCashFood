@@ -24,6 +24,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 @Entity
 @Table(name = "usuario")
 public class Usuario implements Serializable {
+
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Id
     @Column(columnDefinition = "serial")
@@ -48,7 +49,7 @@ public class Usuario implements Serializable {
         this.nivel = nivel;
         this.status = status;
     }
-    
+
     public Long getId() {
         return idUsuario;
     }
@@ -72,8 +73,6 @@ public class Usuario implements Serializable {
     public void setSenha(String senha) {
         this.senha = senha;
     }
-
-   
 
     public UNivel getNivel() {
         return nivel;
@@ -110,4 +109,10 @@ public class Usuario implements Serializable {
         }
         return true;
     }
+
+    @Override
+    public String toString() {
+        return idUsuario + "-" + login + "|" + nivel;
+    }
+
 }

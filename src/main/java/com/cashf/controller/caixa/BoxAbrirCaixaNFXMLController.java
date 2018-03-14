@@ -58,6 +58,8 @@ public class BoxAbrirCaixaNFXMLController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        loadDateTime();
+        loadUser();
     }
 
     @FXML
