@@ -26,10 +26,11 @@
             </Pane>
             <TableView fx:id="tbvMovimentacoes" layoutX="15.0" layoutY="51.0" prefHeight="211.0" prefWidth="601.0" stylesheets="@../../styles/TableViewCSS.css">
                <columns>
-                  <TableColumn fx:id="tbcDescricao" prefWidth="420.0" text="Descrição" />
-                  <TableColumn fx:id="tbcTipo" minWidth="9.0" prefWidth="64.0" text="Tipo" />
-                  <TableColumn fx:id="tbcValor" prefWidth="52.0" text="Valor" />
-                  <TableColumn fx:id="tbcSaldo" prefWidth="64.0" text="Saldo" />
+                  <TableColumn fx:id="tbcDescricao" prefWidth="285.9999694824219" text="Descrição" />
+                  <TableColumn fx:id="tbcData" minWidth="9.0" prefWidth="80.00003051757812" text="Data" />
+                  <TableColumn fx:id="tbcTipo" prefWidth="85.0" text="Tipo" />
+                  <TableColumn fx:id="tbcValor" prefWidth="78.0" text="Valor" />
+                  <TableColumn fx:id="btnEstornar" prefWidth="72.0" text="Estornar" />
                </columns>
             </TableView>
             <HBox alignment="TOP_CENTER" layoutX="18.0" layoutY="406.0" prefHeight="60.0" prefWidth="601.0">

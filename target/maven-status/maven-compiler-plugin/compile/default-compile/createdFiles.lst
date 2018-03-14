@@ -147,6 +147,7 @@ dao/GenericDAOIMP.class
 com/cashf/model/fornecedor/Fornecedor.class
 com/cashf/controller/funcionario/TabFuncionarioFXMLController$ButtonCellDelete$1.class
 com/cashf/model/usuario/UNivel.class
+com/cashf/controller/caixa/GerenciarCaixaFXMLController$ButtonCellCashBack.class
 com/cashf/model/parametros/Parametros_.class
 com/cashf/model/telefone/Telefone.class
 com/cashf/controller/funcionario/TabFuncionarioFXMLController$1.class
@@ -159,6 +160,8 @@ com/cashf/model/fichatecnica/FichaTecnica.class
 com/cashf/controller/login/FXLoginFXMLController.class
 com/cashf/model/telefone/Telefone_.class
 com/cashf/controller/cliente/TabClientesFXMLController$ButtonCellDelete$1.class
+com/cashf/controller/caixa/GerenciarCaixaFXMLController$1.class
+com/cashf/controller/caixa/GerenciarCaixaFXMLController$ButtonCellCashBack$1.class
 com/cashf/controller/ajusteestoque/AjusteEstoqueController.class
 com/cashf/controller/caixa/BoxFecharCaixaFXMLController.class
 com/cashf/model/produto/AliquotasProduto.class
