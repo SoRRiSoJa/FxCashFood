@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXDatePicker?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import com.jfoenix.controls.JFXTimePicker?>
+<?import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<Pane fx:id="paneRoot" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="235.0" prefWidth="683.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cashf.controller.caixa.BoxSangrarCaixaFXMLController">
+   <children>
+      <Pane prefHeight="20.0" prefWidth="683.0" style="-fx-background-color: #0081cb;">
+         <children>
+            <Label layoutX="3.0" text="Sangrar Caixa:" textFill="WHITE" />
+         </children>
+      </Pane>
+      <Label layoutX="250.0" layoutY="30.0" text="Data da Sangria:" />
+      <Label layoutX="473.0" layoutY="30.0" text="Hora da Sangria:" />
+      <JFXDatePicker fx:id="dtpDataSangria" defaultColor="#004ba0" editable="false" layoutX="250.0" layoutY="56.0" overLay="true" prefHeight="26.0" prefWidth="200.0" promptText="Data de Sangria" />
+      <JFXTimePicker fx:id="dtpHoraSangria" defaultColor="#004ba0" layoutX="473.0" layoutY="56.0" overLay="true" prefHeight="26.0" prefWidth="200.0" promptText="Hora do Sangria" />
+      <Label layoutX="10.0" layoutY="30.0" text="Usuário:" />
+      <Label fx:id="lblUsuario" layoutX="10.0" layoutY="56.0" prefHeight="26.0" prefWidth="200.0" />
+      <HBox layoutX="10.0" layoutY="178.0" prefHeight="48.0" prefWidth="662.0">
+         <children>
+            <JFXButton fx:id="btnSangrarCaixa" contentDisplay="TOP" onAction="#onAbrir" prefHeight="26.0" prefWidth="100.0" ripplerFill="WHITE" style="-fx-background-color: #00e676;" text="SANGRAR " textFill="WHITE">
+               <font>
+                  <Font size="10.0" />
+               </font>
+               <graphic>
+                  <MaterialDesignIconView fill="WHITE" glyphName="PLUS" size="16" />
+               </graphic>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <HBox.margin>
+                  <Insets left="430.0" right="10.0" />
+               </HBox.margin>
+            </JFXButton>
+            <JFXButton fx:id="btnCancelar" contentDisplay="TOP" onAction="#onCancelar" prefHeight="26.0" prefWidth="108.0" ripplerFill="WHITE" style="-fx-background-color: #d32f2f;" text="CANCELAR" textFill="WHITE">
+               <font>
+                  <Font size="10.0" />
+               </font>
+               <graphic>
+                  <MaterialDesignIconView fill="WHITE" glyphName="CLIPBOARD_CHECK" size="16" />
+               </graphic>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </JFXButton>
+         </children>
+      </HBox>
+      <Separator layoutX="14.0" layoutY="162.0" prefHeight="2.0" prefWidth="662.0" />
+      <JFXTextField fx:id="txtSaldoAnteriro" labelFloat="true" layoutX="251.0" layoutY="104.0" prefHeight="26.0" prefWidth="165.0" promptText="Saldo anterior:" />
+      <JFXTextField fx:id="txtValor" labelFloat="true" layoutX="473.0" layoutY="104.0" prefHeight="26.0" prefWidth="165.0" promptText="Valor a retirar" />
+      <Label fx:id="lblSaldoFinal" layoutX="473.0" layoutY="140.0" prefHeight="16.0" prefWidth="165.0" textFill="#fc0e0e" />
+   </children>
+</Pane>

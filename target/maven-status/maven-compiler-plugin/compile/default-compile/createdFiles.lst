@@ -46,6 +46,7 @@ util/ProdCalcUtil.class
 com/cashf/controller/caixa/CaixaController.class
 com/cashf/controller/fichatecnica/TabFichaTecniaNFXMLController$ButtonCellDelete.class
 com/cashf/model/funcionario/Funcionario_.class
+com/cashf/controller/caixa/BoxSangrarCaixaFXMLController.class
 com/cashf/model/contacorrente/ContaCorrente.class
 com/cashf/model/meiopagamento/MeioPagamento.class
 com/cashf/model/fichatecnica/FichaTecnica_.class
@@ -79,6 +80,7 @@ com/cashf/model/pessoa/Sexo.class
 com/cashf/model/produto/Produto.class
 util/BDInsert.class
 com/cashf/dao/produto/GrupoDAO.class
+com/cashf/controller/caixa/BoxSuprirCaixaFXMLController.class
 com/cashf/model/pessoa/Pessoa.class
 com/cashf/controller/parametrizacao/GerenciarParametrizacaoFXMLController.class
 com/cashf/model/estado/Estado_.class
@@ -93,6 +95,7 @@ com/cashf/controller/fichatecnica/TabFichaTecniaNFXMLController$ButtonCellDelete
 com/cashf/controller/receberpedido/ReceberPedidoFXMLController.class
 com/cashf/model/estado/Estado.class
 com/cashf/model/ajusteestoque/AjusteEstoque_.class
+com/cashf/controller/caixa/BoxAbrirCaixaNFXMLController.class
 com/cashf/controller/menu/FXMenuFXMLController.class
 com/cashf/dao/caixamovimento/CaixaMovimentoDAO.class
 com/cashf/controller/fichatecnica/TabFichaTecnicaFXMLController$ButtonCellDelete.class
@@ -157,6 +160,7 @@ com/cashf/controller/login/FXLoginFXMLController.class
 com/cashf/model/telefone/Telefone_.class
 com/cashf/controller/cliente/TabClientesFXMLController$ButtonCellDelete$1.class
 com/cashf/controller/ajusteestoque/AjusteEstoqueController.class
+com/cashf/controller/caixa/BoxFecharCaixaFXMLController.class
 com/cashf/model/produto/AliquotasProduto.class
 com/cashf/dao/usuario/UsuarioDAO.class
 com/cashf/model/produto/SituacaoTributaria.class

@@ -5,16 +5,24 @@
  */
 package com.cashf.controller.caixa;
 
+import com.cashf.cashfood.MainApp;
 import com.jfoenix.controls.JFXButton;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.Pane;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import util.PoupUpUtil;
 
 /**
  * FXML Controller class
@@ -62,22 +70,44 @@ public class GerenciarCaixaFXMLController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
+    }
 
     @FXML
     private void onSalvar(ActionEvent event) {
+        if (CaixaController.getInstance().getCaixaAberto().getIdCaixa() == 0) {
+            loadBox("/fxml/caixa/BoxAbrirCaixaNFXML.fxml", "Abrir Caixa");
+        } else {
+            PoupUpUtil.accessDenied("Um caixa já se encontra aberto");
+        }
     }
 
     @FXML
     private void onNovo(ActionEvent event) {
+        loadBox("/fxml/caixa/BoxSuprirCaixaFXML.fxml", "Suprir Caixa");
     }
 
     @FXML
     private void onExcluir(ActionEvent event) {
+        loadBox("/fxml/caixa/BoxSangrarCaixaFXML.fxml", "Sangrar Caixa");
     }
 
     @FXML
     private void onLimpar(ActionEvent event) {
+        loadBox("/fxml/caixa/BoxFecharCaixaFXML.fxml", "Fechar Caixa");
     }
-    
+
+    private void loadBox(String boxPath, String title) {
+        try {
+            Stage stage = new Stage();
+            Parent root = FXMLLoader.load(getClass().getResource(boxPath));
+            stage.setScene(new Scene(root));
+            stage.setTitle(title);
+            stage.initModality(Modality.APPLICATION_MODAL);
+            MainApp.janelaAnterior = MainApp.janelaAberta;
+            MainApp.janelaAberta = stage;
+            stage.show();
+        } catch (IOException ex) {
+            System.out.println("Erro---->" + ex);
+        }
+    }
 }

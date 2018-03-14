@@ -9,6 +9,7 @@ import com.cashf.model.usuario.Usuario;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -36,17 +37,21 @@ public class Caixa implements Serializable {
     private Usuario usuario;
     @Column(columnDefinition = "DATE")
     private LocalDate dataAbertura;
+    private LocalTime horaAbertura;
     private LocalDate dataFechamento;
+    private LocalTime horaFechamento;
     private BigDecimal valorInicial;
 
     public Caixa() {
     }
 
-    public Caixa(long idCaixa, Usuario usuario, LocalDate dataAbertura, LocalDate dataFechamento, BigDecimal valorInicial) {
+    public Caixa(long idCaixa, Usuario usuario, LocalDate dataAbertura, LocalTime horaAbertura, LocalDate dataFechamento, LocalTime horaFechamento, BigDecimal valorInicial) {
         this.idCaixa = idCaixa;
         this.usuario = usuario;
         this.dataAbertura = dataAbertura;
+        this.horaAbertura=horaAbertura;
         this.dataFechamento = dataFechamento;
+        this.horaFechamento=horaFechamento;
         this.valorInicial = valorInicial;
     }
 
@@ -89,6 +94,23 @@ public class Caixa implements Serializable {
     public void setValorInicial(BigDecimal valorInicial) {
         this.valorInicial = valorInicial;
     }
+
+    public LocalTime getHoraAbertura() {
+        return horaAbertura;
+    }
+
+    public void setHoraAbertura(LocalTime horaAbertura) {
+        this.horaAbertura = horaAbertura;
+    }
+
+    public LocalTime getHoraFechamento() {
+        return horaFechamento;
+    }
+
+    public void setHoraFechamento(LocalTime horaFechamento) {
+        this.horaFechamento = horaFechamento;
+    }
+    
 
     @Override
     public int hashCode() {

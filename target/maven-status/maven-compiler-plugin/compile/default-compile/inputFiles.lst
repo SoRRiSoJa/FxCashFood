@@ -2,6 +2,7 @@
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/model/produto/TipoProduto.java
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/util/TextFieldFormatter.java
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/model/caixa/CaixaMovimento.java
+/home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/controller/caixa/BoxFecharCaixaFXMLController.java
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/model/produto/Categoria.java
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/dao/produto/CategoriaDAO.java
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/controller/caixa/CaixaController.java
@@ -9,6 +10,7 @@
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/controller/prepreparo/TabPrePreparoNFXMLController.java
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/model/cidade/Cidade.java
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/controller/fichatecnica/TabFichaTecnicaFXMLController.java
+/home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/controller/caixa/BoxSuprirCaixaFXMLController.java
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/controller/GenericController.java
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/model/produto/UnidadeMedida.java
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/model/notafiscal/ProdutoNotaFiscal.java
@@ -29,6 +31,7 @@
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/model/fichatecnica/ProdutoFichaTecnica.java
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/controller/cliente/FXGerenciarClientesFXMLController.java
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/util/SafePass.java
+/home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/controller/caixa/BoxAbrirCaixaNFXMLController.java
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/controller/parametrizacao/GerenciarParametrizacaoFXMLController.java
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/dao/cliente/ClienteDAO.java
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/core/atualizarestoque/AtualizarEstoque.java
@@ -81,6 +84,7 @@
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/dao/prepreparo/PrePreparoDAO.java
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/controller/fornecedor/FXGerenciarFornecedoresFXMLController.java
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/controller/produto/FXGerenciarProdutosFXMLController.java
+/home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/controller/caixa/BoxSangrarCaixaFXMLController.java
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/dao/ajusteestoque/AjusteEstoqueDAO.java
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/model/caixa/Caixa.java
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/controller/login/FXLoginFXMLController.java
