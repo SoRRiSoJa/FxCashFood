@@ -10,6 +10,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -28,12 +29,11 @@ public class CaixaMovimento implements Serializable{
     @Id
     @Column(columnDefinition = "serial")
     private long idCaixaMovimento;
-    @Column(columnDefinition = "DATE")
-    private LocalDate data;
+    private LocalDate dataMovimento;
     private String observacao;
     private BigDecimal valor;
     private TPMov tipoMovimento;
-    @ManyToOne
+    @ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(nullable = false)
     private Caixa caixa;
 
@@ -42,7 +42,7 @@ public class CaixaMovimento implements Serializable{
 
     public CaixaMovimento(long idCaixaMovimento, LocalDate data, String observacao, BigDecimal valor, TPMov tipoMovimento, Caixa caixa) {
         this.idCaixaMovimento = idCaixaMovimento;
-        this.data = data;
+        this.dataMovimento = data;
         this.observacao = observacao;
         this.valor = valor;
         this.tipoMovimento = tipoMovimento;
@@ -57,12 +57,12 @@ public class CaixaMovimento implements Serializable{
         this.idCaixaMovimento = idCaixaMovimento;
     }
 
-    public LocalDate getData() {
-        return data;
+    public LocalDate getDataMovimento() {
+        return dataMovimento;
     }
 
-    public void setData(LocalDate data) {
-        this.data = data;
+    public void setDataMovimento(LocalDate dataMovimento) {
+        this.dataMovimento = dataMovimento;
     }
 
     public String getObservacao() {

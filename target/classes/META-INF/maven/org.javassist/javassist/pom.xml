@@ -7,7 +7,7 @@
   	Javassist (JAVA programming ASSISTant) makes Java bytecode manipulation
     simple.  It is a class library for editing bytecodes in Java.
   </description>
-  <version>3.20.0-GA</version>
+  <version>3.22.0-GA</version>
   <name>Javassist</name>
   <url>http://www.javassist.org/</url>
 
@@ -145,9 +145,9 @@
         <configuration>
           <source>1.6</source>
           <target>1.6</target>
-          <testSource>1.8</testSource>
-          <testTarget>1.8</testTarget>
-          <compilerArgument>-parameters</compilerArgument>
+          <testSource>1.9</testSource>
+          <testTarget>1.9</testTarget>
+          <testCompilerArgument>-parameters</testCompilerArgument>
         </configuration>
       </plugin>
       <plugin>
@@ -177,7 +177,7 @@
       </plugin>
       <plugin>
         <artifactId>maven-source-plugin</artifactId>
-        <version>2.0.3</version>
+        <version>2.0.4</version>
         <executions>
           <execution>
             <id>attach-sources</id>
@@ -191,15 +191,14 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-javadoc-plugin</artifactId>
-        <version>2.7</version>
+        <version>3.0.0-M1</version>
 	<configuration>
 	  <attach>true</attach>
 	</configuration>
       </plugin>
-        <plugin>
+      <plugin>
         <groupId>org.apache.felix</groupId>
         <artifactId>maven-bundle-plugin</artifactId>
-        <version>2.1.0</version>
         <executions>
           <execution>
             <id>bundle-manifest</id>
@@ -269,9 +268,7 @@
     <profile>
       <id>default-tools</id>
       <activation>
-        <os>
-          <family>!mac</family>
-        </os>
+        <jdk>[,1.8]</jdk>
       </activation>
       <dependencies>
         <dependency>
@@ -285,11 +282,9 @@
       </dependencies>
     </profile>
     <profile>
-      <id>mac-tools</id>
+      <id>java9-tools</id>
       <activation>
-        <os>
-          <family>mac</family>
-        </os>
+        <jdk>[1.9,]</jdk>
       </activation>
       <dependencies>
         <dependency>
@@ -298,7 +293,7 @@
           <version>${java.version}</version>
           <scope>system</scope>
           <optional>true</optional>
-          <systemPath>${java.home}/../lib/tools.jar</systemPath>
+          <systemPath>${java.home}/lib/jrt-fs.jar</systemPath>
         </dependency>
       </dependencies>
     </profile>

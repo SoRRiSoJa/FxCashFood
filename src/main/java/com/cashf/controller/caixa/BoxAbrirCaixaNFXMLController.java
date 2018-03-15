@@ -67,6 +67,9 @@ public class BoxAbrirCaixaNFXMLController implements Initializable {
         getData();
         if (validateField()) {
             CaixaController.getInstance().abrirCaixa(LocalDate.now(), LocalTime.now(), valorInicial);
+            
+            GerenciarCaixaFXMLController.refreshTbv();
+            GerenciarCaixaFXMLController.refreshTotal();
             PoupUpUtil.poupUp("Novo Caixa Aberto", "O Novo Caixa foi iniciado.", "");
             MainApp.janelaAberta.close();
             MainApp.janelaAberta = MainApp.janelaAnterior;

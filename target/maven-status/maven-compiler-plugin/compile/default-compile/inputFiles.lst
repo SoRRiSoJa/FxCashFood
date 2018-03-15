@@ -80,6 +80,7 @@
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/controller/funcionario/TabListaFuncionariosFXMLController.java
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/controller/menu/GavetaMesasFXMLController.java
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/model/fornecedor/Fornecedor.java
+/home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/model/caixa/TPStatusCX.java
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/util/PoupUpUtil.java
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/dao/prepreparo/PrePreparoDAO.java
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/controller/fornecedor/FXGerenciarFornecedoresFXMLController.java

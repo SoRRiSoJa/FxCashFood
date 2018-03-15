@@ -7,17 +7,21 @@
 package com.cashf.controller.caixa;
 
 import com.cashf.cashfood.MainApp;
+import com.cashf.controller.login.LoginController;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.JFXTimePicker;
 import java.net.URL;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
+import util.PoupUpUtil;
 
 /**
  * FXML Controller class
@@ -47,10 +51,18 @@ public class BoxFecharCaixaFXMLController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        loadDateTime();
+        loadUser();
+        txtSaldo.setText(CaixaController.getInstance().getSaldoFinal().toString());
     }
 
     @FXML
     private void onAbrir(ActionEvent event) {
+        CaixaController.getInstance().fecharCaixa();
+        GerenciarCaixaFXMLController.refreshTbv();
+        GerenciarCaixaFXMLController.refreshTotal();
+        MainApp.janelaAberta.close();
+        MainApp.janelaAberta = MainApp.janelaAnterior;
     }
 
     @FXML
@@ -59,4 +71,12 @@ public class BoxFecharCaixaFXMLController implements Initializable {
         MainApp.janelaAberta = MainApp.janelaAnterior;
     }
 
+    private void loadDateTime() {
+        dtpDataFechamento.setValue(LocalDate.now());
+        dtpHoraFechamento.setValue(LocalTime.now());
+    }
+
+    private void loadUser() {
+        lblUsuario.setText(LoginController.getInstance().getUsuario().getLogin());
+    }
 }

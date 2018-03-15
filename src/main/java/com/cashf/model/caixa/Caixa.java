@@ -13,6 +13,8 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -35,17 +37,18 @@ public class Caixa implements Serializable {
     @ManyToOne
     @JoinColumn(nullable = false)
     private Usuario usuario;
-    @Column(columnDefinition = "DATE")
     private LocalDate dataAbertura;
     private LocalTime horaAbertura;
     private LocalDate dataFechamento;
     private LocalTime horaFechamento;
     private BigDecimal valorInicial;
+    @Enumerated(EnumType.STRING)
+    private TPStatusCX status;
 
     public Caixa() {
     }
 
-    public Caixa(long idCaixa, Usuario usuario, LocalDate dataAbertura, LocalTime horaAbertura, LocalDate dataFechamento, LocalTime horaFechamento, BigDecimal valorInicial) {
+    public Caixa(long idCaixa, Usuario usuario, LocalDate dataAbertura, LocalTime horaAbertura, LocalDate dataFechamento, LocalTime horaFechamento, BigDecimal valorInicial,TPStatusCX status) {
         this.idCaixa = idCaixa;
         this.usuario = usuario;
         this.dataAbertura = dataAbertura;
@@ -53,6 +56,7 @@ public class Caixa implements Serializable {
         this.dataFechamento = dataFechamento;
         this.horaFechamento=horaFechamento;
         this.valorInicial = valorInicial;
+        this.status=status;
     }
 
     public long getIdCaixa() {
@@ -109,6 +113,14 @@ public class Caixa implements Serializable {
 
     public void setHoraFechamento(LocalTime horaFechamento) {
         this.horaFechamento = horaFechamento;
+    }
+
+    public TPStatusCX getStatus() {
+        return status;
+    }
+
+    public void setStatus(TPStatusCX status) {
+        this.status = status;
     }
     
 

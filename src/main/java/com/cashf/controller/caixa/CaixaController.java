@@ -11,6 +11,7 @@ import com.cashf.dao.caixamovimento.CaixaMovimentoDAO;
 import com.cashf.model.caixa.Caixa;
 import com.cashf.model.caixa.CaixaMovimento;
 import com.cashf.model.caixa.TPMov;
+import com.cashf.model.caixa.TPStatusCX;
 import com.cashf.model.usuario.Usuario;
 import controller.GenericController;
 import java.math.BigDecimal;
@@ -36,18 +37,28 @@ public class CaixaController implements GenericController<Caixa> {
     private CaixaMovimento caixaMovimento;
     private TPMov tipoMovimento;
     private int tipoConsulta;
+    private BigDecimal totalDebitos;
+    private BigDecimal totalCreditos;
+    private BigDecimal saldoFinal;
 
     private CaixaController() {
         this.caixaDAO = new CaixaDAO(Caixa.class);
         this.caixaMovimentoDAO = new CaixaMovimentoDAO(CaixaMovimento.class);
         this.lista = FXCollections.observableList(caixaDAO.listAll());
-        this.caixa = new Caixa();
-        this.caixaAberto = new Caixa();
+        this.caixaAberto = caixaDAO.getCaixaAberto();
+        if (caixaAberto == null) {
+            this.caixaAberto = new Caixa();
+            this.caixaAberto.setIdCaixa(0l);
+            this.listaMov = FXCollections.observableList(new ArrayList<>());
+        } else {
+            this.listaMov = FXCollections.observableList(caixaMovimentoDAO.listByDateAndCaixa(caixaAberto.getDataAbertura(), caixaAberto));
+            atualizaSaldo();
+        }
         this.caixaMovimento = new CaixaMovimento();
+        this.caixa = new Caixa();
         this.caixa.setIdCaixa(0l);
-        this.caixaAberto.setIdCaixa(0l);
         this.caixaMovimento.setIdCaixaMovimento(0l);
-        this.listaMov = FXCollections.observableList(new ArrayList<>());
+
     }
 
     public static synchronized CaixaController getInstance() {
@@ -73,19 +84,20 @@ public class CaixaController implements GenericController<Caixa> {
         this.caixa = caixa;
     }
 
-    public void setCaixa(long idCaixa, LocalDate dataAbertura, LocalDate dataFechamento, BigDecimal valorInicial, Usuario usuario) {
+    public void setCaixa(long idCaixa, LocalDate dataAbertura, LocalDate dataFechamento, BigDecimal valorInicial, Usuario usuario, TPStatusCX status) {
         this.caixa.setIdCaixa(idCaixa);
         this.caixa.setDataAbertura(LocalDate.now());
         this.caixa.setDataFechamento(dataFechamento);
         this.caixa.setValorInicial(valorInicial);
         this.caixa.setUsuario(usuario);
+        this.caixa.setStatus(status);
     }
 
     public Caixa getCaixaAberto() {
         return caixaAberto;
     }
 
-    public void setCaixaAberto(long idCaixa, LocalDate dataAbertura,LocalTime horaAbertura, LocalDate dataFechamento,LocalTime horaFechamento, BigDecimal valorInicial, Usuario usuario) {
+    public void setCaixaAberto(long idCaixa, LocalDate dataAbertura, LocalTime horaAbertura, LocalDate dataFechamento, LocalTime horaFechamento, BigDecimal valorInicial, Usuario usuario, TPStatusCX status) {
         this.caixaAberto.setIdCaixa(idCaixa);
         this.caixaAberto.setDataAbertura(dataAbertura);
         this.caixaAberto.setHoraAbertura(horaAbertura);
@@ -93,6 +105,7 @@ public class CaixaController implements GenericController<Caixa> {
         this.caixaAberto.setHoraFechamento(horaFechamento);
         this.caixaAberto.setValorInicial(valorInicial);
         this.caixaAberto.setUsuario(usuario);
+        this.caixaAberto.setStatus(status);
     }
 
     public CaixaMovimento getCaixaMovimento() {
@@ -102,13 +115,26 @@ public class CaixaController implements GenericController<Caixa> {
     public void setCaixaMovimento(CaixaMovimento caixaMovimento) {
         this.caixaMovimento = caixaMovimento;
     }
+
     public void setCaixaMovimento(long idCaixaMovimento, LocalDate data, String observacao, BigDecimal valor, TPMov tipoMovimento, Caixa caixa) {
         this.caixaMovimento.setIdCaixaMovimento(idCaixaMovimento);
-        this.caixaMovimento.setData(data);
+        this.caixaMovimento.setDataMovimento(data);
         this.caixaMovimento.setObservacao(observacao);
         this.caixaMovimento.setValor(valor);
         this.caixaMovimento.setTipoMovimento(tipoMovimento);
         this.caixaMovimento.setCaixa(caixa);
+    }
+
+    public BigDecimal getTotalDebitos() {
+        return totalDebitos;
+    }
+
+    public BigDecimal getTotalCreditos() {
+        return totalCreditos;
+    }
+
+    public BigDecimal getSaldoFinal() {
+        return saldoFinal;
     }
 
     public TPMov getTipoMovimento() {
@@ -162,26 +188,70 @@ public class CaixaController implements GenericController<Caixa> {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public void sangrarCaixa() {
+    public void sangrarCaixa(BigDecimal valor) {
+        setCaixaMovimento(0l, caixaAberto.getDataAbertura(), "SANGRIA DE CAIXA", valor, TPMov.DEBITO, getCaixaAberto());
+        this.caixaMovimento.setIdCaixaMovimento(caixaMovimentoDAO.save(caixaMovimento));
+        listaMov.add(caixaMovimento);
+        caixaMovimento = null;
+        caixaMovimento = new CaixaMovimento();
+        this.caixaMovimento.setIdCaixaMovimento(0l);
+        refreshLists();
+        atualizaSaldo();
     }
 
-    public void suprirCaixa() {
+    public void suprirCaixa(BigDecimal valor) {
+        setCaixaMovimento(0l, caixaAberto.getDataAbertura(), "SUPRIMENTO DE CAIXA", valor, TPMov.CREDITO, getCaixaAberto());
+        this.caixaMovimento.setIdCaixaMovimento(caixaMovimentoDAO.save(caixaMovimento));
+        listaMov.add(caixaMovimento);
+        caixaMovimento = null;
+        caixaMovimento = new CaixaMovimento();
+        this.caixaMovimento.setIdCaixaMovimento(0l);
+        refreshLists();
+        atualizaSaldo();
     }
 
-    public void abrirCaixa(LocalDate dataAbertura,LocalTime horaAbertura, BigDecimal valorInicial) {
-        System.out.println("USu Carai"+LoginController.getInstance().getUsuario().toString());
-        setCaixaAberto(0l, dataAbertura,horaAbertura, null,null, valorInicial, LoginController.getInstance().getUsuario());
-        
+    public void abrirCaixa(LocalDate dataAbertura, LocalTime horaAbertura, BigDecimal valorInicial) {
+        setCaixaAberto(0l, dataAbertura, horaAbertura, null, null, valorInicial, LoginController.getInstance().getUsuario(), TPStatusCX.ABERTO);
         this.caixaAberto.setIdCaixa(caixaDAO.save(caixaAberto));
         setCaixaMovimento(0l, dataAbertura, "* LANÇAMENTO INICIAL - ABERTURA CAIXA *", valorInicial, TPMov.CREDITO, getCaixaAberto());
         this.caixaMovimento.setIdCaixaMovimento(caixaMovimentoDAO.save(caixaMovimento));
         listaMov.add(caixaMovimento);
-        caixaMovimento=null;
-        caixaMovimento=new CaixaMovimento();
+        caixaMovimento = null;
+        caixaMovimento = new CaixaMovimento();
         this.caixaMovimento.setIdCaixaMovimento(0l);
+        refreshLists();
+        atualizaSaldo();
     }
 
     public void fecharCaixa() {
+        caixaAberto.setDataFechamento(LocalDate.now());
+        caixaAberto.setHoraFechamento(LocalTime.now());
+        caixaAberto.setStatus(TPStatusCX.FECHADO);
+        caixaDAO.update(caixaAberto);
+        caixaAberto = null;
+        this.caixaAberto = new Caixa();
+        this.caixaAberto.setIdCaixa(0l);
+        this.listaMov = FXCollections.observableList(new ArrayList<>());
+        
+        atualizaSaldo();
     }
 
+    public void refreshLists() {
+        this.listaMov = FXCollections.observableList(caixaMovimentoDAO.listByDateAndCaixa(caixaAberto.getDataAbertura(), caixaAberto));
+        this.lista = FXCollections.observableList(caixaDAO.listAll());
+    }
+
+    public void atualizaSaldo() {
+        totalCreditos = BigDecimal.ZERO;
+        totalDebitos = BigDecimal.ZERO;
+        saldoFinal = BigDecimal.ZERO;
+        listaMov.forEach((cm) -> {
+            if (cm.getTipoMovimento().equals(TPMov.CREDITO)) {
+                totalCreditos = totalCreditos.add(cm.getValor());
+            } else {
+                totalDebitos = totalDebitos.add(cm.getValor());
+            }
+        });
+        saldoFinal = totalCreditos.subtract(totalDebitos);
+    }
 }

@@ -40,7 +40,6 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 import javafx.util.Duration;
-import org.apache.derby.client.am.DateTime;
 import org.controlsfx.control.Notifications;
 import util.PoupUpUtil;
 
@@ -60,7 +59,7 @@ public class GerenciarCaixaFXMLController implements Initializable {
     @FXML
     private TableColumn<CaixaMovimento, BigDecimal> tbcValor;
     @FXML
-    private TableColumn<CaixaMovimento, DateTime> tbcData;
+    private TableColumn<CaixaMovimento, LocalDate> tbcDataMov;
     @FXML
     private TableColumn btnEstornar;
     @FXML
@@ -85,7 +84,15 @@ public class GerenciarCaixaFXMLController implements Initializable {
     private TableColumn<Caixa, LocalDate> tbcDataFe;
     @FXML
     private Pane paneRoot;
-   
+    //---
+    private static TableView<CaixaMovimento> _tbvMovimentacoes;
+    private static Label _lblTotalRecebido;
+    private static Label _lblTotalPago;
+    private static Label _lblSaldo;
+    private static Label _lblSaldoInicial;
+
+    @FXML
+    private Label lblSaldoInicial;
 
     /**
      * Initializes the controller class.
@@ -93,13 +100,27 @@ public class GerenciarCaixaFXMLController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        _tbvMovimentacoes = tbvMovimentacoes;
+        _lblSaldo = lblSaldo;
+        _lblTotalPago = lblTotalPago;
+        _lblTotalRecebido = lblTotalRecebido;
+        _lblSaldoInicial = lblSaldoInicial;
         setUpTbv();
+        if (CaixaController.getInstance().getCaixaAberto() != null) {
+            lblSaldo.setText(CaixaController.getInstance().getSaldoFinal().toString());
+            lblTotalPago.setText(CaixaController.getInstance().getTotalDebitos().toString());
+            lblTotalRecebido.setText(CaixaController.getInstance().getTotalCreditos().toString());
+            lblSaldoInicial.setText(CaixaController.getInstance().getCaixaAberto().getValorInicial().toString());
+        }
+        loadTbv();
+
     }
 
     @FXML
     private void onSalvar(ActionEvent event) {
         if (CaixaController.getInstance().getCaixaAberto().getIdCaixa() == 0) {
             loadBox("/fxml/caixa/BoxAbrirCaixaNFXML.fxml", "Abrir Caixa");
+            loadTbv();
         } else {
             PoupUpUtil.accessDenied("Um caixa já se encontra aberto");
         }
@@ -120,6 +141,10 @@ public class GerenciarCaixaFXMLController implements Initializable {
         loadBox("/fxml/caixa/BoxFecharCaixaFXML.fxml", "Fechar Caixa");
     }
 
+    private void loadTbv() {
+        tbvMovimentacoes.setItems(CaixaController.getInstance().getListaMov());
+    }
+
     private void loadBox(String boxPath, String title) {
         try {
             Stage stage = new Stage();
@@ -137,7 +162,7 @@ public class GerenciarCaixaFXMLController implements Initializable {
 
     private void setUpTbv() {
         tbcDescricao.setCellValueFactory(new PropertyValueFactory<>("observacao"));
-        tbcData.setCellValueFactory(new PropertyValueFactory<>("data"));
+        tbcDataMov.setCellValueFactory(new PropertyValueFactory<>("dataMovimento"));
         tbcTipo.setCellValueFactory(new PropertyValueFactory<>("tipoMovimento"));
         tbcValor.setCellValueFactory(new PropertyValueFactory<>("valor"));
         btnEstornar.setCellFactory(
@@ -147,7 +172,7 @@ public class GerenciarCaixaFXMLController implements Initializable {
                 return new ButtonCellCashBack();
             }
         });
-        tbvMovimentacoes.getColumns().setAll(tbcDescricao, tbcTipo, tbcValor, btnEstornar);
+        tbvMovimentacoes.getColumns().setAll(tbcDescricao, tbcDataMov, tbcTipo, tbcValor, btnEstornar);
     }
 
     public class ButtonCellCashBack extends TableCell<Disposer.Record, Boolean> {
@@ -158,7 +183,7 @@ public class GerenciarCaixaFXMLController implements Initializable {
         Notifications notificationBuilder;
 
         public ButtonCellCashBack() {
-            this.img = new Image("Imagens/cash_back2-256.png");
+            this.img = new Image("Imagens/ban-circle-symbol.png");
             this.imgv = new ImageView(img);
             cellButton.setGraphic(imgv);
             cellButton.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
@@ -173,7 +198,7 @@ public class GerenciarCaixaFXMLController implements Initializable {
                         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                         alert.setTitle("Cofirmar Estornar Lançamento!");
                         alert.setHeaderText("Deseja realmente Estornar?");
-                        alert.setContentText("Movimento:(" + currentPerson.getData() + "|" + currentPerson.getObservacao());
+                        alert.setContentText("Movimento:(" + currentPerson.getDataMovimento() + "|" + currentPerson.getObservacao());
                         Optional<ButtonType> result = alert.showAndWait();
                         if (result.get() == ButtonType.OK) {
                             // ... user chose OK
@@ -209,5 +234,20 @@ public class GerenciarCaixaFXMLController implements Initializable {
             }
         }
 
+    }
+
+    public static void refreshTbv() {
+        _tbvMovimentacoes.setItems(CaixaController.getInstance().getListaMov());
+    }
+
+    public static void refreshTotal() {
+        _lblSaldo.setText(CaixaController.getInstance().getSaldoFinal().toString());
+        _lblTotalPago.setText(CaixaController.getInstance().getTotalDebitos().toString());
+        _lblTotalRecebido.setText(CaixaController.getInstance().getTotalCreditos().toString());
+        if (CaixaController.getInstance().getCaixaAberto() != null && CaixaController.getInstance().getCaixaAberto().getValorInicial() != null) {
+            _lblSaldoInicial.setText(CaixaController.getInstance().getCaixaAberto().getValorInicial().toString());
+        } else {
+            _lblSaldoInicial.setText("N/A");
+        }
     }
 }
