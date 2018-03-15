@@ -5,7 +5,6 @@
  */
 package com.cashf.controller.contaspagar;
 
-import com.cashf.model.contacorrente.ContaCorrente;
 import com.cashf.model.contasPagar.ContaPagar;
 import com.cashf.model.meiopagamento.MeioPagamento;
 import com.jfoenix.controls.JFXButton;
@@ -23,7 +22,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 
 /**
@@ -36,8 +34,6 @@ public class ContasPagarFXMLController implements GenericViewController, Initial
     @FXML
     private Pane paneData;
     @FXML
-    private HBox vBoxButtons;
-    @FXML
     private JFXButton btnSalvar;
     @FXML
     private JFXButton btnNovo;
@@ -48,21 +44,20 @@ public class ContasPagarFXMLController implements GenericViewController, Initial
     @FXML
     private JFXComboBox<MeioPagamento> cbbFormaPagamento;
     @FXML
-    private JFXComboBox<ContaCorrente> cbbContaCorrente;
-    @FXML
     private JFXDatePicker dtpDataVencimento;
     @FXML
     private JFXTextField txtDescricao;
     @FXML
     private JFXTextField txtValor;
     @FXML
-    private JFXTextField txtValorBaixa;
+    private JFXTextField txtEncargos;
     @FXML
-    private JFXTextField txtValor1;
+    private JFXTextField txtValorDesconto;
     @FXML
-    private JFXTextField txtValorBaixa1;
+    private JFXTextField txtValorTaxa;
     @FXML
-    private JFXTextField txtValor11;
+    private JFXTextField txtLiquido;
+
     @FXML
     private TableView<ContaPagar> tbvContas;
     @FXML
@@ -82,14 +77,23 @@ public class ContasPagarFXMLController implements GenericViewController, Initial
     //----
     private String erros;
     private boolean flagButtons;
+    private String favorecido;
+    private String descricao;
+    private BigDecimal valor;
+    private BigDecimal encargos;
+    private BigDecimal valorDesconto;
+    private BigDecimal valorTaxa;
+    private BigDecimal valLiquido;
+
     private final ContasPagarController controller = new ContasPagarController();
+
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
+    }
 
     @FXML
     private void onSalvar(ActionEvent event) {
@@ -105,10 +109,9 @@ public class ContasPagarFXMLController implements GenericViewController, Initial
 
     @FXML
     private void onMouseClickedFormaDePagamento(MouseEvent event) {
-    }
-
-    @FXML
-    private void onMouseClickedContaCorrente(MouseEvent event) {
+        if (cbbFormaPagamento.getSelectionModel().getSelectedItem() != null) {
+            controller.setMeioPagamento(cbbFormaPagamento.getSelectionModel().getSelectedItem());
+        }
     }
 
     @FXML
@@ -137,16 +140,44 @@ public class ContasPagarFXMLController implements GenericViewController, Initial
 
     @Override
     public void getData() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        favorecido = txtFavorecido.getText();
+        cbbFormaPagamento.getValue();
+        dtpDataVencimento.getValue();
+        descricao = txtDescricao.getText();
+        try {
+            valor = new BigDecimal(txtValor.getText());
+        } catch (Exception ex) {
+            valor = BigDecimal.ZERO;
+        }
+        try {
+            encargos = new BigDecimal(txtEncargos.getText());
+        } catch (Exception ex) {
+            encargos = BigDecimal.ZERO;
+        }
+        try {
+            valorDesconto = new BigDecimal(txtValorDesconto.getText());
+        } catch (Exception ex) {
+            valorDesconto = BigDecimal.ZERO;
+        }
+        try {
+            valorTaxa = new BigDecimal(txtValorTaxa.getText());
+        } catch (Exception ex) {
+            valorTaxa = BigDecimal.ZERO;
+        }
+        try {
+            valLiquido = new BigDecimal(txtLiquido.getText());
+        } catch (Exception ex) {
+            valLiquido = BigDecimal.ZERO;
+        }
     }
 
     @Override
     public void loadDataToScreen() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    private void loadCbbFormaPagto(){
+
+    private void loadCbbFormaPagto() {
+        cbbFormaPagamento.setItems(controller.getMeioPagamentoLista());
     }
-    private void loadCbbContaCorrente(){
-    }
-    
+
 }

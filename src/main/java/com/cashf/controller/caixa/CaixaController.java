@@ -8,10 +8,12 @@ package com.cashf.controller.caixa;
 import com.cashf.controller.login.LoginController;
 import com.cashf.dao.caixa.CaixaDAO;
 import com.cashf.dao.caixamovimento.CaixaMovimentoDAO;
+import com.cashf.dao.contacorrente.ContaCorrenteDAO;
 import com.cashf.model.caixa.Caixa;
 import com.cashf.model.caixa.CaixaMovimento;
 import com.cashf.model.caixa.TPMov;
 import com.cashf.model.caixa.TPStatusCX;
+import com.cashf.model.contacorrente.ContaCorrente;
 import com.cashf.model.usuario.Usuario;
 import controller.GenericController;
 import java.math.BigDecimal;
@@ -30,11 +32,14 @@ public class CaixaController implements GenericController<Caixa> {
     public static CaixaController controller = null;
     private final CaixaDAO caixaDAO;
     private final CaixaMovimentoDAO caixaMovimentoDAO;
+    private final ContaCorrenteDAO contaCorrenteDAO;
     private ObservableList<Caixa> lista;
     private ObservableList<CaixaMovimento> listaMov;
+    private ObservableList<ContaCorrente> listaConta;
     private Caixa caixa;
     private Caixa caixaAberto;
     private CaixaMovimento caixaMovimento;
+    private ContaCorrente contaCorrente;
     private TPMov tipoMovimento;
     private int tipoConsulta;
     private BigDecimal totalDebitos;
@@ -43,22 +48,26 @@ public class CaixaController implements GenericController<Caixa> {
 
     private CaixaController() {
         this.caixaDAO = new CaixaDAO(Caixa.class);
+        this.contaCorrenteDAO = new ContaCorrenteDAO(ContaCorrente.class);
         this.caixaMovimentoDAO = new CaixaMovimentoDAO(CaixaMovimento.class);
         this.lista = FXCollections.observableList(caixaDAO.listAll());
-        this.caixaAberto = caixaDAO.getCaixaAberto();
-        if (caixaAberto == null) {
+        this.listaConta = FXCollections.observableList(contaCorrenteDAO.listAll());
+        try {
+            this.caixaAberto = caixaDAO.getCaixaAberto();
+            this.listaMov = FXCollections.observableList(caixaMovimentoDAO.listByDateAndCaixa(caixaAberto.getDataAbertura(), caixaAberto));
+            atualizaSaldo();
+        } catch (Exception ex) {
             this.caixaAberto = new Caixa();
             this.caixaAberto.setIdCaixa(0l);
             this.listaMov = FXCollections.observableList(new ArrayList<>());
-        } else {
-            this.listaMov = FXCollections.observableList(caixaMovimentoDAO.listByDateAndCaixa(caixaAberto.getDataAbertura(), caixaAberto));
-            atualizaSaldo();
+
         }
         this.caixaMovimento = new CaixaMovimento();
         this.caixa = new Caixa();
         this.caixa.setIdCaixa(0l);
         this.caixaMovimento.setIdCaixaMovimento(0l);
-
+        this.contaCorrente = new ContaCorrente();
+        this.contaCorrente.setId(0l);
     }
 
     public static synchronized CaixaController getInstance() {
@@ -84,12 +93,13 @@ public class CaixaController implements GenericController<Caixa> {
         this.caixa = caixa;
     }
 
-    public void setCaixa(long idCaixa, LocalDate dataAbertura, LocalDate dataFechamento, BigDecimal valorInicial, Usuario usuario, TPStatusCX status) {
+    public void setCaixa(long idCaixa, LocalDate dataAbertura, LocalDate dataFechamento, BigDecimal valorInicial, Usuario usuario, ContaCorrente contaCorrente, TPStatusCX status) {
         this.caixa.setIdCaixa(idCaixa);
         this.caixa.setDataAbertura(LocalDate.now());
         this.caixa.setDataFechamento(dataFechamento);
         this.caixa.setValorInicial(valorInicial);
         this.caixa.setUsuario(usuario);
+        this.caixa.setContaCorrente(contaCorrente);
         this.caixa.setStatus(status);
     }
 
@@ -97,7 +107,7 @@ public class CaixaController implements GenericController<Caixa> {
         return caixaAberto;
     }
 
-    public void setCaixaAberto(long idCaixa, LocalDate dataAbertura, LocalTime horaAbertura, LocalDate dataFechamento, LocalTime horaFechamento, BigDecimal valorInicial, Usuario usuario, TPStatusCX status) {
+    public void setCaixaAberto(long idCaixa, LocalDate dataAbertura, LocalTime horaAbertura, LocalDate dataFechamento, LocalTime horaFechamento, BigDecimal valorInicial, Usuario usuario, ContaCorrente contaCorrente, TPStatusCX status) {
         this.caixaAberto.setIdCaixa(idCaixa);
         this.caixaAberto.setDataAbertura(dataAbertura);
         this.caixaAberto.setHoraAbertura(horaAbertura);
@@ -105,6 +115,7 @@ public class CaixaController implements GenericController<Caixa> {
         this.caixaAberto.setHoraFechamento(horaFechamento);
         this.caixaAberto.setValorInicial(valorInicial);
         this.caixaAberto.setUsuario(usuario);
+        this.caixaAberto.setContaCorrente(contaCorrente);
         this.caixaAberto.setStatus(status);
     }
 
@@ -189,7 +200,7 @@ public class CaixaController implements GenericController<Caixa> {
     }
 
     public void sangrarCaixa(BigDecimal valor) {
-        setCaixaMovimento(0l, caixaAberto.getDataAbertura(), "SANGRIA DE CAIXA", valor, TPMov.DEBITO, getCaixaAberto());
+        setCaixaMovimento(0l, caixaAberto.getDataAbertura(), "SANGRIA DE CAIXA", valor, TPMov.SANGRIA, getCaixaAberto());
         this.caixaMovimento.setIdCaixaMovimento(caixaMovimentoDAO.save(caixaMovimento));
         listaMov.add(caixaMovimento);
         caixaMovimento = null;
@@ -200,7 +211,7 @@ public class CaixaController implements GenericController<Caixa> {
     }
 
     public void suprirCaixa(BigDecimal valor) {
-        setCaixaMovimento(0l, caixaAberto.getDataAbertura(), "SUPRIMENTO DE CAIXA", valor, TPMov.CREDITO, getCaixaAberto());
+        setCaixaMovimento(0l, caixaAberto.getDataAbertura(), "SUPRIMENTO DE CAIXA", valor, TPMov.SUPRIMENTO, getCaixaAberto());
         this.caixaMovimento.setIdCaixaMovimento(caixaMovimentoDAO.save(caixaMovimento));
         listaMov.add(caixaMovimento);
         caixaMovimento = null;
@@ -211,9 +222,9 @@ public class CaixaController implements GenericController<Caixa> {
     }
 
     public void abrirCaixa(LocalDate dataAbertura, LocalTime horaAbertura, BigDecimal valorInicial) {
-        setCaixaAberto(0l, dataAbertura, horaAbertura, null, null, valorInicial, LoginController.getInstance().getUsuario(), TPStatusCX.ABERTO);
+        setCaixaAberto(0l, dataAbertura, horaAbertura, null, null, valorInicial, LoginController.getInstance().getUsuario(), getContaCorrente(), TPStatusCX.ABERTO);
         this.caixaAberto.setIdCaixa(caixaDAO.save(caixaAberto));
-        setCaixaMovimento(0l, dataAbertura, "* LANÇAMENTO INICIAL - ABERTURA CAIXA *", valorInicial, TPMov.CREDITO, getCaixaAberto());
+        setCaixaMovimento(0l, dataAbertura, "* LANÇAMENTO INICIAL - ABERTURA CAIXA *", valorInicial, TPMov.SUPRIMENTO, getCaixaAberto());
         this.caixaMovimento.setIdCaixaMovimento(caixaMovimentoDAO.save(caixaMovimento));
         listaMov.add(caixaMovimento);
         caixaMovimento = null;
@@ -232,7 +243,7 @@ public class CaixaController implements GenericController<Caixa> {
         this.caixaAberto = new Caixa();
         this.caixaAberto.setIdCaixa(0l);
         this.listaMov = FXCollections.observableList(new ArrayList<>());
-        
+
         atualizaSaldo();
     }
 
@@ -246,7 +257,7 @@ public class CaixaController implements GenericController<Caixa> {
         totalDebitos = BigDecimal.ZERO;
         saldoFinal = BigDecimal.ZERO;
         listaMov.forEach((cm) -> {
-            if (cm.getTipoMovimento().equals(TPMov.CREDITO)) {
+            if (cm.getTipoMovimento().equals(TPMov.SUPRIMENTO)) {
                 totalCreditos = totalCreditos.add(cm.getValor());
             } else {
                 totalDebitos = totalDebitos.add(cm.getValor());
@@ -254,4 +265,21 @@ public class CaixaController implements GenericController<Caixa> {
         });
         saldoFinal = totalCreditos.subtract(totalDebitos);
     }
+
+    public ObservableList<ContaCorrente> getListaConta() {
+        return listaConta;
+    }
+
+    public void setListaConta(ObservableList<ContaCorrente> listaConta) {
+        this.listaConta = listaConta;
+    }
+
+    public ContaCorrente getContaCorrente() {
+        return contaCorrente;
+    }
+
+    public void setContaCorrente(ContaCorrente contaCorrente) {
+        this.contaCorrente = contaCorrente;
+    }
+
 }

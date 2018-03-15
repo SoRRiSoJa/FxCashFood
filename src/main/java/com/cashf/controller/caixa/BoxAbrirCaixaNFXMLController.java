@@ -7,7 +7,9 @@ package com.cashf.controller.caixa;
 
 import com.cashf.cashfood.MainApp;
 import com.cashf.controller.login.LoginController;
+import com.cashf.model.contacorrente.ContaCorrente;
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.JFXTimePicker;
@@ -54,12 +56,15 @@ public class BoxAbrirCaixaNFXMLController implements Initializable {
     //---
     private BigDecimal valorInicial;
     private String erros = "";
+    @FXML
+    private JFXComboBox<ContaCorrente> cbbConta;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         loadDateTime();
         loadUser();
+        loadCbbConta();
     }
 
     @FXML
@@ -67,7 +72,7 @@ public class BoxAbrirCaixaNFXMLController implements Initializable {
         getData();
         if (validateField()) {
             CaixaController.getInstance().abrirCaixa(LocalDate.now(), LocalTime.now(), valorInicial);
-            
+
             GerenciarCaixaFXMLController.refreshTbv();
             GerenciarCaixaFXMLController.refreshTotal();
             PoupUpUtil.poupUp("Novo Caixa Aberto", "O Novo Caixa foi iniciado.", "");
@@ -91,6 +96,9 @@ public class BoxAbrirCaixaNFXMLController implements Initializable {
         } catch (Exception ex) {
             System.out.println("Erro ao converter Valor Inicial ---->>>>" + ex);
         }
+        if (cbbConta.getSelectionModel().getSelectedItem() != null) {
+            CaixaController.getInstance().setContaCorrente(cbbConta.getSelectionModel().getSelectedItem());
+        }
     }
 
     private boolean validateField() {
@@ -101,6 +109,10 @@ public class BoxAbrirCaixaNFXMLController implements Initializable {
         }
         if (valorInicial.compareTo(BigDecimal.ZERO) < 0) {
             erros += "O valor inicial não pode ser negativo.";
+            flag = false;
+        }
+        if (cbbConta.getSelectionModel().getSelectedItem() == null) {
+            erros += "Você deve selecionar uma conta corrente.";
             flag = false;
         }
         return flag;
@@ -115,4 +127,14 @@ public class BoxAbrirCaixaNFXMLController implements Initializable {
         lblUsuario.setText(LoginController.getInstance().getUsuario().getLogin());
     }
 
+    private void loadCbbConta() {
+        cbbConta.setItems(CaixaController.getInstance().getListaConta());
+    }
+
+    @FXML
+    private void onSelecionarConta(ActionEvent event) {
+        if (cbbConta.getSelectionModel().getSelectedItem() != null) {
+            CaixaController.getInstance().setContaCorrente(cbbConta.getSelectionModel().getSelectedItem());
+        }
+    }
 }

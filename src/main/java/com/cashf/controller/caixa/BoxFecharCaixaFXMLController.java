@@ -21,7 +21,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
-import util.PoupUpUtil;
 
 /**
  * FXML Controller class

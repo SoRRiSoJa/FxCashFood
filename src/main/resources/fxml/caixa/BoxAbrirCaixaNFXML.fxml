@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
 <?import com.jfoenix.controls.JFXDatePicker?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import com.jfoenix.controls.JFXTimePicker?>
@@ -12,7 +13,6 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
-
 
 <StackPane fx:id="paneRoot" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="235.0" prefWidth="683.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cashf.controller.caixa.BoxAbrirCaixaNFXMLController">
    <children>
@@ -60,6 +60,7 @@
             </HBox>
             <Separator layoutX="14.0" layoutY="154.0" prefHeight="2.0" prefWidth="662.0" />
             <JFXTextField fx:id="txtValor" labelFloat="true" layoutX="473.0" layoutY="105.0" prefHeight="26.0" prefWidth="165.0" promptText="Valor Inicial" />
+            <JFXComboBox fx:id="cbbConta" layoutX="10.0" layoutY="105.0" onAction="#onSelecionarConta" prefHeight="26.0" prefWidth="408.0" promptText="Conta Corrente" />
          </children>
       </Pane>
    </children>

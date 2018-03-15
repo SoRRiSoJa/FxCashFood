@@ -40,6 +40,7 @@ public class ContaPagar implements Serializable {
     private BigDecimal valorBruto;
     private BigDecimal encargos;
     private BigDecimal desconto;
+    private BigDecimal acrecimo;
     private BigDecimal valorPago;
     @ManyToOne
     @JoinColumn(nullable = false)
@@ -52,7 +53,7 @@ public class ContaPagar implements Serializable {
     public ContaPagar() {
     }
 
-    public ContaPagar(long idContaPagar, LocalDate dataVencimento, LocalDate dataPagamento, String favorecido, String descricao, BigDecimal valorBruto, BigDecimal encargos, BigDecimal desconto, BigDecimal valorPago, MeioPagamento meioPagamento, Caixa caixa, StatusPagto status) {
+    public ContaPagar(long idContaPagar, LocalDate dataVencimento, LocalDate dataPagamento, String favorecido, String descricao, BigDecimal valorBruto, BigDecimal encargos, BigDecimal desconto,BigDecimal acrecimo, BigDecimal valorPago, MeioPagamento meioPagamento, Caixa caixa, StatusPagto status) {
         this.idContaPagar = idContaPagar;
         this.dataVencimento = dataVencimento;
         this.dataPagamento = dataPagamento;
@@ -61,6 +62,7 @@ public class ContaPagar implements Serializable {
         this.valorBruto = valorBruto;
         this.encargos = encargos;
         this.desconto = desconto;
+        this.acrecimo=acrecimo;
         this.valorPago = valorPago;
         this.meioPagamento = meioPagamento;
         this.caixa = caixa;
@@ -163,6 +165,14 @@ public class ContaPagar implements Serializable {
         this.status = status;
     }
 
+    public BigDecimal getAcrecimo() {
+        return acrecimo;
+    }
+
+    public void setAcrecimo(BigDecimal acrecimo) {
+        this.acrecimo = acrecimo;
+    }
+    
     @Override
     public int hashCode() {
         int hash = 5;

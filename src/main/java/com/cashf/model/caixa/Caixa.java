@@ -5,6 +5,7 @@
  */
 package com.cashf.model.caixa;
 
+import com.cashf.model.contacorrente.ContaCorrente;
 import com.cashf.model.usuario.Usuario;
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -37,6 +38,9 @@ public class Caixa implements Serializable {
     @ManyToOne
     @JoinColumn(nullable = false)
     private Usuario usuario;
+    @ManyToOne
+    @JoinColumn(nullable = false)
+    private ContaCorrente contaCorrente;
     private LocalDate dataAbertura;
     private LocalTime horaAbertura;
     private LocalDate dataFechamento;
@@ -48,9 +52,10 @@ public class Caixa implements Serializable {
     public Caixa() {
     }
 
-    public Caixa(long idCaixa, Usuario usuario, LocalDate dataAbertura, LocalTime horaAbertura, LocalDate dataFechamento, LocalTime horaFechamento, BigDecimal valorInicial,TPStatusCX status) {
+    public Caixa(long idCaixa, Usuario usuario,ContaCorrente contaCorrente, LocalDate dataAbertura, LocalTime horaAbertura, LocalDate dataFechamento, LocalTime horaFechamento, BigDecimal valorInicial,TPStatusCX status) {
         this.idCaixa = idCaixa;
         this.usuario = usuario;
+        this.contaCorrente=contaCorrente;
         this.dataAbertura = dataAbertura;
         this.horaAbertura=horaAbertura;
         this.dataFechamento = dataFechamento;
@@ -121,6 +126,14 @@ public class Caixa implements Serializable {
 
     public void setStatus(TPStatusCX status) {
         this.status = status;
+    }
+
+    public ContaCorrente getContaCorrente() {
+        return contaCorrente;
+    }
+
+    public void setContaCorrente(ContaCorrente contaCorrente) {
+        this.contaCorrente = contaCorrente;
     }
     
 

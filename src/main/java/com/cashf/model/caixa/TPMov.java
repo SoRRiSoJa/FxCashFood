@@ -10,7 +10,7 @@ package com.cashf.model.caixa;
  * @author joao
  */
 public enum TPMov {
-    DEBITO("Débito"), CREDITO("Cédito");
+    SANGRIA("Sangria"), SUPRIMENTO("Suprimento");
     private String descricao;
 
     private TPMov(String descricao) {
