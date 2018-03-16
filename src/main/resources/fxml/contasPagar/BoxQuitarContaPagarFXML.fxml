@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXDatePicker?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.Font?>
+
+<StackPane fx:id="paneRoot" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="285.0" prefWidth="683.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cashf.controller.contaspagar.BoxQuitarContaPagarFXMLController">
+   <children>
+      <Pane fx:id="paneCentral" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="285.0" prefWidth="683.0" style="-fx-background-color: #ffffff;">
+         <children>
+            <Pane prefHeight="20.0" prefWidth="683.0" style="-fx-background-color: #0081cb;">
+               <children>
+                  <Label layoutX="3.0" text="Quitar Conta a Pagar:" textFill="WHITE" />
+               </children>
+            </Pane>
+            <Label layoutX="250.0" layoutY="30.0" text="Data de Vencimento:" />
+            <Label layoutX="473.0" layoutY="30.0" text="Data de Pagamento:" />
+            <JFXDatePicker fx:id="dtpDataVencimento" defaultColor="#004ba0" editable="false" layoutX="250.0" layoutY="56.0" overLay="true" prefHeight="26.0" prefWidth="200.0" promptText="Data de Vencimento" />
+            <Label layoutX="10.0" layoutY="30.0" text="Favorecido:" />
+            <Label fx:id="lblFavorecido" layoutX="10.0" layoutY="56.0" prefHeight="26.0" prefWidth="200.0" />
+            <HBox layoutX="10.0" layoutY="227.0" prefHeight="48.0" prefWidth="662.0">
+               <children>
+                  <JFXButton fx:id="btnQuitar" contentDisplay="TOP" onAction="#onAbrir" prefHeight="26.0" prefWidth="100.0" ripplerFill="WHITE" style="-fx-background-color: #00e676;" text="QUITAR" textFill="WHITE">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                     <graphic>
+                        <MaterialDesignIconView fill="WHITE" glyphName="PLUS" size="16" />
+                     </graphic>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <HBox.margin>
+                        <Insets left="430.0" right="10.0" />
+                     </HBox.margin>
+                  </JFXButton>
+                  <JFXButton fx:id="btnCancelar" contentDisplay="TOP" onAction="#onCancelar" prefHeight="26.0" prefWidth="108.0" ripplerFill="WHITE" style="-fx-background-color: #d32f2f;" text="CANCELAR" textFill="WHITE">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                     <graphic>
+                        <MaterialDesignIconView fill="WHITE" glyphName="CLIPBOARD_CHECK" size="16" />
+                     </graphic>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                  </JFXButton>
+               </children>
+            </HBox>
+            <Separator layoutX="14.0" layoutY="213.0" prefHeight="2.0" prefWidth="662.0" />
+            <JFXTextField fx:id="txtValor" editable="false" labelFloat="true" layoutX="473.0" layoutY="148.0" prefHeight="26.0" prefWidth="165.0" promptText="Valor Pago" />
+            <JFXDatePicker fx:id="dtpDataPagamento" defaultColor="#004ba0" editable="false" layoutX="473.0" layoutY="56.0" overLay="true" prefHeight="26.0" prefWidth="200.0" promptText="Data de Pagamento" />
+            <JFXTextField fx:id="txtAcrecimos" labelFloat="true" layoutX="251.0" layoutY="105.0" onKeyReleased="#onKeyReleasedAcrecimos" prefHeight="26.0" prefWidth="165.0" promptText="Acrécimos" />
+            <JFXComboBox fx:id="cbbFormaPagamento" labelFloat="true" layoutX="10.0" layoutY="105.0" onMouseClicked="#onMouseClickedFormaDePagamento" prefHeight="26.0" prefWidth="220.0" promptText="Forma de Pagamento" />
+            <Label layoutX="11.0" layoutY="151.0" text="Descrição:" />
+            <Label fx:id="lblDescricao" layoutX="11.0" layoutY="177.0" prefHeight="26.0" prefWidth="404.0" />
+            <JFXTextField fx:id="txtDescontos" labelFloat="true" layoutX="473.0" layoutY="105.0" onKeyReleased="#onKeyReleasedDescontos" prefHeight="26.0" prefWidth="165.0" promptText="Descontos" />
+         </children>
+      </Pane>
+   </children>
+</StackPane>

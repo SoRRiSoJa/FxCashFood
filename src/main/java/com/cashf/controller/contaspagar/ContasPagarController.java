@@ -22,33 +22,43 @@ import javafx.collections.ObservableList;
  * @author joao
  */
 public class ContasPagarController implements GenericController<ContaPagar> {
-    
+
+    public static ContasPagarController contasPagarController = null;
     private final ContaPagarDAO contasPagarDAO;
     private final MeioPagamentoDAO meioPagamentoDAO;
     private MeioPagamento meioPagamento;
     private ObservableList<ContaPagar> lista;
     private ObservableList<MeioPagamento> meioPagamentoLista;
     private ContaPagar contaPagar;
-    
-    public ContasPagarController() {
+
+    private ContasPagarController() {
         this.meioPagamentoDAO = new MeioPagamentoDAO(MeioPagamento.class);
         this.contasPagarDAO = new ContaPagarDAO(ContaPagar.class);
         this.meioPagamentoLista = FXCollections.observableList(meioPagamentoDAO.listAll());
         this.lista = FXCollections.observableList(contasPagarDAO.listAll());
+        this.contaPagar = new ContaPagar();
+        this.contaPagar.setIdContaPagar(0l);
     }
-    
+
+    public static synchronized ContasPagarController getInstance() {
+        if (contasPagarController == null) {
+            contasPagarController = new ContasPagarController();
+        }
+        return contasPagarController;
+    }
+
     public MeioPagamento getMeioPagamento() {
         return meioPagamento;
     }
-    
+
     public void setMeioPagamento(MeioPagamento meioPagamento) {
         this.meioPagamento = meioPagamento;
     }
-    
+
     public ContaPagar getContaPAgar() {
         return contaPagar;
     }
-    
+
     public void setContaPAgar(long idContaPagar, LocalDate dataVencimento, LocalDate dataPagamento, String favorecido, String descricao,
             BigDecimal valorBruto, BigDecimal encargos, BigDecimal desconto, BigDecimal acrecimo, BigDecimal valorPago, MeioPagamento meioPagamento, Caixa caixa, StatusPagto status) {
         this.contaPagar.setIdContaPagar(idContaPagar);
@@ -62,61 +72,65 @@ public class ContasPagarController implements GenericController<ContaPagar> {
         this.contaPagar.setAcrecimo(acrecimo);
         this.contaPagar.setValorPago(valorPago);
         this.contaPagar.setMeioPagamento(meioPagamento);
+        this.contaPagar.setStatusPagto(status);
     }
-    
+
     @Override
     public void insert() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
     @Override
     public void update() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
     @Override
     public void delete() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
     @Override
     public void flushObject() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
     @Override
     public ObservableList<ContaPagar> getLista() {
         return lista;
     }
-    
+
     @Override
     public void setLista(ObservableList<ContaPagar> lista) {
         this.lista = lista;
     }
-    
+
     public void setItenLista(long idContaPagar, LocalDate dataVencimento, LocalDate dataPagamento, String favorecido, String descricao, BigDecimal valorBruto, BigDecimal encargos, BigDecimal desconto, BigDecimal acrecimo, BigDecimal valorPago, MeioPagamento meioPagamento, Caixa caixa, StatusPagto status) {
         this.lista.add(new ContaPagar(idContaPagar, dataVencimento, dataPagamento, favorecido, descricao, valorBruto, encargos, desconto, acrecimo, valorPago, meioPagamento, caixa, StatusPagto.ABERTO));
     }
-    
+
     @Override
     public void setItenLista(ContaPagar obj) {
         this.lista.add(obj);
     }
-    
+
     public ObservableList<MeioPagamento> getMeioPagamentoLista() {
         return meioPagamentoLista;
     }
-    
+
     public void setMeioPagamentoLista(ObservableList<MeioPagamento> meioPagamentoLista) {
         this.meioPagamentoLista = meioPagamentoLista;
     }
-    
+
     public ContaPagar getContaPagar() {
         return contaPagar;
     }
-    
+
     public void setContaPagar(ContaPagar contaPagar) {
         this.contaPagar = contaPagar;
     }
-    
+
+    public void quitarConta() {
+        this.contaPagar.setStatusPagto(StatusPagto.PAGO);
+    }
 }

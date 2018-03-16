@@ -14,10 +14,12 @@ com/cashf/dao/prepreparo/PrePreparoDAO.class
 com/cashf/controller/fichatecnica/TabFichaTecnicaFXMLController$1.class
 com/cashf/dao/funcionario/FuncionarioDAO.class
 com/cashf/dao/parametros/ParametrosDAO.class
+com/cashf/controller/contaspagar/BoxQuitarContaPagarFXMLController.class
 com/cashf/controller/produto/FXGerenciarProdutosFXMLController.class
 com/cashf/controller/prepreparo/TabPrePreparoNFXMLController$ButtonCellDelete.class
 com/cashf/controller/meiopagamento/MeioPagamentoFXMLController.class
 com/cashf/dao/telefone/TelefoneDAO.class
+com/cashf/controller/contaspagar/ContasPagarFXMLController$ButtonCellDelete$1.class
 com/cashf/model/produto/Categoria_.class
 com/cashf/controller/cliente/TabClientesFXMLController$ButtonCellDelete.class
 com/cashf/controller/prepreparo/TabPrePreparoFXMLController$ButtonCellDelete.class
@@ -67,6 +69,7 @@ com/cashf/controller/fornecedor/TabListaFornecedoresFXMLController.class
 com/cashf/controller/ajusteestoque/AjustarEstoqueFXMLController$1.class
 com/cashf/model/contasPagar/StatusPagto.class
 util/HibernateUtil.class
+com/cashf/controller/contaspagar/ContasPagarFXMLController$1.class
 com/cashf/dao/fichatecnica/FichaTecnicaDAO.class
 com/cashf/controller/prepreparo/TapListaPrePreparoFXMLController.class
 com/cashf/controller/meiopagamento/MeioPagamentoFXMLController$1.class
@@ -78,6 +81,7 @@ com/cashf/controller/prepreparo/PrePreparoController.class
 com/cashf/cashfood/MainApp.class
 com/cashf/controller/meiopagamento/MeioPagamentoController.class
 com/cashf/model/pessoa/Sexo.class
+com/cashf/controller/contaspagar/ContasPagarFXMLController$2.class
 com/cashf/model/produto/Produto.class
 util/BDInsert.class
 com/cashf/dao/produto/GrupoDAO.class
@@ -111,6 +115,7 @@ com/cashf/model/meiopagamento/TPPagto.class
 com/cashf/dao/contaspagar/ContaPagarDAO.class
 com/cashf/dao/produto/AliquotasProdutoDAO.class
 com/cashf/dao/cliente/ClienteDAO.class
+com/cashf/controller/contaspagar/ContasPagarFXMLController$ButtonCellDelete.class
 com/cashf/controller/cliente/TabListaClientesFXMLController.class
 util/TextFieldFormatter.class
 com/cashf/model/produto/TipoProduto.class
@@ -148,6 +153,7 @@ dao/GenericDAOIMP.class
 com/cashf/model/fornecedor/Fornecedor.class
 com/cashf/controller/funcionario/TabFuncionarioFXMLController$ButtonCellDelete$1.class
 com/cashf/model/usuario/UNivel.class
+com/cashf/controller/contaspagar/ContasPagarFXMLController$ButtonCellPay$1.class
 com/cashf/controller/caixa/GerenciarCaixaFXMLController$ButtonCellCashBack.class
 com/cashf/model/parametros/Parametros_.class
 com/cashf/model/telefone/Telefone.class
@@ -172,6 +178,7 @@ com/cashf/controller/produto/ProdutoController.class
 com/cashf/model/caixa/TPMov.class
 com/cashf/controller/fornecedor/TabFornecedorFXMLController$ButtonCellDelete.class
 com/cashf/controller/fichatecnica/TabFichaTecniaNFXMLController$1.class
+com/cashf/controller/contaspagar/ContasPagarFXMLController$ButtonCellPay.class
 com/cashf/model/prepreparo/PrePreparo.class
 com/cashf/dao/caixa/CaixaDAO.class
 com/cashf/model/contasPagar/ContaPagar_.class

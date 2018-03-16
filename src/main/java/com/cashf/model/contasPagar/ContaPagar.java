@@ -12,6 +12,8 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -43,17 +45,18 @@ public class ContaPagar implements Serializable {
     private BigDecimal acrecimo;
     private BigDecimal valorPago;
     @ManyToOne
-    @JoinColumn(nullable = false)
+    @JoinColumn
     private MeioPagamento meioPagamento;
     @ManyToOne
     @JoinColumn(nullable = false)
     private Caixa caixa;
-    private StatusPagto status;
+    @Enumerated(EnumType.STRING)
+    private StatusPagto statusPagto;
 
     public ContaPagar() {
     }
 
-    public ContaPagar(long idContaPagar, LocalDate dataVencimento, LocalDate dataPagamento, String favorecido, String descricao, BigDecimal valorBruto, BigDecimal encargos, BigDecimal desconto,BigDecimal acrecimo, BigDecimal valorPago, MeioPagamento meioPagamento, Caixa caixa, StatusPagto status) {
+    public ContaPagar(long idContaPagar, LocalDate dataVencimento, LocalDate dataPagamento, String favorecido, String descricao, BigDecimal valorBruto, BigDecimal encargos, BigDecimal desconto, BigDecimal acrecimo, BigDecimal valorPago, MeioPagamento meioPagamento, Caixa caixa, StatusPagto status) {
         this.idContaPagar = idContaPagar;
         this.dataVencimento = dataVencimento;
         this.dataPagamento = dataPagamento;
@@ -62,11 +65,11 @@ public class ContaPagar implements Serializable {
         this.valorBruto = valorBruto;
         this.encargos = encargos;
         this.desconto = desconto;
-        this.acrecimo=acrecimo;
+        this.acrecimo = acrecimo;
         this.valorPago = valorPago;
         this.meioPagamento = meioPagamento;
         this.caixa = caixa;
-        this.status = status;
+        this.statusPagto = status;
     }
 
     public long getIdContaPagar() {
@@ -157,12 +160,12 @@ public class ContaPagar implements Serializable {
         this.caixa = caixa;
     }
 
-    public StatusPagto getStatus() {
-        return status;
+    public StatusPagto getStatusPagto() {
+        return statusPagto;
     }
 
-    public void setStatus(StatusPagto status) {
-        this.status = status;
+    public void setStatusPagto(StatusPagto statusPagto) {
+        this.statusPagto = statusPagto;
     }
 
     public BigDecimal getAcrecimo() {
@@ -172,7 +175,7 @@ public class ContaPagar implements Serializable {
     public void setAcrecimo(BigDecimal acrecimo) {
         this.acrecimo = acrecimo;
     }
-    
+
     @Override
     public int hashCode() {
         int hash = 5;

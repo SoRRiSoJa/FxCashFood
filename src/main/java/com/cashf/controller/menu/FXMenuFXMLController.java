@@ -6,6 +6,7 @@
 package com.cashf.controller.menu;
 
 import com.cashf.cashfood.MainApp;
+import com.cashf.controller.caixa.CaixaController;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXHamburger;
@@ -28,6 +29,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Paint;
+import util.PoupUpUtil;
 
 /**
  * FXML Controller class
@@ -275,23 +277,27 @@ public class FXMenuFXMLController implements Initializable {
 
     @FXML
     private void onFichaTecnica(ActionEvent event) {
-        
+
         loadFXML("/fxml/fichaTecnica/GerenciarFichasTecnicasFXML.fxml");
     }
 
     @FXML
     private void onNaDois(ActionEvent event) {
-     loadFXML("/fxml/receberPedido/ReceberPedidoFXML.fxml");
+        loadFXML("/fxml/receberPedido/ReceberPedidoFXML.fxml");
     }
 
     @FXML
     private void OnNaTres(ActionEvent event) {
-    loadFXML("/fxml/contasPagar/ContasPagarFXML.fxml");
+        if (CaixaController.getInstance().getCaixaAberto().getIdCaixa() != 0) {
+            loadFXML("/fxml/contasPagar/ContasPagarFXML.fxml");
+        } else {
+            PoupUpUtil.errorMessage(rootAcnhorPane, MainApp.paneRoot, "Um Caixa deve Ser aberto!");
+        }
     }
 
     @FXML
     private void OnCaixa(ActionEvent event) {
-    loadFXML("/fxml/caixa/GerenciarCaixaFXML.fxml");
+        loadFXML("/fxml/caixa/GerenciarCaixaFXML.fxml");
     }
 
 }

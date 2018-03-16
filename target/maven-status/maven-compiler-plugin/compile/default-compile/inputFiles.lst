@@ -105,6 +105,7 @@
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/model/produto/Grupo.java
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/model/telefone/Telefone.java
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/dao/notafiscal/NotaFiscalDAO.java
+/home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/controller/contaspagar/BoxQuitarContaPagarFXMLController.java
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/controller/prepreparo/GerenciarPrePreparoFXMLController.java
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/dao/contacorrente/ContaCorrenteDAO.java
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/controller/meiopagamento/MeioPagamentoFXMLController.java
