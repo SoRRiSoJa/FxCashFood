@@ -87,6 +87,7 @@ public class BoxQuitarContaPagarFXMLController implements Initializable {
             ContasPagarController.getInstance().getContaPagar().setAcrecimo(valorAcrecimos);
             ContasPagarController.getInstance().getContaPagar().setMeioPagamento(ContasPagarController.getInstance().getMeioPagamento());
             ContasPagarController.getInstance().getContaPagar().setValorPago(vallorPago);
+            ContasPagarController.getInstance().update();
         } else {
             PoupUpUtil.errorMessage(paneRoot, MainApp.paneRoot, erros);
             erros = "";

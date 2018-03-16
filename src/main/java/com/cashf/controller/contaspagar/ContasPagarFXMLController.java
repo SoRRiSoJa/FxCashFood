@@ -9,9 +9,7 @@ import com.cashf.cashfood.MainApp;
 import com.cashf.controller.caixa.CaixaController;
 import com.cashf.model.contasPagar.ContaPagar;
 import com.cashf.model.contasPagar.StatusPagto;
-import com.cashf.model.meiopagamento.MeioPagamento;
 import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTextField;
 import com.sun.prism.impl.Disposer;
@@ -124,6 +122,7 @@ public class ContasPagarFXMLController implements GenericViewController, Initial
         if (validateFields()) {
             ContasPagarController.getInstance().setContaPAgar(0l, dataVencimento, null, favorecido, descricao, valor, encargos, valorDesconto, valorTaxa, valLiquido, null, CaixaController.getInstance().getCaixaAberto(), StatusPagto.ABERTO);
             ContasPagarController.getInstance().setItenLista(ContasPagarController.getInstance().getContaPAgar());
+            ContasPagarController.getInstance().insert();
             loadTbv();
         } else {
             PoupUpUtil.errorMessage(paneData, MainApp.paneRoot, erros);
@@ -169,6 +168,10 @@ public class ContasPagarFXMLController implements GenericViewController, Initial
     @Override
     public Boolean validateFields() {
         boolean flag = true;
+        if (dataVencimento == null) {
+            erros += "A data de vencimento deve ser informada. \n";
+            flag = false;
+        }
         if (descricao == null || descricao.isEmpty() || descricao.length() < 3) {
             erros += "Uma descrição valida deve ser informada \n";
             flag = false;
@@ -291,14 +294,14 @@ public class ContasPagarFXMLController implements GenericViewController, Initial
                         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                         alert.setTitle("Cofirmar cancelar Conta !");
                         alert.setHeaderText("Deseja realmente cancelar?");
-                        alert.setContentText("Produto:(" + currentPerson.getDescricao() + "");
+                        alert.setContentText("Descrição:" + currentPerson.getDescricao() + "");
                         Optional<ButtonType> result = alert.showAndWait();
                         if (result.get() == ButtonType.OK) {
                             // ... user chose OK
                             ContasPagarController.getInstance().getLista().remove(currentPerson);
                             ContasPagarController.getInstance().delete();
-                            notificationBuilder = Notifications.create().title("Ítem excluído!").
-                                    text("Ítem Excluido com sucesso.").
+                            notificationBuilder = Notifications.create().title("Conta Cancelada!").
+                                    text("Conta cancelada com sucesso.").
                                     hideAfter(Duration.seconds(2)).
                                     position(Pos.TOP_RIGHT).
                                     darkStyle();
@@ -354,7 +357,7 @@ public class ContasPagarFXMLController implements GenericViewController, Initial
                         loadBox("/fxml/contasPagar/BoxQuitarContaPagarFXML.fxml", "Quitar Conta a Pagar");
                     } else {
                         notificationBuilder = Notifications.create().title("Nenhuma conta selecionada!").
-                                text("Você deve selecionar uma conta para cancelar.").
+                                text("Você deve selecionar uma conta para Quitar.").
                                 hideAfter(Duration.seconds(2)).
                                 position(Pos.TOP_RIGHT).
                                 darkStyle();

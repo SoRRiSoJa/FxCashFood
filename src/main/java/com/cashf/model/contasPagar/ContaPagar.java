@@ -45,7 +45,7 @@ public class ContaPagar implements Serializable {
     private BigDecimal acrecimo;
     private BigDecimal valorPago;
     @ManyToOne
-    @JoinColumn
+    @JoinColumn(nullable = true)
     private MeioPagamento meioPagamento;
     @ManyToOne
     @JoinColumn(nullable = false)

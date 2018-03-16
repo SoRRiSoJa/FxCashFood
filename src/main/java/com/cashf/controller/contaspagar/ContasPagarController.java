@@ -73,21 +73,25 @@ public class ContasPagarController implements GenericController<ContaPagar> {
         this.contaPagar.setValorPago(valorPago);
         this.contaPagar.setMeioPagamento(meioPagamento);
         this.contaPagar.setStatusPagto(status);
+        this.contaPagar.setCaixa(caixa);
     }
 
     @Override
     public void insert() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("CP"+contaPagar.getCaixa().toString());
+        this.contaPagar.setIdContaPagar(contasPagarDAO.save(contaPagar));
     }
 
     @Override
     public void update() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        contasPagarDAO.update(contaPagar);
     }
 
     @Override
     public void delete() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        contaPagar.setStatusPagto(StatusPagto.CANCELADA);
+        contaPagar.setDescricao(contaPagar.getDescricao().concat(" - *CANCELADA*"));
+        contasPagarDAO.update(contaPagar);
     }
 
     @Override
