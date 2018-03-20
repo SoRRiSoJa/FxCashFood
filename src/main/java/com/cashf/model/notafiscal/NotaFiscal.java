@@ -49,6 +49,7 @@ public class NotaFiscal implements Serializable {
     private BigDecimal valor_icms;
     private BigDecimal base_icms_subst;
     private BigDecimal valor_icms_subst;
+    private BigDecimal valorTotalIpi;
     private BigDecimal outrasDespesas;
     private BigDecimal desconto;
     private BigDecimal valorTotalProdutos;
@@ -60,7 +61,7 @@ public class NotaFiscal implements Serializable {
     public NotaFiscal() {
     }
 
-    public NotaFiscal(long idNota, String numero_nota, Fornecedor fornecedor, ContaPagar contaPagar, LocalDate dataNota, LocalDate dataRecebimento, BigDecimal base_calc_icms, BigDecimal valor_icms, BigDecimal base_icms_subst, BigDecimal valor_icms_subst, BigDecimal outrasDespesas, BigDecimal desconto, BigDecimal valorTotalProdutos, BigDecimal valorTotalNota, String observacao, List<ProdutoNotaFiscal> listaProdutos) {
+    public NotaFiscal(long idNota, String numero_nota, Fornecedor fornecedor, ContaPagar contaPagar, LocalDate dataNota, LocalDate dataRecebimento, BigDecimal base_calc_icms, BigDecimal valor_icms, BigDecimal base_icms_subst, BigDecimal valor_icms_subst,BigDecimal valorTotalIpi, BigDecimal outrasDespesas, BigDecimal desconto, BigDecimal valorTotalProdutos, BigDecimal valorTotalNota, String observacao, List<ProdutoNotaFiscal> listaProdutos) {
         this.idNota = idNota;
         this.numero_nota = numero_nota;
         this.fornecedor = fornecedor;
@@ -77,6 +78,7 @@ public class NotaFiscal implements Serializable {
         this.valorTotalNota = valorTotalNota;
         this.observacao = observacao;
         this.listaProdutos = listaProdutos;
+        this.valorTotalIpi=valorTotalIpi;
     }
 
     public long getIdNota() {
@@ -182,6 +184,15 @@ public class NotaFiscal implements Serializable {
     public void setValorTotalProdutos(BigDecimal valorTotalProdutos) {
         this.valorTotalProdutos = valorTotalProdutos;
     }
+
+    public BigDecimal getValorTotalIpi() {
+        return valorTotalIpi;
+    }
+
+    public void setValorTotalIpi(BigDecimal valorTotalIpi) {
+        this.valorTotalIpi = valorTotalIpi;
+    }
+    
 
     public BigDecimal getValorTotalNota() {
         return valorTotalNota;

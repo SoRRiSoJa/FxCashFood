@@ -5,8 +5,18 @@
  */
 package com.cashf.dao.contaspagar;
 
+import com.cashf.model.caixa.Caixa;
+import com.cashf.model.caixa.TPMov;
 import com.cashf.model.contasPagar.ContaPagar;
+import com.cashf.model.contasPagar.StatusPagto;
+import com.cashf.model.meiopagamento.TPPagto;
 import dao.GenericDAOIMP;
+import java.math.BigDecimal;
+import java.util.List;
+import org.hibernate.Criteria;
+import org.hibernate.Session;
+import org.hibernate.criterion.Projections;
+import org.hibernate.criterion.Restrictions;
 
 /**
  *
@@ -16,6 +26,20 @@ public class ContaPagarDAO extends GenericDAOIMP<ContaPagar> {
 
     public ContaPagarDAO(Class<ContaPagar> clazz) {
         super(clazz);
+    }
+
+    public BigDecimal getTotalContas(Caixa caixa) {
+        try (Session session = sessionFactory.openSession()) {
+            Criteria criteria = session.createCriteria(ContaPagar.class)
+                    .setProjection(Projections.sum("this.valorPago"))
+                    .add(Restrictions.eq("this.caixa.idCaixa", caixa.getIdCaixa()))
+                    .add(Restrictions.eq("this.statusPagto", StatusPagto.PAGO));
+            return (BigDecimal) criteria.uniqueResult();
+
+        } catch (Exception e) {
+            System.out.println("Erro:" + e);
+            return null;
+        }
     }
 
 }

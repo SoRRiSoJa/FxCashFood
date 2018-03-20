@@ -9,7 +9,9 @@ import com.cashf.cashfood.MainApp;
 import com.cashf.controller.caixa.CaixaController;
 import com.cashf.model.contasPagar.ContaPagar;
 import com.cashf.model.contasPagar.StatusPagto;
+import com.cashf.model.meiopagamento.MeioPagamento;
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTextField;
 import com.sun.prism.impl.Disposer;
@@ -94,7 +96,10 @@ public class ContasPagarFXMLController implements GenericViewController, Initial
     private TableColumn btnQuitar;
     @FXML
     private TableColumn btnCancelar;
-    //----
+    @FXML
+    private JFXComboBox<MeioPagamento> cbbFormaPagamento;
+
+//----
     private String erros = "";
     private boolean flagButtons;
     private String favorecido;
@@ -112,15 +117,17 @@ public class ContasPagarFXMLController implements GenericViewController, Initial
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-
+        loadCbbMeioPagto();
         setUpTableView();
+        loadTbv();
+
     }
 
     @FXML
     private void onSalvar(ActionEvent event) {
         getData();
         if (validateFields()) {
-            ContasPagarController.getInstance().setContaPAgar(0l, dataVencimento, null, favorecido, descricao, valor, encargos, valorDesconto, valorTaxa, valLiquido, null, CaixaController.getInstance().getCaixaAberto(), StatusPagto.ABERTO);
+            ContasPagarController.getInstance().setContaPAgar(0l, dataVencimento, null, favorecido, descricao, valor, encargos, valorDesconto, valorTaxa, valLiquido, ContasPagarController.getInstance().getMeioPagamento(), CaixaController.getInstance().getCaixaAberto(), StatusPagto.ABERTO);
             ContasPagarController.getInstance().setItenLista(ContasPagarController.getInstance().getContaPAgar());
             ContasPagarController.getInstance().insert();
             loadTbv();
@@ -196,6 +203,10 @@ public class ContasPagarFXMLController implements GenericViewController, Initial
             erros += "O Valor das taxas não pode ser negativo\n";
             flag = false;
         }
+        if (cbbFormaPagamento.getSelectionModel().getSelectedItem() == null) {
+            erros += "Uma forma de pagamento ser informada \n";
+            flag = false;
+        }
 
         return flag;
     }
@@ -230,6 +241,9 @@ public class ContasPagarFXMLController implements GenericViewController, Initial
         } catch (Exception ex) {
             valLiquido = BigDecimal.ZERO;
         }
+        if (cbbFormaPagamento.getSelectionModel().getSelectedItem() != null) {
+            ContasPagarController.getInstance().setMeioPagamento(cbbFormaPagamento.getSelectionModel().getSelectedItem());
+        }
     }
 
     @Override
@@ -246,6 +260,10 @@ public class ContasPagarFXMLController implements GenericViewController, Initial
 
     private void loadTbv() {
         tbvContas.setItems(ContasPagarController.getInstance().getLista());
+    }
+
+    public void loadCbbMeioPagto() {
+        cbbFormaPagamento.setItems(ContasPagarController.getInstance().getMeioPagamentoLista());
     }
 
     private void setUpTableView() {
@@ -269,6 +287,13 @@ public class ContasPagarFXMLController implements GenericViewController, Initial
             }
         });
         tbvContas.getColumns().setAll(tbcFavorecido, tbcDescricao, tbcVencimento, tbcValor, tbcStatus, btnQuitar, btnCancelar);
+    }
+
+    @FXML
+    private void onMouseClickedFormaDePagamento(MouseEvent event) {
+        if (cbbFormaPagamento.getSelectionModel().getSelectedItem() != null) {
+            ContasPagarController.getInstance().setMeioPagamento(cbbFormaPagamento.getSelectionModel().getSelectedItem());
+        }
     }
 
     public class ButtonCellDelete extends TableCell<Disposer.Record, Boolean> {
@@ -298,8 +323,10 @@ public class ContasPagarFXMLController implements GenericViewController, Initial
                         Optional<ButtonType> result = alert.showAndWait();
                         if (result.get() == ButtonType.OK) {
                             // ... user chose OK
-                            ContasPagarController.getInstance().getLista().remove(currentPerson);
+                            ContasPagarController.getInstance().setContaPagar(currentPerson);
                             ContasPagarController.getInstance().delete();
+                            ContasPagarController.getInstance().getLista().remove(currentPerson);
+
                             notificationBuilder = Notifications.create().title("Conta Cancelada!").
                                     text("Conta cancelada com sucesso.").
                                     hideAfter(Duration.seconds(2)).
@@ -351,7 +378,6 @@ public class ContasPagarFXMLController implements GenericViewController, Initial
                 public void handle(ActionEvent t) {
                     // get Selected Item
                     ContaPagar currentPerson = (ContaPagar) ButtonCellPay.this.getTableView().getItems().get(ButtonCellPay.this.getIndex());
-                    //remove selected item from the table list
                     if (currentPerson != null) {
                         ContasPagarController.getInstance().setContaPagar(currentPerson);
                         loadBox("/fxml/contasPagar/BoxQuitarContaPagarFXML.fxml", "Quitar Conta a Pagar");

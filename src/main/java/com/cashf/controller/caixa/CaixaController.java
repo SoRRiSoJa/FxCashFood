@@ -9,11 +9,13 @@ import com.cashf.controller.login.LoginController;
 import com.cashf.dao.caixa.CaixaDAO;
 import com.cashf.dao.caixamovimento.CaixaMovimentoDAO;
 import com.cashf.dao.contacorrente.ContaCorrenteDAO;
+import com.cashf.dao.contaspagar.ContaPagarDAO;
 import com.cashf.model.caixa.Caixa;
 import com.cashf.model.caixa.CaixaMovimento;
 import com.cashf.model.caixa.TPMov;
 import com.cashf.model.caixa.TPStatusCX;
 import com.cashf.model.contacorrente.ContaCorrente;
+import com.cashf.model.contasPagar.ContaPagar;
 import com.cashf.model.usuario.Usuario;
 import controller.GenericController;
 import java.math.BigDecimal;
@@ -32,6 +34,7 @@ public class CaixaController implements GenericController<Caixa> {
     public static CaixaController controller = null;
     private final CaixaDAO caixaDAO;
     private final CaixaMovimentoDAO caixaMovimentoDAO;
+    private final ContaPagarDAO contasPagarDAO;
     private final ContaCorrenteDAO contaCorrenteDAO;
     private ObservableList<Caixa> lista;
     private ObservableList<CaixaMovimento> listaMov;
@@ -48,6 +51,7 @@ public class CaixaController implements GenericController<Caixa> {
 
     private CaixaController() {
         this.caixaDAO = new CaixaDAO(Caixa.class);
+        this.contasPagarDAO = new ContaPagarDAO(ContaPagar.class);
         this.contaCorrenteDAO = new ContaCorrenteDAO(ContaCorrente.class);
         this.caixaMovimentoDAO = new CaixaMovimentoDAO(CaixaMovimento.class);
         this.lista = FXCollections.observableList(caixaDAO.listAll());
@@ -281,5 +285,7 @@ public class CaixaController implements GenericController<Caixa> {
     public void setContaCorrente(ContaCorrente contaCorrente) {
         this.contaCorrente = contaCorrente;
     }
-
+    public BigDecimal getTotalContasPagarCaixa(Caixa caixaAberto){
+        return contasPagarDAO.getTotalContas(caixaAberto);
+    }
 }

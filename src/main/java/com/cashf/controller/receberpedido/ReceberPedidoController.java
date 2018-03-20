@@ -19,6 +19,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.Consumer;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -141,8 +142,8 @@ public class ReceberPedidoController implements GenericController<NotaFiscal> {
         this.notaFiscal = notaFiscal;
     }
 
-    public void setNotaFiscal(long idNota, String numero_nota, LocalDate dataNota, LocalDate dataRecebimento, BigDecimal base_calc_icms, BigDecimal valor_icms, BigDecimal base_icms_subst, BigDecimal valor_icms_subst, BigDecimal outrasDespesas, BigDecimal desconto, BigDecimal valorTotalProdutos, BigDecimal valorTotalNota, String observacao) {
-        this.notaFiscal = new NotaFiscal(idNota, numero_nota, fornecedor, contaPagar, dataNota, dataRecebimento, base_calc_icms, valor_icms, base_icms_subst, valor_icms_subst, outrasDespesas, desconto, valorTotalProdutos, valorTotalNota, observacao, listaProdutosNota);
+    public void setNotaFiscal(long idNota, String numero_nota, LocalDate dataNota, LocalDate dataRecebimento, BigDecimal base_calc_icms, BigDecimal valor_icms, BigDecimal base_icms_subst, BigDecimal valor_icms_subst,BigDecimal valTotalIpi, BigDecimal outrasDespesas, BigDecimal desconto, BigDecimal valorTotalProdutos, BigDecimal valorTotalNota, String observacao) {
+        this.notaFiscal = new NotaFiscal(idNota, numero_nota, fornecedor, contaPagar, dataNota, dataRecebimento, base_calc_icms, valor_icms, base_icms_subst, valor_icms_subst, outrasDespesas, desconto, valorTotalProdutos,valTotalIpi, valorTotalNota, observacao, listaProdutosNota);
     }
 
     public ObservableList<ProdutoNotaFiscal> getListaProdutosNota() {
@@ -153,8 +154,13 @@ public class ReceberPedidoController implements GenericController<NotaFiscal> {
         this.listaProdutosNota = listaProdutosNota;
     }
 
-    public void setListaProdutosNota(Long idProdutoNotaFiscal, Integer qtdeProduto, BigDecimal valorIpi, BigDecimal valorIcmsSubst, BigDecimal valoruUnitario, BigDecimal despesas, BigDecimal descontos) {
-        this.listaProdutosNota.add(new ProdutoNotaFiscal(idProdutoNotaFiscal, notaFiscal, produtoAtual, qtdeProduto, valorIpi, valorIcmsSubst, valoruUnitario, despesas, descontos, valoruUnitario.multiply(BigDecimal.valueOf(qtdeProduto.doubleValue())).subtract(descontos).add(despesas)));
+    public void setListaProdutosNota(Long idProdutoNotaFiscal, Integer qtdeProduto, BigDecimal valorIpi, BigDecimal valorIcmsSubst, BigDecimal valoruUnitario, BigDecimal despesas, BigDecimal descontos, BigDecimal embalagemCompra, UnidadeMedida unidadeMedida) {
+        ProdutoNotaFiscal pn = new ProdutoNotaFiscal(idProdutoNotaFiscal, notaFiscal, produtoAtual, qtdeProduto, valorIpi, valorIcmsSubst, valoruUnitario, despesas, descontos, valoruUnitario.multiply(BigDecimal.valueOf(qtdeProduto.doubleValue())).subtract(descontos).add(despesas));
+        pn.getProduto().setUnidadeMedida(unidadeMedida);
+        pn.getProduto().setQtdeEmbalagem(embalagemCompra);
+        pn.getProduto().setQtdeProduto(BigDecimal.valueOf(qtdeProduto));
+        pn.getProduto().setUnidadesEstoque(pn.getProduto().getQtdeEmbalagem().multiply(BigDecimal.valueOf(qtdeProduto)));
+        this.listaProdutosNota.add(pn);
     }
 
     public UnidadeMedida getUnidadeMedida() {
@@ -197,6 +203,19 @@ public class ReceberPedidoController implements GenericController<NotaFiscal> {
     }
 
     /**
+     * Calcula o valor total para a lista de produtos de uma Nota Fiscal 
+     * Calcula o valor utilizando a aliquota de IPI, qtde comprada, descontos 
+     * e acrecimos. Realiza o Update na tabela Produtos
+     */
+    public void updateValorProdLista() {
+        listaProdutosNota.forEach((ProdutoNotaFiscal prod) -> {
+            prod.getProduto().setPreco_custo(prod.getValorUnitario().add(prod.getValorTotal().multiply(prod.getValorIpi())).subtract(prod.getDescontos()).add(prod.getDespesas()).divide(BigDecimal.valueOf(prod.getQtdeProduto())));
+            prod.getProduto().setPreco_venda(prod.getProduto().getPreco_custo());
+            produtoDAO.update(prod.getProduto());
+        });
+    }
+
+    /**
      * Calcula o valor total do Icms para os produtos de uma Nota Fiscal Calcula
      * o valor od ICMS utilizando a aliquota informada no cadastro do produto ou
      * utiliza o valor do ICMS Subst se informado.
@@ -226,10 +245,10 @@ public class ReceberPedidoController implements GenericController<NotaFiscal> {
         this.valTotalIPI = getValTotalIPI();
         calcValTotalIcmsProd();
         calcValTotalProd();
-        valTotalNota=valTotalNota.add(valTotalIPI);
-        valTotalNota=valTotalNota.add(valTotalIcms);
-        valTotalNota=valTotalNota.add(valTotalIcmsSubst);
-        valTotalNota=valTotalNota.add(valTotalProd);
+        valTotalNota = valTotalNota.add(valTotalIPI);
+        valTotalNota = valTotalNota.add(valTotalIcms);
+        valTotalNota = valTotalNota.add(valTotalIcmsSubst);
+        valTotalNota = valTotalNota.add(valTotalProd);
     }
 
 }

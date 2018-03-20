@@ -26,7 +26,7 @@
                   <Label layoutX="5.0" layoutY="2.0" text="Informações da Nota:" textFill="WHITE" />
                </children>
             </Pane>
-            <HBox alignment="CENTER" layoutX="9.0" layoutY="391.0" prefHeight="68.0" prefWidth="621.0">
+            <HBox alignment="CENTER" layoutX="9.0" layoutY="396.0" prefHeight="68.0" prefWidth="621.0">
                <children>
                   <JFXButton fx:id="btnSalvar" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" onAction="#onSalvar" prefHeight="36.0" prefWidth="100.0" ripplerFill="WHITE" style="-fx-background-color: #2196f3;" textFill="WHITE">
                      <HBox.margin>
@@ -65,19 +65,18 @@
             </HBox>
             <JFXComboBox fx:id="cbbFornecedor" focusColor="#004ba0" labelFloat="true" layoutX="35.0" layoutY="33.0" prefHeight="26.0" prefWidth="280.0" promptText="Fornecedor" />
             <JFXDatePicker fx:id="dtpDataNota" defaultColor="#004ba0" layoutX="445.0" layoutY="33.0" prefHeight="24.0" prefWidth="160.0" promptText="Data da nota" />
-            <Separator layoutX="35.0" layoutY="80.0" prefHeight="0.0" prefWidth="570.0" />
-            <JFXTextField fx:id="txtNumeroNota" focusColor="#004ba0" labelFloat="true" layoutX="35.0" layoutY="95.0" prefHeight="24.0" prefWidth="160.0" promptText="Número da nota" />
-            <JFXTextField fx:id="txtValorIcms" focusColor="#004ba0" labelFloat="true" layoutX="35.0" layoutY="145.0" prefHeight="24.0" prefWidth="160.0" promptText="Valor do ICMS" />
-            <JFXTextField fx:id="txtBaseCalculoIcms" focusColor="#004ba0" labelFloat="true" layoutX="244.0" layoutY="145.0" prefHeight="24.0" prefWidth="160.0" promptText="Base de cálculo ICMS" />
-            <JFXTextField fx:id="txtValorTotalIpi" focusColor="#004ba0" labelFloat="true" layoutX="456.0" layoutY="145.0" prefHeight="24.0" prefWidth="160.0" promptText="Valor total IPI" />
-            <JFXTextField fx:id="txtBaseIcmsSubst" focusColor="#004ba0" labelFloat="true" layoutX="35.0" layoutY="195.0" prefHeight="24.0" prefWidth="160.0" promptText="Base ICMS subst." />
-            <JFXTextField fx:id="txtValorIcmsSubst" focusColor="#004ba0" labelFloat="true" layoutX="244.0" layoutY="195.0" prefHeight="24.0" prefWidth="160.0" promptText="Valor do ICMS Subst" />
-            <JFXTextField fx:id="txtOutrasDespesas" focusColor="#004ba0" labelFloat="true" layoutX="456.0" layoutY="195.0" prefHeight="24.0" prefWidth="160.0" promptText="Outras despesas" />
-            <JFXTextField fx:id="txtDesconto" focusColor="#004ba0" labelFloat="true" layoutX="35.0" layoutY="243.0" prefHeight="24.0" prefWidth="160.0" promptText="Desconto" />
-            <JFXTextField fx:id="txtValorTotalProdutos" focusColor="#004ba0" labelFloat="true" layoutX="244.0" layoutY="243.0" prefHeight="24.0" prefWidth="160.0" promptText="Valor total Produtos" />
-            <JFXTextField fx:id="txtValorTotalNota" focusColor="#004ba0" labelFloat="true" layoutX="456.0" layoutY="243.0" prefHeight="24.0" prefWidth="160.0" promptText="Valor total da nota" />
-            <JFXTextField fx:id="txtObservacao" focusColor="#004ba0" labelFloat="true" layoutX="35.0" layoutY="305.0" prefHeight="24.0" prefWidth="570.0" promptText="Observação" />
-            <JFXDatePicker fx:id="dtpDataRecebimento" defaultColor="#004ba0" layoutX="244.0" layoutY="95.0" prefHeight="26.0" prefWidth="175.0" promptText="Data da recebimento" />
+            <Separator layoutX="35.0" layoutY="115.0" prefHeight="0.0" prefWidth="570.0" />
+            <JFXTextField fx:id="txtNumeroNota" focusColor="#004ba0" labelFloat="true" layoutX="35.0" layoutY="149.0" prefHeight="24.0" prefWidth="160.0" promptText="Número da nota" />
+            <JFXDatePicker fx:id="dtpDataRecebimento" defaultColor="#004ba0" layoutX="244.0" layoutY="149.0" prefHeight="26.0" prefWidth="175.0" promptText="Data da recebimento" />
+            <JFXTextField fx:id="txtBaseCalculoIcms" focusColor="#004ba0" labelFloat="true" layoutX="35.0" layoutY="199.0" prefHeight="24.0" prefWidth="160.0" promptText="Base de cálculo ICMS" />
+            <JFXTextField fx:id="txtValorIcms" editable="false" focusColor="#004ba0" labelFloat="true" layoutX="244.0" layoutY="199.0" prefHeight="24.0" prefWidth="160.0" promptText="Valor do ICMS" />
+            <JFXTextField fx:id="txtValorTotalIpi" editable="false" focusColor="#004ba0" labelFloat="true" layoutX="456.0" layoutY="199.0" prefHeight="24.0" prefWidth="160.0" promptText="Valor total IPI" />
+            <JFXTextField fx:id="txtBaseIcmsSubst" focusColor="#004ba0" labelFloat="true" layoutX="35.0" layoutY="249.0" prefHeight="24.0" prefWidth="160.0" promptText="Base ICMS subst." />
+            <JFXTextField fx:id="txtValorIcmsSubst" editable="false" focusColor="#004ba0" labelFloat="true" layoutX="244.0" layoutY="249.0" prefHeight="24.0" prefWidth="160.0" promptText="Valor do ICMS Subst" />
+            <JFXTextField fx:id="txtOutrasDespesas" focusColor="#004ba0" labelFloat="true" layoutX="456.0" layoutY="249.0" prefHeight="24.0" prefWidth="160.0" promptText="Outras despesas" />
+            <JFXTextField fx:id="txtDesconto" focusColor="#004ba0" labelFloat="true" layoutX="35.0" layoutY="297.0" prefHeight="24.0" prefWidth="160.0" promptText="Desconto" />
+            <JFXTextField fx:id="txtValorTotalProdutos" editable="false" focusColor="#004ba0" labelFloat="true" layoutX="244.0" layoutY="297.0" prefHeight="24.0" prefWidth="160.0" promptText="Valor total Produtos" />
+            <JFXTextField fx:id="txtValorTotalNota" editable="false" focusColor="#004ba0" labelFloat="true" layoutX="456.0" layoutY="297.0" prefHeight="24.0" prefWidth="160.0" promptText="Valor total da nota" />
          </children>
       </Pane>
       <Pane layoutX="669.0" layoutY="30.0" prefHeight="475.0" prefWidth="640.0" style="-fx-background-color: #ffffff;">
@@ -92,14 +91,13 @@
             </Pane>
             <JFXComboBox fx:id="cbbProduto" focusColor="#004ba0" labelFloat="true" layoutX="35.0" layoutY="33.0" prefHeight="26.0" prefWidth="280.0" promptText="Produto" />
             <JFXComboBox fx:id="cbbUnidadeFisica" focusColor="#004ba0" labelFloat="true" layoutX="456.0" layoutY="33.0" prefHeight="26.0" prefWidth="160.0" promptText="Unidade Física" />
+            <JFXTextField fx:id="txtEmbalagemDeCompra" focusColor="#004ba0" labelFloat="true" layoutX="33.0" layoutY="93.0" prefHeight="24.0" prefWidth="160.0" promptText="Embalagem de compra" />
             <JFXTextField fx:id="txtValorIpi" focusColor="#004ba0" labelFloat="true" layoutX="254.0" layoutY="93.0" prefHeight="24.0" prefWidth="160.0" promptText="Valor IPI" />
             <JFXTextField fx:id="txtValorIcmsSubstProd" focusColor="#004ba0" labelFloat="true" layoutX="456.0" layoutY="93.0" prefHeight="24.0" prefWidth="160.0" promptText="Valor do ICMS Subst" />
-            <JFXTextField fx:id="txtQtdeCompra" focusColor="#004ba0" labelFloat="true" layoutX="33.0" layoutY="142.0" prefHeight="24.0" prefWidth="160.0" promptText="Qunatidade de compra" />
-            <JFXTextField fx:id="txtQtdeRecebida" focusColor="#004ba0" labelFloat="true" layoutX="254.0" layoutY="142.0" prefHeight="24.0" prefWidth="160.0" promptText="Qunatidade de recebida" />
-            <JFXTextField fx:id="txtPrcoCompra" focusColor="#004ba0" labelFloat="true" layoutX="456.0" layoutY="142.0" prefHeight="24.0" prefWidth="160.0" promptText="Valor Unitario Compra" />
-            <JFXTextField fx:id="txtOutrasDespesasProd" focusColor="#004ba0" labelFloat="true" layoutX="33.0" layoutY="191.0" prefHeight="24.0" prefWidth="160.0" promptText="Outras despesas" />
-            <JFXTextField fx:id="txtDescontoProd" focusColor="#004ba0" labelFloat="true" layoutX="254.0" layoutY="191.0" prefHeight="24.0" prefWidth="160.0" promptText="Desconto" />
-            <JFXTextField fx:id="txtEmbalagemDeCompra" focusColor="#004ba0" labelFloat="true" layoutX="33.0" layoutY="93.0" prefHeight="24.0" prefWidth="160.0" promptText="Embalagem de compra" />
+            <JFXTextField fx:id="txtQtdeCompra" focusColor="#004ba0" labelFloat="true" layoutX="33.0" layoutY="142.0" prefHeight="24.0" prefWidth="160.0" promptText="Quantidade de compra" />
+            <JFXTextField fx:id="txtPrcoCompra" focusColor="#004ba0" labelFloat="true" layoutX="255.0" layoutY="142.0" prefHeight="24.0" prefWidth="160.0" promptText="Valor Unitario Compra" />
+            <JFXTextField fx:id="txtOutrasDespesasProd" focusColor="#004ba0" labelFloat="true" layoutX="456.0" layoutY="142.0" prefHeight="24.0" prefWidth="160.0" promptText="Outras despesas" />
+            <JFXTextField fx:id="txtDescontoProd" focusColor="#004ba0" labelFloat="true" layoutX="35.0" layoutY="191.0" prefHeight="26.0" prefWidth="160.0" promptText="Desconto" />
             <Separator layoutX="35.0" layoutY="244.0" prefHeight="0.0" prefWidth="570.0" />
             <TableView fx:id="tbvProdutos" layoutX="29.0" layoutY="300.0" prefHeight="164.0" prefWidth="580.0" stylesheets="@../../styles/TableViewCSS.css">
                <columns>
