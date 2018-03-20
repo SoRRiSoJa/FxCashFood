@@ -116,6 +116,7 @@
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/model/contasPagar/StatusPagto.java
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/controller/produto/TabListaProdutosFXMLController.java
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/dao/GenericDAO.java
+/home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/core/gerarContasPagar/GerarContasPagar.java
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/controller/contaspagar/ContasPagarFXMLController.java
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/controller/produto/TabProdutoFXMLController.java
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/controller/contaspagar/ContasPagarController.java

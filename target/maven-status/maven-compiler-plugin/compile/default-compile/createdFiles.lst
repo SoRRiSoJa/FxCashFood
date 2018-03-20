@@ -34,6 +34,7 @@ util/UnitConverter.class
 com/cashf/model/contasPagar/ContaPagar.class
 com/cashf/dao/banco/BancoDAO.class
 com/cashf/model/caixa/TPStatusCX.class
+com/cashf/core/gerarContasPagar/GerarContasPagar.class
 com/cashf/controller/parametrizacao/ParametrosController.class
 com/cashf/controller/fornecedor/FornecedorController.class
 com/cashf/model/cliente/Cliente_.class
