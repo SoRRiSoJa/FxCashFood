@@ -67,6 +67,7 @@ com/cashf/controller/menu/GavetaMesasFXMLController.class
 com/cashf/controller/cliente/ClienteController.class
 com/cashf/controller/receberpedido/ReceberPedidoController.class
 com/cashf/controller/fornecedor/TabListaFornecedoresFXMLController.class
+com/cashf/core/gerarContasPagar/BoxGerarContasPagarFXMLController.class
 com/cashf/controller/ajusteestoque/AjustarEstoqueFXMLController$1.class
 com/cashf/model/contasPagar/StatusPagto.class
 util/HibernateUtil.class

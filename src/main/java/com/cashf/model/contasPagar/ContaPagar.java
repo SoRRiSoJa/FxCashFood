@@ -10,10 +10,12 @@ import com.cashf.model.meiopagamento.MeioPagamento;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -44,7 +46,7 @@ public class ContaPagar implements Serializable {
     private BigDecimal desconto;
     private BigDecimal acrecimo;
     private BigDecimal valorPago;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL,fetch=FetchType.EAGER)
     @JoinColumn(nullable = false)
     private MeioPagamento meioPagamento;
     @ManyToOne

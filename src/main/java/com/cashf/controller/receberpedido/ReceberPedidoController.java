@@ -10,7 +10,6 @@ import com.cashf.dao.fornecedor.FornecedorDAO;
 import com.cashf.dao.notafiscal.NotaFiscalDAO;
 import com.cashf.dao.produto.ProdutoDAO;
 import com.cashf.model.contasPagar.ContaPagar;
-import com.cashf.model.contasPagar.StatusPagto;
 import com.cashf.model.fornecedor.Fornecedor;
 import com.cashf.model.notafiscal.NotaFiscal;
 import com.cashf.model.notafiscal.ProdutoNotaFiscal;
@@ -22,7 +21,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.function.Consumer;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -31,7 +29,8 @@ import javafx.collections.ObservableList;
  * @author joao
  */
 public class ReceberPedidoController implements GenericController<NotaFiscal> {
-    
+
+    public static ReceberPedidoController controller;
     private final ProdutoDAO produtoDAO;
     private final FornecedorDAO fornecedorDAO;
     private final NotaFiscalDAO notaFiscalDAO;
@@ -50,8 +49,8 @@ public class ReceberPedidoController implements GenericController<NotaFiscal> {
     private BigDecimal valTotalIcmsSubst;
     private ObservableList<ProdutoNotaFiscal> listaProdutosNota;
     private ObservableList<NotaFiscal> lista;
-    
-    public ReceberPedidoController() {
+
+    private ReceberPedidoController() {
         this.produtoDAO = new ProdutoDAO(Produto.class);
         this.fornecedorDAO = new FornecedorDAO(Fornecedor.class);
         this.notaFiscalDAO = new NotaFiscalDAO(NotaFiscal.class);
@@ -65,60 +64,67 @@ public class ReceberPedidoController implements GenericController<NotaFiscal> {
         this.notaFiscal.setIdNota(0l);
         this.produtoAtual.setIdProduto(0l);
         this.fornecedor.setIdFornecedor(0l);
-        
+
     }
-    
+
+    public static synchronized ReceberPedidoController getInstance() {
+        if (controller == null) {
+            controller = new ReceberPedidoController();
+        }
+        return controller;
+    }
+
     public ContaPagar getContaPagar() {
         return contaPagar;
     }
-    
+
     public void setContaPagar(ContaPagar contaPagar) {
         this.contaPagar = contaPagar;
     }
-    
+
     public Fornecedor getFornecedor() {
         return fornecedor;
     }
-    
+
     public void setFornecedor(Fornecedor fornecedor) {
         this.fornecedor = fornecedor;
     }
-    
+
     public Produto getProdutoAtual() {
         return produtoAtual;
     }
-    
+
     public void setProdutoAtual(Produto produtoAtual) {
         this.produtoAtual = produtoAtual;
     }
-    
+
     public ObservableList<Fornecedor> loadComboFornecedor() {
         return FXCollections.observableList(fornecedorDAO.listAll());
     }
-    
+
     public ObservableList<Produto> loadComboProduto() {
         return FXCollections.observableList(produtoDAO.listAll());
     }
-    
+
     public List<UnidadeMedida> loadComboUnidadeMedida() {
         return Arrays.asList(UnidadeMedida.values());
     }
-    
+
     @Override
     public void insert() {
         this.notaFiscal.setIdNota(notaFiscalDAO.save(notaFiscal));
     }
-    
+
     @Override
     public void update() {
         notaFiscalDAO.update(notaFiscal);
     }
-    
+
     @Override
     public void delete() {
         notaFiscalDAO.delete(notaFiscal);
     }
-    
+
     @Override
     public void flushObject() {
         this.fornecedor = new Fornecedor();
@@ -129,42 +135,42 @@ public class ReceberPedidoController implements GenericController<NotaFiscal> {
         this.produtoAtual.setIdProduto(0l);
         this.fornecedor.setIdFornecedor(0l);
     }
-    
+
     @Override
     public ObservableList<NotaFiscal> getLista() {
         return this.lista;
     }
-    
+
     @Override
     public void setLista(ObservableList<NotaFiscal> lista) {
         this.lista = lista;
     }
-    
+
     @Override
     public void setItenLista(NotaFiscal obj) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
     public NotaFiscal getNotaFiscal() {
         return notaFiscal;
     }
-    
+
     public void setNotaFiscal(NotaFiscal notaFiscal) {
         this.notaFiscal = notaFiscal;
     }
-    
+
     public void setNotaFiscal(long idNota, String numero_nota, LocalDate dataNota, LocalDate dataRecebimento, BigDecimal base_calc_icms, BigDecimal valor_icms, BigDecimal base_icms_subst, BigDecimal valor_icms_subst, BigDecimal valTotalIpi, BigDecimal outrasDespesas, BigDecimal desconto, BigDecimal valorTotalProdutos, BigDecimal valorTotalNota, String observacao) {
         this.notaFiscal = new NotaFiscal(idNota, numero_nota, fornecedor, contaPagar, dataNota, dataRecebimento, base_calc_icms, valor_icms, base_icms_subst, valor_icms_subst, outrasDespesas, desconto, valorTotalProdutos, valTotalIpi, valorTotalNota, observacao, listaProdutosNota);
     }
-    
+
     public ObservableList<ProdutoNotaFiscal> getListaProdutosNota() {
         return listaProdutosNota;
     }
-    
+
     public void setListaProdutosNota(ObservableList<ProdutoNotaFiscal> listaProdutosNota) {
         this.listaProdutosNota = listaProdutosNota;
     }
-    
+
     public void setListaProdutosNota(Long idProdutoNotaFiscal, Integer qtdeProduto, BigDecimal valorIpi, BigDecimal valorIcmsSubst, BigDecimal valoruUnitario, BigDecimal despesas, BigDecimal descontos, BigDecimal embalagemCompra, UnidadeMedida unidadeMedida) {
         ProdutoNotaFiscal pn = new ProdutoNotaFiscal(idProdutoNotaFiscal, notaFiscal, produtoAtual, qtdeProduto, valorIpi, valorIcmsSubst, valoruUnitario, despesas, descontos, valoruUnitario.multiply(BigDecimal.valueOf(qtdeProduto.doubleValue())).subtract(descontos).add(despesas));
         pn.getProduto().setUnidadeMedida(unidadeMedida);
@@ -173,27 +179,27 @@ public class ReceberPedidoController implements GenericController<NotaFiscal> {
         pn.getProduto().setUnidadesEstoque(pn.getProduto().getQtdeEmbalagem().multiply(BigDecimal.valueOf(qtdeProduto)));
         this.listaProdutosNota.add(pn);
     }
-    
+
     public UnidadeMedida getUnidadeMedida() {
         return unidadeMedida;
     }
-    
+
     public void setUnidadeMedida(UnidadeMedida unidadeMedida) {
         this.unidadeMedida = unidadeMedida;
     }
-    
+
     public BigDecimal getValTotalNota() {
         return valTotalNota;
     }
-    
+
     public BigDecimal getValTotalProd() {
         return valTotalProd;
     }
-    
+
     public BigDecimal getValTotalIcms() {
         return valTotalIcms;
     }
-    
+
     public BigDecimal getValTotalIcmsSubst() {
         return valTotalIcmsSubst;
     }
@@ -243,15 +249,15 @@ public class ReceberPedidoController implements GenericController<NotaFiscal> {
             }
         });
     }
-    
+
     private void calcValTotalProd() {
         valTotalProd = BigDecimal.ZERO;
         listaProdutosNota.forEach((prod) -> {
             valTotalProd = valTotalProd.add(prod.getValorUnitario().multiply(BigDecimal.valueOf(prod.getQtdeProduto().doubleValue())).add(prod.getDespesas()).subtract(prod.getDescontos()));
-            
+
         });
     }
-    
+
     public void calcTotalDespesasDescontos() {
         valTotalDescontos = BigDecimal.ZERO;
         valTotalAcrecimos = BigDecimal.ZERO;
@@ -260,7 +266,7 @@ public class ReceberPedidoController implements GenericController<NotaFiscal> {
             valTotalAcrecimos = valTotalAcrecimos.add(prod.getDespesas());
         });
     }
-    
+
     public void calcValTotalNota() {
         valTotalNota = BigDecimal.ZERO;
         this.valTotalIPI = getValTotalIPI();
@@ -272,7 +278,7 @@ public class ReceberPedidoController implements GenericController<NotaFiscal> {
         valTotalNota = valTotalNota.add(valTotalIcmsSubst);
         valTotalNota = valTotalNota.add(valTotalProd);
     }
-    
+
     public void gerarContaPagar() {
         gerarContasPagar.gerarContaPagar(
                 valTotalProd,
@@ -285,5 +291,5 @@ public class ReceberPedidoController implements GenericController<NotaFiscal> {
         setContaPagar(gerarContasPagar.getContaPagar());
         notaFiscal.setContaPagar(getContaPagar());
     }
-    
+
 }

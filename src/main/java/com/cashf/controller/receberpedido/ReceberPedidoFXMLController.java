@@ -5,6 +5,7 @@
  */
 package com.cashf.controller.receberpedido;
 
+import com.cashf.cashfood.MainApp;
 import com.cashf.model.fornecedor.Fornecedor;
 import com.cashf.model.notafiscal.ProdutoNotaFiscal;
 import com.cashf.model.produto.Produto;
@@ -15,6 +16,7 @@ import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTextField;
 import com.sun.prism.impl.Disposer;
 import controller.GenericViewController;
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.net.URL;
 import java.time.LocalDate;
@@ -22,8 +24,11 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ContentDisplay;
@@ -33,6 +38,8 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import javafx.util.Callback;
 import javafx.util.Duration;
 import org.controlsfx.control.Notifications;
@@ -134,7 +141,6 @@ public class ReceberPedidoFXMLController implements GenericViewController, Initi
 
     private String erros;
     private boolean flagButtons;
-    private final ReceberPedidoController controller = new ReceberPedidoController();
     //----
 
     /**
@@ -154,20 +160,25 @@ public class ReceberPedidoFXMLController implements GenericViewController, Initi
     private void onSalvar(ActionEvent event) {
         getData();
         if (validateFields()) {
-            controller.setNotaFiscal(0l, numeroNota,
+            ReceberPedidoController.getInstance().setNotaFiscal(0l, numeroNota,
                     dataNota,
                     dataRecebimento,
                     baseCalculoIcms,
-                    controller.getValTotalIcms(),
+                    ReceberPedidoController.getInstance().getValTotalIcms(),
                     baseIcmsSubst,
-                    controller.getValTotalIcmsSubst(),
+                    ReceberPedidoController.getInstance().getValTotalIcmsSubst(),
                     outrasDespesas,
                     desconto,
-                    controller.getValTotalProd(),
-                    controller.getValTotalIPI(),
-                    controller.getValTotalNota(),
+                    ReceberPedidoController.getInstance().getValTotalProd(),
+                    ReceberPedidoController.getInstance().getValTotalIPI(),
+                    ReceberPedidoController.getInstance().getValTotalNota(),
                     "");
-            System.out.println("NOTA:" + controller.getNotaFiscal().toString());
+            System.out.println("NOTA:" + ReceberPedidoController.getInstance().getNotaFiscal().toString());
+            //ReceberPedidoController.getInstance().gerarContaPagar();
+            //ReceberPedidoController.getInstance().insert();
+            ReceberPedidoController.getInstance().getLista().add(ReceberPedidoController.getInstance().getNotaFiscal());
+            loadBox("/fxml/contasPagar/BoxGerarContasPagarFXML.fxml", "Gerar Contas Pagar");
+            
         } else {
             PoupUpUtil.accessDenied(erros);
             erros = "";
@@ -190,22 +201,20 @@ public class ReceberPedidoFXMLController implements GenericViewController, Initi
     private void onAdicionar(ActionEvent event) {
         getDataProd();
         if (validateFieldsProd()) {
-            controller.setListaProdutosNota(0l,
+            ReceberPedidoController.getInstance().setListaProdutosNota(0l,
                     qtdeCompra.intValue(),
                     valorIpi,
                     valorIcmsSubstProd,
                     prcoCompra,
                     outrasDespesasProd,
                     descontoProd, embalagemDeCompra,
-                    controller.getUnidadeMedida());
+                    ReceberPedidoController.getInstance().getUnidadeMedida());
 
-            controller.setProdutoAtual(null);
-            controller.calcValTotalNota();
+            ReceberPedidoController.getInstance().setProdutoAtual(null);
+            ReceberPedidoController.getInstance().calcValTotalNota();
             loadDataNota();
-            controller.gerarContaPagar();
-            controller.insert();
-            controller.getLista().add(controller.getNotaFiscal());
-            tbvProdutos.setItems(controller.getListaProdutosNota());
+          
+            tbvProdutos.setItems(ReceberPedidoController.getInstance().getListaProdutosNota());
         } else {
             PoupUpUtil.accessDenied(erros);
             erros = "";
@@ -213,11 +222,11 @@ public class ReceberPedidoFXMLController implements GenericViewController, Initi
     }
 
     private void loadDataNota() {
-        txtValorTotalProdutos.setText(controller.getValTotalProd().toString());
-        txtValorTotalNota.setText(controller.getValTotalNota().toString());
-        txtValorIcms.setText(controller.getValTotalIcms().toString());
-        txtValorIcmsSubst.setText(controller.getValTotalIcmsSubst().toString());
-        txtValorTotalIpi.setText(controller.getValTotalIPI().toString());
+        txtValorTotalProdutos.setText(ReceberPedidoController.getInstance().getValTotalProd().toString());
+        txtValorTotalNota.setText(ReceberPedidoController.getInstance().getValTotalNota().toString());
+        txtValorIcms.setText(ReceberPedidoController.getInstance().getValTotalIcms().toString());
+        txtValorIcmsSubst.setText(ReceberPedidoController.getInstance().getValTotalIcmsSubst().toString());
+        txtValorTotalIpi.setText(ReceberPedidoController.getInstance().getValTotalIPI().toString());
     }
 
     @Override
@@ -324,22 +333,7 @@ public class ReceberPedidoFXMLController implements GenericViewController, Initi
             erros += "O Número da nota deve ser informado. \n";
             flag = false;
         }
-        if (valorIcms.compareTo(BigDecimal.ZERO) < 0) {
-            erros += "O Valor do ICMS do produto ser maior ou = 0 \n";
-            flag = false;
-        }
-        if (baseCalculoIcms.compareTo(BigDecimal.ZERO) < 0) {
-            erros += "O Valor da Base de Calculo ICMS Nota deve ser maior ou = 0 \n";
-            flag = false;
-        }
-        if (baseIcmsSubst.compareTo(BigDecimal.ZERO) < 0) {
-            erros += "O Valor da Base de ICMS Subst da Nota deve ser maior ou = 0 \n";
-            flag = false;
-        }
-        if (valorIcmsSubst.compareTo(BigDecimal.ZERO) < 0) {
-            erros += "O Valor do ICMS Subst da Nota deve ser maior ou = 0 \n";
-            flag = false;
-        }
+                            
         if (outrasDespesas.compareTo(BigDecimal.ZERO) < 0) {
             erros += "O Valor de outras despesas deve ser maior ou = 0 \n";
             flag = false;
@@ -403,39 +397,11 @@ public class ReceberPedidoFXMLController implements GenericViewController, Initi
 
     @Override
     public void getData() {
-        controller.setFornecedor(cbbFornecedor.getValue());
+        if (cbbFornecedor.getSelectionModel().getSelectedItem() != null) {
+            ReceberPedidoController.getInstance().setFornecedor(cbbFornecedor.getSelectionModel().getSelectedItem());
+        }
         dataNota = dtpDataNota.getValue();
         numeroNota = txtNumeroNota.getText();
-        try {
-            valorIcms = new BigDecimal(txtValorIcms.getText());
-        } catch (Exception ex) {
-            System.out.println("Erro ao converter --->>> icms nota:" + ex);
-            valorIcms = BigDecimal.ZERO;
-        }
-        try {
-            baseCalculoIcms = new BigDecimal(txtBaseCalculoIcms.getText());
-        } catch (Exception ex) {
-            System.out.println("Erro ao converter --->>> baseCalculoIcms nota:" + ex);
-            baseCalculoIcms = BigDecimal.ZERO;
-        }
-        try {
-            valorTotalIpi = new BigDecimal(txtValorTotalIpi.getText());
-        } catch (Exception ex) {
-            System.out.println("Erro ao converter --->>> valorTotalIpi nota:" + ex);
-            valorTotalIpi = BigDecimal.ZERO;
-        }
-        try {
-            baseIcmsSubst = new BigDecimal(txtBaseIcmsSubst.getText());
-        } catch (Exception ex) {
-            System.out.println("Erro ao converter --->>> baseIcmsSubst nota:" + ex);
-            baseIcmsSubst = BigDecimal.ZERO;
-        }
-        try {
-            valorIcmsSubst = new BigDecimal(txtValorIcmsSubst.getText());
-        } catch (Exception ex) {
-            System.out.println("Erro ao converter --->>> valorIcmsSubst nota:" + ex);
-            valorIcmsSubst = BigDecimal.ZERO;
-        }
         try {
             outrasDespesas = new BigDecimal(txtOutrasDespesas.getText());
         } catch (Exception ex) {
@@ -464,8 +430,8 @@ public class ReceberPedidoFXMLController implements GenericViewController, Initi
     }
 
     public void getDataProd() {
-        controller.setProdutoAtual(cbbProduto.getSelectionModel().getSelectedItem());
-        controller.setUnidadeMedida(cbbUnidadeFisica.getSelectionModel().getSelectedItem());
+        ReceberPedidoController.getInstance().setProdutoAtual(cbbProduto.getSelectionModel().getSelectedItem());
+        ReceberPedidoController.getInstance().setUnidadeMedida(cbbUnidadeFisica.getSelectionModel().getSelectedItem());
         try {
             valorIpi = new BigDecimal(txtValorIpi.getText());
         } catch (Exception ex) {
@@ -539,15 +505,30 @@ public class ReceberPedidoFXMLController implements GenericViewController, Initi
     }
 
     private void loadCbbProdutos() {
-        cbbProduto.setItems(controller.loadComboProduto());
+        cbbProduto.setItems(ReceberPedidoController.getInstance().loadComboProduto());
     }
 
     private void loadCbbFornecedor() {
-        cbbFornecedor.setItems(controller.loadComboFornecedor());
+        cbbFornecedor.setItems(ReceberPedidoController.getInstance().loadComboFornecedor());
     }
 
     private void loadCbbUnidadeMedida() {
-        cbbUnidadeFisica.getItems().addAll(controller.loadComboUnidadeMedida());
+        cbbUnidadeFisica.getItems().addAll(ReceberPedidoController.getInstance().loadComboUnidadeMedida());
+    }
+
+    private void loadBox(String boxPath, String title) {
+        try {
+            Stage stage = new Stage();
+            Parent root = FXMLLoader.load(getClass().getResource(boxPath));
+            stage.setScene(new Scene(root));
+            stage.setTitle(title);
+            stage.initModality(Modality.APPLICATION_MODAL);
+            MainApp.janelaAnterior = MainApp.janelaAberta;
+            MainApp.janelaAberta = stage;
+            stage.show();
+        } catch (IOException ex) {
+            System.out.println("Erro---->" + ex);
+        }
     }
 
     private void setUpTableViewItens() {
@@ -589,7 +570,7 @@ public class ReceberPedidoFXMLController implements GenericViewController, Initi
                     Optional<ButtonType> result = alert.showAndWait();
                     if (result.get() == ButtonType.OK) {
                         // ... user chose OK
-                        controller.getListaProdutosNota().remove(currentPerson);
+                        ReceberPedidoController.getInstance().getListaProdutosNota().remove(currentPerson);
                         //lblCustoTotal.setText(nf.format(PrePreparoController.getInstance().getCustoTotal()));
                         notificationBuilder = Notifications.create().title("Produto excluído!").
                                 text("Produto Excluido com sucesso.").

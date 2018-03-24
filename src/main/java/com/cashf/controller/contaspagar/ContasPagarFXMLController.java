@@ -119,6 +119,7 @@ public class ContasPagarFXMLController implements GenericViewController, Initial
         // TODO
         loadCbbMeioPagto();
         setUpTableView();
+        
         loadTbv();
 
     }

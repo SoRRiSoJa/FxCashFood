@@ -8,10 +8,12 @@ package com.cashf.model.meiopagamento;
 import com.cashf.model.contacorrente.ContaCorrente;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -37,7 +39,7 @@ public class MeioPagamento implements Serializable {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private TPPagto tipoPagto;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL,fetch=FetchType.EAGER)
     @JoinColumn(nullable = false)
     private ContaCorrente contaCorrente;
     public MeioPagamento() {

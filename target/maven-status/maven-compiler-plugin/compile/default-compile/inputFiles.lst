@@ -32,6 +32,7 @@
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/controller/cliente/FXGerenciarClientesFXMLController.java
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/util/SafePass.java
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/controller/caixa/BoxAbrirCaixaNFXMLController.java
+/home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/core/gerarContasPagar/BoxGerarContasPagarFXMLController.java
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/controller/parametrizacao/GerenciarParametrizacaoFXMLController.java
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/dao/cliente/ClienteDAO.java
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/core/atualizarestoque/AtualizarEstoque.java

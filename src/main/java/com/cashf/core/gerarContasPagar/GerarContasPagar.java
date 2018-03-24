@@ -12,9 +12,11 @@ import com.cashf.model.caixa.Caixa;
 import com.cashf.model.contasPagar.ContaPagar;
 import com.cashf.model.contasPagar.StatusPagto;
 import com.cashf.model.meiopagamento.MeioPagamento;
-import com.cashf.model.notafiscal.NotaFiscal;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 /**
  *
@@ -23,18 +25,30 @@ import java.time.LocalDate;
 public class GerarContasPagar {
 
     private ContaPagar contaPagar;
+    private ObservableList<ContaPagar> lista;
+     private ObservableList<MeioPagamento> listaMeioPagamento;
     private MeioPagamento meioPagamento;
     private final ContaPagarDAO contaPagarDAO;
     private final MeioPagamentoDAO meioPagamentoDAO;
-
+    private boolean tipoParcelamento;
     public GerarContasPagar() {
         this.contaPagarDAO = new ContaPagarDAO(ContaPagar.class);
         this.meioPagamentoDAO = new MeioPagamentoDAO(MeioPagamento.class);
         this.meioPagamento = meioPagamentoDAO.getMPDinheiro();
+        this.lista=FXCollections.observableList(new ArrayList<>());
+        this.listaMeioPagamento=FXCollections.observableList(meioPagamentoDAO.listAll());
         this.contaPagar = new ContaPagar();
         this.contaPagar.setIdContaPagar(0l);
     }
 
+    public boolean isTipoParcelamento() {
+        return tipoParcelamento;
+    }
+
+    public void setTipoParcelamento(boolean tipoParcelamento) {
+        this.tipoParcelamento = tipoParcelamento;
+    }
+    
     public ContaPagar getContaPagar() {
         return contaPagar;
     }
@@ -81,4 +95,22 @@ public class GerarContasPagar {
                 valorPago, meioPagamento, CaixaController.getInstance().getCaixaAberto(), StatusPagto.ABERTO);
         contaPagar.setIdContaPagar(contaPagarDAO.save(contaPagar));
     }
+
+    public ObservableList<ContaPagar> getLista() {
+        return lista;
+    }
+
+    public void setLista(ObservableList<ContaPagar> lista) {
+        this.lista = lista;
+    }
+
+    public ObservableList<MeioPagamento> getListaMeioPagamento() {
+        return listaMeioPagamento;
+    }
+
+    public void setListaMeioPagamento(ObservableList<MeioPagamento> listaMeioPagamento) {
+        this.listaMeioPagamento = listaMeioPagamento;
+    }
+    
+    
 }

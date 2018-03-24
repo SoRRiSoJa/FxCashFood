@@ -9,6 +9,7 @@ import com.cashf.dao.banco.BancoDAO;
 import com.cashf.dao.contacorrente.ContaCorrenteDAO;
 import com.cashf.model.banco.Banco;
 import com.cashf.model.contacorrente.ContaCorrente;
+import java.math.BigDecimal;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -44,7 +45,7 @@ public class ContaCorrenteController {
     }
 
     public void setContaCorrente(long id, String descricao, String agencia, String contaCorrente, Banco banco) {
-        this.contaCorrente = new ContaCorrente(id, descricao, agencia, contaCorrente, banco);
+        this.contaCorrente = new ContaCorrente(id, descricao, agencia, contaCorrente,BigDecimal.ZERO ,banco);
     }
 
     public ObservableList<ContaCorrente> getLista() {
