@@ -285,6 +285,8 @@ public class TabFuncionarioFXMLController implements GenericViewController, Init
             }
             clearFields();
             FuncionarioController.getInstance().flushObject();
+            FuncionarioController.getInstance().buscaTodos();
+            
             TabListaFuncionariosFXMLController.loadTbvFun();
             loadTbvTelefone();
             

@@ -22,20 +22,21 @@
                   <Label layoutX="5.0" layoutY="2.0" text="Clientes Cadastrados:" textFill="WHITE" />
                </children>
             </Pane>
-            <JFXTextField fx:id="txtConsultar" focusColor="#004ba0" labelFloat="true" layoutX="230.0" layoutY="48.0" prefHeight="26.0" prefWidth="800.0" promptText="Consultar" />
+            <JFXTextField fx:id="txtConsultar" focusColor="#004ba0" labelFloat="true" layoutX="85.0" layoutY="48.0" prefHeight="26.0" prefWidth="945.0" promptText="Consultar" />
             <JFXButton fx:id="btnPesquisar" contentDisplay="GRAPHIC_ONLY" layoutX="987.0" layoutY="32.0" onAction="#onPesquisar" prefHeight="32.0" prefWidth="43.0" ripplerFill="#69e2ff" style="-fx-background-color: #ffffff;" textFill="WHITE">
                <graphic>
                   <FontAwesomeIconView glyphName="SEARCH" />
                </graphic>
             </JFXButton>
-            <JFXRadioButton fx:id="rdbNome" layoutX="234.0" layoutY="95.0" style="-jfx-selected-color: #69e2ff;" text="Nome" />
-            <JFXRadioButton fx:id="rdbCpf" layoutX="385.0" layoutY="95.0" style="-jfx-selected-color: #69e2ff;" text="CPF" />
-            <JFXRadioButton fx:id="rdbTodos" layoutX="502.0" layoutY="95.0" style="-jfx-selected-color: #69e2ff;" text="Todos" />
-            <TableView fx:id="tbvClientes" layoutX="233.0" layoutY="130.0" onMouseClicked="#onMouseClickedCliente" prefHeight="315.0" prefWidth="800.0" stylesheets="@../../styles/TableViewCSS.css">
+            <JFXRadioButton fx:id="rdbNome" layoutX="90.0" layoutY="95.0" style="-jfx-selected-color: #69e2ff;" text="Nome" />
+            <JFXRadioButton fx:id="rdbCpf" layoutX="241.0" layoutY="95.0" style="-jfx-selected-color: #69e2ff;" text="CPF" />
+            <JFXRadioButton fx:id="rdbTodos" layoutX="358.0" layoutY="95.0" style="-jfx-selected-color: #69e2ff;" text="Todos" />
+            <TableView fx:id="tbvClientes" layoutX="88.0" layoutY="130.0" onMouseClicked="#onMouseClickedCliente" prefHeight="315.0" prefWidth="945.0" stylesheets="@../../styles/TableViewCSS.css">
                <columns>
-                  <TableColumn fx:id="tbcNome" prefWidth="207.0" text="Nome" />
-                  <TableColumn fx:id="tbcEndereco" prefWidth="311.0" text="Endereço" />
-                  <TableColumn fx:id="tbcEmail" prefWidth="281.0" text="e-mail" />
+                  <TableColumn fx:id="tbcNome" prefWidth="253.0" text="Nome" />
+                  <TableColumn fx:id="tbcEndereco" prefWidth="265.0" text="Endereço" />
+                  <TableColumn fx:id="tbcEmail" prefWidth="282.0" text="e-mail" />
+                  <TableColumn fx:id="tbcCpf" prefWidth="144.0" text="CPF" />
                </columns>
             </TableView>
          </children>

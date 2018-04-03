@@ -45,8 +45,11 @@ public class TabListaClientesFXMLController implements Initializable {
     private TableColumn<Cliente, String> tbcEmail;
     @FXML
     private TableColumn<Cliente, String> tbcEndereco;
-    private static TableView<Cliente> _tbvClientes;
+    @FXML
+    private TableColumn<Cliente, String> tbcCpf;
 
+    private static TableView<Cliente> _tbvClientes;
+    
     /**
      * Initializes the controller class.
      */
@@ -80,6 +83,7 @@ public class TabListaClientesFXMLController implements Initializable {
 
     public static void loadTbvCli() {
         _tbvClientes.setItems(ClienteController.getInstance().getLista());
+        _tbvClientes.refresh();
     }
 
     @FXML
@@ -98,7 +102,8 @@ public class TabListaClientesFXMLController implements Initializable {
         tbcNome.setCellValueFactory(new PropertyValueFactory<>("nome"));
         tbcEndereco.setCellValueFactory(new PropertyValueFactory<>("endereco"));
         tbcEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
-        tbvClientes.getColumns().setAll(tbcNome, tbcEndereco, tbcEmail);
+        tbcCpf.setCellValueFactory(new PropertyValueFactory<>("cpf"));
+        tbvClientes.getColumns().setAll(tbcNome, tbcEndereco, tbcEmail,tbcCpf);
     }
 
     private void loadTbv() {

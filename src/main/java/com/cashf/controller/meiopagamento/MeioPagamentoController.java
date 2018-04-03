@@ -85,22 +85,30 @@ public class MeioPagamentoController {
     public void setMeioPagamento(long id, String descricao, Integer prazoRecebimento, BigDecimal taxa, TPPagto tipoPagto, ContaCorrente contaCorrente) {
         this.meioPagamento = new MeioPagamento(id, descricao, prazoRecebimento, taxa, tipoPagto, contaCorrente);
     }
-    public void insert(){
+
+    public void insert() {
         meioPagamento.setIdMeio(meioPagamentoDAO.save(meioPagamento));
         setItemLista(meioPagamento);
         flushMeioPagamento();
     }
-    public void delete(){
+
+    public void delete() {
         meioPagamentoDAO.delete(meioPagamento);
         lista.remove(meioPagamento);
         flushMeioPagamento();
     }
-    public void update(){
+
+    public void update() {
         meioPagamentoDAO.update(meioPagamento);
         flushMeioPagamento();
     }
-    private void flushMeioPagamento(){
-        meioPagamento=new MeioPagamento();
+
+    private void flushMeioPagamento() {
+        meioPagamento = new MeioPagamento();
         meioPagamento.setIdMeio(0l);
+    }
+
+    public void refreshList() {
+        this.lista = FXCollections.observableList(meioPagamentoDAO.listAll());
     }
 }

@@ -44,8 +44,8 @@ public class ContaCorrenteController {
         this.contaCorrente = contaCorrente;
     }
 
-    public void setContaCorrente(long id, String descricao, String agencia, String contaCorrente, Banco banco,Boolean isCaixa) {
-        this.contaCorrente = new ContaCorrente(id, descricao, agencia, contaCorrente,BigDecimal.ZERO,isCaixa ,banco);
+    public void setContaCorrente(long id, String descricao, String agencia, String contaCorrente, Banco banco, Boolean isCaixa) {
+        this.contaCorrente = new ContaCorrente(id, descricao, agencia, contaCorrente, BigDecimal.ZERO, isCaixa, banco);
     }
 
     public ObservableList<ContaCorrente> getLista() {
@@ -99,4 +99,7 @@ public class ContaCorrenteController {
         contaCorrente.setId(0l);
     }
 
+    public void refreshList() {
+        this.lista = FXCollections.observableList(contaCorrenteDAO.listAll());
+    }
 }

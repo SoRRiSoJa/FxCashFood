@@ -50,6 +50,7 @@ public class FornecedorController {
         this.cidade = new Cidade();
         telefone.setIdTelefone(0l);
         fornecedor.setIdFornecedor(0l);
+        tipoConsulta=0;
     }
 
     public static synchronized FornecedorController getInstance() {

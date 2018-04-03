@@ -55,6 +55,7 @@ public class GrupoController {
     public ObservableList<Categoria> getListaCategria() {
         return listaCategria;
     }
+
     public ObservableList<Categoria> getListaCbbCategria() {
         return FXCollections.observableList(categoriaDAO.listAll());
     }
@@ -133,6 +134,10 @@ public class GrupoController {
     private void flushGrupo() {
         grupo = new Grupo();
         grupo.setIdGrupo(0l);
+    }
+
+    public void refreshList() {
+        this.lista = FXCollections.observableList(grupoDAO.listAll());
     }
 
     private void flushCategoria() {

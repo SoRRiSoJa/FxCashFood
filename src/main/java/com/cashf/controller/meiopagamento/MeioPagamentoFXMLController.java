@@ -14,15 +14,21 @@ import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXTextField;
 import java.math.BigDecimal;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.util.Duration;
+import org.controlsfx.control.Notifications;
 import util.PoupUpUtil;
 
 /**
@@ -97,8 +103,10 @@ public class MeioPagamentoFXMLController implements Initializable {
                 controller.update();
                 PoupUpUtil.poupUp("Meio de Pagamento Alterado", "O Meio de Pagamento foi alterado com sucesso.", "");
             }
-            loadTbv();
+            controller.refreshList();
             clearFields();
+            loadTbv();
+            tbvCartoes.refresh();
         } else {
             PoupUpUtil.accessDenied(erros);
             erros = "";
@@ -116,10 +124,36 @@ public class MeioPagamentoFXMLController implements Initializable {
     @FXML
     private void onExcluir(ActionEvent event) {
         if (controller.getMeioPagamento() != null) {
-            controller.delete();
-            PoupUpUtil.poupUp("Meio de Pagamento Excluído", "O Meio de Pagamento foi excluído com sucesso.", "");
+            Notifications notificationBuilder;
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Cofirmar Excluir Meio de Pagamento!");
+            alert.setHeaderText("Deseja realmente Excluir?");
+            alert.setContentText("Nome:(" + controller.getMeioPagamento().getDescricao() + ")");
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.get() == ButtonType.OK) {
+                try {
+                    controller.delete();
+                    
+                    PoupUpUtil.poupUp("Meio de Pagamento Excluído", "O Meio de Pagamento foi excluído com sucesso.", "");
+                    // ... user chose OK
+                    notificationBuilder = Notifications.create().title("Grupo excluído!").
+                            text("Meio de Pagamento Excluido com sucesso.").
+                            hideAfter(Duration.seconds(2)).
+                            position(Pos.TOP_RIGHT).
+                            darkStyle();
+                    notificationBuilder.showInformation();
+                } catch (Exception e) {
+                    erros = "Você não pode Excluir este Meio de Pagamento \n"
+                            + "Existem contas asssociadas a ele";
+                    PoupUpUtil.accessDenied(erros);
+                }
+
+            } else {
+                alert.close();
+            }
         }
         btnExcluir.setDisable(true);
+        tbvCartoes.refresh();
         clearFields();
     }
 

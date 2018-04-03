@@ -39,7 +39,7 @@ public class ClienteController implements GenericController<Cliente> {
     private Operadora operadora;
     private Cidade cidade;
     private Sexo sexo;
-    private int tipoConsulta=0;
+    private int tipoConsulta = 0;
 
     private ClienteController() {
         this.lt = new ArrayList<>();
@@ -178,7 +178,7 @@ public class ClienteController implements GenericController<Cliente> {
         telefone.setIdTelefone(0l);
         this.cliente = new Cliente();
         cliente.setIdPessoa(0l);
-        
+
     }
 
     @Override
@@ -228,13 +228,16 @@ public class ClienteController implements GenericController<Cliente> {
     public void setTipoConsulta(int tipoConsulta) {
         this.tipoConsulta = tipoConsulta;
     }
-    public void buscaNome(String nome){
-        lista=FXCollections.observableList(clienteDAO.listByName(nome));
+
+    public void buscaNome(String nome) {
+        lista = FXCollections.observableList(clienteDAO.listByName(nome));
     }
-    public void buscaCpf(String cpf){
-        lista=FXCollections.observableList(clienteDAO.listByCPF(cpf));
+
+    public void buscaCpf(String cpf) {
+        lista = FXCollections.observableList(clienteDAO.listByCPF(cpf));
     }
-        public void buscaTodos(){
-        lista=FXCollections.observableList(clienteDAO.listAll());
+
+    public void buscaTodos() {
+        lista = FXCollections.observableList(clienteDAO.listAll());
     }
 }

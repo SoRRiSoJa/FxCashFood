@@ -112,8 +112,15 @@ public class GerenciarGruposFXMLController implements Initializable {
             } else {
                 controller.update();
                 PoupUpUtil.poupUp("Grupo Alterado", "O Grupo foi alterado com sucesso.", "");
+                tbvGrupos.setItems(FXCollections.observableList(new ArrayList<>()));
+
+                clearFields();
+
             }
             btnAdicionar.setDisable(false);
+            controller.refreshList();
+            loadtbv();
+            tbvGrupos.refresh();
         } else {
             PoupUpUtil.accessDenied(erros);
             erros = "";
@@ -149,7 +156,7 @@ public class GerenciarGruposFXMLController implements Initializable {
                             darkStyle();
                     notificationBuilder.showInformation();
                 } catch (Exception e) {
-                    erros="Você não pode Excluir este Grupo \n"
+                    erros = "Você não pode Excluir este Grupo \n"
                             + "Existem produtos asssociados a ele";
                     PoupUpUtil.accessDenied(erros);
                 }
@@ -204,6 +211,7 @@ public class GerenciarGruposFXMLController implements Initializable {
         txtDescCat.clear();
         cbbCategoria.setValue(null);
         tbvCategoria.setItems(FXCollections.observableList(new ArrayList<>()));
+
     }
 
     private void setInputON() {

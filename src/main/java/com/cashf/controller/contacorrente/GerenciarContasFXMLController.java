@@ -12,14 +12,20 @@ import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.util.Duration;
+import org.controlsfx.control.Notifications;
 import util.PoupUpUtil;
 
 /**
@@ -61,7 +67,7 @@ public class GerenciarContasFXMLController implements Initializable {
     ContaCorrenteController controller = new ContaCorrenteController();
     private String erros;
     private boolean flagButtons;
-    private boolean isCaixa=false;
+    private boolean isCaixa = false;
     private String agencia;
     private String descricao;
     private String numero;
@@ -92,10 +98,14 @@ public class GerenciarContasFXMLController implements Initializable {
 
             } else {
                 controller.update();
+                
+
                 PoupUpUtil.poupUp("Conta Corrente Alterada", "A conta corrente foi alterada com sucesso.", "");
             }
+            controller.refreshList();
             loadTbv();
             clearFields();
+            tbvContas.refresh();
         } else {
             PoupUpUtil.accessDenied(erros);
             erros = "";
@@ -113,11 +123,38 @@ public class GerenciarContasFXMLController implements Initializable {
     @FXML
     private void onExcluir(ActionEvent event) {
         if (controller.getContaCorrente() != null) {
-            controller.delete();
-            PoupUpUtil.poupUp("Conta Corrente Excluída", "A conta corrente foi excluída com sucesso.", "");
+            Notifications notificationBuilder;
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Cofirmar Excluir Conta Corrente!");
+            alert.setHeaderText("Deseja realmente Excluir?");
+            alert.setContentText("Nome:(" + controller.getContaCorrente().getDescricao() + ")");
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.get() == ButtonType.OK) {
+                try {
+                    
+                    controller.delete();
+                    PoupUpUtil.poupUp("Conta Corrente Excluída", "A Conta Corrente foi excluída com sucesso.", "");
+                    // ... user chose OK
+                    notificationBuilder = Notifications.create().title("Conta Corrente excluída!").
+                            text("Conta Corrente Excluida com sucesso.").
+                            hideAfter(Duration.seconds(2)).
+                            position(Pos.TOP_RIGHT).
+                            darkStyle();
+                    notificationBuilder.showInformation();
+                } catch (Exception e) {
+                    erros = "Você não pode Excluir esta Conta \n"
+                            + "Existem Contas a Pagar ou Meios de pagamento asssociados a ela";
+                    PoupUpUtil.accessDenied(erros);
+                }
+
+            } else {
+                alert.close();
+            }
         }
-        btnExcluir.setDisable(true);
+        loadTbv();
         clearFields();
+        tbvContas.refresh();
+        btnExcluir.setDisable(true);
     }
 
     @FXML

@@ -45,9 +45,10 @@ public class TabListaFuncionariosFXMLController implements Initializable {
     private TableColumn<Funcionario, String> tbcEndereco;
     @FXML
     private TableColumn<Funcionario, String> tbcEmail;
+    @FXML
+    private TableColumn<Funcionario, String> tbcCPf;
     private static TableView<Funcionario> _tbvFuncionarios;
 
-    ;
     /**
      * Initializes the controller class.
      *
@@ -60,7 +61,7 @@ public class TabListaFuncionariosFXMLController implements Initializable {
         setUptableView();
         setUpRadioButtons();
         loadTbv();
-        _tbvFuncionarios=tbvFuncionarios;
+        _tbvFuncionarios = tbvFuncionarios;
     }
 
     @FXML
@@ -97,7 +98,8 @@ public class TabListaFuncionariosFXMLController implements Initializable {
         tbcNome.setCellValueFactory(new PropertyValueFactory<>("nome"));
         tbcEndereco.setCellValueFactory(new PropertyValueFactory<>("endereco"));
         tbcEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
-        tbvFuncionarios.getColumns().setAll(tbcNome, tbcEndereco, tbcEmail);
+        tbcCPf.setCellValueFactory(new PropertyValueFactory<>("cpf"));
+        tbvFuncionarios.getColumns().setAll(tbcNome, tbcEndereco, tbcEmail, tbcCPf);
     }
 
     private void loadTbv() {
@@ -106,6 +108,7 @@ public class TabListaFuncionariosFXMLController implements Initializable {
 
     public static void loadTbvFun() {
         _tbvFuncionarios.setItems(FuncionarioController.getInstance().getLista());
+        _tbvFuncionarios.refresh();
     }
 
     private void setUpRadioButtons() {

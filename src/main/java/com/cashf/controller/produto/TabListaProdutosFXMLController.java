@@ -5,6 +5,7 @@
  */
 package com.cashf.controller.produto;
 
+import com.cashf.model.produto.Grupo;
 import com.cashf.model.produto.Produto;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXRadioButton;
@@ -44,6 +45,8 @@ public class TabListaProdutosFXMLController implements Initializable {
     @FXML
     private TableColumn<Produto, Integer> tbcQtde;
     @FXML
+    private TableColumn<Produto, Grupo> tbcGrupo;
+    @FXML
     private JFXTextField txtConsultar;
     @FXML
     private JFXButton btnPesquisar;
@@ -53,6 +56,7 @@ public class TabListaProdutosFXMLController implements Initializable {
     private JFXRadioButton rdbGrupo;
     @FXML
     private JFXRadioButton rdbTodos;
+    
 
     /**
      * Initializes the controller class.
@@ -102,7 +106,8 @@ public class TabListaProdutosFXMLController implements Initializable {
         tbcCusto.setCellValueFactory(new PropertyValueFactory<>("preco_custo"));
         tbcVenda.setCellValueFactory(new PropertyValueFactory<>("preco_venda"));
         tbcQtde.setCellValueFactory(new PropertyValueFactory<>("qtdeProduto"));
-        tbvProdutos.getColumns().setAll(tbcCod, tbcCodRef, tbcDescricao, tbcTipo, tbcCusto, tbcVenda, tbcQtde);
+        tbcGrupo.setCellValueFactory(new PropertyValueFactory<>("grupo"));
+        tbvProdutos.getColumns().setAll(tbcCod, tbcCodRef, tbcDescricao, tbcTipo, tbcCusto, tbcVenda, tbcQtde,tbcGrupo);
     }
 
     private void loadTbv() {

@@ -34,7 +34,7 @@
             <TableView fx:id="tbvFornecedores" layoutX="233.0" layoutY="130.0" onMouseClicked="#onMouseClickedFornecedor" prefHeight="315.0" prefWidth="800.0" stylesheets="@../../styles/TableViewCSS.css">
                <columns>
                   <TableColumn fx:id="tbcNome" prefWidth="207.0" text="Nome" />
-                  <TableColumn prefWidth="311.0" text="Razão Social" />
+                  <TableColumn fx:id="tbcRazao" prefWidth="311.0" text="Razão Social" />
                   <TableColumn fx:id="tbcEmail" prefWidth="281.0" text="e-mail" />
                </columns>
             </TableView>

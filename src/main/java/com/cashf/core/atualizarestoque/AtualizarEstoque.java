@@ -170,8 +170,9 @@ public class AtualizarEstoque {
 
                 produto.setUnidadeMedida(itemAtual.getProduto().getUnidadeMedida());
                 produto.setQtdeEmbalagem(itemAtual.getProduto().getQtdeEmbalagem());
-                produto.setQtdeProduto(produto.getQtdeProduto().add(itemAtual.getProduto().getQtdeProduto()));
-                produto.setUnidadesEstoque(produto.getUnidadesEstoque().add(itemAtual.getProduto().getUnidadesEstoque()));
+                produto.setQtdeProduto(produto.getQtdeProduto().add(BigDecimal.valueOf(itemAtual.getQtdeProduto())));
+                 produto.setUnidadesEstoque(produto.getUnidadesEstoque().add(itemAtual.getProduto().getUnidadesEstoque()));
+                
                 produto.setPreco_custo(itemAtual.getValorTotal().add(itemAtual.getValorIpi()).divide(BigDecimal.valueOf(itemAtual.getQtdeProduto())));
                 produto.setPreco_venda(itemAtual.getValorTotal().add(itemAtual.getValorIpi()).divide(BigDecimal.valueOf(itemAtual.getQtdeProduto())));
 
