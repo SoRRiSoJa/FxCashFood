@@ -5,6 +5,7 @@
  */
 package com.cashf.controller.receberpedido;
 
+import com.cashf.core.atualizarestoque.AtualizarEstoque;
 import com.cashf.dao.fornecedor.FornecedorDAO;
 import com.cashf.dao.notafiscal.NotaFiscalDAO;
 import com.cashf.dao.produto.ProdutoDAO;
@@ -47,6 +48,7 @@ public class ReceberPedidoController implements GenericController<NotaFiscal> {
     private BigDecimal valTotalIcmsSubst;
     private ObservableList<ProdutoNotaFiscal> listaProdutosNota;
     private ObservableList<NotaFiscal> lista;
+    private AtualizarEstoque atualizarEstoque;
 
     private ReceberPedidoController() {
         this.produtoDAO = new ProdutoDAO(Produto.class);
@@ -61,6 +63,7 @@ public class ReceberPedidoController implements GenericController<NotaFiscal> {
         this.notaFiscal.setIdNota(0l);
         this.produtoAtual.setIdProduto(0l);
         this.fornecedor.setIdFornecedor(0l);
+        this.atualizarEstoque=new AtualizarEstoque();
 
     }
 
@@ -185,7 +188,7 @@ public class ReceberPedidoController implements GenericController<NotaFiscal> {
         this.listaProdutosNota = listaProdutosNota;
     }
 
-    public void setListaProdutosNota(Long idProdutoNotaFiscal, Integer qtdeProduto, BigDecimal valorIpi, BigDecimal valorIcmsSubst, BigDecimal valoruUnitario, BigDecimal despesas, BigDecimal descontos, BigDecimal embalagemCompra, UnidadeMedida unidadeMedida) {
+    public void setListaProdutosNota(Long idProdutoNotaFiscal,BigDecimal qtdeEmbalagem, Integer qtdeProduto, BigDecimal valorIpi, BigDecimal valorIcmsSubst, BigDecimal valoruUnitario, BigDecimal despesas, BigDecimal descontos, BigDecimal embalagemCompra, UnidadeMedida unidadeMedida) {
         ProdutoNotaFiscal pn = new ProdutoNotaFiscal(idProdutoNotaFiscal, notaFiscal, produtoAtual, qtdeProduto, valorIpi, valorIcmsSubst, valoruUnitario, despesas, descontos, valoruUnitario.multiply(BigDecimal.valueOf(qtdeProduto.doubleValue())).subtract(descontos).add(despesas));
         pn.getProduto().setUnidadeMedida(unidadeMedida);
         pn.getProduto().setQtdeEmbalagem(embalagemCompra);
@@ -325,6 +328,9 @@ public class ReceberPedidoController implements GenericController<NotaFiscal> {
 
     public void setValTotalAcrecimos(BigDecimal valTotalAcrecimos) {
         this.valTotalAcrecimos = valTotalAcrecimos;
+    }
+    public void atualizarEstoqueProdutosNota(){
+        atualizarEstoque.adicionarProdutosNota(notaFiscal);
     }
 
 }

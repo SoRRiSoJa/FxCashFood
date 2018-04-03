@@ -37,6 +37,7 @@ public class ProdutoNotaFiscal implements Serializable {
     @JoinColumn(name = "idproduto")
     private Produto produto;
     private Integer qtdeProduto;
+    private BigDecimal qtdeEmbalagem;
     private BigDecimal valorIpi;
     private BigDecimal valorIcmsSubst;
     private BigDecimal valorUnitario;
@@ -47,7 +48,7 @@ public class ProdutoNotaFiscal implements Serializable {
     public ProdutoNotaFiscal() {
     }
 
-    public ProdutoNotaFiscal(Long idProdutoNotaFiscal, NotaFiscal notaFiscal, Produto produto, Integer qtdeProduto, BigDecimal valorIpi, BigDecimal valorIcmsSubst, BigDecimal valoruUnitario, BigDecimal despesas, BigDecimal descontos, BigDecimal valorTotal) {
+    public ProdutoNotaFiscal(Long idProdutoNotaFiscal, NotaFiscal notaFiscal, Produto produto,Integer qtdeProduto, BigDecimal valorIpi, BigDecimal valorIcmsSubst, BigDecimal valoruUnitario, BigDecimal despesas, BigDecimal descontos, BigDecimal valorTotal) {
         this.idProdutoNotaFiscal = idProdutoNotaFiscal;
         this.notaFiscal = notaFiscal;
         this.produto = produto;
@@ -58,7 +59,7 @@ public class ProdutoNotaFiscal implements Serializable {
         this.valorIcmsSubst = valorIcmsSubst;
         this.despesas = despesas;
         this.descontos = descontos;
-
+        
     }
 
     public Long getIdProdutoNotaFiscal() {
@@ -140,7 +141,7 @@ public class ProdutoNotaFiscal implements Serializable {
     public void setDescontos(BigDecimal descontos) {
         this.descontos = descontos;
     }
-    
+      
 
     @Override
     public int hashCode() {

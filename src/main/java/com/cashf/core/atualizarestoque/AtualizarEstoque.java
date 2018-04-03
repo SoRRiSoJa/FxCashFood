@@ -10,6 +10,7 @@ import com.cashf.dao.ajusteestoque.AjusteEstoqueDAO;
 import com.cashf.dao.produto.ProdutoDAO;
 import com.cashf.model.ajusteestoque.AjusteEstoque;
 import com.cashf.model.ajusteestoque.TipoAjuste;
+import com.cashf.model.notafiscal.NotaFiscal;
 import com.cashf.model.prepreparo.PrePreparo;
 import com.cashf.model.produto.Produto;
 import com.cashf.model.produto.UnidadeMedida;
@@ -159,5 +160,27 @@ public class AtualizarEstoque {
 
     public void atualizar() {
         ajusteEstoqueDAO.save(ajusteEstoque);
+    }
+
+    public Boolean adicionarProdutosNota(NotaFiscal nota) {
+        boolean flag = true;
+        try {
+            nota.getListaProdutos().forEach((itemAtual) -> {
+                produto = produtoDAO.findById(itemAtual.getProduto().getIdProduto());
+
+                produto.setUnidadeMedida(itemAtual.getProduto().getUnidadeMedida());
+                produto.setQtdeEmbalagem(itemAtual.getProduto().getQtdeEmbalagem());
+                produto.setQtdeProduto(produto.getQtdeProduto().add(itemAtual.getProduto().getQtdeProduto()));
+                produto.setUnidadesEstoque(produto.getUnidadesEstoque().add(itemAtual.getProduto().getUnidadesEstoque()));
+                produto.setPreco_custo(itemAtual.getValorTotal().add(itemAtual.getValorIpi()).divide(BigDecimal.valueOf(itemAtual.getQtdeProduto())));
+                produto.setPreco_venda(itemAtual.getValorTotal().add(itemAtual.getValorIpi()).divide(BigDecimal.valueOf(itemAtual.getQtdeProduto())));
+
+                produtoDAO.update(produto);
+            });
+        } catch (Exception ex) {
+            System.out.println("Erro ao adicionar Produtos:--->>>> " + ex);
+            flag = false;
+        }
+        return flag;
     }
 }

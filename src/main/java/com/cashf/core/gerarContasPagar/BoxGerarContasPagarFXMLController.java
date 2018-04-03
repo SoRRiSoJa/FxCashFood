@@ -7,6 +7,7 @@ package com.cashf.core.gerarContasPagar;
 
 import com.cashf.cashfood.MainApp;
 import com.cashf.controller.receberpedido.ReceberPedidoController;
+import com.cashf.core.atualizarestoque.AtualizarEstoque;
 import com.cashf.model.contasPagar.ContaPagar;
 import com.cashf.model.meiopagamento.MeioPagamento;
 import com.cashf.model.notafiscal.NotaFiscal;
@@ -77,6 +78,7 @@ public class BoxGerarContasPagarFXMLController implements Initializable {
     private JFXRadioButton rbtNao;
     //---
     private GerarContasPagar gerarContasPagar;
+    private AtualizarEstoque atualizarEstoque;
     private LocalDate dataInicial;
     private BigDecimal valorTotal;
     private int nParcelas;
@@ -90,6 +92,7 @@ public class BoxGerarContasPagarFXMLController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         gerarContasPagar = new GerarContasPagar();
+        atualizarEstoque=new AtualizarEstoque();
         loadData();
         loadCbbMeioPagto();
         setUpTableView();
@@ -140,6 +143,7 @@ public class BoxGerarContasPagarFXMLController implements Initializable {
             // ... user chose OK
             ReceberPedidoController.getInstance().getNotaFiscal().setContaPagar(gerarContasPagar.getLista().get(0));
             ReceberPedidoController.getInstance().salvarNota();
+            ReceberPedidoController.getInstance().atualizarEstoqueProdutosNota();
 
             notificationBuilder = Notifications.create().title("Conta(s) Lançadas!").
                     text("Contas Lançadas com sucesso!.").

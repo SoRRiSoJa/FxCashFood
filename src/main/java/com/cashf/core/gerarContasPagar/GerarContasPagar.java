@@ -7,6 +7,7 @@ package com.cashf.core.gerarContasPagar;
 
 import com.cashf.controller.caixa.CaixaController;
 import com.cashf.controller.receberpedido.ReceberPedidoController;
+import com.cashf.core.atualizarestoque.AtualizarEstoque;
 import com.cashf.dao.contaspagar.ContaPagarDAO;
 import com.cashf.dao.meiopagamento.MeioPagamentoDAO;
 import com.cashf.model.caixa.Caixa;
@@ -27,6 +28,7 @@ import javafx.collections.ObservableList;
 public class GerarContasPagar {
 
     private ContaPagar contaPagar;
+    
     private ObservableList<ContaPagar> lista;
     private ObservableList<MeioPagamento> listaMeioPagamento;
     private MeioPagamento meioPagamento;
@@ -50,6 +52,7 @@ public class GerarContasPagar {
         this.listaMeioPagamento = FXCollections.observableList(meioPagamentoDAO.listAll());
         this.contaPagar = new ContaPagar();
         this.contaPagar.setIdContaPagar(0l);
+        
     }
 
     public GerarContasPagar(String numeroNota, String favorecido, BigDecimal valorBruto, BigDecimal encargos, BigDecimal acrecimo, BigDecimal desconto, BigDecimal valorPago) {
@@ -224,7 +227,7 @@ public class GerarContasPagar {
     public void setListaMeioPagamento(ObservableList<MeioPagamento> listaMeioPagamento) {
         this.listaMeioPagamento = listaMeioPagamento;
     }
-
+    
     private void flushObject() {
         this.contaPagar = new ContaPagar();
         this.contaPagar.setIdContaPagar(0l);

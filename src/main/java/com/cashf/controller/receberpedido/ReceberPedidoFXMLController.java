@@ -202,6 +202,7 @@ public class ReceberPedidoFXMLController implements GenericViewController, Initi
         getDataProd();
         if (validateFieldsProd()) {
             ReceberPedidoController.getInstance().setListaProdutosNota(0l,
+                    embalagemDeCompra,
                     qtdeCompra.intValue(),
                     valorIpi,
                     valorIcmsSubstProd,
