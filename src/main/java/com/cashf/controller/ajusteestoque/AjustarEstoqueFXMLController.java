@@ -144,6 +144,7 @@ public class AjustarEstoqueFXMLController implements GenericViewController, Init
 
     @FXML
     private void onSalvar(ActionEvent event) {
+        boolean flagAjuste = true;
         if (validateFields()) {
             getData();
             controller.setTipoAjuste(cbbTipoAjuste.getSelectionModel().getSelectedItem());
@@ -152,20 +153,31 @@ public class AjustarEstoqueFXMLController implements GenericViewController, Init
             controller.setQtdeAjuste(qtdeAjuste);
             switch (aux) {
                 case E:
-                    controller.adicionarProduto();
+                    if (!controller.adicionarProduto()) {
+                        erros += "Verifique a quantidade a adicionar!";
+                        flagAjuste = false;
+                    }
                     break;
                 case S:
-                    controller.retirarProduto();
+                    if (!controller.retirarProduto()) {
+                        erros += "Verifique a quantidade a retirar!";
+                        flagAjuste = false;
+                    }
                     break;
             }
-            controller.getAtualizarEstoque().setTipoAjuste(controller.getTipoAjuste());
-            controller.getAtualizarEstoque().setAjusteEstoque(motivoAjuste, LocalDate.now(), LocalTime.now(), qtdeAjuste);
+            if (flagAjuste) {
+                controller.getAtualizarEstoque().setTipoAjuste(controller.getTipoAjuste());
+                controller.getAtualizarEstoque().setAjusteEstoque(motivoAjuste, LocalDate.now(), LocalTime.now(), qtdeAjuste);
 
-            controller.insert();
-            controller.refreshListaPRod();
-            lblSaldo.setText(controller.getProduto().getQtdeProduto() + "");
-            txtQtdeAtual.setText(controller.getProduto().getQtdeProduto() + "");
-            tbvProdutos.refresh();
+                controller.insert();
+                controller.refreshListaPRod();
+                lblSaldo.setText(controller.getProduto().getQtdeProduto() + "");
+                txtQtdeAtual.setText(controller.getProduto().getQtdeProduto() + "");
+                tbvProdutos.refresh();
+            } else {
+                PoupUpUtil.errorMessage(paneRoot, MainApp.paneRoot, erros);
+                erros = "";
+            }
         } else {
             PoupUpUtil.errorMessage(paneRoot, MainApp.paneRoot, erros);
             erros = "";

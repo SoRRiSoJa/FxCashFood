@@ -119,12 +119,12 @@ public class AjusteEstoqueController implements GenericController<AjusteEstoque>
         this.listaProduto = FXCollections.observableList(produtoDAO.listProdNotFicha());
     }
 
-    public void adicionarProduto() {
-        atualizarEstoque.adicionarProduto(qtdeAjuste, unidadeMedida);
+    public boolean adicionarProduto() {
+        return atualizarEstoque.adicionarProduto(qtdeAjuste, unidadeMedida);
     }
 
-    public void retirarProduto() {
-        atualizarEstoque.retirarProduto(qtdeAjuste, unidadeMedida);
+    public boolean retirarProduto() {
+        return atualizarEstoque.retirarProduto(qtdeAjuste, unidadeMedida);
     }
     void buscaCodRef(String text) {
         this.listaProduto = FXCollections.observableList(produtoDAO.listProdInsumosCodRef(text));

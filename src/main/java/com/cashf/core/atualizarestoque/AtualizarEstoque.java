@@ -51,6 +51,8 @@ public class AtualizarEstoque {
             if (produto.getUnidadeMedida().equals(unidadeMedida)) {
                 if (qtdeAtual.compareTo(qtdeAjuste) >= 0) {//Se unidades iguáis e qtde>= a ajuste
                     produto.setQtdeProduto(qtdeAtual.subtract(qtdeAjuste));
+                } else {
+                    flag = false;
                 }
             } else {
                 produto.setQtdeProduto(qtdeAtual.subtract(UnitConverter.convertTo(unidadeMedida, produto.getUnidadeMedida(), qtdeAjuste)));
@@ -171,8 +173,8 @@ public class AtualizarEstoque {
                 produto.setUnidadeMedida(itemAtual.getProduto().getUnidadeMedida());
                 produto.setQtdeEmbalagem(itemAtual.getProduto().getQtdeEmbalagem());
                 produto.setQtdeProduto(produto.getQtdeProduto().add(BigDecimal.valueOf(itemAtual.getQtdeProduto())));
-                 produto.setUnidadesEstoque(produto.getUnidadesEstoque().add(itemAtual.getProduto().getUnidadesEstoque()));
-                
+                produto.setUnidadesEstoque(produto.getUnidadesEstoque().add(itemAtual.getProduto().getUnidadesEstoque()));
+
                 produto.setPreco_custo(itemAtual.getValorTotal().add(itemAtual.getValorIpi()).divide(BigDecimal.valueOf(itemAtual.getQtdeProduto())));
                 produto.setPreco_venda(itemAtual.getValorTotal().add(itemAtual.getValorIpi()).divide(BigDecimal.valueOf(itemAtual.getQtdeProduto())));
 
