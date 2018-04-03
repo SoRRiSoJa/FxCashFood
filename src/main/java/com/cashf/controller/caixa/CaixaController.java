@@ -45,9 +45,9 @@ public class CaixaController implements GenericController<Caixa> {
     private ContaCorrente contaCorrente;
     private TPMov tipoMovimento;
     private int tipoConsulta;
-    private BigDecimal totalDebitos;
-    private BigDecimal totalCreditos;
-    private BigDecimal saldoFinal;
+    private BigDecimal totalDebitos = BigDecimal.ZERO;
+    private BigDecimal totalCreditos = BigDecimal.ZERO;
+    private BigDecimal saldoFinal = BigDecimal.ZERO;
 
     private CaixaController() {
         this.caixaDAO = new CaixaDAO(Caixa.class);
@@ -55,7 +55,7 @@ public class CaixaController implements GenericController<Caixa> {
         this.contaCorrenteDAO = new ContaCorrenteDAO(ContaCorrente.class);
         this.caixaMovimentoDAO = new CaixaMovimentoDAO(CaixaMovimento.class);
         this.lista = FXCollections.observableList(caixaDAO.listAll());
-        this.listaConta = FXCollections.observableList(contaCorrenteDAO.listAll());
+        this.listaConta = FXCollections.observableList(contaCorrenteDAO.listCcaixa());
         try {
             this.caixaAberto = caixaDAO.getCaixaAberto();
             this.listaMov = FXCollections.observableList(caixaMovimentoDAO.listByDateAndCaixa(caixaAberto.getDataAbertura(), caixaAberto));
@@ -260,13 +260,15 @@ public class CaixaController implements GenericController<Caixa> {
         totalCreditos = BigDecimal.ZERO;
         totalDebitos = BigDecimal.ZERO;
         saldoFinal = BigDecimal.ZERO;
-        listaMov.forEach((cm) -> {
-            if (cm.getTipoMovimento().equals(TPMov.SUPRIMENTO)) {
-                totalCreditos = totalCreditos.add(cm.getValor());
-            } else {
-                totalDebitos = totalDebitos.add(cm.getValor());
-            }
-        });
+        if (listaMov != null) {
+            listaMov.forEach((cm) -> {
+                if (cm.getTipoMovimento().equals(TPMov.SUPRIMENTO)) {
+                    totalCreditos = totalCreditos.add(cm.getValor());
+                } else {
+                    totalDebitos = totalDebitos.add(cm.getValor());
+                }
+            });
+        }
         saldoFinal = totalCreditos.subtract(totalDebitos);
     }
 
@@ -285,7 +287,8 @@ public class CaixaController implements GenericController<Caixa> {
     public void setContaCorrente(ContaCorrente contaCorrente) {
         this.contaCorrente = contaCorrente;
     }
-    public BigDecimal getTotalContasPagarCaixa(Caixa caixaAberto){
+
+    public BigDecimal getTotalContasPagarCaixa(Caixa caixaAberto) {
         return contasPagarDAO.getTotalContas(caixaAberto);
     }
 }

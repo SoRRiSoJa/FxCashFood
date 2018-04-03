@@ -146,6 +146,7 @@ public class ProdutoNotaFiscal implements Serializable {
     public int hashCode() {
         int hash = 3;
         hash = 43 * hash + Objects.hashCode(this.idProdutoNotaFiscal);
+        hash = 43 * hash + Objects.hashCode(this.produto);
         hash = 43 * hash + Objects.hashCode(this.notaFiscal);
         return hash;
     }
@@ -166,6 +167,9 @@ public class ProdutoNotaFiscal implements Serializable {
             return false;
         }
         if (!Objects.equals(this.notaFiscal, other.notaFiscal)) {
+            return false;
+        }
+        if (!Objects.equals(this.produto, other.produto)) {
             return false;
         }
         return true;

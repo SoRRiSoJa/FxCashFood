@@ -5,27 +5,34 @@
  */
 package com.cashf.core.gerarContasPagar;
 
+import com.cashf.cashfood.MainApp;
 import com.cashf.controller.receberpedido.ReceberPedidoController;
 import com.cashf.model.contasPagar.ContaPagar;
 import com.cashf.model.meiopagamento.MeioPagamento;
+import com.cashf.model.notafiscal.NotaFiscal;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXTextField;
 import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.net.URL;
 import java.time.LocalDate;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.util.Duration;
+import org.controlsfx.control.Notifications;
 
 /**
  * FXML Controller class
@@ -69,7 +76,7 @@ public class BoxGerarContasPagarFXMLController implements Initializable {
     @FXML
     private JFXRadioButton rbtNao;
     //---
-    private final GerarContasPagar gerarContasPagar = new GerarContasPagar();
+    private GerarContasPagar gerarContasPagar;
     private LocalDate dataInicial;
     private BigDecimal valorTotal;
     private int nParcelas;
@@ -82,6 +89,7 @@ public class BoxGerarContasPagarFXMLController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        gerarContasPagar = new GerarContasPagar();
         loadData();
         loadCbbMeioPagto();
         setUpTableView();
@@ -102,15 +110,54 @@ public class BoxGerarContasPagarFXMLController implements Initializable {
     @FXML
     private void onGerar(ActionEvent event) {
         getData();
-        System.out.println(valorTotal.divide(BigDecimal.valueOf(nParcelas), 4, RoundingMode.HALF_EVEN));
+       
+        if (gerarContasPagar.isTipoParcelamento()) {
+            gerarContasPagar.gerarParcelas(ReceberPedidoController.getInstance().getValTotalNota(),
+                    dataInicial,
+                    lblFavorecido.getText(),
+                    nParcelas,
+                    intervalor);
+            ReceberPedidoController.getInstance().setContaPagar(gerarContasPagar.getContaPagar());
+            ReceberPedidoController.getInstance().getNotaFiscal().setContaPagar(gerarContasPagar.getContaPagar());
+            loadListaParcelas();
+        } else {
+            gerarContasPagar.gerarContaPagar(BigDecimal.ZERO, BigDecimal.ZERO, BigDecimal.ZERO, BigDecimal.ZERO, valorTotal, dataInicial, lblFavorecido.getText());
+            loadListaParcelas();
+        }
+
     }
 
     @FXML
     private void onAbrir(ActionEvent event) {
+        Notifications notificationBuilder;
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Cofirmar O Lançamento!");
+        alert.setHeaderText("Deseja Lançar a(s) contas geradas?");
+        //alert.setContentText("N + ")");
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == ButtonType.OK) {
+            gerarContasPagar.efetuarLancamento();
+            // ... user chose OK
+            ReceberPedidoController.getInstance().getNotaFiscal().setContaPagar(gerarContasPagar.getLista().get(0));
+            ReceberPedidoController.getInstance().salvarNota();
+
+            notificationBuilder = Notifications.create().title("Conta(s) Lançadas!").
+                    text("Contas Lançadas com sucesso!.").
+                    hideAfter(Duration.seconds(2)).
+                    position(Pos.TOP_RIGHT).
+                    darkStyle();
+            notificationBuilder.showInformation();
+        } else {
+            alert.close();
+        }
+        MainApp.janelaAberta.close();
+        MainApp.janelaAberta = MainApp.janelaAnterior;
     }
 
     @FXML
     private void onCancelar(ActionEvent event) {
+        MainApp.janelaAberta.close();
+        MainApp.janelaAberta = MainApp.janelaAnterior;
     }
 
     private void loadData() {
@@ -122,6 +169,10 @@ public class BoxGerarContasPagarFXMLController implements Initializable {
 
     public void loadCbbMeioPagto() {
         cbbFormaPagamento.setItems(gerarContasPagar.getListaMeioPagamento());
+    }
+
+    public void loadListaParcelas() {
+        tbvContas.setItems(gerarContasPagar.getLista());
     }
 
     private void setUpTableView() {
@@ -163,7 +214,8 @@ public class BoxGerarContasPagarFXMLController implements Initializable {
         }
         return flag;
     }
-     private void setUpRadioButtons() {
+
+    private void setUpRadioButtons() {
 
         rbtSim.selectedProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue) {

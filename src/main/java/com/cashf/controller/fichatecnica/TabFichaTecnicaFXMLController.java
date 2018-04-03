@@ -19,9 +19,11 @@ import controller.GenericViewController;
 import java.math.BigDecimal;
 import java.net.URL;
 import java.text.NumberFormat;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Optional;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -209,6 +211,8 @@ public class TabFichaTecnicaFXMLController implements Initializable, GenericView
         ccbItens.setValue(null);
         cbbUnidadeMedida.setValue(null);
         ccbFichaTecnica.setValue(null);
+        tbvFichaItens.setItems(FXCollections.observableList(new ArrayList<>()));
+        
     }
 
     @Override

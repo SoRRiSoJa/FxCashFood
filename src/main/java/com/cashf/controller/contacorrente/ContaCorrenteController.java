@@ -44,8 +44,8 @@ public class ContaCorrenteController {
         this.contaCorrente = contaCorrente;
     }
 
-    public void setContaCorrente(long id, String descricao, String agencia, String contaCorrente, Banco banco) {
-        this.contaCorrente = new ContaCorrente(id, descricao, agencia, contaCorrente,BigDecimal.ZERO ,banco);
+    public void setContaCorrente(long id, String descricao, String agencia, String contaCorrente, Banco banco,Boolean isCaixa) {
+        this.contaCorrente = new ContaCorrente(id, descricao, agencia, contaCorrente,BigDecimal.ZERO,isCaixa ,banco);
     }
 
     public ObservableList<ContaCorrente> getLista() {

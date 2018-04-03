@@ -17,9 +17,11 @@ import com.sun.prism.impl.Disposer;
 import controller.GenericViewController;
 import java.net.URL;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Optional;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -310,6 +312,7 @@ public class TabClientesFXMLController implements GenericViewController, Initial
         txtNumeroTelefone.clear();
         cbbCidade.setValue(null);
         cbbOperadora.setValue(null);
+        tbvTelefones.setItems(FXCollections.observableList(new ArrayList<>()));
     }
 
     @Override

@@ -8,6 +8,7 @@ package com.cashf.controller.contacorrente;
 import com.cashf.model.banco.Banco;
 import com.cashf.model.contacorrente.ContaCorrente;
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 import java.net.URL;
@@ -54,11 +55,13 @@ public class GerenciarContasFXMLController implements Initializable {
     private TableColumn<ContaCorrente, String> tbcAgencia;
     @FXML
     private TableColumn<ContaCorrente, String> tbcConta;
-
+    @FXML
+    private JFXCheckBox ckbContaCaixa;
     //---------------------------------
     ContaCorrenteController controller = new ContaCorrenteController();
     private String erros;
     private boolean flagButtons;
+    private boolean isCaixa=false;
     private String agencia;
     private String descricao;
     private String numero;
@@ -74,6 +77,7 @@ public class GerenciarContasFXMLController implements Initializable {
         loadCbbBanco();
         setInputOff();
         setUptableView();
+        setUpCheckBox();
         loadTbv();
     }
 
@@ -141,6 +145,7 @@ public class GerenciarContasFXMLController implements Initializable {
         txtDescricao.setText(controller.getContaCorrente().getDescricao());
         txtNumero.setText(controller.getContaCorrente().getContaCorrente());
         cbbBanco.setValue(controller.getContaCorrente().getBanco());
+        ckbContaCaixa.selectedProperty().setValue(controller.getContaCorrente().getcCaixa());
         getData();
     }
 
@@ -149,6 +154,7 @@ public class GerenciarContasFXMLController implements Initializable {
         txtDescricao.clear();
         txtNumero.clear();
         cbbBanco.setValue(null);
+        ckbContaCaixa.selectedProperty().setValue(false);
 
     }
 
@@ -158,6 +164,15 @@ public class GerenciarContasFXMLController implements Initializable {
         numero = txtNumero.getText();
         descricao = txtDescricao.getText();
         controller.setBanco(cbbBanco.getSelectionModel().getSelectedItem());
+    }
+
+    private void setUpCheckBox() {
+        ckbContaCaixa.selectedProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue) {
+                isCaixa = !isCaixa;
+            }
+        });
+
     }
 
     private void loadCbbBanco() {
@@ -172,6 +187,7 @@ public class GerenciarContasFXMLController implements Initializable {
         txtDescricao.setDisable(true);
         txtAgencia.setDisable(true);
         cbbBanco.setDisable(true);
+        ckbContaCaixa.setDisable(true);
         flagButtons = false;
     }
 
@@ -183,6 +199,7 @@ public class GerenciarContasFXMLController implements Initializable {
         txtDescricao.setDisable(false);
         txtAgencia.setDisable(false);
         cbbBanco.setDisable(false);
+        ckbContaCaixa.setDisable(false);
         flagButtons = true;
     }
 
@@ -209,7 +226,7 @@ public class GerenciarContasFXMLController implements Initializable {
     }
 
     private void setData() {
-        controller.setContaCorrente(idConta, descricao, agencia, numero, controller.getBanco());
+        controller.setContaCorrente(idConta, descricao, agencia, numero, controller.getBanco(), isCaixa);
     }
 
     private void setUptableView() {

@@ -20,8 +20,10 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.net.URL;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Optional;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -174,9 +176,7 @@ public class ReceberPedidoFXMLController implements GenericViewController, Initi
                     ReceberPedidoController.getInstance().getValTotalNota(),
                     "");
             System.out.println("NOTA:" + ReceberPedidoController.getInstance().getNotaFiscal().toString());
-            //ReceberPedidoController.getInstance().gerarContaPagar();
-            //ReceberPedidoController.getInstance().insert();
-            ReceberPedidoController.getInstance().getLista().add(ReceberPedidoController.getInstance().getNotaFiscal());
+            clearFields();
             loadBox("/fxml/contasPagar/BoxGerarContasPagarFXML.fxml", "Gerar Contas Pagar");
             
         } else {
@@ -253,6 +253,7 @@ public class ReceberPedidoFXMLController implements GenericViewController, Initi
         txtOutrasDespesasProd.clear();
         txtDescontoProd.clear();
         txtEmbalagemDeCompra.clear();
+        tbvProdutos.setItems(FXCollections.observableList(new ArrayList<>()));
     }
 
     @Override

@@ -46,7 +46,7 @@ public class ContaPagar implements Serializable {
     private BigDecimal desconto;
     private BigDecimal acrecimo;
     private BigDecimal valorPago;
-    @ManyToOne(cascade = CascadeType.ALL,fetch=FetchType.EAGER)
+    @ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(nullable = false)
     private MeioPagamento meioPagamento;
     @ManyToOne

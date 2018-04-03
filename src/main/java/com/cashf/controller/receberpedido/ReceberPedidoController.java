@@ -5,7 +5,6 @@
  */
 package com.cashf.controller.receberpedido;
 
-import com.cashf.core.gerarContasPagar.GerarContasPagar;
 import com.cashf.dao.fornecedor.FornecedorDAO;
 import com.cashf.dao.notafiscal.NotaFiscalDAO;
 import com.cashf.dao.produto.ProdutoDAO;
@@ -34,7 +33,6 @@ public class ReceberPedidoController implements GenericController<NotaFiscal> {
     private final ProdutoDAO produtoDAO;
     private final FornecedorDAO fornecedorDAO;
     private final NotaFiscalDAO notaFiscalDAO;
-    private final GerarContasPagar gerarContasPagar;
     private Fornecedor fornecedor;
     private Produto produtoAtual;
     private NotaFiscal notaFiscal;
@@ -54,7 +52,6 @@ public class ReceberPedidoController implements GenericController<NotaFiscal> {
         this.produtoDAO = new ProdutoDAO(Produto.class);
         this.fornecedorDAO = new FornecedorDAO(Fornecedor.class);
         this.notaFiscalDAO = new NotaFiscalDAO(NotaFiscal.class);
-        this.gerarContasPagar = new GerarContasPagar();
         this.fornecedor = new Fornecedor();
         this.produtoAtual = new Produto();
         this.listaProdutosNota = FXCollections.observableList(new ArrayList<>());
@@ -145,7 +142,7 @@ public class ReceberPedidoController implements GenericController<NotaFiscal> {
     public void setLista(ObservableList<NotaFiscal> lista) {
         this.lista = lista;
     }
-
+    
     @Override
     public void setItenLista(NotaFiscal obj) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -160,7 +157,24 @@ public class ReceberPedidoController implements GenericController<NotaFiscal> {
     }
 
     public void setNotaFiscal(long idNota, String numero_nota, LocalDate dataNota, LocalDate dataRecebimento, BigDecimal base_calc_icms, BigDecimal valor_icms, BigDecimal base_icms_subst, BigDecimal valor_icms_subst, BigDecimal valTotalIpi, BigDecimal outrasDespesas, BigDecimal desconto, BigDecimal valorTotalProdutos, BigDecimal valorTotalNota, String observacao) {
-        this.notaFiscal = new NotaFiscal(idNota, numero_nota, fornecedor, contaPagar, dataNota, dataRecebimento, base_calc_icms, valor_icms, base_icms_subst, valor_icms_subst, outrasDespesas, desconto, valorTotalProdutos, valTotalIpi, valorTotalNota, observacao, listaProdutosNota);
+        //this.notaFiscal = new NotaFiscal(idNota, numero_nota, fornecedor, contaPagar, dataNota, dataRecebimento, base_calc_icms, valor_icms, base_icms_subst, valor_icms_subst, outrasDespesas, desconto, valorTotalProdutos, valTotalIpi, valorTotalNota, observacao, listaProdutosNota);
+        this.notaFiscal.setIdNota(idNota);
+        this.notaFiscal.setFornecedor(fornecedor);
+        this.notaFiscal.setNumero_nota(numero_nota);
+        this.notaFiscal.setContaPagar(contaPagar);
+        this.notaFiscal.setDataNota(dataNota);
+        this.notaFiscal.setDataRecebimento(dataRecebimento);
+        this.notaFiscal.setBase_calc_icms(base_calc_icms);
+        this.notaFiscal.setValor_icms(valor_icms);
+        this.notaFiscal.setBase_icms_subst(base_icms_subst);
+        this.notaFiscal.setValor_icms_subst(valor_icms_subst);
+        this.notaFiscal.setOutrasDespesas(outrasDespesas);
+        this.notaFiscal.setDesconto(desconto);
+        this.notaFiscal.setValorTotalProdutos(valorTotalProdutos);
+        this.notaFiscal.setValorTotalNota(valorTotalNota);
+        this.notaFiscal.setValorTotalIpi(valTotalIpi);
+        this.notaFiscal.setObservacao(observacao);
+        this.notaFiscal.setListaProdutos(listaProdutosNota);
     }
 
     public ObservableList<ProdutoNotaFiscal> getListaProdutosNota() {
@@ -179,7 +193,7 @@ public class ReceberPedidoController implements GenericController<NotaFiscal> {
         pn.getProduto().setUnidadesEstoque(pn.getProduto().getQtdeEmbalagem().multiply(BigDecimal.valueOf(qtdeProduto)));
         this.listaProdutosNota.add(pn);
     }
-
+    
     public UnidadeMedida getUnidadeMedida() {
         return unidadeMedida;
     }
@@ -203,7 +217,9 @@ public class ReceberPedidoController implements GenericController<NotaFiscal> {
     public BigDecimal getValTotalIcmsSubst() {
         return valTotalIcmsSubst;
     }
-
+    public void salvarNota(){
+        notaFiscalDAO.update(notaFiscal);
+    }
     /**
      * Retorna o valor total do IPI para os produtos de uma Nota Fiscal Calcula
      * o valor od IPI utilizando o valor informado na Nota Fiscal do produto
@@ -250,6 +266,11 @@ public class ReceberPedidoController implements GenericController<NotaFiscal> {
         });
     }
 
+    /**
+     * Calcula o valor total para os produtos de uma Nota Fiscal Raliza a
+     * somatoria dos valores e quantidades dos produtos considerando seus
+     * descontos e acrecimos.
+     */
     private void calcValTotalProd() {
         valTotalProd = BigDecimal.ZERO;
         listaProdutosNota.forEach((prod) -> {
@@ -258,6 +279,9 @@ public class ReceberPedidoController implements GenericController<NotaFiscal> {
         });
     }
 
+    /**
+     * Calcula o valor total de descontos e acrecimos dos produtos de uma nota
+     */
     public void calcTotalDespesasDescontos() {
         valTotalDescontos = BigDecimal.ZERO;
         valTotalAcrecimos = BigDecimal.ZERO;
@@ -267,6 +291,10 @@ public class ReceberPedidoController implements GenericController<NotaFiscal> {
         });
     }
 
+    /**
+     * Calcula o valor total de uma nota Fiscal considerando total de produtos
+     * 
+     */
     public void calcValTotalNota() {
         valTotalNota = BigDecimal.ZERO;
         this.valTotalIPI = getValTotalIPI();
@@ -280,16 +308,23 @@ public class ReceberPedidoController implements GenericController<NotaFiscal> {
     }
 
     public void gerarContaPagar() {
-        gerarContasPagar.gerarContaPagar(
-                valTotalProd,
-                valTotalIPI.add(valTotalIcms).add(valTotalIcmsSubst),
-                valTotalDescontos,
-                valTotalAcrecimos,
-                valTotalNota,
-                LocalDate.now(),
-                fornecedor.getNomefantasia());
-        setContaPagar(gerarContasPagar.getContaPagar());
-        notaFiscal.setContaPagar(getContaPagar());
+
+    }
+
+    public BigDecimal getValTotalDescontos() {
+        return valTotalDescontos;
+    }
+
+    public void setValTotalDescontos(BigDecimal valTotalDescontos) {
+        this.valTotalDescontos = valTotalDescontos;
+    }
+
+    public BigDecimal getValTotalAcrecimos() {
+        return valTotalAcrecimos;
+    }
+
+    public void setValTotalAcrecimos(BigDecimal valTotalAcrecimos) {
+        this.valTotalAcrecimos = valTotalAcrecimos;
     }
 
 }

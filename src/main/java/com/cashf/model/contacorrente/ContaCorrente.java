@@ -8,7 +8,6 @@ package com.cashf.model.contacorrente;
 import com.cashf.model.banco.Banco;
 import java.io.Serializable;
 import java.math.BigDecimal;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -34,6 +33,7 @@ public class ContaCorrente implements Serializable {
     private String agencia;
     private String contaCorrente;
     private BigDecimal saldo;
+    private Boolean cCaixa;
     @ManyToOne
     @JoinColumn(nullable = false)
     private Banco banco;
@@ -41,14 +41,14 @@ public class ContaCorrente implements Serializable {
     public ContaCorrente() {
     }
 
-    public ContaCorrente(Long idConta, String descricao, String agencia, String contaCorrente,BigDecimal saldo, Banco banco) {
+    public ContaCorrente(Long idConta, String descricao, String agencia, String contaCorrente,BigDecimal saldo,Boolean caixa, Banco banco) {
         this.idConta = idConta;
         this.descricao = descricao;
         this.agencia = agencia;
         this.contaCorrente = contaCorrente;
         this.saldo=saldo;
         this.banco = banco;
-        
+        this.cCaixa=caixa;
     }
 
     public Long getId() {
@@ -90,6 +90,15 @@ public class ContaCorrente implements Serializable {
     public void setSaldo(BigDecimal saldo) {
         this.saldo = saldo;
     }
+
+    public Boolean getcCaixa() {
+        return cCaixa;
+    }
+
+    public void setcCaixa(Boolean cCaixa) {
+        this.cCaixa = cCaixa;
+    }
+    
     
     public Banco getBanco() {
         return banco;

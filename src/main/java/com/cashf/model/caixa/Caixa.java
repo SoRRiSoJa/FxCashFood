@@ -48,6 +48,7 @@ public class Caixa implements Serializable {
     private BigDecimal valorInicial;
     @Enumerated(EnumType.STRING)
     private TPStatusCX status;
+    
 
     public Caixa() {
     }

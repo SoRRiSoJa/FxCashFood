@@ -20,9 +20,11 @@ import controller.GenericViewController;
 import java.math.BigDecimal;
 import java.net.URL;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Optional;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -382,6 +384,7 @@ public class TabFuncionarioFXMLController implements GenericViewController, Init
         ccbNIvel.setValue(null);
         cbbCidade.setValue(null);
         cbbOperadora.setValue(null);
+        tbvTelefone.setItems(FXCollections.observableList(new ArrayList<>()));
     }
 
     @Override

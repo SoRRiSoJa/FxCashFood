@@ -19,9 +19,11 @@ import java.math.BigDecimal;
 import java.net.URL;
 import java.text.NumberFormat;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Optional;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -294,6 +296,8 @@ public class TabPrePreparoNFXMLController implements GenericViewController, Init
         cbbUnidadeMedidaProd.setValue(null);
         cbbUnidadeMedida.setValue(null);
         cbbProduto.setValue(null);
+        tbvItens.setItems(FXCollections.observableList(new ArrayList<>()));
+        
     }
 
     @Override

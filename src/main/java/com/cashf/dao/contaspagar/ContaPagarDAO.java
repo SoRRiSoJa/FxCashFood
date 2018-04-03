@@ -38,7 +38,7 @@ public class ContaPagarDAO extends GenericDAOIMP<ContaPagar> {
 
         } catch (Exception e) {
             System.out.println("Erro:" + e);
-            return null;
+            return BigDecimal.ZERO;
         }
     }
 
