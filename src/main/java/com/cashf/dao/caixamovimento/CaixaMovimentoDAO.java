@@ -24,9 +24,9 @@ public class CaixaMovimentoDAO extends GenericDAOIMP<CaixaMovimento> {
 
     public List<CaixaMovimento> listByDateAndCaixa(LocalDate dataMov, Caixa caixaAberto) {
         try (Session session = sessionFactory.openSession()) {
-            String hql = "from CaixaMovimento cax where Extract(DAY from cax.dataMovimento) = :dia"
-                    + " and Extract(MONTH from cax.dataMovimento) = :mes"
-                    + " and Extract(YEAR from cax.dataMovimento) = :ano"
+            String hql = "from CaixaMovimento cax where Extract(DAY from cax.dataMovimento) >= :dia"
+                    + " and Extract(MONTH from cax.dataMovimento) >= :mes"
+                    + " and Extract(YEAR from cax.dataMovimento) >= :ano"
                     + " and caixa.idCaixa = :idCaixaA ";
 
             List<CaixaMovimento> roleList = session.createQuery(hql)

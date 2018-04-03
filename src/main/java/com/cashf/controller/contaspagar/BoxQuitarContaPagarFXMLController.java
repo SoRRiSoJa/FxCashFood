@@ -6,6 +6,7 @@
 package com.cashf.controller.contaspagar;
 
 import com.cashf.cashfood.MainApp;
+import com.cashf.controller.caixa.CaixaController;
 import com.cashf.model.contasPagar.StatusPagto;
 import com.cashf.model.meiopagamento.MeioPagamento;
 import com.jfoenix.controls.JFXButton;
@@ -80,7 +81,8 @@ public class BoxQuitarContaPagarFXMLController implements Initializable {
     @FXML
     private void onAbrir(ActionEvent event) {
         getData();
-        if (validateFields()) {
+        if (validateFields()){
+            
             ContasPagarController.getInstance().getContaPagar().setStatusPagto(StatusPagto.PAGO);
             ContasPagarController.getInstance().getContaPagar().setDataPagamento(dataPagamento);
             ContasPagarController.getInstance().getContaPagar().setDesconto(valorDesconto);
@@ -88,8 +90,9 @@ public class BoxQuitarContaPagarFXMLController implements Initializable {
             ContasPagarController.getInstance().getContaPagar().setMeioPagamento(ContasPagarController.getInstance().getMeioPagamento());
             ContasPagarController.getInstance().getContaPagar().setValorPago(vallorPago);
             ContasPagarController.getInstance().update();
+            CaixaController.getInstance().movimentarCaixaDebito(lblDescricao.getText(),vallorPago);
         } else {
-            PoupUpUtil.errorMessage(paneRoot, MainApp.paneRoot, erros);
+            PoupUpUtil.errorMessage(MainApp.paneRoot, paneRoot, erros);
             erros = "";
         }
     }
@@ -103,7 +106,7 @@ public class BoxQuitarContaPagarFXMLController implements Initializable {
     @FXML
     private void onMouseClickedFormaDePagamento(MouseEvent event) {
         if (cbbFormaPagamento.getSelectionModel().getSelectedItem() != null) {
-            ContasPagarController.getInstance().setMeioPagamento(cbbFormaPagamento.getSelectionModel().getSelectedItem());
+            ContasPagarController.getInstance().setMeioPagamento(cbbFormaPagamento.getItems().get(cbbFormaPagamento.getSelectionModel().getSelectedIndex()));
         }
     }
 
@@ -168,7 +171,9 @@ public class BoxQuitarContaPagarFXMLController implements Initializable {
             }
         }
     }
-
+    public boolean validateValue(BigDecimal val){
+            return (val.compareTo(CaixaController.getInstance().getSaldoFinal())<=0);
+    }
     public Boolean validateFields() {
         boolean flag = true;
 
@@ -186,6 +191,10 @@ public class BoxQuitarContaPagarFXMLController implements Initializable {
         }
         if (cbbFormaPagamento.getSelectionModel().getSelectedItem() == null) {
             erros += "Uma forma de pagamento ser informada \n";
+            flag = false;
+        }
+        if(!validateValue(vallorPago)){
+            erros += "O valor é superior ao saldo de caixa \n";
             flag = false;
         }
         return flag;
@@ -210,6 +219,7 @@ public class BoxQuitarContaPagarFXMLController implements Initializable {
         } catch (Exception ex) {
             valorDesconto = BigDecimal.ZERO;
         }
+        ContasPagarController.getInstance().setMeioPagamento(cbbFormaPagamento.getItems().get(cbbFormaPagamento.getSelectionModel().getSelectedIndex()));
         
     }
 

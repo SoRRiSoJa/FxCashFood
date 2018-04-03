@@ -214,6 +214,17 @@ public class CaixaController implements GenericController<Caixa> {
         atualizaSaldo();
     }
 
+    public void movimentarCaixaDebito(String desc, BigDecimal valor) {
+        setCaixaMovimento(0l, LocalDate.now(), desc, valor, TPMov.DEBITO, getCaixaAberto());
+        this.caixaMovimento.setIdCaixaMovimento(caixaMovimentoDAO.save(caixaMovimento));
+        listaMov.add(caixaMovimento);
+        caixaMovimento = null;
+        caixaMovimento = new CaixaMovimento();
+        this.caixaMovimento.setIdCaixaMovimento(0l);
+        refreshLists();
+        atualizaSaldo();
+    }
+
     public void suprirCaixa(BigDecimal valor) {
         setCaixaMovimento(0l, caixaAberto.getDataAbertura(), "SUPRIMENTO DE CAIXA", valor, TPMov.SUPRIMENTO, getCaixaAberto());
         this.caixaMovimento.setIdCaixaMovimento(caixaMovimentoDAO.save(caixaMovimento));
