@@ -153,6 +153,7 @@ public class TabFichaTecniaNFXMLController implements Initializable, GenericView
             FichaTecnicaController.getInstance().insert();
             PoupUpUtil.poupUp("Ficha Técnica Cadastrada", "A Ficha Técnica foi cadastrada com sucesso.", "");
             FichaTecnicaController.getInstance().flushObject();
+            
             clearFields();
             loadTbvFicha();
         } else {

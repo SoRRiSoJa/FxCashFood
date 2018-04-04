@@ -82,10 +82,12 @@ public class TabListaFichaTecnicaFXMLController implements Initializable {
     }
     public static void loadTbvFT() {
         _tbvProdutos.setItems(FichaTecnicaController.getInstance().getLista());
+        _tbvProdutos.refresh();
     }
     private void loadTbv() {
         tbvProdutos.setItems(FichaTecnicaController.getInstance().getLista());
     }
+    
 
     private void setUpRadioButtons() {
 
@@ -112,5 +114,5 @@ public class TabListaFichaTecnicaFXMLController implements Initializable {
             }
         });
     }
-
+    
 }

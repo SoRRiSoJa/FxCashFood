@@ -17,8 +17,14 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.geometry.Pos;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+import javafx.util.Duration;
+import org.controlsfx.control.Notifications;
 
 /**
  *
@@ -75,12 +81,12 @@ public class PrePreparoController implements GenericController<PrePreparo> {
 
     @Override
     public void update() {
-
+        prePreparoDAO.update(prePreparo);
     }
 
     @Override
     public void delete() {
-
+       prePreparoDAO.delete(prePreparo);
     }
 
     @Override
@@ -134,7 +140,7 @@ public class PrePreparoController implements GenericController<PrePreparo> {
     }
 
     public void setListaItens(BigDecimal qtdeProduto, BigDecimal valorPorcao) {
-        this.listaItens.add(new ProdutoPrePreparo(0l,prePreparo,itemAtual, unidadeMedida, qtdeProduto, valorPorcao));
+        this.listaItens.add(new ProdutoPrePreparo(0l, prePreparo, itemAtual, unidadeMedida, qtdeProduto, valorPorcao));
     }
 
     public PrePreparo getPrePreparo() {
@@ -200,25 +206,29 @@ public class PrePreparoController implements GenericController<PrePreparo> {
     public void setTipoConsulta(int tipoConsulta) {
         this.tipoConsulta = tipoConsulta;
     }
+
     void buscaCodRef(String text) {
         this.listaCbbItens = FXCollections.observableList(produtoDAO.listProdInsumosCodRef(text));
     }
+
     void buscaInsumosDesc(String text) {
         this.listaCbbItens = FXCollections.observableList(produtoDAO.listProdInsumosDesc(text));
     }
+
     void buscaInsumosTodos() {
         this.listaCbbItens = FXCollections.observableList(produtoDAO.listProdInsumos());
     }
+
     void buscaDesc(String text) {
-        lista=FXCollections.observableList(prePreparoDAO.listByDesc(text));
+        lista = FXCollections.observableList(prePreparoDAO.listByDesc(text));
     }
 
     void buscaData(LocalDate Data) {
-     lista=FXCollections.observableList(prePreparoDAO.listByDate(Data));
+        lista = FXCollections.observableList(prePreparoDAO.listByDate(Data));
     }
 
     void buscaTodos() {
-     lista=FXCollections.observableList(prePreparoDAO.listAll());
+        lista = FXCollections.observableList(prePreparoDAO.listAll());
     }
 
     public UnidadeMedida getUnidadeMedidaProd() {

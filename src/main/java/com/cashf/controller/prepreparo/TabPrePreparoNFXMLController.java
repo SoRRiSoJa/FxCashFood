@@ -129,7 +129,7 @@ public class TabPrePreparoNFXMLController implements GenericViewController, Init
     private static Label _lblCustoTotal;
     private static TableColumn _btnExcluirItem;
     private static JFXComboBox<UnidadeMedida> _cbbUnidadeMedidaProd;
-
+    private static JFXComboBox<Produto> _cbbProduto;
     //--
     private String erros;
     private String pesquisa;
@@ -160,6 +160,7 @@ public class TabPrePreparoNFXMLController implements GenericViewController, Init
         _lblCustoTotal = lblCustoTotal;
         _btnExcluirItem = btnExcluirItem;
         _tbvItens = tbvItens;
+        _cbbProduto=cbbProduto;
         loadCbbProdutos();
         loadCbbUnidadeMedida();
         loadCbbUnidadeMedidaProd();
@@ -193,7 +194,10 @@ public class TabPrePreparoNFXMLController implements GenericViewController, Init
             PrePreparoController.getInstance().insert();
 
             PoupUpUtil.poupUp("Pré-Preparo Cadastrado", "O Pré-Preparo foi cadastrado com sucesso.", "");
+            
             PrePreparoController.getInstance().flushObject();
+            PrePreparoController.getInstance().buscaTodos();
+            TapListaPrePreparoFXMLController.refreshList();
             loadTbv();
             clearFields();
         } else {
@@ -220,8 +224,9 @@ public class TabPrePreparoNFXMLController implements GenericViewController, Init
             Optional<ButtonType> result = alert.showAndWait();
             if (result.get() == ButtonType.OK) {
                 PrePreparoController.getInstance().delete();
+                PrePreparoController.getInstance().getLista().remove(PrePreparoController.getInstance().getPrePreparo());
+                TapListaPrePreparoFXMLController.loadTbvPP();
                 clearFields();
-                //TabListaPrePreparosFXMLController.loadTbvCli();
                 // ... user chose OK
 
                 notificationBuilder = Notifications.create().title("PrePreparo excluído!").
@@ -425,6 +430,7 @@ public class TabPrePreparoNFXMLController implements GenericViewController, Init
     }
 
     public static void LDTS() {
+        _cbbProduto.getSelectionModel().select(PrePreparoController.getInstance().getPrePreparo().getProdutoPrincipal());
         _cbbUnidadeMedidaProd.setValue(PrePreparoController.getInstance().getPrePreparo().getProdutoPrincipal().getUnidadeMedida());
         _tbvItens.setItems(PrePreparoController.getInstance().getListaItens());
         _txtRendimento.setText(PrePreparoController.getInstance().getPrePreparo().getRendimento().toString());

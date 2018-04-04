@@ -23,6 +23,7 @@ import javafx.collections.ObservableList;
  * @author joao
  */
 public class FichaTecnicaController implements GenericController<FichaTecnica> {
+
     public static FichaTecnicaController controller;
     private final FichaTecnicaDAO fichaTecnicaDAO;
     private final ProdutoDAO produtoDAO;
@@ -35,25 +36,27 @@ public class FichaTecnicaController implements GenericController<FichaTecnica> {
     private UnidadeMedida unidadeMedida;
     private BigDecimal custoTotal;
     private int tipoConsulta;
-    
-    private FichaTecnicaController(){
-        this.fichaTecnicaDAO=new FichaTecnicaDAO(FichaTecnica.class);
-        this.produtoDAO=new ProdutoDAO(Produto.class);
-        this.lista=FXCollections.observableList(fichaTecnicaDAO.listAll());
-        this.comboBoxItensFicha=FXCollections.observableList(produtoDAO.listProdNotFicha());
-        this.fichaTecnica=new FichaTecnica();
+
+    private FichaTecnicaController() {
+        this.fichaTecnicaDAO = new FichaTecnicaDAO(FichaTecnica.class);
+        this.produtoDAO = new ProdutoDAO(Produto.class);
+        this.lista = FXCollections.observableList(fichaTecnicaDAO.listAll());
+        this.comboBoxItensFicha = FXCollections.observableList(produtoDAO.listProdNotFicha());
+        this.fichaTecnica = new FichaTecnica();
         this.itemAtual = new Produto();
         this.produtoPrincipal = new Produto();
         this.fichaTecnica.setIdFichaTecnica(0l);
-        this.custoTotal=BigDecimal.ZERO;
-        this.listaItensFicha=FXCollections.observableList(new ArrayList<>());
+        this.custoTotal = BigDecimal.ZERO;
+        this.listaItensFicha = FXCollections.observableList(new ArrayList<>());
     }
+
     public static synchronized FichaTecnicaController getInstance() {
         if (controller == null) {
             controller = new FichaTecnicaController();
         }
         return controller;
     }
+
     @Override
     public void insert() {
         fichaTecnicaDAO.update(fichaTecnica);
@@ -61,24 +64,24 @@ public class FichaTecnicaController implements GenericController<FichaTecnica> {
 
     @Override
     public void update() {
-        
+        fichaTecnicaDAO.update(fichaTecnica);
     }
 
     @Override
     public void delete() {
-        
+        fichaTecnicaDAO.delete(fichaTecnica);
     }
 
     @Override
     public void flushObject() {
-        this.fichaTecnica=new FichaTecnica();
+        this.fichaTecnica = new FichaTecnica();
         this.itemAtual = new Produto();
         this.produtoPrincipal = new Produto();
         this.fichaTecnica.setIdFichaTecnica(0l);
-        this.custoTotal=BigDecimal.ZERO;
-        this.listaItensFicha=FXCollections.observableList(new ArrayList<>());
-        this.lista=FXCollections.observableList(fichaTecnicaDAO.listAll());
-        this.comboBoxItensFicha=FXCollections.observableList(produtoDAO.listProdNotFicha());
+        this.custoTotal = BigDecimal.ZERO;
+        this.listaItensFicha = FXCollections.observableList(new ArrayList<>());
+        this.lista = FXCollections.observableList(fichaTecnicaDAO.listAll());
+        this.comboBoxItensFicha = FXCollections.observableList(produtoDAO.listProdNotFicha());
     }
 
     @Override
@@ -88,15 +91,16 @@ public class FichaTecnicaController implements GenericController<FichaTecnica> {
 
     @Override
     public void setLista(ObservableList<FichaTecnica> lista) {
-        
+
     }
 
     @Override
     public void setItenLista(FichaTecnica obj) {
-        
+
     }
+
     public void setListaItens(BigDecimal qtdeProduto, BigDecimal valorPorcao) {
-        this.listaItensFicha.add(new ProdutoFichaTecnica(0l,fichaTecnica,itemAtual, unidadeMedida, qtdeProduto, valorPorcao));
+        this.listaItensFicha.add(new ProdutoFichaTecnica(0l, fichaTecnica, itemAtual, unidadeMedida, qtdeProduto, valorPorcao));
     }
 
     public FichaTecnica getFichaTecnica() {
@@ -114,7 +118,8 @@ public class FichaTecnicaController implements GenericController<FichaTecnica> {
     public void setFichaTecnica(FichaTecnica fichaTecnica) {
         this.fichaTecnica = fichaTecnica;
     }
-    public void setFichaTecnica(long idFichaTecnica,Produto  produtoPrincipal,Boolean status) {
+
+    public void setFichaTecnica(long idFichaTecnica, Produto produtoPrincipal, Boolean status) {
         this.fichaTecnica.setIdFichaTecnica(idFichaTecnica);
         this.fichaTecnica.setProdutoPrincipal(produtoPrincipal);
         this.fichaTecnica.setDataProducao(LocalDate.now());
@@ -126,6 +131,7 @@ public class FichaTecnicaController implements GenericController<FichaTecnica> {
     public ObservableList<Produto> getComboBoxItensFicha() {
         return comboBoxItensFicha;
     }
+
     public ObservableList<Produto> getComboBoxFichaTecnica() {
         return FXCollections.observableList(produtoDAO.listProdFichaTecnica());
     }
@@ -153,7 +159,8 @@ public class FichaTecnicaController implements GenericController<FichaTecnica> {
     public void setProdutoPrincipal(Produto produtoPrincipal) {
         this.produtoPrincipal = produtoPrincipal;
     }
-     public BigDecimal getCustoTotal() {
+
+    public BigDecimal getCustoTotal() {
         custoTotal = BigDecimal.ZERO;
         listaItensFicha.forEach((custUnit) -> {
             custoTotal = custoTotal.add(custUnit.getValorPorcao());
@@ -168,15 +175,18 @@ public class FichaTecnicaController implements GenericController<FichaTecnica> {
     public void setTipoConsulta(int tipoConsulta) {
         this.tipoConsulta = tipoConsulta;
     }
+
     void buscaCodRef(String text) {
         this.comboBoxItensFicha = FXCollections.observableList(produtoDAO.listProdInsumosCodRef(text));
     }
+
     void buscaInsumosDesc(String text) {
         this.comboBoxItensFicha = FXCollections.observableList(produtoDAO.listProdInsumosDesc(text));
     }
+
     void buscaInsumosTodos() {
         this.comboBoxItensFicha = FXCollections.observableList(produtoDAO.listProdInsumos());
     }
-    
+
     
 }

@@ -72,6 +72,7 @@ public class TapListaPrePreparoFXMLController implements Initializable {
     private void onSelecionarProduto(MouseEvent event) {
         if (tbvProdutos.getSelectionModel().getSelectedItem() != null) {
             PrePreparoController.getInstance().setPrePreparo(tbvProdutos.getItems().get(tbvProdutos.getSelectionModel().getSelectedIndex()));
+            
             System.out.println("Aqui---...............>>>>" + PrePreparoController.getInstance().getPrePreparo().toString());
             PrePreparoController.getInstance().getPrePreparo().getListaProdutos().forEach((pp) -> {
                 System.out.println("PR:" + pp.getProduto().getDescriao() + "- qtde:" + pp.getQtdeProduto());
@@ -138,6 +139,10 @@ public class TapListaPrePreparoFXMLController implements Initializable {
                 PrePreparoController.getInstance().setTipoConsulta(0);//todos
             }
         });
+    }
+    public static void refreshList(){
+        
+        _tbvProdutos.refresh();
     }
 
     
