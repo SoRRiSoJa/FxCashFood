@@ -47,15 +47,15 @@ public class AtualizarEstoque {
     public Boolean retirarProduto(BigDecimal qtdeAjuste, UnidadeMedida unidadeMedida) {
         boolean flag = true;
         try {
-            BigDecimal qtdeAtual = produto.getQtdeProduto();
+            BigDecimal qtdeAtual = produto.getUnidadesEstoque();
             if (produto.getUnidadeMedida().equals(unidadeMedida)) {
                 if (qtdeAtual.compareTo(qtdeAjuste) >= 0) {//Se unidades iguáis e qtde>= a ajuste
-                    produto.setQtdeProduto(qtdeAtual.subtract(qtdeAjuste));
+                    produto.setUnidadesEstoque(qtdeAtual.subtract(qtdeAjuste));
                 } else {
                     flag = false;
                 }
             } else {
-                produto.setQtdeProduto(qtdeAtual.subtract(UnitConverter.convertTo(unidadeMedida, produto.getUnidadeMedida(), qtdeAjuste)));
+                produto.setUnidadesEstoque(qtdeAtual.subtract(UnitConverter.convertTo(unidadeMedida, produto.getUnidadeMedida(), qtdeAjuste)));
             }
 
             produtoDAO.update(produto);
@@ -69,13 +69,13 @@ public class AtualizarEstoque {
     public Boolean adicionarProduto(BigDecimal qtdeAjuste, UnidadeMedida unidadeMedida) {
         boolean flag = true;
         try {
-            BigDecimal qtdeAtual = produto.getQtdeProduto();
+            BigDecimal qtdeAtual = produto.getUnidadesEstoque();
             if (produto.getUnidadeMedida().equals(unidadeMedida)) {
                 if (qtdeAjuste.compareTo(BigDecimal.ZERO) > 0) {// qtdeAjuste>= 0
-                    produto.setQtdeProduto(qtdeAtual.add(qtdeAjuste));
+                    produto.setUnidadesEstoque(qtdeAtual.add(qtdeAjuste));
                 }
             } else {
-                produto.setQtdeProduto(qtdeAtual.add(UnitConverter.convertTo(unidadeMedida, produto.getUnidadeMedida(), qtdeAjuste)));
+                produto.setUnidadesEstoque(qtdeAtual.add(UnitConverter.convertTo(unidadeMedida, produto.getUnidadeMedida(), qtdeAjuste)));
             }
             produtoDAO.update(produto);
         } catch (Exception ex) {
@@ -91,14 +91,14 @@ public class AtualizarEstoque {
             prePreparo.getListaProdutos().forEach((itemAtual) -> {
                 produto = produtoDAO.findById(itemAtual.getProduto().getIdProduto());
                 if (itemAtual.getUnidadeMedida().equals(produto.getUnidadeMedida())) {
-                    produto.setQtdeProduto(produto.getQtdeProduto().subtract(itemAtual.getQtdeProduto()));
+                    produto.setUnidadesEstoque(produto.getUnidadesEstoque().subtract(itemAtual.getQtdeProduto()));
                 } else {
-                    produto.setQtdeProduto(produto.getQtdeProduto().subtract(UnitConverter.convertTo(itemAtual.getUnidadeMedida(), produto.getUnidadeMedida(), itemAtual.getQtdeProduto())));
+                    produto.setUnidadesEstoque(produto.getUnidadesEstoque().subtract(UnitConverter.convertTo(itemAtual.getUnidadeMedida(), produto.getUnidadeMedida(), itemAtual.getQtdeProduto())));
                 }
                 produtoDAO.update(produto);
             });
             produto = produtoDAO.findById(prePreparo.getProdutoPrincipal().getIdProduto());
-            produto.setQtdeProduto(prePreparo.getRendimento());
+            produto.setUnidadesEstoque(prePreparo.getRendimento());
             produto.setUnidadeMedida(unidadeMEdida);
             produto.setPreco_custo(prePreparo.getCustoTotal().divide(prePreparo.getRendimento()));
             produto.setPreco_venda(prePreparo.getCustoTotal().divide(prePreparo.getRendimento()));
@@ -174,7 +174,6 @@ public class AtualizarEstoque {
                 produto.setQtdeEmbalagem(itemAtual.getProduto().getQtdeEmbalagem());
                 produto.setQtdeProduto(produto.getQtdeProduto().add(BigDecimal.valueOf(itemAtual.getQtdeProduto())));
                 produto.setUnidadesEstoque(produto.getUnidadesEstoque().add(itemAtual.getProduto().getUnidadesEstoque()));
-
                 produto.setPreco_custo(itemAtual.getValorTotal().add(itemAtual.getValorIpi()).divide(BigDecimal.valueOf(itemAtual.getQtdeProduto())));
                 produto.setPreco_venda(itemAtual.getValorTotal().add(itemAtual.getValorIpi()).divide(BigDecimal.valueOf(itemAtual.getQtdeProduto())));
 

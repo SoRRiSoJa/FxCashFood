@@ -105,7 +105,7 @@ public class TabListaProdutosFXMLController implements Initializable {
         tbcTipo.setCellValueFactory(new PropertyValueFactory<>("tipo"));
         tbcCusto.setCellValueFactory(new PropertyValueFactory<>("preco_custo"));
         tbcVenda.setCellValueFactory(new PropertyValueFactory<>("preco_venda"));
-        tbcQtde.setCellValueFactory(new PropertyValueFactory<>("qtdeProduto"));
+        tbcQtde.setCellValueFactory(new PropertyValueFactory<>("unidadesEstoque"));
         tbcGrupo.setCellValueFactory(new PropertyValueFactory<>("grupo"));
         tbvProdutos.getColumns().setAll(tbcCod, tbcCodRef, tbcDescricao, tbcTipo, tbcCusto, tbcVenda, tbcQtde,tbcGrupo);
     }

@@ -171,8 +171,8 @@ public class AjustarEstoqueFXMLController implements GenericViewController, Init
 
                 controller.insert();
                 controller.refreshListaPRod();
-                lblSaldo.setText(controller.getProduto().getQtdeProduto() + "");
-                txtQtdeAtual.setText(controller.getProduto().getQtdeProduto() + "");
+                lblSaldo.setText(controller.getProduto().getUnidadesEstoque()+ "");
+                txtQtdeAtual.setText(controller.getProduto().getUnidadesEstoque()+ "");
                 tbvProdutos.refresh();
             } else {
                 PoupUpUtil.errorMessage(paneRoot, MainApp.paneRoot, erros);
@@ -269,7 +269,7 @@ public class AjustarEstoqueFXMLController implements GenericViewController, Init
     @Override
     public void loadDataToScreen() {
         txtDescricao.setText(controller.getProduto().getDescriao());
-        txtQtdeAtual.setText(controller.getProduto().getQtdeProduto() + "");
+        txtQtdeAtual.setText(controller.getProduto().getUnidadesEstoque() + "");
         cbbUnidadeMedida.getSelectionModel().select(controller.getProduto().getUnidadeMedida());
     }
 
@@ -289,7 +289,7 @@ public class AjustarEstoqueFXMLController implements GenericViewController, Init
         tbcCodRef.setCellValueFactory(new PropertyValueFactory<>("codigoReferencia"));
         tbcDescricao.setCellValueFactory(new PropertyValueFactory<>("descriao"));
         tbcTipo.setCellValueFactory(new PropertyValueFactory<>("tipo"));
-        tbcQtde.setCellValueFactory(new PropertyValueFactory<>("qtdeProduto"));
+        tbcQtde.setCellValueFactory(new PropertyValueFactory<>("unidadesEstoque"));
         tbvProdutos.getColumns().setAll(tbcCod, tbcCodRef, tbcDescricao, tbcTipo, tbcQtde);
     }
 

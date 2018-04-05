@@ -188,12 +188,12 @@ public class ReceberPedidoController implements GenericController<NotaFiscal> {
         this.listaProdutosNota = listaProdutosNota;
     }
 
-    public void setListaProdutosNota(Long idProdutoNotaFiscal,BigDecimal qtdeEmbalagem, Integer qtdeProduto, BigDecimal valorIpi, BigDecimal valorIcmsSubst, BigDecimal valoruUnitario, BigDecimal despesas, BigDecimal descontos, BigDecimal embalagemCompra, UnidadeMedida unidadeMedida) {
+    public void setListaProdutosNota(Long idProdutoNotaFiscal,Integer qtdeProduto, BigDecimal valorIpi, BigDecimal valorIcmsSubst, BigDecimal valoruUnitario, BigDecimal despesas, BigDecimal descontos, BigDecimal embalagemCompra, UnidadeMedida unidadeMedida) {
         ProdutoNotaFiscal pn = new ProdutoNotaFiscal(idProdutoNotaFiscal, notaFiscal, produtoAtual, qtdeProduto, valorIpi, valorIcmsSubst, valoruUnitario, despesas, descontos, valoruUnitario.multiply(BigDecimal.valueOf(qtdeProduto.doubleValue())).subtract(descontos).add(despesas));
         pn.getProduto().setUnidadeMedida(unidadeMedida);
         pn.getProduto().setQtdeEmbalagem(embalagemCompra);
         pn.getProduto().setQtdeProduto(BigDecimal.valueOf(qtdeProduto));
-        pn.getProduto().setUnidadesEstoque(pn.getProduto().getQtdeEmbalagem().multiply(BigDecimal.valueOf(qtdeProduto)));
+        pn.getProduto().setUnidadesEstoque((pn.getProduto().getQtdeEmbalagem().multiply(BigDecimal.valueOf(qtdeProduto))));
         this.listaProdutosNota.add(pn);
     }
     
