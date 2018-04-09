@@ -73,7 +73,7 @@ public class FXLoginFXMLController implements Initializable {
                             position(Pos.BOTTOM_RIGHT).
                             darkStyle().graphic(new ImageView(imgOne));
                     LoginController.getInstance().setLoginStatus();
-                    menuPrincipal = FXMLLoader.load(getClass().getResource("/fxml/FXMenuFXML.fxml"));
+                    menuPrincipal = FXMLLoader.load(getClass().getResource("/fxml/FXMenuFCaixaFXML.fxml"));
                     rootStackPane.getChildren().setAll(menuPrincipal);
 
                 } catch (IOException ex) {

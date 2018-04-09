@@ -42,9 +42,10 @@ public class ProdutoDAO extends GenericDAOIMP<Produto> {
             return null;
         }
     }
+
     public List<Produto> listProdInsumosCodRef(String codRef) {
         try (Session session = sessionFactory.openSession()) {
-            String hql = "from Produto prod where prod.codigoReferencia like'" + codRef + "%'"+" AND prod.tipo like 'INSUMO'";
+            String hql = "from Produto prod where prod.codigoReferencia like'" + codRef + "%'" + " AND prod.tipo like 'INSUMO'";
             List<Produto> roleList = session.createQuery(hql).list();
             return roleList;
         } catch (Exception e) {
@@ -52,10 +53,10 @@ public class ProdutoDAO extends GenericDAOIMP<Produto> {
             return null;
         }
     }
-    
+
     public List<Produto> listProdInsumosDesc(String desc) {
         try (Session session = sessionFactory.openSession()) {
-            String hql = "from Produto prod where prod.descriao like'"+ desc + "%'"+"AND prod.tipo like 'INSUMO'";
+            String hql = "from Produto prod where prod.descriao like'" + desc + "%'" + "AND prod.tipo like 'INSUMO'";
             List<Produto> roleList = session.createQuery(hql).list();
             return roleList;
         } catch (Exception e) {
@@ -85,7 +86,8 @@ public class ProdutoDAO extends GenericDAOIMP<Produto> {
             return null;
         }
     }
-     public List<Produto> listByDesc(String desc) {
+
+    public List<Produto> listByDesc(String desc) {
         try (Session session = sessionFactory.openSession()) {
             String hql = "from Produto prod where prod.descriao like '" + desc + "%'";
             List<Produto> roleList = session.createQuery(hql).list();
@@ -95,9 +97,21 @@ public class ProdutoDAO extends GenericDAOIMP<Produto> {
             return null;
         }
     }
-     public List<Produto> listByGrupo(String grup) {
+
+    public List<Produto> listByGrupo(String grup) {
         try (Session session = sessionFactory.openSession()) {
             String hql = "from Produto prod where prod.grupo.descricao like '" + grup + "%'";
+            List<Produto> roleList = session.createQuery(hql).list();
+            return roleList;
+        } catch (Exception e) {
+            System.out.println("Erro:" + e);
+            return null;
+        }
+    }
+
+    public List<Produto> listByGrupoId(String idG) {
+        try (Session session = sessionFactory.openSession()) {
+            String hql = "from Produto prod where prod.grupo.idGrupo = "+idG ;
             List<Produto> roleList = session.createQuery(hql).list();
             return roleList;
         } catch (Exception e) {

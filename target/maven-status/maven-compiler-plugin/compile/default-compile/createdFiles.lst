@@ -28,6 +28,7 @@ com/cashf/controller/caixa/GerenciarCaixaFXMLController.class
 com/cashf/model/parametros/Parametros.class
 com/cashf/model/caixa/CaixaMovimento_.class
 util/PoupUpUtil.class
+com/cashf/controller/menu/FCPainelProdutosFXMLController.class
 util/UnitConverter.class
 com/cashf/model/contasPagar/ContaPagar.class
 com/cashf/dao/banco/BancoDAO.class
@@ -111,6 +112,7 @@ com/cashf/model/meiopagamento/TPPagto.class
 com/cashf/dao/contaspagar/ContaPagarDAO.class
 com/cashf/dao/produto/AliquotasProdutoDAO.class
 com/cashf/dao/cliente/ClienteDAO.class
+com/cashf/controller/menu/FCMenuController.class
 com/cashf/controller/contaspagar/ContasPagarFXMLController$ButtonCellDelete.class
 com/cashf/controller/cliente/TabListaClientesFXMLController.class
 util/TextFieldFormatter.class
@@ -139,6 +141,7 @@ com/cashf/model/ajusteestoque/TipoAjuste.class
 com/cashf/controller/produto/TabProdutoFXMLController.class
 com/cashf/model/prepreparo/ProdutoPrePreparo.class
 com/cashf/core/atualizarestoque/AtualizarEstoque.class
+com/cashf/controller/menu/FXMenuFCaixaFXMLController.class
 com/cashf/model/usuario/Usuario_.class
 com/cashf/model/produto/Produto_.class
 com/cashf/model/prepreparo/ProdutoPrePreparo_.class

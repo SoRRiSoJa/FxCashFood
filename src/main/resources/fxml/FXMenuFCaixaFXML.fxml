@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXDrawer?>
+<?import com.jfoenix.controls.JFXHamburger?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+
+<StackPane fx:id="rootStackPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1366.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cashf.controller.menu.FXMenuFCaixaFXMLController">
+   <children>
+      <AnchorPane prefHeight="700.0" prefWidth="1366.0">
+         <children>
+            <Pane fx:id="paneHeader" prefHeight="40.0" prefWidth="1366.0" styleClass="pane" stylesheets="@../styles/MenuCSS.css">
+               <children>
+                  <JFXHamburger fx:id="jfxHamburguer" layoutX="16.0" layoutY="10.0" />
+                  <JFXButton fx:id="btnSair" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" layoutX="1326.0" onAction="#onSair" prefHeight="40.0" prefWidth="40.0" ripplerFill="WHITE" text="Sair" textFill="WHITE">
+                     <graphic>
+                        <FontAwesomeIconView fx:id="iconSair" fill="WHITE" glyphName="SIGN_OUT" size="20" />
+                     </graphic>
+                  </JFXButton>
+               </children>
+            </Pane>
+            <JFXDrawer fx:id="jfxDrawer" defaultDrawerSize="180.0" layoutY="40.0" prefHeight="590.0" prefWidth="180.0" />
+            <Pane fx:id="paneCalc" layoutX="1072.0" layoutY="40.0" prefHeight="590.0" prefWidth="294.0" style="-fx-background-color: #aaaaaa;" />
+            <Pane fx:id="paneProdutos" layoutX="180.0" layoutY="40.0" prefHeight="590.0" prefWidth="892.0" />
+         </children>
+      </AnchorPane>
+   </children>
+</StackPane>
