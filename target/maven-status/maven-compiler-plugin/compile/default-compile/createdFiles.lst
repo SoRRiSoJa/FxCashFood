@@ -104,6 +104,7 @@ com/cashf/dao/caixamovimento/CaixaMovimentoDAO.class
 util/SafePass.class
 com/cashf/controller/login/LoginController.class
 com/cashf/model/fichatecnica/ProdutoFichaTecnica.class
+com/cashf/controller/menu/MenuSistemaFXMLController.class
 com/cashf/model/produto/Grupo_.class
 com/cashf/controller/cliente/TabClientesFXMLController.class
 com/cashf/model/notafiscal/ProdutoNotaFiscal_.class

@@ -18,6 +18,7 @@
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/util/BDInsert.java
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/dao/parametros/ParametrosDAO.java
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/controller/parametrizacao/ParametrosController.java
+/home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/controller/menu/MenuSistemaFXMLController.java
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/model/estado/Estado.java
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/model/pessoa/Sexo.java
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/model/produto/SituacaoTributaria.java

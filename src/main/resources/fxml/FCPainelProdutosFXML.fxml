@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.Pane?>
@@ -19,7 +20,15 @@
             <Font name="System Bold" size="13.0" />
          </font>
       </Label>
-      <FlowPane fx:id="flowPane" layoutX="20.0" layoutY="52.0" prefHeight="82.0" prefWidth="852.0" stylesheets="@../styles/PainelProdutosCSS.css" />
-      <FlowPane fx:id="flowPaneProd" layoutX="20.0" layoutY="202.0" prefHeight="370.0" prefWidth="852.0" stylesheets="@../styles/PainelProdutosCSS.css" />
+      <ScrollPane layoutX="20.0" layoutY="45.0" prefHeight="82.0" prefWidth="852.0">
+         <content>
+            <FlowPane fx:id="flowPane" prefHeight="82.0" prefWidth="852.0" stylesheets="@../styles/PainelProdutosCSS.css" />
+         </content>
+      </ScrollPane>
+      <ScrollPane layoutX="20.0" layoutY="195.0" prefHeight="381.0" prefWidth="852.0">
+         <content>
+            <FlowPane fx:id="flowPaneProd" prefHeight="370.0" prefWidth="832.0" stylesheets="@../styles/PainelProdutosCSS.css" />
+         </content>
+      </ScrollPane>
    </children>
 </Pane>
