@@ -15,7 +15,7 @@
             <Pane fx:id="paneHeader" prefHeight="40.0" prefWidth="1366.0" styleClass="pane" stylesheets="@../styles/MenuCSS.css">
                <children>
                   <JFXHamburger fx:id="jfxHamburguer" layoutX="16.0" layoutY="10.0" />
-                  <JFXButton fx:id="btnSair" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" layoutX="1326.0" onAction="#onSair" prefHeight="40.0" prefWidth="40.0" ripplerFill="WHITE" text="Sair" textFill="WHITE">
+                  <JFXButton fx:id="btnSair" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" layoutX="1324.0" onAction="#onSair" prefHeight="40.0" prefWidth="40.0" ripplerFill="WHITE" text="Sair" textFill="WHITE">
                      <graphic>
                         <FontAwesomeIconView fx:id="iconSair" fill="WHITE" glyphName="SIGN_OUT" size="20" />
                      </graphic>
@@ -23,8 +23,8 @@
                </children>
             </Pane>
             <JFXDrawer fx:id="jfxDrawer" defaultDrawerSize="180.0" layoutY="40.0" prefHeight="572.0" prefWidth="180.0" style="-fx-background-color: #ffffff;" />
-            <Pane fx:id="paneCalc" layoutX="1072.0" layoutY="40.0" prefHeight="590.0" prefWidth="294.0" style="-fx-background-color: #aaaaaa;" />
-            <Pane fx:id="paneProdutos" layoutX="180.0" layoutY="40.0" prefHeight="590.0" prefWidth="892.0" style="-fx-background-color: #ffffff;" />
+            <Pane fx:id="paneCalc" layoutX="1066.0" layoutY="40.0" prefHeight="632.0" prefWidth="300.0" style="-fx-background-color: #aaaaaa;" />
+            <Pane fx:id="paneProdutos" layoutX="180.0" layoutY="40.0" prefHeight="590.0" prefWidth="886.0" style="-fx-background-color: #ffffff;" />
          </children>
       </AnchorPane>
    </children>

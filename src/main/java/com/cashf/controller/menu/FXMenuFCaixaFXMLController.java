@@ -19,12 +19,16 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Paint;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -53,6 +57,7 @@ public class FXMenuFCaixaFXMLController implements Initializable {
     private HamburgerNextArrowBasicTransition burgerTask2;
     private Pane paneAux;
     private Pane paneAnt;
+    private StackPane stAux;
     private boolean flag = false;
     @FXML
     private StackPane rootStackPane;
@@ -83,12 +88,19 @@ public class FXMenuFCaixaFXMLController implements Initializable {
         });
         loadPanelGrupo();
         menuButtonsControl();
+        loadRegistradora();
         // TODO
     }
 
     @FXML
     private void onSair(ActionEvent event) {
-        System.exit(0);
+        rootStackPane.getChildren().remove(0);
+        try {
+            stAux = FXMLLoader.load(getClass().getResource("/fxml/MenuSistemaFXML.fxml"));
+            rootStackPane.getChildren().add(stAux);
+        } catch (IOException ex) {
+            System.out.println("Erro--->>" + ex);
+        }
     }
 
     private void loadPanelGrupo() {
@@ -112,6 +124,7 @@ public class FXMenuFCaixaFXMLController implements Initializable {
     }
 
     private void menuButtonsControl() {
+        String title="";
         for (Node node : gavetas.getChildren()) {
             if (node.getAccessibleText() != null) {
                 if (node.getAccessibleText().equalsIgnoreCase("FPane")) {
@@ -122,7 +135,6 @@ public class FXMenuFCaixaFXMLController implements Initializable {
                                 case "M01":
                                     GavetaMesasFXMLController.getIconM1().setFill(Paint.valueOf("RED"));
                                     System.out.println("Mesa1");
-
                                     break;
                                 case "M02":
                                     GavetaMesasFXMLController.getIconM2().setFill(Paint.valueOf("RED"));
@@ -195,6 +207,8 @@ public class FXMenuFCaixaFXMLController implements Initializable {
 
                                     break;
                             }
+                            loadBox("/fxml/mesas/GerenciarMesasFXML.fxml", title);
+
                         });
                     }
 
@@ -203,4 +217,26 @@ public class FXMenuFCaixaFXMLController implements Initializable {
         }
     }
 
+    private void loadBox(String boxPath, String title) {
+        try {
+            Stage stage = new Stage();
+            Parent root = FXMLLoader.load(getClass().getResource(boxPath));
+            stage.setScene(new Scene(root));
+            stage.setTitle(title);
+            stage.initModality(Modality.APPLICATION_MODAL);
+            MainApp.janelaAnterior = MainApp.janelaAberta;
+            MainApp.janelaAberta = stage;
+            stage.show();
+        } catch (IOException ex) {
+            System.out.println("Erro---->" + ex);
+        }
+    }
+private void loadRegistradora(){
+         try {
+            paneAux = FXMLLoader.load(getClass().getResource("/fxml/registradora/RegistradoraFXML.fxml"));
+            paneCalc.getChildren().add(paneAux);
+        } catch (IOException ex) {
+            System.out.println("Erro:" + ex);
+        }
+    }
 }

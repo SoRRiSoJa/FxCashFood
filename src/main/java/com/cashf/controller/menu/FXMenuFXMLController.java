@@ -60,6 +60,7 @@ public class FXMenuFXMLController implements Initializable {
     private JFXDrawer drawer;
     //-------------------
     private static StackPane rootAux;
+    private StackPane stAux;
     private VBox gavetas;
     private HamburgerNextArrowBasicTransition burgerTask2;
     private Pane paneAux;
@@ -143,7 +144,13 @@ public class FXMenuFXMLController implements Initializable {
 
     @FXML
     private void onSair(ActionEvent event) {
-        System.exit(0);
+        rootSatackPane.getChildren().remove(0);
+        try {
+            stAux = FXMLLoader.load(getClass().getResource("/fxml/MenuSistemaFXML.fxml"));
+            rootSatackPane.getChildren().add(stAux);
+        } catch (IOException ex) {
+            System.out.println("Erro--->>" + ex);
+        }
     }
 
     //----------------------------------------------
@@ -299,5 +306,5 @@ public class FXMenuFXMLController implements Initializable {
     private void OnCaixa(ActionEvent event) {
         loadFXML("/fxml/caixa/GerenciarCaixaFXML.fxml");
     }
-
+    
 }

@@ -9,6 +9,7 @@ com/cashf/controller/funcionario/TabFuncionarioFXMLController$ButtonCellDelete.c
 com/cashf/controller/fichatecnica/FichaTecnicaController.class
 com/cashf/controller/cliente/FXGerenciarClientesFXMLController.class
 com/cashf/controller/fichatecnica/TabListaFichaTecnicaFXMLController.class
+com/cashf/controller/registradora/RegistradoraFXMLController.class
 com/cashf/model/produto/Categoria.class
 com/cashf/dao/prepreparo/PrePreparoDAO.class
 com/cashf/dao/funcionario/FuncionarioDAO.class
@@ -116,6 +117,7 @@ com/cashf/dao/cliente/ClienteDAO.class
 com/cashf/controller/menu/FCMenuController.class
 com/cashf/controller/contaspagar/ContasPagarFXMLController$ButtonCellDelete.class
 com/cashf/controller/cliente/TabListaClientesFXMLController.class
+com/cashf/controller/mesas/GerenciarMesasFXMLController.class
 util/TextFieldFormatter.class
 com/cashf/model/produto/TipoProduto.class
 com/cashf/dao/cidade/CidadeDAO.class
