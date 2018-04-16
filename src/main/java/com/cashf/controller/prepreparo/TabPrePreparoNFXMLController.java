@@ -396,7 +396,7 @@ public class TabPrePreparoNFXMLController implements GenericViewController, Init
         tbcCodRef.setCellValueFactory(new PropertyValueFactory<>("codigoReferencia"));
         tbcDescricao.setCellValueFactory(new PropertyValueFactory<>("descriao"));
         tbcTipo.setCellValueFactory(new PropertyValueFactory<>("tipo"));
-        tbcQtde.setCellValueFactory(new PropertyValueFactory<>("qtdeProduto"));
+        tbcQtde.setCellValueFactory(new PropertyValueFactory<>("unidadesEstoque"));
         tbvProdutos.getColumns().setAll(tbcCodRef, tbcDescricao, tbcTipo, tbcQtde);
     }
 

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXRadioButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.Pane?>
+
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="572.0" prefWidth="1366.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cashf.controller.combos.TabListaCombosFXMLController">
+   <children>
+      <Pane layoutX="20.0" layoutY="30.0" prefHeight="482.0" prefWidth="1200.0" style="-fx-background-color: #ffffff;">
+         <effect>
+            <DropShadow />
+         </effect>
+         <children>
+            <TableView fx:id="tbvProdutos" layoutX="230.0" layoutY="126.0" onMouseClicked="#onSelecionarProduto" prefHeight="333.0" prefWidth="800.0" stylesheets="@../../styles/TableViewCSS.css">
+               <columns>
+                  <TableColumn fx:id="tbcDescricao" prefWidth="527.0000305175781" text="Descrição" />
+                  <TableColumn fx:id="tbcCusto" prefWidth="132.0" text="Preço_Custo" />
+                  <TableColumn fx:id="tbcVenda" prefWidth="140.0" text="Preço_Venda" />
+               </columns>
+            </TableView>
+            <Pane prefHeight="20.0" prefWidth="1200.0" style="-fx-background-color: #0081cb;">
+               <children>
+                  <Label layoutX="5.0" layoutY="2.0" text="Combos cadastrados:" textFill="WHITE" />
+               </children>
+            </Pane>
+            <JFXTextField fx:id="txtConsultar" focusColor="#004ba0" labelFloat="true" layoutX="230.0" layoutY="48.0" prefHeight="26.0" prefWidth="800.0" promptText="Consultar" />
+            <JFXButton fx:id="btnPesquisar" contentDisplay="GRAPHIC_ONLY" layoutX="987.0" layoutY="32.0" onAction="#onPesquisar" prefHeight="32.0" prefWidth="43.0" ripplerFill="#69e2ff" style="-fx-background-color: #ffffff;" textFill="WHITE">
+               <graphic>
+                  <FontAwesomeIconView glyphName="SEARCH" />
+               </graphic>
+            </JFXButton>
+            <JFXRadioButton fx:id="rdbDesc" layoutX="234.0" layoutY="95.0" style="-jfx-selected-color: #69e2ff;" text="Descrição" />
+            <JFXRadioButton fx:id="rdbData" layoutX="374.0" layoutY="95.0" style="-jfx-selected-color: #69e2ff;" text="Data Produção" />
+            <JFXRadioButton fx:id="rdbTodos" layoutX="534.0" layoutY="95.0" style="-jfx-selected-color: #69e2ff;" text="Todos" />
+         </children>
+      </Pane>
+   </children>
+</Pane>

@@ -75,6 +75,8 @@ Contributor(s):
         <mapping class="com.cashf.model.contasPagar.ContaPagar" />
         <mapping class="com.cashf.model.caixa.Caixa" />
         <mapping class="com.cashf.model.caixa.CaixaMovimento" />
+        <mapping class="com.cashf.model.combo.Combo" />
+        <mapping class="com.cashf.model.combo.ProdutoCombo" />
         
     </session-factory>
 </hibernate-configuration>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+
+<VBox fx:id="vBox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="572.0" prefWidth="180.0" style="-fx-background-color: #ffffff;" stylesheets="@../styles/GavetaMesaCSS.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cashf.controller.menu.GavetasERPFXMLController">
+   <children>
+      <Pane fx:id="pane" prefHeight="140.0" prefWidth="180.0" style="-fx-background-color: #0081cb;" styleClass="pane">
+         <children>
+            <Circle fx:id="circleImg" fill="WHITE" layoutX="90.0" layoutY="70.0" radius="56.0" stroke="WHITE" strokeLineCap="ROUND" strokeType="INSIDE" />
+         </children>
+      </Pane>
+      <JFXButton prefHeight="62.0" prefWidth="180.0" text="GERENCIAR CAIXA">
+         <graphic>
+            <FontAwesomeIconView glyphName="CALCULATOR" size="16" />
+         </graphic>
+         <VBox.margin>
+            <Insets />
+         </VBox.margin>
+      </JFXButton>
+      <JFXButton layoutX="10.0" layoutY="150.0" prefHeight="62.0" prefWidth="180.0" text="CONTAS A PAGAR">
+         <graphic>
+            <FontAwesomeIconView glyphName="CREDIT_CARD" size="16" />
+         </graphic>
+      </JFXButton>
+      <JFXButton layoutX="10.0" layoutY="150.0" prefHeight="62.0" prefWidth="180.0" text="RECEBER PEDIDO">
+         <graphic>
+            <FontAwesomeIconView glyphName="CART_ARROW_DOWN" size="16" />
+         </graphic>
+      </JFXButton>
+      <JFXButton layoutX="10.0" layoutY="212.0" prefHeight="62.0" prefWidth="180.0" text=" PRÉ-PREPARO ">
+         <graphic>
+            <FontAwesomeIconView glyphName="CUTLERY" size="16" />
+         </graphic>
+      </JFXButton>
+      <JFXButton layoutX="10.0" layoutY="274.0" prefHeight="62.0" prefWidth="180.0" text=" FICHA TÉCNICA ">
+         <graphic>
+            <FontAwesomeIconView glyphName="BOOK" size="16" />
+         </graphic>
+      </JFXButton>
+      <JFXButton layoutX="10.0" layoutY="336.0" prefHeight="62.0" prefWidth="180.0" text="AJUSTAR ESTOQUE">
+         <graphic>
+            <FontAwesomeIconView glyphName="BALANCE_SCALE" size="16" />
+         </graphic>
+      </JFXButton>
+      <JFXButton layoutX="10.0" layoutY="460.0" prefHeight="61.0" prefWidth="180.0" text="LANÇAR COMBOS">
+         <graphic>
+            <FontAwesomeIconView glyphName="CUBES" size="16" />
+         </graphic>
+      </JFXButton>
+   </children>
+</VBox>

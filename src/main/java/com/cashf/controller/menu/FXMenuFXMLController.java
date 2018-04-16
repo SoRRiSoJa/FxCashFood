@@ -78,6 +78,8 @@ public class FXMenuFXMLController implements Initializable {
     private JFXButton btnNATres;
     @FXML
     private JFXButton btnCaixa;
+    @FXML
+    private JFXButton btnCombos;
 
     /**
      * Initializes the controller class.
@@ -156,7 +158,7 @@ public class FXMenuFXMLController implements Initializable {
     //----------------------------------------------
     private void loadDrawer() {
         try {
-            gavetas = FXMLLoader.load(getClass().getResource("/fxml/GavetaMesasFXML.fxml"));
+            gavetas = FXMLLoader.load(getClass().getResource("/fxml/GavetasERPFXML.fxml"));
             drawer.setSidePane(gavetas);
         } catch (IOException ex) {
             System.out.println("Erro:" + ex);
@@ -305,6 +307,11 @@ public class FXMenuFXMLController implements Initializable {
     @FXML
     private void OnCaixa(ActionEvent event) {
         loadFXML("/fxml/caixa/GerenciarCaixaFXML.fxml");
+    }
+
+    @FXML
+    private void onCombos(ActionEvent event) {
+        loadFXML("/fxml/combos/GerenciarCombosFXML.fxml");
     }
     
 }
