@@ -12,6 +12,7 @@ import com.jfoenix.controls.JFXTextField;
 import java.math.BigDecimal;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -26,7 +27,7 @@ import javafx.scene.input.MouseEvent;
  * @author joao
  */
 public class TabListaCombosFXMLController implements Initializable {
-    
+
     @FXML
     private TableView<Combo> tbvProdutos;
     @FXML
@@ -53,20 +54,26 @@ public class TabListaCombosFXMLController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         setUpTableView();
+        loadTbv();
     }
-    
+
     @FXML
     private void onSelecionarProduto(MouseEvent event) {
+        if (tbvProdutos.getSelectionModel().getSelectedItem() != null) {
+            ComboController.getInstance().setCombo(tbvProdutos.getItems().get(tbvProdutos.getSelectionModel().getSelectedIndex()));
+            ComboController.getInstance().setLista(FXCollections.observableList(ComboController.getInstance().getLista()));
+            TabComboFXMLController.LDTS();
+        }
     }
-    
+
     @FXML
     private void onPesquisar(ActionEvent event) {
     }
-    
+
     private void setUpTableView() {
         tbcDescricao.setCellValueFactory(new PropertyValueFactory<>("produtoPrincipal"));
         tbcCusto.setCellValueFactory(new PropertyValueFactory<>("custoTotal"));
-        tbcVenda.setCellValueFactory(new PropertyValueFactory<>("custoTotal"));
+        tbcVenda.setCellValueFactory(new PropertyValueFactory<>("valorVenda"));
         tbvProdutos.getColumns().setAll(tbcDescricao, tbcCusto, tbcVenda);
     }
 

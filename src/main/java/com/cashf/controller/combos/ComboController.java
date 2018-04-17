@@ -6,6 +6,7 @@
 package com.cashf.controller.combos;
 
 import com.cashf.dao.combo.ComboDAO;
+import com.cashf.dao.produto.ProdutoDAO;
 import com.cashf.model.combo.Combo;
 import com.cashf.model.combo.ProdutoCombo;
 import com.cashf.model.produto.Produto;
@@ -23,6 +24,7 @@ public class ComboController implements GenericController<Combo> {
 
     public static ComboController comboController = null;
     private final ComboDAO comboDAO;
+    private final ProdutoDAO produtoDAO;
     private Combo combo;
     private Produto produtoPrincipal;
     private Produto itemAtual;
@@ -32,7 +34,9 @@ public class ComboController implements GenericController<Combo> {
 
     private ComboController() {
         this.comboDAO = new ComboDAO(Combo.class);
+        this.produtoDAO=new ProdutoDAO(Produto.class);
         this.lista = FXCollections.observableList(comboDAO.listAll());
+        this.listaProdutos = FXCollections.observableList(produtoDAO.listProdToCombo());
         this.combo = new Combo();
         this.combo.setIdCombo(0l);
     }
