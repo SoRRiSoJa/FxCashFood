@@ -72,6 +72,7 @@
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/controller/receberpedido/ReceberPedidoFXMLController.java
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/dao/fornecedor/FornecedorDAO.java
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/dao/produto/GrupoDAO.java
+/home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/model/parametros/ParametrosFiscais.java
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/controller/menu/GavetasERPFXMLController.java
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/controller/combos/TabListaCombosFXMLController.java
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/controller/cliente/TabClientesFXMLController.java
@@ -128,6 +129,8 @@
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/controller/produto/GrupoController.java
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/model/contasPagar/StatusPagto.java
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/controller/produto/TabListaProdutosFXMLController.java
+/home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/dao/parametros/ParametrosFiscaisDAO.java
+/home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/controller/parametrizacao/TabParametrosFiscaisFXMLController.java
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/dao/GenericDAO.java
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/core/gerarContasPagar/GerarContasPagar.java
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/controller/contaspagar/ContasPagarFXMLController.java

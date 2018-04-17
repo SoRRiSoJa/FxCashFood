@@ -65,6 +65,7 @@ controller/GenericViewController.class
 com/cashf/model/funcionario/Funcionario.class
 com/cashf/controller/funcionario/TabListaFuncionariosFXMLController.class
 com/cashf/controller/contaspagar/ContasPagarController.class
+com/cashf/dao/parametros/ParametrosFiscaisDAO.class
 com/cashf/controller/produto/GerenciarGruposFXMLController$ButtonCellDelete.class
 com/cashf/model/banco/Banco.class
 com/cashf/controller/menu/GavetaMesasFXMLController.class
@@ -99,6 +100,7 @@ com/cashf/model/pessoa/Pessoa.class
 com/cashf/controller/parametrizacao/GerenciarParametrizacaoFXMLController.class
 com/cashf/model/estado/Estado_.class
 com/cashf/controller/contacorrente/GerenciarContasFXMLController.class
+com/cashf/model/parametros/ParametrosFiscais_.class
 com/cashf/model/fichatecnica/ProdutoFichaTecnica_.class
 dao/GenericDAO.class
 com/cashf/model/prepreparo/PrePreparo_.class
@@ -116,6 +118,8 @@ com/cashf/controller/menu/MenuSistemaFXMLController.class
 com/cashf/model/produto/Grupo_.class
 com/cashf/controller/cliente/TabClientesFXMLController.class
 com/cashf/model/notafiscal/ProdutoNotaFiscal_.class
+com/cashf/model/parametros/ParametrosFiscais.class
+com/cashf/controller/parametrizacao/TabParametrosFiscaisFXMLController.class
 com/cashf/dao/produto/CategoriaDAO.class
 com/cashf/model/meiopagamento/TPPagto.class
 com/cashf/controller/combos/TabComboFXMLController$ButtonCellDelete.class

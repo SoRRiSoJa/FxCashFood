@@ -157,6 +157,8 @@ public class TabProdutoFXMLController implements GenericViewController, Initiali
     private static Label _lblTotal;
     @FXML
     private Label lblTotal;
+    @FXML
+    private JFXButton btnImportar;
 
     /**
      * Initializes the controller class.
@@ -772,5 +774,9 @@ public class TabProdutoFXMLController implements GenericViewController, Initiali
 
     public static void setBtnEX(Boolean sta) {
         _btnExcluir.setDisable(sta);
+    }
+
+    @FXML
+    private void onImportar(ActionEvent event) {
     }
 }

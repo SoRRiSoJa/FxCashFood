@@ -11,8 +11,8 @@ package com.cashf.model.produto;
  */
 public enum TipoProduto {
     FICHA_TECNICA("Ficha Técnica"),INSUMO("Insumo"),
-    MERCADORIA("Mercadoria"),
-    PRE_PREPARO("Pré-preparo");
+    MERCADORIA("Mercadoria"),PRE_PREPARO("Pré-preparo"),
+    COMBO("Combo");
     
     private final String descricao;
 

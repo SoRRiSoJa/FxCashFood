@@ -77,6 +77,6 @@ Contributor(s):
         <mapping class="com.cashf.model.caixa.CaixaMovimento" />
         <mapping class="com.cashf.model.combo.Combo" />
         <mapping class="com.cashf.model.combo.ProdutoCombo" />
-        
+        <mapping class="com.cashf.model.parametros.ParametrosFiscais" />
     </session-factory>
 </hibernate-configuration>

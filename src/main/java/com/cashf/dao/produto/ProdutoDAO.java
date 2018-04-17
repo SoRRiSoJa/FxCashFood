@@ -31,9 +31,10 @@ public class ProdutoDAO extends GenericDAOIMP<Produto> {
         }
 
     }
+    
     public List<Produto> listProdToCombo() {
         try (Session session = sessionFactory.openSession()) {
-            String hql = "from Produto prod where prod.tipo NOT like 'INSUMO' AND  prod.tipo NOT like 'PRE_PREPARO'";
+            String hql = "from Produto prod where prod.tipo NOT like 'INSUMO' AND  prod.tipo NOT like 'PRE_PREPARO' AND  prod.tipo NOT like 'COMBO'";
             List<Produto> roleList = session.createQuery(hql).list();
             return roleList;
         } catch (Exception e) {
@@ -43,7 +44,18 @@ public class ProdutoDAO extends GenericDAOIMP<Produto> {
 
     }
 
-    public List<Produto> listProdInsumos() {
+    public List<Produto> listProdCombo() {
+        try (Session session = sessionFactory.openSession()) {
+            String hql = "from Produto prod where prod.tipo like 'COMBO'";
+            List<Produto> roleList = session.createQuery(hql).list();
+            return roleList;
+        } catch (Exception e) {
+            System.out.println("Erro:" + e);
+            return null;
+        }
+    }
+    
+     public List<Produto> listProdInsumos() {
         try (Session session = sessionFactory.openSession()) {
             String hql = "from Produto prod where prod.tipo like 'INSUMO'";
             List<Produto> roleList = session.createQuery(hql).list();
@@ -53,7 +65,6 @@ public class ProdutoDAO extends GenericDAOIMP<Produto> {
             return null;
         }
     }
-
     public List<Produto> listProdInsumosCodRef(String codRef) {
         try (Session session = sessionFactory.openSession()) {
             String hql = "from Produto prod where prod.codigoReferencia like'" + codRef + "%'" + " AND prod.tipo like 'INSUMO'";
@@ -64,7 +75,43 @@ public class ProdutoDAO extends GenericDAOIMP<Produto> {
             return null;
         }
     }
+    //------
+    public List<Produto> listProdToComboCodRef(String codRef) {
+        try (Session session = sessionFactory.openSession()) {
+            String hql = "from Produto where prod.codigoReferencia like'" + codRef + "%'"+"AND prod prod.tipo NOT like 'INSUMO' AND  prod.tipo NOT like 'PRE_PREPARO' AND  prod.tipo NOT like 'COMBO'";
+            List<Produto> roleList = session.createQuery(hql).list();
+            return roleList;
+        } catch (Exception e) {
+            System.out.println("Erro:" + e);
+            return null;
+        }
 
+    }
+    //------
+    public List<Produto> listProdToComboDesc(String desc) {
+        try (Session session = sessionFactory.openSession()) {
+            String hql = "from Produto where prod.descriao like'" + desc + "%'"+"AND prod prod.tipo NOT like 'INSUMO' AND  prod.tipo NOT like 'PRE_PREPARO' AND  prod.tipo NOT like 'COMBO'";
+            List<Produto> roleList = session.createQuery(hql).list();
+            return roleList;
+        } catch (Exception e) {
+            System.out.println("Erro:" + e);
+            return null;
+        }
+
+    }
+    //------
+    public List<Produto> listProdToComboGrupo(String grupo) {
+        try (Session session = sessionFactory.openSession()) {
+            String hql = "from Produto where prod.grupo.descricao like'" + grupo + "%'"+"AND prod prod.tipo NOT like 'INSUMO' AND  prod.tipo NOT like 'PRE_PREPARO' AND  prod.tipo NOT like 'COMBO'";
+            List<Produto> roleList = session.createQuery(hql).list();
+            return roleList;
+        } catch (Exception e) {
+            System.out.println("Erro:" + e);
+            return null;
+        }
+
+    }
+    //---
     public List<Produto> listProdInsumosDesc(String desc) {
         try (Session session = sessionFactory.openSession()) {
             String hql = "from Produto prod where prod.descriao like'" + desc + "%'" + "AND prod.tipo like 'INSUMO'";

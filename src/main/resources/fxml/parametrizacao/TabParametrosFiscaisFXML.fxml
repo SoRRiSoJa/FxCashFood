@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="542.0" prefWidth="1366.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cashf.controller.parametrizacao.TabParametrosFiscaisFXMLController">
+   <children>
+      <Pane layoutX="163.0" layoutY="48.0" prefHeight="447.0" prefWidth="640.0" style="-fx-background-color: #ffffff;">
+         <effect>
+            <DropShadow />
+         </effect>
+         <children>
+            <JFXComboBox fx:id="cbbSituacaoTributaria" focusColor="#004ba0" labelFloat="true" layoutX="35.0" layoutY="44.0" prefHeight="26.0" prefWidth="155.0" promptText="Situação Tributária" />
+            <JFXTextField fx:id="txtPercentualPIS" focusColor="#004ba0" labelFloat="true" layoutX="35.0" layoutY="96.0" onKeyReleased="#onKeyReleasedPISPercent" prefHeight="24.0" prefWidth="137.0" promptText="\% PIS" />
+            <JFXTextField fx:id="txtCstPis" focusColor="#004ba0" labelFloat="true" layoutX="243.0" layoutY="96.0" onKeyReleased="#onKeyReleasedCSTPis" prefHeight="24.0" prefWidth="137.0" promptText="Cst PIS" />
+            <JFXTextField fx:id="txtPercentualConfins" focusColor="#004ba0" labelFloat="true" layoutX="468.0" layoutY="96.0" onKeyReleased="#onKeyReleasedconfisnPercent" prefHeight="24.0" prefWidth="137.0" promptText="\% CONFINS" />
+            <JFXTextField fx:id="txtCfop" focusColor="#004ba0" labelFloat="true" layoutX="35.0" layoutY="152.0" onKeyReleased="#onKeyReleasedCFOP" prefHeight="24.0" prefWidth="137.0" promptText="CFOP" />
+            <JFXTextField fx:id="txtCstConfins" focusColor="#004ba0" labelFloat="true" layoutX="243.0" layoutY="152.0" onKeyReleased="#onKeyReleasedCstConfins" prefHeight="24.0" prefWidth="137.0" promptText="Cst CONFINS" />
+            <JFXTextField fx:id="txtAliquotaCSOCN" focusColor="#004ba0" labelFloat="true" layoutX="468.0" layoutY="152.0" onKeyReleased="#onKeyReleasedALCsosn" prefHeight="24.0" prefWidth="137.0" promptText="Alíquota CSOSN" />
+            <JFXTextField fx:id="txtCest" focusColor="#004ba0" labelFloat="true" layoutX="35.0" layoutY="208.0" onKeyReleased="#onKeyReleasedCest" prefHeight="24.0" prefWidth="137.0" promptText="CEST" />
+            <JFXTextField fx:id="txtAliquotaICMS" focusColor="#004ba0" labelFloat="true" layoutX="243.0" layoutY="208.0" onKeyReleased="#onKeyReleasedALIcms" prefHeight="24.0" prefWidth="137.0" promptText="Alíquota ICMS" />
+            <JFXTextField fx:id="txtCSOSN" focusColor="#004ba0" labelFloat="true" layoutX="468.0" layoutY="208.0" onKeyReleased="#onKeyReleasedCsosn" prefHeight="24.0" prefWidth="137.0" promptText="CSOSN" />
+            <JFXTextField fx:id="txtAliquotaMunicipal" focusColor="#004ba0" labelFloat="true" layoutX="35.0" layoutY="264.0" onKeyReleased="#onKeyReleasedALMunicipal" prefHeight="24.0" prefWidth="137.0" promptText="Alíquota Municipal" />
+            <JFXTextField fx:id="txtAliquotaEstadual" focusColor="#004ba0" labelFloat="true" layoutX="243.0" layoutY="264.0" onKeyReleased="#onKeyReleasedALEstadual" prefHeight="24.0" prefWidth="137.0" promptText="Alíquota Estadual" />
+            <JFXTextField fx:id="txtAliquotaFederal" focusColor="#004ba0" labelFloat="true" layoutX="468.0" layoutY="264.0" onKeyReleased="#onKeyReleasedAlFederal" prefHeight="24.0" prefWidth="137.0" promptText="Alíquota Federal" />
+            <HBox alignment="CENTER" layoutX="10.0" layoutY="340.0" prefHeight="68.0" prefWidth="621.0">
+               <children>
+                  <JFXButton fx:id="btnSalvar" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" onAction="#onSalvar" prefHeight="36.0" prefWidth="100.0" ripplerFill="WHITE" style="-fx-background-color: #2196f3;" textFill="WHITE">
+                     <HBox.margin>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </HBox.margin>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                     <graphic>
+                        <FontAwesomeIconView fill="WHITE" glyphName="PLUS" size="24" />
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton fx:id="btnNovo" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" layoutX="10.0" layoutY="10.0" onAction="#onNovo" prefHeight="36.0" prefWidth="100.0" ripplerFill="WHITE" style="-fx-background-color: #00e676;" textFill="WHITE">
+                     <HBox.margin>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </HBox.margin>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                     <graphic>
+                        <FontAwesomeIconView fill="WHITE" glyphName="EDIT" size="24" />
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton fx:id="btnExcluir" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" layoutX="100.0" layoutY="10.0" onAction="#onExcluir" prefHeight="36.0" prefWidth="100.0" ripplerFill="WHITE" style="-fx-background-color: #d32f2f;" textFill="WHITE">
+                     <HBox.margin>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </HBox.margin>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                     <graphic>
+                        <FontAwesomeIconView fill="WHITE" glyphName="TRASH" size="24" />
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton fx:id="btnLimpar" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" layoutX="190.0" layoutY="10.0" onAction="#onLimpar" prefHeight="36.0" prefWidth="100.0" ripplerFill="WHITE" style="-fx-background-color: #00251a;" textFill="WHITE">
+                     <HBox.margin>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </HBox.margin>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                     <graphic>
+                        <FontAwesomeIconView fill="WHITE" glyphName="ERASER" size="24" />
+                     </graphic>
+                  </JFXButton>
+               </children>
+            </HBox>
+            <Pane prefHeight="20.0" prefWidth="640.0" style="-fx-background-color: #0081cb;">
+               <children>
+                  <Label layoutX="5.0" layoutY="2.0" text="Allíquotas do Produto:" textFill="WHITE" />
+               </children>
+            </Pane>
+         </children>
+      </Pane>
+      <VBox layoutX="840.0" layoutY="48.0" prefHeight="447.0" prefWidth="170.0">
+         <children>
+            <Pane prefHeight="20.0" prefWidth="170.0" style="-fx-background-color: #0081cb;">
+               <children>
+                  <Label layoutX="5.0" layoutY="2.0" text="Parâmetros Fiscais:" textFill="WHITE" />
+               </children>
+            </Pane>
+            <TableView prefHeight="426.0" prefWidth="170.0" stylesheets="@../../styles/TableViewCSS.css">
+              <columns>
+                <TableColumn prefWidth="169.0" text="Situação Tributária" />
+              </columns>
+            </TableView>
+         </children>
+         <effect>
+            <DropShadow />
+         </effect>
+      </VBox>
+   </children>
+</Pane>

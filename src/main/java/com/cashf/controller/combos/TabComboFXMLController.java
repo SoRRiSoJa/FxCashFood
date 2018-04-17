@@ -5,6 +5,8 @@
  */
 package com.cashf.controller.combos;
 
+import com.cashf.cashfood.MainApp;
+import com.cashf.controller.prepreparo.PrePreparoController;
 import com.cashf.model.combo.ProdutoCombo;
 import com.cashf.model.produto.Produto;
 import com.cashf.model.produto.UnidadeMedida;
@@ -32,9 +34,11 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
 import javafx.util.Callback;
 import javafx.util.Duration;
 import org.controlsfx.control.Notifications;
+import util.PoupUpUtil;
 
 /**
  * FXML Controller class
@@ -103,10 +107,14 @@ public class TabComboFXMLController implements GenericViewController, Initializa
     private BigDecimal precoCusto;
     private BigDecimal precoVenda;
     private BigDecimal qtde;
+    private BigDecimal valDif;
+    private boolean difVal;
     private static TableView<ProdutoCombo> _tbvItens;
     private static JFXComboBox<Produto> _cbbProduto;
     private static JFXTextField _txtValCusto;
     private static JFXTextField _txtValVenda;
+    @FXML
+    private Pane paneRoot;
 
     /**
      * Initializes the controller class.
@@ -120,24 +128,69 @@ public class TabComboFXMLController implements GenericViewController, Initializa
         _txtValVenda = txtValVenda;
         setUpTableView();
         setUptableViewItens();
+        setUpRadioButtons();
         loadTbvProdutos();
+        loadCbb();
 
     }
 
     @FXML
     private void onAdicionar(ActionEvent event) {
+        getDataItem();
+        if (validateFieldsProdutoCombo()) {
+            ComboController.getInstance().setItemAtual(tbvProdutos.getItems().get(tbvProdutos.getSelectionModel().getSelectedIndex()));
+            ComboController.getInstance().setListaProdutosCombo(0l,
+                    ComboController.getInstance().getCombo(),
+                    ComboController.getInstance().getItemAtual(),
+                    UnidadeMedida.UN,
+                    qtde,
+                    valDif,
+                    difVal, 0);
+            tbvItens.setItems(ComboController.getInstance().getListaProdutosCombo());
+            ComboController.getInstance().setItemAtual(null);
+            txtPesquisar.clear();
+            txtqtde.clear();
+        } else {
+            PoupUpUtil.errorMessage(paneRoot, MainApp.paneRoot, erros);
+            erros = "";
+        }
     }
 
     @FXML
     private void onSelecionarProduto(MouseEvent event) {
+        if (cbbProduto.getSelectionModel().getSelectedItem() != null) {
+            ComboController.getInstance().setProdutoPrincipal(cbbProduto.getItems().get(cbbProduto.getSelectionModel().getSelectedIndex()));
+            txtPesquisar.setText(PrePreparoController.getInstance().getItemAtual().getDescriao());
+        }
+
     }
 
     @FXML
     private void onKeyReleasedPesquisar(KeyEvent event) {
+        if (txtPesquisar.getText() != null && txtPesquisar.getText().length() > 1) {
+            switch (ComboController.getInstance().getTipoConsulta()) {
+                case 1:
+                    ComboController.getInstance().buscaComboCodRef(txtPesquisar.getText());
+                    tbvProdutos.refresh();
+                    break;
+                case 2:
+                    ComboController.getInstance().buscaComboDesc(txtPesquisar.getText());
+                    tbvProdutos.refresh();
+                    // loadTbv();
+                    break;
+                default:
+                    ComboController.getInstance().buscaComboTodos();
+                    tbvProdutos.refresh();
+                    break;
+            }
+        }
     }
 
     @FXML
     private void onSelecionarProdPrincipal(ActionEvent event) {
+        if (cbbProduto.getSelectionModel().getSelectedItem() != null) {
+            ComboController.getInstance().setProdutoPrincipal(cbbProduto.getItems().get(cbbProduto.getSelectionModel().getSelectedIndex()));
+        }
     }
 
     @FXML
@@ -193,6 +246,10 @@ public class TabComboFXMLController implements GenericViewController, Initializa
 
     public Boolean validateFieldsProdutoCombo() {
         boolean flag = true;
+        if (cbbProduto.getSelectionModel().getSelectedItem() == null) {
+            erros += "Um produto deve ser selecionado como Produto Principal.";
+            flag = false;
+        }
 
         if (qtde == null || qtde.compareTo(BigDecimal.ZERO) <= 0) {
             erros += "A quantidade deve ser maior que 0";
@@ -233,6 +290,11 @@ public class TabComboFXMLController implements GenericViewController, Initializa
         if (tbvProdutos.getSelectionModel().getSelectedItem() != null) {
             ComboController.getInstance().setItemAtual(tbvProdutos.getItems().get(tbvProdutos.getSelectionModel().getSelectedIndex()));
         }
+        if (cbbProduto.getSelectionModel().getSelectedItem() != null) {
+            if (ComboController.getInstance().getProdutoPrincipal().getIdProduto() == 0l) {
+                ComboController.getInstance().setProdutoPrincipal(cbbProduto.getItems().get(cbbProduto.getSelectionModel().getSelectedIndex()));
+            }
+        }
 
     }
 
@@ -264,7 +326,37 @@ public class TabComboFXMLController implements GenericViewController, Initializa
         _txtValCusto.setText(ComboController.getInstance().getCombo().getCustoTotal().toString());
         _txtValVenda.setText(ComboController.getInstance().getCombo().getValorVenda().toString());
     }
-    private void loadTbvProdutos(){
+
+    private void setUpRadioButtons() {
+
+        rbtCodigo.selectedProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue) {
+                rbtDescricao.setSelected(false);
+                rbtTodos.setSelected(false);
+                ComboController.getInstance().setTipoConsulta(1);//todos
+                loadTbvProdutos();
+            }
+        });
+        rbtDescricao.selectedProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue) {
+                rbtCodigo.setSelected(false);
+                rbtTodos.setSelected(false);
+                ComboController.getInstance().setTipoConsulta(2);//todos
+                loadTbvProdutos();
+            }
+        });
+
+        rbtTodos.selectedProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue) {
+                rbtCodigo.setSelected(false);
+                rbtDescricao.setSelected(false);
+                ComboController.getInstance().setTipoConsulta(0);//todos
+                loadTbvProdutos();
+            }
+        });
+    }
+
+    private void loadTbvProdutos() {
         tbvProdutos.setItems(ComboController.getInstance().getListaProdutos());
     }
 
@@ -289,6 +381,10 @@ public class TabComboFXMLController implements GenericViewController, Initializa
             }
         });
         tbvItens.getColumns().setAll(tbcItem, tbcQtdIten, tbcUnidadeItem, tbcCustoItem, btnExcluirItem);
+    }
+
+    private void loadCbb() {
+        cbbProduto.setItems(ComboController.getInstance().getListaCbb());
     }
 
     public class ButtonCellDelete extends TableCell<Disposer.Record, Boolean> {

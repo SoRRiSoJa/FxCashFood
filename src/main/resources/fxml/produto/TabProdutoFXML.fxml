@@ -147,6 +147,11 @@
                   <Label layoutX="5.0" layoutY="2.0" text="Allíquotas do Produto:" textFill="WHITE" />
                </children>
             </Pane>
+            <JFXButton fx:id="btnImportar" layoutX="243.0" layoutY="44.0" onAction="#onImportar" prefHeight="30.0" prefWidth="137.0" ripplerFill="WHITE" style="-fx-background-color: #2196f3;" text="IMPORTAR" textFill="WHITE">
+               <graphic>
+                  <FontAwesomeIconView fill="WHITE" glyphName="PASTE" size="12" />
+               </graphic>
+            </JFXButton>
          </children>
       </Pane>
    </children>
