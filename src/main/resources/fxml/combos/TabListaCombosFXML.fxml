@@ -10,7 +10,6 @@
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.Pane?>
 
-
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="572.0" prefWidth="1366.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cashf.controller.combos.TabListaCombosFXMLController">
    <children>
       <Pane layoutX="20.0" layoutY="30.0" prefHeight="482.0" prefWidth="1200.0" style="-fx-background-color: #ffffff;">
@@ -37,8 +36,7 @@
                </graphic>
             </JFXButton>
             <JFXRadioButton fx:id="rdbDesc" layoutX="234.0" layoutY="95.0" style="-jfx-selected-color: #69e2ff;" text="Descrição" />
-            <JFXRadioButton fx:id="rdbData" layoutX="374.0" layoutY="95.0" style="-jfx-selected-color: #69e2ff;" text="Data Produção" />
-            <JFXRadioButton fx:id="rdbTodos" layoutX="534.0" layoutY="95.0" style="-jfx-selected-color: #69e2ff;" text="Todos" />
+            <JFXRadioButton fx:id="rdbTodos" layoutX="434.0" layoutY="95.0" style="-jfx-selected-color: #69e2ff;" text="Todos" />
          </children>
       </Pane>
    </children>

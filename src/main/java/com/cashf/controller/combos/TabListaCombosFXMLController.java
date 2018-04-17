@@ -5,9 +5,11 @@
  */
 package com.cashf.controller.combos;
 
+import com.cashf.model.combo.Combo;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXTextField;
+import java.math.BigDecimal;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -15,6 +17,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 
 /**
@@ -23,15 +26,15 @@ import javafx.scene.input.MouseEvent;
  * @author joao
  */
 public class TabListaCombosFXMLController implements Initializable {
-
+    
     @FXML
-    private TableView<?> tbvProdutos;
+    private TableView<Combo> tbvProdutos;
     @FXML
-    private TableColumn<?, ?> tbcDescricao;
+    private TableColumn<Combo, String> tbcDescricao;
     @FXML
-    private TableColumn<?, ?> tbcCusto;
+    private TableColumn<Combo, BigDecimal> tbcCusto;
     @FXML
-    private TableColumn<?, ?> tbcVenda;
+    private TableColumn<Combo, BigDecimal> tbcVenda;
     @FXML
     private JFXTextField txtConsultar;
     @FXML
@@ -49,14 +52,25 @@ public class TabListaCombosFXMLController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
-
+        setUpTableView();
+    }
+    
     @FXML
     private void onSelecionarProduto(MouseEvent event) {
     }
-
+    
     @FXML
     private void onPesquisar(ActionEvent event) {
     }
     
+    private void setUpTableView() {
+        tbcDescricao.setCellValueFactory(new PropertyValueFactory<>("produtoPrincipal"));
+        tbcCusto.setCellValueFactory(new PropertyValueFactory<>("custoTotal"));
+        tbcVenda.setCellValueFactory(new PropertyValueFactory<>("custoTotal"));
+        tbvProdutos.getColumns().setAll(tbcDescricao, tbcCusto, tbcVenda);
+    }
+
+    private void loadTbv() {
+        tbvProdutos.setItems(ComboController.getInstance().getLista());
+    }
 }

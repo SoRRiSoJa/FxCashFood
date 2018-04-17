@@ -7,7 +7,11 @@ package com.cashf.controller.combos;
 
 import com.cashf.dao.combo.ComboDAO;
 import com.cashf.model.combo.Combo;
+import com.cashf.model.combo.ProdutoCombo;
+import com.cashf.model.produto.Produto;
+import com.cashf.model.produto.UnidadeMedida;
 import controller.GenericController;
+import java.math.BigDecimal;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -20,7 +24,11 @@ public class ComboController implements GenericController<Combo> {
     public static ComboController comboController = null;
     private final ComboDAO comboDAO;
     private Combo combo;
+    private Produto produtoPrincipal;
+    private Produto itemAtual;
     private ObservableList<Combo> lista;
+    private ObservableList<Produto> listaProdutos;
+    private ObservableList<ProdutoCombo> listaProdutosCombo;
 
     private ComboController() {
         this.comboDAO = new ComboDAO(Combo.class);
@@ -53,7 +61,9 @@ public class ComboController implements GenericController<Combo> {
 
     @Override
     public void flushObject() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        combo = new Combo();
+        combo.setIdCombo(0);
+
     }
 
     @Override
@@ -63,12 +73,58 @@ public class ComboController implements GenericController<Combo> {
 
     @Override
     public void setLista(ObservableList<Combo> lista) {
-        this.lista=lista;
+        this.lista = lista;
     }
 
     @Override
     public void setItenLista(Combo obj) {
         this.lista.add(obj);
+    }
+
+    public Combo getCombo() {
+        return combo;
+    }
+
+    public void setCombo(Combo combo) {
+        this.combo = combo;
+    }
+
+    public Produto getProdutoPrincipal() {
+        return produtoPrincipal;
+    }
+
+    public void setProdutoPrincipal(Produto produtoPrincipal) {
+        this.produtoPrincipal = produtoPrincipal;
+    }
+
+    public Produto getItemAtual() {
+        return itemAtual;
+    }
+
+    public void setItemAtual(Produto itemAtual) {
+        this.itemAtual = itemAtual;
+    }
+
+    public ObservableList<Produto> getListaProdutos() {
+        return listaProdutos;
+    }
+
+    public void setListaProdutos(ObservableList<Produto> listaProdutos) {
+        this.listaProdutos = listaProdutos;
+    }
+
+    public ObservableList<ProdutoCombo> getListaProdutosCombo() {
+        return listaProdutosCombo;
+    }
+
+    public void setListaProdutosCombo(ObservableList<ProdutoCombo> listaProdutosCombo) {
+        this.listaProdutosCombo = listaProdutosCombo;
+    }
+
+    public void setListaProdutosCombo(long idProdutoCombo, Combo combo, Produto produto, UnidadeMedida unidadeMedida, BigDecimal qtdeProduto, BigDecimal valorDiferenciado, Boolean valorDif, Integer sequencia) {
+        this.listaProdutosCombo.add(new ProdutoCombo(idProdutoCombo, combo, produto, UnidadeMedida.UN, qtdeProduto, BigDecimal.ZERO, false, 0));
+
+        this.listaProdutosCombo = listaProdutosCombo;
     }
 
 }

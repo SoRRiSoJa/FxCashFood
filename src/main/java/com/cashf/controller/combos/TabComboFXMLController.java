@@ -5,10 +5,15 @@
  */
 package com.cashf.controller.combos;
 
+import com.cashf.model.combo.ProdutoCombo;
+import com.cashf.model.produto.Produto;
+import com.cashf.model.produto.UnidadeMedida;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXTextField;
+import controller.GenericViewController;
+import java.math.BigDecimal;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -25,7 +30,7 @@ import javafx.scene.input.MouseEvent;
  *
  * @author joao
  */
-public class TabComboFXMLController implements Initializable {
+public class TabComboFXMLController implements GenericViewController, Initializable {
 
     @FXML
     private JFXTextField txtqtde;
@@ -36,21 +41,21 @@ public class TabComboFXMLController implements Initializable {
     @FXML
     private JFXRadioButton rbtDescricao;
     @FXML
-    private TableView<?> tbvProdutos;
+    private TableView<Produto> tbvProdutos;
     @FXML
-    private TableColumn<?, ?> tbcCodRef;
+    private TableColumn<Produto, String> tbcCodRef;
     @FXML
-    private TableColumn<?, ?> tbcDescricao;
+    private TableColumn<Produto, String> tbcDescricao;
     @FXML
-    private TableColumn<?, ?> tbcTipo;
+    private TableColumn<Produto, String> tbcTipo;
     @FXML
-    private TableColumn<?, ?> tbcQtde;
+    private TableColumn<Produto, BigDecimal> tbcQtde;
     @FXML
     private JFXTextField txtPesquisar;
     @FXML
     private JFXRadioButton rbtTodos;
     @FXML
-    private JFXComboBox<?> cbbProduto;
+    private JFXComboBox<Produto> cbbProduto;
     @FXML
     private JFXTextField txtValVenda;
     @FXML
@@ -68,19 +73,25 @@ public class TabComboFXMLController implements Initializable {
     @FXML
     private Label lblCustoTotal;
     @FXML
-    private TableView<?> tbvItens;
+    private TableView<ProdutoCombo> tbvItens;
     @FXML
-    private TableColumn<?, ?> tbcItem;
+    private TableColumn<ProdutoCombo, Produto> tbcItem;
     @FXML
-    private TableColumn<?, ?> tbcQtdIten;
+    private TableColumn<ProdutoCombo, BigDecimal> tbcQtdIten;
     @FXML
-    private TableColumn<?, ?> tbcUnidadeItem;
+    private TableColumn<ProdutoCombo, UnidadeMedida> tbcUnidadeItem;
     @FXML
-    private TableColumn<?, ?> tbcCustoItem;
+    private TableColumn<ProdutoCombo, BigDecimal> tbcCustoItem;
     @FXML
-    private TableColumn<?, ?> btnExcluirItem;
+    private TableColumn btnExcluirItem;
     @FXML
     private JFXTextField txtValCusto;
+    //-----
+    private String erros;
+    private boolean flagButtons;
+    private BigDecimal precoCusto;
+    private BigDecimal precoVenda;
+    private BigDecimal qtde;
 
     /**
      * Initializes the controller class.
@@ -88,7 +99,7 @@ public class TabComboFXMLController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
+    }
 
     @FXML
     private void onAdicionar(ActionEvent event) {
@@ -121,5 +132,107 @@ public class TabComboFXMLController implements Initializable {
     @FXML
     private void onLimpar(ActionEvent event) {
     }
-    
+
+    @Override
+    public void clearFields() {
+        txtPesquisar.clear();
+        txtValCusto.clear();
+        txtValVenda.clear();
+        txtqtde.clear();
+        cbbProduto.setValue(null);
+    }
+
+    @Override
+    public void setInputOff() {
+        txtPesquisar.setDisable(true);
+        txtValCusto.setDisable(true);
+        txtValVenda.setDisable(true);
+        txtqtde.setDisable(true);
+        cbbProduto.setDisable(true);
+        btnAdicionar.setDisable(true);
+        btnExcluir.setDisable(true);
+        btnLimpar.setDisable(true);
+        btnSalvar.setDisable(true);
+    }
+
+    @Override
+    public void setInputOn() {
+        txtPesquisar.setDisable(false);
+        txtValCusto.setDisable(false);
+        txtValVenda.setDisable(false);
+        txtqtde.setDisable(false);
+        cbbProduto.setDisable(false);
+        btnAdicionar.setDisable(false);
+        btnExcluir.setDisable(false);
+        btnLimpar.setDisable(false);
+        btnSalvar.setDisable(false);
+    }
+
+    public Boolean validateFieldsProdutoCombo() {
+        boolean flag = true;
+
+        if (qtde == null || qtde.compareTo(BigDecimal.ZERO) <= 0) {
+            erros += "A quantidade deve ser maior que 0";
+            flag = false;
+        }
+        if (tbvProdutos.getSelectionModel().getSelectedItem() == null) {
+            erros += "Selecione um Produto  para compor os ítens deste combo.";
+            flag = false;
+        }
+        return flag;
+    }
+
+    @Override
+    public Boolean validateFields() {
+        boolean flag = true;
+        if (precoCusto == null || precoCusto.compareTo(BigDecimal.ZERO) < 0) {
+            erros += "O valor de custo deve ser maior ou igual a 0";
+            flag = false;
+        }
+        if (precoVenda == null || precoVenda.compareTo(BigDecimal.ZERO) <= 0) {
+            erros += "O valor de venda deve ser maior que 0.";
+            flag = false;
+        }
+        if (cbbProduto.getSelectionModel().getSelectedItem() == null) {
+            erros += "Um produto deve ser selecionado como Produto Principal.";
+            flag = false;
+        }
+
+        return flag;
+    }
+
+    public void getDataItem() {
+        try {
+            qtde = new BigDecimal(txtqtde.getText());
+        } catch (Exception ex) {
+            System.out.println("Erro ao converter:" + ex);
+        }
+        if (tbvProdutos.getSelectionModel().getSelectedItem() != null) {
+            ComboController.getInstance().setItemAtual(tbvProdutos.getItems().get(tbvProdutos.getSelectionModel().getSelectedIndex()));
+        }
+
+    }
+
+    @Override
+    public void getData() {
+        try {
+            precoCusto = new BigDecimal(txtValCusto.getText());
+        } catch (Exception ex) {
+            System.out.println("Erro ao converter:" + ex);
+        }
+        try {
+            precoVenda = new BigDecimal(txtValVenda.getText());
+        } catch (Exception ex) {
+            System.out.println("Erro ao converter:" + ex);
+        }
+        if (cbbProduto.getSelectionModel().getSelectedItem() != null) {
+            ComboController.getInstance().setProdutoPrincipal(cbbProduto.getItems().get(cbbProduto.getSelectionModel().getSelectedIndex()));
+        }
+    }
+
+    @Override
+    public void loadDataToScreen() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }
