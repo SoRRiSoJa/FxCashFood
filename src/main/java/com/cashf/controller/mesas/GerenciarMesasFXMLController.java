@@ -11,6 +11,7 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
@@ -21,7 +22,7 @@ import javafx.scene.layout.StackPane;
  * @author joao
  */
 public class GerenciarMesasFXMLController implements Initializable {
-
+    
     @FXML
     private StackPane rootStackPane;
     @FXML
@@ -36,6 +37,8 @@ public class GerenciarMesasFXMLController implements Initializable {
     private JFXButton btnFecharParcial;
     @FXML
     private TableView<?> tbvComanda;
+    @FXML
+    private Label lblNumMesa;
 
     /**
      * Initializes the controller class.
@@ -43,20 +46,21 @@ public class GerenciarMesasFXMLController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        lblNumMesa.setText(MesaController.getInstance().getMesaAtual().getNumMesa() + "");
     }    
-
+    
     @FXML
     private void onRegistrar(ActionEvent event) {
     }
-
+    
     @FXML
     private void onTransferir(ActionEvent event) {
     }
-
+    
     @FXML
     private void onFechar(ActionEvent event) {
     }
-
+    
     @FXML
     private void onFecharParcial(ActionEvent event) {
     }

@@ -12,6 +12,7 @@ import com.cashf.model.mesa.Mesa;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Iterator;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -31,6 +32,7 @@ public class MesaController {
         this.lista = FXCollections.observableList(new ArrayList<>());
         this.mesaAtual = new Mesa();
         this.mesaAtual.setIdMesa(0l);
+        gerarMesas();
     }
 
     public static synchronized MesaController getInstance() {
@@ -52,9 +54,20 @@ public class MesaController {
         return lista;
     }
 
+    public Mesa getMesaNum(int num) {
+        for (Iterator<Mesa> it = lista.iterator(); it.hasNext();) {
+            Mesa me = it.next();
+            if (me.getNumMesa() == num) {
+                return me;
+            }
+        }
+        return null;
+    }
+
     public void setLista(ObservableList<Mesa> lista) {
         this.lista = lista;
     }
+
     public void setMesaAtual(long idMesa, Integer numPax, int numMesa, LocalDate dataAbertura, LocalTime horaAbertura, LocalTime horaFechamento, int status) {
         this.mesaAtual.setIdMesa(idMesa);
         this.mesaAtual.setNumMesa(numMesa);
@@ -63,6 +76,12 @@ public class MesaController {
         this.mesaAtual.setHoraAbertura(horaAbertura);
         this.mesaAtual.setHoraFechamento(horaFechamento);
         this.mesaAtual.setStatus(0);
+    }
+
+    private void gerarMesas() {
+        for (int i = 1; i < 19; i++) {
+            lista.add(new Mesa(0, 0, i, LocalDate.now(), LocalTime.now(), null, 0));
+        }
     }
 
 }
