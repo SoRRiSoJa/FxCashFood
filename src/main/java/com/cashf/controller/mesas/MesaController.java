@@ -5,10 +5,9 @@
  */
 package com.cashf.controller.mesas;
 
-import com.cashf.controller.prepreparo.PrePreparoController;
-import static com.cashf.controller.prepreparo.PrePreparoController.prePreparoController;
 import com.cashf.dao.mesa.MesaDAO;
 import com.cashf.model.mesa.Mesa;
+import com.cashf.model.mesa.StatusMesa;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -68,19 +67,19 @@ public class MesaController {
         this.lista = lista;
     }
 
-    public void setMesaAtual(long idMesa, Integer numPax, int numMesa, LocalDate dataAbertura, LocalTime horaAbertura, LocalTime horaFechamento, int status) {
+    public void setMesaAtual(long idMesa, Integer numPax, int numMesa, LocalDate dataAbertura, LocalTime horaAbertura, LocalTime horaFechamento, StatusMesa status) {
         this.mesaAtual.setIdMesa(idMesa);
         this.mesaAtual.setNumMesa(numMesa);
         this.mesaAtual.setNumPax(numPax);
         this.mesaAtual.setDataAbertura(dataAbertura);
         this.mesaAtual.setHoraAbertura(horaAbertura);
         this.mesaAtual.setHoraFechamento(horaFechamento);
-        this.mesaAtual.setStatus(0);
+        this.mesaAtual.setStatus(status);
     }
 
     private void gerarMesas() {
         for (int i = 1; i < 19; i++) {
-            lista.add(new Mesa(0, 0, i, LocalDate.now(), LocalTime.now(), null, 0));
+            lista.add(new Mesa(0, 0, i, LocalDate.now(), LocalTime.now(), null, StatusMesa.DISPONIVEL));
         }
     }
 

@@ -40,7 +40,7 @@ public class ProdutoCombo implements Serializable{
     private BigDecimal qtdeProduto;
     private BigDecimal valorDiferenciado;
     private Boolean valorDif;
-    private Integer sequencia;
+    private Integer etapa;
 
     public ProdutoCombo() {
     }
@@ -53,7 +53,7 @@ public class ProdutoCombo implements Serializable{
         this.qtdeProduto = qtdeProduto;
         this.valorDiferenciado = valorDiferenciado;
         this.valorDif = valorDif;
-        this.sequencia = sequencia;
+        this.etapa = sequencia;
     }
 
     public long getIdProdutoCombo() {
@@ -112,12 +112,12 @@ public class ProdutoCombo implements Serializable{
         this.valorDif = valorDif;
     }
 
-    public Integer getSequencia() {
-        return sequencia;
+    public Integer getEtapa() {
+        return etapa;
     }
 
-    public void setSequencia(Integer sequencia) {
-        this.sequencia = sequencia;
+    public void setEtapa(Integer etapa) {
+        this.etapa = etapa;
     }
 
     @Override

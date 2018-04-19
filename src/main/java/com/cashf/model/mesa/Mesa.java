@@ -11,6 +11,8 @@ import java.time.LocalTime;
 import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -36,12 +38,14 @@ public class Mesa implements Serializable {
     private LocalTime horaAbertura;
     @Column(columnDefinition = "TIME")
     private LocalTime horaFechamento;
-    private int status;
+    @Enumerated(EnumType.ORDINAL)
+    @Column(nullable = false)
+    private StatusMesa status;
 
     public Mesa() {
     }
 
-    public Mesa(long idMesa, Integer numPax, int numMesa, LocalDate dataAbertura, LocalTime horaAbertura, LocalTime horaFechamento, int status) {
+    public Mesa(long idMesa, Integer numPax, int numMesa, LocalDate dataAbertura, LocalTime horaAbertura, LocalTime horaFechamento, StatusMesa status) {
         this.idMesa = idMesa;
         this.numPax = numPax;
         this.numMesa = numMesa;
@@ -99,11 +103,11 @@ public class Mesa implements Serializable {
         this.horaFechamento = horaFechamento;
     }
 
-    public int getStatus() {
+    public StatusMesa getStatus() {
         return status;
     }
 
-    public void setStatus(int status) {
+    public void setStatus(StatusMesa status) {
         this.status = status;
     }
 
@@ -140,8 +144,7 @@ public class Mesa implements Serializable {
 
     @Override
     public String toString() {
-        return  numMesa +"";
+        return numMesa + "";
     }
-    
-    
+
 }

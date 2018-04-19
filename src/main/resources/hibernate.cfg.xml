@@ -81,6 +81,7 @@ Contributor(s):
         <mapping class="com.cashf.model.mesa.Mesa" />
         <mapping class="com.cashf.model.venda.Venda" />
         <mapping class="com.cashf.model.venda.ProdutoVenda" />
-        
+        <mapping class="com.cashf.model.contareceber.ContaReceber" />
+                
     </session-factory>
 </hibernate-configuration>

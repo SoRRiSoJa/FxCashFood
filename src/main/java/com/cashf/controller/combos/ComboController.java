@@ -14,6 +14,8 @@ import com.cashf.model.produto.UnidadeMedida;
 import controller.GenericController;
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -34,6 +36,7 @@ public class ComboController implements GenericController<Combo> {
     private ObservableList<Produto> listaCbb;
     private ObservableList<ProdutoCombo> listaProdutosCombo;
     private int tipoConsulta;
+    private int etapa;
 
     private ComboController() {
         this.comboDAO = new ComboDAO(Combo.class);
@@ -46,6 +49,7 @@ public class ComboController implements GenericController<Combo> {
         this.produtoPrincipal.setIdProduto(0l);
         this.combo = new Combo();
         this.combo.setIdCombo(0l);
+        this.etapa = 1;
     }
 
     public ObservableList<Produto> getListaCbb() {
@@ -116,6 +120,15 @@ public class ComboController implements GenericController<Combo> {
         this.combo = combo;
     }
 
+    public void setCombo(long idCombo, Produto produtoPrincipal, BigDecimal custoTotal, BigDecimal valorVenda, Boolean status, List<ProdutoCombo> listaProdutos) {
+        this.combo.setIdCombo(idCombo);
+        this.combo.setProdutoPrincipal(produtoPrincipal);
+        this.combo.setCustoTotal(custoTotal);
+        this.combo.setValorVenda(valorVenda);
+        this.combo.setStatus(status);
+        this.combo.setListaProdutos(ComboController.getInstance().getListaProdutosCombo());
+    }
+
     public Produto getProdutoPrincipal() {
         return produtoPrincipal;
     }
@@ -149,10 +162,11 @@ public class ComboController implements GenericController<Combo> {
     }
 
     public void setListaProdutosCombo(long idProdutoCombo, Combo combo, Produto produto, UnidadeMedida unidadeMedida, BigDecimal qtdeProduto, BigDecimal valorDiferenciado, Boolean valorDif, Integer sequencia) {
-        this.listaProdutosCombo.add(new ProdutoCombo(idProdutoCombo, combo, produto, UnidadeMedida.UN, qtdeProduto, BigDecimal.ZERO, false, 0));
+        this.listaProdutosCombo.add(new ProdutoCombo(idProdutoCombo, combo, produto, UnidadeMedida.UN, qtdeProduto, BigDecimal.ZERO, false, sequencia));
 
         this.listaProdutosCombo = listaProdutosCombo;
     }
+
     public void buscaComboCodRef(String text) {
         this.listaProdutos = FXCollections.observableList(produtoDAO.listProdToComboCodRef(text));
     }
@@ -169,11 +183,24 @@ public class ComboController implements GenericController<Combo> {
         //lista = FXCollections.observableList(comboDAO.listByDesc(text));
     }
 
-    
+    public int getEtapa() {
+        return etapa;
+    }
+
+    public void setEtapa(int etapa) {
+        this.etapa = etapa;
+    }
 
     void buscaTodos() {
         //lista = FXCollections.observableList(comboDAO.listAll());
     }
 
+    public int getTotalEtapa(int etapa) {
+        int tot = 0;
+        for (ProdutoCombo pc : listaProdutosCombo) {
+            tot = (pc.getEtapa().equals(etapa)) ? tot + 1 : tot;
+        }
+        return tot;
+    }
 
 }

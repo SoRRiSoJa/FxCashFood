@@ -6,7 +6,7 @@
 package com.cashf.controller.combos;
 
 import com.cashf.cashfood.MainApp;
-import com.cashf.controller.prepreparo.PrePreparoController;
+import com.cashf.model.combo.Combo;
 import com.cashf.model.combo.ProdutoCombo;
 import com.cashf.model.produto.Produto;
 import com.cashf.model.produto.UnidadeMedida;
@@ -35,6 +35,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.text.Text;
 import javafx.util.Callback;
 import javafx.util.Duration;
 import org.controlsfx.control.Notifications;
@@ -94,9 +95,9 @@ public class TabComboFXMLController implements GenericViewController, Initializa
     @FXML
     private TableColumn<ProdutoCombo, BigDecimal> tbcQtdIten;
     @FXML
-    private TableColumn<ProdutoCombo, UnidadeMedida> tbcUnidadeItem;
-    @FXML
     private TableColumn<ProdutoCombo, BigDecimal> tbcCustoItem;
+    @FXML
+    private TableColumn<ProdutoCombo, Integer> tbcEtapa;
     @FXML
     private TableColumn btnExcluirItem;
     @FXML
@@ -115,6 +116,12 @@ public class TabComboFXMLController implements GenericViewController, Initializa
     private static JFXTextField _txtValVenda;
     @FXML
     private Pane paneRoot;
+    @FXML
+    private Text txtEtapa;
+    @FXML
+    private JFXRadioButton rbtGrupo;
+    @FXML
+    private JFXButton btnFinalizarEtapa;
 
     /**
      * Initializes the controller class.
@@ -131,6 +138,7 @@ public class TabComboFXMLController implements GenericViewController, Initializa
         setUpRadioButtons();
         loadTbvProdutos();
         loadCbb();
+        loadEtapa();
 
     }
 
@@ -145,7 +153,8 @@ public class TabComboFXMLController implements GenericViewController, Initializa
                     UnidadeMedida.UN,
                     qtde,
                     valDif,
-                    difVal, 0);
+                    difVal,
+                    ComboController.getInstance().getEtapa());
             tbvItens.setItems(ComboController.getInstance().getListaProdutosCombo());
             ComboController.getInstance().setItemAtual(null);
             txtPesquisar.clear();
@@ -158,9 +167,9 @@ public class TabComboFXMLController implements GenericViewController, Initializa
 
     @FXML
     private void onSelecionarProduto(MouseEvent event) {
-        if (cbbProduto.getSelectionModel().getSelectedItem() != null) {
-            ComboController.getInstance().setProdutoPrincipal(cbbProduto.getItems().get(cbbProduto.getSelectionModel().getSelectedIndex()));
-            txtPesquisar.setText(PrePreparoController.getInstance().getItemAtual().getDescriao());
+        if (tbvProdutos.getSelectionModel().getSelectedItem() != null) {
+            ComboController.getInstance().setItemAtual(tbvProdutos.getItems().get(tbvProdutos.getSelectionModel().getSelectedIndex()));
+            txtPesquisar.setText(ComboController.getInstance().getItemAtual().getDescriao());
         }
 
     }
@@ -195,6 +204,20 @@ public class TabComboFXMLController implements GenericViewController, Initializa
 
     @FXML
     private void onSalvar(ActionEvent event) {
+        getData();
+        if (validateFields()) {
+            ComboController.getInstance().setCombo(0,
+                    ComboController.getInstance().getProdutoPrincipal(),
+                    precoCusto,
+                    precoVenda,
+                    difVal,
+                    ComboController.getInstance().getListaProdutosCombo());
+            ComboController.getInstance().insert();
+
+        } else {
+            PoupUpUtil.errorMessage(paneRoot, MainApp.paneRoot, erros);
+            erros = "";
+        }
     }
 
     @FXML
@@ -207,6 +230,20 @@ public class TabComboFXMLController implements GenericViewController, Initializa
 
     @FXML
     private void onLimpar(ActionEvent event) {
+    }
+
+    @FXML
+    private void onFinalizarEtapa(ActionEvent event) {
+
+        if (ComboController.getInstance().getTotalEtapa(ComboController.getInstance().getEtapa()) == 0) {
+            erros = "Adicione produtos antes de finalizar uma etapa.";
+            PoupUpUtil.errorMessage(paneRoot, MainApp.paneRoot, erros);
+            erros = "";
+        } else {
+            ComboController.getInstance().setEtapa(ComboController.getInstance().getEtapa() + 1);
+            loadEtapa();
+        }
+
     }
 
     @Override
@@ -332,6 +369,7 @@ public class TabComboFXMLController implements GenericViewController, Initializa
         rbtCodigo.selectedProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue) {
                 rbtDescricao.setSelected(false);
+                rbtGrupo.setSelected(false);
                 rbtTodos.setSelected(false);
                 ComboController.getInstance().setTipoConsulta(1);//todos
                 loadTbvProdutos();
@@ -340,8 +378,18 @@ public class TabComboFXMLController implements GenericViewController, Initializa
         rbtDescricao.selectedProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue) {
                 rbtCodigo.setSelected(false);
+                rbtGrupo.setSelected(false);
                 rbtTodos.setSelected(false);
                 ComboController.getInstance().setTipoConsulta(2);//todos
+                loadTbvProdutos();
+            }
+        });
+        rbtGrupo.selectedProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue) {
+                rbtCodigo.setSelected(false);
+                rbtDescricao.setSelected(false);
+                rbtTodos.setSelected(false);
+                ComboController.getInstance().setTipoConsulta(3);//todos
                 loadTbvProdutos();
             }
         });
@@ -350,6 +398,7 @@ public class TabComboFXMLController implements GenericViewController, Initializa
             if (newValue) {
                 rbtCodigo.setSelected(false);
                 rbtDescricao.setSelected(false);
+                rbtGrupo.setSelected(false);
                 ComboController.getInstance().setTipoConsulta(0);//todos
                 loadTbvProdutos();
             }
@@ -364,14 +413,14 @@ public class TabComboFXMLController implements GenericViewController, Initializa
         tbcCodRef.setCellValueFactory(new PropertyValueFactory<>("codigoReferencia"));
         tbcDescricao.setCellValueFactory(new PropertyValueFactory<>("descriao"));
         tbcTipo.setCellValueFactory(new PropertyValueFactory<>("tipo"));
-        tbcQtde.setCellValueFactory(new PropertyValueFactory<>("unidadesEstoque"));
+        tbcQtde.setCellValueFactory(new PropertyValueFactory<>("grupo"));
         tbvProdutos.getColumns().setAll(tbcCodRef, tbcDescricao, tbcTipo, tbcQtde);
     }
 
     private void setUptableViewItens() {
         tbcItem.setCellValueFactory(new PropertyValueFactory<>("produto"));
         tbcQtdIten.setCellValueFactory(new PropertyValueFactory<>("qtdeProduto"));
-        tbcUnidadeItem.setCellValueFactory(new PropertyValueFactory<>("unidadeMedida"));
+        tbcEtapa.setCellValueFactory(new PropertyValueFactory<>("etapa"));
         tbcCustoItem.setCellValueFactory(new PropertyValueFactory<>("valorDiferenciado"));
         btnExcluirItem.setCellFactory(
                 new Callback<TableColumn<Disposer.Record, Boolean>, TableCell<Disposer.Record, Boolean>>() {
@@ -380,7 +429,7 @@ public class TabComboFXMLController implements GenericViewController, Initializa
                 return new ButtonCellDelete();
             }
         });
-        tbvItens.getColumns().setAll(tbcItem, tbcQtdIten, tbcUnidadeItem, tbcCustoItem, btnExcluirItem);
+        tbvItens.getColumns().setAll(tbcItem, tbcQtdIten, tbcEtapa, tbcCustoItem, btnExcluirItem);
     }
 
     private void loadCbb() {
@@ -430,5 +479,10 @@ public class TabComboFXMLController implements GenericViewController, Initializa
             }
         }
 
+    }
+
+    private void loadEtapa() {
+        txtEtapa.setText(ComboController.getInstance().getEtapa() + "");
+        btnFinalizarEtapa.setText("FInalizar etapa: " + ComboController.getInstance().getEtapa() + "");
     }
 }
