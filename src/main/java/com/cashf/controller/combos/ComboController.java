@@ -14,7 +14,6 @@ import com.cashf.model.produto.UnidadeMedida;
 import controller.GenericController;
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

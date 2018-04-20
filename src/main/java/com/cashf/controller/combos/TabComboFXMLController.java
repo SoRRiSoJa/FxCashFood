@@ -218,7 +218,7 @@ public class TabComboFXMLController implements GenericViewController, Initializa
                         ComboController.getInstance().getProdutoPrincipal(),
                         precoCusto,
                         precoVenda,
-                        difVal,
+                        true,
                         ComboController.getInstance().getListaProdutosCombo());
                 ComboController.getInstance().insert();
                 PoupUpUtil.poupUp("Combo Cadastrado", "O Combo foi cadastrado com sucesso.", "");
