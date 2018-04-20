@@ -94,7 +94,11 @@ public class ComboController implements GenericController<Combo> {
     public void flushObject() {
         combo = new Combo();
         combo.setIdCombo(0);
-
+        this.listaProdutosCombo = FXCollections.observableList(new ArrayList<>());
+    }
+    public void loadList(){
+        this.listaProdutos = FXCollections.observableList(produtoDAO.listProdToCombo());
+        this.listaCbb = FXCollections.observableList(produtoDAO.listProdCombo());
     }
 
     @Override
@@ -164,15 +168,15 @@ public class ComboController implements GenericController<Combo> {
     public void setListaProdutosCombo(long idProdutoCombo, Combo combo, Produto produto, UnidadeMedida unidadeMedida, BigDecimal qtdeProduto, BigDecimal valorDiferenciado, Boolean valorDif, Integer sequencia) {
         this.listaProdutosCombo.add(new ProdutoCombo(idProdutoCombo, combo, produto, UnidadeMedida.UN, qtdeProduto, BigDecimal.ZERO, false, sequencia));
 
-        this.listaProdutosCombo = listaProdutosCombo;
+        
     }
 
     public void buscaComboCodRef(String text) {
         this.listaProdutos = FXCollections.observableList(produtoDAO.listProdToComboCodRef(text));
     }
 
-    public void buscaComboDesc(String text) {
-        this.listaProdutos = FXCollections.observableList(produtoDAO.listProdToComboDesc(text));
+    public void buscaComboGrupo(String text) {
+        this.listaProdutos = FXCollections.observableList(produtoDAO.listProdToComboGrupo(text));
     }
 
     public void buscaComboTodos() {

@@ -27,9 +27,10 @@ import javafx.scene.input.MouseEvent;
  * @author joao
  */
 public class TabListaCombosFXMLController implements Initializable {
-
+    
     @FXML
     private TableView<Combo> tbvProdutos;
+    private static TableView<Combo> _tbvProdutos;
     @FXML
     private TableColumn<Combo, String> tbcDescricao;
     @FXML
@@ -55,29 +56,36 @@ public class TabListaCombosFXMLController implements Initializable {
         // TODO
         setUpTableView();
         loadTbv();
+        _tbvProdutos=tbvProdutos;
     }
-
+    
     @FXML
     private void onSelecionarProduto(MouseEvent event) {
         if (tbvProdutos.getSelectionModel().getSelectedItem() != null) {
             ComboController.getInstance().setCombo(tbvProdutos.getItems().get(tbvProdutos.getSelectionModel().getSelectedIndex()));
-            ComboController.getInstance().setLista(FXCollections.observableList(ComboController.getInstance().getLista()));
+            ComboController.getInstance().setListaProdutosCombo(FXCollections.observableList(ComboController.getInstance().getCombo().getListaProdutos()));
+            ComboController.getInstance().setProdutoPrincipal(ComboController.getInstance().getCombo().getProdutoPrincipal());
             TabComboFXMLController.LDTS();
         }
     }
-
+    
     @FXML
     private void onPesquisar(ActionEvent event) {
     }
-
+    
     private void setUpTableView() {
         tbcDescricao.setCellValueFactory(new PropertyValueFactory<>("produtoPrincipal"));
         tbcCusto.setCellValueFactory(new PropertyValueFactory<>("custoTotal"));
         tbcVenda.setCellValueFactory(new PropertyValueFactory<>("valorVenda"));
         tbvProdutos.getColumns().setAll(tbcDescricao, tbcCusto, tbcVenda);
     }
-
+    
     private void loadTbv() {
         tbvProdutos.setItems(ComboController.getInstance().getLista());
     }
+
+    public static TableView<Combo> getTbvProdutos() {
+        return _tbvProdutos;
+    }
+    
 }

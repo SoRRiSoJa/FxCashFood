@@ -6,7 +6,7 @@
 package com.cashf.controller.combos;
 
 import com.cashf.cashfood.MainApp;
-import com.cashf.model.combo.Combo;
+import com.cashf.controller.cliente.ClienteController;
 import com.cashf.model.combo.ProdutoCombo;
 import com.cashf.model.produto.Produto;
 import com.cashf.model.produto.UnidadeMedida;
@@ -20,12 +20,15 @@ import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import java.math.BigDecimal;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableCell;
@@ -104,6 +107,7 @@ public class TabComboFXMLController implements GenericViewController, Initializa
     private JFXTextField txtValCusto;
     //-----
     private String erros;
+    private long idCombo = 0;
     private boolean flagButtons;
     private BigDecimal precoCusto;
     private BigDecimal precoVenda;
@@ -139,13 +143,16 @@ public class TabComboFXMLController implements GenericViewController, Initializa
         loadTbvProdutos();
         loadCbb();
         loadEtapa();
+        setInputOff();
+        btnNovo.setDisable(false);
 
     }
 
     @FXML
     private void onAdicionar(ActionEvent event) {
         getDataItem();
-        if (validateFieldsProdutoCombo()) {
+
+        if (ComboController.getInstance().getCombo().getIdCombo() == 0) {
             ComboController.getInstance().setItemAtual(tbvProdutos.getItems().get(tbvProdutos.getSelectionModel().getSelectedIndex()));
             ComboController.getInstance().setListaProdutosCombo(0l,
                     ComboController.getInstance().getCombo(),
@@ -183,7 +190,7 @@ public class TabComboFXMLController implements GenericViewController, Initializa
                     tbvProdutos.refresh();
                     break;
                 case 2:
-                    ComboController.getInstance().buscaComboDesc(txtPesquisar.getText());
+                    ComboController.getInstance().buscaComboGrupo(txtPesquisar.getText());
                     tbvProdutos.refresh();
                     // loadTbv();
                     break;
@@ -206,14 +213,24 @@ public class TabComboFXMLController implements GenericViewController, Initializa
     private void onSalvar(ActionEvent event) {
         getData();
         if (validateFields()) {
-            ComboController.getInstance().setCombo(0,
-                    ComboController.getInstance().getProdutoPrincipal(),
-                    precoCusto,
-                    precoVenda,
-                    difVal,
-                    ComboController.getInstance().getListaProdutosCombo());
-            ComboController.getInstance().insert();
-
+            if (ComboController.getInstance().getCombo().getIdCombo() == 0) {
+                ComboController.getInstance().setCombo(0,
+                        ComboController.getInstance().getProdutoPrincipal(),
+                        precoCusto,
+                        precoVenda,
+                        difVal,
+                        ComboController.getInstance().getListaProdutosCombo());
+                ComboController.getInstance().insert();
+                PoupUpUtil.poupUp("Combo Cadastrado", "O Combo foi cadastrado com sucesso.", "");
+            } else {
+                ComboController.getInstance().update();
+                PoupUpUtil.poupUp("Combo Alterado", "O Combo foi alterado com sucesso.", "");
+            }
+            clearFields();
+            ComboController.getInstance().flushObject();
+            ComboController.getInstance().loadList();
+            tbvItens.refresh();
+            tbvProdutos.refresh();
         } else {
             PoupUpUtil.errorMessage(paneRoot, MainApp.paneRoot, erros);
             erros = "";
@@ -222,14 +239,59 @@ public class TabComboFXMLController implements GenericViewController, Initializa
 
     @FXML
     private void onNovo(ActionEvent event) {
+        setInputOn();
+        btnNovo.setDisable(true);
+        if (ComboController.getInstance().getCombo().getIdCombo() == 0) {
+            btnExcluir.setDisable(true);
+            clearFields();
+        } else {
+            btnExcluir.setDisable(false);
+        }
     }
 
     @FXML
     private void onExcluir(ActionEvent event) {
+        if (ComboController.getInstance().getCombo().getIdCombo() != 0l) {
+            Notifications notificationBuilder;
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Cofirmar Excluir Combo!");
+            alert.setHeaderText("Deseja realmente Excluir?");
+            alert.setContentText("Combo:(" + ComboController.getInstance().getCombo().getProdutoPrincipal().getDescriao() + ")");
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.get() == ButtonType.OK) {
+                ComboController.getInstance().delete();
+                clearFields();
+                ComboController.getInstance().flushObject();
+                ComboController.getInstance().loadList();
+                ComboController.getInstance().getLista().remove(ComboController.getInstance().getCombo());
+                tbvItens.setItems(ComboController.getInstance().getListaProdutosCombo());
+                tbvItens.refresh();
+                TabListaCombosFXMLController.getTbvProdutos().setItems(ComboController.getInstance().getLista());
+                TabListaCombosFXMLController.getTbvProdutos().refresh();
+                clearFields();
+                // ... user chose OK
+
+                notificationBuilder = Notifications.create().title("Cliente excluído!").
+                        text("Cliente Excluido com sucesso.").
+                        hideAfter(Duration.seconds(2)).
+                        position(Pos.TOP_RIGHT).
+                        darkStyle();
+                notificationBuilder.showInformation();
+            } else {
+                alert.close();
+            }
+        }
+
     }
 
     @FXML
     private void onLimpar(ActionEvent event) {
+        ComboController.getInstance().flushObject();
+        ComboController.getInstance().loadList();
+        tbvItens.setItems(ComboController.getInstance().getListaProdutosCombo());
+        tbvItens.refresh();
+        clearFields();
+
     }
 
     @FXML
@@ -266,6 +328,7 @@ public class TabComboFXMLController implements GenericViewController, Initializa
         btnExcluir.setDisable(true);
         btnLimpar.setDisable(true);
         btnSalvar.setDisable(true);
+        btnFinalizarEtapa.setDisable(true);
     }
 
     @Override
@@ -279,6 +342,7 @@ public class TabComboFXMLController implements GenericViewController, Initializa
         btnExcluir.setDisable(false);
         btnLimpar.setDisable(false);
         btnSalvar.setDisable(false);
+        btnFinalizarEtapa.setDisable(false);
     }
 
     public Boolean validateFieldsProdutoCombo() {
