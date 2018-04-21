@@ -7,7 +7,6 @@ package com.cashf.core.gerarContasPagar;
 
 import com.cashf.controller.caixa.CaixaController;
 import com.cashf.controller.receberpedido.ReceberPedidoController;
-import com.cashf.core.atualizarestoque.AtualizarEstoque;
 import com.cashf.dao.contaspagar.ContaPagarDAO;
 import com.cashf.dao.meiopagamento.MeioPagamentoDAO;
 import com.cashf.model.caixa.Caixa;

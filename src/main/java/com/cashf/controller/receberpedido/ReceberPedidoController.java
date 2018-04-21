@@ -63,7 +63,7 @@ public class ReceberPedidoController implements GenericController<NotaFiscal> {
         this.notaFiscal.setIdNota(0l);
         this.produtoAtual.setIdProduto(0l);
         this.fornecedor.setIdFornecedor(0l);
-        this.atualizarEstoque=new AtualizarEstoque();
+        this.atualizarEstoque = new AtualizarEstoque();
 
     }
 
@@ -145,7 +145,7 @@ public class ReceberPedidoController implements GenericController<NotaFiscal> {
     public void setLista(ObservableList<NotaFiscal> lista) {
         this.lista = lista;
     }
-    
+
     @Override
     public void setItenLista(NotaFiscal obj) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -188,7 +188,7 @@ public class ReceberPedidoController implements GenericController<NotaFiscal> {
         this.listaProdutosNota = listaProdutosNota;
     }
 
-    public void setListaProdutosNota(Long idProdutoNotaFiscal,Integer qtdeProduto, BigDecimal valorIpi, BigDecimal valorIcmsSubst, BigDecimal valoruUnitario, BigDecimal despesas, BigDecimal descontos, BigDecimal embalagemCompra, UnidadeMedida unidadeMedida) {
+    public void setListaProdutosNota(Long idProdutoNotaFiscal, Integer qtdeProduto, BigDecimal valorIpi, BigDecimal valorIcmsSubst, BigDecimal valoruUnitario, BigDecimal despesas, BigDecimal descontos, BigDecimal embalagemCompra, UnidadeMedida unidadeMedida) {
         ProdutoNotaFiscal pn = new ProdutoNotaFiscal(idProdutoNotaFiscal, notaFiscal, produtoAtual, qtdeProduto, valorIpi, valorIcmsSubst, valoruUnitario, despesas, descontos, valoruUnitario.multiply(BigDecimal.valueOf(qtdeProduto.doubleValue())).subtract(descontos).add(despesas));
         pn.getProduto().setUnidadeMedida(unidadeMedida);
         pn.getProduto().setQtdeEmbalagem(embalagemCompra);
@@ -196,7 +196,7 @@ public class ReceberPedidoController implements GenericController<NotaFiscal> {
         pn.getProduto().setUnidadesEstoque((pn.getProduto().getQtdeEmbalagem().multiply(BigDecimal.valueOf(qtdeProduto))));
         this.listaProdutosNota.add(pn);
     }
-    
+
     public UnidadeMedida getUnidadeMedida() {
         return unidadeMedida;
     }
@@ -220,9 +220,11 @@ public class ReceberPedidoController implements GenericController<NotaFiscal> {
     public BigDecimal getValTotalIcmsSubst() {
         return valTotalIcmsSubst;
     }
-    public void salvarNota(){
+
+    public void salvarNota() {
         notaFiscalDAO.update(notaFiscal);
     }
+
     /**
      * Retorna o valor total do IPI para os produtos de uma Nota Fiscal Calcula
      * o valor od IPI utilizando o valor informado na Nota Fiscal do produto
@@ -240,15 +242,27 @@ public class ReceberPedidoController implements GenericController<NotaFiscal> {
 
     /**
      * Calcula o preço de custo para a lista de produtos de uma Nota Fiscal
-     * Calcula o valor utilizando a aliquota de IPI, qtde comprada, descontos e
-     * acrecimos. Realiza o Update na tabela Produtos
+     * Calcula o valor utilizando o valor do IPI e ICMS Substituto , qtde
+     * comprada, descontos e acrecimos. Realiza o Update na tabela Produtos
      */
     public void updateDataProdLista() {
+
         listaProdutosNota.forEach((ProdutoNotaFiscal prod) -> {
-            prod.getProduto().setPreco_custo(prod.getValorUnitario().add(prod.getValorTotal().multiply(prod.getValorIpi())).subtract(prod.getDescontos()).add(prod.getDespesas()).divide(BigDecimal.valueOf(prod.getQtdeProduto())));
+            prod.getProduto().setPreco_custo(calculaValorUnit(prod));
             prod.getProduto().setPreco_venda(prod.getProduto().getPreco_custo());
             produtoDAO.update(prod.getProduto());
         });
+    }
+
+    private BigDecimal calculaValorUnit(ProdutoNotaFiscal prod) {
+        BigDecimal valUnit = prod.getValorUnitario();
+        BigDecimal valIR = prod.getValorIcmsSubst().add(prod.getValorIpi());//valor total impostos
+        valUnit = valUnit.add(valIR);//Valor unitário + impostos
+        valUnit = valUnit.multiply(prod.getProduto().getQtdeProduto());
+        valUnit = valUnit.add(prod.getDespesas());//Valor unitário + impostos + Despesas
+        valUnit = valUnit.subtract(prod.getDescontos());//(Valor unitário + impostos + Despesas)-descontos
+        valUnit = valUnit.divide(prod.getProduto().getUnidadesEstoque());
+        return valUnit;
     }
 
     /**
@@ -261,11 +275,8 @@ public class ReceberPedidoController implements GenericController<NotaFiscal> {
         valTotalIcms = BigDecimal.ZERO;
         valTotalIcmsSubst = BigDecimal.ZERO;
         listaProdutosNota.forEach((prod) -> {
-            if (prod.getValorIcmsSubst().compareTo(BigDecimal.ZERO) == 0) {
-                valTotalIcms = valTotalIcms.add(((prod.getProduto().getAliquotasProduto().getAliquotaIcms().divide(BigDecimal.valueOf(100))).multiply((prod.getValorUnitario().subtract(prod.getDescontos()))).add(prod.getDespesas())).multiply(BigDecimal.valueOf(prod.getQtdeProduto())));
-            } else {
-                valTotalIcmsSubst = valTotalIcmsSubst.add(prod.getValorIcmsSubst());
-            }
+            valTotalIcms = valTotalIcms.add(((prod.getProduto().getAliquotasProduto().getAliquotaIcms().divide(BigDecimal.valueOf(100))).multiply((prod.getValorUnitario().subtract(prod.getDescontos()))).add(prod.getDespesas())).multiply(BigDecimal.valueOf(prod.getQtdeProduto())));
+            valTotalIcmsSubst = valTotalIcmsSubst.add(prod.getValorIcmsSubst());
         });
     }
 
@@ -296,7 +307,7 @@ public class ReceberPedidoController implements GenericController<NotaFiscal> {
 
     /**
      * Calcula o valor total de uma nota Fiscal considerando total de produtos
-     * 
+     *
      */
     public void calcValTotalNota() {
         valTotalNota = BigDecimal.ZERO;
@@ -305,7 +316,6 @@ public class ReceberPedidoController implements GenericController<NotaFiscal> {
         calcValTotalProd();
         calcTotalDespesasDescontos();
         valTotalNota = valTotalNota.add(valTotalIPI);
-        valTotalNota = valTotalNota.add(valTotalIcms);
         valTotalNota = valTotalNota.add(valTotalIcmsSubst);
         valTotalNota = valTotalNota.add(valTotalProd);
     }
@@ -329,7 +339,8 @@ public class ReceberPedidoController implements GenericController<NotaFiscal> {
     public void setValTotalAcrecimos(BigDecimal valTotalAcrecimos) {
         this.valTotalAcrecimos = valTotalAcrecimos;
     }
-    public void atualizarEstoqueProdutosNota(){
+
+    public void atualizarEstoqueProdutosNota() {
         atualizarEstoque.adicionarProdutosNota(notaFiscal);
     }
 

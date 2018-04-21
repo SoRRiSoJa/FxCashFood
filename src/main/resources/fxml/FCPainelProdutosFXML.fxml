@@ -9,25 +9,25 @@
 
 <Pane fx:id="paneProdutos" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="590.0" prefWidth="886.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cashf.controller.menu.FCPainelProdutosFXMLController">
    <children>
-      <Separator layoutX="20.0" layoutY="145.0" prefWidth="858.0" />
+      <Separator layoutX="20.0" layoutY="175.0" prefWidth="852.0" />
       <Label alignment="CENTER" layoutX="20.0" layoutY="12.0" prefHeight="30.0" prefWidth="150.0" text="GRUPOS:">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" layoutX="20.0" layoutY="165.0" prefHeight="30.0" prefWidth="150.0" text="PRODUTOS:">
+      <Label alignment="CENTER" layoutX="20.0" layoutY="188.0" prefHeight="30.0" prefWidth="150.0" text="PRODUTOS:">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
       </Label>
-      <ScrollPane layoutX="20.0" layoutY="45.0" prefHeight="82.0" prefWidth="852.0">
+      <ScrollPane layoutX="20.0" layoutY="52.0" prefHeight="100.0" prefWidth="852.0">
          <content>
-            <FlowPane fx:id="flowPane" prefHeight="82.0" prefWidth="852.0" stylesheets="@../styles/PainelProdutosCSS.css" />
+            <FlowPane fx:id="flowPane" prefHeight="99.0" prefWidth="852.0" stylesheets="@../styles/PainelProdutosCSS.css" />
          </content>
       </ScrollPane>
-      <ScrollPane layoutX="20.0" layoutY="195.0" prefHeight="381.0" prefWidth="852.0">
+      <ScrollPane layoutX="20.0" layoutY="228.0" prefHeight="350.0" prefWidth="852.0">
          <content>
-            <FlowPane fx:id="flowPaneProd" prefHeight="370.0" prefWidth="832.0" stylesheets="@../styles/PainelProdutosCSS.css" />
+            <FlowPane fx:id="flowPaneProd" prefHeight="349.0" prefWidth="832.0" stylesheets="@../styles/PainelProdutosCSS.css" />
          </content>
       </ScrollPane>
    </children>

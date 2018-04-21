@@ -34,6 +34,7 @@ public class ComboController implements GenericController<Combo> {
     private ObservableList<Produto> listaProdutos;
     private ObservableList<Produto> listaCbb;
     private ObservableList<ProdutoCombo> listaProdutosCombo;
+    private ObservableList<ProdutoCombo> listaProdutosEtapa;
     private int tipoConsulta;
     private int etapa;
 
@@ -44,6 +45,7 @@ public class ComboController implements GenericController<Combo> {
         this.listaProdutos = FXCollections.observableList(produtoDAO.listProdToCombo());
         this.listaCbb = FXCollections.observableList(produtoDAO.listProdCombo());
         this.listaProdutosCombo = FXCollections.observableList(new ArrayList<>());
+        this.listaProdutosEtapa = FXCollections.observableList(new ArrayList<>());
         this.produtoPrincipal = new Produto();
         this.produtoPrincipal.setIdProduto(0l);
         this.combo = new Combo();
@@ -95,7 +97,8 @@ public class ComboController implements GenericController<Combo> {
         combo.setIdCombo(0);
         this.listaProdutosCombo = FXCollections.observableList(new ArrayList<>());
     }
-    public void loadList(){
+
+    public void loadList() {
         this.listaProdutos = FXCollections.observableList(produtoDAO.listProdToCombo());
         this.listaCbb = FXCollections.observableList(produtoDAO.listProdCombo());
     }
@@ -121,6 +124,18 @@ public class ComboController implements GenericController<Combo> {
 
     public void setCombo(Combo combo) {
         this.combo = combo;
+    }
+
+    public ObservableList<ProdutoCombo> getListaProdutosEtapa() {
+        return listaProdutosEtapa;
+    }
+
+    public void setListaProdutosEtapa(long idProdutoCombo, Combo combo, Produto produto, UnidadeMedida unidadeMedida, BigDecimal qtdeProduto, BigDecimal valorDiferenciado, Boolean valorDif, Integer sequencia) {
+        this.listaProdutosEtapa.add(new ProdutoCombo(idProdutoCombo, combo, produto, UnidadeMedida.UN, qtdeProduto, BigDecimal.ZERO, false, sequencia));
+    }
+
+    public void setListaProdutosEtapa(ObservableList<ProdutoCombo> listaProdutosEtapa) {
+        this.listaProdutosEtapa = listaProdutosEtapa;
     }
 
     public void setCombo(long idCombo, Produto produtoPrincipal, BigDecimal custoTotal, BigDecimal valorVenda, Boolean status, List<ProdutoCombo> listaProdutos) {
@@ -167,7 +182,6 @@ public class ComboController implements GenericController<Combo> {
     public void setListaProdutosCombo(long idProdutoCombo, Combo combo, Produto produto, UnidadeMedida unidadeMedida, BigDecimal qtdeProduto, BigDecimal valorDiferenciado, Boolean valorDif, Integer sequencia) {
         this.listaProdutosCombo.add(new ProdutoCombo(idProdutoCombo, combo, produto, UnidadeMedida.UN, qtdeProduto, BigDecimal.ZERO, false, sequencia));
 
-        
     }
 
     public void buscaComboCodRef(String text) {
@@ -204,6 +218,11 @@ public class ComboController implements GenericController<Combo> {
             tot = (pc.getEtapa().equals(etapa)) ? tot + 1 : tot;
         }
         return tot;
+    }
+
+    public void refreshEtapa() {
+        this.listaProdutosEtapa = FXCollections.observableList(new ArrayList<>());
+        this.etapa++;
     }
 
 }

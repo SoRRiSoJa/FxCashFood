@@ -10,7 +10,6 @@ import com.cashf.controller.receberpedido.ReceberPedidoController;
 import com.cashf.core.atualizarestoque.AtualizarEstoque;
 import com.cashf.model.contasPagar.ContaPagar;
 import com.cashf.model.meiopagamento.MeioPagamento;
-import com.cashf.model.notafiscal.NotaFiscal;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDatePicker;

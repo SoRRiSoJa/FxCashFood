@@ -101,7 +101,12 @@
                   <Separator layoutX="14.0" layoutY="167.0" prefWidth="570.0" />
                   <JFXButton fx:id="btnFinalizarEtapa" layoutX="14.0" layoutY="188.0" onAction="#onFinalizarEtapa" prefHeight="30.0" prefWidth="152.0" ripplerFill="WHITE" style="-fx-background-color: #00e676;" text="Finalizar etapa:" textFill="WHITE">
                      <graphic>
-                        <FontAwesomeIconView fill="WHITE" glyphName="CART_ARROW_DOWN" size="12" />
+                        <FontAwesomeIconView fill="WHITE" glyphName="CART_PLUS" size="18" />
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton fx:id="btnConcluirSel" layoutX="185.0" layoutY="188.0" onAction="#onConcluirSel" prefHeight="30.0" prefWidth="152.0" ripplerFill="WHITE" style="-fx-background-color: #2196f3;" text="Concluir Seleção" textFill="WHITE">
+                     <graphic>
+                        <FontAwesomeIconView fill="WHITE" glyphName="CART_ARROW_DOWN" size="18" />
                      </graphic>
                   </JFXButton>
                </children>

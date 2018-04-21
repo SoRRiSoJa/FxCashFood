@@ -11,10 +11,12 @@ import com.cashf.dao.produto.ProdutoDAO;
 import com.cashf.model.ajusteestoque.AjusteEstoque;
 import com.cashf.model.ajusteestoque.TipoAjuste;
 import com.cashf.model.notafiscal.NotaFiscal;
+import com.cashf.model.notafiscal.ProdutoNotaFiscal;
 import com.cashf.model.prepreparo.PrePreparo;
 import com.cashf.model.produto.Produto;
 import com.cashf.model.produto.UnidadeMedida;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import util.UnitConverter;
@@ -174,8 +176,9 @@ public class AtualizarEstoque {
                 produto.setQtdeEmbalagem(itemAtual.getProduto().getQtdeEmbalagem());
                 produto.setQtdeProduto(produto.getQtdeProduto().add(BigDecimal.valueOf(itemAtual.getQtdeProduto())));
                 produto.setUnidadesEstoque(produto.getUnidadesEstoque().add(itemAtual.getProduto().getUnidadesEstoque()));
-                produto.setPreco_custo(itemAtual.getValorTotal().add(itemAtual.getValorIpi()).divide(BigDecimal.valueOf(itemAtual.getQtdeProduto())));
-                produto.setPreco_venda(itemAtual.getValorTotal().add(itemAtual.getValorIpi()).divide(BigDecimal.valueOf(itemAtual.getQtdeProduto())));
+
+                produto.setPreco_custo(itemAtual.getValorTotal().add(itemAtual.getValorIpi()).divide(itemAtual.getProduto().getQtdeEmbalagem().multiply(BigDecimal.valueOf(itemAtual.getQtdeProduto())),4, RoundingMode.HALF_EVEN));
+                produto.setPreco_venda(itemAtual.getValorTotal().add(itemAtual.getValorIpi()).divide(itemAtual.getProduto().getQtdeEmbalagem().multiply(BigDecimal.valueOf(itemAtual.getQtdeProduto())),4, RoundingMode.HALF_EVEN));
 
                 produtoDAO.update(produto);
             });
@@ -185,4 +188,5 @@ public class AtualizarEstoque {
         }
         return flag;
     }
+
 }

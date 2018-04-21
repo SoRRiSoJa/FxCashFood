@@ -6,7 +6,6 @@
 package com.cashf.controller.combos;
 
 import com.cashf.cashfood.MainApp;
-import com.cashf.controller.cliente.ClienteController;
 import com.cashf.model.combo.ProdutoCombo;
 import com.cashf.model.produto.Produto;
 import com.cashf.model.produto.UnidadeMedida;
@@ -126,6 +125,8 @@ public class TabComboFXMLController implements GenericViewController, Initializa
     private JFXRadioButton rbtGrupo;
     @FXML
     private JFXButton btnFinalizarEtapa;
+    @FXML
+    private JFXButton btnConcluirSel;
 
     /**
      * Initializes the controller class.
@@ -154,7 +155,7 @@ public class TabComboFXMLController implements GenericViewController, Initializa
 
         if (ComboController.getInstance().getCombo().getIdCombo() == 0) {
             ComboController.getInstance().setItemAtual(tbvProdutos.getItems().get(tbvProdutos.getSelectionModel().getSelectedIndex()));
-            ComboController.getInstance().setListaProdutosCombo(0l,
+            ComboController.getInstance().setListaProdutosEtapa(0l,
                     ComboController.getInstance().getCombo(),
                     ComboController.getInstance().getItemAtual(),
                     UnidadeMedida.UN,
@@ -162,7 +163,9 @@ public class TabComboFXMLController implements GenericViewController, Initializa
                     valDif,
                     difVal,
                     ComboController.getInstance().getEtapa());
-            tbvItens.setItems(ComboController.getInstance().getListaProdutosCombo());
+            ComboController.getInstance().setListaProdutosCombo(0l, ComboController.getInstance().getCombo(), ComboController.getInstance().getItemAtual(),
+                    UnidadeMedida.UN, qtde, valDif, difVal, ComboController.getInstance().getEtapa());
+            tbvItens.setItems(ComboController.getInstance().getListaProdutosEtapa());
             ComboController.getInstance().setItemAtual(null);
             txtPesquisar.clear();
             txtqtde.clear();
@@ -297,12 +300,12 @@ public class TabComboFXMLController implements GenericViewController, Initializa
     @FXML
     private void onFinalizarEtapa(ActionEvent event) {
 
-        if (ComboController.getInstance().getTotalEtapa(ComboController.getInstance().getEtapa()) == 0) {
+        if (ComboController.getInstance().getListaProdutosEtapa().isEmpty()) {
             erros = "Adicione produtos antes de finalizar uma etapa.";
             PoupUpUtil.errorMessage(paneRoot, MainApp.paneRoot, erros);
             erros = "";
         } else {
-            ComboController.getInstance().setEtapa(ComboController.getInstance().getEtapa() + 1);
+            ComboController.getInstance().refreshEtapa();
             loadEtapa();
         }
 
@@ -500,6 +503,12 @@ public class TabComboFXMLController implements GenericViewController, Initializa
         cbbProduto.setItems(ComboController.getInstance().getListaCbb());
     }
 
+    @FXML
+    private void onConcluirSel(ActionEvent event) {
+        tbvItens.setItems(ComboController.getInstance().getListaProdutosCombo());
+        tbvItens.refresh();
+    }
+
     public class ButtonCellDelete extends TableCell<Disposer.Record, Boolean> {
 
         JFXButton cellButton = new JFXButton("Excluir");
@@ -546,6 +555,8 @@ public class TabComboFXMLController implements GenericViewController, Initializa
     }
 
     private void loadEtapa() {
+        tbvItens.setItems(ComboController.getInstance().getListaProdutosEtapa());
+        tbvItens.refresh();
         txtEtapa.setText(ComboController.getInstance().getEtapa() + "");
         btnFinalizarEtapa.setText("FInalizar etapa: " + ComboController.getInstance().getEtapa() + "");
     }

@@ -29,7 +29,7 @@ public class FCMenuController {
     private FCMenuController() {
         this.produtoDAO = new ProdutoDAO(Produto.class);
         this.grupoDAO = new GrupoDAO(Grupo.class);
-        this.listaGrupos = FXCollections.observableList(grupoDAO.listAll());
+        this.listaGrupos = FXCollections.observableList(grupoDAO.listNotInsumos());
         this.listaProdutos = FXCollections.observableList(produtoDAO.listAll());
         this.produtoAtual = new Produto();
         this.produtoAtual.setIdProduto(0l);
