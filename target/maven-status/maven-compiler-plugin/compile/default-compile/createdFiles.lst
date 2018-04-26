@@ -10,11 +10,13 @@ com/cashf/model/pessoa/Pessoa_.class
 com/cashf/model/mesa/Mesa_.class
 com/cashf/controller/funcionario/TabFuncionarioFXMLController$ButtonCellDelete.class
 com/cashf/controller/fichatecnica/FichaTecnicaController.class
+com/cashf/controller/mesas/RegistrarConsumoFXMLController$ButtonCellDelete$1.class
 com/cashf/controller/cliente/FXGerenciarClientesFXMLController.class
 com/cashf/controller/fichatecnica/TabListaFichaTecnicaFXMLController.class
 com/cashf/controller/registradora/RegistradoraFXMLController.class
 com/cashf/model/produto/Categoria.class
 com/cashf/model/venda/ProdutoVenda.class
+com/cashf/controller/mesas/RegistrarConsumoFXMLController$1.class
 com/cashf/dao/prepreparo/PrePreparoDAO.class
 com/cashf/dao/funcionario/FuncionarioDAO.class
 com/cashf/dao/parametros/ParametrosDAO.class
@@ -101,11 +103,13 @@ com/cashf/model/pessoa/Sexo.class
 com/cashf/controller/menu/GavetasERPFXMLController.class
 com/cashf/controller/contaspagar/ContasPagarFXMLController$2.class
 com/cashf/model/produto/Produto.class
+com/cashf/controller/mesas/RegistrarConsumoFXMLController$ButtonCellDelete.class
 util/BDInsert.class
 com/cashf/dao/produto/GrupoDAO.class
 com/cashf/controller/caixa/BoxSuprirCaixaFXMLController.class
 com/cashf/model/pessoa/Pessoa.class
 com/cashf/controller/parametrizacao/GerenciarParametrizacaoFXMLController.class
+com/cashf/controller/mesas/AbrirMesaFXMLController.class
 com/cashf/model/estado/Estado_.class
 com/cashf/controller/contacorrente/GerenciarContasFXMLController.class
 com/cashf/model/parametros/ParametrosFiscais_.class
@@ -122,6 +126,7 @@ com/cashf/dao/caixamovimento/CaixaMovimentoDAO.class
 util/SafePass.class
 com/cashf/controller/login/LoginController.class
 com/cashf/model/fichatecnica/ProdutoFichaTecnica.class
+com/cashf/core/venda/VendaController.class
 com/cashf/controller/menu/MenuSistemaFXMLController.class
 com/cashf/model/produto/Grupo_.class
 com/cashf/controller/cliente/TabClientesFXMLController.class
@@ -170,6 +175,7 @@ com/cashf/controller/produto/TabProdutoFXMLController.class
 com/cashf/model/prepreparo/ProdutoPrePreparo.class
 com/cashf/core/atualizarestoque/AtualizarEstoque.class
 com/cashf/controller/menu/FXMenuFCaixaFXMLController.class
+com/cashf/controller/mesas/RegistrarConsumoFXMLController.class
 com/cashf/dao/contareceber/ContaReceberDAO.class
 com/cashf/model/usuario/Usuario_.class
 com/cashf/model/produto/Produto_.class

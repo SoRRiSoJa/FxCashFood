@@ -11,6 +11,7 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Objects;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -112,6 +113,13 @@ public class Venda implements Serializable {
         return hash;
     }
 
+    
+
+    @Override
+    public String toString() {
+        return "Venda{" + "valorTotal=" + valorTotal + ", dataVenda=" + dataVenda + ", mesa=" + mesa + '}';
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -127,12 +135,16 @@ public class Venda implements Serializable {
         if (this.idVenda != other.idVenda) {
             return false;
         }
+        if (!Objects.equals(this.dataVenda, other.dataVenda)) {
+            return false;
+        }
+        if (!Objects.equals(this.mesa, other.mesa)) {
+            return false;
+        }
+        if (!Objects.equals(this.listaProdutos, other.listaProdutos)) {
+            return false;
+        }
         return true;
-    }
-
-    @Override
-    public String toString() {
-        return "Venda{" + "valorTotal=" + valorTotal + ", dataVenda=" + dataVenda + ", mesa=" + mesa + '}';
     }
     
 

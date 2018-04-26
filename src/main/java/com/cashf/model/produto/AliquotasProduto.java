@@ -38,6 +38,9 @@ public class AliquotasProduto implements Serializable {
     private BigDecimal percentualConfins;
     @Column(precision = 8, scale = 4)
     private BigDecimal aliquotaCsosn;
+    @Column(precision = 8, scale = 4)
+    private BigDecimal csosn;
+
     private BigDecimal cest;
     @Column(precision = 8, scale = 4)
     private BigDecimal aliquotaIcms;
@@ -51,7 +54,7 @@ public class AliquotasProduto implements Serializable {
     @Column(nullable = false)
     private SituacaoTributaria situacaoTributaria;
 
-    public AliquotasProduto(long id, BigDecimal percentualPis, BigDecimal cstpPis, BigDecimal cfop, BigDecimal cstConfins, BigDecimal percentualConfins, BigDecimal aliquotaCsosn, BigDecimal cest, BigDecimal aliquotaIcms, BigDecimal aliquotafederal, BigDecimal aliquotaestadual, BigDecimal aliquomunicipal, SituacaoTributaria situacaoTributaria) {
+    public AliquotasProduto(long id, BigDecimal percentualPis, BigDecimal cstpPis, BigDecimal cfop, BigDecimal cstConfins, BigDecimal percentualConfins,BigDecimal csosn ,BigDecimal aliquotaCsosn, BigDecimal cest, BigDecimal aliquotaIcms, BigDecimal aliquotafederal, BigDecimal aliquotaestadual, BigDecimal aliquomunicipal, SituacaoTributaria situacaoTributaria) {
         this.idAliquota = id;
         this.percentualPis = percentualPis;
         this.cstpPis = cstpPis;
@@ -59,12 +62,21 @@ public class AliquotasProduto implements Serializable {
         this.cstConfins = cstConfins;
         this.percentualConfins = percentualConfins;
         this.aliquotaCsosn = aliquotaCsosn;
+        this.csosn=csosn;
         this.cest = cest;
         this.aliquotaIcms = aliquotaIcms;
         this.aliquotafederal = aliquotafederal;
         this.aliquotaestadual = aliquotaestadual;
         this.aliquotamunicipal = aliquomunicipal;
         this.situacaoTributaria = situacaoTributaria;
+    }
+
+    public BigDecimal getCsosn() {
+        return csosn;
+    }
+
+    public void setCsosn(BigDecimal csosn) {
+        this.csosn = csosn;
     }
 
     public AliquotasProduto() {

@@ -1,6 +1,7 @@
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/controller/menu/FXMenuFXMLController.java
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/model/produto/TipoProduto.java
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/util/TextFieldFormatter.java
+/home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/controller/mesas/AbrirMesaFXMLController.java
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/model/caixa/CaixaMovimento.java
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/controller/caixa/BoxFecharCaixaFXMLController.java
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/model/produto/Categoria.java
@@ -59,6 +60,7 @@
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/model/notafiscal/NotaFiscal.java
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/model/prepreparo/ProdutoPrePreparo.java
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/dao/GenericDAOIMP.java
+/home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/controller/mesas/RegistrarConsumoFXMLController.java
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/model/funcionario/Funcionario.java
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/dao/cidade/CidadeDAO.java
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/controller/fichatecnica/FichaTecnicaController.java
@@ -85,6 +87,7 @@
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/model/venda/Venda.java
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/controller/mesas/GerenciarMesasFXMLController.java
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/controller/prepreparo/TapListaPrePreparoFXMLController.java
+/home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/core/venda/VendaController.java
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/dao/telefone/TelefoneDAO.java
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/model/usuario/UNivel.java
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/controller/GenericViewController.java

@@ -133,14 +133,22 @@ public class Mesa implements Serializable {
         if (this.idMesa != other.idMesa) {
             return false;
         }
+        if (this.numMesa != other.numMesa) {
+            return false;
+        }
+        if (!Objects.equals(this.dataAbertura, other.dataAbertura)) {
+            return false;
+        }
         if (!Objects.equals(this.horaAbertura, other.horaAbertura)) {
             return false;
         }
-        if (!Objects.equals(this.horaFechamento, other.horaFechamento)) {
+        if (this.status != other.status) {
             return false;
         }
         return true;
     }
+
+    
 
     @Override
     public String toString() {

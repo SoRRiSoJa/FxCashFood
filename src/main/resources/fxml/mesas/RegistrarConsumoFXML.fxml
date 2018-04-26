@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXRadioButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<Pane prefHeight="490.0" prefWidth="640.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cashf.controller.mesas.RegistrarConsumoFXMLController">
+   <effect>
+      <DropShadow />
+   </effect>
+   <children>
+      <Pane prefHeight="20.0" prefWidth="640.0" style="-fx-background-color: #0081cb;">
+         <children>
+            <Label layoutX="5.0" layoutY="2.0" text="Produtos da Venda:" textFill="WHITE" />
+         </children>
+      </Pane>
+      <Pane layoutX="20.0" layoutY="38.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="230.0" prefWidth="600.0" style="-fx-background-color: #ffffff;">
+         <children>
+            <Pane prefHeight="20.0" prefWidth="600.0" style="-fx-background-color: #0081cb;">
+               <children>
+                  <Label layoutX="5.0" layoutY="2.0" text="Registro de Consumo:" textFill="WHITE" />
+               </children>
+            </Pane>
+            <Text layoutX="14.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Selecione o produto:">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
+            <Text fx:id="txtEtapa" layoutX="206.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
+            <VBox layoutX="14.0" layoutY="71.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="74.0" prefWidth="386.0" spacing="15.0" style="-fx-background-color: #ffffff;">
+               <children>
+                  <JFXComboBox fx:id="cbbProduto" editable="true" onAction="#onProdutos" onKeyTyped="#onPesquisar" prefHeight="26.0" prefWidth="386.0" promptText="Descrição do Produto" />
+                  <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="32.0" prefWidth="386.0" style="-fx-background-color: #ffffff;">
+                     <children>
+                        <Label text="Filtrar:">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <JFXRadioButton fx:id="rbtCodigo" style="-jfx-selected-color: #69e2ff;" text="Código">
+                           <font>
+                              <Font size="12.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets top="6.0" />
+                           </HBox.margin>
+                        </JFXRadioButton>
+                        <JFXRadioButton fx:id="rbtDescricao" style="-jfx-selected-color: #69e2ff;" text="Descrição">
+                           <font>
+                              <Font size="12.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets top="6.0" />
+                           </HBox.margin>
+                        </JFXRadioButton>
+                        <JFXRadioButton fx:id="rbtGrupo" style="-jfx-selected-color: #69e2ff;" text="Grupo">
+                           <font>
+                              <Font size="12.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets top="6.0" />
+                           </HBox.margin>
+                        </JFXRadioButton>
+                        <JFXRadioButton fx:id="rbtTodos" layoutX="271.0" layoutY="16.0" style="-jfx-selected-color: #69e2ff;" text="Todos">
+                           <font>
+                              <Font size="12.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets top="6.0" />
+                           </HBox.margin>
+                        </JFXRadioButton>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <JFXTextField fx:id="txtqtde" focusColor="#004ba0" labelFloat="true" layoutX="458.0" layoutY="71.0" prefHeight="24.0" prefWidth="130.0" promptText="Quantidade" />
+            <Separator layoutX="14.0" layoutY="167.0" prefWidth="570.0" />
+            <JFXButton fx:id="btnAdicionar" layoutX="14.0" layoutY="188.0" onAction="#onAdicionar" prefHeight="30.0" prefWidth="165.0" ripplerFill="WHITE" style="-fx-background-color: #00e676;" text="Adicionar produto" textFill="WHITE">
+               <graphic>
+                  <FontAwesomeIconView fill="WHITE" glyphName="CART_ARROW_DOWN" size="18" />
+               </graphic>
+            </JFXButton>
+            <JFXButton fx:id="btnConcluirSel" layoutX="200.0" layoutY="188.0" onAction="#onConcluirSel" prefHeight="30.0" prefWidth="152.0" ripplerFill="WHITE" style="-fx-background-color: #2196f3;" text="Concluir Seleção" textFill="WHITE">
+               <graphic>
+                  <FontAwesomeIconView fill="WHITE" glyphName="CART_ARROW_DOWN" size="18" />
+               </graphic>
+            </JFXButton>
+         </children>
+         <effect>
+            <DropShadow />
+         </effect>
+      </Pane>
+      <TableView fx:id="tbvProdutos" layoutX="22.0" layoutY="289.0" prefHeight="180.0" prefWidth="600.0" stylesheets="@../../styles/TableViewCSS.css">
+         <columns>
+            <TableColumn fx:id="tbcCod" prefWidth="52.0" text="COD" />
+            <TableColumn fx:id="tbcDescricao" minWidth="9.0" prefWidth="351.0" text="DESCRIÇÃO" />
+            <TableColumn fx:id="tbcQtde" prefWidth="64.0" text="QTDE." />
+            <TableColumn fx:id="tbcValor" minWidth="9.0" prefWidth="66.0" text="VALOR" />
+            <TableColumn fx:id="btnExcluirItem" minWidth="9.0" prefWidth="74.0" text="Excluir" />
+         </columns>
+         <effect>
+            <DropShadow />
+         </effect>
+      </TableView>
+   </children>
+</Pane>

@@ -7,6 +7,8 @@ package com.cashf.controller.menu;
 
 import com.cashf.cashfood.MainApp;
 import com.cashf.controller.mesas.MesaController;
+import com.cashf.core.venda.VendaController;
+import com.cashf.model.mesa.StatusMesa;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXHamburger;
@@ -22,6 +24,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Pane;
@@ -136,17 +140,14 @@ public class FXMenuFCaixaFXMLController implements Initializable {
                                 case "M01":
                                     GavetaMesasFXMLController.getIconM1().setFill(Paint.valueOf("RED"));
                                     MesaController.getInstance().setMesaAtual(MesaController.getInstance().getMesaNum(1));
-                                    
                                     break;
                                 case "M02":
                                     GavetaMesasFXMLController.getIconM2().setFill(Paint.valueOf("RED"));
                                     MesaController.getInstance().setMesaAtual(MesaController.getInstance().getMesaNum(2));
-
                                     break;
                                 case "M03":
                                     GavetaMesasFXMLController.getIconM3().setFill(Paint.valueOf("RED"));
                                     MesaController.getInstance().setMesaAtual(MesaController.getInstance().getMesaNum(3));
-
                                     break;
                                 case "M04":
                                     GavetaMesasFXMLController.getIconM4().setFill(Paint.valueOf("RED"));
@@ -198,7 +199,7 @@ public class FXMenuFCaixaFXMLController implements Initializable {
                                     break;
                                 case "M16":
                                     GavetaMesasFXMLController.getIconM16().setFill(Paint.valueOf("RED"));
-                                   MesaController.getInstance().setMesaAtual(MesaController.getInstance().getMesaNum(16));
+                                    MesaController.getInstance().setMesaAtual(MesaController.getInstance().getMesaNum(16));
                                     break;
                                 case "M17":
                                     GavetaMesasFXMLController.getIconM17().setFill(Paint.valueOf("RED"));
@@ -206,10 +207,10 @@ public class FXMenuFCaixaFXMLController implements Initializable {
                                     break;
                                 case "M18":
                                     GavetaMesasFXMLController.getIconM18().setFill(Paint.valueOf("RED"));
-                                    MesaController.getInstance().setMesaAtual(MesaController.getInstance().getMesaNum(18));
                                     break;
                             }
-                            loadBox("/fxml/mesas/GerenciarMesasFXML.fxml","Mesa Nº"+ MesaController.getInstance().getMesaAtual().toString());
+                            VendaController.getInstance().setVenda(VendaController.getInstance().getVendaByMesa(MesaController.getInstance().getMesaAtual()));
+                            loadBox("/fxml/mesas/GerenciarMesasFXML.fxml", "Mesa Nº" + MesaController.getInstance().getMesaAtual().toString());
 
                         });
                     }
@@ -242,4 +243,67 @@ public class FXMenuFCaixaFXMLController implements Initializable {
             System.out.println("Erro:" + ex);
         }
     }
+
+    public static void changeStatusTable(int num, StatusMesa status) {
+        String statusColor = "";
+        statusColor += (status.equals(StatusMesa.ABERTA)) ? "RED" : "GREEN";
+        switch (num) {
+            case 1:
+                GavetaMesasFXMLController.getIconM1().setFill(Paint.valueOf(statusColor));
+                break;
+            case 2:
+                GavetaMesasFXMLController.getIconM2().setFill(Paint.valueOf(statusColor));
+                break;
+            case 3:
+                GavetaMesasFXMLController.getIconM3().setFill(Paint.valueOf(statusColor));
+                break;
+            case 4:
+                GavetaMesasFXMLController.getIconM4().setFill(Paint.valueOf(statusColor));
+                break;
+            case 5:
+                GavetaMesasFXMLController.getIconM5().setFill(Paint.valueOf(statusColor));
+                break;
+            case 6:
+                GavetaMesasFXMLController.getIconM6().setFill(Paint.valueOf(statusColor));
+                break;
+            case 7:
+                GavetaMesasFXMLController.getIconM7().setFill(Paint.valueOf(statusColor));
+                break;
+            case 8:
+                GavetaMesasFXMLController.getIconM8().setFill(Paint.valueOf(statusColor));
+                break;
+            case 9:
+                GavetaMesasFXMLController.getIconM9().setFill(Paint.valueOf(statusColor));
+                break;
+            case 10:
+                GavetaMesasFXMLController.getIconM10().setFill(Paint.valueOf(statusColor));
+                break;
+            case 11:
+                GavetaMesasFXMLController.getIconM11().setFill(Paint.valueOf(statusColor));
+                break;
+            case 12:
+                GavetaMesasFXMLController.getIconM12().setFill(Paint.valueOf(statusColor));
+                break;
+            case 13:
+                GavetaMesasFXMLController.getIconM13().setFill(Paint.valueOf(statusColor));
+                break;
+            case 14:
+                GavetaMesasFXMLController.getIconM14().setFill(Paint.valueOf(statusColor));
+                break;
+            case 15:
+                GavetaMesasFXMLController.getIconM15().setFill(Paint.valueOf(statusColor));
+                break;
+            case 16:
+                GavetaMesasFXMLController.getIconM16().setFill(Paint.valueOf(statusColor));
+                break;
+            case 17:
+                GavetaMesasFXMLController.getIconM17().setFill(Paint.valueOf(statusColor));
+                break;
+            case 18:
+                GavetaMesasFXMLController.getIconM18().setFill(Paint.valueOf(statusColor));
+                break;
+        }
+
+    }
+
 }

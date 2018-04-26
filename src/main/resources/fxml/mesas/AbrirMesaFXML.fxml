@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXRadioButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<Pane fx:id="paneRoot" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="250.0" prefWidth="600.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cashf.controller.mesas.AbrirMesaFXMLController">
+    <children>
+        <Pane prefHeight="20.0" prefWidth="600.0" style="-fx-background-color: #0081cb;">
+            <children>
+                <Label layoutX="5.0" layoutY="2.0" text="Abrir Mesa :" textFill="WHITE" />
+            </children>
+        </Pane>
+        <JFXComboBox fx:id="cbbMesa" labelFloat="true" layoutX="16.0" layoutY="39.0" onAction="#onSelecionarMesa" prefHeight="26.0" prefWidth="386.0" promptText="Selecione uma mesa" />
+        <VBox layoutX="14.0" layoutY="89.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="74.0" prefWidth="386.0" spacing="15.0" style="-fx-background-color: #ffffff;">
+            <children>
+                <JFXComboBox fx:id="cbbCliente" editable="true" labelFloat="true" onAction="#onSelecionarCliente" prefHeight="26.0" prefWidth="386.0" promptText="Selecione um Cliente" />
+                <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="32.0" prefWidth="386.0" style="-fx-background-color: #ffffff;">
+                    <children>
+                        <Label text="Filtrar:">
+                            <font>
+                                <Font name="System Bold" size="12.0" />
+                            </font>
+                        </Label>
+                        <JFXRadioButton fx:id="rbtNome" style="-jfx-selected-color: #69e2ff;" text="Nome">
+                            <font>
+                                <Font size="12.0" />
+                            </font>
+                            <HBox.margin>
+                                <Insets top="6.0" />
+                            </HBox.margin>
+                        </JFXRadioButton>
+                        <JFXRadioButton fx:id="rbtCpf" style="-jfx-selected-color: #69e2ff;" text="CPF">
+                            <font>
+                                <Font size="12.0" />
+                            </font>
+                            <HBox.margin>
+                                <Insets top="6.0" />
+                            </HBox.margin>
+                        </JFXRadioButton>
+                        <JFXRadioButton fx:id="rbtEmail" style="-jfx-selected-color: #69e2ff;" text="E-mail">
+                            <font>
+                                <Font size="12.0" />
+                            </font>
+                            <HBox.margin>
+                                <Insets top="6.0" />
+                            </HBox.margin>
+                        </JFXRadioButton>
+                        <JFXRadioButton fx:id="rbtTodos" layoutX="271.0" layoutY="16.0" style="-jfx-selected-color: #69e2ff;" text="Todos">
+                            <font>
+                                <Font size="12.0" />
+                            </font>
+                            <HBox.margin>
+                                <Insets top="6.0" />
+                            </HBox.margin>
+                        </JFXRadioButton>
+                    </children>
+                </HBox>
+            </children>
+        </VBox>
+        <JFXTextField fx:id="txtPax" focusColor="#004ba0" labelFloat="true" layoutX="458.0" layoutY="89.0" prefHeight="24.0" prefWidth="130.0" promptText="Nº Pessoas" />
+        <Separator layoutX="14.0" layoutY="183.0" prefWidth="570.0" />
+        <JFXButton fx:id="btnAbrir" layoutX="16.0" layoutY="200.0" onAction="#onAbrir" prefHeight="30.0" prefWidth="130.0" ripplerFill="WHITE" style="-fx-background-color: #2196f3;" text="ABRIR MESA" textFill="WHITE">
+            <graphic>
+                <FontAwesomeIconView fill="WHITE" glyphName="CUTLERY" size="18" />
+            </graphic>
+        </JFXButton>
+    </children>
+    <effect>
+        <DropShadow />
+    </effect>
+</Pane>

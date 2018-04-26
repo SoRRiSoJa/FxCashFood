@@ -5,14 +5,25 @@
  */
 package com.cashf.controller.menu;
 
+import com.cashf.cashfood.MainApp;
+import com.cashf.controller.mesas.MesaController;
 import com.jfoenix.controls.JFXButton;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Pane;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -27,6 +38,10 @@ public class FCPainelProdutosFXMLController implements Initializable {
     private FlowPane flowPane;
     @FXML
     private FlowPane flowPaneProd;
+    @FXML
+    private JFXButton btnAbrirMesa;
+    @FXML
+    private JFXButton btnFecharMesa;
 
     /**
      * Initializes the controller class.
@@ -36,30 +51,72 @@ public class FCPainelProdutosFXMLController implements Initializable {
         // TODO
         loadPanelGrupo();
         buttonsControlGrupos();
+        setBtnKeys();
     }
 
     private void loadPanelGrupo() {
         FCMenuController.getInstance().getListaGrupos().forEach((gr) -> {
             JFXButton lb = new JFXButton();
+            lb.setMinSize(200, 40);
             lb.setText(gr.getDescricao());
-            lb.setAccessibleText(gr.getIdGrupo()+"");
+            lb.setAccessibleText(gr.getIdGrupo() + "");
             flowPane.getChildren().add(lb);
         });
     }
-     private void loadPanelProduto() {
+
+    private void loadPanelProduto() {
         FCMenuController.getInstance().getListaProdutos().forEach((pr) -> {
             JFXButton lb = new JFXButton();
             lb.setText(pr.getDescriao());
+            lb.setMinSize(200, 40);
             flowPaneProd.getChildren().add(lb);
         });
     }
-     private void buttonsControlGrupos() {
-         flowPane.getChildren().stream().filter((node) -> (node.getAccessibleText() != null)).forEachOrdered((node) -> {
-             node.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
-                 FCMenuController.getInstance().buscaProdutosByGrupo(node.getAccessibleText());
-                 loadPanelProduto();
-             });
+
+    private void buttonsControlGrupos() {
+        flowPane.getChildren().stream().filter((node) -> (node.getAccessibleText() != null)).forEachOrdered((node) -> {
+            node.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
+                FCMenuController.getInstance().buscaProdutosByGrupo(node.getAccessibleText());
+                loadPanelProduto();
+            });
         });
     }
 
+    @FXML
+    private void onAbrirMesa(ActionEvent event) {
+        loadBox("/fxml/mesas/AbrirMesaFXML.fxml", "Mesa Nº" + MesaController.getInstance().getMesaAtual().toString());
+    }
+
+    private void loadBox(String boxPath, String title) {
+        try {
+            Stage stage = new Stage();
+            Parent root = FXMLLoader.load(getClass().getResource(boxPath));
+            stage.setScene(new Scene(root));
+            stage.setTitle(title);
+            stage.initModality(Modality.APPLICATION_MODAL);
+            MainApp.janelaAnterior = MainApp.janelaAberta;
+            MainApp.janelaAberta = stage;
+            stage.show();
+        } catch (IOException ex) {
+            System.out.println("Erro---->" + ex);
+        }
+    }
+
+    private void setBtnKeys() {
+        MainApp.janelaAberta.addEventHandler(KeyEvent.KEY_PRESSED, (KeyEvent t) -> {
+            if (t.getCode() == KeyCode.F2) {
+                loadBox("/fxml/mesas/AbrirMesaFXML.fxml", "Mesa Nº" + MesaController.getInstance().getMesaAtual().toString());
+            }
+        });
+        MainApp.janelaAberta.addEventHandler(KeyEvent.KEY_PRESSED, (KeyEvent t) -> {
+            if (t.getCode() == KeyCode.F3) {
+                //loadBox("/fxml/mesas/AbrirMesaFXML.fxml", "Mesa Nº" + MesaController.getInstance().getMesaAtual().toString());
+            }
+        });
+
+    }
+
+    @FXML
+    private void onFecharMesa(ActionEvent event) {
+    }
 }

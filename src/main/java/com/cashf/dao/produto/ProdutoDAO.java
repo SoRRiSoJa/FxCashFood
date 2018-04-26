@@ -43,6 +43,17 @@ public class ProdutoDAO extends GenericDAOIMP<Produto> {
         }
 
     }
+    public List<Produto> listProdToVenda() {
+        try (Session session = sessionFactory.openSession()) {
+            String hql = "from Produto prod where prod.tipo NOT like 'INSUMO' AND  prod.tipo NOT like 'PRE_PREPARO'";
+            List<Produto> roleList = session.createQuery(hql).list();
+            return roleList;
+        } catch (Exception e) {
+            System.out.println("Erro:" + e);
+            return null;
+        }
+
+    }
 
     public List<Produto> listProdCombo() {
         try (Session session = sessionFactory.openSession()) {

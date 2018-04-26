@@ -35,7 +35,7 @@ public class ProdutoVenda implements Serializable {
     private Venda vendaId;
     @ManyToOne
     @JoinColumn(name = "idproduto")
-    Produto produto;
+    private Produto produto;
     private BigDecimal qtde;
     private BigDecimal precoUnit;
 

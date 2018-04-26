@@ -96,13 +96,14 @@ public class ProdutoController implements GenericController<Produto> {
         this.aliquotaProduto = aliquotaProduto;
     }
 
-    public void setAliquotaProduto(long id, BigDecimal percentualPis, BigDecimal cstpPis, BigDecimal cfop, BigDecimal cstConfins, BigDecimal percentualConfins, BigDecimal aliquotaCsosn, BigDecimal cest, BigDecimal aliquotaIcms, BigDecimal aliquotafederal,BigDecimal aliquotamunicipal,BigDecimal aliquotaestadual) {
+    public void setAliquotaProduto(long id, BigDecimal percentualPis, BigDecimal cstpPis, BigDecimal cfop, BigDecimal cstConfins, BigDecimal percentualConfins,BigDecimal csosn, BigDecimal aliquotaCsosn, BigDecimal cest, BigDecimal aliquotaIcms, BigDecimal aliquotafederal,BigDecimal aliquotamunicipal,BigDecimal aliquotaestadual) {
         this.aliquotaProduto.setIdAliquota(id);
         this.aliquotaProduto.setPercentualPis(percentualPis);
         this.aliquotaProduto.setCstpPis(cstpPis);
         this.aliquotaProduto.setCfop(cfop);
         this.aliquotaProduto.setCstConfins(cstConfins);
         this.aliquotaProduto.setPercentualConfins(percentualConfins);
+        this.aliquotaProduto.setCsosn(csosn);
         this.aliquotaProduto.setAliquotaCsosn(aliquotaCsosn);
         this.aliquotaProduto.setCest(cest);
         this.aliquotaProduto.setAliquotaIcms(aliquotaIcms);

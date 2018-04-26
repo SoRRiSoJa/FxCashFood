@@ -119,6 +119,7 @@ public class TabProdutoFXMLController implements GenericViewController, Initiali
     private BigDecimal cstConfins;
     private BigDecimal percentualConfins;
     private BigDecimal aliquotaCsosn;
+    private BigDecimal csosn;
     private BigDecimal cest;
     private BigDecimal aliquotaIcms;
     private BigDecimal aliquotafederal;
@@ -218,9 +219,9 @@ public class TabProdutoFXMLController implements GenericViewController, Initiali
     @FXML
     private void onSalvar(ActionEvent event) {
         getData();
-        if (validateFields()) {
+        if (validateFields()&& validateTax()) {
             ProdutoController.getInstance().setProduto(idProduto, codigoReferencia, descriao, qtdeEmbalagem, unidadesEstoque, qtdeProduto, ncm, preco_custo, preco_venda, ProdutoController.getInstance().getGrupo(), ProdutoController.getInstance().getUnidadeMedida(), ProdutoController.getInstance().getTipoProduto(), Boolean.TRUE);
-            ProdutoController.getInstance().setAliquotaProduto(idAliquota, percentualPis, cstpPis, cfop, cstConfins, percentualConfins, aliquotaCsosn, cest, aliquotaIcms, aliquotafederal, aliquotamunicipal, aliquotaestadual);
+            ProdutoController.getInstance().setAliquotaProduto(idAliquota, percentualPis, cstpPis, cfop, cstConfins, percentualConfins, csosn, aliquotaCsosn, cest, aliquotaIcms, aliquotafederal, aliquotamunicipal, aliquotaestadual);
             if (ProdutoController.getInstance().getProduto().getIdProduto() == 0l) {
 
                 ProdutoController.getInstance().insert();
@@ -392,36 +393,6 @@ public class TabProdutoFXMLController implements GenericViewController, Initiali
             erros += "A descrição do produto deve ser preenchida corretamente! \n";
             flag = false;
         }
-        if (qtdeEmbalagem.compareTo(BigDecimal.ZERO) <= 0) {
-            erros += "informe a quantidade da embalagem! \n";
-            flag = false;
-        }
-        if (qtdeProduto.compareTo(BigDecimal.ZERO) <= 0) {
-            erros += "informe a quantidade em estoque! \n";
-            flag = false;
-        }
-
-        if (preco_custo.compareTo(BigDecimal.ZERO) < 0) {
-            erros += "O preço de custo não pode ser negativo! \n";
-            flag = false;
-        }
-        if (preco_venda.compareTo(BigDecimal.ZERO) < 0) {
-            erros += "O preço de venda nao pode ser negativo! \n";
-            flag = false;
-        }
-
-        if ((cbbProdutos.getSelectionModel().getSelectedItem().equals(TipoProduto.FICHA_TECNICA) || cbbProdutos.getSelectionModel().getSelectedItem().equals(TipoProduto.PRE_PREPARO))) {
-        } else {
-            if ((preco_custo.compareTo(BigDecimal.ZERO) == 0)) {
-                erros += "O preço de custo deve ser maio que 0! \n";
-                flag = false;
-            }
-            if (preco_venda.compareTo(BigDecimal.ZERO) == 0) {
-                erros += "O preço de venda deve ser maio que 0! \n";
-                flag = false;
-            }
-        }
-
         //--
         if (cbbUnidadeFisica.getSelectionModel().getSelectedItem() == null) {
             erros += "Você deve selecionar uma Unidade física para o produto! \n";
@@ -443,23 +414,23 @@ public class TabProdutoFXMLController implements GenericViewController, Initiali
         boolean flag = true;
         //-------
         if (percentualConfins == null || percentualConfins.compareTo(BigDecimal.ZERO) < 0) {
-            erros += "O preço de venda deve ser maio que 0! \n";
+            erros += "Percentual Confis deve ser 0! \n";
             flag = false;
         }
         if (cstpPis == null || cstpPis.compareTo(BigDecimal.ZERO) < 0) {
-            erros += "O preço de venda deve ser maio que 0! \n";
+            erros += "CSTP Pis deve ser maior que  0! \n";
             flag = false;
         }
         if (cfop == null || cfop.compareTo(BigDecimal.ZERO) < 0) {
-            erros += "O preço de venda deve ser maio que 0! \n";
+            erros += "A CFOP deve ser maio que 0! \n";
             flag = false;
         }
         if (cstConfins == null || cstConfins.compareTo(BigDecimal.ZERO) < 0) {
-            erros += "O preço de venda deve ser maio que 0! \n";
+            erros += "O CST Confins deve ser maior que 0 0! \n";
             flag = false;
         }
         if (percentualConfins == null || percentualConfins.compareTo(BigDecimal.ZERO) < 0) {
-            erros += "O preço de venda deve ser maio que 0! \n";
+            erros += "O Precentual da Confins deve ser maior ou igual que 0! \n";
             flag = false;
         }
         if (aliquotaCsosn == null || aliquotaCsosn.compareTo(BigDecimal.ZERO) < 0) {
@@ -467,7 +438,7 @@ public class TabProdutoFXMLController implements GenericViewController, Initiali
             flag = false;
         }
         if (cest == null || cest.compareTo(BigDecimal.ZERO) < 0) {
-            erros += "O preço de venda deve ser maio que 0! \n";
+            erros += "O valor do CEST deve ser maior ou igual a 0! \n";
             flag = false;
         }
         if (aliquotaIcms == null || aliquotaIcms.compareTo(BigDecimal.ZERO) < 0) {
@@ -520,28 +491,77 @@ public class TabProdutoFXMLController implements GenericViewController, Initiali
             qtdeEmbalagem = BigDecimal.ZERO;
         }
         try {
-            unidadesEstoque = new BigDecimal(txtQtdeProd.getText());
+            unidadesEstoque = BigDecimal.ZERO;
         } catch (Exception ex) {
             unidadesEstoque = BigDecimal.ZERO;
         }
         try {
-            qtdeProduto = unidadesEstoque.multiply(qtdeEmbalagem);
+            qtdeProduto = new BigDecimal(txtQtdeProd.getText());;
         } catch (Exception ex) {
             qtdeProduto = BigDecimal.ZERO;
         }
         ProdutoController.getInstance().setSituacaoTributaria(cbbSituacaoTributaria.getSelectionModel().getSelectedItem());
-        percentualPis = new BigDecimal(txtPercentualPIS.getText());
-        aliquotaIcms = new BigDecimal(txtAliquotaICMS.getText());
-        cest = new BigDecimal(txtCest.getText());
-        cfop = new BigDecimal(txtCfop.getText());
-        aliquotaCsosn = new BigDecimal(txtAliquotaCSOCN.getText());
-        aliquotaCsosn = new BigDecimal(txtCSOSN.getText());
-        percentualConfins = new BigDecimal(txtPercentualConfins.getText());
-        cstpPis = new BigDecimal(txtCstPis.getText());
-        cstConfins = new BigDecimal(txtCstConfins.getText());
-        aliquotamunicipal = new BigDecimal(txtAliquotaMunicipal.getText());
-        aliquotaestadual = new BigDecimal(txtAliquotaEstadual.getText());
-        aliquotafederal = new BigDecimal(txtAliquotaFederal.getText());
+        try {
+            percentualPis = new BigDecimal(txtPercentualPIS.getText());
+        } catch (Exception ex) {
+            percentualPis = BigDecimal.ZERO;
+        }
+        try {
+            aliquotaIcms = new BigDecimal(txtAliquotaICMS.getText());
+        } catch (Exception ex) {
+            aliquotaIcms = BigDecimal.ZERO;
+        }
+        try {
+            cest = new BigDecimal(txtCest.getText());
+        } catch (Exception ex) {
+            cest = BigDecimal.ZERO;
+        }
+        try {
+            cfop = new BigDecimal(txtCfop.getText());
+        } catch (Exception ex) {
+            cfop = BigDecimal.ZERO;
+        }
+        try {
+            aliquotaCsosn = new BigDecimal(txtAliquotaCSOCN.getText());
+        } catch (Exception ex) {
+            aliquotaCsosn = BigDecimal.ZERO;
+        }
+        try {
+            csosn = new BigDecimal(txtCSOSN.getText());
+        } catch (Exception ex) {
+            csosn = BigDecimal.ZERO;
+        }
+        try {
+            percentualConfins = new BigDecimal(txtPercentualConfins.getText());
+        } catch (Exception ex) {
+            percentualConfins = BigDecimal.ZERO;
+        }
+        try {
+            cstpPis = new BigDecimal(txtCstPis.getText());
+        } catch (Exception ex) {
+            cstpPis = BigDecimal.ZERO;
+        }
+        try {
+            cstConfins = new BigDecimal(txtCstConfins.getText());
+        } catch (Exception ex) {
+            cstConfins = BigDecimal.ZERO;
+        }
+        try {
+            aliquotamunicipal = new BigDecimal(txtAliquotaMunicipal.getText());
+        } catch (Exception ex) {
+            aliquotamunicipal = BigDecimal.ZERO;
+        }
+        try {
+            aliquotaestadual = new BigDecimal(txtAliquotaEstadual.getText());
+        } catch (Exception ex) {
+            aliquotaestadual = BigDecimal.ZERO;
+        }
+        try {
+            aliquotafederal = new BigDecimal(txtAliquotaFederal.getText());
+        } catch (Exception ex) {
+            aliquotafederal = BigDecimal.ZERO;
+        }
+
         lblTotal.setText(qtdeProduto.toString());
     }
 
@@ -565,7 +585,7 @@ public class TabProdutoFXMLController implements GenericViewController, Initiali
         txtCest.setText(ProdutoController.getInstance().getProduto().getAliquotasProduto().getCest() + "");
         txtCfop.setText(ProdutoController.getInstance().getProduto().getAliquotasProduto().getCfop() + "");
         txtAliquotaCSOCN.setText(ProdutoController.getInstance().getProduto().getAliquotasProduto().getAliquotaCsosn() + "");
-        //txtCSOSN.setText(ProdutoController.getInstance().getProduto().getAliquotasProduto().getAliquotaCsosn());
+        txtCSOSN.setText(ProdutoController.getInstance().getProduto().getAliquotasProduto().getCsosn() + "");
         txtPercentualConfins.setText(ProdutoController.getInstance().getProduto().getAliquotasProduto().getPercentualConfins() + "");
         txtCstPis.setText(ProdutoController.getInstance().getProduto().getAliquotasProduto().getCstpPis() + "");
         txtCstConfins.setText(ProdutoController.getInstance().getProduto().getAliquotasProduto().getCstConfins() + "");
@@ -593,14 +613,14 @@ public class TabProdutoFXMLController implements GenericViewController, Initiali
         _txtCest.setText(ProdutoController.getInstance().getProduto().getAliquotasProduto().getCest() + "");
         _txtCfop.setText(ProdutoController.getInstance().getProduto().getAliquotasProduto().getCfop() + "");
         _txtAliquotaCSOCN.setText(ProdutoController.getInstance().getProduto().getAliquotasProduto().getAliquotaCsosn() + "");
-        //txtCSOSN.setText(ProdutoController.getInstance().getProduto().getAliquotasProduto().getAliquotaCsosn());
+        _txtCSOSN.setText(ProdutoController.getInstance().getProduto().getAliquotasProduto().getCsosn() + "");
         _txtPercentualConfins.setText(ProdutoController.getInstance().getProduto().getAliquotasProduto().getPercentualConfins() + "");
         _txtCstPis.setText(ProdutoController.getInstance().getProduto().getAliquotasProduto().getCstpPis() + "");
         _txtCstConfins.setText(ProdutoController.getInstance().getProduto().getAliquotasProduto().getCstConfins() + "");
         _txtAliquotaMunicipal.setText(ProdutoController.getInstance().getProduto().getAliquotasProduto().getAliquotamunicipal() + "");
         _txtAliquotaEstadual.setText(ProdutoController.getInstance().getProduto().getAliquotasProduto().getAliquotaestadual() + "");
         _txtAliquotaFederal.setText(ProdutoController.getInstance().getProduto().getAliquotasProduto().getAliquotafederal() + "");
-        _lblTotal.setText(ProdutoController.getInstance().getProduto().getUnidadesEstoque()+ "");
+        _lblTotal.setText(ProdutoController.getInstance().getProduto().getUnidadesEstoque() + "");
         _btnExcluir.setDisable(false);
     }
 
