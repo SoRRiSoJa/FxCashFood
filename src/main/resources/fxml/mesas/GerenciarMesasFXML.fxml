@@ -2,15 +2,13 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXListView?>
-<?import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.effect.DropShadow?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.StackPane?>
@@ -27,20 +25,16 @@
                <children>
                   <Pane prefHeight="20.0" prefWidth="640.0" style="-fx-background-color: #0081cb;">
                      <children>
-                        <Label layoutX="5.0" layoutY="2.0" text="MESA Nº:" textFill="WHITE" />
+                        <Label layoutX="5.0" layoutY="2.0" text="MESA Nº:" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font></Label>
                         <Label fx:id="lblNumMesa" layoutX="69.0" layoutY="2.0" textFill="WHITE" />
                      </children>
                   </Pane>
                   <HBox alignment="TOP_CENTER" layoutX="16.0" layoutY="455.0" prefHeight="68.0" prefWidth="601.0">
                      <children>
                         <JFXButton fx:id="btnRegistrar" contentDisplay="TOP" onAction="#onRegistrar" prefHeight="66.0" prefWidth="133.0" ripplerFill="WHITE" style="-fx-background-color: #2196f3;" text="REGISTRAR CONSUMO" textFill="WHITE">
-                           <graphic>
-                              <ImageView fitHeight="28.0" fitWidth="40.0" pickOnBounds="true">
-                                 <image>
-                                    <Image url="@../../../../../../CashFood/src/main/resources/Imagens/plus.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
                            <HBox.margin>
                               <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                            </HBox.margin>
@@ -50,6 +44,9 @@
                            <font>
                               <Font size="10.0" />
                            </font>
+                           <graphic>
+                              <FontAwesomeIconView fill="WHITE" glyphName="PLUS" size="22" />
+                           </graphic>
                         </JFXButton>
                         <JFXButton fx:id="btnTransferir" contentDisplay="TOP" layoutX="10.0" layoutY="10.0" onAction="#onTransferir" prefHeight="67.0" prefWidth="119.0" ripplerFill="WHITE" style="-fx-background-color: #00e676;" text="TRANSFERIR MESA" textFill="WHITE">
                            <HBox.margin>
@@ -62,7 +59,7 @@
                               <Font size="10.0" />
                            </font>
                            <graphic>
-                              <MaterialDesignIconView fill="WHITE" glyphName="TRENDING_UP" size="29" />
+                              <FontAwesomeIconView fill="WHITE" glyphName="ARROWS_H" size="28" />
                            </graphic>
                         </JFXButton>
                         <JFXButton fx:id="btnFechar" contentDisplay="TOP" layoutX="100.0" layoutY="10.0" onAction="#onFechar" prefHeight="66.0" prefWidth="108.0" ripplerFill="WHITE" style="-fx-background-color: #d32f2f;" text="FECHAR MESA" textFill="WHITE">
@@ -76,7 +73,7 @@
                               <Font size="10.0" />
                            </font>
                            <graphic>
-                              <MaterialDesignIconView fill="WHITE" glyphName="TRENDING_DOWN" size="29" />
+                              <FontAwesomeIconView fill="WHITE" glyphName="USD" size="22" />
                            </graphic>
                         </JFXButton>
                         <JFXButton fx:id="btnFecharParcial" contentDisplay="TOP" layoutX="190.0" layoutY="10.0" onAction="#onFecharParcial" prefHeight="67.0" prefWidth="145.0" ripplerFill="WHITE" style="-fx-background-color: #00251a;" text="FECHAR MESA PARCIAL" textFill="WHITE">
@@ -90,7 +87,7 @@
                               <Font size="10.0" />
                            </font>
                            <graphic>
-                              <MaterialDesignIconView fill="WHITE" glyphName="CLIPBOARD_CHECK" size="29" />
+                              <FontAwesomeIconView fill="WHITE" glyphName="PERCENT" size="22" />
                            </graphic>
                         </JFXButton>
                      </children>
@@ -102,7 +99,7 @@
                   <Separator layoutX="17.0" layoutY="425.0" prefHeight="0.0" prefWidth="609.0" />
                   <Separator layoutX="16.0" layoutY="311.0" orientation="VERTICAL" prefHeight="114.0" prefWidth="0.0" />
                   <Separator layoutX="624.0" layoutY="311.0" orientation="VERTICAL" prefHeight="114.0" prefWidth="0.0" />
-                  <TableView fx:id="tbvComanda" layoutX="14.0" layoutY="42.0" prefHeight="240.0" prefWidth="612.0" stylesheets="@../../../../../../CashFood/src/main/resources/styles/TableViewCSS.css">
+                  <TableView fx:id="tbvComanda" layoutX="14.0" layoutY="42.0" prefHeight="240.0" prefWidth="612.0" stylesheets="@../../styles/TableViewCSS.css">
                      <columns>
                         <TableColumn fx:id="tbcCod" prefWidth="40.0" text="COD" />
                         <TableColumn fx:id="tbcDescricao" prefWidth="137.00003051757812" text="DESCRIÇÃO" />
@@ -124,7 +121,10 @@
                <children>
                   <Pane prefHeight="20.0" prefWidth="656.0" style="-fx-background-color: #0081cb;">
                      <children>
-                        <Label layoutX="5.0" layoutY="2.0" text="MESAS OCUPADAS:" textFill="WHITE" />
+                        <Label layoutX="5.0" layoutY="2.0" text="MESAS:" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font></Label>
                      </children>
                   </Pane>
                   <JFXListView layoutX="23.0" layoutY="42.0" prefHeight="527.0" prefWidth="612.0">

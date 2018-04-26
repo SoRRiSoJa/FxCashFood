@@ -8,6 +8,7 @@ package com.cashf.controller.mesas;
 import com.cashf.cashfood.MainApp;
 import com.cashf.core.venda.VendaController;
 import com.cashf.model.produto.Produto;
+import com.cashf.model.produto.TipoProduto;
 import com.cashf.model.venda.ProdutoVenda;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
@@ -17,26 +18,36 @@ import com.sun.prism.impl.Disposer;
 import controller.GenericViewController;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import javafx.util.Callback;
 import javafx.util.Duration;
 import org.controlsfx.control.Notifications;
+import util.PoupUpUtil;
 
 /**
  * FXML Controller class
@@ -79,6 +90,10 @@ public class RegistrarConsumoFXMLController implements GenericViewController, In
     private BigDecimal qtde;
     private Boolean flag;
     private String erros = "";
+    @FXML
+    private StackPane rootStackPane;
+    @FXML
+    private Pane pane;
 
     /**
      * Initializes the controller class.
@@ -125,19 +140,30 @@ public class RegistrarConsumoFXMLController implements GenericViewController, In
     @FXML
     private void onAdicionar(ActionEvent event) {
         getData();
+        if (VendaController.getInstance().getProdutoSelecionado().getTipo().equals(TipoProduto.COMBO)) {
+            MainApp.janelaAberta.close();
+            MainApp.janelaAberta = MainApp.janelaAnterior;
+            loadBox("/fxml/mesas/RegistrarConsumoComboFXML.fxml", "COMBO");
+
+        }
         if (validateFields()) {
             VendaController.getInstance().setListaProduosVenda(0l,
                     VendaController.getInstance().getVenda(),
                     VendaController.getInstance().getProdutoSelecionado(),
                     qtde,
                     VendaController.getInstance().getProdutoSelecionado().getPreco_venda());
+            VendaController.getInstance().getVenda().setValorTotal(VendaController.getInstance().getVenda().getValorTotal().add(qtde.multiply(VendaController.getInstance().getProdutoSelecionado().getPreco_venda())));
+            loadTbv();
+        } else {
+            PoupUpUtil.errorMessage(MainApp.paneRoot,rootStackPane, erros);
+            erros = "";
         }
-        VendaController.getInstance().getVenda().setValorTotal(VendaController.getInstance().getVenda().getValorTotal().add(qtde.multiply(VendaController.getInstance().getProdutoSelecionado().getPreco_venda())));
-        loadTbv();
+
     }
 
     @FXML
-    private void onConcluirSel(ActionEvent event) {
+    private void onConcluirSel(ActionEvent event
+    ) {
         MainApp.janelaAberta.close();
         MainApp.janelaAberta = MainApp.janelaAnterior;
     }
@@ -171,7 +197,12 @@ public class RegistrarConsumoFXMLController implements GenericViewController, In
         }
         if (qtde.compareTo(BigDecimal.ZERO) <= 0) {
             flag = false;
+
             erros += "A quantidade deve ser amior que 0";
+        }
+        if (flag && qtde.compareTo(VendaController.getInstance().getProdutoSelecionado().getUnidadesEstoque()) > 0) {
+            erros += "A quantidade informada é maior que o total em estoque.";
+            flag = false;
         }
         return flag;
     }
@@ -236,12 +267,26 @@ public class RegistrarConsumoFXMLController implements GenericViewController, In
         });
     }
 
+    private void loadBox(String boxPath, String title) {
+        try {
+            Stage stage = new Stage();
+            Parent root = FXMLLoader.load(getClass().getResource(boxPath));
+            stage.setScene(new Scene(root));
+            stage.setTitle(title);
+            stage.initModality(Modality.APPLICATION_MODAL);
+            MainApp.janelaAnterior = MainApp.janelaAberta;
+            MainApp.janelaAberta = stage;
+            stage.show();
+        } catch (IOException ex) {
+            System.out.println("Erro---->" + ex);
+        }
+    }
+
     private void setUptableViewProdutos() {
         tbcCod.setCellValueFactory((param) -> new SimpleStringProperty(param.getValue().getProduto().getCodigoReferencia()));
-        tbcCod.setCellValueFactory(new PropertyValueFactory<>("produto"));
         tbcDescricao.setCellValueFactory(new PropertyValueFactory<>("produto"));
         tbcQtde.setCellValueFactory(new PropertyValueFactory<>("qtde"));
-        tbcValor.setCellValueFactory(new PropertyValueFactory<>("precoUnit"));
+        tbcValor.setCellValueFactory((param) -> new SimpleObjectProperty<BigDecimal>(param.getValue().getPrecoUnit().multiply(param.getValue().getQtde())));
         btnExcluirItem.setCellFactory(
                 new Callback<TableColumn<Disposer.Record, Boolean>, TableCell<Disposer.Record, Boolean>>() {
             @Override

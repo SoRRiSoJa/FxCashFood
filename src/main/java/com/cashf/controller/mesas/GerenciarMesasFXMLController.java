@@ -6,26 +6,40 @@
 package com.cashf.controller.mesas;
 
 import com.cashf.cashfood.MainApp;
+import com.cashf.core.venda.VendaController;
 import com.cashf.model.produto.Produto;
 import com.cashf.model.venda.ProdutoVenda;
 import com.jfoenix.controls.JFXButton;
+import com.sun.prism.impl.Disposer;
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.util.Callback;
+import javafx.util.Duration;
+import org.controlsfx.control.Notifications;
 
 /**
  * FXML Controller class
@@ -75,7 +89,7 @@ public class GerenciarMesasFXMLController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        //colunaNome.setCellValueFactory((param) -> new SimpleStringProperty(param.getValue().getPessoa().getNome()));
+        setUptableViewProdutos();
         lblNumMesa.setText(MesaController.getInstance().getMesaAtual().getNumMesa() + "");
     }
 
@@ -109,5 +123,222 @@ public class GerenciarMesasFXMLController implements Initializable {
         } catch (IOException ex) {
             System.out.println("Erro---->" + ex);
         }
+    }
+
+    private void setUptableViewProdutos() {
+        tbcCod.setCellValueFactory((param) -> new SimpleStringProperty(param.getValue().getProduto().getCodigoReferencia()));
+        tbcDescricao.setCellValueFactory(new PropertyValueFactory<>("produto"));
+        tbcQtde.setCellValueFactory(new PropertyValueFactory<>("qtde"));
+        tbcPreco.setCellValueFactory(new PropertyValueFactory<>("precoUnit"));
+        btnAdicionar.setCellFactory(
+                new Callback<TableColumn<Disposer.Record, Boolean>, TableCell<Disposer.Record, Boolean>>() {
+            @Override
+            public TableCell<Disposer.Record, Boolean> call(TableColumn<Disposer.Record, Boolean> p) {
+                return new ButtonCellPlus();
+            }
+        });
+        btnSubtrair.setCellFactory(
+                new Callback<TableColumn<Disposer.Record, Boolean>, TableCell<Disposer.Record, Boolean>>() {
+            @Override
+            public TableCell<Disposer.Record, Boolean> call(TableColumn<Disposer.Record, Boolean> p) {
+                return new ButtonCellMinus();
+            }
+        });
+        tbcTotal.setCellValueFactory((param) -> new SimpleObjectProperty<BigDecimal>(param.getValue().getPrecoUnit().multiply(param.getValue().getQtde())));
+        btnCancelar.setCellFactory(
+                new Callback<TableColumn<Disposer.Record, Boolean>, TableCell<Disposer.Record, Boolean>>() {
+            @Override
+            public TableCell<Disposer.Record, Boolean> call(TableColumn<Disposer.Record, Boolean> p) {
+                return new ButtonCellDelete();
+            }
+        });
+        btnTransferirM.setCellFactory(
+                new Callback<TableColumn<Disposer.Record, Boolean>, TableCell<Disposer.Record, Boolean>>() {
+            @Override
+            public TableCell<Disposer.Record, Boolean> call(TableColumn<Disposer.Record, Boolean> p) {
+                return new ButtonCellShift();
+            }
+        });
+        tbvComanda.getColumns().setAll(tbcCod, tbcDescricao, tbcQtde, tbcPreco, btnAdicionar, btnSubtrair, tbcTotal, btnCancelar, btnTransferirM);
+    }
+
+    public class ButtonCellDelete extends TableCell<Disposer.Record, Boolean> {
+
+        JFXButton cellButton = new JFXButton("Excluir");
+        Notifications notificationBuilder;
+        FontAwesomeIconView auxff = new FontAwesomeIconView(FontAwesomeIcon.TRASH);
+
+        public ButtonCellDelete() {
+            auxff.setSize("2em");
+            cellButton.setGraphic(auxff);
+            cellButton.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
+            cellButton.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent t) {
+                    // get Selected Item
+                    ProdutoVenda currentPerson = (ProdutoVenda) ButtonCellDelete.this.getTableView().getItems().get(ButtonCellDelete.this.getIndex());
+                    //remove selected item from the table list
+                    if (currentPerson != null) {
+                        // ... user chose OK
+                        VendaController.getInstance().getListaProd().remove(currentPerson);
+
+                    } else {
+                        notificationBuilder = Notifications.create().title("Nenhum contato selecionado!").
+                                text("Você deve selecionar um contato para editar.").
+                                hideAfter(Duration.seconds(2)).
+                                position(Pos.TOP_RIGHT).
+                                darkStyle();
+                        notificationBuilder.showConfirm();
+                    }
+
+                }
+            });
+        }
+
+        @Override
+        protected void updateItem(Boolean t, boolean empty) {
+            super.updateItem(t, empty);
+            if (!empty) {
+                setGraphic(cellButton);
+            } else {
+                setGraphic(null);
+            }
+        }
+
+    }
+
+    public class ButtonCellPlus extends TableCell<Disposer.Record, Boolean> {
+
+        JFXButton cellButton = new JFXButton("Adicionar");
+        Notifications notificationBuilder;
+        FontAwesomeIconView auxff = new FontAwesomeIconView(FontAwesomeIcon.PLUS);
+
+        public ButtonCellPlus() {
+            auxff.setSize("2em");
+            cellButton.setGraphic(auxff);
+            cellButton.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
+            cellButton.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent t) {
+                    // get Selected Item
+                    ProdutoVenda currentPerson = (ProdutoVenda) ButtonCellPlus.this.getTableView().getItems().get(ButtonCellPlus.this.getIndex());
+                    //remove selected item from the table list
+                    if (currentPerson != null) {
+                        // ... user chose OK
+                        VendaController.getInstance().getListaProd().remove(currentPerson);
+
+                    } else {
+                        notificationBuilder = Notifications.create().title("Nenhum contato selecionado!").
+                                text("Você deve selecionar um contato para editar.").
+                                hideAfter(Duration.seconds(2)).
+                                position(Pos.TOP_RIGHT).
+                                darkStyle();
+                        notificationBuilder.showConfirm();
+                    }
+
+                }
+            });
+        }
+
+        @Override
+        protected void updateItem(Boolean t, boolean empty) {
+            super.updateItem(t, empty);
+            if (!empty) {
+                setGraphic(cellButton);
+            } else {
+                setGraphic(null);
+            }
+        }
+
+    }
+
+    public class ButtonCellMinus extends TableCell<Disposer.Record, Boolean> {
+
+        JFXButton cellButton = new JFXButton("Subtrair");
+        Notifications notificationBuilder;
+        FontAwesomeIconView auxff = new FontAwesomeIconView(FontAwesomeIcon.PLUS);
+
+        public ButtonCellMinus() {
+            auxff.setSize("2em");
+            cellButton.setGraphic(auxff);
+            cellButton.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
+            cellButton.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent t) {
+                    // get Selected Item
+                    ProdutoVenda currentPerson = (ProdutoVenda) ButtonCellMinus.this.getTableView().getItems().get(ButtonCellMinus.this.getIndex());
+                    //remove selected item from the table list
+                    if (currentPerson != null) {
+                        // ... user chose OK
+                        VendaController.getInstance().getListaProd().remove(currentPerson);
+
+                    } else {
+                        notificationBuilder = Notifications.create().title("Nenhum contato selecionado!").
+                                text("Você deve selecionar um contato para editar.").
+                                hideAfter(Duration.seconds(2)).
+                                position(Pos.TOP_RIGHT).
+                                darkStyle();
+                        notificationBuilder.showConfirm();
+                    }
+
+                }
+            });
+        }
+
+        @Override
+        protected void updateItem(Boolean t, boolean empty) {
+            super.updateItem(t, empty);
+            if (!empty) {
+                setGraphic(cellButton);
+            } else {
+                setGraphic(null);
+            }
+        }
+
+    }
+
+    public class ButtonCellShift extends TableCell<Disposer.Record, Boolean> {
+
+        JFXButton cellButton = new JFXButton("Transferir");
+        Notifications notificationBuilder;
+        FontAwesomeIconView auxff = new FontAwesomeIconView(FontAwesomeIcon.ARROWS_H);
+
+        public ButtonCellShift() {
+            auxff.setSize("2em");
+            cellButton.setGraphic(auxff);
+            cellButton.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
+            cellButton.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent t) {
+                    // get Selected Item
+                    ProdutoVenda currentPerson = (ProdutoVenda) ButtonCellShift.this.getTableView().getItems().get(ButtonCellShift.this.getIndex());
+                    //remove selected item from the table list
+                    if (currentPerson != null) {
+                        // ... user chose OK
+                        VendaController.getInstance().getListaProd().remove(currentPerson);
+
+                    } else {
+                        notificationBuilder = Notifications.create().title("Nenhum contato selecionado!").
+                                text("Você deve selecionar um contato para editar.").
+                                hideAfter(Duration.seconds(2)).
+                                position(Pos.TOP_RIGHT).
+                                darkStyle();
+                        notificationBuilder.showConfirm();
+                    }
+
+                }
+            });
+        }
+
+        @Override
+        protected void updateItem(Boolean t, boolean empty) {
+            super.updateItem(t, empty);
+            if (!empty) {
+                setGraphic(cellButton);
+            } else {
+                setGraphic(null);
+            }
+        }
+
     }
 }
