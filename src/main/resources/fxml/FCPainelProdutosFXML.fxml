@@ -33,14 +33,14 @@
             <FlowPane fx:id="flowPaneProd" prefHeight="285.0" prefWidth="832.0" stylesheets="@../styles/PainelProdutosCSS.css" />
          </content>
       </ScrollPane>
-      <HBox layoutX="21.0" layoutY="543.0" prefHeight="36.0" prefWidth="852.0">
+      <HBox layoutX="21.0" layoutY="543.0" prefHeight="36.0" prefWidth="852.0" spacing="10.0">
          <children>
-            <JFXButton fx:id="btnAbrirMesa" onAction="#onAbrirMesa" prefHeight="36.0" prefWidth="157.0" text="ABRIR MESA - (F2)" textFill="#0081cb">
+            <JFXButton fx:id="btnAbrirMesa" onAction="#onAbrirMesa" prefHeight="36.0" prefWidth="157.0" style="-fx-background-color: #70ffd8;" text="ABRIR MESA - (F2)" textFill="#0081cb">
                <graphic>
                   <FontAwesomeIconView fill="#0081cb" glyphName="GLASS" />
                </graphic>
             </JFXButton>
-            <JFXButton fx:id="btnFecharMesa" layoutX="10.0" layoutY="10.0" onAction="#onFecharMesa" prefHeight="36.0" prefWidth="173.0" text="FECHAR MESA - (F3)" textFill="#0081cb">
+            <JFXButton fx:id="btnFecharMesa" layoutX="10.0" layoutY="10.0" onAction="#onFecharMesa" prefHeight="36.0" prefWidth="173.0" style="-fx-background-color: #70ffd8;" text="FECHAR MESA - (F3)" textFill="#0081cb">
                <graphic>
                   <FontAwesomeIconView fill="#0081cb" glyphName="USD" />
                </graphic>

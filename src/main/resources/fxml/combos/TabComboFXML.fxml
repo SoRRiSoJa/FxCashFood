@@ -92,8 +92,8 @@
                         </HBox>
                      </children>
                   </VBox>
-                  <JFXTextField fx:id="txtqtde" focusColor="#004ba0" labelFloat="true" layoutX="458.0" layoutY="71.0" prefHeight="24.0" prefWidth="130.0" promptText="Quantidade" />
-                  <JFXButton fx:id="btnAdicionar" contentDisplay="GRAPHIC_ONLY" layoutX="546.0" layoutY="120.0" onAction="#onAdicionar" prefHeight="30.0" prefWidth="40.0" ripplerFill="WHITE" style="-fx-background-color: #2196f3;" textFill="WHITE">
+                  <JFXTextField fx:id="txtqtde" focusColor="#004ba0" labelFloat="true" layoutX="501.0" layoutY="73.0" prefHeight="26.0" prefWidth="81.0" promptText="Quantidade" />
+                  <JFXButton fx:id="btnAdicionar" contentDisplay="GRAPHIC_ONLY" layoutX="544.0" layoutY="186.0" onAction="#onAdicionar" prefHeight="30.0" prefWidth="40.0" ripplerFill="WHITE" style="-fx-background-color: #2196f3;" textFill="WHITE">
                      <graphic>
                         <FontAwesomeIconView fill="WHITE" glyphName="PLUS" size="12" />
                      </graphic>
@@ -109,6 +109,7 @@
                         <FontAwesomeIconView fill="WHITE" glyphName="CART_ARROW_DOWN" size="18" />
                      </graphic>
                   </JFXButton>
+                  <JFXTextField fx:id="txtValor" focusColor="#004ba0" labelFloat="true" layoutX="501.0" layoutY="120.0" prefHeight="26.0" prefWidth="81.0" promptText="Valor " />
                </children>
                <effect>
                   <DropShadow />

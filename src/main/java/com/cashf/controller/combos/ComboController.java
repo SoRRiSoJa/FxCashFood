@@ -131,7 +131,7 @@ public class ComboController implements GenericController<Combo> {
     }
 
     public void setListaProdutosEtapa(long idProdutoCombo, Combo combo, Produto produto, UnidadeMedida unidadeMedida, BigDecimal qtdeProduto, BigDecimal valorDiferenciado, Boolean valorDif, Integer sequencia) {
-        this.listaProdutosEtapa.add(new ProdutoCombo(idProdutoCombo, combo, produto, UnidadeMedida.UN, qtdeProduto, BigDecimal.ZERO, false, sequencia));
+        this.listaProdutosEtapa.add(new ProdutoCombo(idProdutoCombo, combo, produto, UnidadeMedida.UN, qtdeProduto, valorDiferenciado, true, sequencia));
     }
 
     public void setListaProdutosEtapa(ObservableList<ProdutoCombo> listaProdutosEtapa) {
@@ -180,7 +180,7 @@ public class ComboController implements GenericController<Combo> {
     }
 
     public void setListaProdutosCombo(long idProdutoCombo, Combo combo, Produto produto, UnidadeMedida unidadeMedida, BigDecimal qtdeProduto, BigDecimal valorDiferenciado, Boolean valorDif, Integer sequencia) {
-        this.listaProdutosCombo.add(new ProdutoCombo(idProdutoCombo, combo, produto, UnidadeMedida.UN, qtdeProduto, BigDecimal.ZERO, false, sequencia));
+        this.listaProdutosCombo.add(new ProdutoCombo(idProdutoCombo, combo, produto, UnidadeMedida.UN, qtdeProduto, valorDiferenciado, true, sequencia));
 
     }
 

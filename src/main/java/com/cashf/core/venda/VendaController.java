@@ -5,8 +5,11 @@
  */
 package com.cashf.core.venda;
 
+import com.cashf.dao.combo.ComboDAO;
 import com.cashf.dao.produto.ProdutoDAO;
 import com.cashf.dao.venda.VendaDAO;
+import com.cashf.model.combo.Combo;
+import com.cashf.model.combo.ProdutoCombo;
 import com.cashf.model.mesa.Mesa;
 import com.cashf.model.produto.Produto;
 import com.cashf.model.venda.ProdutoVenda;
@@ -29,14 +32,18 @@ public class VendaController implements GenericController<Venda> {
     //private ObservableList<ProdutoVenda> listaProduosVenda;
     private ObservableList<Produto> listaProd;
     private final ProdutoDAO produtoDAO;
+    private final ComboDAO comboDAO;
     private final VendaDAO vendaDAO;
     private Produto produtoSelecionado;
+    private Combo comboSelecionado;
     private int tipoConsulta;
+    private int etapaAtual;
 
     public VendaController() {
-
+        this.etapaAtual = 1;
         this.produtoDAO = new ProdutoDAO(Produto.class);
         this.vendaDAO = new VendaDAO(Venda.class);
+        this.comboDAO = new ComboDAO(Combo.class);
         this.listaProd = FXCollections.observableList(produtoDAO.listProdToVenda());
         this.lista = FXCollections.observableList(new ArrayList<>());
         this.venda = new Venda();
@@ -45,6 +52,8 @@ public class VendaController implements GenericController<Venda> {
         venda.setListaProdutos(FXCollections.observableList(new ArrayList<>()));
         this.produtoSelecionado = new Produto();
         this.produtoSelecionado.setIdProduto(0l);
+        this.comboSelecionado = new Combo();
+        this.comboSelecionado.setIdCombo(0l);
     }
 
     public static synchronized VendaController getInstance() {
@@ -52,6 +61,22 @@ public class VendaController implements GenericController<Venda> {
             vendaController = new VendaController();
         }
         return vendaController;
+    }
+
+    public int getEtapaAtual() {
+        return etapaAtual;
+    }
+
+    public void setEtapaAtual(int etapaAtual) {
+        this.etapaAtual = etapaAtual;
+    }
+
+    public Combo getComboSelecionado() {
+        return comboSelecionado;
+    }
+
+    public void setComboSelecionado(Combo comboSelecionado) {
+        this.comboSelecionado = comboSelecionado;
     }
 
     public Venda getVendaByMesa(Mesa mesa) {
@@ -149,6 +174,26 @@ public class VendaController implements GenericController<Venda> {
 
     public void setTipoConsulta(int tipoConsulta) {
         this.tipoConsulta = tipoConsulta;
+    }
+
+    public void selCombo() {
+        comboSelecionado = comboDAO.listProdInsumos(produtoSelecionado).get(0);
+    }
+
+    public ObservableList<Produto> getListaProdEtapa(int etapa) {
+        ObservableList<Produto> olpc = FXCollections.observableList(new ArrayList<>());
+        comboSelecionado.getListaProdutos().stream().filter((pc) -> (pc.getEtapa().equals(etapa))).forEachOrdered((pc) -> {
+            olpc.add(pc.getProduto());
+        });
+        return olpc;
+    }
+
+    public int getMaxEtapa(Combo combo) {
+        int max = 0;
+        for (ProdutoCombo pc : combo.getListaProdutos()) {
+            max = (pc.getEtapa() > max) ? pc.getEtapa() : max;
+        }
+        return max;
     }
 
 }

@@ -100,7 +100,15 @@ public class FichaTecnicaController implements GenericController<FichaTecnica> {
     }
 
     public void setListaItens(BigDecimal qtdeProduto, BigDecimal valorPorcao) {
-        this.listaItensFicha.add(new ProdutoFichaTecnica(0l, fichaTecnica, itemAtual, unidadeMedida, qtdeProduto, valorPorcao));
+        ProdutoFichaTecnica pf= new ProdutoFichaTecnica();
+        pf.setIdProdutoFichaTecnica(0l);
+        pf.setFichaTecnica(fichaTecnica);
+        pf.setProduto(itemAtual);
+        pf.setUnidadeMedida(unidadeMedida);
+        pf.setQtdeProduto(qtdeProduto);
+        pf.setValorPorcao(valorPorcao);
+        //new ProdutoFichaTecnica(0l, fichaTecnica, itemAtual, unidadeMedida, qtdeProduto, valorPorcao)
+        this.listaItensFicha.add(pf);
     }
 
     public FichaTecnica getFichaTecnica() {

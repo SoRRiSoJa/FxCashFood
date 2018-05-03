@@ -127,6 +127,8 @@ public class TabComboFXMLController implements GenericViewController, Initializa
     private JFXButton btnFinalizarEtapa;
     @FXML
     private JFXButton btnConcluirSel;
+    @FXML
+    private JFXTextField txtValor;
 
     /**
      * Initializes the controller class.
@@ -373,6 +375,10 @@ public class TabComboFXMLController implements GenericViewController, Initializa
             erros += "O valor de custo deve ser maior ou igual a 0";
             flag = false;
         }
+        if (valDif == null || valDif.compareTo(BigDecimal.ZERO) < 0) {
+            erros += "Informe o valor diferenciado para este produto.";
+            flag = false;
+        }
         if (precoVenda == null || precoVenda.compareTo(BigDecimal.ZERO) <= 0) {
             erros += "O valor de venda deve ser maior que 0.";
             flag = false;
@@ -388,6 +394,11 @@ public class TabComboFXMLController implements GenericViewController, Initializa
     public void getDataItem() {
         try {
             qtde = new BigDecimal(txtqtde.getText());
+        } catch (Exception ex) {
+            System.out.println("Erro ao converter:" + ex);
+        }
+        try {
+            valDif = new BigDecimal(txtValor.getText());
         } catch (Exception ex) {
             System.out.println("Erro ao converter:" + ex);
         }

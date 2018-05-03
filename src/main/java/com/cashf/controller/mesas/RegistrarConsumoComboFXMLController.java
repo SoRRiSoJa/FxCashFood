@@ -5,10 +5,15 @@
  */
 package com.cashf.controller.mesas;
 
+import com.cashf.core.venda.VendaController;
+import com.cashf.model.combo.ProdutoCombo;
+import com.cashf.model.produto.Produto;
+import com.cashf.model.venda.ProdutoVenda;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXTextField;
+import java.math.BigDecimal;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -25,11 +30,11 @@ import javafx.scene.text.Text;
  * @author joao
  */
 public class RegistrarConsumoComboFXMLController implements Initializable {
-
+    
     @FXML
     private Text txtCombo;
     @FXML
-    private JFXComboBox<?> cbbProduto;
+    private JFXComboBox<Produto> cbbProduto;
     @FXML
     private JFXRadioButton rbtCodigo;
     @FXML
@@ -47,17 +52,17 @@ public class RegistrarConsumoComboFXMLController implements Initializable {
     @FXML
     private JFXButton btnAdicionar;
     @FXML
-    private TableView<?> tbvProdutos;
+    private TableView<ProdutoVenda> tbvProdutos;
     @FXML
-    private TableColumn<?, ?> tbcCod;
+    private TableColumn<ProdutoVenda, String> tbcCod;
     @FXML
-    private TableColumn<?, ?> tbcDescricao;
+    private TableColumn<ProdutoVenda, Produto> tbcDescricao;
     @FXML
-    private TableColumn<?, ?> tbcQtde;
+    private TableColumn<ProdutoVenda, Integer> tbcQtde;
     @FXML
-    private TableColumn<?, ?> tbcValor;
+    private TableColumn<ProdutoVenda, BigDecimal> tbcValor;
     @FXML
-    private TableColumn<?, ?> btnExcluirItem;
+    private TableColumn btnExcluirItem;
 
     /**
      * Initializes the controller class.
@@ -65,26 +70,37 @@ public class RegistrarConsumoComboFXMLController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
-
+        loadCbbProduto();
+        txtCombo.setText(VendaController.getInstance().getComboSelecionado().getProdutoPrincipal().getDescriao());
+        btnConcluirEtapa.setText("Concluir Etapa Nº"+VendaController.getInstance().getEtapaAtual());
+        
+    }
+    
     @FXML
     private void onProdutos(ActionEvent event) {
     }
-
+    
     @FXML
     private void onPesquisar(KeyEvent event) {
     }
-
+    
     @FXML
     private void onConcluirEtapa(ActionEvent event) {
+        VendaController.getInstance().setEtapaAtual(VendaController.getInstance().getEtapaAtual() + 1);
+        btnConcluirEtapa.setText("Concluir Etapa Nº"+VendaController.getInstance().getEtapaAtual());
+        loadCbbProduto();
     }
-
+    
     @FXML
     private void onFinalizarCombo(ActionEvent event) {
     }
-
+    
     @FXML
     private void onAdcionar(ActionEvent event) {
     }
-    
+
+    private void loadCbbProduto() {
+        System.out.println("Aqui--->>>>>>>>>>>>>>>>>>>" + VendaController.getInstance().getEtapaAtual());
+        cbbProduto.setItems(VendaController.getInstance().getListaProdEtapa(VendaController.getInstance().getEtapaAtual()));
+    }
 }

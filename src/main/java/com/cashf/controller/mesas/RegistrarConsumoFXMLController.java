@@ -87,7 +87,7 @@ public class RegistrarConsumoFXMLController implements GenericViewController, In
     @FXML
     private TableColumn btnExcluirItem;
     //------------
-    private BigDecimal qtde;
+    private BigDecimal qtde = BigDecimal.ZERO;
     private Boolean flag;
     private String erros = "";
     @FXML
@@ -141,6 +141,7 @@ public class RegistrarConsumoFXMLController implements GenericViewController, In
     private void onAdicionar(ActionEvent event) {
         getData();
         if (VendaController.getInstance().getProdutoSelecionado().getTipo().equals(TipoProduto.COMBO)) {
+            VendaController.getInstance().selCombo();
             MainApp.janelaAberta.close();
             MainApp.janelaAberta = MainApp.janelaAnterior;
             loadBox("/fxml/mesas/RegistrarConsumoComboFXML.fxml", "COMBO");
@@ -155,7 +156,8 @@ public class RegistrarConsumoFXMLController implements GenericViewController, In
             VendaController.getInstance().getVenda().setValorTotal(VendaController.getInstance().getVenda().getValorTotal().add(qtde.multiply(VendaController.getInstance().getProdutoSelecionado().getPreco_venda())));
             loadTbv();
         } else {
-            PoupUpUtil.errorMessage(MainApp.paneRoot,rootStackPane, erros);
+            PoupUpUtil.accessDenied(erros);
+            //PoupUpUtil.errorMessage(MainApp.paneRoot,rootStackPane, erros);
             erros = "";
         }
 
@@ -195,7 +197,7 @@ public class RegistrarConsumoFXMLController implements GenericViewController, In
             erros += "Um produto deve ser selecionado.";
 
         }
-        if (qtde.compareTo(BigDecimal.ZERO) <= 0) {
+        if (qtde != null && qtde.compareTo(BigDecimal.ZERO) <= 0) {
             flag = false;
 
             erros += "A quantidade deve ser amior que 0";

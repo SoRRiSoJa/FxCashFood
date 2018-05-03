@@ -12,7 +12,6 @@ import com.cashf.model.cliente.Cliente;
 import com.cashf.model.mesa.Mesa;
 import com.cashf.model.mesa.StatusMesa;
 import com.cashf.model.produto.Produto;
-import com.cashf.model.venda.Venda;
 import controller.GenericController;
 import java.time.LocalDate;
 import java.time.LocalTime;
