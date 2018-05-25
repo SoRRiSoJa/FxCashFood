@@ -118,7 +118,7 @@ public class FXMenuFCaixaFXMLController implements Initializable {
         }
 
     }
-
+    
     private void loadDrawer() {
         try {
             gavetas = FXMLLoader.load(getClass().getResource("/fxml/GavetaMesasFXML.fxml"));

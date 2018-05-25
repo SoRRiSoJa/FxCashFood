@@ -72,16 +72,15 @@ public class GerenciarMesasFXMLController implements Initializable {
     private TableColumn<ProdutoVenda, BigDecimal> tbcQtde;
     @FXML
     private TableColumn<ProdutoVenda, BigDecimal> tbcPreco;
-    @FXML
-    private TableColumn btnAdicionar;
-    @FXML
-    private TableColumn btnSubtrair;
+
     @FXML
     private TableColumn<ProdutoVenda, BigDecimal> tbcTotal;
     @FXML
     private TableColumn btnCancelar;
     @FXML
     private TableColumn btnTransferirM;
+    //----
+    private static TableView<ProdutoVenda> _tbvComanda;
 
     /**
      * Initializes the controller class.
@@ -89,7 +88,9 @@ public class GerenciarMesasFXMLController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        _tbvComanda = tbvComanda;
         setUptableViewProdutos();
+        loadTbv();
         lblNumMesa.setText(MesaController.getInstance().getMesaAtual().getNumMesa() + "");
     }
 
@@ -100,6 +101,7 @@ public class GerenciarMesasFXMLController implements Initializable {
 
     @FXML
     private void onTransferir(ActionEvent event) {
+        loadBox("/fxml/mesas/TransferirMesaFXML.fxml", "Transferir Mesa");
     }
 
     @FXML
@@ -125,25 +127,21 @@ public class GerenciarMesasFXMLController implements Initializable {
         }
     }
 
+    private void loadTbv() {
+        tbvComanda.setItems(VendaController.getInstance().getListaProduosVenda());
+    }
+
+    public static void refreshTbvComanda() {
+        _tbvComanda.setItems(VendaController.getInstance().getListaProduosVenda());
+        _tbvComanda.refresh();
+    }
+
     private void setUptableViewProdutos() {
         tbcCod.setCellValueFactory((param) -> new SimpleStringProperty(param.getValue().getProduto().getCodigoReferencia()));
         tbcDescricao.setCellValueFactory(new PropertyValueFactory<>("produto"));
         tbcQtde.setCellValueFactory(new PropertyValueFactory<>("qtde"));
         tbcPreco.setCellValueFactory(new PropertyValueFactory<>("precoUnit"));
-        btnAdicionar.setCellFactory(
-                new Callback<TableColumn<Disposer.Record, Boolean>, TableCell<Disposer.Record, Boolean>>() {
-            @Override
-            public TableCell<Disposer.Record, Boolean> call(TableColumn<Disposer.Record, Boolean> p) {
-                return new ButtonCellPlus();
-            }
-        });
-        btnSubtrair.setCellFactory(
-                new Callback<TableColumn<Disposer.Record, Boolean>, TableCell<Disposer.Record, Boolean>>() {
-            @Override
-            public TableCell<Disposer.Record, Boolean> call(TableColumn<Disposer.Record, Boolean> p) {
-                return new ButtonCellMinus();
-            }
-        });
+
         tbcTotal.setCellValueFactory((param) -> new SimpleObjectProperty<BigDecimal>(param.getValue().getPrecoUnit().multiply(param.getValue().getQtde())));
         btnCancelar.setCellFactory(
                 new Callback<TableColumn<Disposer.Record, Boolean>, TableCell<Disposer.Record, Boolean>>() {
@@ -159,7 +157,7 @@ public class GerenciarMesasFXMLController implements Initializable {
                 return new ButtonCellShift();
             }
         });
-        tbvComanda.getColumns().setAll(tbcCod, tbcDescricao, tbcQtde, tbcPreco, btnAdicionar, btnSubtrair, tbcTotal, btnCancelar, btnTransferirM);
+        tbvComanda.getColumns().setAll(tbcCod, tbcDescricao, tbcQtde, tbcPreco, tbcTotal, btnCancelar, btnTransferirM);
     }
 
     public class ButtonCellDelete extends TableCell<Disposer.Record, Boolean> {
@@ -177,96 +175,6 @@ public class GerenciarMesasFXMLController implements Initializable {
                 public void handle(ActionEvent t) {
                     // get Selected Item
                     ProdutoVenda currentPerson = (ProdutoVenda) ButtonCellDelete.this.getTableView().getItems().get(ButtonCellDelete.this.getIndex());
-                    //remove selected item from the table list
-                    if (currentPerson != null) {
-                        // ... user chose OK
-                        VendaController.getInstance().getListaProd().remove(currentPerson);
-
-                    } else {
-                        notificationBuilder = Notifications.create().title("Nenhum contato selecionado!").
-                                text("Você deve selecionar um contato para editar.").
-                                hideAfter(Duration.seconds(2)).
-                                position(Pos.TOP_RIGHT).
-                                darkStyle();
-                        notificationBuilder.showConfirm();
-                    }
-
-                }
-            });
-        }
-
-        @Override
-        protected void updateItem(Boolean t, boolean empty) {
-            super.updateItem(t, empty);
-            if (!empty) {
-                setGraphic(cellButton);
-            } else {
-                setGraphic(null);
-            }
-        }
-
-    }
-
-    public class ButtonCellPlus extends TableCell<Disposer.Record, Boolean> {
-
-        JFXButton cellButton = new JFXButton("Adicionar");
-        Notifications notificationBuilder;
-        FontAwesomeIconView auxff = new FontAwesomeIconView(FontAwesomeIcon.PLUS);
-
-        public ButtonCellPlus() {
-            auxff.setSize("2em");
-            cellButton.setGraphic(auxff);
-            cellButton.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
-            cellButton.setOnAction(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent t) {
-                    // get Selected Item
-                    ProdutoVenda currentPerson = (ProdutoVenda) ButtonCellPlus.this.getTableView().getItems().get(ButtonCellPlus.this.getIndex());
-                    //remove selected item from the table list
-                    if (currentPerson != null) {
-                        // ... user chose OK
-                        VendaController.getInstance().getListaProd().remove(currentPerson);
-
-                    } else {
-                        notificationBuilder = Notifications.create().title("Nenhum contato selecionado!").
-                                text("Você deve selecionar um contato para editar.").
-                                hideAfter(Duration.seconds(2)).
-                                position(Pos.TOP_RIGHT).
-                                darkStyle();
-                        notificationBuilder.showConfirm();
-                    }
-
-                }
-            });
-        }
-
-        @Override
-        protected void updateItem(Boolean t, boolean empty) {
-            super.updateItem(t, empty);
-            if (!empty) {
-                setGraphic(cellButton);
-            } else {
-                setGraphic(null);
-            }
-        }
-
-    }
-
-    public class ButtonCellMinus extends TableCell<Disposer.Record, Boolean> {
-
-        JFXButton cellButton = new JFXButton("Subtrair");
-        Notifications notificationBuilder;
-        FontAwesomeIconView auxff = new FontAwesomeIconView(FontAwesomeIcon.PLUS);
-
-        public ButtonCellMinus() {
-            auxff.setSize("2em");
-            cellButton.setGraphic(auxff);
-            cellButton.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
-            cellButton.setOnAction(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent t) {
-                    // get Selected Item
-                    ProdutoVenda currentPerson = (ProdutoVenda) ButtonCellMinus.this.getTableView().getItems().get(ButtonCellMinus.this.getIndex());
                     //remove selected item from the table list
                     if (currentPerson != null) {
                         // ... user chose OK

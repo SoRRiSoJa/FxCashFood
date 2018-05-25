@@ -135,6 +135,7 @@
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/model/meiopagamento/TPPagto.java
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/controller/fornecedor/TabFornecedorFXMLController.java
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/controller/fornecedor/FornecedorController.java
+/home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/controller/mesas/TransferirMesaFXMLController.java
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/controller/produto/GrupoController.java
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/controller/mesas/RegistrarConsumoComboFXMLController.java
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/model/contasPagar/StatusPagto.java

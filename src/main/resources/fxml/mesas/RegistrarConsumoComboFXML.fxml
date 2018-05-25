@@ -52,7 +52,7 @@
             </Text>
             <VBox layoutX="14.0" layoutY="71.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="74.0" prefWidth="386.0" spacing="15.0" style="-fx-background-color: #ffffff;">
                <children>
-                  <JFXComboBox fx:id="cbbProduto" editable="true" onAction="#onProdutos" onKeyTyped="#onPesquisar" prefHeight="26.0" prefWidth="386.0" promptText="Produtos da etapa" />
+                  <JFXComboBox fx:id="cbbProduto" editable="true" onAction="#onProdutos" onKeyTyped="#onProdutoEtapa" prefHeight="26.0" prefWidth="386.0" promptText="Produtos da etapa" />
                   <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="32.0" prefWidth="386.0" style="-fx-background-color: #ffffff;">
                      <children>
                         <Label text="Filtrar:">
@@ -96,7 +96,7 @@
                   </HBox>
                </children>
             </VBox>
-            <JFXTextField fx:id="txtQtde" editable="false" focusColor="#004ba0" labelFloat="true" layoutX="458.0" layoutY="71.0" prefHeight="24.0" prefWidth="130.0" promptText="Quantidade" />
+            <JFXTextField fx:id="txtQtde" focusColor="#004ba0" labelFloat="true" layoutX="458.0" layoutY="71.0" prefHeight="24.0" prefWidth="130.0" promptText="Quantidade" />
             <Separator layoutX="14.0" layoutY="167.0" prefWidth="570.0" />
             <JFXButton fx:id="btnConcluirEtapa" layoutX="14.0" layoutY="188.0" onAction="#onConcluirEtapa" prefHeight="30.0" prefWidth="165.0" ripplerFill="WHITE" style="-fx-background-color: #00e676;" text="Cuncluir etapa" textFill="WHITE">
                <graphic>

@@ -101,15 +101,13 @@
                   <Separator layoutX="624.0" layoutY="311.0" orientation="VERTICAL" prefHeight="114.0" prefWidth="0.0" />
                   <TableView fx:id="tbvComanda" layoutX="14.0" layoutY="42.0" prefHeight="240.0" prefWidth="612.0" stylesheets="@../../styles/TableViewCSS.css">
                      <columns>
-                        <TableColumn fx:id="tbcCod" prefWidth="40.0" text="COD" />
-                        <TableColumn fx:id="tbcDescricao" prefWidth="137.00003051757812" text="DESCRIÇÃO" />
+                        <TableColumn fx:id="tbcCod" prefWidth="81.0" text="COD" />
+                        <TableColumn fx:id="tbcDescricao" prefWidth="185.0" text="DESCRIÇÃO" />
                         <TableColumn fx:id="tbcQtde" prefWidth="50.0" text="QTDE" />
-                        <TableColumn fx:id="tbcPreco" prefWidth="67.0" text="PREÇO" />
-                        <TableColumn fx:id="btnAdicionar" prefWidth="33.0" text="+" />
-                        <TableColumn fx:id="btnSubtrair" prefWidth="36.0" text="-" />
-                        <TableColumn fx:id="tbcTotal" prefWidth="60.0" text="TOTAL" />
-                        <TableColumn fx:id="btnCancelar" prefWidth="87.0" text="CANCELAR" />
-                        <TableColumn fx:id="btnTransferirM" prefWidth="101.0" text="TRANSFERIR" />
+                        <TableColumn fx:id="tbcPreco" prefWidth="62.0" text="PREÇO" />
+                        <TableColumn fx:id="tbcTotal" prefWidth="68.0" text="TOTAL" />
+                        <TableColumn fx:id="btnCancelar" prefWidth="86.0" text="CANCELAR" />
+                        <TableColumn fx:id="btnTransferirM" prefWidth="82.0" text="TRF.-ÍTEN" />
                      </columns>
                   </TableView>
                </children>

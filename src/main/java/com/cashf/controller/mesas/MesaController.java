@@ -12,6 +12,8 @@ import com.cashf.model.cliente.Cliente;
 import com.cashf.model.mesa.Mesa;
 import com.cashf.model.mesa.StatusMesa;
 import com.cashf.model.produto.Produto;
+import com.cashf.model.venda.ProdutoVenda;
+import com.cashf.model.venda.Venda;
 import controller.GenericController;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -155,5 +157,29 @@ public class MesaController implements GenericController<Mesa> {
     @Override
     public void setItenLista(Mesa obj) {
 
+    }
+
+    public boolean tranferirMesa(Mesa destino) {
+        boolean flag = false;
+        int index;
+        if (destino.getStatus() != StatusMesa.ABERTA) {
+
+            Venda vAux = VendaController.getInstance().getVendaByMesa(mesaAtual);
+            VendaController.getInstance().getLista().remove(vAux);
+            destino.setHoraAbertura(LocalTime.now());
+            destino.setNumPax(mesaAtual.getNumPax());
+            destino.setStatus(StatusMesa.ABERTA);
+            vAux.setMesa(destino);
+            vAux.getListaProdutos().forEach((pv) -> {
+                pv.setVendaId(vAux);
+            });
+            VendaController.getInstance().getLista().add(vAux);
+            VendaController.getInstance().setVenda(vAux);
+
+            mesaAtual.setStatus(StatusMesa.FECHADA);
+            setMesaAtual(destino);
+            flag = true;
+        }
+        return flag;
     }
 }

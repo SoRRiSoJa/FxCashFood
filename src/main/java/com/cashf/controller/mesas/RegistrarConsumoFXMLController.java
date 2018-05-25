@@ -105,6 +105,7 @@ public class RegistrarConsumoFXMLController implements GenericViewController, In
         loadCbbProd();
         setUpRadioButtons();
         setUptableViewProdutos();
+        loadTbv();
     }
 
     @FXML
@@ -164,8 +165,8 @@ public class RegistrarConsumoFXMLController implements GenericViewController, In
     }
 
     @FXML
-    private void onConcluirSel(ActionEvent event
-    ) {
+    private void onConcluirSel(ActionEvent event) {
+        GerenciarMesasFXMLController.refreshTbvComanda();
         MainApp.janelaAberta.close();
         MainApp.janelaAberta = MainApp.janelaAnterior;
     }

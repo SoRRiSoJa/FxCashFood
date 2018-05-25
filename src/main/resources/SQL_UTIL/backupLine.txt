@@ -1,0 +1,1 @@
+/usr/bin/pg_dump --host localhost --port 5432 --username "postgres" --no-password  --format plain --create --section data --inserts --column-inserts --verbose --file "/home/joao/Documentos/CashFoodData" "cashfood_data_02"

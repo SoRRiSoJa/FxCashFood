@@ -17,6 +17,7 @@ import com.cashf.model.venda.Venda;
 import controller.GenericController;
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Iterator;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -29,7 +30,6 @@ public class VendaController implements GenericController<Venda> {
     private static VendaController vendaController = null;
     private Venda venda;
     private ObservableList<Venda> lista;
-    //private ObservableList<ProdutoVenda> listaProduosVenda;
     private ObservableList<Produto> listaProd;
     private final ProdutoDAO produtoDAO;
     private final ComboDAO comboDAO;
@@ -186,6 +186,26 @@ public class VendaController implements GenericController<Venda> {
             olpc.add(pc.getProduto());
         });
         return olpc;
+    }
+
+    public ProdutoCombo getByProduto(Produto produto) {
+        ProdutoCombo pCombo = new ProdutoCombo();
+        for (ProdutoCombo pcs : comboSelecionado.getListaProdutos()) {
+            if (pcs.getProduto().equals(produto)) {
+                pCombo = pcs;
+            }
+        }
+        return pCombo;
+    }
+
+    public void addProdutoComboToProdutoVenda(BigDecimal qtde) {
+        ProdutoVenda pv = new ProdutoVenda();
+        pv.setIdProdVenda(0l);
+        pv.setProduto(produtoSelecionado);
+        pv.setPrecoUnit(getByProduto(produtoSelecionado).getValorDiferenciado());
+        pv.setQtde(qtde);
+        pv.setVendaId(venda);
+        this.venda.getListaProdutos().add(pv);
     }
 
     public int getMaxEtapa(Combo combo) {
