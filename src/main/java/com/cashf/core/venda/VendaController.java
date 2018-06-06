@@ -17,7 +17,6 @@ import com.cashf.model.venda.Venda;
 import controller.GenericController;
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Iterator;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 

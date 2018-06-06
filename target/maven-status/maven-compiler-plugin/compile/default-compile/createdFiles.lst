@@ -52,6 +52,7 @@ com/cashf/model/cliente/Cliente_.class
 com/cashf/controller/parametrizacao/TabParametrosSisFXMLController.class
 com/cashf/model/produto/UnidadeMedida.class
 util/UnitConverter$1.class
+com/cashf/controller/registradora/RegistradoraController.class
 com/cashf/model/produto/AliquotasProduto_.class
 com/cashf/model/contareceber/ContaReceber.class
 com/cashf/controller/mesas/GerenciarMesasFXMLController$ButtonCellDelete.class
@@ -169,8 +170,11 @@ com/cashf/controller/fornecedor/TabFornecedorFXMLController$1.class
 com/cashf/controller/parametrizacao/ParametrosInicioFXMLController.class
 com/cashf/dao/venda/VendaDAO.class
 com/cashf/model/notafiscal/NotaFiscal_.class
+com/cashf/controller/registradora/NRegistradoraFXMLController.class
+com/cashf/controller/registradora/NRegistradoraFXMLController$1$1.class
 com/cashf/model/combo/Combo.class
 com/cashf/controller/prepreparo/TabPrePreparoNFXMLController$1.class
+com/cashf/controller/registradora/NRegistradoraFXMLController$1.class
 com/cashf/model/caixa/Caixa_.class
 util/ImageHandler.class
 com/cashf/model/meiopagamento/MeioPagamento_.class

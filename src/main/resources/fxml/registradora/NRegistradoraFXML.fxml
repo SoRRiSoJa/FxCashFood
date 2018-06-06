@@ -1,15 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXComboBox?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="632.0" prefWidth="300.0" style="-fx-background-color: #212121;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="632.0" prefWidth="300.0" style="-fx-background-color: #212121;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cashf.controller.registradora.NRegistradoraFXMLController">
    <children>
       <HBox prefHeight="30.0" prefWidth="300.0">
          <children>
@@ -30,14 +33,14 @@
       </HBox>
       <HBox layoutY="30.0" prefHeight="40.0" prefWidth="300.0">
          <children>
-            <TextField fx:id="txtMesa" onMouseClicked="#onMouseClickMesa" prefHeight="40.0" prefWidth="140.0" style="-fx-background-color: #69e2ff;">
+            <TextField fx:id="txtMesa" onKeyReleased="#onKeyReleasedMesa" onMouseClicked="#onMouseClickMesa" prefHeight="40.0" prefWidth="140.0" style="-fx-background-color: #69e2ff;">
                <HBox.margin>
                   <Insets left="2.0" />
                </HBox.margin>
             </TextField>
-            <JFXComboBox fx:id="cbbGarcom" editable="true" prefHeight="40.0" prefWidth="146.0" style="-fx-background-color: #69e2ff;">
+            <JFXComboBox fx:id="cbbGarcom" editable="true" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: #69e2ff;">
                <HBox.margin>
-                  <Insets left="10.0" />
+                  <Insets left="6.0" />
                </HBox.margin>
             </JFXComboBox>
          </children>
@@ -61,16 +64,195 @@
       </HBox>
       <HBox layoutY="100.0" prefHeight="40.0" prefWidth="300.0">
          <children>
-            <JFXComboBox fx:id="cbbGarcom1" editable="true" prefHeight="40.0" prefWidth="140.0" style="-fx-background-color: #69e2ff;">
+            <JFXComboBox fx:id="cbbProduto" editable="true" onAction="#onCodigoProduto" onKeyTyped="#onBuscarCodigo" prefHeight="40.0" prefWidth="140.0" style="-fx-background-color: #69e2ff;">
                <HBox.margin>
                   <Insets left="2.0" />
                </HBox.margin>
             </JFXComboBox>
-            <TextField fx:id="txtMesa1" onMouseClicked="#onMouseClickMesa" prefHeight="40.0" prefWidth="146.0" style="-fx-background-color: #69e2ff;">
+            <TextField fx:id="txtQtde" onMouseClicked="#onMouseClickQtde" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: #69e2ff;">
                <HBox.margin>
-                  <Insets left="10.0" />
+                  <Insets left="6.0" />
                </HBox.margin>
             </TextField>
+         </children>
+      </HBox>
+      <TextField fx:id="txtDescricao" layoutX="2.0" layoutY="145.0" prefHeight="26.0" prefWidth="296.0" style="-fx-background-color: #69e2ff;" />
+      <Label layoutX="1.0" layoutY="173.0" prefHeight="24.0" prefWidth="296.0" style="-fx-background-color: #212121;" text="Observação do Ítem:" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtObsItem" layoutX="2.0" layoutY="201.0" prefHeight="40.0" prefWidth="296.0" style="-fx-background-color: #69e2ff;" />
+      <Pane fx:id="paneTeclado" layoutY="251.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="146.0" prefWidth="300.0" style="-fx-background-color: #212121;">
+         <children>
+            <FlowPane prefHeight="25.0" prefWidth="300.0">
+               <children>
+                  <JFXButton fx:id="btn7" onAction="#onBtn_7" prefHeight="16.0" prefWidth="94.0" ripplerFill="WHITE" style="-fx-background-color: #bdbdbd;" text="7">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                     <FlowPane.margin>
+                        <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
+                     </FlowPane.margin>
+                  </JFXButton>
+                  <JFXButton fx:id="btn8" layoutX="10.0" layoutY="10.0" onAction="#onBtn_8" prefHeight="16.0" prefWidth="94.0" ripplerFill="WHITE" style="-fx-background-color: #bdbdbd;" text="8">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                     <FlowPane.margin>
+                        <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
+                     </FlowPane.margin>
+                  </JFXButton>
+                  <JFXButton fx:id="btn9" layoutX="110.0" layoutY="10.0" onAction="#onBtn_9" prefHeight="16.0" prefWidth="94.0" ripplerFill="WHITE" style="-fx-background-color: #bdbdbd;" text="9">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                     <FlowPane.margin>
+                        <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
+                     </FlowPane.margin>
+                  </JFXButton>
+               </children>
+            </FlowPane>
+            <FlowPane layoutY="28.0" prefHeight="25.0" prefWidth="300.0">
+               <children>
+                  <JFXButton fx:id="btn4" onAction="#onBtn_4" prefHeight="16.0" prefWidth="94.0" ripplerFill="WHITE" style="-fx-background-color: #bdbdbd;" text="4">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                     <FlowPane.margin>
+                        <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
+                     </FlowPane.margin>
+                  </JFXButton>
+                  <JFXButton fx:id="btn5" layoutX="10.0" layoutY="10.0" onAction="#onBtn_5" prefHeight="16.0" prefWidth="94.0" ripplerFill="WHITE" style="-fx-background-color: #bdbdbd;" text="5">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                     <FlowPane.margin>
+                        <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
+                     </FlowPane.margin>
+                  </JFXButton>
+                  <JFXButton fx:id="btn6" layoutX="110.0" layoutY="10.0" onAction="#onBtn_6" prefHeight="16.0" prefWidth="94.0" ripplerFill="WHITE" style="-fx-background-color: #bdbdbd;" text="6">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                     <FlowPane.margin>
+                        <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
+                     </FlowPane.margin>
+                  </JFXButton>
+               </children>
+            </FlowPane>
+            <FlowPane layoutY="56.0" prefHeight="25.0" prefWidth="300.0">
+               <children>
+                  <JFXButton fx:id="btn1" onAction="#onBtn_1" prefHeight="16.0" prefWidth="94.0" ripplerFill="WHITE" style="-fx-background-color: #bdbdbd;" text="1">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                     <FlowPane.margin>
+                        <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
+                     </FlowPane.margin>
+                  </JFXButton>
+                  <JFXButton fx:id="btn2" layoutX="10.0" layoutY="10.0" onAction="#onBtn_2" prefHeight="16.0" prefWidth="94.0" ripplerFill="WHITE" style="-fx-background-color: #bdbdbd;" text="2">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                     <FlowPane.margin>
+                        <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
+                     </FlowPane.margin>
+                  </JFXButton>
+                  <JFXButton fx:id="btn3" layoutX="110.0" layoutY="10.0" onAction="#onBtn_3" prefHeight="16.0" prefWidth="94.0" ripplerFill="WHITE" style="-fx-background-color: #bdbdbd;" text="3">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                     <FlowPane.margin>
+                        <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
+                     </FlowPane.margin>
+                  </JFXButton>
+               </children>
+            </FlowPane>
+            <FlowPane layoutY="84.0" prefHeight="25.0" prefWidth="300.0">
+               <children>
+                  <JFXButton fx:id="btnLimpar" onAction="#onLimpar" prefHeight="16.0" prefWidth="94.0" ripplerFill="WHITE" style="-fx-background-color: #bdbdbd;" text="LIMPAR">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                     <FlowPane.margin>
+                        <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
+                     </FlowPane.margin>
+                  </JFXButton>
+                  <JFXButton fx:id="btn0" layoutX="10.0" layoutY="10.0" onAction="#onBtn_0" prefHeight="16.0" prefWidth="94.0" ripplerFill="WHITE" style="-fx-background-color: #bdbdbd;" text="0">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                     <FlowPane.margin>
+                        <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
+                     </FlowPane.margin>
+                  </JFXButton>
+                  <JFXButton fx:id="btnVirgula" layoutX="110.0" layoutY="10.0" onAction="#onBtn_Virgula" prefHeight="16.0" prefWidth="94.0" ripplerFill="WHITE" style="-fx-background-color: #bdbdbd;" text=",">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                     <FlowPane.margin>
+                        <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
+                     </FlowPane.margin>
+                  </JFXButton>
+               </children>
+            </FlowPane>
+            <FlowPane layoutY="113.0" prefHeight="25.0" prefWidth="300.0">
+               <children>
+                  <JFXButton fx:id="btnPagto" onAction="#onPagar" prefHeight="16.0" prefWidth="94.0" ripplerFill="WHITE" style="-fx-background-color: #00e676;" text="PAGTO" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                     <FlowPane.margin>
+                        <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
+                     </FlowPane.margin>
+                  </JFXButton>
+                  <JFXButton fx:id="btnEnter" layoutX="110.0" layoutY="10.0" onAction="#onEnter" prefHeight="26.0" prefWidth="194.0" ripplerFill="WHITE" style="-fx-background-color: #00b0ff;" text="ENTER" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                     <FlowPane.margin>
+                        <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
+                     </FlowPane.margin>
+                  </JFXButton>
+               </children>
+            </FlowPane>
+         </children>
+      </Pane>
+      <TableView fx:id="tbvComanda" layoutX="2.0" layoutY="397.0" prefHeight="210.0" prefWidth="294.0" stylesheets="@../../styles/TableViewRegistradora.css">
+         <columns>
+            <TableColumn fx:id="tbcCod" prefWidth="40.0" text="COD" />
+            <TableColumn fx:id="tbcDescricao" prefWidth="93.0" text="DESCRIÇÃO" />
+            <TableColumn fx:id="tbcQtde" prefWidth="48.0" text="QTDE" />
+            <TableColumn fx:id="tbcPreco" prefWidth="58.0" text="PREÇO" />
+            <TableColumn fx:id="tbcTotal" prefWidth="60.0" text="TOTAL" />
+         </columns>
+      </TableView>
+      <HBox layoutX="2.0" layoutY="608.0" prefHeight="24.0" prefWidth="294.0">
+         <children>
+            <Label prefHeight="30.0" prefWidth="78.0" style="-fx-background-color: #212121;" text="Troco Ant:" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblTrocoAnt" alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="72.0" style="-fx-background-color: #212121;" text="0,00" textFill="YELLOW">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </Label>
+            <Label prefHeight="30.0" prefWidth="78.0" style="-fx-background-color: #212121;" text="Total:" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+               <HBox.margin>
+                  <Insets left="2.0" />
+               </HBox.margin>
+            </Label>
+            <Label fx:id="lblTotal" alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="72.0" style="-fx-background-color: #212121;" text="0,00" textFill="YELLOW">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </Label>
          </children>
       </HBox>
    </children>

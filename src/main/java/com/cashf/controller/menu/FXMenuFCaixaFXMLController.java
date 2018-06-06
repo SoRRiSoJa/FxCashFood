@@ -237,7 +237,7 @@ public class FXMenuFCaixaFXMLController implements Initializable {
 
     private void loadRegistradora() {
         try {
-            paneAux = FXMLLoader.load(getClass().getResource("/fxml/registradora/RegistradoraFXML.fxml"));
+            paneAux = FXMLLoader.load(getClass().getResource("/fxml/registradora/NRegistradoraFXML.fxml"));
             paneCalc.getChildren().add(paneAux);
         } catch (IOException ex) {
             System.out.println("Erro:" + ex);
