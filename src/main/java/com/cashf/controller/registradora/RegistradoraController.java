@@ -13,7 +13,6 @@ import com.cashf.model.funcionario.Funcionario;
 import com.cashf.model.mesa.StatusMesa;
 import com.cashf.model.produto.Produto;
 import com.cashf.model.venda.ProdutoVenda;
-import com.cashf.model.venda.Venda;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import javafx.collections.FXCollections;
@@ -52,8 +51,9 @@ public class RegistradoraController {
         }
         return registradoraController;
     }
-    public void setVenda(int numMesa){
-        if(MesaController.getInstance().getMesaNum(numMesa).getStatus()==StatusMesa.ABERTA){
+
+    public void setVenda(int numMesa) {
+        if (MesaController.getInstance().getMesaNum(numMesa).getStatus() == StatusMesa.ABERTA) {
             VendaController.getInstance().setVenda(VendaController.getInstance().getVendaByMesa(MesaController.getInstance().getMesaNum(numMesa)));
         }
     }
@@ -107,6 +107,14 @@ public class RegistradoraController {
         pv.setPrecoUnit(produto.getPreco_venda());
         this.listaProdutoVenda.add(pv);
         //this.venda.getListaProdutos().add(pv);
+    }
+
+    BigDecimal getTotalLancamento() {
+        BigDecimal total = BigDecimal.ZERO;
+        for (ProdutoVenda val : listaProdutoVenda) {
+            total = total.add(val.getPrecoUnit().multiply(val.getQtde()));
+        }
+        return total;
     }
 
 }

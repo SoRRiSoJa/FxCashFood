@@ -7,6 +7,7 @@ package com.cashf.controller.menu;
 
 import com.cashf.cashfood.MainApp;
 import com.cashf.controller.mesas.MesaController;
+import com.cashf.controller.registradora.NRegistradoraFXMLController;
 import com.jfoenix.controls.JFXButton;
 import java.io.IOException;
 import java.net.URL;
@@ -68,7 +69,13 @@ public class FCPainelProdutosFXMLController implements Initializable {
         FCMenuController.getInstance().getListaProdutos().forEach((pr) -> {
             JFXButton lb = new JFXButton();
             lb.setText(pr.getDescriao());
+            lb.setAccessibleText(pr.getIdProduto() + "");
             lb.setMinSize(200, 40);
+            lb.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
+                FCMenuController.getInstance().buscaProdutoById(pr.getIdProduto());
+                NRegistradoraFXMLController._cbbProduto.getSelectionModel().select(FCMenuController.getInstance().getProdutoAtual());
+
+            });
             flowPaneProd.getChildren().add(lb);
         });
     }

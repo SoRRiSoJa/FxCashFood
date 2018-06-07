@@ -106,13 +106,14 @@ public class NRegistradoraFXMLController implements Initializable {
     @FXML
     private Label lblTotal;
     //-----
+    public static JFXComboBox<Produto> _cbbProduto;
     private String qtdeProduto;
     private String codigoProduto = "";
     private String mesa = "";
     private String erros = "";
     private Integer qtdeProd;
     private Integer nMesa;
-
+    
     private int foco = 1;
 
     /**
@@ -124,6 +125,7 @@ public class NRegistradoraFXMLController implements Initializable {
         loadCbbFunc();
         loadCbbProd();
         setUptableViewProdutos();
+        _cbbProduto=cbbProduto;
     }
 
     @FXML
@@ -199,6 +201,7 @@ public class NRegistradoraFXMLController implements Initializable {
         if (validateFields()) {
             getData();
             tbvComanda.setItems(RegistradoraController.getInstance().getListaProdutoVenda());
+            lblTotal.setText(RegistradoraController.getInstance().getTotalLancamento().toString());
         } else {
             PoupUpUtil.accessDenied(erros);
             //PoupUpUtil.errorMessage(MainApp.paneRoot,rootStackPane, erros);
@@ -282,7 +285,7 @@ public class NRegistradoraFXMLController implements Initializable {
     @FXML
     private void onCodigoProduto(ActionEvent event) {
         if (cbbProduto.getSelectionModel().getSelectedItem() != null) {
-            txtDescricao.setText(cbbProduto.getSelectionModel().getSelectedItem().getDescriao());
+            txtDescricao.setText(cbbProduto.getItems().get(cbbProduto.getSelectionModel().getSelectedIndex()).getDescriao());
         }
     }
 
@@ -358,6 +361,14 @@ public class NRegistradoraFXMLController implements Initializable {
         } catch (IOException ex) {
             System.out.println("Erro---->" + ex);
         }
+    }
+
+    public static JFXComboBox<Produto> getCbbProduto() {
+        return _cbbProduto;
+    }
+
+    public static void setCbbProduto(JFXComboBox<Produto> _cbbProduto) {
+        NRegistradoraFXMLController._cbbProduto = _cbbProduto;
     }
 
 }

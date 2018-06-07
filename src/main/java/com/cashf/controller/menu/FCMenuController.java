@@ -75,8 +75,13 @@ public class FCMenuController {
     public void setListaGrupos(ObservableList<Grupo> listaGrupos) {
         this.listaGrupos = listaGrupos;
     }
-    public void buscaProdutosByGrupo(String idGrupo){
-        listaProdutos=FXCollections.observableList(produtoDAO.listByGrupoId(idGrupo));
+
+    public void buscaProdutosByGrupo(String idGrupo) {
+        listaProdutos = FXCollections.observableList(produtoDAO.listByGrupoId(idGrupo));
     }
 
+    public void buscaProdutoById(long idProduto) {
+        produtoAtual = produtoDAO.findById(idProduto);
+        System.out.println("ProdutoAtual--------------:" + produtoAtual);
+    }
 }
