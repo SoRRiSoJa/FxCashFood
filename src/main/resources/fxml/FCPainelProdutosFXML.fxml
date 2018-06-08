@@ -35,14 +35,19 @@
       </ScrollPane>
       <HBox layoutX="21.0" layoutY="543.0" prefHeight="36.0" prefWidth="852.0" spacing="10.0">
          <children>
-            <JFXButton fx:id="btnAbrirMesa" onAction="#onAbrirMesa" prefHeight="36.0" prefWidth="157.0" style="-fx-background-color: #70ffd8;" text="ABRIR MESA - (F2)" textFill="#0081cb">
+            <JFXButton fx:id="btnAbrirMesa" onAction="#onAbrirMesa" prefHeight="36.0" prefWidth="186.0" style="-fx-background-color: #2196f3;" text="ABRIR MESA - (F2)" textFill="WHITE">
                <graphic>
-                  <FontAwesomeIconView fill="#0081cb" glyphName="GLASS" />
+                  <FontAwesomeIconView fill="WHITE" glyphName="GLASS" />
                </graphic>
             </JFXButton>
-            <JFXButton fx:id="btnFecharMesa" layoutX="10.0" layoutY="10.0" onAction="#onFecharMesa" prefHeight="36.0" prefWidth="173.0" style="-fx-background-color: #70ffd8;" text="FECHAR MESA - (F3)" textFill="#0081cb">
+            <JFXButton fx:id="btnFecharMesa" layoutX="10.0" layoutY="10.0" onAction="#onFecharMesa" prefHeight="36.0" prefWidth="186.0" style="-fx-background-color: #d32f2f;" text="FECHAR MESA - (F3)" textFill="WHITE">
                <graphic>
-                  <FontAwesomeIconView fill="#0081cb" glyphName="USD" />
+                  <FontAwesomeIconView fill="WHITE" glyphName="USD" />
+               </graphic>
+            </JFXButton>
+            <JFXButton fx:id="btnTransferirMesa" layoutX="177.0" layoutY="10.0" onAction="#onTransferirMesa" prefHeight="36.0" prefWidth="186.0" style="-fx-background-color: #00e676;" text="TRANSFERIR MESA- (F4)" textFill="WHITE">
+               <graphic>
+                  <FontAwesomeIconView fill="WHITE" glyphName="USD" />
                </graphic>
             </JFXButton>
          </children>

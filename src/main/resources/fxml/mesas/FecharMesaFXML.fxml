@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<StackPane fx:id="stackPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="490.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cashf.controller.mesas.FecharMesaFXMLController">
+   <children>
+      <Pane fx:id="paneRoot" prefHeight="490.0" prefWidth="640.0" style="-fx-background-color: #ffffff;">
+         <effect>
+            <DropShadow />
+         </effect>
+         <children>
+            <Pane prefHeight="20.0" prefWidth="640.0" style="-fx-background-color: #0081cb;">
+               <children>
+                  <Label layoutX="5.0" layoutY="2.0" text="Fechar Mesa:" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font></Label>
+               </children>
+            </Pane>
+            <Text layoutX="11.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mesa:">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Text>
+            <JFXComboBox fx:id="cbbMesa" editable="true" layoutX="12.0" layoutY="70.0" onAction="#onMesa" onKeyTyped="#onPesquisar" prefHeight="26.0" prefWidth="308.0" promptText="Selecione uma Mesa" />
+            <TableView fx:id="tbvComanda1" layoutX="12.0" layoutY="117.0" prefHeight="160.0" prefWidth="616.0" stylesheets="@../../styles/TableViewCSS.css">
+               <columns>
+                  <TableColumn fx:id="tbcCod1" prefWidth="86.0" text="COD" />
+                  <TableColumn fx:id="tbcDescricao1" prefWidth="221.0" text="DESCRIÇÃO" />
+                  <TableColumn fx:id="tbcQtde1" prefWidth="58.0" text="QTDE" />
+                  <TableColumn fx:id="tbcPreco1" prefWidth="62.0" text="PREÇO" />
+                  <TableColumn fx:id="tbcTotal1" prefWidth="100.0" text="TOTAL" />
+                  <TableColumn fx:id="btnCancelar1" prefWidth="88.0" text="CANCELAR" />
+               </columns>
+            </TableView>
+            <JFXComboBox fx:id="cbbMeioPagto" editable="true" layoutX="12.0" layoutY="324.0" onAction="#onMeioPagto" onKeyTyped="#onPesquisar" prefHeight="26.0" prefWidth="616.0" promptText="Meio de pagamento" />
+            <JFXTextField fx:id="txtValor" focusColor="#ff0b02" labelFloat="true" layoutX="12.0" layoutY="370.0" prefHeight="26.0" prefWidth="308.0" promptText="Valor Recebido" />
+            <JFXButton fx:id="btnFechar" layoutX="346.0" layoutY="449.0" onAction="#onFechar" prefHeight="30.0" prefWidth="130.0" ripplerFill="WHITE" style="-fx-background-color: #00e676;" text="FECHAR MESA" textFill="WHITE">
+               <graphic>
+                  <FontAwesomeIconView fill="WHITE" glyphName="USD" size="18" />
+               </graphic>
+            </JFXButton>
+            <JFXButton fx:id="btnCancelar" layoutX="497.0" layoutY="449.0" onAction="#onCancelar" prefHeight="30.0" prefWidth="130.0" ripplerFill="WHITE" style="-fx-background-color: #d32f2f;" text="CANCELAR" textFill="WHITE">
+               <graphic>
+                  <FontAwesomeIconView fill="WHITE" glyphName="CLOSE" size="18" />
+               </graphic>
+            </JFXButton>
+            <Separator layoutX="12.0" layoutY="436.0" prefHeight="2.0" prefWidth="616.0" />
+            <Text layoutX="12.0" layoutY="301.0" strokeType="OUTSIDE" strokeWidth="0.0" text="VALOR TOTAL:">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Text>
+            <Text fx:id="txtTotal" layoutX="138.0" layoutY="301.0" strokeType="OUTSIDE" strokeWidth="0.0" text="R$ 250.00">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Text>
+            <Text layoutX="12.0" layoutY="423.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TROCO:">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Text>
+            <Text fx:id="txtTroco" layoutX="138.0" layoutY="423.0" strokeType="OUTSIDE" strokeWidth="0.0" text="R$ 250.00">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Text>
+         </children>
+      </Pane>
+   </children>
+</StackPane>

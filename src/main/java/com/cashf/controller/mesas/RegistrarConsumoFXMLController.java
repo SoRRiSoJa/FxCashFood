@@ -203,10 +203,7 @@ public class RegistrarConsumoFXMLController implements GenericViewController, In
 
             erros += "A quantidade deve ser amior que 0";
         }
-        if (flag && qtde.compareTo(VendaController.getInstance().getProdutoSelecionado().getUnidadesEstoque()) > 0) {
-            erros += "A quantidade informada é maior que o total em estoque.";
-            flag = false;
-        }
+        
         return flag;
     }
 

@@ -6,10 +6,12 @@
 package com.cashf.core.venda;
 
 import com.cashf.dao.combo.ComboDAO;
+import com.cashf.dao.meiopagamento.MeioPagamentoDAO;
 import com.cashf.dao.produto.ProdutoDAO;
 import com.cashf.dao.venda.VendaDAO;
 import com.cashf.model.combo.Combo;
 import com.cashf.model.combo.ProdutoCombo;
+import com.cashf.model.meiopagamento.MeioPagamento;
 import com.cashf.model.mesa.Mesa;
 import com.cashf.model.produto.Produto;
 import com.cashf.model.venda.ProdutoVenda;
@@ -30,9 +32,11 @@ public class VendaController implements GenericController<Venda> {
     private Venda venda;
     private ObservableList<Venda> lista;
     private ObservableList<Produto> listaProd;
+    private MeioPagamento meioPagto;
     private final ProdutoDAO produtoDAO;
     private final ComboDAO comboDAO;
     private final VendaDAO vendaDAO;
+    private final MeioPagamentoDAO meioPAgamentoDAO;
     private Produto produtoSelecionado;
     private Combo comboSelecionado;
     private int tipoConsulta;
@@ -43,6 +47,7 @@ public class VendaController implements GenericController<Venda> {
         this.produtoDAO = new ProdutoDAO(Produto.class);
         this.vendaDAO = new VendaDAO(Venda.class);
         this.comboDAO = new ComboDAO(Combo.class);
+        this.meioPAgamentoDAO = new MeioPagamentoDAO(MeioPagamento.class);
         this.listaProd = FXCollections.observableList(produtoDAO.listProdToVenda());
         this.lista = FXCollections.observableList(new ArrayList<>());
         this.venda = new Venda();
@@ -213,6 +218,18 @@ public class VendaController implements GenericController<Venda> {
             max = (pc.getEtapa() > max) ? pc.getEtapa() : max;
         }
         return max;
+    }
+
+    public ObservableList<MeioPagamento> getListaMeioPagto() {
+        return FXCollections.observableList(meioPAgamentoDAO.listAll());
+    }
+
+    public MeioPagamento getMeioPagto() {
+        return meioPagto;
+    }
+
+    public void setMeioPagto(MeioPagamento meioPagto) {
+        this.meioPagto = meioPagto;
     }
 
 }

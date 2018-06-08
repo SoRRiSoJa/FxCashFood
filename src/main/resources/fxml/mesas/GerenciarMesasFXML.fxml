@@ -93,9 +93,18 @@
                      </children>
                   </HBox>
                   <Separator layoutX="17.0" layoutY="310.0" prefHeight="0.0" prefWidth="609.0" />
-                  <Label layoutX="28.0" layoutY="320.0" text="Total da Mesa:" />
-                  <Label layoutX="28.0" layoutY="360.0" text="Pagamento Parcial:" />
-                  <Label layoutX="28.0" layoutY="400.0" text="Saldo Atual:" />
+                  <Label layoutX="28.0" layoutY="320.0" text="Total da Mesa:">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font></Label>
+                  <Label layoutX="28.0" layoutY="360.0" text="Pagamento Parcial:">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font></Label>
+                  <Label layoutX="28.0" layoutY="400.0" text="Saldo Atual:">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font></Label>
                   <Separator layoutX="17.0" layoutY="425.0" prefHeight="0.0" prefWidth="609.0" />
                   <Separator layoutX="16.0" layoutY="311.0" orientation="VERTICAL" prefHeight="114.0" prefWidth="0.0" />
                   <Separator layoutX="624.0" layoutY="311.0" orientation="VERTICAL" prefHeight="114.0" prefWidth="0.0" />
@@ -110,6 +119,21 @@
                         <TableColumn fx:id="btnTransferirM" prefWidth="82.0" text="TRF.-ÍTEN" />
                      </columns>
                   </TableView>
+                  <Label fx:id="lblTotal" layoutX="187.0" layoutY="320.0">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lblPagtoParc" layoutX="187.0" layoutY="360.0">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lblSaldoAtual" layoutX="187.0" layoutY="400.0">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                  </Label>
                </children>
             </Pane>
             <Pane layoutX="700.0" layoutY="20.0" prefHeight="592.0" prefWidth="656.0" style="-fx-background-color: #ffffff;">

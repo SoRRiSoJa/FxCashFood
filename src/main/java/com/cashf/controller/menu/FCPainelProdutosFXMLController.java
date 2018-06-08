@@ -43,6 +43,8 @@ public class FCPainelProdutosFXMLController implements Initializable {
     private JFXButton btnAbrirMesa;
     @FXML
     private JFXButton btnFecharMesa;
+    @FXML
+    private JFXButton btnTransferirMesa;
 
     /**
      * Initializes the controller class.
@@ -120,10 +122,19 @@ public class FCPainelProdutosFXMLController implements Initializable {
                 //loadBox("/fxml/mesas/AbrirMesaFXML.fxml", "Mesa Nº" + MesaController.getInstance().getMesaAtual().toString());
             }
         });
+        MainApp.janelaAberta.addEventHandler(KeyEvent.KEY_PRESSED, (KeyEvent t) -> {
+            if (t.getCode() == KeyCode.F4) {
+                //loadBox("/fxml/mesas/AbrirMesaFXML.fxml", "Mesa Nº" + MesaController.getInstance().getMesaAtual().toString());
+            }
+        });
 
     }
 
     @FXML
     private void onFecharMesa(ActionEvent event) {
+    }
+
+    @FXML
+    private void onTransferirMesa(ActionEvent event) {
     }
 }

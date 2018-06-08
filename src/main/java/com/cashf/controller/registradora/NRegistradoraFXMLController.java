@@ -113,7 +113,7 @@ public class NRegistradoraFXMLController implements Initializable {
     private String erros = "";
     private Integer qtdeProd;
     private Integer nMesa;
-    
+
     private int foco = 1;
 
     /**
@@ -125,7 +125,7 @@ public class NRegistradoraFXMLController implements Initializable {
         loadCbbFunc();
         loadCbbProd();
         setUptableViewProdutos();
-        _cbbProduto=cbbProduto;
+        _cbbProduto = cbbProduto;
     }
 
     @FXML
@@ -194,6 +194,7 @@ public class NRegistradoraFXMLController implements Initializable {
 
     @FXML
     private void onPagar(ActionEvent event) {
+        loadBox("/fxml/mesas/FecharMesaFXML.fxml", "Receber");
     }
 
     @FXML

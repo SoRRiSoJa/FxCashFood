@@ -81,6 +81,13 @@ public class GerenciarMesasFXMLController implements Initializable {
     private TableColumn btnTransferirM;
     //----
     private static TableView<ProdutoVenda> _tbvComanda;
+    private Label lblTotalMesa;
+    @FXML
+    private Label lblTotal;
+    @FXML
+    private Label lblPagtoParc;
+    @FXML
+    private Label lblSaldoAtual;
 
     /**
      * Initializes the controller class.
@@ -92,6 +99,7 @@ public class GerenciarMesasFXMLController implements Initializable {
         setUptableViewProdutos();
         loadTbv();
         lblNumMesa.setText(MesaController.getInstance().getMesaAtual().getNumMesa() + "");
+        loadData();
     }
 
     @FXML
@@ -125,6 +133,10 @@ public class GerenciarMesasFXMLController implements Initializable {
         } catch (IOException ex) {
             System.out.println("Erro---->" + ex);
         }
+    }
+
+    private void loadData() {
+        lblTotal.setText(VendaController.getInstance().getVendaByMesa(MesaController.getInstance().getMesaAtual()).getValorTotal().toString());
     }
 
     private void loadTbv() {

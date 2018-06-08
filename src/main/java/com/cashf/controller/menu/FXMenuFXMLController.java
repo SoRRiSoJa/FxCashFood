@@ -23,12 +23,10 @@ import javafx.scene.Node;
 import javafx.scene.control.MenuBar;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Paint;
 import util.PoupUpUtil;
 
 /**
@@ -106,6 +104,7 @@ public class FXMenuFXMLController implements Initializable {
                 drawer.setMinWidth(0);
             }
         });
+
         menuButtonsControl();
     }
 
@@ -182,91 +181,34 @@ public class FXMenuFXMLController implements Initializable {
     private void menuButtonsControl() {
         for (Node node : gavetas.getChildren()) {
             if (node.getAccessibleText() != null) {
-                if (node.getAccessibleText().equalsIgnoreCase("FPane")) {
-                    FlowPane fp = (FlowPane) node;
-                    for (Node nodeFp : fp.getChildren()) {
-                        nodeFp.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
-                            switch (nodeFp.getAccessibleText()) {
-                                case "M01":
-                                    GavetaMesasFXMLController.getIconM1().setFill(Paint.valueOf("RED"));
-                                    System.out.println("Mesa1");
-                                    break;
-                                case "M02":
-                                    GavetaMesasFXMLController.getIconM2().setFill(Paint.valueOf("RED"));
-                                    System.out.println("Mesa2");
-                                    drawer.close();
-                                    break;
-                                case "M03":
-                                    GavetaMesasFXMLController.getIconM3().setFill(Paint.valueOf("RED"));
-                                    System.out.println("Mesa3");
-                                    drawer.close();
-                                    break;
-                                case "M04":
-                                    GavetaMesasFXMLController.getIconM4().setFill(Paint.valueOf("RED"));
-                                    drawer.close();
-                                    break;
-                                case "M05":
-                                    GavetaMesasFXMLController.getIconM5().setFill(Paint.valueOf("RED"));
-                                    drawer.close();
-                                    break;
-                                case "M06":
-                                    GavetaMesasFXMLController.getIconM6().setFill(Paint.valueOf("RED"));
-                                    drawer.close();
-                                    break;
-                                case "M07":
-                                    GavetaMesasFXMLController.getIconM7().setFill(Paint.valueOf("RED"));
-                                    drawer.close();
-                                    break;
-                                case "M08":
-                                    GavetaMesasFXMLController.getIconM8().setFill(Paint.valueOf("RED"));
-                                    drawer.close();
-                                    break;
-                                case "M09":
-                                    GavetaMesasFXMLController.getIconM9().setFill(Paint.valueOf("RED"));
-                                    drawer.close();
-                                    break;
-                                case "M10":
-                                    GavetaMesasFXMLController.getIconM10().setFill(Paint.valueOf("RED"));
-                                    drawer.close();
-                                    break;
-                                case "M11":
-                                    GavetaMesasFXMLController.getIconM11().setFill(Paint.valueOf("RED"));
-                                    drawer.close();
-                                    break;
-                                case "M12":
-                                    GavetaMesasFXMLController.getIconM12().setFill(Paint.valueOf("RED"));
-                                    drawer.close();
-                                    break;
-                                case "M13":
-                                    GavetaMesasFXMLController.getIconM13().setFill(Paint.valueOf("RED"));
-                                    drawer.close();
-                                    break;
-                                case "M14":
-                                    GavetaMesasFXMLController.getIconM14().setFill(Paint.valueOf("RED"));
-                                    drawer.close();
-                                    break;
-                                case "M15":
-                                    GavetaMesasFXMLController.getIconM15().setFill(Paint.valueOf("RED"));
-                                    drawer.close();
-                                    break;
-                                case "M16":
-                                    GavetaMesasFXMLController.getIconM16().setFill(Paint.valueOf("RED"));
-                                    drawer.close();
-                                    break;
-                                case "M17":
-                                    GavetaMesasFXMLController.getIconM17().setFill(Paint.valueOf("RED"));
-                                    drawer.close();
-                                    break;
-                                case "M18":
-                                    GavetaMesasFXMLController.getIconM18().setFill(Paint.valueOf("RED"));
-                                    drawer.close();
-                                    break;
-                            }
-                        });
+                node.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
+                    switch (node.getAccessibleText()) {
+                        case "M01":
+                            loadFXML("/fxml/clientes/FXGerenciarClientesFXML.fxml");
+                            break;
+                        case "M02":
+                            loadFXML("/fxml/funcionario/FXGerenciarFuncionariosFXML.fxml");
+                            break;
+                        case "M03":
+                            loadFXML("/fxml/fornecedores/FXGerenciarFornecedoresFXML.fxml");
+                            break;
+                        case "M04":
+                            loadFXML("/fxml/produto/GerenciarGruposFXML.fxml");
+                            break;
+                        case "M05":
+                            loadFXML("/fxml/produto/FXGerenciarProdutosFXML.fxml");
+                            break;
+                        case "M06":
+                            loadFXML("/fxml/contaCorrente/GerenciarContasFXML.fxml");
+                            break;
+                        case "M07":
+                            loadFXML("/fxml/meioPagamento/MeioPagamentoFXML.fxml");
+                            break;
                     }
-
-                }
+                    drawer.close();
+                });
             }
+
         }
     }
 
@@ -286,13 +228,16 @@ public class FXMenuFXMLController implements Initializable {
 
     @FXML
     private void onFichaTecnica(ActionEvent event) {
-
         loadFXML("/fxml/fichaTecnica/GerenciarFichasTecnicasFXML.fxml");
     }
 
     @FXML
     private void onNaDois(ActionEvent event) {
-        loadFXML("/fxml/receberPedido/ReceberPedidoFXML.fxml");
+        if (CaixaController.getInstance().getCaixaAberto().getIdCaixa() != 0) {
+            loadFXML("/fxml/receberPedido/ReceberPedidoFXML.fxml");
+        } else {
+            PoupUpUtil.errorMessage(rootAcnhorPane, MainApp.paneRoot, "Um Caixa deve Ser aberto!");
+        }
     }
 
     @FXML
@@ -313,5 +258,5 @@ public class FXMenuFXMLController implements Initializable {
     private void onCombos(ActionEvent event) {
         loadFXML("/fxml/combos/GerenciarCombosFXML.fxml");
     }
-    
+
 }
