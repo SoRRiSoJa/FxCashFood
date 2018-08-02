@@ -274,7 +274,7 @@ public class NRegistradoraFXMLController implements Initializable {
         tbcDescricao.setCellValueFactory(new PropertyValueFactory<>("produto"));
         tbcQtde.setCellValueFactory(new PropertyValueFactory<>("qtde"));
         tbcPreco.setCellValueFactory(new PropertyValueFactory<>("precoUnit"));
-        tbcTotal.setCellValueFactory((param) -> new SimpleObjectProperty<BigDecimal>(param.getValue().getPrecoUnit().multiply(param.getValue().getQtde())));
+        tbcTotal.setCellValueFactory((param) -> new SimpleObjectProperty<>(param.getValue().getPrecoUnit().multiply(param.getValue().getQtde())));
         tbvComanda.getColumns().setAll(tbcCod, tbcDescricao, tbcQtde, tbcPreco, tbcTotal);
     }
 
@@ -308,7 +308,7 @@ public class NRegistradoraFXMLController implements Initializable {
                 erros = "Mesa não existe. \n";
                 flag = false;
             }
-        } catch (Exception ex) {
+        } catch (NumberFormatException ex) {
             erros = "Mesa Inválida verifique o número informado. \n";
             flag = false;
         }
@@ -323,7 +323,7 @@ public class NRegistradoraFXMLController implements Initializable {
                 erros = "Informe uma quantidade para o produto. \n";
                 flag = false;
             }
-        } catch (Exception ex) {
+        } catch (NumberFormatException ex) {
             erros = "Quantidade inválida verifique o númeor informado. \n";
             flag = false;
         }

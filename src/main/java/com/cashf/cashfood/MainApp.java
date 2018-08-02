@@ -8,18 +8,22 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
-
+import util.BDInsert;
 
 public class MainApp extends Application {
+
     public static Stage janelaAberta, janelaAnterior;
     public static StackPane paneRoot;
+
     @Override
     public void start(Stage stage) throws Exception {
         Parent root;
-        if(ParametrosController.getInstance().getLista().isEmpty()){
+        if (!ParametrosController.getInstance().getLista().isEmpty()) {
+            //BDInsert bdInsert = new BDInsert();
+            //bdInsert.insertData();
             root = FXMLLoader.load(getClass().getResource("/fxml/parametrizacao/GerenciarParametrizacaoFXML.fxml"));
-        }else{
-             root = FXMLLoader.load(getClass().getResource("/fxml/login/FXLoginFXML.fxml"));
+        } else {
+            root = FXMLLoader.load(getClass().getResource("/fxml/login/FXLoginFXML.fxml"));
         }
         Scene scene = new Scene(root);
         stage.setTitle("ERP - Cash Food v.1.0 Copyright (c) 2017 By João André Martins Dias e Silva");

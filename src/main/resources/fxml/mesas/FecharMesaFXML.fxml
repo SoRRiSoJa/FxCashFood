@@ -63,7 +63,7 @@
                   <Font name="System Bold" size="14.0" />
                </font>
             </Text>
-            <Text fx:id="txtTotal" layoutX="138.0" layoutY="301.0" strokeType="OUTSIDE" strokeWidth="0.0" text="R$ 250.00">
+            <Text fx:id="txtTotal" layoutX="138.0" layoutY="301.0" strokeType="OUTSIDE" strokeWidth="0.0">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
@@ -73,7 +73,7 @@
                   <Font name="System Bold" size="14.0" />
                </font>
             </Text>
-            <Text fx:id="txtTroco" layoutX="138.0" layoutY="423.0" strokeType="OUTSIDE" strokeWidth="0.0" text="R$ 250.00">
+            <Text fx:id="txtTroco" layoutX="138.0" layoutY="423.0" strokeType="OUTSIDE" strokeWidth="0.0">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>

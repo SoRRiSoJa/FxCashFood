@@ -10,6 +10,7 @@ import com.cashf.model.produto.SituacaoTributaria;
 import dao.GenericDAOIMP;
 import java.util.List;
 import org.hibernate.Session;
+import org.hibernate.query.Query;
 
 /**
  *
@@ -30,5 +31,17 @@ public class ParametrosFiscaisDAO extends GenericDAOIMP<ParametrosFiscais> {
             System.out.println("Erro:" + e);
             return null;
         }
+    }
+    public ParametrosFiscais getBySituacaoTributaria(String st) {
+        try (Session session = sessionFactory.openSession()) {
+            String hql = "from ParametrosFiscais pf where pf.situacaoTributaria like :st";
+            Query query = session.createQuery(hql);
+            query.setParameter("st", st);
+            return (ParametrosFiscais) query.getSingleResult();
+        } catch (Exception e) {
+            System.out.println("Erro:" + e);
+            return null;
+        }
+
     }
 }

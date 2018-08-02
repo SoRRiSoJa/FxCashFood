@@ -63,12 +63,14 @@
             <scope>provided</scope>
         </dependency>
         <!-- Fim Hibernate -->
+        
         <dependency>
             <groupId>unknown.binary</groupId>
             <artifactId>hibernate-jpamodelgen-4.3.1.Final</artifactId>
             <version>SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
+        
         <dependency>
             <groupId>unknown.binary</groupId>
             <artifactId>derbyclient</artifactId>

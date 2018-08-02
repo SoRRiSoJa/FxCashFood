@@ -20,7 +20,7 @@
             <DropShadow />
          </effect>
          <children>
-            <JFXComboBox fx:id="cbbSituacaoTributaria" focusColor="#004ba0" labelFloat="true" layoutX="35.0" layoutY="44.0" prefHeight="26.0" prefWidth="155.0" promptText="Situação Tributária" />
+            <JFXComboBox fx:id="cbbSituacaoTributaria" focusColor="#004ba0" labelFloat="true" layoutX="35.0" layoutY="44.0" onAction="#onSelectST" prefHeight="26.0" prefWidth="155.0" promptText="Situação Tributária" />
             <JFXTextField fx:id="txtPercentualPIS" focusColor="#004ba0" labelFloat="true" layoutX="35.0" layoutY="96.0" onKeyReleased="#onKeyReleasedPISPercent" prefHeight="24.0" prefWidth="137.0" promptText="\% PIS" />
             <JFXTextField fx:id="txtCstPis" focusColor="#004ba0" labelFloat="true" layoutX="243.0" layoutY="96.0" onKeyReleased="#onKeyReleasedCSTPis" prefHeight="24.0" prefWidth="137.0" promptText="Cst PIS" />
             <JFXTextField fx:id="txtPercentualConfins" focusColor="#004ba0" labelFloat="true" layoutX="468.0" layoutY="96.0" onKeyReleased="#onKeyReleasedconfisnPercent" prefHeight="24.0" prefWidth="137.0" promptText="\% CONFINS" />
@@ -95,9 +95,9 @@
                   <Label layoutX="5.0" layoutY="2.0" text="Parâmetros Fiscais:" textFill="WHITE" />
                </children>
             </Pane>
-            <TableView prefHeight="426.0" prefWidth="170.0" stylesheets="@../../styles/TableViewCSS.css">
+            <TableView fx:id="tbvSituacao" prefHeight="426.0" prefWidth="170.0" stylesheets="@../../styles/TableViewCSS.css">
               <columns>
-                <TableColumn prefWidth="169.0" text="Situação Tributária" />
+                <TableColumn fx:id="tbcSituacao" prefWidth="169.0" text="Situação Tributária" />
               </columns>
             </TableView>
          </children>

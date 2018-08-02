@@ -34,6 +34,7 @@ com/cashf/controller/cliente/TabClientesFXMLController$ButtonCellDelete.class
 com/cashf/model/contacorrente/ContaCorrente_.class
 com/cashf/model/venda/Venda.class
 com/cashf/controller/fornecedor/TabFornecedorFXMLController$ButtonCellDelete$1.class
+com/cashf/controller/mesas/FecharMesaFXMLController$1.class
 com/cashf/dao/produto/ProdutoDAO.class
 com/cashf/controller/caixa/GerenciarCaixaFXMLController.class
 com/cashf/model/combo/ProdutoCombo.class
@@ -86,6 +87,7 @@ com/cashf/model/banco/Banco.class
 com/cashf/controller/menu/GavetaMesasFXMLController.class
 com/cashf/controller/cliente/ClienteController.class
 com/cashf/model/combo/ProdutoCombo_.class
+util/JFXComboBoxAutoComplete.class
 com/cashf/controller/receberpedido/ReceberPedidoController.class
 com/cashf/controller/fornecedor/TabListaFornecedoresFXMLController.class
 com/cashf/core/gerarContasPagar/BoxGerarContasPagarFXMLController.class
@@ -107,6 +109,7 @@ com/cashf/controller/combos/TabComboFXMLController.class
 com/cashf/controller/meiopagamento/MeioPagamentoController.class
 com/cashf/model/contareceber/ContaReceber_.class
 com/cashf/model/pessoa/Sexo.class
+com/cashf/dao/estado/EstadoDAO.class
 com/cashf/controller/menu/GavetasERPFXMLController.class
 com/cashf/controller/contaspagar/ContasPagarFXMLController$2.class
 com/cashf/model/produto/Produto.class
@@ -189,10 +192,12 @@ com/cashf/controller/produto/TabProdutoFXMLController.class
 com/cashf/model/prepreparo/ProdutoPrePreparo.class
 com/cashf/core/atualizarestoque/AtualizarEstoque.class
 com/cashf/controller/menu/FXMenuFCaixaFXMLController.class
+com/cashf/controller/parametrizacao/TabParametrosFiscaisFXMLController$1.class
 com/cashf/controller/mesas/RegistrarConsumoFXMLController.class
 com/cashf/dao/contareceber/ContaReceberDAO.class
 com/cashf/model/usuario/Usuario_.class
 com/cashf/model/produto/Produto_.class
+com/cashf/controller/mesas/FecharMesaFXMLController$ButtonCellDelete.class
 com/cashf/model/combo/Combo_.class
 com/cashf/model/prepreparo/ProdutoPrePreparo_.class
 com/cashf/controller/fornecedor/FXGerenciarFornecedoresFXMLController.class

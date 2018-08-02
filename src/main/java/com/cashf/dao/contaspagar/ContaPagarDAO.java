@@ -6,13 +6,10 @@
 package com.cashf.dao.contaspagar;
 
 import com.cashf.model.caixa.Caixa;
-import com.cashf.model.caixa.TPMov;
 import com.cashf.model.contasPagar.ContaPagar;
 import com.cashf.model.contasPagar.StatusPagto;
-import com.cashf.model.meiopagamento.TPPagto;
 import dao.GenericDAOIMP;
 import java.math.BigDecimal;
-import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Projections;

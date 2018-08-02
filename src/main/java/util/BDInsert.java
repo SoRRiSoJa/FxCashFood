@@ -5,6 +5,9 @@
  */
 package util;
 
+import com.cashf.dao.banco.BancoDAO;
+import com.cashf.dao.cidade.CidadeDAO;
+import com.cashf.dao.estado.EstadoDAO;
 import com.cashf.model.banco.Banco;
 import com.cashf.model.cidade.Cidade;
 import com.cashf.model.estado.Estado;
@@ -20,12 +23,39 @@ public class BDInsert {
     private List<Estado> estados = new ArrayList<>();
     private List<Cidade> cidades = new ArrayList<>();
     private List<Banco> bancos = new ArrayList<>();
+    private final EstadoDAO estadoDAO;
+    private final CidadeDAO cidadeDAO;
+    private final BancoDAO bancoDAO;
 
     public BDInsert() {
         this.estados = new ArrayList<>();
         this.cidades = new ArrayList<>();
         this.bancos = new ArrayList<>();
+        this.estadoDAO = new EstadoDAO(Estado.class);
+        this.cidadeDAO = new CidadeDAO(Cidade.class);
+        this.bancoDAO = new BancoDAO(Banco.class);
+    }
 
+    private void loadLists() {
+        createInstanceBancos();
+        createInstanceEstados();
+        createInstanceCidades();
+    }
+
+    public void insertData() {
+        loadLists();
+        estados.forEach((est) -> {
+            estadoDAO.save(est);
+        });
+        cidades.forEach((cid) -> {
+            cidadeDAO.save(cid);
+        });
+        bancos.forEach((bac) -> {
+            bancoDAO.save(bac);
+        });
+    }
+
+    private void createInstanceEstados() {
         estados.add(new Estado("AC", "Acre"));
         estados.add(new Estado("AL", "Alagoas"));
         estados.add(new Estado("AM", "Amazonas"));
@@ -53,6 +83,9 @@ public class BDInsert {
         estados.add(new Estado("SE", "Sergipe"));
         estados.add(new Estado("SP", "São Paulo"));
         estados.add(new Estado("TO", "Tocantins"));
+    }
+
+    private void createInstanceCidades() {
         cidades.add(new Cidade("Presidente Prudente", new Estado("SP", "São Paulo")));
         cidades.add(new Cidade("Marilia", new Estado("SP", "São Paulo")));
         cidades.add(new Cidade("Presidente Epitacio", new Estado("SP", "São Paulo")));
@@ -62,6 +95,9 @@ public class BDInsert {
         cidades.add(new Cidade("Campinas", new Estado("SP", "São Paulo")));
         cidades.add(new Cidade("Americana", new Estado("SP", "São Paulo")));
         cidades.add(new Cidade("Rio de Janeiro", new Estado("RJ", "Rio de Janeiro")));
+    }
+
+    private void createInstanceBancos() {
         bancos.add(new Banco(1l, "Banco do Brasil"));
         bancos.add(new Banco(2l, "Banco Central do Brasil"));
         bancos.add(new Banco(3l, "Banco da Amazônia"));
@@ -116,17 +152,4 @@ public class BDInsert {
         bancos.add(new Banco(756l, "Banco Cooperativo do Brasil - BANCOOB"));
         bancos.add(new Banco(748l, "Banco Cooperativo Sicredi - BANSICREDI"));
     }
-
-    public List<Estado> getEstados() {
-        return estados;
-    }
-
-    public List<Cidade> getCidades() {
-        return cidades;
-    }
-
-    public List<Banco> getBancos() {
-        return bancos;
-    }
-
 }
