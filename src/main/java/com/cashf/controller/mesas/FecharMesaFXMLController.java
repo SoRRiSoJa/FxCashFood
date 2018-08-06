@@ -23,7 +23,6 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
@@ -54,17 +53,17 @@ public class FecharMesaFXMLController implements Initializable {
     @FXML
     private JFXComboBox<Mesa> cbbMesa;
     @FXML
-    private TableView<ProdutoVenda> tbvComanda1;
+    private TableView<ProdutoVenda> tbvComanda;
     @FXML
-    private TableColumn<ProdutoVenda, String> tbcCod1;
+    private TableColumn<ProdutoVenda, String> tbcCod;
     @FXML
-    private TableColumn<ProdutoVenda, String> tbcDescricao1;
+    private TableColumn<ProdutoVenda, String> tbcDescricao;
     @FXML
-    private TableColumn<ProdutoVenda, BigDecimal> tbcQtde1;
+    private TableColumn<ProdutoVenda, BigDecimal> tbcQtde;
     @FXML
-    private TableColumn<ProdutoVenda, BigDecimal> tbcPreco1;
+    private TableColumn<ProdutoVenda, BigDecimal> tbcPreco;
     @FXML
-    private TableColumn<ProdutoVenda, BigDecimal> tbcTotal1;
+    private TableColumn<ProdutoVenda, BigDecimal> tbcTotal;
     @FXML
     private TableColumn btnCancelar1;
     @FXML
@@ -73,12 +72,12 @@ public class FecharMesaFXMLController implements Initializable {
     private JFXTextField txtValor;
     @FXML
     private JFXButton btnFechar;
-    @FXML
-    private JFXButton btnCancelar;
+    
     @FXML
     private Text txtTotal;
     @FXML
     private Text txtTroco;
+    
 
     /**
      * Initializes the controller class.
@@ -98,7 +97,7 @@ public class FecharMesaFXMLController implements Initializable {
         if (cbbMesa.getSelectionModel().getSelectedItem() != null) {
             MesaController.getInstance().setMesaAtual(cbbMesa.getItems().get(cbbMesa.getSelectionModel().getSelectedIndex()));
             VendaController.getInstance().setVenda(VendaController.getInstance().getVendaByMesa(MesaController.getInstance().getMesaAtual()));
-            tbvComanda1.refresh();
+            tbvComanda.refresh();
             loadTbv();
             loadData();
         }
@@ -131,7 +130,7 @@ public class FecharMesaFXMLController implements Initializable {
     }
     
     private void loadTbv() {
-        tbvComanda1.setItems(FXCollections.observableList(VendaController.getInstance().getVenda().getListaProdutos()));
+        tbvComanda.setItems(FXCollections.observableList(VendaController.getInstance().getVenda().getListaProdutos()));
     }
     
     private void loadLIstaMesas() {
@@ -143,12 +142,12 @@ public class FecharMesaFXMLController implements Initializable {
     }
     
     private void setUptableViewProdutos() {
-        tbcCod1.setCellValueFactory((param) -> new SimpleStringProperty(param.getValue().getProduto().getCodigoReferencia()));
-        tbcDescricao1.setCellValueFactory(new PropertyValueFactory<>("produto"));
-        tbcQtde1.setCellValueFactory(new PropertyValueFactory<>("qtde"));
-        tbcPreco1.setCellValueFactory(new PropertyValueFactory<>("precoUnit"));
+        tbcCod.setCellValueFactory((param) -> new SimpleStringProperty(param.getValue().getProduto().getCodigoReferencia()));
+        tbcDescricao.setCellValueFactory(new PropertyValueFactory<>("produto"));
+        tbcQtde.setCellValueFactory(new PropertyValueFactory<>("qtde"));
+        tbcPreco.setCellValueFactory(new PropertyValueFactory<>("precoUnit"));
         
-        tbcTotal1.setCellValueFactory((param) -> new SimpleObjectProperty<>(param.getValue().getPrecoUnit().multiply(param.getValue().getQtde())));
+        tbcTotal.setCellValueFactory((param) -> new SimpleObjectProperty<>(param.getValue().getPrecoUnit().multiply(param.getValue().getQtde())));
         btnCancelar1.setCellFactory(
                 new Callback<TableColumn<Disposer.Record, Boolean>, TableCell<Disposer.Record, Boolean>>() {
             @Override
@@ -157,7 +156,7 @@ public class FecharMesaFXMLController implements Initializable {
             }
         });
         
-        tbvComanda1.getColumns().setAll(tbcCod1, tbcDescricao1, tbcQtde1, tbcPreco1, tbcTotal1, btnCancelar1);
+        tbvComanda.getColumns().setAll(tbcCod, tbcDescricao, tbcQtde, tbcPreco, tbcTotal, btnCancelar1);
     }
     
     public class ButtonCellDelete extends TableCell<Disposer.Record, Boolean> {

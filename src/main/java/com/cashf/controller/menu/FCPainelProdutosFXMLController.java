@@ -119,7 +119,7 @@ public class FCPainelProdutosFXMLController implements Initializable {
         });
         MainApp.janelaAberta.addEventHandler(KeyEvent.KEY_PRESSED, (KeyEvent t) -> {
             if (t.getCode() == KeyCode.F3) {
-                //loadBox("/fxml/mesas/AbrirMesaFXML.fxml", "Mesa Nº" + MesaController.getInstance().getMesaAtual().toString());
+                loadBox("/fxml/mesas/FecharMesaFXML.fxml", "Mesa Nº" + MesaController.getInstance().getMesaAtual().toString());
             }
         });
         MainApp.janelaAberta.addEventHandler(KeyEvent.KEY_PRESSED, (KeyEvent t) -> {
@@ -132,6 +132,7 @@ public class FCPainelProdutosFXMLController implements Initializable {
 
     @FXML
     private void onFecharMesa(ActionEvent event) {
+        loadBox("/fxml/mesas/FecharMesaFXML.fxml", "Mesa Nº" + MesaController.getInstance().getMesaAtual().toString());
     }
 
     @FXML
