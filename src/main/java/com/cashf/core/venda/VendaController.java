@@ -94,7 +94,7 @@ public class VendaController implements GenericController<Venda> {
     public BigDecimal getValTotal() {
         BigDecimal tot = BigDecimal.ZERO;
         for (ProdutoVenda pv : vendaController.getInstance().getListaProduosVenda()) {
-            tot = tot.add(pv.getPrecoUnit().multiply(pv.getPrecoUnit()));
+            tot = tot.add(pv.getPrecoUnit().multiply(pv.getQtde()));
         }
         return tot;
     }
