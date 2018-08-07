@@ -84,13 +84,19 @@ public class VendaController implements GenericController<Venda> {
     }
 
     public Venda getVendaByMesa(Mesa mesa) {
-        Venda venda = null;
-        for (Venda ve : lista) {
-            if (ve.getMesa().equals(mesa)) {
-                venda = ve;
-            }
-        }
+
+        lista.stream().filter((ve) -> (ve.getMesa().equals(mesa))).forEachOrdered((ve) -> {
+            venda = ve;
+        });
         return venda;
+    }
+
+    public BigDecimal getValTotal() {
+        BigDecimal tot = BigDecimal.ZERO;
+        for (ProdutoVenda pv : vendaController.getInstance().getListaProduosVenda()) {
+            tot = tot.add(pv.getPrecoUnit().multiply(pv.getPrecoUnit()));
+        }
+        return tot;
     }
 
     @Override

@@ -46,7 +46,7 @@
                </columns>
             </TableView>
             <JFXComboBox fx:id="cbbMeioPagto" editable="true" layoutX="12.0" layoutY="324.0" onAction="#onMeioPagto" onKeyTyped="#onPesquisar" prefHeight="26.0" prefWidth="616.0" promptText="Meio de pagamento" />
-            <JFXTextField fx:id="txtValor" focusColor="#ff0b02" labelFloat="true" layoutX="12.0" layoutY="370.0" prefHeight="26.0" prefWidth="308.0" promptText="Valor Recebido">
+            <JFXTextField fx:id="txtValor" focusColor="#ff0b02" labelFloat="true" layoutX="12.0" layoutY="370.0" onKeyReleased="#onValorRecebido" prefHeight="26.0" prefWidth="308.0" promptText="Valor Recebido">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font></JFXTextField>

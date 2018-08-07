@@ -31,6 +31,8 @@ import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.InputMethodEvent;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
@@ -45,7 +47,7 @@ import org.controlsfx.control.Notifications;
  * @author joao
  */
 public class FecharMesaFXMLController implements Initializable {
-    
+
     @FXML
     private StackPane stackPane;
     @FXML
@@ -72,12 +74,17 @@ public class FecharMesaFXMLController implements Initializable {
     private JFXTextField txtValor;
     @FXML
     private JFXButton btnFechar;
-    
+
     @FXML
     private Text txtTotal;
     @FXML
     private Text txtTroco;
-    
+    @FXML
+    private JFXButton btnCancelar;
+    //--------------
+    String valorRecebido = "";
+    BigDecimal vRecebido;
+    BigDecimal vTroco;
 
     /**
      * Initializes the controller class.
@@ -91,7 +98,7 @@ public class FecharMesaFXMLController implements Initializable {
         loadTbv();
         loadData();
     }
-    
+
     @FXML
     private void onMesa(ActionEvent event) {
         if (cbbMesa.getSelectionModel().getSelectedItem() != null) {
@@ -102,51 +109,51 @@ public class FecharMesaFXMLController implements Initializable {
             loadData();
         }
     }
-    
+
     @FXML
     private void onPesquisar(KeyEvent event) {
     }
-    
+
     @FXML
     private void onMeioPagto(ActionEvent event) {
         if (cbbMeioPagto.getSelectionModel().getSelectedItem() != null) {
             VendaController.getInstance().setMeioPagto(cbbMeioPagto.getItems().get(cbbMeioPagto.getSelectionModel().getSelectedIndex()));
         }
     }
-    
+
     @FXML
     private void onFechar(ActionEvent event) {
-        
+
     }
-    
+
     @FXML
     private void onCancelar(ActionEvent event) {
         MainApp.janelaAberta.close();
         MainApp.janelaAberta = MainApp.janelaAnterior;
     }
-    
+
     private void loadMeioPagamento() {
         cbbMeioPagto.setItems(VendaController.getInstance().getListaMeioPagto());
     }
-    
+
     private void loadTbv() {
         tbvComanda.setItems(FXCollections.observableList(VendaController.getInstance().getVenda().getListaProdutos()));
     }
-    
+
     private void loadLIstaMesas() {
         cbbMesa.setItems(MesaController.getInstance().getLista());
     }
-    
+
     private void loadData() {
         txtTotal.setText(VendaController.getInstance().getVendaByMesa(MesaController.getInstance().getMesaAtual()).getValorTotal().toString());
     }
-    
+
     private void setUptableViewProdutos() {
         tbcCod.setCellValueFactory((param) -> new SimpleStringProperty(param.getValue().getProduto().getCodigoReferencia()));
         tbcDescricao.setCellValueFactory(new PropertyValueFactory<>("produto"));
         tbcQtde.setCellValueFactory(new PropertyValueFactory<>("qtde"));
         tbcPreco.setCellValueFactory(new PropertyValueFactory<>("precoUnit"));
-        
+
         tbcTotal.setCellValueFactory((param) -> new SimpleObjectProperty<>(param.getValue().getPrecoUnit().multiply(param.getValue().getQtde())));
         btnCancelar1.setCellFactory(
                 new Callback<TableColumn<Disposer.Record, Boolean>, TableCell<Disposer.Record, Boolean>>() {
@@ -155,16 +162,26 @@ public class FecharMesaFXMLController implements Initializable {
                 return new ButtonCellDelete();
             }
         });
-        
+
         tbvComanda.getColumns().setAll(tbcCod, tbcDescricao, tbcQtde, tbcPreco, tbcTotal, btnCancelar1);
     }
-    
+
+    @FXML
+    private void onValorRecebido(KeyEvent event) {
+        valorRecebido = txtValor.getText();
+        if (event.getCode() == KeyCode.ENTER) {
+            vRecebido= new BigDecimal(valorRecebido);
+            vTroco=vRecebido.subtract(VendaController.getInstance().getValTotal());
+            txtTroco.setText(vTroco.toString());
+        }
+    }
+
     public class ButtonCellDelete extends TableCell<Disposer.Record, Boolean> {
-        
+
         JFXButton cellButton = new JFXButton("Excluir");
         Notifications notificationBuilder;
         FontAwesomeIconView auxff = new FontAwesomeIconView(FontAwesomeIcon.TRASH);
-        
+
         public ButtonCellDelete() {
             auxff.setSize("2em");
             cellButton.setGraphic(auxff);
@@ -176,7 +193,7 @@ public class FecharMesaFXMLController implements Initializable {
                 if (currentPerson != null) {
                     // ... user chose OK
                     VendaController.getInstance().getListaProd().remove(currentPerson);
-                    
+
                 } else {
                     notificationBuilder = Notifications.create().title("Nenhum contato selecionado!").
                             text("Você deve selecionar um contato para editar.").
@@ -187,7 +204,7 @@ public class FecharMesaFXMLController implements Initializable {
                 }
             });
         }
-        
+
         @Override
         protected void updateItem(Boolean t, boolean empty) {
             super.updateItem(t, empty);
@@ -197,7 +214,7 @@ public class FecharMesaFXMLController implements Initializable {
                 setGraphic(null);
             }
         }
-        
+
     }
-    
+
 }
