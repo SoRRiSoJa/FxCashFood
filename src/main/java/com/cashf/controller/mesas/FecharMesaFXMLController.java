@@ -6,6 +6,7 @@
 package com.cashf.controller.mesas;
 
 import com.cashf.cashfood.MainApp;
+import com.cashf.controller.caixa.GerenciarCaixaFXMLController;
 import com.cashf.core.venda.VendaController;
 import com.cashf.model.meiopagamento.MeioPagamento;
 import com.cashf.model.mesa.Mesa;
@@ -123,6 +124,7 @@ public class FecharMesaFXMLController implements Initializable {
     @FXML
     private void onFechar(ActionEvent event) {
         MesaController.getInstance().fecharMesa();
+        GerenciarCaixaFXMLController.refreshTbv();
     }
 
     @FXML
