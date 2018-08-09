@@ -5,10 +5,15 @@
  */
 package com.cashf.core.venda;
 
+import com.cashf.controller.caixa.CaixaController;
+import com.cashf.dao.caixamovimento.CaixaMovimentoDAO;
 import com.cashf.dao.combo.ComboDAO;
 import com.cashf.dao.meiopagamento.MeioPagamentoDAO;
 import com.cashf.dao.produto.ProdutoDAO;
 import com.cashf.dao.venda.VendaDAO;
+import com.cashf.model.caixa.Caixa;
+import com.cashf.model.caixa.CaixaMovimento;
+import com.cashf.model.caixa.TPMov;
 import com.cashf.model.combo.Combo;
 import com.cashf.model.combo.ProdutoCombo;
 import com.cashf.model.meiopagamento.MeioPagamento;
@@ -18,9 +23,11 @@ import com.cashf.model.venda.ProdutoVenda;
 import com.cashf.model.venda.Venda;
 import controller.GenericController;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import org.apache.derby.client.am.DateTime;
 
 /**
  *
@@ -36,9 +43,11 @@ public class VendaController implements GenericController<Venda> {
     private final ProdutoDAO produtoDAO;
     private final ComboDAO comboDAO;
     private final VendaDAO vendaDAO;
+    private final CaixaMovimentoDAO caixaMovimentoDAO;
     private final MeioPagamentoDAO meioPAgamentoDAO;
     private Produto produtoSelecionado;
     private Combo comboSelecionado;
+    private CaixaMovimento caixaMovimento;
     private int tipoConsulta;
     private int etapaAtual;
 
@@ -48,6 +57,7 @@ public class VendaController implements GenericController<Venda> {
         this.vendaDAO = new VendaDAO(Venda.class);
         this.comboDAO = new ComboDAO(Combo.class);
         this.meioPAgamentoDAO = new MeioPagamentoDAO(MeioPagamento.class);
+        this.caixaMovimentoDAO=new CaixaMovimentoDAO(CaixaMovimento.class);
         this.listaProd = FXCollections.observableList(produtoDAO.listProdToVenda());
         this.lista = FXCollections.observableList(new ArrayList<>());
         this.venda = new Venda();
@@ -58,6 +68,8 @@ public class VendaController implements GenericController<Venda> {
         this.produtoSelecionado.setIdProduto(0l);
         this.comboSelecionado = new Combo();
         this.comboSelecionado.setIdCombo(0l);
+        this.caixaMovimento=new CaixaMovimento();
+        caixaMovimento.setIdCaixaMovimento(0l);
     }
 
     public static synchronized VendaController getInstance() {
@@ -67,6 +79,22 @@ public class VendaController implements GenericController<Venda> {
         return vendaController;
     }
 
+    public CaixaMovimento getCaixaMovimento() {
+        return caixaMovimento;
+    }
+
+    public void setCaixaMovimento(CaixaMovimento caixaMovimento) {
+        this.caixaMovimento = caixaMovimento;
+    }
+    public void setCaixaMovimento(String observacao, BigDecimal valor) {
+        this.caixaMovimento.setIdCaixaMovimento(0l);
+        this.caixaMovimento.setTipoMovimento(TPMov.CREDITO);
+        this.caixaMovimento.setDataMovimento(LocalDate.now());
+        this.caixaMovimento.setCaixa(CaixaController.getInstance().getCaixaAberto());
+        this.caixaMovimento.setObservacao(observacao);
+        this.caixaMovimento.setValor(valor);
+    }
+    
     public int getEtapaAtual() {
         return etapaAtual;
     }
@@ -122,6 +150,14 @@ public class VendaController implements GenericController<Venda> {
         this.venda = new Venda();
         venda.setIdVenda(0l);
         venda.setListaProdutos(FXCollections.observableList(new ArrayList<>()));
+    }
+    public void fecharVenda(){
+        venda.setValorTotal(getValTotal());
+        venda.setDataVenda(LocalDate.now());
+        insert();
+        setCaixaMovimento("Venda", getValTotal());
+        caixaMovimento.setIdCaixaMovimento(caixaMovimentoDAO.save(caixaMovimento));
+        lista.remove(venda);
     }
 
     @Override

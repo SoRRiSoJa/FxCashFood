@@ -31,7 +31,6 @@ import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.InputMethodEvent;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
@@ -123,7 +122,7 @@ public class FecharMesaFXMLController implements Initializable {
 
     @FXML
     private void onFechar(ActionEvent event) {
-
+        MesaController.getInstance().fecharMesa();
     }
 
     @FXML
@@ -174,6 +173,7 @@ public class FecharMesaFXMLController implements Initializable {
             vTroco=vRecebido.subtract(VendaController.getInstance().getValTotal());
             txtTroco.setText(vTroco.toString());
         }
+        
     }
 
     public class ButtonCellDelete extends TableCell<Disposer.Record, Boolean> {

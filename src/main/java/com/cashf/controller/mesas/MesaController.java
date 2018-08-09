@@ -5,6 +5,7 @@
  */
 package com.cashf.controller.mesas;
 
+import com.cashf.controller.cliente.ClienteController;
 import com.cashf.core.venda.VendaController;
 import com.cashf.dao.cliente.ClienteDAO;
 import com.cashf.dao.mesa.MesaDAO;
@@ -12,7 +13,6 @@ import com.cashf.model.cliente.Cliente;
 import com.cashf.model.mesa.Mesa;
 import com.cashf.model.mesa.StatusMesa;
 import com.cashf.model.produto.Produto;
-import com.cashf.model.venda.ProdutoVenda;
 import com.cashf.model.venda.Venda;
 import controller.GenericController;
 import java.time.LocalDate;
@@ -20,6 +20,7 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import util.PoupUpUtil;
 
 /**
  *
@@ -128,6 +129,16 @@ public class MesaController implements GenericController<Mesa> {
         VendaController.getInstance().getVenda().setMesa(mesaAtual);
         VendaController.getInstance().getVenda().setCliente(cliente);
         VendaController.getInstance().getLista().add(VendaController.getInstance().getVenda());
+    }
+
+    public void fecharMesa() {
+        mesaAtual.setHoraFechamento(LocalTime.now());
+        mesaAtual.setStatus(StatusMesa.FECHADA);
+        insert();
+        VendaController.getInstance().getVenda().setMesa(mesaAtual);
+        VendaController.getInstance().fecharVenda();
+        PoupUpUtil.poupUp("Venda Efetuada", "Venda efetuada com sucesso.", "");
+
     }
 
     @Override
