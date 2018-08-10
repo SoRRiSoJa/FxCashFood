@@ -5,7 +5,6 @@
  */
 package com.cashf.controller.mesas;
 
-import com.cashf.controller.cliente.ClienteController;
 import com.cashf.core.venda.VendaController;
 import com.cashf.dao.cliente.ClienteDAO;
 import com.cashf.dao.mesa.MesaDAO;

@@ -125,6 +125,7 @@ public class FecharMesaFXMLController implements Initializable {
     private void onFechar(ActionEvent event) {
         MesaController.getInstance().fecharMesa();
         GerenciarCaixaFXMLController.refreshTbv();
+        GerenciarCaixaFXMLController.refreshTotal();
     }
 
     @FXML
