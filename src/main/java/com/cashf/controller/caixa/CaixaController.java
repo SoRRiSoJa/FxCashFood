@@ -283,7 +283,7 @@ public class CaixaController implements GenericController<Caixa> {
         refreshLists();
         if (listaMov != null) {
             listaMov.forEach((cm) -> {
-                if (cm.getTipoMovimento().equals(TPMov.SUPRIMENTO)) {
+                if (cm.getTipoMovimento().equals(TPMov.SUPRIMENTO)||cm.getTipoMovimento().equals(TPMov.CREDITO)) {
                     totalCreditos = totalCreditos.add(cm.getValor());
                 } else {
                     totalDebitos = totalDebitos.add(cm.getValor());
