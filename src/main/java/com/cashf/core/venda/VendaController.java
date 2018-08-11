@@ -47,7 +47,7 @@ public class VendaController implements GenericController<Venda> {
     private final MeioPagamentoDAO meioPAgamentoDAO;
     private Produto produtoSelecionado;
     private Combo comboSelecionado;
-    private CaixaMovimento caixaMovimento;
+    
     private int tipoConsulta;
     private int etapaAtual;
 
@@ -68,9 +68,7 @@ public class VendaController implements GenericController<Venda> {
         this.produtoSelecionado.setIdProduto(0l);
         this.comboSelecionado = new Combo();
         this.comboSelecionado.setIdCombo(0l);
-        this.caixaMovimento=new CaixaMovimento();
-        caixaMovimento.setIdCaixaMovimento(0l);
-    }
+           }
 
     public static synchronized VendaController getInstance() {
         if (vendaController == null) {
@@ -79,21 +77,7 @@ public class VendaController implements GenericController<Venda> {
         return vendaController;
     }
 
-    public CaixaMovimento getCaixaMovimento() {
-        return caixaMovimento;
-    }
-
-    public void setCaixaMovimento(CaixaMovimento caixaMovimento) {
-        this.caixaMovimento = caixaMovimento;
-    }
-    public void setCaixaMovimento(String observacao, BigDecimal valor) {
-        this.caixaMovimento.setIdCaixaMovimento(0l);
-        this.caixaMovimento.setTipoMovimento(TPMov.CREDITO);
-        this.caixaMovimento.setDataMovimento(LocalDate.now());
-        this.caixaMovimento.setCaixa(CaixaController.getInstance().getCaixaAberto());
-        this.caixaMovimento.setObservacao(observacao);
-        this.caixaMovimento.setValor(valor);
-    }
+   
     
     public int getEtapaAtual() {
         return etapaAtual;
@@ -155,8 +139,7 @@ public class VendaController implements GenericController<Venda> {
         venda.setValorTotal(getValTotal());
         venda.setDataVenda(LocalDate.now());
         insert();
-        setCaixaMovimento("Venda", getValTotal());
-        caixaMovimento.setIdCaixaMovimento(caixaMovimentoDAO.save(caixaMovimento));
+        CaixaController.getInstance().movimentarCaixaCredito("Venda", getValTotal());
         lista.remove(venda);
     }
 

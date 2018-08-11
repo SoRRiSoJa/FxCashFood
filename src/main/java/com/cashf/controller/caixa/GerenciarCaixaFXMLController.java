@@ -240,8 +240,8 @@ public class GerenciarCaixaFXMLController implements Initializable {
     }
 
     public static void refreshTbv() {
-        CaixaController.getInstance().refreshLists();
         _tbvMovimentacoes.setItems(CaixaController.getInstance().getListaMov());
+        CaixaController.getInstance().refreshLists();
         _tbvMovimentacoes.refresh();
     }
 

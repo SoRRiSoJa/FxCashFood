@@ -210,7 +210,7 @@ public class CaixaController implements GenericController<Caixa> {
         caixaMovimento = null;
         caixaMovimento = new CaixaMovimento();
         this.caixaMovimento.setIdCaixaMovimento(0l);
-        refreshLists();
+
         atualizaSaldo();
     }
 
@@ -221,7 +221,16 @@ public class CaixaController implements GenericController<Caixa> {
         caixaMovimento = null;
         caixaMovimento = new CaixaMovimento();
         this.caixaMovimento.setIdCaixaMovimento(0l);
-        refreshLists();
+
+        atualizaSaldo();
+    }
+    public void movimentarCaixaCredito(String desc, BigDecimal valor) {
+        setCaixaMovimento(0l, LocalDate.now(), desc, valor, TPMov.CREDITO, getCaixaAberto());
+        this.caixaMovimento.setIdCaixaMovimento(caixaMovimentoDAO.save(caixaMovimento));
+        listaMov.add(caixaMovimento);
+        caixaMovimento = null;
+        caixaMovimento = new CaixaMovimento();
+        this.caixaMovimento.setIdCaixaMovimento(0l);
         atualizaSaldo();
     }
 
@@ -232,7 +241,7 @@ public class CaixaController implements GenericController<Caixa> {
         caixaMovimento = null;
         caixaMovimento = new CaixaMovimento();
         this.caixaMovimento.setIdCaixaMovimento(0l);
-        refreshLists();
+
         atualizaSaldo();
     }
 
@@ -245,7 +254,7 @@ public class CaixaController implements GenericController<Caixa> {
         caixaMovimento = null;
         caixaMovimento = new CaixaMovimento();
         this.caixaMovimento.setIdCaixaMovimento(0l);
-        refreshLists();
+
         atualizaSaldo();
     }
 
@@ -271,6 +280,7 @@ public class CaixaController implements GenericController<Caixa> {
         totalCreditos = BigDecimal.ZERO;
         totalDebitos = BigDecimal.ZERO;
         saldoFinal = BigDecimal.ZERO;
+        refreshLists();
         if (listaMov != null) {
             listaMov.forEach((cm) -> {
                 if (cm.getTipoMovimento().equals(TPMov.SUPRIMENTO)) {

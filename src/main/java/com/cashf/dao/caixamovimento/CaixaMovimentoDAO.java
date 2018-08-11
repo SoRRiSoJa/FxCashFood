@@ -22,7 +22,7 @@ public class CaixaMovimentoDAO extends GenericDAOIMP<CaixaMovimento> {
         super(clazz);
     }
 
-    public List<CaixaMovimento> listByDateAndCaixa(LocalDate dataMov, Caixa caixaAberto) {
+    public List<CaixaMovimento> listByDAndCaixa(LocalDate dataMov, Caixa caixaAberto) {
         try (Session session = sessionFactory.openSession()) {
             String hql = "from CaixaMovimento cax where Extract(DAY from cax.dataMovimento) >= :dia"
                     + " and Extract(MONTH from cax.dataMovimento) >= :mes"
@@ -33,6 +33,21 @@ public class CaixaMovimentoDAO extends GenericDAOIMP<CaixaMovimento> {
                     .setParameter("dia", dataMov.getDayOfMonth())
                     .setParameter("mes", dataMov.getMonth().getValue())
                     .setParameter("ano", dataMov.getYear())
+                    .setParameter("idCaixaA", caixaAberto.getIdCaixa())
+                    .list();
+            return roleList;
+        } catch (Exception e) {
+            System.out.println("Erro:" + e);
+            return null;
+        }
+    }
+    public List<CaixaMovimento> listByDateAndCaixa(LocalDate dataMov, Caixa caixaAberto) {
+        try (Session session = sessionFactory.openSession()) {
+            String hql = "from CaixaMovimento cax where cax.dataMovimento>=:dataInicio"
+                    + " and caixa.idCaixa = :idCaixaA ";
+
+            List<CaixaMovimento> roleList = session.createQuery(hql)
+                    .setParameter("dataInicio", dataMov)
                     .setParameter("idCaixaA", caixaAberto.getIdCaixa())
                     .list();
             return roleList;
