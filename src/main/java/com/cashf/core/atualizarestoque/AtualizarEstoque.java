@@ -11,7 +11,6 @@ import com.cashf.dao.produto.ProdutoDAO;
 import com.cashf.model.ajusteestoque.AjusteEstoque;
 import com.cashf.model.ajusteestoque.TipoAjuste;
 import com.cashf.model.notafiscal.NotaFiscal;
-import com.cashf.model.notafiscal.ProdutoNotaFiscal;
 import com.cashf.model.prepreparo.PrePreparo;
 import com.cashf.model.produto.Produto;
 import com.cashf.model.produto.UnidadeMedida;

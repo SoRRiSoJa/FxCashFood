@@ -23,8 +23,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -90,14 +88,18 @@ public class AbrirMesaFXMLController implements Initializable {
 
     @FXML
     private void onAbrir(ActionEvent event) {
-        MesaController.getInstance().abrirMesa();
+        Integer pax;
+        try {
+            pax = Integer.parseInt(txtPax.getText());
+        } catch (NumberFormatException ex) {
+            pax = 1;
+        }
+        MesaController.getInstance().abrirMesa(pax);
         MainApp.janelaAberta.close();
         MainApp.janelaAberta = MainApp.janelaAnterior;
         FXMenuFCaixaFXMLController.changeStatusTable(MesaController.getInstance().getMesaAtual().getNumMesa(), StatusMesa.ABERTA);
         loadBox("/fxml/mesas/GerenciarMesasFXML.fxml", "Mesa Nº" + MesaController.getInstance().getMesaAtual().getNumMesa());
     }
-
-    
 
     private void loadBox(String boxPath, String title) {
         try {

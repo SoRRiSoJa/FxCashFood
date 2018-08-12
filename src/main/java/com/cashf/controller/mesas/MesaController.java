@@ -122,7 +122,8 @@ public class MesaController implements GenericController<Mesa> {
         this.listaCli = listaCli;
     }
 
-    public void abrirMesa() {
+    public void abrirMesa(int nPax) {
+        mesaAtual.setNumPax(nPax);
         mesaAtual.setHoraAbertura(LocalTime.now());
         mesaAtual.setStatus(StatusMesa.ABERTA);
         VendaController.getInstance().getVenda().setMesa(mesaAtual);

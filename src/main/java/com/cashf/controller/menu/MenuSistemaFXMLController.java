@@ -6,6 +6,7 @@
 package com.cashf.controller.menu;
 
 import com.cashf.cashfood.MainApp;
+import com.cashf.controller.caixa.CaixaController;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -14,6 +15,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.StackPane;
+import util.PoupUpUtil;
 
 /**
  * FXML Controller class
@@ -52,7 +54,12 @@ public class MenuSistemaFXMLController implements Initializable {
 
     @FXML
     private void onPdv(ActionEvent event) {
-        loadFxml("/fxml/FXMenuFCaixaFXML.fxml");
+        if (CaixaController.getInstance().getCaixaAberto().getIdCaixa() != 0) {
+            loadFxml("/fxml/FXMenuFCaixaFXML.fxml");
+        } else {
+            PoupUpUtil.errorMessage(rootAux, MainApp.paneRoot, "Um Caixa deve Ser aberto!");
+        }
+
     }
 
     @FXML
