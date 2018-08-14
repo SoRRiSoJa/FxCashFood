@@ -9,12 +9,14 @@ import com.cashf.controller.caixa.CaixaController;
 import com.cashf.core.atualizarestoque.AtualizarEstoque;
 import com.cashf.dao.caixamovimento.CaixaMovimentoDAO;
 import com.cashf.dao.combo.ComboDAO;
+import com.cashf.dao.contacorrente.ContaCorrenteDAO;
 import com.cashf.dao.meiopagamento.MeioPagamentoDAO;
 import com.cashf.dao.produto.ProdutoDAO;
 import com.cashf.dao.venda.VendaDAO;
 import com.cashf.model.caixa.CaixaMovimento;
 import com.cashf.model.combo.Combo;
 import com.cashf.model.combo.ProdutoCombo;
+import com.cashf.model.contacorrente.ContaCorrente;
 import com.cashf.model.contasPagar.StatusPagto;
 import com.cashf.model.meiopagamento.MeioPagamento;
 import com.cashf.model.mesa.Mesa;
@@ -45,6 +47,7 @@ public class VendaController implements GenericController<Venda> {
     private final VendaDAO vendaDAO;
     private final CaixaMovimentoDAO caixaMovimentoDAO;
     private final MeioPagamentoDAO meioPAgamentoDAO;
+    private final ContaCorrenteDAO contaCorrenteDAO;
     private Produto produtoSelecionado;
     private Combo comboSelecionado;
     private final AtualizarEstoque atualizarEstoque;
@@ -69,6 +72,7 @@ public class VendaController implements GenericController<Venda> {
         this.comboSelecionado = new Combo();
         this.comboSelecionado.setIdCombo(0l);
         this.atualizarEstoque = new AtualizarEstoque();
+        this.contaCorrenteDAO = new ContaCorrenteDAO(ContaCorrente.class);
     }
 
     public static synchronized VendaController getInstance() {
