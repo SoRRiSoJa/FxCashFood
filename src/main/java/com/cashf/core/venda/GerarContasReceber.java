@@ -5,8 +5,8 @@
  */
 package com.cashf.core.venda;
 
+import com.cashf.controller.caixa.CaixaController;
 import com.cashf.dao.contareceber.ContaReceberDAO;
-import com.cashf.model.caixa.Caixa;
 import com.cashf.model.contareceber.ContaReceber;
 import com.cashf.model.contasPagar.StatusPagto;
 import com.cashf.model.meiopagamento.MeioPagamento;
@@ -37,7 +37,23 @@ public class GerarContasReceber {
         this.contaReceber = contaReceber;
     }
 
-    public void setContaReceber(LocalDate dataVencimento, LocalDate dataPagamento, String favorecido, String descricao, BigDecimal valorBruto, BigDecimal encargos, BigDecimal desconto, BigDecimal acrecimo, BigDecimal valorPago, MeioPagamento meioPagamento, Venda venda, Caixa caixa, StatusPagto statusPagto) {
-        this.contaReceber = contaReceber;
+    public void setContaReceber(LocalDate dataVencimento, LocalDate dataPagamento, String favorecido, String descricao, BigDecimal valorBruto, BigDecimal encargos, BigDecimal desconto, BigDecimal acrecimo, BigDecimal valorPago, MeioPagamento meioPagamento, Venda venda, StatusPagto statusPagto) {
+        this.contaReceber.setDataVencimento(dataVencimento);
+        this.contaReceber.setDataPagamento(dataPagamento);
+        this.contaReceber.setFavorecido(favorecido);
+        this.contaReceber.setDescricao(descricao);
+        this.contaReceber.setValorBruto(valorBruto);
+        this.contaReceber.setEncargos(encargos);
+        this.contaReceber.setDesconto(desconto);
+        this.contaReceber.setAcrecimo(acrecimo);
+        this.contaReceber.setValorPago(valorPago);
+        this.contaReceber.setMeioPagamento(meioPagamento);
+        this.contaReceber.setCaixa(CaixaController.getInstance().getCaixaAberto());
+        this.contaReceber.setVenda(venda);
+        this.contaReceber.setStatusPagto(statusPagto);
+    }
+
+    public void efetuarLancamento() {
+        contaReceber.setIdContaReceber(contaReceberDAO.save(contaReceber));
     }
 }
