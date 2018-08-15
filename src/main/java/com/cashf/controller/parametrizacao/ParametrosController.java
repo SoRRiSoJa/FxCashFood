@@ -28,7 +28,7 @@ import javafx.scene.image.Image;
  * @author joao
  */
 public class ParametrosController implements GenericController<Parametros> {
-    
+
     public static ParametrosController parametrosController = null;
     private final ParametrosDAO parametrosDAO;
     private final ParametrosFiscaisDAO parametrosFiscaisDAO;
@@ -43,7 +43,7 @@ public class ParametrosController implements GenericController<Parametros> {
     private SituacaoTributaria situacaoTributaria;
     private Usuario usuario;
     private File arquivoLogo;
-    
+
     private ParametrosController() {
         this.parametrosDAO = new ParametrosDAO(Parametros.class);
         this.parametrosFiscaisDAO = new ParametrosFiscaisDAO(ParametrosFiscais.class);
@@ -60,18 +60,18 @@ public class ParametrosController implements GenericController<Parametros> {
         this.usuario.setId(0l);
         this.cidade = new Cidade();
     }
-    
+
     public static synchronized ParametrosController getInstance() {
         if (parametrosController == null) {
             parametrosController = new ParametrosController();
         }
         return parametrosController;
     }
-    
+
     public SituacaoTributaria getSituacaoTributaria() {
         return situacaoTributaria;
     }
-    
+
     public void setSituacaoTributaria(SituacaoTributaria situacaoTributaria) {
         this.situacaoTributaria = situacaoTributaria;
     }
@@ -80,15 +80,15 @@ public class ParametrosController implements GenericController<Parametros> {
         ParametrosFiscais pf = parametrosFiscaisDAO.getBySituacaoTributaria(st.name());
         return pf;
     }
-    
+
     public Parametros getParametro() {
         return parametro;
     }
-    
+
     public void setParametro(Parametros parametro) {
         this.parametro = parametro;
     }
-    
+
     public void setParametro(long idParametro, String cnpj, String inscrEst, String nomefantasia, String razaoSocial, String endereco, String complemento, int numero, String cep, String bairro, String email, String telefone, Cidade cidade, byte[] foto) {
         this.parametro = new Parametros(idParametro, cnpj, inscrEst, nomefantasia, razaoSocial, endereco, complemento, numero, cep, bairro, email, telefone, cidade, foto);
     }
@@ -107,105 +107,109 @@ public class ParametrosController implements GenericController<Parametros> {
         parametrosFiscais.setAliquotamunicipal(aliquotamunicipal);
         parametrosFiscais.setSituacaoTributaria(situacaoTributaria);
     }
-    
+
     public Usuario getUsuario() {
         return usuario;
     }
-    
+
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
-    
+
     public void setUsuario(Long id, String login, String senha, UNivel nivel, Boolean status) {
         this.usuario = new Usuario(id, login, senha, nivel, status);
     }
-    
+
     public ObservableList<ParametrosFiscais> getListaParametrosFicais() {
         return listaParametrosFicais;
     }
-    
+
     public void setListaParametrosFicais(ObservableList<ParametrosFiscais> listaParametrosFicais) {
         this.listaParametrosFicais = listaParametrosFicais;
     }
-    
+
     public ParametrosFiscais getParametrosFiscais() {
         return parametrosFiscais;
     }
-    
+
     public void setParametrosFiscais(ParametrosFiscais parametrosFiscais) {
         this.parametrosFiscais = parametrosFiscais;
     }
-    
+
     public ObservableList<Cidade> getListaCidade() {
         return listaCidade;
     }
-    
+
     public void setListaCidade(ObservableList<Cidade> listaCidade) {
         this.listaCidade = listaCidade;
     }
-    
+
     public Cidade getCidade() {
         return cidade;
     }
-    
+
     public void setCidade(Cidade cidade) {
         this.cidade = cidade;
     }
-    
+
     @Override
     public void insert() {
         usuarioDAO.save(usuario);
         parametrosDAO.save(parametro);
     }
-    
+
     @Override
     public void update() {
         parametrosDAO.update(parametro);
     }
-    
+
     @Override
     public void delete() {
         if (parametro.getIdParametro() != 0l) {
             parametrosDAO.delete(parametro);
         }
     }
-    
+
     @Override
     public void flushObject() {
         this.parametro = new Parametros();
         this.parametro.setIdParametro(0l);
     }
-    
+
+    public void refreshList() {
+        this.listaCidade = FXCollections.observableList(cidadeDAO.listAll());
+    }
+
     @Override
     public ObservableList<Parametros> getLista() {
         return lista;
     }
-    
+
     @Override
     public void setLista(ObservableList<Parametros> lista) {
         this.lista = lista;
     }
-    
+
     @Override
     public void setItenLista(Parametros obj) {
         this.lista.add(obj);
     }
-    
+
     public File getArquivoLogo() {
         return arquivoLogo;
     }
 
     public Image getArquivoLogoImage() {
-        try {            
+        try {
             return new Image(arquivoLogo.toURI().toURL().toString());
         } catch (MalformedURLException ex) {
             System.out.println("Erro-->>" + ex);
         }
         return null;
     }
-    
+
     public void setArquivoLogo(File arquivoLogo) {
         this.arquivoLogo = arquivoLogo;
     }
-    
+
 }

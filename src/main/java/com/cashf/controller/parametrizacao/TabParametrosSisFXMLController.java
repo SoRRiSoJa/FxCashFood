@@ -161,6 +161,11 @@ public class TabParametrosSisFXMLController implements GenericViewController, In
         setUpFileCoser();
         _dtpDataCad.setValue(LocalDate.now());
         _dtpDataCad.setDisable(true);
+        if (ParametrosController.getInstance().getLista().isEmpty()) {
+            ParametrosController.getInstance().refreshList();
+            loadCbbCidade();
+        }
+
     }
 
     @FXML

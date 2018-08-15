@@ -45,7 +45,7 @@ public class BDInsert {
     public void insertData() {
         loadLists();
         estados.forEach((est) -> {
-            estadoDAO.save(est);
+            estadoDAO.saveEst(est);
         });
         cidades.forEach((cid) -> {
             cidadeDAO.save(cid);
