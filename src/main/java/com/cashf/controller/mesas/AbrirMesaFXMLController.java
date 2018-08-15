@@ -88,10 +88,10 @@ public class AbrirMesaFXMLController implements Initializable {
 
     @FXML
     private void onAbrir(ActionEvent event) {
-        Integer pax;
+        int pax;
         try {
             pax = Integer.parseInt(txtPax.getText());
-        } catch (NumberFormatException ex) {
+        } catch (Exception ex) {
             pax = 1;
         }
         MesaController.getInstance().abrirMesa(pax);
