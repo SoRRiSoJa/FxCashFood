@@ -161,8 +161,8 @@ public class VendaController implements GenericController<Venda> {
         GerarContasReceber gerarContasReceber = new GerarContasReceber();
         venda.setValorTotal(getValTotal());
         venda.setDataVenda(LocalDate.now());
-
         insert();
+        atualizarSaldoCC();
         CaixaController.getInstance().movimentarCaixaCredito("Venda", getValTotal());
         venda.getListaProdutos().stream().map((pv) -> {
             atualizarEstoque.setProduto(pv.getProduto());
