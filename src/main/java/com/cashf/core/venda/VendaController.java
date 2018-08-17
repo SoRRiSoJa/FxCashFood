@@ -97,7 +97,12 @@ public class VendaController implements GenericController<Venda> {
     public void setComboSelecionado(Combo comboSelecionado) {
         this.comboSelecionado = comboSelecionado;
     }
-
+    /**
+     * Retorna o objeto Venda associado a um objeto Mesa da lista de mesas abertas
+     * public Venda getVendaByMesa(Mesa)
+     * @param mesa - Objeto mesa que se deseja obter a venda
+     * @return Venda - Venda associada a mesa .
+     */
     public Venda getVendaByMesa(Mesa mesa) {
 
         lista.stream().filter((ve) -> (ve.getMesa().equals(mesa))).forEachOrdered((ve) -> {
@@ -105,7 +110,13 @@ public class VendaController implements GenericController<Venda> {
         });
         return venda;
     }
-
+    /**
+     * Calcula o valor total dos produtos de uma venda realizando a 
+     * multiplicação dos preços unitários pela quantidade.
+     * public BigDecimal getValTotal()
+     *
+     * @return BigDecimal - Valor total da venda
+     */
     public BigDecimal getValTotal() {
         BigDecimal tot = BigDecimal.ZERO;
         for (ProdutoVenda pv : VendaController.getInstance().getListaProduosVenda()) {
@@ -138,11 +149,19 @@ public class VendaController implements GenericController<Venda> {
         venda.setIdVenda(0l);
         venda.setListaProdutos(FXCollections.observableList(new ArrayList<>()));
     }
-
+    /**
+     * Realiza o fechamento da venda gerando sua conta a receber, atualizando 
+     * seu valor total e data. Insere a movimentação de caixa e realia a
+     * atualização do estoque de produtos e atualiza o saldo da conta conrrente
+     * associada ao meio de pagamento selecionado.
+     * 
+     * private void fecharVenda()
+     */
     public void fecharVenda() {
         GerarContasReceber gerarContasReceber = new GerarContasReceber();
         venda.setValorTotal(getValTotal());
         venda.setDataVenda(LocalDate.now());
+
         insert();
         CaixaController.getInstance().movimentarCaixaCredito("Venda", getValTotal());
         venda.getListaProdutos().stream().map((pv) -> {
@@ -161,6 +180,16 @@ public class VendaController implements GenericController<Venda> {
                 venda.getValorTotal(), meioPagto, venda, StatusPagto.PAGO);
         gerarContasReceber.efetuarLancamento();
         lista.remove(venda);
+    }
+
+    /**
+     * Atualiza o valor do saldo da conta corrente associada ao meio de 
+     * pagamento selecionado no fechamento da venda.
+     * private void atualizarSaldoCC()
+     */
+    private void atualizarSaldoCC() {
+        meioPagto.getContaCorrente().setSaldo(meioPagto.getContaCorrente().getSaldo().add(venda.getValorTotal()));
+        contaCorrenteDAO.update(meioPagto.getContaCorrente());
     }
 
     @Override

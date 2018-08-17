@@ -245,7 +245,7 @@ public class CaixaController implements GenericController<Caixa> {
 
         atualizaSaldo();
     }
-
+    
     public void abrirCaixa(LocalDate dataAbertura, LocalTime horaAbertura, BigDecimal valorInicial) {
         setCaixaAberto(0l, dataAbertura, horaAbertura, null, null, valorInicial, LoginController.getInstance().getUsuario(), getContaCorrente(), TPStatusCX.ABERTO);
         this.caixaAberto.setIdCaixa(caixaDAO.save(caixaAberto));
@@ -277,6 +277,11 @@ public class CaixaController implements GenericController<Caixa> {
         this.lista = FXCollections.observableList(caixaDAO.listAll());
     }
 
+    /**
+     * Atualiza os valores totais de Creditos Débitos e o saldo final apartir
+     * dos movimentos de caixa. 
+     * public void atualizaSaldo()
+     */
     public void atualizaSaldo() {
         totalCreditos = BigDecimal.ZERO;
         totalDebitos = BigDecimal.ZERO;
