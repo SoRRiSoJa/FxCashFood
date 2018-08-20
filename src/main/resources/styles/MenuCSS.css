@@ -7,7 +7,9 @@ and open the template in the editor.
     Created on : 18/11/2017, 15:49:50
     Author     : joao
 */
-
+.menu-bar.button.label{
+    -fx-text-fill: white;
+}
 .pane{
     -fx-background-color:#0081cb;
 }
