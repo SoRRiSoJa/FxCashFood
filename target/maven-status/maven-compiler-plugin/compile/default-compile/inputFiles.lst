@@ -4,6 +4,7 @@
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/controller/mesas/AbrirMesaFXMLController.java
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/model/caixa/CaixaMovimento.java
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/controller/caixa/BoxFecharCaixaFXMLController.java
+/home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/controller/menu/MenuFXMLController.java
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/model/produto/Categoria.java
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/dao/produto/CategoriaDAO.java
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/controller/caixa/CaixaController.java

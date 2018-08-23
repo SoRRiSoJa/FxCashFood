@@ -81,6 +81,7 @@ com/cashf/model/funcionario/Funcionario.class
 com/cashf/controller/funcionario/TabListaFuncionariosFXMLController.class
 com/cashf/controller/contaspagar/ContasPagarController.class
 com/cashf/controller/mesas/RegistrarConsumoComboFXMLController$ButtonCellDelete$1.class
+com/cashf/controller/menu/MenuFXMLController.class
 com/cashf/dao/parametros/ParametrosFiscaisDAO.class
 com/cashf/controller/produto/GerenciarGruposFXMLController$ButtonCellDelete.class
 com/cashf/model/banco/Banco.class

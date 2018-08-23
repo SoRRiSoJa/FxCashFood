@@ -12,6 +12,7 @@ import com.cashf.model.cliente.Cliente;
 import com.cashf.model.mesa.Mesa;
 import com.cashf.model.mesa.StatusMesa;
 import com.cashf.model.produto.Produto;
+import com.cashf.model.venda.ProdutoVenda;
 import com.cashf.model.venda.Venda;
 import controller.GenericController;
 import java.time.LocalDate;
@@ -189,6 +190,19 @@ public class MesaController implements GenericController<Mesa> {
 
             mesaAtual.setStatus(StatusMesa.FECHADA);
             setMesaAtual(destino);
+            flag = true;
+        }
+        return flag;
+    }
+    
+    public boolean tranferirItemMesa(Mesa destino,ProdutoVenda pv) {
+        boolean flag = false;
+        int index;
+        if (destino.getStatus() != StatusMesa.ABERTA) {
+            Venda vOrigen = VendaController.getInstance().getVendaByMesa(mesaAtual);
+            Venda vDestino= VendaController.getInstance().getVendaByMesa(destino);
+            vOrigen.getListaProdutos().remove(pv);
+            vDestino.getListaProdutos().add(pv);
             flag = true;
         }
         return flag;
