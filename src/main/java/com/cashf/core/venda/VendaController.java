@@ -49,6 +49,7 @@ public class VendaController implements GenericController<Venda> {
     private final MeioPagamentoDAO meioPAgamentoDAO;
     private final ContaCorrenteDAO contaCorrenteDAO;
     private Produto produtoSelecionado;
+    private ProdutoVenda produtoVendaSelecionado;
     private Combo comboSelecionado;
     private final AtualizarEstoque atualizarEstoque;
     private int tipoConsulta;
@@ -67,6 +68,8 @@ public class VendaController implements GenericController<Venda> {
         venda.setIdVenda(0l);
         venda.setValorTotal(BigDecimal.ZERO);
         venda.setListaProdutos(FXCollections.observableList(new ArrayList<>()));
+        this.produtoVendaSelecionado = new ProdutoVenda();
+        this.produtoVendaSelecionado.setIdProdVenda(0l);
         this.produtoSelecionado = new Produto();
         this.produtoSelecionado.setIdProduto(0l);
         this.comboSelecionado = new Combo();
@@ -305,5 +308,14 @@ public class VendaController implements GenericController<Venda> {
     public void setMeioPagto(MeioPagamento meioPagto) {
         this.meioPagto = meioPagto;
     }
+
+    public ProdutoVenda getProdutoVendaSelecionado() {
+        return produtoVendaSelecionado;
+    }
+
+    public void setProdutoVendaSelecionado(ProdutoVenda produtoVendaSelecionado) {
+        this.produtoVendaSelecionado = produtoVendaSelecionado;
+    }
+    
 
 }

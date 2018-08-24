@@ -7,7 +7,6 @@ package com.cashf.controller.mesas;
 
 import com.cashf.cashfood.MainApp;
 import com.cashf.controller.menu.FXMenuFCaixaFXMLController;
-import com.cashf.controller.menu.GavetaMesasFXMLController;
 import com.cashf.model.mesa.Mesa;
 import com.cashf.model.mesa.StatusMesa;
 import com.jfoenix.controls.JFXButton;

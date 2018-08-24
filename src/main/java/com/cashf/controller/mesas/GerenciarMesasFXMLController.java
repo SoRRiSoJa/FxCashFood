@@ -193,8 +193,8 @@ public class GerenciarMesasFXMLController implements Initializable {
                         VendaController.getInstance().getListaProd().remove(currentPerson);
 
                     } else {
-                        notificationBuilder = Notifications.create().title("Nenhum contato selecionado!").
-                                text("Você deve selecionar um contato para editar.").
+                        notificationBuilder = Notifications.create().title("Nenhum produto selecionado!").
+                                text("Você deve selecionar um contato para remover.").
                                 hideAfter(Duration.seconds(2)).
                                 position(Pos.TOP_RIGHT).
                                 darkStyle();
@@ -235,11 +235,12 @@ public class GerenciarMesasFXMLController implements Initializable {
                     //remove selected item from the table list
                     if (currentPerson != null) {
                         // ... user chose OK
-                        VendaController.getInstance().getListaProd().remove(currentPerson);
-
+                        VendaController.getInstance().setProdutoVendaSelecionado(currentPerson);
+                        loadBox("/fxml/mesas/TransferirProdutoFXML.fxml", "Transferir Ítem");
+                        
                     } else {
                         notificationBuilder = Notifications.create().title("Nenhum contato selecionado!").
-                                text("Você deve selecionar um contato para editar.").
+                                text("Você deve selecionar um contato para transferir.").
                                 hideAfter(Duration.seconds(2)).
                                 position(Pos.TOP_RIGHT).
                                 darkStyle();
