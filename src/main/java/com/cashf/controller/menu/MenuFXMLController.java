@@ -146,6 +146,16 @@ public class MenuFXMLController implements Initializable {
     private void onAjustarEstoque(ActionEvent event) {
         loadFXML("/fxml/ajusteEstoque/AjustarEstoqueFXML.fxml");
     }
+    @FXML
+    private void onSair(ActionEvent event) {
+        rootStackPane.getChildren().remove(0);
+        try {
+            stAux = FXMLLoader.load(getClass().getResource("/fxml/MenuSistemaFXML.fxml"));
+            rootStackPane.getChildren().add(stAux);
+        } catch (IOException ex) {
+            System.out.println("Erro--->>" + ex);
+        }
+    }
 
     //------------------------
     private void loadFXML(String path) {

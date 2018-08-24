@@ -38,6 +38,11 @@
                         <MenuItem mnemonicParsing="false" text="About" />
                      </items>
                   </Menu>
+                  <Menu mnemonicParsing="false" onAction="#onSair" text="Sair">
+                     <items>
+                        <MenuItem mnemonicParsing="false" text="Sair" />
+                     </items>
+                  </Menu>
                </menus>
                <VBox.margin>
                   <Insets />
@@ -106,7 +111,7 @@
             <Pane fx:id="paneBody" prefHeight="605.0" prefWidth="1366.0" style="-fx-background-color: #ffffff;" />
          </children>
          <StackPane.margin>
-            <Insets top="30.0" />
+            <Insets />
          </StackPane.margin>
       </VBox>
    </children>

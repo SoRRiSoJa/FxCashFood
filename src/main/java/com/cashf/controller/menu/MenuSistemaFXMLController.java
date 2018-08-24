@@ -64,7 +64,7 @@ public class MenuSistemaFXMLController implements Initializable {
 
     @FXML
     private void onErp(ActionEvent event) {
-        loadFxml("/fxml/FXMenuFXML.fxml");
+        loadFxml("/fxml/MenuFXML.fxml");
     }
 
     @FXML
