@@ -2,25 +2,39 @@
 
 <?import com.jfoenix.controls.JFXTabPane?>
 <?import javafx.scene.control.Tab?>
-<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-
-<Pane fx:id="paneRoot" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="572.0" prefWidth="1366.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cashf.controller.cliente.FXGerenciarClientesFXMLController">
-    <children>
-        <JFXTabPane fx:id="TabPaneClientes" stylesheets="@../../styles/TabPaneCSS.css" tabMinHeight="30.0" tabMinWidth="678.0">
-            <tabs>
-                <Tab fx:id="tabClientes" text="Clientes">
-                    <content>
+<Pane fx:id="paneRoot" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="602.0" minWidth="1366.0" prefHeight="602.0" prefWidth="1366.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cashf.controller.cliente.FXGerenciarClientesFXMLController">
+   <children>
+      <VBox minHeight="60.0" minWidth="1366.0" prefHeight="602.0" prefWidth="1366.0">
+         <children>
+            <Pane prefHeight="30.0" prefWidth="1366.0" style="-fx-background-color: #0081cb;">
+               <children>
+                  <Text fill="WHITE" layoutY="18.0" strokeMiterLimit="20.0" strokeType="OUTSIDE" strokeWidth="4.0" text="GERENCIAR CLIENTES" textAlignment="CENTER" underline="true" wrappingWidth="1366.0">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                  </Text>
+               </children>
+            </Pane>
+            <JFXTabPane fx:id="TabPaneClientes" prefWidth="1354.0" stylesheets="@../../styles/TabPaneCSS.css" tabMinHeight="30.0" tabMinWidth="678.0">
+               <tabs>
+                  <Tab fx:id="tabClientes" text="Clientes">
+                     <content>
                         <fx:include source="TabClientesFXML.fxml" />
-                    </content>
-                </Tab>
-                <Tab fx:id="tabListaClientes" text="Lista de Clientes">
-                    <content>
+                     </content>
+                  </Tab>
+                  <Tab fx:id="tabListaClientes" text="Lista de Clientes">
+                     <content>
                         <fx:include source="TabListaClientesFXML.fxml" />
-                    </content>
-                </Tab>
-            </tabs>
-        </JFXTabPane>
-    </children>
+                     </content>
+                  </Tab>
+               </tabs>
+            </JFXTabPane>
+         </children>
+      </VBox>
+   </children>
 </Pane>

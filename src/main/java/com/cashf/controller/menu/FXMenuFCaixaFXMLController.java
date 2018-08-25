@@ -91,6 +91,7 @@ public class FXMenuFCaixaFXMLController implements Initializable {
                 jfxDrawer.setMinWidth(0);
             }
         });
+        jfxDrawer.open();
         loadPanelGrupo();
         menuButtonsControl();
         loadRegistradora();

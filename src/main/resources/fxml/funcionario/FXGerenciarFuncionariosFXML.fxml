@@ -2,25 +2,38 @@
 
 <?import com.jfoenix.controls.JFXTabPane?>
 <?import javafx.scene.control.Tab?>
-<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-
-<Pane fx:id="paneFuncionario" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="572.0" prefWidth="1366.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
-    <children>
-        <JFXTabPane fx:id="tabPane" stylesheets="@../../styles/TabPaneCSS.css" tabMinHeight="30.0" tabMinWidth="678.0">
-            <tabs>
-                <Tab fx:id="tabFuncionario" text="Funcionario">
-                    <content>
+<Pane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="602.0" minWidth="1366.0" prefHeight="602.0" prefWidth="1366.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cashf.controller.funcionario.FXGerenciarFuncionariosFXMLController">
+   <children>
+      <VBox minHeight="602.0" minWidth="1366.0" prefHeight="602.0" prefWidth="1366.0">
+         <children>
+            <Pane prefHeight="30.0" prefWidth="1366.0" style="-fx-background-color: #0081cb;">
+               <children>
+                  <Text fill="WHITE" layoutY="18.0" strokeMiterLimit="20.0" strokeType="OUTSIDE" strokeWidth="4.0" text="GERENCIAR FUNCIONÁRIOS" textAlignment="CENTER" underline="true" wrappingWidth="1366.0">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                  </Text>
+               </children>
+            </Pane>
+            <JFXTabPane fx:id="tabPane" stylesheets="@../../styles/TabPaneCSS.css" tabMinHeight="30.0" tabMinWidth="678.0">
+               <tabs>
+                  <Tab fx:id="tabFuncionario" text="Funcionario">
+                     <content>
                         <fx:include source="TabFuncionarioFXML.fxml" />
-                    </content>
-                </Tab>
-                <Tab fx:id="tabListaFuncionarios" text="Lista Funcionarios">
-                   <content>
+                     </content>
+                  </Tab>
+                  <Tab fx:id="tabListaFuncionarios" text="Lista Funcionarios">
+                     <content>
                         <fx:include source="TabListaFuncionariosFXML.fxml" />
-                    </content>
-                </Tab>
-            </tabs>
-        </JFXTabPane>
-    </children>
+                     </content>
+                  </Tab>
+               </tabs>
+            </JFXTabPane>
+         </children></VBox>
+   </children>
 </Pane>
