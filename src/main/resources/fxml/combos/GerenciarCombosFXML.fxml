@@ -1,27 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
 <?import com.jfoenix.controls.JFXTabPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="672.0" prefWidth="1366.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cashf.controller.combos.GerenciarCombosFXMLController">
-    <children>
-        <JFXTabPane fx:id="tabPane" stylesheets="@../../styles/TabPaneCSS.css" tabMinHeight="30.0" tabMinWidth="678.0">
-            <tabs>
-                <Tab text="Combos">
-                    <content>
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="602.0" minWidth="1366.0" prefHeight="602.0" prefWidth="1366.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cashf.controller.combos.GerenciarCombosFXMLController">
+   <children>
+      <VBox minHeight="602.0" minWidth="1366.0" prefHeight="602.0" prefWidth="1366.0">
+         <children>
+            <Pane prefHeight="30.0" prefWidth="1366.0" style="-fx-background-color: #0081cb;">
+               <children>
+                  <Text fill="WHITE" layoutY="18.0" strokeMiterLimit="20.0" strokeType="OUTSIDE" strokeWidth="4.0" text="GERENCIAR COMBOS DE PRODUTOS" textAlignment="CENTER" underline="true" wrappingWidth="1366.0">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                  </Text>
+               </children>
+            </Pane>
+            <JFXTabPane fx:id="tabPane" stylesheets="@../../styles/TabPaneCSS.css" tabMinHeight="30.0" tabMinWidth="678.0">
+               <tabs>
+                  <Tab text="Combos">
+                     <content>
                         <fx:include source="TabComboFXML.fxml" />
-                    </content>
-                </Tab>
-                <Tab text="Lista de Combos">
-                    <content>
-                         <fx:include source="TabListaCombosFXML.fxml" />
-                    </content>
-                </Tab>
-            </tabs>
-        </JFXTabPane>
-    </children>
+                     </content>
+                  </Tab>
+                  <Tab text="Lista de Combos">
+                     <content>
+                        <fx:include source="TabListaCombosFXML.fxml" />
+                     </content>
+                  </Tab>
+               </tabs>
+            </JFXTabPane>
+         </children>
+      </VBox>
+   </children>
 </Pane>

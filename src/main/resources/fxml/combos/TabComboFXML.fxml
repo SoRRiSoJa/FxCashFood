@@ -17,9 +17,9 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane fx:id="paneRoot" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="542.0" prefWidth="1366.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cashf.controller.combos.TabComboFXMLController">
+<Pane fx:id="paneRoot" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="532.0" prefWidth="1366.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cashf.controller.combos.TabComboFXMLController">
    <children>
-      <Pane layoutX="10.0" layoutY="10.0" prefHeight="490.0" prefWidth="640.0" style="-fx-background-color: #ffffff;">
+      <Pane layoutX="10.0" layoutY="20.0" prefHeight="490.0" prefWidth="640.0" style="-fx-background-color: #ffffff;">
          <effect>
             <DropShadow />
          </effect>
@@ -128,7 +128,7 @@
             </TableView>
          </children>
       </Pane>
-      <Pane layoutX="668.0" layoutY="10.0" prefHeight="490.0" prefWidth="640.0" style="-fx-background-color: #ffffff;">
+      <Pane layoutX="668.0" layoutY="20.0" prefHeight="490.0" prefWidth="640.0" style="-fx-background-color: #ffffff;">
          <effect>
             <DropShadow />
          </effect>
