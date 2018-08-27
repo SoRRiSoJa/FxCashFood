@@ -28,13 +28,44 @@ public class FXGerenciarFuncionariosFXMLController implements Initializable {
     private Tab tabFuncionario;
     @FXML
     private Tab tabListaFuncionarios;
-
+    //-----------
+    private static Tab  _tabFuncionario;
+    private static Tab _tabListaFuncionarios;
+    private static JFXTabPane _tabPane;
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
+        _tabFuncionario=tabFuncionario;
+        _tabListaFuncionarios=tabListaFuncionarios;
+        _tabPane=tabPane;
+    }
+
+    public static Tab getTabFuncionario() {
+        return _tabFuncionario;
+    }
+
+    public static void setTabFuncionario(Tab _tabFuncionario) {
+        FXGerenciarFuncionariosFXMLController._tabFuncionario = _tabFuncionario;
+    }
+
+    public static Tab getTabListaFuncionarios() {
+        return _tabListaFuncionarios;
+    }
+
+    public static void setTabListaFuncionarios(Tab _tabListaFuncionarios) {
+        FXGerenciarFuncionariosFXMLController._tabListaFuncionarios = _tabListaFuncionarios;
+    }
+
+    public static JFXTabPane getTabPane() {
+        return _tabPane;
+    }
+
+    public static void setTabPane(JFXTabPane _tabPane) {
+        FXGerenciarFuncionariosFXMLController._tabPane = _tabPane;
+    }
+    
     
 }

@@ -5,6 +5,7 @@
  */
 package com.cashf.controller.funcionario;
 
+import com.cashf.controller.cliente.ClienteController;
 import com.cashf.model.funcionario.Funcionario;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXRadioButton;
@@ -16,6 +17,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
@@ -85,11 +87,6 @@ public class TabListaFuncionariosFXMLController implements Initializable {
     @FXML
     private void onMouseClickedCliente(MouseEvent event) {
         if (tbvFuncionarios.getSelectionModel().getSelectedItem() != null) {
-            FuncionarioController.getInstance().setFuncionario(tbvFuncionarios.getSelectionModel().getSelectedItem());
-            FuncionarioController.getInstance().setListaTelefone(FXCollections.observableList(FuncionarioController.getInstance().getFuncionario().getTelefones()));
-            TabFuncionarioFXMLController.LDTS();
-            TabFuncionarioFXMLController.LDTSPhone();
-            TabFuncionarioFXMLController.setBtnEX(Boolean.FALSE);
 
         }
     }
@@ -100,6 +97,20 @@ public class TabListaFuncionariosFXMLController implements Initializable {
         tbcEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
         tbcCPf.setCellValueFactory(new PropertyValueFactory<>("cpf"));
         tbvFuncionarios.getColumns().setAll(tbcNome, tbcEndereco, tbcEmail, tbcCPf);
+        tbvFuncionarios.setRowFactory(tv -> {
+            TableRow<Funcionario> row = new TableRow<>();
+            row.setOnMouseClicked(event -> {
+                if (event.getClickCount() == 2 && (!row.isEmpty())) {
+                    FuncionarioController.getInstance().setFuncionario(row.getItem());
+                    FuncionarioController.getInstance().setListaTelefone(FXCollections.observableList(FuncionarioController.getInstance().getFuncionario().getTelefones()));
+                    TabFuncionarioFXMLController.LDTS();
+                    TabFuncionarioFXMLController.LDTSPhone();
+                    TabFuncionarioFXMLController.setBtnEX(Boolean.FALSE);
+                    FXGerenciarFuncionariosFXMLController.getTabPane().getSelectionModel().selectFirst();
+                }
+            });
+            return row;
+        });
     }
 
     private void loadTbv() {
