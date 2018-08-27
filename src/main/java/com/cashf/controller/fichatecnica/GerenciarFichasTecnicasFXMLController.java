@@ -20,13 +20,23 @@ public class GerenciarFichasTecnicasFXMLController implements Initializable {
 
     @FXML
     private JFXTabPane tabPane;
-
+    
+    private static JFXTabPane _tabPane;
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        _tabPane=tabPane;
     }    
+
+    public static JFXTabPane getTabPane() {
+        return _tabPane;
+    }
+
+    public static void setTabPane(JFXTabPane _tabPane) {
+        GerenciarFichasTecnicasFXMLController._tabPane = _tabPane;
+    }
     
 }
