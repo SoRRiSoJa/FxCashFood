@@ -16,6 +16,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
@@ -49,7 +50,7 @@ public class TabListaClientesFXMLController implements Initializable {
     private TableColumn<Cliente, String> tbcCpf;
 
     private static TableView<Cliente> _tbvClientes;
-    
+
     /**
      * Initializes the controller class.
      */
@@ -88,13 +89,7 @@ public class TabListaClientesFXMLController implements Initializable {
 
     @FXML
     private void onMouseClickedCliente(MouseEvent event) {
-        if (tbvClientes.getSelectionModel().getSelectedItem() != null) {
-            ClienteController.getInstance().setCliente(tbvClientes.getSelectionModel().getSelectedItem());
-            ClienteController.getInstance().setListaTelefone(FXCollections.observableList(ClienteController.getInstance().getCliente().getTelefones()));
-            TabClientesFXMLController.LDTSFone();
-            TabClientesFXMLController.LDTS();
-            TabClientesFXMLController.setBtnEX(Boolean.FALSE);
-        }
+        
 
     }
 
@@ -103,7 +98,21 @@ public class TabListaClientesFXMLController implements Initializable {
         tbcEndereco.setCellValueFactory(new PropertyValueFactory<>("endereco"));
         tbcEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
         tbcCpf.setCellValueFactory(new PropertyValueFactory<>("cpf"));
-        tbvClientes.getColumns().setAll(tbcNome, tbcEndereco, tbcEmail,tbcCpf);
+        tbvClientes.getColumns().setAll(tbcNome, tbcEndereco, tbcEmail, tbcCpf);
+        tbvClientes.setRowFactory(tv -> {
+            TableRow<Cliente> row = new TableRow<>();
+            row.setOnMouseClicked(event -> {
+                if (event.getClickCount() == 2 && (!row.isEmpty())) {
+                    ClienteController.getInstance().setCliente(row.getItem());
+                    ClienteController.getInstance().setListaTelefone(FXCollections.observableList(ClienteController.getInstance().getCliente().getTelefones()));
+                    TabClientesFXMLController.LDTSFone();
+                    TabClientesFXMLController.LDTS();
+                    TabClientesFXMLController.setBtnEX(Boolean.FALSE);
+                    FXGerenciarClientesFXMLController.getTabPane().getSelectionModel().selectFirst();
+                }
+            });
+            return row;
+        });
     }
 
     private void loadTbv() {

@@ -17,6 +17,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
@@ -108,6 +109,17 @@ public class TabListaProdutosFXMLController implements Initializable {
         tbcQtde.setCellValueFactory(new PropertyValueFactory<>("unidadesEstoque"));
         tbcGrupo.setCellValueFactory(new PropertyValueFactory<>("grupo"));
         tbvProdutos.getColumns().setAll(tbcCod, tbcCodRef, tbcDescricao, tbcTipo, tbcCusto, tbcVenda, tbcQtde,tbcGrupo);
+        tbvProdutos.setRowFactory(tv -> {
+            TableRow<Produto> row = new TableRow<>();
+            row.setOnMouseClicked(event -> {
+                if (event.getClickCount() == 2 && (!row.isEmpty())) {
+                    ProdutoController.getInstance().setProduto(row.getItem());
+                    TabProdutoFXMLController.setBtnEX(Boolean.FALSE);
+                    FXGerenciarProdutosFXMLController.getTabPane().getSelectionModel().selectFirst();
+                }
+            });
+            return row;
+        });         
     }
 
     private void loadTbv() {

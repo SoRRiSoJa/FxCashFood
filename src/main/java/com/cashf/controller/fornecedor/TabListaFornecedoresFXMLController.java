@@ -16,6 +16,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
@@ -80,11 +81,7 @@ public class TabListaFornecedoresFXMLController implements Initializable {
 
     @FXML
     private void onMouseClickedFornecedor(MouseEvent event) {
-        FornecedorController.getInstance().setFornecedor(tbvFornecedores.getSelectionModel().getSelectedItem());
-        FornecedorController.getInstance().setListaTelefone(FXCollections.observableList(FornecedorController.getInstance().getFornecedor().getTelefones()));
-        TabFornecedorFXMLController.LDTS();
-        TabFornecedorFXMLController.LDTSPhone();
-        TabFornecedorFXMLController.setBtnEX(Boolean.FALSE);
+
     }
 
     private void setUptableView() {
@@ -92,6 +89,20 @@ public class TabListaFornecedoresFXMLController implements Initializable {
         tbcRazao.setCellValueFactory(new PropertyValueFactory<>("razaoSocial"));
         tbcEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
         tbvFornecedores.getColumns().setAll(tbcNome, tbcRazao, tbcEmail);
+        tbvFornecedores.setRowFactory(tv -> {
+            TableRow<Fornecedor> row = new TableRow<>();
+            row.setOnMouseClicked(event -> {
+                if (event.getClickCount() == 2 && (!row.isEmpty())) {
+                    FornecedorController.getInstance().setFornecedor(row.getItem());
+                    FornecedorController.getInstance().setListaTelefone(FXCollections.observableList(FornecedorController.getInstance().getFornecedor().getTelefones()));
+                    TabFornecedorFXMLController.LDTS();
+                    TabFornecedorFXMLController.LDTSPhone();
+                    TabFornecedorFXMLController.setBtnEX(Boolean.FALSE);
+                    FXGerenciarFornecedoresFXMLController.getTabPane().getSelectionModel().selectFirst();
+                }
+            });
+            return row;
+        });         
     }
 
     private void loadTbv() {

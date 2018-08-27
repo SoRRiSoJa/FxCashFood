@@ -28,13 +28,23 @@ public class FXGerenciarClientesFXMLController implements Initializable {
     private Tab tabClientes;
     @FXML
     private Tab tabListaClientes;
-
+    //------
+    private static  JFXTabPane _tabPane;
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        _tabPane=TabPaneClientes;
     }    
+
+    public static JFXTabPane getTabPane() {
+        return _tabPane;
+    }
+
+    public static void setTabPane(JFXTabPane _tabPane) {
+        FXGerenciarClientesFXMLController._tabPane = _tabPane;
+    }
     
 }
