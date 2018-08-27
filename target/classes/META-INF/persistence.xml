@@ -3,7 +3,7 @@
   <persistence-unit name="com.cashf_FXCashFoodUnidadePersistencia2" transaction-type="RESOURCE_LOCAL">
     <provider>org.hibernate.ejb.HibernatePersistence</provider>
     <properties>
-      <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/cashfood_data_02"/>
+      <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/cashfood_data_03"/>
       <property name="javax.persistence.jdbc.user" value="postgres"/>
       <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
       <property name="javax.persistence.jdbc.password" value="73684985"/>

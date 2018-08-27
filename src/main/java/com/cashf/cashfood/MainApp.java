@@ -19,8 +19,8 @@ public class MainApp extends Application {
     public void start(Stage stage) throws Exception {
         Parent root;
         if (ParametrosController.getInstance().getLista().isEmpty()) {
-            //BDInsert bdInsert = new BDInsert();
-            //bdInsert.insertData();
+            BDInsert bdInsert = new BDInsert();
+            bdInsert.insertData();
             root = FXMLLoader.load(getClass().getResource("/fxml/parametrizacao/GerenciarParametrizacaoFXML.fxml"));
         } else {
             root = FXMLLoader.load(getClass().getResource("/fxml/login/FXLoginFXML.fxml"));
