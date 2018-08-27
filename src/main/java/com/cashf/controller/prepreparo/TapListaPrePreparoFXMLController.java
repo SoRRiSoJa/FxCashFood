@@ -20,6 +20,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
@@ -71,14 +72,7 @@ public class TapListaPrePreparoFXMLController implements Initializable {
     @FXML
     private void onSelecionarProduto(MouseEvent event) {
         if (tbvProdutos.getSelectionModel().getSelectedItem() != null) {
-            PrePreparoController.getInstance().setPrePreparo(tbvProdutos.getItems().get(tbvProdutos.getSelectionModel().getSelectedIndex()));
             
-            System.out.println("Aqui---...............>>>>" + PrePreparoController.getInstance().getPrePreparo().toString());
-            PrePreparoController.getInstance().getPrePreparo().getListaProdutos().forEach((pp) -> {
-                System.out.println("PR:" + pp.getProduto().getDescriao() + "- qtde:" + pp.getQtdeProduto());
-            });
-            PrePreparoController.getInstance().setListaItens(FXCollections.observableList(PrePreparoController.getInstance().getPrePreparo().getListaProdutos()));
-            TabPrePreparoNFXMLController.LDTS();
         }
     }
 
@@ -107,10 +101,27 @@ public class TapListaPrePreparoFXMLController implements Initializable {
         tbcUnidade.setCellValueFactory(new PropertyValueFactory<>("produtoPrincipal.unidadeMedida"));
         tbcQtde.setCellValueFactory(new PropertyValueFactory<>("produtoPrincipal.qtdeProduto"));
         tbvProdutos.getColumns().setAll(tbcDescricao, tbcData, tbcCusto, tbcUnidade, tbcQtde);
+        tbvProdutos.setRowFactory(tv -> {
+            TableRow<PrePreparo> row = new TableRow<>();
+            row.setOnMouseClicked(event -> {
+                if (event.getClickCount() == 2 && (!row.isEmpty())) {
+                    PrePreparoController.getInstance().setPrePreparo(row.getItem());
+                    PrePreparoController.getInstance().getPrePreparo().getListaProdutos().forEach((pp) -> {
+                        System.out.println("PR:" + pp.getProduto().getDescriao() + "- qtde:" + pp.getQtdeProduto());
+                    });
+                    PrePreparoController.getInstance().setListaItens(FXCollections.observableList(PrePreparoController.getInstance().getPrePreparo().getListaProdutos()));
+                    TabPrePreparoNFXMLController.LDTS();
+                    GerenciarPrePreparoFXMLController.getTabPane().getSelectionModel().selectFirst();
+                }
+            });
+            return row;
+        });
     }
+
     public static void loadTbvPP() {
         _tbvProdutos.setItems(PrePreparoController.getInstance().getLista());
     }
+
     private void loadTbv() {
         tbvProdutos.setItems(PrePreparoController.getInstance().getLista());
     }
@@ -140,10 +151,10 @@ public class TapListaPrePreparoFXMLController implements Initializable {
             }
         });
     }
-    public static void refreshList(){
-        
+
+    public static void refreshList() {
+
         _tbvProdutos.refresh();
     }
 
-    
 }
