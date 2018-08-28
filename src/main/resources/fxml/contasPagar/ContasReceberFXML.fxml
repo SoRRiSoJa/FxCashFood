@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXDatePicker?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<Pane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="542.0" minWidth="1366.0" prefHeight="542.0" prefWidth="1366.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cashf.controller.contaspagar.ContasReceberFXMLController">
+   <children>
+      <Pane fx:id="paneData" layoutX="20.0" layoutY="30.0" prefHeight="477.0" prefWidth="640.0" style="-fx-background-color: #ffffff;">
+         <effect>
+            <DropShadow />
+         </effect>
+         <children>
+            <JFXDatePicker fx:id="dtpDataVencimento" defaultColor="#4059a9" layoutX="44.0" layoutY="31.0" prefHeight="29.0" prefWidth="260.0" promptText="Data de Vencimento" />
+            <JFXComboBox fx:id="cbbFormaPagamento" labelFloat="true" layoutX="325.0" layoutY="35.0" onMouseClicked="#onMouseClickedFormaDePagamento" prefHeight="26.0" prefWidth="260.0" promptText="Meio de Pagamento" />
+            <JFXTextField fx:id="txtFavorecido" labelFloat="true" layoutX="44.0" layoutY="102.0" prefHeight="24.0" prefWidth="540.0" promptText="Favorecido" />
+            <JFXTextField fx:id="txtDescricao" labelFloat="true" layoutX="44.0" layoutY="154.0" prefHeight="24.0" prefWidth="540.0" promptText="Descrição" />
+            <JFXTextField fx:id="txtValor" labelFloat="true" layoutX="44.0" layoutY="205.0" prefHeight="24.0" prefWidth="260.0" promptText="Valor Bruto" />
+            <JFXTextField fx:id="txtEncargos" labelFloat="true" layoutX="323.0" layoutY="205.0" prefHeight="24.0" prefWidth="260.0" promptText="Encargos" />
+            <JFXTextField fx:id="txtValorDesconto" labelFloat="true" layoutX="44.0" layoutY="262.0" prefHeight="24.0" prefWidth="260.0" promptText="Valor de Desconto" />
+            <JFXTextField fx:id="txtValorTaxa" labelFloat="true" layoutX="323.0" layoutY="262.0" prefHeight="24.0" prefWidth="260.0" promptText="Taxa de cartão" />
+            <JFXTextField fx:id="txtLiquido" labelFloat="true" layoutX="323.0" layoutY="312.0" prefHeight="24.0" prefWidth="260.0" promptText="Valor Líquido" />
+            <HBox alignment="CENTER" layoutX="9.0" layoutY="399.0" prefHeight="68.0" prefWidth="621.0">
+               <children>
+                  <JFXButton fx:id="btnSalvar" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" onAction="#onSalvar" prefHeight="36.0" prefWidth="100.0" ripplerFill="WHITE" style="-fx-background-color: #2196f3;" textFill="WHITE">
+                     <HBox.margin>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </HBox.margin>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                     <graphic>
+                        <FontAwesomeIconView fill="WHITE" glyphName="PLUS" size="24" />
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton fx:id="btnNovo" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" layoutX="10.0" layoutY="10.0" onAction="#onNovo" prefHeight="36.0" prefWidth="100.0" ripplerFill="WHITE" style="-fx-background-color: #00e676;" textFill="WHITE">
+                     <HBox.margin>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </HBox.margin>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                     <graphic>
+                        <FontAwesomeIconView fill="WHITE" glyphName="EDIT" size="24" />
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton fx:id="btnLimpar" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" layoutX="190.0" layoutY="10.0" onAction="#onLimpar" prefHeight="36.0" prefWidth="100.0" ripplerFill="WHITE" style="-fx-background-color: #00251a;" textFill="WHITE">
+                     <HBox.margin>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </HBox.margin>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                     <graphic>
+                        <FontAwesomeIconView fill="WHITE" glyphName="ERASER" size="24" />
+                     </graphic>
+                  </JFXButton>
+               </children>
+            </HBox>
+            <Pane prefHeight="20.0" prefWidth="640.0" style="-fx-background-color: #0081cb;">
+               <children>
+                  <Text fill="WHITE" layoutY="15.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CADSTRAR CONTAS A RECEBER" textAlignment="CENTER" wrappingWidth="650.0000040512532">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                  </Text>
+               </children>
+            </Pane>
+         </children>
+      </Pane>
+      <Pane fx:id="paneData1" layoutX="700.0" layoutY="30.0" prefHeight="477.0" prefWidth="650.0" style="-fx-background-color: #ffffff;">
+         <effect>
+            <DropShadow />
+         </effect>
+         <children>
+            <Pane prefHeight="20.0" prefWidth="650.0" style="-fx-background-color: #0081cb;">
+               <children>
+                  <Text fill="WHITE" layoutY="15.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CONTAS A RECEBER" textAlignment="CENTER" wrappingWidth="650.0000040512532">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                  </Text>
+               </children>
+            </Pane>
+            <TableView fx:id="tbvContas" layoutX="11.0" layoutY="41.0" onMouseClicked="#onMouseClickedContaPagar" prefHeight="406.0" prefWidth="629.0" stylesheets="@../../styles/TableViewCSS.css">
+               <columns>
+                  <TableColumn fx:id="tbcFavorecido" prefWidth="94.0" text="Favorecido" />
+                  <TableColumn fx:id="tbcDescricao" prefWidth="180.0" text="Descrição" />
+                  <TableColumn fx:id="tbcVencimento" prefWidth="96.0" text="Vencimento" />
+                  <TableColumn fx:id="tbcValor" prefWidth="69.0" text="Valor" />
+                  <TableColumn fx:id="tbcStatus" prefWidth="59.0" text="Status" />
+                  <TableColumn fx:id="btnQuitar" prefWidth="56.0" text="Quitar" />
+                  <TableColumn fx:id="btnCancelar" prefWidth="74.0" text="Cancelar" />
+               </columns>
+               <effect>
+                  <DropShadow />
+               </effect>
+            </TableView>
+         </children>
+      </Pane>
+   </children>
+</Pane>

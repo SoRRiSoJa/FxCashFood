@@ -6,7 +6,6 @@
 <?import com.jfoenix.controls.JFXTextField?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.effect.DropShadow?>
@@ -22,11 +21,6 @@
             <DropShadow />
          </effect>
          <children>
-            <Pane prefHeight="20.0" prefWidth="640.0" style="-fx-background-color: #0081cb;">
-               <children>
-                  <Label layoutX="5.0" layoutY="2.0" text="Registrar nova Conta Pagar:" textFill="WHITE" />
-               </children>
-            </Pane>
             <JFXDatePicker fx:id="dtpDataVencimento" defaultColor="#4059a9" layoutX="44.0" layoutY="31.0" prefHeight="29.0" prefWidth="260.0" promptText="Data de Vencimento" />
             <JFXComboBox fx:id="cbbFormaPagamento" labelFloat="true" layoutX="325.0" layoutY="35.0" onMouseClicked="#onMouseClickedFormaDePagamento" prefHeight="26.0" prefWidth="260.0" promptText="Meio de Pagamento" />
             <JFXTextField fx:id="txtFavorecido" labelFloat="true" layoutX="44.0" layoutY="102.0" prefHeight="24.0" prefWidth="540.0" promptText="Favorecido" />
@@ -73,22 +67,17 @@
                   </JFXButton>
                </children>
             </HBox>
+            <Pane prefHeight="20.0" prefWidth="640.0" style="-fx-background-color: #0081cb;">
+               <children>
+                  <Text fill="WHITE" layoutY="15.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CADASTRAR CONTAS A PAGAR" textAlignment="CENTER" wrappingWidth="650.0000040512532">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                  </Text>
+               </children>
+            </Pane>
          </children>
       </Pane>
-      <TableView fx:id="tbvContas" layoutX="700.0" layoutY="50.0" onMouseClicked="#onMouseClickedContaPagar" prefHeight="477.0" prefWidth="652.0" stylesheets="@../../styles/TableViewCSS.css">
-         <columns>
-            <TableColumn fx:id="tbcFavorecido" prefWidth="95.0" text="Favorecido" />
-            <TableColumn fx:id="tbcDescricao" prefWidth="201.0" text="Descrição" />
-            <TableColumn fx:id="tbcVencimento" prefWidth="97.0" text="Vencimento" />
-            <TableColumn fx:id="tbcValor" prefWidth="73.0" text="Valor" />
-            <TableColumn fx:id="tbcStatus" prefWidth="56.0" text="Status" />
-            <TableColumn fx:id="btnQuitar" prefWidth="55.0" text="Quitar" />
-            <TableColumn fx:id="btnCancelar" prefWidth="74.0" text="Cancelar" />
-         </columns>
-         <effect>
-            <DropShadow />
-         </effect>
-      </TableView>
       <Pane prefHeight="30.0" prefWidth="1366.0" style="-fx-background-color: #0081cb;">
          <children>
             <Text fill="WHITE" layoutY="18.0" strokeMiterLimit="20.0" strokeType="OUTSIDE" strokeWidth="4.0" text="GERENCIAR CONTAS A PAGAR" textAlignment="CENTER" underline="true" wrappingWidth="1366.0">
@@ -96,6 +85,36 @@
                   <Font name="System Bold" size="13.0" />
                </font>
             </Text>
+         </children>
+      </Pane>
+      <Pane fx:id="paneData11" layoutX="700.0" layoutY="50.0" prefHeight="477.0" prefWidth="650.0" style="-fx-background-color: #ffffff;">
+         <effect>
+            <DropShadow />
+         </effect>
+         <children>
+            <Pane prefHeight="20.0" prefWidth="650.0" style="-fx-background-color: #0081cb;">
+               <children>
+                  <Text fill="WHITE" layoutY="15.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CONTAS A PAGAR" textAlignment="CENTER" wrappingWidth="650.0000040512532">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                  </Text>
+               </children>
+            </Pane>
+            <TableView fx:id="tbvContas" layoutX="11.0" layoutY="41.0" onMouseClicked="#onMouseClickedContaPagar" prefHeight="406.0" prefWidth="629.0" stylesheets="@../../styles/TableViewCSS.css">
+               <columns>
+                  <TableColumn fx:id="tbcFavorecido" prefWidth="92.0" text="Favorecido" />
+                  <TableColumn fx:id="tbcDescricao" prefWidth="180.0" text="Descrição" />
+                  <TableColumn fx:id="tbcVencimento" prefWidth="97.0" text="Vencimento" />
+                  <TableColumn fx:id="tbcValor" prefWidth="63.0" text="Valor" />
+                  <TableColumn fx:id="tbcStatus" prefWidth="57.0" text="Status" />
+                  <TableColumn fx:id="btnQuitar" prefWidth="59.0" text="Quitar" />
+                  <TableColumn fx:id="btnCancelar" text="Cancelar" />
+               </columns>
+               <effect>
+                  <DropShadow />
+               </effect>
+            </TableView>
          </children>
       </Pane>
    </children>
