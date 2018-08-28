@@ -11,22 +11,35 @@ import com.cashf.model.contareceber.ContaReceber;
 import com.cashf.model.contasPagar.StatusPagto;
 import com.cashf.model.meiopagamento.MeioPagamento;
 import com.cashf.model.venda.Venda;
+import controller.GenericController;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 /**
  *
  * @author joao
  */
-public class GerarContasReceber {
-    
+public class ContaReceberController implements GenericController<ContaReceber> {
+
+    public static ContaReceberController contaReceberController;
     private ContaReceber contaReceber;
+    private ObservableList<ContaReceber> lista;
     private final ContaReceberDAO contaReceberDAO;
 
-    public GerarContasReceber() {
+    private ContaReceberController() {
         this.contaReceberDAO = new ContaReceberDAO(ContaReceber.class);
+        this.lista = FXCollections.observableList(contaReceberDAO.listAll());
         this.contaReceber = new ContaReceber();
         this.contaReceber.setIdContaReceber(0l);
+    }
+
+    public static synchronized ContaReceberController getInstance() {
+        if (contaReceberController == null) {
+            contaReceberController = new ContaReceberController();
+        }
+        return contaReceberController;
     }
 
     public ContaReceber getContaReceber() {
@@ -53,7 +66,40 @@ public class GerarContasReceber {
         this.contaReceber.setStatusPagto(statusPagto);
     }
 
-    public void efetuarLancamento() {
+    @Override
+    public void insert() {
         contaReceber.setIdContaReceber(contaReceberDAO.save(contaReceber));
+    }
+
+    @Override
+    public void update() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void delete() {
+        contaReceberDAO.delete(contaReceber);
+        flushObject();
+    }
+
+    @Override
+    public void flushObject() {
+        this.contaReceber = new ContaReceber();
+        this.contaReceber.setIdContaReceber(0l);
+    }
+
+    @Override
+    public ObservableList<ContaReceber> getLista() {
+        return lista;
+    }
+
+    @Override
+    public void setLista(ObservableList<ContaReceber> lista) {
+        this.lista = lista;
+    }
+
+    @Override
+    public void setItenLista(ContaReceber obj) {
+        lista.add(obj);
     }
 }
