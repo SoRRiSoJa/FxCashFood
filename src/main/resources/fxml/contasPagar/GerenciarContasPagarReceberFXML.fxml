@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXTabPane?>
+<?import javafx.scene.control.Tab?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
@@ -17,6 +19,20 @@
                   </Text>
                </children>
             </Pane>
+            <JFXTabPane fx:id="TabPaneContas" prefWidth="1366.0" stylesheets="@../../styles/TabPaneCSS.css" tabMinHeight="30.0" tabMinWidth="678.0">
+               <tabs>
+                  <Tab fx:id="tabPagar" text="Gerenciar Contas Pagar">
+                     <content>
+                        <fx:include source="ContasPagarFXML.fxml" />
+                     </content>
+                  </Tab>
+                  <Tab fx:id="tabReceber" text="Gerenciar Contas Receber">
+                     <content>
+                        <fx:include source="ContasReceberFXML.fxml" />
+                     </content>
+                  </Tab>
+               </tabs>
+            </JFXTabPane>
       </VBox>
    </children>
 </Pane>

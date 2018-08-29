@@ -131,7 +131,7 @@ public class MenuFXMLController implements Initializable {
     @FXML
     private void OnNaTres(ActionEvent event) {
         if (CaixaController.getInstance().getCaixaAberto().getIdCaixa() != 0) {
-            loadFXML("/fxml/contasPagar/ContasPagarFXML.fxml");
+            loadFXML("/fxml/contasPagar/GerenciarContasPagarReceberFXML.fxml");
         } else {
             PoupUpUtil.errorMessage(rootVbox, MainApp.paneRoot, "Um Caixa deve Ser aberto!");
         }

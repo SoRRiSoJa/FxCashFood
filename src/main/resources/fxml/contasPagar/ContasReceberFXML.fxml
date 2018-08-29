@@ -69,7 +69,7 @@
             </HBox>
             <Pane prefHeight="20.0" prefWidth="640.0" style="-fx-background-color: #0081cb;">
                <children>
-                  <Text fill="WHITE" layoutY="15.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CADSTRAR CONTAS A RECEBER" textAlignment="CENTER" wrappingWidth="650.0000040512532">
+                  <Text fill="WHITE" layoutY="15.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CADSTRAR / EDITAR CONTAS A RECEBER" textAlignment="CENTER" wrappingWidth="650.0000040512532">
                      <font>
                         <Font name="System Bold" size="13.0" />
                      </font>
