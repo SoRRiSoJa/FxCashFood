@@ -14,6 +14,7 @@ import com.cashf.model.venda.Venda;
 import controller.GenericController;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -65,7 +66,9 @@ public class ContaReceberController implements GenericController<ContaReceber> {
         this.contaReceber.setVenda(venda);
         this.contaReceber.setStatusPagto(statusPagto);
     }
-
+    public void quitarContaReceber(LocalDate dataPagamento,BigDecimal encargos, BigDecimal desconto, BigDecimal acrecimo, BigDecimal valorPago, MeioPagamento meioPagamento,StatusPagto statusPagto){
+    
+    }
     @Override
     public void insert() {
         contaReceber.setIdContaReceber(contaReceberDAO.save(contaReceber));
@@ -73,19 +76,21 @@ public class ContaReceberController implements GenericController<ContaReceber> {
 
     @Override
     public void update() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        contaReceberDAO.update(contaReceber);
     }
 
     @Override
     public void delete() {
         contaReceberDAO.delete(contaReceber);
-        flushObject();
+        this.contaReceber = new ContaReceber();
+        this.contaReceber.setIdContaReceber(0l);
     }
 
     @Override
     public void flushObject() {
         this.contaReceber = new ContaReceber();
         this.contaReceber.setIdContaReceber(0l);
+        this.lista = FXCollections.observableList(new ArrayList<>());
     }
 
     @Override

@@ -205,6 +205,8 @@ public class CaixaController implements GenericController<Caixa> {
 
     public void sangrarCaixa(BigDecimal valor) {
         setCaixaMovimento(0l, caixaAberto.getDataAbertura(), "SANGRIA DE CAIXA", valor, TPMov.SANGRIA, getCaixaAberto());
+        getCaixaAberto().getContaCorrente().setSaldo(getCaixaAberto().getContaCorrente().getSaldo().subtract(valor));
+        contaCorrenteDAO.update(getCaixaAberto().getContaCorrente());
         this.caixaMovimento.setIdCaixaMovimento(caixaMovimentoDAO.save(caixaMovimento));
         listaMov.add(caixaMovimento);
         caixaMovimento = null;
@@ -216,6 +218,8 @@ public class CaixaController implements GenericController<Caixa> {
 
     public void movimentarCaixaDebito(String desc, BigDecimal valor) {
         setCaixaMovimento(0l, LocalDate.now(), desc, valor, TPMov.DEBITO, getCaixaAberto());
+        getCaixaAberto().getContaCorrente().setSaldo(getCaixaAberto().getContaCorrente().getSaldo().subtract(valor));
+        contaCorrenteDAO.update(getCaixaAberto().getContaCorrente());
         this.caixaMovimento.setIdCaixaMovimento(caixaMovimentoDAO.save(caixaMovimento));
         listaMov.add(caixaMovimento);
         caixaMovimento = null;
@@ -227,6 +231,9 @@ public class CaixaController implements GenericController<Caixa> {
 
     public void movimentarCaixaCredito(String desc, BigDecimal valor) {
         setCaixaMovimento(0l, LocalDate.now(), desc, valor, TPMov.CREDITO, getCaixaAberto());
+        getCaixaAberto().getContaCorrente().setSaldo(getCaixaAberto().getContaCorrente().getSaldo().add(valor));
+        contaCorrenteDAO.update(getCaixaAberto().getContaCorrente());
+        
         this.caixaMovimento.setIdCaixaMovimento(caixaMovimentoDAO.save(caixaMovimento));
         listaMov.add(caixaMovimento);
         caixaMovimento = null;
@@ -237,7 +244,11 @@ public class CaixaController implements GenericController<Caixa> {
 
     public void suprirCaixa(BigDecimal valor) {
         setCaixaMovimento(0l, caixaAberto.getDataAbertura(), "SUPRIMENTO DE CAIXA", valor, TPMov.SUPRIMENTO, getCaixaAberto());
+        getCaixaAberto().getContaCorrente().setSaldo(getCaixaAberto().getContaCorrente().getSaldo().add(valor));
+        contaCorrenteDAO.update(getCaixaAberto().getContaCorrente());
+        
         this.caixaMovimento.setIdCaixaMovimento(caixaMovimentoDAO.save(caixaMovimento));
+        
         listaMov.add(caixaMovimento);
         caixaMovimento = null;
         caixaMovimento = new CaixaMovimento();
@@ -245,7 +256,7 @@ public class CaixaController implements GenericController<Caixa> {
 
         atualizaSaldo();
     }
-    
+
     public void abrirCaixa(LocalDate dataAbertura, LocalTime horaAbertura, BigDecimal valorInicial) {
         setCaixaAberto(0l, dataAbertura, horaAbertura, null, null, valorInicial, LoginController.getInstance().getUsuario(), getContaCorrente(), TPStatusCX.ABERTO);
         this.caixaAberto.setIdCaixa(caixaDAO.save(caixaAberto));
@@ -279,8 +290,7 @@ public class CaixaController implements GenericController<Caixa> {
 
     /**
      * Atualiza os valores totais de Creditos Débitos e o saldo final apartir
-     * dos movimentos de caixa. 
-     * public void atualizaSaldo()
+     * dos movimentos de caixa. public void atualizaSaldo()
      */
     public void atualizaSaldo() {
         totalCreditos = BigDecimal.ZERO;

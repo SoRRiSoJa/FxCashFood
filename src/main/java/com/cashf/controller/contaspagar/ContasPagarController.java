@@ -5,6 +5,7 @@
  */
 package com.cashf.controller.contaspagar;
 
+import com.cashf.controller.caixa.CaixaController;
 import com.cashf.dao.contaspagar.ContaPagarDAO;
 import com.cashf.dao.meiopagamento.MeioPagamentoDAO;
 import com.cashf.model.caixa.Caixa;
@@ -78,7 +79,7 @@ public class ContasPagarController implements GenericController<ContaPagar> {
 
     @Override
     public void insert() {
-        System.out.println("CP"+contaPagar.getCaixa().toString());
+
         this.contaPagar.setIdContaPagar(contasPagarDAO.save(contaPagar));
     }
 
@@ -134,7 +135,15 @@ public class ContasPagarController implements GenericController<ContaPagar> {
         this.contaPagar = contaPagar;
     }
 
-    public void quitarConta() {
+    public void quitarConta(String descricao, LocalDate dataPagamento, BigDecimal encargos, BigDecimal desconto, BigDecimal acrecimo, BigDecimal valorPago, MeioPagamento meioPagamento) {
         this.contaPagar.setStatusPagto(StatusPagto.PAGO);
+        this.contaPagar.setDataPagamento(dataPagamento);
+        this.contaPagar.setDesconto(desconto);
+        this.contaPagar.setAcrecimo(acrecimo);
+        this.contaPagar.setMeioPagamento(ContasPagarController.getInstance().getMeioPagamento());
+        this.contaPagar.setValorPago(valorPago);
+        update();
+        CaixaController.getInstance().movimentarCaixaDebito(descricao, valorPago);
+
     }
 }
