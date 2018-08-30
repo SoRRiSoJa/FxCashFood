@@ -40,48 +40,47 @@ made subject to such option by the copyright holder.
 Contributor(s):
 -->
 <hibernate-configuration>
-    <session-factory>
-        <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
-        <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
-        <property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/cashfood_data_03</property>
-        <property name="hibernate.connection.username">postgres</property>
-        <property name="hibernate.connection.password">73684985</property>
-        <property name="hibernate.hbm2ddl.auto">update</property>
-        <property name="hibernate.connection.pool_size">200</property>
-        <property name="show_sql">true</property>
-        <mapping class="com.cashf.model.banco.Banco" />
-        <mapping class="com.cashf.model.cidade.Cidade" />
-        <mapping class="com.cashf.model.estado.Estado" />
-        <mapping class="com.cashf.model.usuario.Usuario" />
-        <mapping class="com.cashf.model.contacorrente.ContaCorrente" />
-        <mapping class="com.cashf.model.meiopagamento.MeioPagamento" />
-        <mapping class="com.cashf.model.fornecedor.Fornecedor" />
-        <mapping class="com.cashf.model.telefone.Telefone" />
-        <mapping class="com.cashf.model.produto.Produto" />
-        <mapping class="com.cashf.model.produto.AliquotasProduto" />
-        <mapping class="com.cashf.model.produto.Grupo" />
-        <mapping class="com.cashf.model.produto.Categoria" />
-        <mapping class="com.cashf.model.pessoa.Pessoa" />
-        <mapping class="com.cashf.model.funcionario.Funcionario" />
-        <mapping class="com.cashf.model.cliente.Cliente" />
-        <mapping class="com.cashf.model.parametros.Parametros" />
-        <mapping class="com.cashf.model.ajusteestoque.AjusteEstoque" />
-        <mapping class="com.cashf.model.prepreparo.PrePreparo" />
-        <mapping class="com.cashf.model.prepreparo.ProdutoPrePreparo" />
-        <mapping class="com.cashf.model.fichatecnica.FichaTecnica" />
-        <mapping class="com.cashf.model.fichatecnica.ProdutoFichaTecnica" />
-        <mapping class="com.cashf.model.notafiscal.NotaFiscal" />
-        <mapping class="com.cashf.model.notafiscal.ProdutoNotaFiscal" />
-        <mapping class="com.cashf.model.contasPagar.ContaPagar" />
-        <mapping class="com.cashf.model.caixa.Caixa" />
-        <mapping class="com.cashf.model.caixa.CaixaMovimento" />
-        <mapping class="com.cashf.model.combo.Combo" />
-        <mapping class="com.cashf.model.combo.ProdutoCombo" />
-        <mapping class="com.cashf.model.parametros.ParametrosFiscais" />
-        <mapping class="com.cashf.model.mesa.Mesa" />
-        <mapping class="com.cashf.model.venda.Venda" />
-        <mapping class="com.cashf.model.venda.ProdutoVenda" />
-        <mapping class="com.cashf.model.contareceber.ContaReceber" />
-                
-    </session-factory>
+  <session-factory>
+    <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
+    <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
+    <property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/cashfood_data_02</property>
+    <property name="hibernate.connection.username">postgres</property>
+    <property name="hibernate.connection.password">73684985</property>
+    <property name="hibernate.hbm2ddl.auto">update</property>
+    <property name="hibernate.connection.pool_size">200</property>
+    <property name="show_sql">true</property>
+    <mapping class="com.cashf.model.banco.Banco"/>
+    <mapping class="com.cashf.model.cidade.Cidade"/>
+    <mapping class="com.cashf.model.estado.Estado"/>
+    <mapping class="com.cashf.model.usuario.Usuario"/>
+    <mapping class="com.cashf.model.contacorrente.ContaCorrente"/>
+    <mapping class="com.cashf.model.meiopagamento.MeioPagamento"/>
+    <mapping class="com.cashf.model.fornecedor.Fornecedor"/>
+    <mapping class="com.cashf.model.telefone.Telefone"/>
+    <mapping class="com.cashf.model.produto.Produto"/>
+    <mapping class="com.cashf.model.produto.AliquotasProduto"/>
+    <mapping class="com.cashf.model.produto.Grupo"/>
+    <mapping class="com.cashf.model.produto.Categoria"/>
+    <mapping class="com.cashf.model.pessoa.Pessoa"/>
+    <mapping class="com.cashf.model.funcionario.Funcionario"/>
+    <mapping class="com.cashf.model.cliente.Cliente"/>
+    <mapping class="com.cashf.model.parametros.Parametros"/>
+    <mapping class="com.cashf.model.ajusteestoque.AjusteEstoque"/>
+    <mapping class="com.cashf.model.prepreparo.PrePreparo"/>
+    <mapping class="com.cashf.model.prepreparo.ProdutoPrePreparo"/>
+    <mapping class="com.cashf.model.fichatecnica.FichaTecnica"/>
+    <mapping class="com.cashf.model.fichatecnica.ProdutoFichaTecnica"/>
+    <mapping class="com.cashf.model.notafiscal.NotaFiscal"/>
+    <mapping class="com.cashf.model.notafiscal.ProdutoNotaFiscal"/>
+    <mapping class="com.cashf.model.contasPagar.ContaPagar"/>
+    <mapping class="com.cashf.model.caixa.Caixa"/>
+    <mapping class="com.cashf.model.caixa.CaixaMovimento"/>
+    <mapping class="com.cashf.model.combo.Combo"/>
+    <mapping class="com.cashf.model.combo.ProdutoCombo"/>
+    <mapping class="com.cashf.model.parametros.ParametrosFiscais"/>
+    <mapping class="com.cashf.model.mesa.Mesa"/>
+    <mapping class="com.cashf.model.venda.Venda"/>
+    <mapping class="com.cashf.model.venda.ProdutoVenda"/>
+    <mapping class="com.cashf.model.contareceber.ContaReceber"/>
+  </session-factory>
 </hibernate-configuration>

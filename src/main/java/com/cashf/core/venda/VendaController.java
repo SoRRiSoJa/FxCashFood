@@ -201,7 +201,7 @@ public class VendaController implements GenericController<Venda> {
             cr = new ContaReceber(0l, LocalDate.now().plusDays(meioPagto.getPrazoRecebimento()), null,
                     venda.getCliente().getNome(),
                     "VENDA - " + meioPagto.getDescricao(), venda.getValorTotal(), BigDecimal.ZERO, BigDecimal.ZERO, BigDecimal.ZERO,
-                    venda.getValorTotal().subtract(venda.getValorTotal().multiply(meioPagto.getTaxa().divide(new BigDecimal(100)))), meioPagto, venda, CaixaController.getInstance().getCaixaAberto(), StatusPagto.PAGO);
+                    venda.getValorTotal().subtract(venda.getValorTotal().multiply(meioPagto.getTaxa().divide(new BigDecimal(100)))), meioPagto, venda, CaixaController.getInstance().getCaixaAberto(), StatusPagto.ABERTO);
         }
         contaReceberDAO.save(cr);
     }
