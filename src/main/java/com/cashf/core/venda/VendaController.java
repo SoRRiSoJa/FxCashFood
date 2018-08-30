@@ -176,6 +176,8 @@ public class VendaController implements GenericController<Venda> {
         insert();//Persistindo a venda
         //Realizando a movimentação de caixa
         caixaMovimentoDAO.save(new CaixaMovimento(0l, LocalDate.now(), "VENDA", getValTotal(), TPMov.CREDITO, CaixaController.getInstance().getCaixaAberto()));
+        //atualizando saldo de conta
+        atualizarCC(venda.getValorTotal());
         //Atualizando estoque de produtos
         for (ProdutoVenda pv : venda.getListaProdutos()) {
             atualizarEstoque.setProduto(pv.getProduto());
@@ -183,12 +185,25 @@ public class VendaController implements GenericController<Venda> {
             atualizarEstoque.retirarProduto(pv.getQtde(), pv.getProduto().getUnidadeMedida());
         }
         //Gerando a conta a receber
-        contaReceberDAO.save(new ContaReceber(0l, LocalDate.now(),
-                LocalDate.now(),
-                venda.getCliente().getNome(),
-                "VENDA", venda.getValorTotal(), BigDecimal.ZERO, BigDecimal.ZERO, BigDecimal.ZERO,
-                venda.getValorTotal(), meioPagto, venda, CaixaController.getInstance().getCaixaAberto(), StatusPagto.PAGO));
+        gerarContaReceber();
         lista.remove(venda);
+    }
+
+    private void gerarContaReceber() {
+        ContaReceber cr;
+        if (meioPagto.getTipoPagto() == TPPagto.DINHEIRO) {
+            cr = new ContaReceber(0l, LocalDate.now(),
+                    LocalDate.now(),
+                    venda.getCliente().getNome(),
+                    "VENDA - " + meioPagto.getDescricao(), venda.getValorTotal(), BigDecimal.ZERO, BigDecimal.ZERO, BigDecimal.ZERO,
+                    venda.getValorTotal(), meioPagto, venda, CaixaController.getInstance().getCaixaAberto(), StatusPagto.PAGO);
+        } else {
+            cr = new ContaReceber(0l, LocalDate.now().plusDays(meioPagto.getPrazoRecebimento()), null,
+                    venda.getCliente().getNome(),
+                    "VENDA - " + meioPagto.getDescricao(), venda.getValorTotal(), BigDecimal.ZERO, BigDecimal.ZERO, BigDecimal.ZERO,
+                    venda.getValorTotal().subtract(venda.getValorTotal().multiply(meioPagto.getTaxa().divide(new BigDecimal(100)))), meioPagto, venda, CaixaController.getInstance().getCaixaAberto(), StatusPagto.PAGO);
+        }
+        contaReceberDAO.save(cr);
     }
 
     private void atualizarCC(BigDecimal valor) {
