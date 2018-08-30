@@ -10,15 +10,19 @@ import com.cashf.core.atualizarestoque.AtualizarEstoque;
 import com.cashf.dao.caixamovimento.CaixaMovimentoDAO;
 import com.cashf.dao.combo.ComboDAO;
 import com.cashf.dao.contacorrente.ContaCorrenteDAO;
+import com.cashf.dao.contareceber.ContaReceberDAO;
 import com.cashf.dao.meiopagamento.MeioPagamentoDAO;
 import com.cashf.dao.produto.ProdutoDAO;
 import com.cashf.dao.venda.VendaDAO;
 import com.cashf.model.caixa.CaixaMovimento;
+import com.cashf.model.caixa.TPMov;
 import com.cashf.model.combo.Combo;
 import com.cashf.model.combo.ProdutoCombo;
 import com.cashf.model.contacorrente.ContaCorrente;
+import com.cashf.model.contareceber.ContaReceber;
 import com.cashf.model.contasPagar.StatusPagto;
 import com.cashf.model.meiopagamento.MeioPagamento;
+import com.cashf.model.meiopagamento.TPPagto;
 import com.cashf.model.mesa.Mesa;
 import com.cashf.model.produto.Produto;
 import com.cashf.model.venda.ProdutoVenda;
@@ -48,6 +52,7 @@ public class VendaController implements GenericController<Venda> {
     private final CaixaMovimentoDAO caixaMovimentoDAO;
     private final MeioPagamentoDAO meioPAgamentoDAO;
     private final ContaCorrenteDAO contaCorrenteDAO;
+    private final ContaReceberDAO contaReceberDAO;
     private Produto produtoSelecionado;
     private ProdutoVenda produtoVendaSelecionado;
     private Combo comboSelecionado;
@@ -60,8 +65,10 @@ public class VendaController implements GenericController<Venda> {
         this.produtoDAO = new ProdutoDAO(Produto.class);
         this.vendaDAO = new VendaDAO(Venda.class);
         this.comboDAO = new ComboDAO(Combo.class);
+        this.contaCorrenteDAO = new ContaCorrenteDAO(ContaCorrente.class);
         this.meioPAgamentoDAO = new MeioPagamentoDAO(MeioPagamento.class);
         this.caixaMovimentoDAO = new CaixaMovimentoDAO(CaixaMovimento.class);
+        this.contaReceberDAO = new ContaReceberDAO(ContaReceber.class);
         this.listaProd = FXCollections.observableList(produtoDAO.listProdToVenda());
         this.lista = FXCollections.observableList(new ArrayList<>());
         this.venda = new Venda();
@@ -75,7 +82,6 @@ public class VendaController implements GenericController<Venda> {
         this.comboSelecionado = new Combo();
         this.comboSelecionado.setIdCombo(0l);
         this.atualizarEstoque = new AtualizarEstoque();
-        this.contaCorrenteDAO = new ContaCorrenteDAO(ContaCorrente.class);
     }
 
     public static synchronized VendaController getInstance() {
@@ -100,9 +106,11 @@ public class VendaController implements GenericController<Venda> {
     public void setComboSelecionado(Combo comboSelecionado) {
         this.comboSelecionado = comboSelecionado;
     }
+
     /**
-     * Retorna o objeto Venda associado a um objeto Mesa da lista de mesas abertas
-     * public Venda getVendaByMesa(Mesa)
+     * Retorna o objeto Venda associado a um objeto Mesa da lista de mesas
+     * abertas public Venda getVendaByMesa(Mesa)
+     *
      * @param mesa - Objeto mesa que se deseja obter a venda
      * @return Venda - Venda associada a mesa .
      */
@@ -113,10 +121,11 @@ public class VendaController implements GenericController<Venda> {
         });
         return venda;
     }
+
     /**
-     * Calcula o valor total dos produtos de uma venda realizando a 
-     * multiplicação dos preços unitários pela quantidade.
-     * public BigDecimal getValTotal()
+     * Calcula o valor total dos produtos de uma venda realizando a
+     * multiplicação dos preços unitários pela quantidade. public BigDecimal
+     * getValTotal()
      *
      * @return BigDecimal - Valor total da venda
      */
@@ -152,46 +161,42 @@ public class VendaController implements GenericController<Venda> {
         venda.setIdVenda(0l);
         venda.setListaProdutos(FXCollections.observableList(new ArrayList<>()));
     }
+
     /**
-     * Realiza o fechamento da venda gerando sua conta a receber, atualizando 
+     * Realiza o fechamento da venda gerando sua conta a receber, atualizando
      * seu valor total e data. Insere a movimentação de caixa e realia a
      * atualização do estoque de produtos e atualiza o saldo da conta conrrente
      * associada ao meio de pagamento selecionado.
-     * 
+     *
      * private void fecharVenda()
      */
     public void fecharVenda() {
-        GerarContasReceber gerarContasReceber = new GerarContasReceber();
         venda.setValorTotal(getValTotal());
         venda.setDataVenda(LocalDate.now());
-        insert();
-        atualizarSaldoCC();
-        CaixaController.getInstance().movimentarCaixaCredito("Venda", getValTotal());
-        venda.getListaProdutos().stream().map((pv) -> {
+        insert();//Persistindo a venda
+        //Realizando a movimentação de caixa
+        caixaMovimentoDAO.save(new CaixaMovimento(0l, LocalDate.now(), "VENDA", getValTotal(), TPMov.CREDITO, CaixaController.getInstance().getCaixaAberto()));
+        //Atualizando estoque de produtos
+        for (ProdutoVenda pv : venda.getListaProdutos()) {
             atualizarEstoque.setProduto(pv.getProduto());
-            return pv;
-        }).map((pv) -> {
             atualizarEstoque.setUnidadeMEdida(pv.getProduto().getUnidadeMedida());
-            return pv;
-        }).forEachOrdered((pv) -> {
             atualizarEstoque.retirarProduto(pv.getQtde(), pv.getProduto().getUnidadeMedida());
-        });
-        gerarContasReceber.setContaReceber(LocalDate.now(),
+        }
+        //Gerando a conta a receber
+        contaReceberDAO.save(new ContaReceber(0l, LocalDate.now(),
                 LocalDate.now(),
                 venda.getCliente().getNome(),
                 "VENDA", venda.getValorTotal(), BigDecimal.ZERO, BigDecimal.ZERO, BigDecimal.ZERO,
-                venda.getValorTotal(), meioPagto, venda, StatusPagto.PAGO);
-        gerarContasReceber.efetuarLancamento();
+                venda.getValorTotal(), meioPagto, venda, CaixaController.getInstance().getCaixaAberto(), StatusPagto.PAGO));
         lista.remove(venda);
     }
 
-    /**
-     * Atualiza o valor do saldo da conta corrente associada ao meio de 
-     * pagamento selecionado no fechamento da venda.
-     * private void atualizarSaldoCC()
-     */
-    private void atualizarSaldoCC() {
-        meioPagto.getContaCorrente().setSaldo(meioPagto.getContaCorrente().getSaldo().add(venda.getValorTotal()));
+    private void atualizarCC(BigDecimal valor) {
+        if (meioPagto.getTipoPagto() == TPPagto.DINHEIRO) {
+            meioPagto.getContaCorrente().setSaldo(meioPagto.getContaCorrente().getSaldo().add(valor));
+        } else {
+            meioPagto.getContaCorrente().setSaldo(meioPagto.getContaCorrente().getSaldo().add(valor.subtract(valor.multiply(meioPagto.getTaxa().divide(new BigDecimal(100))))));
+        }
         contaCorrenteDAO.update(meioPagto.getContaCorrente());
     }
 
@@ -316,6 +321,5 @@ public class VendaController implements GenericController<Venda> {
     public void setProdutoVendaSelecionado(ProdutoVenda produtoVendaSelecionado) {
         this.produtoVendaSelecionado = produtoVendaSelecionado;
     }
-    
 
 }

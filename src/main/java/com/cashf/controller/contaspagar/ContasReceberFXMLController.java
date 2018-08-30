@@ -122,6 +122,7 @@ public class ContasReceberFXMLController implements GenericViewController, Initi
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         loadCbbMeioPagamento();
+        loadTbv();
         setUpTableView();
     }
 
