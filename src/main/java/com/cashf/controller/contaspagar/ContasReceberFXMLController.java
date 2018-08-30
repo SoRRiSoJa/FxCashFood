@@ -6,6 +6,9 @@
 package com.cashf.controller.contaspagar;
 
 import com.cashf.cashfood.MainApp;
+import com.cashf.controller.caixa.CaixaController;
+import com.cashf.core.venda.ContaReceberController;
+import com.cashf.model.contareceber.ContaReceber;
 import com.cashf.model.contasPagar.ContaPagar;
 import com.cashf.model.contasPagar.StatusPagto;
 import com.cashf.model.meiopagamento.MeioPagamento;
@@ -45,6 +48,7 @@ import javafx.stage.Stage;
 import javafx.util.Callback;
 import javafx.util.Duration;
 import org.controlsfx.control.Notifications;
+import util.PoupUpUtil;
 
 /**
  * FXML Controller class
@@ -84,17 +88,17 @@ public class ContasReceberFXMLController implements GenericViewController, Initi
     @FXML
     private Pane paneData1;
     @FXML
-    private TableView<ContaPagar> tbvContas;
+    private TableView<ContaReceber> tbvContas;
     @FXML
-    private TableColumn<ContaPagar, String> tbcFavorecido;
+    private TableColumn<ContaReceber, String> tbcFavorecido;
     @FXML
-    private TableColumn<ContaPagar, String> tbcDescricao;
+    private TableColumn<ContaReceber, String> tbcDescricao;
     @FXML
-    private TableColumn<ContaPagar, LocalDate> tbcVencimento;
+    private TableColumn<ContaReceber, LocalDate> tbcVencimento;
     @FXML
-    private TableColumn<ContaPagar, BigDecimal> tbcValor;
+    private TableColumn<ContaReceber, BigDecimal> tbcValor;
     @FXML
-    private TableColumn<ContaPagar, StatusPagto> tbcStatus;
+    private TableColumn<ContaReceber, StatusPagto> tbcStatus;
     @FXML
     private TableColumn btnQuitar;
     @FXML
@@ -117,14 +121,29 @@ public class ContasReceberFXMLController implements GenericViewController, Initi
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        loadCbbMeioPagamento();
+        setUpTableView();
     }
 
     @FXML
     private void onMouseClickedFormaDePagamento(MouseEvent event) {
+        if (cbbFormaPagamento.getSelectionModel().getSelectedItem() != null) {
+            ContaReceberController.getInstance().getContaReceber().setMeioPagamento(cbbFormaPagamento.getSelectionModel().getSelectedItem());
+        }
     }
 
     @FXML
     private void onSalvar(ActionEvent event) {
+     getData();
+        if (validateFields()) {
+            ContaReceberController.getInstance().setContaReceber(dataVencimento, null, favorecido, descricao, valor, encargos, valorDesconto, valorTaxa, valLiquido,StatusPagto.ABERTO);
+            ContaReceberController.getInstance().setItenLista(ContaReceberController.getInstance().getContaReceber());
+            ContaReceberController.getInstance().insert();
+            loadTbv();
+        } else {
+            PoupUpUtil.errorMessage(paneData, MainApp.paneRoot, erros);
+            erros = "";
+        }
     }
 
     @FXML
@@ -133,7 +152,9 @@ public class ContasReceberFXMLController implements GenericViewController, Initi
 
     @FXML
     private void onLimpar(ActionEvent event) {
+        clearFields();
     }
+    
 
     @FXML
     private void onMouseClickedContaPagar(MouseEvent event) {
@@ -231,14 +252,29 @@ public class ContasReceberFXMLController implements GenericViewController, Initi
             valLiquido = BigDecimal.ZERO;
         }
         if (cbbFormaPagamento.getSelectionModel().getSelectedItem() != null) {
-            ContasPagarController.getInstance().setMeioPagamento(cbbFormaPagamento.getSelectionModel().getSelectedItem());
+            ContaReceberController.getInstance().getContaReceber().setMeioPagamento(cbbFormaPagamento.getSelectionModel().getSelectedItem());
         }
     }
-    
+
     @Override
     public void loadDataToScreen() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        txtFavorecido.setText(ContaReceberController.getInstance().getContaReceber().getFavorecido());
+        dtpDataVencimento.setValue(ContaReceberController.getInstance().getContaReceber().getDataVencimento());
+        txtDescricao.setText(ContaReceberController.getInstance().getContaReceber().getDescricao());
+        txtValor.setText(ContaReceberController.getInstance().getContaReceber().getValorBruto().toString());
+        txtEncargos.setText(ContaReceberController.getInstance().getContaReceber().getEncargos().toString());
+        txtValorDesconto.setText(ContaReceberController.getInstance().getContaReceber().getDesconto().toString());
+        txtValorTaxa.setText(ContaReceberController.getInstance().getContaReceber().getAcrecimo().toString());
+        txtLiquido.setText(ContaReceberController.getInstance().getContaReceber().getValorPago().toString());
     }
+
+    private void loadCbbMeioPagamento() {
+        cbbFormaPagamento.setItems(ContaReceberController.getInstance().getListaMeioPagamento());
+    }
+    private void loadTbv() {
+        tbvContas.setItems(ContaReceberController.getInstance().getLista());
+    }
+
     private void setUpTableView() {
         tbcFavorecido.setCellValueFactory(new PropertyValueFactory<>("favorecido"));
         tbcDescricao.setCellValueFactory(new PropertyValueFactory<>("descricao"));
@@ -261,6 +297,7 @@ public class ContasReceberFXMLController implements GenericViewController, Initi
         });
         tbvContas.getColumns().setAll(tbcFavorecido, tbcDescricao, tbcVencimento, tbcValor, tbcStatus, btnQuitar, btnCancelar);
     }
+
     public class ButtonCellDelete extends TableCell<Disposer.Record, Boolean> {
 
         Image img;
@@ -385,7 +422,5 @@ public class ContasReceberFXMLController implements GenericViewController, Initi
             System.out.println("Erro---->" + ex);
         }
     }
-
-    
 
 }
