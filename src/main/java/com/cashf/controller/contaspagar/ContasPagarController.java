@@ -135,7 +135,7 @@ public class ContasPagarController implements GenericController<ContaPagar> {
         this.contaPagar = contaPagar;
     }
 
-    public void quitarConta(String descricao, LocalDate dataPagamento, BigDecimal encargos, BigDecimal desconto, BigDecimal acrecimo, BigDecimal valorPago, MeioPagamento meioPagamento) {
+    public void quitarConta(String descricao, LocalDate dataPagamento,BigDecimal desconto, BigDecimal acrecimo, BigDecimal valorPago) {
         this.contaPagar.setStatusPagto(StatusPagto.PAGO);
         this.contaPagar.setDataPagamento(dataPagamento);
         this.contaPagar.setDesconto(desconto);

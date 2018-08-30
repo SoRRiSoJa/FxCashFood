@@ -7,7 +7,6 @@ package com.cashf.controller.contaspagar;
 
 import com.cashf.cashfood.MainApp;
 import com.cashf.controller.caixa.CaixaController;
-import com.cashf.model.contasPagar.StatusPagto;
 import com.cashf.model.meiopagamento.MeioPagamento;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
@@ -81,16 +80,8 @@ public class BoxQuitarContaPagarFXMLController implements Initializable {
     @FXML
     private void onAbrir(ActionEvent event) {
         getData();
-        if (validateFields()){
-            
-            ContasPagarController.getInstance().getContaPagar().setStatusPagto(StatusPagto.PAGO);
-            ContasPagarController.getInstance().getContaPagar().setDataPagamento(dataPagamento);
-            ContasPagarController.getInstance().getContaPagar().setDesconto(valorDesconto);
-            ContasPagarController.getInstance().getContaPagar().setAcrecimo(valorAcrecimos);
-            ContasPagarController.getInstance().getContaPagar().setMeioPagamento(ContasPagarController.getInstance().getMeioPagamento());
-            ContasPagarController.getInstance().getContaPagar().setValorPago(vallorPago);
-            ContasPagarController.getInstance().update();
-            CaixaController.getInstance().movimentarCaixaDebito(lblDescricao.getText(),vallorPago);
+        if (validateFields()) {
+            ContasPagarController.getInstance().quitarConta(lblDescricao.getText(), dataPagamento,valorAcrecimos,valorDesconto, vallorPago);
         } else {
             PoupUpUtil.errorMessage(MainApp.paneRoot, paneRoot, erros);
             erros = "";
@@ -139,13 +130,13 @@ public class BoxQuitarContaPagarFXMLController implements Initializable {
             try {
                 valorAcrecimos = new BigDecimal(txtAcrecimos.getText());
             } catch (Exception exx) {
-                
+
             }
             try {
                 vallorPago = vallorPago.add(valorAcrecimos);
                 txtValor.setText(vallorPago.toString());
             } catch (Exception ex) {
-               
+
             }
         }
     }
@@ -162,18 +153,20 @@ public class BoxQuitarContaPagarFXMLController implements Initializable {
                 try {
                     valorDesconto = new BigDecimal(txtDescontos.getText());
                 } catch (Exception exx) {
-                   
+
                 }
                 vallorPago = vallorPago.subtract(valorDesconto);
                 txtValor.setText(vallorPago.toString());
             } catch (Exception ex) {
-                
+
             }
         }
     }
-    public boolean validateValue(BigDecimal val){
-            return (val.compareTo(CaixaController.getInstance().getSaldoFinal())<=0);
+
+    public boolean validateValue(BigDecimal val) {
+        return (val.compareTo(CaixaController.getInstance().getSaldoFinal()) <= 0);
     }
+
     public Boolean validateFields() {
         boolean flag = true;
 
@@ -193,7 +186,7 @@ public class BoxQuitarContaPagarFXMLController implements Initializable {
             erros += "Uma forma de pagamento ser informada \n";
             flag = false;
         }
-        if(!validateValue(vallorPago)){
+        if (!validateValue(vallorPago)) {
             erros += "O valor é superior ao saldo de caixa \n";
             flag = false;
         }
@@ -220,7 +213,7 @@ public class BoxQuitarContaPagarFXMLController implements Initializable {
             valorDesconto = BigDecimal.ZERO;
         }
         ContasPagarController.getInstance().setMeioPagamento(cbbFormaPagamento.getItems().get(cbbFormaPagamento.getSelectionModel().getSelectedIndex()));
-        
+
     }
 
 }
