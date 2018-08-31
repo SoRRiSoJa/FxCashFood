@@ -48,7 +48,7 @@ public class ReceberPedidoController implements GenericController<NotaFiscal> {
     private BigDecimal valTotalIcmsSubst;
     private ObservableList<ProdutoNotaFiscal> listaProdutosNota;
     private ObservableList<NotaFiscal> lista;
-    private AtualizarEstoque atualizarEstoque;
+    private final AtualizarEstoque atualizarEstoque;
 
     private ReceberPedidoController() {
         this.produtoDAO = new ProdutoDAO(Produto.class);

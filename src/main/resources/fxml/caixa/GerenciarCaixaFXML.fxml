@@ -85,15 +85,17 @@
             <Separator layoutX="17.0" layoutY="280.0" prefHeight="0.0" prefWidth="600.0" />
             <Label layoutX="28.0" layoutY="290.0" text="Total Recebido:" />
             <Label layoutX="28.0" layoutY="330.0" text="Total Pago:" />
-            <Label layoutX="223.0" layoutY="330.0" text="Saldo Atual:" />
+            <Label layoutX="315.0" layoutY="330.0" text="Saldo Atual Dinheiro:" />
             <Separator layoutX="17.0" layoutY="395.0" prefHeight="0.0" prefWidth="600.0" />
             <Separator layoutX="16.0" layoutY="281.0" orientation="VERTICAL" prefHeight="114.0" prefWidth="0.0" />
             <Separator layoutX="615.0" layoutY="281.0" orientation="VERTICAL" prefHeight="114.0" prefWidth="0.0" />
-            <Label fx:id="lblTotalRecebido" layoutX="139.0" layoutY="290.0" />
-            <Label fx:id="lblTotalPago" layoutX="139.0" layoutY="330.0" />
-            <Label fx:id="lblSaldo" layoutX="334.0" layoutY="330.0" />
-            <Label layoutX="224.0" layoutY="290.0" text="Saldo Inicial:" />
-            <Label fx:id="lblSaldoInicial" layoutX="335.0" layoutY="290.0" />
+            <Label fx:id="lblTotalRecebido" layoutX="139.0" layoutY="290.0" prefHeight="16.0" prefWidth="80.0" />
+            <Label fx:id="lblTotalPago" layoutX="139.0" layoutY="330.0" prefHeight="16.0" prefWidth="80.0" />
+            <Label fx:id="lblSaldoConta" layoutX="465.0" layoutY="330.0" prefHeight="16.0" prefWidth="80.0" />
+            <Label layoutX="316.0" layoutY="290.0" text="Saldo Inicial:" />
+            <Label fx:id="lblSaldoInicial" layoutX="464.0" layoutY="290.0" prefHeight="16.0" prefWidth="80.0" />
+            <Label layoutX="28.0" layoutY="364.0" text="Saldo de movimentações:" />
+            <Label fx:id="lblSaldoMov" layoutX="224.0" layoutY="364.0" prefHeight="16.0" prefWidth="80.0" />
          </children>
       </Pane>
       <Pane layoutX="672.0" layoutY="50.0" prefHeight="477.0" prefWidth="640.0" style="-fx-background-color: #ffffff;">

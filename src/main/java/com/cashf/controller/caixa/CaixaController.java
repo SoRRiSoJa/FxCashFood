@@ -48,6 +48,8 @@ public class CaixaController implements GenericController<Caixa> {
     private BigDecimal totalDebitos = BigDecimal.ZERO;
     private BigDecimal totalCreditos = BigDecimal.ZERO;
     private BigDecimal saldoFinal = BigDecimal.ZERO;
+    private BigDecimal saldoConta = BigDecimal.ZERO;
+
 
     private CaixaController() {
         this.caixaDAO = new CaixaDAO(Caixa.class);
@@ -154,6 +156,9 @@ public class CaixaController implements GenericController<Caixa> {
 
     public TPMov getTipoMovimento() {
         return tipoMovimento;
+    }
+    public BigDecimal getSaldoConta() {
+        return saldoConta;
     }
 
     public void setTipoMovimento(TPMov tipoMovimento) {
@@ -305,7 +310,7 @@ public class CaixaController implements GenericController<Caixa> {
                 totalDebitos = totalDebitos.add(cm.getValor());
             }
         });
-
+        saldoConta=getCaixaAberto().getContaCorrente().getSaldo();
         saldoFinal = totalCreditos.subtract(totalDebitos);
     }
 

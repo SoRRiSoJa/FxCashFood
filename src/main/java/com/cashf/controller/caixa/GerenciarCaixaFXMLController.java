@@ -74,7 +74,6 @@ public class GerenciarCaixaFXMLController implements Initializable {
     private Label lblTotalRecebido;
     @FXML
     private Label lblTotalPago;
-    @FXML
     private Label lblSaldo;
     @FXML
     private TableView<Caixa> tbvLista;
@@ -93,6 +92,10 @@ public class GerenciarCaixaFXMLController implements Initializable {
 
     @FXML
     private Label lblSaldoInicial;
+    @FXML
+    private Label lblSaldoConta;
+    @FXML
+    private Label lblSaldoMov;
 
     /**
      * Initializes the controller class.
@@ -109,8 +112,9 @@ public class GerenciarCaixaFXMLController implements Initializable {
         
 
         if (CaixaController.getInstance().getCaixaAberto().getIdCaixa() != 0) {
-            lblSaldo.setText(CaixaController.getInstance().getSaldoFinal().toString());
-            //lblTotalPago.setText(CaixaController.getInstance().getTotalDebitos().add(CaixaController.getInstance().getTotalContasPagarCaixa(CaixaController.getInstance().getCaixaAberto())).toString());
+            lblSaldoConta.setText(CaixaController.getInstance().getSaldoConta().toString());
+            lblSaldoMov.setText(CaixaController.getInstance().getSaldoFinal().toString());
+            lblTotalPago.setText(CaixaController.getInstance().getTotalDebitos().toString());
             lblTotalRecebido.setText(CaixaController.getInstance().getTotalCreditos().toString());
             lblSaldoInicial.setText(CaixaController.getInstance().getCaixaAberto().getValorInicial().toString());
         }

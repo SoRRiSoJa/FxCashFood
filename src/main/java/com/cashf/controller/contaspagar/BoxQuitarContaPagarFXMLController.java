@@ -164,7 +164,7 @@ public class BoxQuitarContaPagarFXMLController implements Initializable {
     }
 
     public boolean validateValue(BigDecimal val) {
-        return (val.compareTo(CaixaController.getInstance().getSaldoFinal()) <= 0);
+        return (val.compareTo(CaixaController.getInstance().getSaldoConta()) <= 0);
     }
 
     public Boolean validateFields() {

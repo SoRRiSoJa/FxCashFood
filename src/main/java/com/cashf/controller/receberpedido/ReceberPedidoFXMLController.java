@@ -176,7 +176,7 @@ public class ReceberPedidoFXMLController implements GenericViewController, Initi
                     ReceberPedidoController.getInstance().getValTotalNota(),
                     "");
             System.out.println("NOTA:" + ReceberPedidoController.getInstance().getNotaFiscal().toString());
-            clearFields();
+            //clearFields();
             loadBox("/fxml/contasPagar/BoxGerarContasPagarFXML.fxml", "Gerar Contas Pagar");
 
         } else {
