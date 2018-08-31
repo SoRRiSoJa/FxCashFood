@@ -383,7 +383,7 @@ public class ContasReceberFXMLController implements GenericViewController, Initi
                     ContaPagar currentPerson = (ContaPagar) ButtonCellPay.this.getTableView().getItems().get(ButtonCellPay.this.getIndex());
                     if (currentPerson != null) {
                         ContasPagarController.getInstance().setContaPagar(currentPerson);
-                        loadBox("/fxml/contasPagar/BoxQuitarContaPagarFXML.fxml", "Quitar Conta a Pagar");
+                        loadBox("/fxml/contasPagar/BoxQuitarContaReceberFXML.fxml", "Receber Conta a Pagar");
                     } else {
                         notificationBuilder = Notifications.create().title("Nenhuma conta selecionada!").
                                 text("Você deve selecionar uma conta para Quitar.").
