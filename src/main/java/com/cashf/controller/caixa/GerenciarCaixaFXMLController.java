@@ -89,7 +89,9 @@ public class GerenciarCaixaFXMLController implements Initializable {
     private static Label _lblTotalPago;
     private static Label _lblSaldo;
     private static Label _lblSaldoInicial;
-
+    private static Label _lblSaldoConta;
+    private static Label _lblSaldoMov;
+    
     @FXML
     private Label lblSaldoInicial;
     @FXML
@@ -108,6 +110,9 @@ public class GerenciarCaixaFXMLController implements Initializable {
         _lblTotalPago = lblTotalPago;
         _lblTotalRecebido = lblTotalRecebido;
         _lblSaldoInicial = lblSaldoInicial;
+        _lblSaldoConta=lblSaldoConta;
+        _lblSaldoMov=lblSaldoMov;
+    
         setUpTbv();
         
 
@@ -250,7 +255,8 @@ public class GerenciarCaixaFXMLController implements Initializable {
     }
 
     public static void refreshTotal() {
-        _lblSaldo.setText(CaixaController.getInstance().getSaldoFinal().toString());
+        _lblSaldoConta.setText(CaixaController.getInstance().getSaldoConta().toString());
+        _lblSaldoMov.setText(CaixaController.getInstance().getSaldoFinal().toString());
         _lblTotalPago.setText(CaixaController.getInstance().getTotalDebitos().toString());
         _lblTotalRecebido.setText(CaixaController.getInstance().getTotalCreditos().toString());
         if (CaixaController.getInstance().getCaixaAberto() != null && CaixaController.getInstance().getCaixaAberto().getValorInicial() != null) {

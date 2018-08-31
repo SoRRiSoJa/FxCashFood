@@ -83,11 +83,10 @@ public class BoxQuitarContaPagarFXMLController implements Initializable {
         if (validateFields()) {
             ContasPagarController.getInstance().quitarConta(lblDescricao.getText(), dataPagamento,valorAcrecimos,valorDesconto, vallorPago);
         } else {
-            PoupUpUtil.errorMessage(MainApp.paneRoot, paneRoot, erros);
+            PoupUpUtil.accessDenied(erros);
+            //PoupUpUtil.errorMessage(paneRoot, paneRoot, erros);
             erros = "";
         }
-        MainApp.janelaAberta.close();
-        MainApp.janelaAberta = MainApp.janelaAnterior;
     }
 
     @FXML
