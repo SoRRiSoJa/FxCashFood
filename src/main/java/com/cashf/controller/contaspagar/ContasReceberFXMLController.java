@@ -6,7 +6,6 @@
 package com.cashf.controller.contaspagar;
 
 import com.cashf.cashfood.MainApp;
-import com.cashf.controller.caixa.CaixaController;
 import com.cashf.core.venda.ContaReceberController;
 import com.cashf.model.contareceber.ContaReceber;
 import com.cashf.model.contasPagar.ContaPagar;

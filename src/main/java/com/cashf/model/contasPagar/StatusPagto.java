@@ -10,7 +10,7 @@ package com.cashf.model.contasPagar;
  * @author joao
  */
 public enum StatusPagto {
-    PAGO("PAGO"), ABERTO("EM ABERTO"),CANCELADA("CANCELADA");
+    PAGO("PAGO"), ABERTO("EM ABERTO"),CANCELADA("CANCELADA"),RECEBIDA("RECEBIDA");
 
     private final String descricao;
 
