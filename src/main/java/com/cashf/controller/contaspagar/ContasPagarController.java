@@ -79,13 +79,14 @@ public class ContasPagarController implements GenericController<ContaPagar> {
 
     @Override
     public void insert() {
-
         this.contaPagar.setIdContaPagar(contasPagarDAO.save(contaPagar));
+        this.lista = FXCollections.observableList(contasPagarDAO.listAll());
     }
 
     @Override
     public void update() {
         contasPagarDAO.update(contaPagar);
+        this.lista = FXCollections.observableList(contasPagarDAO.listAll());
     }
 
     @Override
@@ -93,6 +94,7 @@ public class ContasPagarController implements GenericController<ContaPagar> {
         contaPagar.setStatusPagto(StatusPagto.CANCELADA);
         contaPagar.setDescricao(contaPagar.getDescricao().concat(" - *CANCELADA*"));
         contasPagarDAO.update(contaPagar);
+        this.lista = FXCollections.observableList(contasPagarDAO.listAll());
     }
 
     @Override
@@ -135,7 +137,7 @@ public class ContasPagarController implements GenericController<ContaPagar> {
         this.contaPagar = contaPagar;
     }
 
-    public void quitarConta(String descricao, LocalDate dataPagamento,BigDecimal desconto, BigDecimal acrecimo, BigDecimal valorPago) {
+    public void quitarConta(String descricao, LocalDate dataPagamento, BigDecimal desconto, BigDecimal acrecimo, BigDecimal valorPago) {
         this.contaPagar.setStatusPagto(StatusPagto.PAGO);
         this.contaPagar.setDataPagamento(dataPagamento);
         this.contaPagar.setDesconto(desconto);

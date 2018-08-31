@@ -86,6 +86,8 @@ public class BoxQuitarContaPagarFXMLController implements Initializable {
             PoupUpUtil.errorMessage(MainApp.paneRoot, paneRoot, erros);
             erros = "";
         }
+        MainApp.janelaAberta.close();
+        MainApp.janelaAberta = MainApp.janelaAnterior;
     }
 
     @FXML
