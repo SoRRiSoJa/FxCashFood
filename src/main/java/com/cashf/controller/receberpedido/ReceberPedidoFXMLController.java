@@ -178,7 +178,7 @@ public class ReceberPedidoFXMLController implements GenericViewController, Initi
             System.out.println("NOTA:" + ReceberPedidoController.getInstance().getNotaFiscal().toString());
             clearFields();
             loadBox("/fxml/contasPagar/BoxGerarContasPagarFXML.fxml", "Gerar Contas Pagar");
-            
+
         } else {
             PoupUpUtil.accessDenied(erros);
             erros = "";
@@ -201,20 +201,23 @@ public class ReceberPedidoFXMLController implements GenericViewController, Initi
     private void onAdicionar(ActionEvent event) {
         getDataProd();
         if (validateFieldsProd()) {
-            ReceberPedidoController.getInstance().setListaProdutosNota(0l,                   
+            if (ReceberPedidoController.getInstance().setListaProdutosNota(0l,
                     qtdeCompra.intValue(),
                     valorIpi,
                     valorIcmsSubstProd,
                     prcoCompra,
                     outrasDespesasProd,
                     descontoProd, embalagemDeCompra,
-                    ReceberPedidoController.getInstance().getUnidadeMedida());
+                    ReceberPedidoController.getInstance().getUnidadeMedida())) {
 
-            ReceberPedidoController.getInstance().setProdutoAtual(null);
-            ReceberPedidoController.getInstance().calcValTotalNota();
-            loadDataNota();
-          
-            tbvProdutos.setItems(ReceberPedidoController.getInstance().getListaProdutosNota());
+                ReceberPedidoController.getInstance().setProdutoAtual(null);
+                ReceberPedidoController.getInstance().calcValTotalNota();
+                loadDataNota();
+                tbvProdutos.setItems(ReceberPedidoController.getInstance().getListaProdutosNota());
+            } else {
+                PoupUpUtil.accessDenied("Este produto já foi adicionado a nota fiscal!");
+            }
+
         } else {
             PoupUpUtil.accessDenied(erros);
             erros = "";
@@ -254,6 +257,7 @@ public class ReceberPedidoFXMLController implements GenericViewController, Initi
         txtDescontoProd.clear();
         txtEmbalagemDeCompra.clear();
         tbvProdutos.setItems(FXCollections.observableList(new ArrayList<>()));
+        ReceberPedidoController.getInstance().flushObject();
     }
 
     @Override
@@ -334,7 +338,7 @@ public class ReceberPedidoFXMLController implements GenericViewController, Initi
             erros += "O Número da nota deve ser informado. \n";
             flag = false;
         }
-                            
+
         if (outrasDespesas.compareTo(BigDecimal.ZERO) < 0) {
             erros += "O Valor de outras despesas deve ser maior ou = 0 \n";
             flag = false;

@@ -112,7 +112,13 @@ public class ReceberPedidoController implements GenericController<NotaFiscal> {
 
     @Override
     public void insert() {
-        this.notaFiscal.setIdNota(notaFiscalDAO.save(notaFiscal));
+        notaFiscal.setIdNota(notaFiscalDAO.save(notaFiscal));
+        fornecedor = new Fornecedor();
+        produtoAtual = new Produto();
+        notaFiscal = new NotaFiscal();
+        notaFiscal.setIdNota(0l);
+        produtoAtual.setIdProduto(0l);
+        fornecedor.setIdFornecedor(0l);
     }
 
     @Override
@@ -188,13 +194,19 @@ public class ReceberPedidoController implements GenericController<NotaFiscal> {
         this.listaProdutosNota = listaProdutosNota;
     }
 
-    public void setListaProdutosNota(Long idProdutoNotaFiscal, Integer qtdeProduto, BigDecimal valorIpi, BigDecimal valorIcmsSubst, BigDecimal valoruUnitario, BigDecimal despesas, BigDecimal descontos, BigDecimal embalagemCompra, UnidadeMedida unidadeMedida) {
+    public boolean setListaProdutosNota(Long idProdutoNotaFiscal, Integer qtdeProduto, BigDecimal valorIpi, BigDecimal valorIcmsSubst, BigDecimal valoruUnitario, BigDecimal despesas, BigDecimal descontos, BigDecimal embalagemCompra, UnidadeMedida unidadeMedida) {
+        boolean flag=true;
         ProdutoNotaFiscal pn = new ProdutoNotaFiscal(idProdutoNotaFiscal, notaFiscal, produtoAtual, qtdeProduto, valorIpi, valorIcmsSubst, valoruUnitario, despesas, descontos, valoruUnitario.multiply(BigDecimal.valueOf(qtdeProduto.doubleValue())).subtract(descontos).add(despesas));
         pn.getProduto().setUnidadeMedida(unidadeMedida);
         pn.getProduto().setQtdeEmbalagem(embalagemCompra);
         pn.getProduto().setQtdeProduto(BigDecimal.valueOf(qtdeProduto));
         pn.getProduto().setUnidadesEstoque((pn.getProduto().getQtdeEmbalagem().multiply(BigDecimal.valueOf(qtdeProduto))));
-        this.listaProdutosNota.add(pn);
+        if (!listaProdutosNota.contains(pn)) {
+            this.listaProdutosNota.add(pn);
+        }else{
+            flag=false;
+        }
+        return flag;
     }
 
     public UnidadeMedida getUnidadeMedida() {
