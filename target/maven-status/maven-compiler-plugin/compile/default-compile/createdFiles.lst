@@ -206,6 +206,7 @@ com/cashf/controller/mesas/RegistrarConsumoFXMLController.class
 com/cashf/dao/contareceber/ContaReceberDAO.class
 com/cashf/model/usuario/Usuario_.class
 com/cashf/model/produto/Produto_.class
+com/cashf/controller/contaspagar/BoxQuitarContaReceberFXMLController.class
 com/cashf/controller/mesas/FecharMesaFXMLController$ButtonCellDelete.class
 com/cashf/model/combo/Combo_.class
 com/cashf/model/prepreparo/ProdutoPrePreparo_.class
