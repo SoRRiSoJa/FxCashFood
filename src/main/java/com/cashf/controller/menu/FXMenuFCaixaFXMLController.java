@@ -24,8 +24,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Pane;
@@ -119,7 +117,7 @@ public class FXMenuFCaixaFXMLController implements Initializable {
         }
 
     }
-    
+
     private void loadDrawer() {
         try {
             gavetas = FXMLLoader.load(getClass().getResource("/fxml/GavetaMesasFXML.fxml"));
@@ -211,8 +209,11 @@ public class FXMenuFCaixaFXMLController implements Initializable {
                                     break;
                             }
                             VendaController.getInstance().setVenda(VendaController.getInstance().getVendaByMesa(MesaController.getInstance().getMesaAtual()));
-                            loadBox("/fxml/mesas/GerenciarMesasFXML.fxml", "Mesa Nº" + MesaController.getInstance().getMesaAtual().toString());
-
+                            if (VendaController.getInstance().getVenda().getMesa().getIdMesa() == 0) {
+                                loadBox("/fxml/mesas/AbrirMesaFXML.fxml", "Mesa Nº" + MesaController.getInstance().getMesaAtual().toString());
+                            } else {
+                                loadBox("/fxml/mesas/RegistrarConsumoFXML.fxml", "Mesa Nº" + MesaController.getInstance().getMesaAtual().toString());
+                            }
                         });
                     }
 
@@ -303,6 +304,7 @@ public class FXMenuFCaixaFXMLController implements Initializable {
             case 18:
                 GavetaMesasFXMLController.getIconM18().setFill(Paint.valueOf(statusColor));
                 break;
+
         }
 
     }

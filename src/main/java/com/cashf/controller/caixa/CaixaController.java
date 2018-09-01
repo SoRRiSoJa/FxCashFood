@@ -61,7 +61,15 @@ public class CaixaController implements GenericController<Caixa> {
         try {
             this.caixaAberto = caixaDAO.getCaixaAberto();
             this.listaMov = FXCollections.observableList(caixaMovimentoDAO.listByDateAndCaixa(caixaAberto.getDataAbertura(), caixaAberto));
-            atualizaSaldo();
+            listaMov.forEach((cm) -> {
+            if (cm.getTipoMovimento().equals(TPMov.SUPRIMENTO) || cm.getTipoMovimento().equals(TPMov.CREDITO)) {
+                totalCreditos = totalCreditos.add(cm.getValor());
+            } else {
+                totalDebitos = totalDebitos.add(cm.getValor());
+            }
+        });
+        saldoConta=caixaAberto.getContaCorrente().getSaldo();
+        saldoFinal = totalCreditos.subtract(totalDebitos);
         } catch (Exception ex) {
             this.caixaAberto = new Caixa();
             this.caixaAberto.setIdCaixa(0l);
