@@ -83,19 +83,49 @@
                </children>
             </HBox>
             <Separator layoutX="17.0" layoutY="280.0" prefHeight="0.0" prefWidth="600.0" />
-            <Label layoutX="28.0" layoutY="290.0" text="Total Recebido:" />
-            <Label layoutX="28.0" layoutY="330.0" text="Total Pago:" />
-            <Label layoutX="315.0" layoutY="330.0" text="Saldo Atual Dinheiro:" />
+            <Label layoutX="28.0" layoutY="290.0" text="Total Recebido:">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font></Label>
+            <Label layoutX="28.0" layoutY="330.0" text="Total Pago:">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font></Label>
+            <Label layoutX="348.0" layoutY="330.0" text="Saldo Atual Dinheiro:">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font></Label>
             <Separator layoutX="17.0" layoutY="395.0" prefHeight="0.0" prefWidth="600.0" />
             <Separator layoutX="16.0" layoutY="281.0" orientation="VERTICAL" prefHeight="114.0" prefWidth="0.0" />
             <Separator layoutX="615.0" layoutY="281.0" orientation="VERTICAL" prefHeight="114.0" prefWidth="0.0" />
-            <Label fx:id="lblTotalRecebido" layoutX="139.0" layoutY="290.0" prefHeight="16.0" prefWidth="80.0" />
-            <Label fx:id="lblTotalPago" layoutX="139.0" layoutY="330.0" prefHeight="16.0" prefWidth="80.0" />
-            <Label fx:id="lblSaldoConta" layoutX="465.0" layoutY="330.0" prefHeight="16.0" prefWidth="80.0" />
-            <Label layoutX="316.0" layoutY="290.0" text="Saldo Inicial:" />
-            <Label fx:id="lblSaldoInicial" layoutX="464.0" layoutY="290.0" prefHeight="16.0" prefWidth="80.0" />
-            <Label layoutX="28.0" layoutY="364.0" text="Saldo de movimentações:" />
-            <Label fx:id="lblSaldoMov" layoutX="224.0" layoutY="364.0" prefHeight="16.0" prefWidth="80.0" />
+            <Label fx:id="lblTotalRecebido" layoutX="238.0" layoutY="290.0" prefHeight="16.0" prefWidth="80.0">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font></Label>
+            <Label fx:id="lblTotalPago" layoutX="238.0" layoutY="330.0" prefHeight="16.0" prefWidth="80.0" textFill="#f20606">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font></Label>
+            <Label fx:id="lblSaldoConta" layoutX="526.0" layoutY="330.0" prefHeight="16.0" prefWidth="80.0">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font></Label>
+            <Label layoutX="349.0" layoutY="290.0" text="Saldo Inicial:">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font></Label>
+            <Label fx:id="lblSaldoInicial" layoutX="525.0" layoutY="290.0" prefHeight="16.0" prefWidth="80.0">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font></Label>
+            <Label layoutX="28.0" layoutY="364.0" text="Saldo de movimentações:">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font></Label>
+            <Label fx:id="lblSaldoMov" layoutX="238.0" layoutY="364.0" prefHeight="16.0" prefWidth="80.0">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font></Label>
          </children>
       </Pane>
       <Pane layoutX="672.0" layoutY="50.0" prefHeight="477.0" prefWidth="640.0" style="-fx-background-color: #ffffff;">

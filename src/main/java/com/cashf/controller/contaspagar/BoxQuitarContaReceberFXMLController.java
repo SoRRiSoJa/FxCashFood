@@ -73,6 +73,7 @@ public class BoxQuitarContaReceberFXMLController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        loadCbbMeioPagto();
     }
 
     @FXML
@@ -86,7 +87,6 @@ public class BoxQuitarContaReceberFXMLController implements Initializable {
                     vallorPago,
                     ContaReceberController.getInstance().getContaReceber().getMeioPagamento(),
                     StatusPagto.RECEBIDA);
-            //Conta(lblDescricao.getText(), dataPagamento,valorAcrecimos,valorDesconto, vallorPago);
         } else {
             PoupUpUtil.accessDenied(erros);
             //PoupUpUtil.errorMessage(paneRoot, paneRoot, erros);

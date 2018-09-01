@@ -5,15 +5,37 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <StackPane fx:id="rootStackPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1366.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cashf.controller.menu.MenuSistemaFXMLController">
    <children>
       <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #ffffff;">
          <children>
-            <Pane prefHeight="100.0" prefWidth="1366.0" style="-fx-background-color: #0081cb;" />
+            <Pane prefHeight="100.0" prefWidth="1366.0" style="-fx-background-color: #0081cb;">
+               <children>
+                  <HBox alignment="CENTER" layoutX="26.0" layoutY="12.0" prefHeight="76.0" prefWidth="337.0">
+                     <children>
+                        <FontAwesomeIconView fill="WHITE" glyphName="CUTLERY" size="40" wrappingWidth="46.0">
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </FontAwesomeIconView>
+                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Sistema Cash Food v.1.0 ERP &amp; PDV" textAlignment="CENTER" wrappingWidth="229.37841796875">
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets left="20.0" />
+                           </HBox.margin>
+                        </Text>
+                     </children>
+                  </HBox>
+               </children></Pane>
             <GridPane layoutY="100.0" prefHeight="600.0" prefWidth="1366.0" style="-fx-background-color: #ffffff;">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
