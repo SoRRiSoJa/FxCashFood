@@ -71,7 +71,14 @@ public class ContaReceberController implements GenericController<ContaReceber> {
     }
 
     public void quitarContaReceber(LocalDate dataPagamento, BigDecimal encargos, BigDecimal desconto, BigDecimal acrecimo, BigDecimal valorPago, MeioPagamento meioPagamento, StatusPagto statusPagto) {
-
+        this.contaReceber.setStatusPagto(StatusPagto.RECEBIDA);
+        this.contaReceber.setDataPagamento(dataPagamento);
+        this.contaReceber.setDesconto(desconto);
+        this.contaReceber.setAcrecimo(acrecimo);
+        this.contaReceber.setMeioPagamento(ContaReceberController.getInstance().getContaReceber().getMeioPagamento());
+        this.contaReceber.setValorPago(valorPago);
+        update();
+        CaixaController.getInstance().movimentarCaixaCredito(contaReceber.getDescricao(), valorPago);
     }
 
     @Override
