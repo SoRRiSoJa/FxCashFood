@@ -267,6 +267,8 @@ public class CaixaController implements GenericController<Caixa> {
         this.caixaAberto.setIdCaixa(caixaDAO.save(caixaAberto));
         setCaixaMovimento(0l, dataAbertura, "* LANÇAMENTO INICIAL - ABERTURA CAIXA *", valorInicial, TPMov.SUPRIMENTO, getCaixaAberto());
         this.caixaMovimento.setIdCaixaMovimento(caixaMovimentoDAO.save(caixaMovimento));
+        getCaixaAberto().getContaCorrente().setSaldo(getCaixaAberto().getContaCorrente().getSaldo().add(valorInicial));
+        contaCorrenteDAO.update(getCaixaAberto().getContaCorrente());
         listaMov.add(caixaMovimento);
         caixaMovimento = null;
         caixaMovimento = new CaixaMovimento();
