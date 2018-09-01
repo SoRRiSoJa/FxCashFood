@@ -166,7 +166,7 @@ public class RegistrarConsumoFXMLController implements GenericViewController, In
 
     @FXML
     private void onConcluirSel(ActionEvent event) {
-        GerenciarMesasFXMLController.refreshTbvComanda();
+        //GerenciarMesasFXMLController.refreshTbvComanda();
         MainApp.janelaAberta.close();
         MainApp.janelaAberta = MainApp.janelaAnterior;
     }

@@ -7,6 +7,7 @@ package com.cashf.controller.mesas;
 
 import com.cashf.cashfood.MainApp;
 import com.cashf.controller.menu.FXMenuFCaixaFXMLController;
+import com.cashf.core.venda.VendaController;
 import com.cashf.model.cliente.Cliente;
 import com.cashf.model.mesa.Mesa;
 import com.cashf.model.mesa.StatusMesa;
@@ -82,7 +83,7 @@ public class AbrirMesaFXMLController implements Initializable {
     @FXML
     private void onSelecionarCliente(ActionEvent event) {
         if (cbbCliente.getSelectionModel().getSelectedItem() != null) {
-            MesaController.getInstance().setCliente(cbbCliente.getItems().get(cbbCliente.getSelectionModel().getSelectedIndex()));
+            VendaController.getInstance().getVenda().setCliente(cbbCliente.getItems().get(cbbCliente.getSelectionModel().getSelectedIndex()));
         }
     }
 
@@ -98,7 +99,7 @@ public class AbrirMesaFXMLController implements Initializable {
         MainApp.janelaAberta.close();
         MainApp.janelaAberta = MainApp.janelaAnterior;
         FXMenuFCaixaFXMLController.changeStatusTable(MesaController.getInstance().getMesaAtual().getNumMesa(), StatusMesa.ABERTA);
-        loadBox("/fxml/mesas/GerenciarMesasFXML.fxml", "Mesa Nº" + MesaController.getInstance().getMesaAtual().getNumMesa());
+        loadBox("/fxml/mesas/RegistrarConsumoFXML.fxml", "Mesa Nº" + MesaController.getInstance().getMesaAtual().getNumMesa());
     }
 
     private void loadBox(String boxPath, String title) {

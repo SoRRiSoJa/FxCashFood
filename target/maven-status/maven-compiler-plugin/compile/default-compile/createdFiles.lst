@@ -91,6 +91,7 @@ com/cashf/controller/produto/GerenciarGruposFXMLController$ButtonCellDelete.clas
 com/cashf/model/banco/Banco.class
 com/cashf/controller/menu/GavetaMesasFXMLController.class
 com/cashf/controller/cliente/ClienteController.class
+com/cashf/controller/mesas/NMesaController.class
 com/cashf/model/combo/ProdutoCombo_.class
 util/JFXComboBoxAutoComplete.class
 com/cashf/controller/receberpedido/ReceberPedidoController.class

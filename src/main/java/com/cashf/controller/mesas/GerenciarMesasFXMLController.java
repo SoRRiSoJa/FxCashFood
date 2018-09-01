@@ -95,11 +95,12 @@ public class GerenciarMesasFXMLController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        _tbvComanda = tbvComanda;
+
         setUptableViewProdutos();
         loadTbv();
         lblNumMesa.setText(MesaController.getInstance().getMesaAtual().getNumMesa() + "");
         loadData();
+        _tbvComanda = tbvComanda;
     }
 
     @FXML
@@ -237,7 +238,7 @@ public class GerenciarMesasFXMLController implements Initializable {
                         // ... user chose OK
                         VendaController.getInstance().setProdutoVendaSelecionado(currentPerson);
                         loadBox("/fxml/mesas/TransferirProdutoFXML.fxml", "Transferir Ítem");
-                        
+
                     } else {
                         notificationBuilder = Notifications.create().title("Nenhum contato selecionado!").
                                 text("Você deve selecionar um contato para transferir.").

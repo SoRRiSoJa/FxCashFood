@@ -127,15 +127,15 @@ public class MesaController implements GenericController<Mesa> {
         mesaAtual.setNumPax(nPax);
         mesaAtual.setHoraAbertura(LocalTime.now());
         mesaAtual.setStatus(StatusMesa.ABERTA);
+        insert();
         VendaController.getInstance().getVenda().setMesa(mesaAtual);
-        VendaController.getInstance().getVenda().setCliente(cliente);
         VendaController.getInstance().getLista().add(VendaController.getInstance().getVenda());
     }
 
     public void fecharMesa() {
         mesaAtual.setHoraFechamento(LocalTime.now());
         mesaAtual.setStatus(StatusMesa.FECHADA);
-        insert();
+        update();
         VendaController.getInstance().getVenda().setMesa(mesaAtual);
         VendaController.getInstance().fecharVenda();
         PoupUpUtil.poupUp("Venda Efetuada", "Venda efetuada com sucesso.", "");
@@ -194,13 +194,13 @@ public class MesaController implements GenericController<Mesa> {
         }
         return flag;
     }
-    
-    public boolean tranferirItemMesa(Mesa destino,ProdutoVenda pv) {
+
+    public boolean tranferirItemMesa(Mesa destino, ProdutoVenda pv) {
         boolean flag = false;
         int index;
         if (destino.getStatus() != StatusMesa.ABERTA) {
             Venda vOrigen = VendaController.getInstance().getVendaByMesa(mesaAtual);
-            Venda vDestino= VendaController.getInstance().getVendaByMesa(destino);
+            Venda vDestino = VendaController.getInstance().getVendaByMesa(destino);
             vOrigen.getListaProdutos().remove(pv);
             vDestino.getListaProdutos().add(pv);
             flag = true;
