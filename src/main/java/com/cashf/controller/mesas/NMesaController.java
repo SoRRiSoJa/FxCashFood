@@ -83,10 +83,15 @@ public class NMesaController implements GenericController<Mesa> {
         VendaController.getInstance().getLista().add(VendaController.getInstance().getVenda());
     }
      public void fecharMesa() {
+        Mesa mesaAux=new Mesa(0, 0, VendaController.getInstance().getVenda().getMesa().getNumMesa(), LocalDate.now(), LocalTime.now(), null, StatusMesa.DISPONIVEL);
         VendaController.getInstance().getVenda().getMesa().setHoraFechamento(LocalTime.now());
         VendaController.getInstance().getVenda().getMesa().setStatus(StatusMesa.FECHADA);
         mesaDAO.update(VendaController.getInstance().getVenda().getMesa());
         VendaController.getInstance().fecharVenda();
+        this.lista.remove(mesaAtual);
+        this.mesaAtual = new Mesa();
+        this.mesaAtual.setIdMesa(0l);
+        this.lista.add(mesaAux);
     }
 
     @Override

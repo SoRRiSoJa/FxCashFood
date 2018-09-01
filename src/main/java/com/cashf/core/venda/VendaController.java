@@ -187,6 +187,9 @@ public class VendaController implements GenericController<Venda> {
         //Gerando a conta a receber
         gerarContaReceber();
         lista.remove(venda);
+        this.venda = new Venda();
+        venda.setIdVenda(0l);
+        venda.setListaProdutos(FXCollections.observableList(new ArrayList<>()));
     }
 
     private void gerarContaReceber() {
