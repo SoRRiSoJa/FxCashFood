@@ -50,7 +50,6 @@ public class CaixaController implements GenericController<Caixa> {
     private BigDecimal saldoFinal = BigDecimal.ZERO;
     private BigDecimal saldoConta = BigDecimal.ZERO;
 
-
     private CaixaController() {
         this.caixaDAO = new CaixaDAO(Caixa.class);
         this.contasPagarDAO = new ContaPagarDAO(ContaPagar.class);
@@ -62,14 +61,14 @@ public class CaixaController implements GenericController<Caixa> {
             this.caixaAberto = caixaDAO.getCaixaAberto();
             this.listaMov = FXCollections.observableList(caixaMovimentoDAO.listByDateAndCaixa(caixaAberto.getDataAbertura(), caixaAberto));
             listaMov.forEach((cm) -> {
-            if (cm.getTipoMovimento().equals(TPMov.SUPRIMENTO) || cm.getTipoMovimento().equals(TPMov.CREDITO)) {
-                totalCreditos = totalCreditos.add(cm.getValor());
-            } else {
-                totalDebitos = totalDebitos.add(cm.getValor());
-            }
-        });
-        saldoConta=caixaAberto.getContaCorrente().getSaldo();
-        saldoFinal = totalCreditos.subtract(totalDebitos);
+                if (cm.getTipoMovimento().equals(TPMov.SUPRIMENTO) || cm.getTipoMovimento().equals(TPMov.CREDITO)) {
+                    totalCreditos = totalCreditos.add(cm.getValor());
+                } else {
+                    totalDebitos = totalDebitos.add(cm.getValor());
+                }
+            });
+            saldoConta = caixaAberto.getContaCorrente().getSaldo();
+            saldoFinal = totalCreditos.subtract(totalDebitos);
         } catch (Exception ex) {
             this.caixaAberto = new Caixa();
             this.caixaAberto.setIdCaixa(0l);
@@ -165,6 +164,7 @@ public class CaixaController implements GenericController<Caixa> {
     public TPMov getTipoMovimento() {
         return tipoMovimento;
     }
+
     public BigDecimal getSaldoConta() {
         return saldoConta;
     }
@@ -258,9 +258,9 @@ public class CaixaController implements GenericController<Caixa> {
         setCaixaMovimento(0l, caixaAberto.getDataAbertura(), "SUPRIMENTO DE CAIXA", valor, TPMov.SUPRIMENTO, getCaixaAberto());
         getCaixaAberto().getContaCorrente().setSaldo(getCaixaAberto().getContaCorrente().getSaldo().add(valor));
         contaCorrenteDAO.update(getCaixaAberto().getContaCorrente());
-        
+
         this.caixaMovimento.setIdCaixaMovimento(caixaMovimentoDAO.save(caixaMovimento));
-        
+
         listaMov.add(caixaMovimento);
         caixaMovimento = null;
         caixaMovimento = new CaixaMovimento();
@@ -310,17 +310,20 @@ public class CaixaController implements GenericController<Caixa> {
         totalCreditos = BigDecimal.ZERO;
         totalDebitos = BigDecimal.ZERO;
         saldoFinal = BigDecimal.ZERO;
-        refreshLists();
+        if (caixaAberto.getIdCaixa() != 0) {
+            refreshLists();
 
-        listaMov.forEach((cm) -> {
-            if (cm.getTipoMovimento().equals(TPMov.SUPRIMENTO) || cm.getTipoMovimento().equals(TPMov.CREDITO)) {
-                totalCreditos = totalCreditos.add(cm.getValor());
-            } else {
-                totalDebitos = totalDebitos.add(cm.getValor());
-            }
-        });
-        saldoConta=getCaixaAberto().getContaCorrente().getSaldo();
-        saldoFinal = totalCreditos.subtract(totalDebitos);
+            listaMov.forEach((cm) -> {
+                if (cm.getTipoMovimento().equals(TPMov.SUPRIMENTO) || cm.getTipoMovimento().equals(TPMov.CREDITO)) {
+                    totalCreditos = totalCreditos.add(cm.getValor());
+                } else {
+                    totalDebitos = totalDebitos.add(cm.getValor());
+                }
+            });
+
+            saldoConta = getCaixaAberto().getContaCorrente().getSaldo();
+            saldoFinal = totalCreditos.subtract(totalDebitos);
+        }
     }
 
     public ObservableList<ContaCorrente> getListaConta() {
