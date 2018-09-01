@@ -189,6 +189,7 @@ public class VendaController implements GenericController<Venda> {
         lista.remove(venda);
         this.venda = new Venda();
         venda.setIdVenda(0l);
+        venda.setValorTotal(BigDecimal.ZERO);
         venda.setListaProdutos(FXCollections.observableList(new ArrayList<>()));
     }
 

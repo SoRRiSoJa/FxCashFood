@@ -128,7 +128,9 @@ public class FecharMesaFXMLController implements Initializable {
         MesaController.getInstance().fecharMesa();
         FXMenuFCaixaFXMLController.changeStatusTable(MesaController.getInstance().getMesaAtual().getNumMesa(), StatusMesa.DISPONIVEL);
         GerenciarCaixaFXMLController.refreshTbv();
-        GerenciarCaixaFXMLController.refreshTotal();
+//      GerenciarCaixaFXMLController.refreshTotal();
+        MainApp.janelaAberta.close();
+        MainApp.janelaAberta = MainApp.janelaAnterior;
     }
 
     @FXML
@@ -175,11 +177,11 @@ public class FecharMesaFXMLController implements Initializable {
     private void onValorRecebido(KeyEvent event) {
         valorRecebido = txtValor.getText();
         if (event.getCode() == KeyCode.ENTER) {
-            vRecebido= new BigDecimal(valorRecebido);
-            vTroco=vRecebido.subtract(VendaController.getInstance().getValTotal());
+            vRecebido = new BigDecimal(valorRecebido);
+            vTroco = vRecebido.subtract(VendaController.getInstance().getValTotal());
             txtTroco.setText(vTroco.toString());
         }
-        
+
     }
 
     public class ButtonCellDelete extends TableCell<Disposer.Record, Boolean> {

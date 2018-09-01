@@ -314,7 +314,7 @@ public class ContasReceberFXMLController implements GenericViewController, Initi
                 @Override
                 public void handle(ActionEvent t) {
                     // get Selected Item
-                    ContaPagar currentPerson = (ContaPagar) ButtonCellDelete.this.getTableView().getItems().get(ButtonCellDelete.this.getIndex());
+                    ContaReceber currentPerson = (ContaReceber) ButtonCellDelete.this.getTableView().getItems().get(ButtonCellDelete.this.getIndex());
                     //remove selected item from the table list
                     if (currentPerson != null) {
 
@@ -325,10 +325,9 @@ public class ContasReceberFXMLController implements GenericViewController, Initi
                         Optional<ButtonType> result = alert.showAndWait();
                         if (result.get() == ButtonType.OK) {
                             // ... user chose OK
-                            ContasPagarController.getInstance().setContaPagar(currentPerson);
-                            ContasPagarController.getInstance().delete();
-                            ContasPagarController.getInstance().getLista().remove(currentPerson);
-
+                            ContaReceberController.getInstance().setContaReceber(currentPerson);
+                            ContaReceberController.getInstance().delete();
+                            ContaReceberController.getInstance().getLista().remove(currentPerson);
                             notificationBuilder = Notifications.create().title("Conta Cancelada!").
                                     text("Conta cancelada com sucesso.").
                                     hideAfter(Duration.seconds(2)).
