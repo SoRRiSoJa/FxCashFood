@@ -7,9 +7,11 @@ package com.cashf.controller.mesas;
 
 import com.cashf.cashfood.MainApp;
 import com.cashf.controller.caixa.GerenciarCaixaFXMLController;
+import com.cashf.controller.menu.FXMenuFCaixaFXMLController;
 import com.cashf.core.venda.VendaController;
 import com.cashf.model.meiopagamento.MeioPagamento;
 import com.cashf.model.mesa.Mesa;
+import com.cashf.model.mesa.StatusMesa;
 import com.cashf.model.venda.ProdutoVenda;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
@@ -124,6 +126,7 @@ public class FecharMesaFXMLController implements Initializable {
     @FXML
     private void onFechar(ActionEvent event) {
         MesaController.getInstance().fecharMesa();
+        FXMenuFCaixaFXMLController.changeStatusTable(MesaController.getInstance().getMesaAtual().getNumMesa(), StatusMesa.DISPONIVEL);
         GerenciarCaixaFXMLController.refreshTbv();
         GerenciarCaixaFXMLController.refreshTotal();
     }
