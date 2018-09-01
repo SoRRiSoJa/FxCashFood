@@ -81,7 +81,7 @@ public class BoxQuitarContaReceberFXMLController implements Initializable {
         getData();
         if (true) {
             ContaReceberController.getInstance().quitarContaReceber(dataPagamento,
-                    valor,
+                    BigDecimal.ZERO,
                     valorDesconto,
                     valorAcrecimos,
                     vallorPago,

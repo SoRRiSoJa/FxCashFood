@@ -6,13 +6,11 @@
 package com.cashf.core.venda;
 
 import com.cashf.controller.caixa.CaixaController;
-import com.cashf.dao.contacorrente.ContaCorrenteDAO;
 import com.cashf.dao.contareceber.ContaReceberDAO;
 import com.cashf.dao.meiopagamento.MeioPagamentoDAO;
 import com.cashf.model.contareceber.ContaReceber;
 import com.cashf.model.contasPagar.StatusPagto;
 import com.cashf.model.meiopagamento.MeioPagamento;
-import com.cashf.model.venda.Venda;
 import controller.GenericController;
 import java.math.BigDecimal;
 import java.time.LocalDate;
