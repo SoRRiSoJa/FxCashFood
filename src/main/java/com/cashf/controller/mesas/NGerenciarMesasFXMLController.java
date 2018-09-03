@@ -49,14 +49,6 @@ public class NGerenciarMesasFXMLController implements Initializable {
     @FXML
     private Label lblNumMesa;
     @FXML
-    private JFXButton btnRegistrar;
-    @FXML
-    private JFXButton btnTransferir;
-    @FXML
-    private JFXButton btnFechar;
-    @FXML
-    private JFXButton btnFecharParcial;
-    @FXML
     private TableView<ProdutoVenda> tbvComanda;
     @FXML
     private TableColumn<ProdutoVenda, String> tbcCod;
@@ -75,12 +67,18 @@ public class NGerenciarMesasFXMLController implements Initializable {
     @FXML
     private Label lblTotal;
     @FXML
-    private Label lblPagtoParc;
-    @FXML
     private Label lblSaldoAtual;
     //----
     //----
     private static TableView<ProdutoVenda> _tbvComanda;
+    @FXML
+    private Label lblCLiente;
+    @FXML
+    private Label lblNCompras;
+    @FXML
+    private Label lblAvgCompras;
+    @FXML
+    private Label lblPax;
 
     /**
      * Initializes the controller class.
@@ -94,26 +92,13 @@ public class NGerenciarMesasFXMLController implements Initializable {
         _tbvComanda = tbvComanda;
     }
 
-    @FXML
-    private void onRegistrar(ActionEvent event) {
-        
-    }
-
-    @FXML
-    private void onTransferir(ActionEvent event) {
-       
-    }
-
-    @FXML
-    private void onFechar(ActionEvent event) {
-    }
-
-    @FXML
-    private void onFecharParcial(ActionEvent event) {
-    }
 
     private void loadData() {
         lblTotal.setText(VendaController.getInstance().getVendaByMesa(MesaController.getInstance().getMesaAtual()).getValorTotal().toString());
+        lblCLiente.setText(VendaController.getInstance().getVendaByMesa(MesaController.getInstance().getMesaAtual()).getCliente().getNome());
+        lblNCompras.setText(""+VendaController.getInstance().getNumVendasCliente(VendaController.getInstance().getVendaByMesa(MesaController.getInstance().getMesaAtual())));
+        lblAvgCompras.setText(""+VendaController.getInstance().getAvgVendaCliente(VendaController.getInstance().getVendaByMesa(MesaController.getInstance().getMesaAtual())));
+        lblPax.setText(""+MesaController.getInstance().getMesaAtual().getNumPax());
     }
 
     private void loadTbv() {

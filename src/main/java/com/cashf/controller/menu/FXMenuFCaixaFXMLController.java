@@ -209,10 +209,10 @@ public class FXMenuFCaixaFXMLController implements Initializable {
                                     break;
                             }
                             VendaController.getInstance().setVenda(VendaController.getInstance().getVendaByMesa(MesaController.getInstance().getMesaAtual()));
-                            if (VendaController.getInstance().getVenda().getMesa().getIdMesa() == 0) {
+                            if (MesaController.getInstance().getMesaAtual().getIdMesa() == 0) {
                                 loadBox("/fxml/mesas/AbrirMesaFXML.fxml", "Mesa Nº" + MesaController.getInstance().getMesaAtual().toString());
                             } else {
-                                loadBox("/fxml/mesas/RegistrarConsumoFXML.fxml", "Mesa Nº" + MesaController.getInstance().getMesaAtual().toString());
+                                loadBox("/fxml/mesas/NGerenciarMesasFXML.fxml", "Mesa Nº" + MesaController.getInstance().getMesaAtual().toString());
                             }
                         });
                     }

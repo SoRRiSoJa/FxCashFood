@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="632.0" minWidth="1366.0" prefHeight="632.0" prefWidth="1366.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cashf.controller.mesas.NGerenciarMesasFXMLController">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="632.0" minWidth="1366.0" prefHeight="632.0" prefWidth="1366.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cashf.controller.mesas.NGerenciarMesasFXMLController">
    <children>
       <Pane minHeight="632.0" minWidth="1366.0" prefHeight="632.0" prefWidth="1366.0">
          <children>
@@ -29,12 +29,12 @@
                      </children>
                   </Pane>
                   <Separator layoutX="17.0" layoutY="451.0" prefHeight="0.0" prefWidth="965.0" />
-                  <Label layoutX="28.0" layoutY="461.0" text="Total da Mesa:">
+                  <Label layoutX="28.0" layoutY="461.0" text="Valor Total Consumo da Mesa:">
                      <font>
                         <Font name="System Bold" size="13.0" />
                      </font>
                   </Label>
-                  <Label layoutX="28.0" layoutY="501.0" text="Pagamento Parcial:">
+                  <Label layoutX="28.0" layoutY="501.0" text="Nº Pessoas:">
                      <font>
                         <Font name="System Bold" size="13.0" />
                      </font>
@@ -58,17 +58,17 @@
                         <TableColumn fx:id="btnTransferirM" prefWidth="83.0" text="TRF.-ÍTEN" />
                      </columns>
                   </TableView>
-                  <Label fx:id="lblTotal" layoutX="187.0" layoutY="461.0" prefHeight="16.0" prefWidth="89.0">
+                  <Label fx:id="lblTotal" layoutX="266.0" layoutY="461.0" prefHeight="16.0" prefWidth="89.0">
                      <font>
                         <Font name="System Bold" size="13.0" />
                      </font>
                   </Label>
-                  <Label fx:id="lblPagtoParc" layoutX="187.0" layoutY="501.0" prefHeight="16.0" prefWidth="89.0">
+                  <Label fx:id="lblPax" layoutX="266.0" layoutY="501.0" prefHeight="16.0" prefWidth="89.0">
                      <font>
                         <Font name="System Bold" size="13.0" />
                      </font>
                   </Label>
-                  <Label fx:id="lblSaldoAtual" layoutX="187.0" layoutY="541.0" prefHeight="16.0" prefWidth="89.0">
+                  <Label fx:id="lblSaldoAtual" layoutX="265.0" layoutY="541.0" prefHeight="16.0" prefWidth="89.0">
                      <font>
                         <Font name="System Bold" size="13.0" />
                      </font>
@@ -78,27 +78,27 @@
                         <Font name="System Bold" size="13.0" />
                      </font>
                   </Label>
-                  <Label fx:id="lblCLiente" layoutX="659.0" layoutY="461.0" prefHeight="16.0" prefWidth="89.0">
+                  <Label fx:id="lblCLiente" layoutX="685.0" layoutY="461.0" prefHeight="16.0" prefWidth="200.0">
                      <font>
                         <Font name="System Bold" size="13.0" />
                      </font>
                   </Label>
-                  <Label layoutX="500.0" layoutY="501.0" text="Nº Pessoas:">
+                  <Label layoutX="500.0" layoutY="501.0" text="Nº Compras do Cliente:">
                      <font>
                         <Font name="System Bold" size="13.0" />
                      </font>
                   </Label>
-                  <Label fx:id="lblCLiente1" layoutX="659.0" layoutY="501.0" prefHeight="16.0" prefWidth="89.0">
+                  <Label fx:id="lblNCompras" layoutX="685.0" layoutY="501.0" prefHeight="16.0" prefWidth="200.0">
                      <font>
                         <Font name="System Bold" size="13.0" />
                      </font>
                   </Label>
-                  <Label layoutX="500.0" layoutY="541.0" text="Cliente:">
+                  <Label layoutX="500.0" layoutY="541.0" text="Valor Médio Compras:">
                      <font>
                         <Font name="System Bold" size="13.0" />
                      </font>
                   </Label>
-                  <Label fx:id="lblCLiente11" layoutX="659.0" layoutY="541.0" prefHeight="16.0" prefWidth="89.0">
+                  <Label fx:id="lblAvgCompras" layoutX="686.0" layoutY="541.0" prefHeight="16.0" prefWidth="171.0">
                      <font>
                         <Font name="System Bold" size="13.0" />
                      </font>

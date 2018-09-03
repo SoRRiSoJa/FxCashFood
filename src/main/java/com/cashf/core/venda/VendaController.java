@@ -343,5 +343,10 @@ public class VendaController implements GenericController<Venda> {
     public void setProdutoVendaSelecionado(ProdutoVenda produtoVendaSelecionado) {
         this.produtoVendaSelecionado = produtoVendaSelecionado;
     }
-
+    public long getNumVendasCliente(Venda venda){
+            return vendaDAO.totalDeVendasParaCliente(venda.getCliente());
+    }
+    public double getAvgVendaCliente(Venda venda){
+        return vendaDAO.avgValorVendaCliente(venda.getCliente());
+    }
 }
