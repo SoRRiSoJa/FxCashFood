@@ -6,6 +6,7 @@ com/cashf/dao/contacorrente/ContaCorrenteDAO.class
 com/cashf/controller/fichatecnica/TabFichaTecniaNFXMLController.class
 com/cashf/model/produto/Grupo.class
 com/cashf/controller/contaspagar/ContasPagarFXMLController.class
+com/cashf/controller/mesas/NGerenciarMesasFXMLController$2.class
 com/cashf/model/pessoa/Pessoa_.class
 com/cashf/model/mesa/Mesa_.class
 com/cashf/controller/funcionario/TabFuncionarioFXMLController$ButtonCellDelete.class
@@ -111,6 +112,7 @@ com/cashf/controller/contacorrente/ContaCorrenteController.class
 com/cashf/model/caixa/Caixa.class
 com/cashf/controller/produto/GrupoController.class
 com/cashf/controller/prepreparo/PrePreparoController.class
+com/cashf/controller/mesas/NGerenciarMesasFXMLController.class
 com/cashf/cashfood/MainApp.class
 com/cashf/controller/combos/TabComboFXMLController.class
 com/cashf/controller/meiopagamento/MeioPagamentoController.class
@@ -138,6 +140,7 @@ com/cashf/model/fichatecnica/ProdutoFichaTecnica_.class
 dao/GenericDAO.class
 com/cashf/model/prepreparo/PrePreparo_.class
 com/cashf/controller/fichatecnica/TabFichaTecniaNFXMLController$ButtonCellDelete$1.class
+com/cashf/controller/mesas/NGerenciarMesasFXMLController$ButtonCellShift.class
 com/cashf/controller/receberpedido/ReceberPedidoFXMLController.class
 com/cashf/model/estado/Estado.class
 com/cashf/model/ajusteestoque/AjusteEstoque_.class
@@ -164,6 +167,7 @@ com/cashf/controller/menu/FCMenuController.class
 com/cashf/controller/contaspagar/ContasPagarFXMLController$ButtonCellDelete.class
 com/cashf/controller/cliente/TabListaClientesFXMLController.class
 com/cashf/model/mesa/StatusMesa.class
+com/cashf/controller/mesas/NGerenciarMesasFXMLController$ButtonCellDelete.class
 com/cashf/controller/contaspagar/ContasReceberFXMLController$ButtonCellDelete.class
 com/cashf/controller/mesas/GerenciarMesasFXMLController.class
 util/TextFieldFormatter.class
@@ -184,6 +188,7 @@ com/cashf/controller/parametrizacao/ParametrosInicioFXMLController.class
 com/cashf/dao/venda/VendaDAO.class
 com/cashf/model/notafiscal/NotaFiscal_.class
 com/cashf/controller/registradora/NRegistradoraFXMLController.class
+com/cashf/controller/mesas/NGerenciarMesasFXMLController$ButtonCellShift$1.class
 com/cashf/controller/registradora/NRegistradoraFXMLController$1$1.class
 com/cashf/model/combo/Combo.class
 com/cashf/controller/prepreparo/TabPrePreparoNFXMLController$1.class
@@ -205,6 +210,7 @@ com/cashf/controller/menu/FXMenuFCaixaFXMLController.class
 com/cashf/controller/parametrizacao/TabParametrosFiscaisFXMLController$1.class
 com/cashf/controller/mesas/RegistrarConsumoFXMLController.class
 com/cashf/dao/contareceber/ContaReceberDAO.class
+com/cashf/controller/mesas/NGerenciarMesasFXMLController$1.class
 com/cashf/model/usuario/Usuario_.class
 com/cashf/model/produto/Produto_.class
 com/cashf/controller/contaspagar/BoxQuitarContaReceberFXMLController.class
@@ -212,6 +218,7 @@ com/cashf/controller/mesas/FecharMesaFXMLController$ButtonCellDelete.class
 com/cashf/model/combo/Combo_.class
 com/cashf/model/prepreparo/ProdutoPrePreparo_.class
 com/cashf/controller/fornecedor/FXGerenciarFornecedoresFXMLController.class
+com/cashf/controller/mesas/NGerenciarMesasFXMLController$ButtonCellDelete$1.class
 com/cashf/controller/cliente/TabClientesFXMLController$1.class
 dao/GenericDAOIMP.class
 com/cashf/controller/combos/TabComboFXMLController$ButtonCellDelete$1.class

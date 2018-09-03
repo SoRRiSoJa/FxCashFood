@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.Font?>
+
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="632.0" minWidth="1366.0" prefHeight="632.0" prefWidth="1366.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cashf.controller.mesas.NGerenciarMesasFXMLController">
+   <children>
+      <Pane minHeight="632.0" minWidth="1366.0" prefHeight="632.0" prefWidth="1366.0">
+         <children>
+            <Pane layoutX="183.0" layoutY="20.0" prefHeight="592.0" prefWidth="1000.0" style="-fx-background-color: #ffffff;">
+               <effect>
+                  <DropShadow />
+               </effect>
+               <children>
+                  <Pane prefHeight="20.0" prefWidth="1000.0" style="-fx-background-color: #0081cb;">
+                     <children>
+                        <Label layoutX="5.0" layoutY="2.0" text="MESA Nº:" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="lblNumMesa" layoutX="89.0" layoutY="2.0" textFill="WHITE" />
+                     </children>
+                  </Pane>
+                  <Separator layoutX="17.0" layoutY="451.0" prefHeight="0.0" prefWidth="965.0" />
+                  <Label layoutX="28.0" layoutY="461.0" text="Total da Mesa:">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="28.0" layoutY="501.0" text="Pagamento Parcial:">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="28.0" layoutY="541.0" text="Saldo Atual:">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                  </Label>
+                  <Separator layoutX="17.0" layoutY="566.0" prefHeight="0.0" prefWidth="965.0" />
+                  <Separator layoutX="16.0" layoutY="452.0" orientation="VERTICAL" prefHeight="114.0" prefWidth="0.0" />
+                  <Separator layoutX="980.0" layoutY="452.0" orientation="VERTICAL" prefHeight="114.0" prefWidth="0.0" />
+                  <TableView fx:id="tbvComanda" layoutX="14.0" layoutY="62.0" prefHeight="343.0" prefWidth="970.0" stylesheets="@../../styles/TableViewCSS.css">
+                     <columns>
+                        <TableColumn fx:id="tbcCod" prefWidth="145.0" text="COD" />
+                        <TableColumn fx:id="tbcDescricao" prefWidth="456.0" text="DESCRIÇÃO" />
+                        <TableColumn fx:id="tbcQtde" prefWidth="53.0" text="QTDE" />
+                        <TableColumn fx:id="tbcPreco" prefWidth="73.0" text="PREÇO" />
+                        <TableColumn fx:id="tbcTotal" prefWidth="70.0" text="TOTAL" />
+                        <TableColumn fx:id="btnCancelar" prefWidth="89.0" text="CANCELAR" />
+                        <TableColumn fx:id="btnTransferirM" prefWidth="83.0" text="TRF.-ÍTEN" />
+                     </columns>
+                  </TableView>
+                  <Label fx:id="lblTotal" layoutX="187.0" layoutY="461.0" prefHeight="16.0" prefWidth="89.0">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lblPagtoParc" layoutX="187.0" layoutY="501.0" prefHeight="16.0" prefWidth="89.0">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lblSaldoAtual" layoutX="187.0" layoutY="541.0" prefHeight="16.0" prefWidth="89.0">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="500.0" layoutY="461.0" text="Cliente:">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lblCLiente" layoutX="659.0" layoutY="461.0" prefHeight="16.0" prefWidth="89.0">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="500.0" layoutY="501.0" text="Nº Pessoas:">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lblCLiente1" layoutX="659.0" layoutY="501.0" prefHeight="16.0" prefWidth="89.0">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="500.0" layoutY="541.0" text="Cliente:">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lblCLiente11" layoutX="659.0" layoutY="541.0" prefHeight="16.0" prefWidth="89.0">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+         </children>
+      </Pane>
+   </children>
+</StackPane>

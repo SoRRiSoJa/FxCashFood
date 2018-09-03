@@ -82,6 +82,7 @@ public class VendaController implements GenericController<Venda> {
         this.comboSelecionado = new Combo();
         this.comboSelecionado.setIdCombo(0l);
         this.atualizarEstoque = new AtualizarEstoque();
+        
     }
 
     public static synchronized VendaController getInstance() {
@@ -134,6 +135,8 @@ public class VendaController implements GenericController<Venda> {
         for (ProdutoVenda pv : VendaController.getInstance().getListaProduosVenda()) {
             tot = tot.add(pv.getPrecoUnit().multiply(pv.getQtde()));
         }
+        System.out.println("AVG:"+vendaDAO.avgValorVendaCliente(venda.getCliente()));
+        System.out.println("Nº:"+vendaDAO.totalDeVendasParaCliente(venda.getCliente()));
         return tot;
     }
 
