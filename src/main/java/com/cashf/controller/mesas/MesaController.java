@@ -128,6 +128,7 @@ public class MesaController implements GenericController<Mesa> {
         mesaAtual.setHoraAbertura(LocalTime.now());
         mesaAtual.setStatus(StatusMesa.ABERTA);
         insert();
+        VendaController.getInstance().setNewVenda();
         VendaController.getInstance().getVenda().setMesa(mesaAtual);
         VendaController.getInstance().getLista().add(VendaController.getInstance().getVenda());
     }

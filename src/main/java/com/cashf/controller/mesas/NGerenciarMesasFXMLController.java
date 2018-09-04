@@ -16,6 +16,7 @@ import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.net.URL;
+import java.text.DecimalFormat;
 import java.util.ResourceBundle;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -94,10 +95,11 @@ public class NGerenciarMesasFXMLController implements Initializable {
 
 
     private void loadData() {
-        lblTotal.setText(VendaController.getInstance().getVendaByMesa(MesaController.getInstance().getMesaAtual()).getValorTotal().toString());
+        DecimalFormat df = new DecimalFormat("R$,##0.00;(R$,##0.00)");
+        lblTotal.setText(df.format(VendaController.getInstance().getVendaByMesa(MesaController.getInstance().getMesaAtual()).getValorTotal()));
         lblCLiente.setText(VendaController.getInstance().getVendaByMesa(MesaController.getInstance().getMesaAtual()).getCliente().getNome());
         lblNCompras.setText(""+VendaController.getInstance().getNumVendasCliente(VendaController.getInstance().getVendaByMesa(MesaController.getInstance().getMesaAtual())));
-        lblAvgCompras.setText(""+VendaController.getInstance().getAvgVendaCliente(VendaController.getInstance().getVendaByMesa(MesaController.getInstance().getMesaAtual())));
+        lblAvgCompras.setText(df.format(VendaController.getInstance().getAvgVendaCliente(VendaController.getInstance().getVendaByMesa(MesaController.getInstance().getMesaAtual()))));
         lblPax.setText(""+MesaController.getInstance().getMesaAtual().getNumPax());
     }
 

@@ -82,7 +82,7 @@ public class VendaController implements GenericController<Venda> {
         this.comboSelecionado = new Combo();
         this.comboSelecionado.setIdCombo(0l);
         this.atualizarEstoque = new AtualizarEstoque();
-        
+
     }
 
     public static synchronized VendaController getInstance() {
@@ -135,8 +135,6 @@ public class VendaController implements GenericController<Venda> {
         for (ProdutoVenda pv : VendaController.getInstance().getListaProduosVenda()) {
             tot = tot.add(pv.getPrecoUnit().multiply(pv.getQtde()));
         }
-        System.out.println("AVG:"+vendaDAO.avgValorVendaCliente(venda.getCliente()));
-        System.out.println("Nº:"+vendaDAO.totalDeVendasParaCliente(venda.getCliente()));
         return tot;
     }
 
@@ -245,6 +243,13 @@ public class VendaController implements GenericController<Venda> {
         this.venda = venda;
     }
 
+    public void setNewVenda() {
+        this.venda = new Venda();
+        venda.setIdVenda(0l);
+        venda.setValorTotal(BigDecimal.ZERO);
+        venda.setListaProdutos(FXCollections.observableList(new ArrayList<>()));
+    }
+
     public ObservableList<ProdutoVenda> getListaProduosVenda() {
         return FXCollections.observableList(venda.getListaProdutos());
     }
@@ -343,10 +348,12 @@ public class VendaController implements GenericController<Venda> {
     public void setProdutoVendaSelecionado(ProdutoVenda produtoVendaSelecionado) {
         this.produtoVendaSelecionado = produtoVendaSelecionado;
     }
-    public long getNumVendasCliente(Venda venda){
-            return vendaDAO.totalDeVendasParaCliente(venda.getCliente());
+
+    public long getNumVendasCliente(Venda venda) {
+        return vendaDAO.totalDeVendasParaCliente(venda.getCliente());
     }
-    public double getAvgVendaCliente(Venda venda){
+
+    public double getAvgVendaCliente(Venda venda) {
         return vendaDAO.avgValorVendaCliente(venda.getCliente());
     }
 }
