@@ -95,7 +95,7 @@ public class NGerenciarMesasFXMLController implements Initializable {
 
 
     private void loadData() {
-        DecimalFormat df = new DecimalFormat("R$,##0.00;(R$,##0.00)");
+        DecimalFormat df = new DecimalFormat("$,##0.00;($,##0.00)");
         lblTotal.setText(df.format(VendaController.getInstance().getVendaByMesa(MesaController.getInstance().getMesaAtual()).getValorTotal()));
         lblCLiente.setText(VendaController.getInstance().getVendaByMesa(MesaController.getInstance().getMesaAtual()).getCliente().getNome());
         lblNCompras.setText(""+VendaController.getInstance().getNumVendasCliente(VendaController.getInstance().getVendaByMesa(MesaController.getInstance().getMesaAtual())));
