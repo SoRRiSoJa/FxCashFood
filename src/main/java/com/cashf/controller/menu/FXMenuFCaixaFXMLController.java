@@ -212,6 +212,7 @@ public class FXMenuFCaixaFXMLController implements Initializable {
                             if (MesaController.getInstance().getMesaAtual().getIdMesa() == 0) {
                                 loadBox("/fxml/mesas/AbrirMesaFXML.fxml", "Mesa Nº" + MesaController.getInstance().getMesaAtual().toString());
                             } else {
+                                VendaController.getInstance().setVenda(VendaController.getInstance().getVendaByMesa(MesaController.getInstance().getMesaAtual()));
                                 loadBox("/fxml/mesas/NGerenciarMesasFXML.fxml", "Mesa Nº" + MesaController.getInstance().getMesaAtual().toString());
                             }
                         });

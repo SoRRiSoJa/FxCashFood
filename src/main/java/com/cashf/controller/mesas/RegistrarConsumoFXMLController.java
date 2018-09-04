@@ -102,6 +102,7 @@ public class RegistrarConsumoFXMLController implements GenericViewController, In
 
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        VendaController.getInstance().setVenda(VendaController.getInstance().getVendaByMesa(MesaController.getInstance().getMesaAtual()));
         loadCbbProd();
         setUpRadioButtons();
         setUptableViewProdutos();
