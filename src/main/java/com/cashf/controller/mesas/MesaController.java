@@ -130,6 +130,7 @@ public class MesaController implements GenericController<Mesa> {
         insert();
         VendaController.getInstance().setNewVenda();
         VendaController.getInstance().getVenda().setMesa(mesaAtual);
+        VendaController.getInstance().getVenda().setCliente(cliente);
         VendaController.getInstance().getLista().add(VendaController.getInstance().getVenda());
         VendaController.getInstance().setVenda(VendaController.getInstance().getVendaByMesa(mesaAtual));
     }

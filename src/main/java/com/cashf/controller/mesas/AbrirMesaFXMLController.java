@@ -83,7 +83,7 @@ public class AbrirMesaFXMLController implements Initializable {
     @FXML
     private void onSelecionarCliente(ActionEvent event) {
         if (cbbCliente.getSelectionModel().getSelectedItem() != null) {
-            VendaController.getInstance().getVenda().setCliente(cbbCliente.getItems().get(cbbCliente.getSelectionModel().getSelectedIndex()));
+            MesaController.getInstance().setCliente(cbbCliente.getItems().get(cbbCliente.getSelectionModel().getSelectedIndex()));
         }
     }
 
