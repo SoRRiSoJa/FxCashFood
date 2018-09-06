@@ -7,9 +7,12 @@ package com.cashf.core.atualizarestoque;
 
 import com.cashf.controller.login.LoginController;
 import com.cashf.dao.ajusteestoque.AjusteEstoqueDAO;
+import com.cashf.dao.fichatecnica.FichaTecnicaDAO;
 import com.cashf.dao.produto.ProdutoDAO;
 import com.cashf.model.ajusteestoque.AjusteEstoque;
 import com.cashf.model.ajusteestoque.TipoAjuste;
+import com.cashf.model.fichatecnica.FichaTecnica;
+import com.cashf.model.fichatecnica.ProdutoFichaTecnica;
 import com.cashf.model.notafiscal.NotaFiscal;
 import com.cashf.model.prepreparo.PrePreparo;
 import com.cashf.model.produto.Produto;
@@ -28,6 +31,7 @@ public class AtualizarEstoque {
 
     private final AjusteEstoqueDAO ajusteEstoqueDAO;
     private final ProdutoDAO produtoDAO;
+    private final FichaTecnicaDAO fichaTecnicaDAO;
     private Produto produto;
     private PrePreparo prePreparo;
     private AjusteEstoque ajusteEstoque;
@@ -36,6 +40,7 @@ public class AtualizarEstoque {
 
     public AtualizarEstoque() {
         this.produtoDAO = new ProdutoDAO(Produto.class);
+        this.fichaTecnicaDAO = new FichaTecnicaDAO(FichaTecnica.class);
         this.ajusteEstoqueDAO = new AjusteEstoqueDAO(AjusteEstoque.class);
         this.produto = new Produto();
         produto.setIdProduto(0l);
@@ -44,7 +49,14 @@ public class AtualizarEstoque {
         this.ajusteEstoque = new AjusteEstoque();
         this.ajusteEstoque.setIdAjuste(0l);
     }
-
+    public void retirarFichaTecnica(){
+        FichaTecnica ftAux=fichaTecnicaDAO.getByProduto(produto);
+        for(ProdutoFichaTecnica ft:ftAux.getListaProdutos()){
+            setProduto(ft.getProduto());
+            retirarProduto(ft.getQtdeProduto(), ft.getUnidadeMedida());
+        }
+         setProduto(ftAux.getProdutoPrincipal());
+    }
     public Boolean retirarProduto(BigDecimal qtdeAjuste, UnidadeMedida unidadeMedida) {
         boolean flag = true;
         try {

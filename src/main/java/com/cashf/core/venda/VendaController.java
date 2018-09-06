@@ -25,6 +25,7 @@ import com.cashf.model.meiopagamento.MeioPagamento;
 import com.cashf.model.meiopagamento.TPPagto;
 import com.cashf.model.mesa.Mesa;
 import com.cashf.model.produto.Produto;
+import com.cashf.model.produto.TipoProduto;
 import com.cashf.model.venda.ProdutoVenda;
 import com.cashf.model.venda.Venda;
 import controller.GenericController;
@@ -181,6 +182,10 @@ public class VendaController implements GenericController<Venda> {
         atualizarCC(venda.getValorTotal());
         //Atualizando estoque de produtos
         for (ProdutoVenda pv : venda.getListaProdutos()) {
+            if (pv.getProduto().getTipo().equals(TipoProduto.FICHA_TECNICA)) {
+                atualizarEstoque.setProduto(pv.getProduto());
+                atualizarEstoque.retirarFichaTecnica();
+            }
             atualizarEstoque.setProduto(pv.getProduto());
             atualizarEstoque.setUnidadeMEdida(pv.getProduto().getUnidadeMedida());
             atualizarEstoque.retirarProduto(pv.getQtde(), pv.getProduto().getUnidadeMedida());
