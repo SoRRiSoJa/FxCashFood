@@ -14,6 +14,7 @@ import com.sun.prism.impl.Disposer;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.net.URL;
+import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -91,7 +92,7 @@ public class GerenciarCaixaFXMLController implements Initializable {
     private static Label _lblSaldoInicial;
     private static Label _lblSaldoConta;
     private static Label _lblSaldoMov;
-    
+
     @FXML
     private Label lblSaldoInicial;
     @FXML
@@ -110,22 +111,24 @@ public class GerenciarCaixaFXMLController implements Initializable {
         _lblTotalPago = lblTotalPago;
         _lblTotalRecebido = lblTotalRecebido;
         _lblSaldoInicial = lblSaldoInicial;
-        _lblSaldoConta=lblSaldoConta;
-        _lblSaldoMov=lblSaldoMov;
-    
+        _lblSaldoConta = lblSaldoConta;
+        _lblSaldoMov = lblSaldoMov;
+
         setUpTbv();
-        
-
-        if (CaixaController.getInstance().getCaixaAberto().getIdCaixa() != 0) {
-            lblSaldoConta.setText(CaixaController.getInstance().getSaldoConta().toString());
-            lblSaldoMov.setText(CaixaController.getInstance().getSaldoFinal().toString());
-            lblTotalPago.setText(CaixaController.getInstance().getTotalDebitos().toString());
-            lblTotalRecebido.setText(CaixaController.getInstance().getTotalCreditos().toString());
-            lblSaldoInicial.setText(CaixaController.getInstance().getCaixaAberto().getValorInicial().toString());
-        }
-
+        loadData();
         loadTbv();
 
+    }
+
+    private void loadData() {
+        DecimalFormat df = new DecimalFormat("R$ #,##0.00;(R$ #,##0.00)");
+        if (CaixaController.getInstance().getCaixaAberto().getIdCaixa() != 0) {
+            lblSaldoConta.setText(df.format(CaixaController.getInstance().getSaldoConta()));
+            lblSaldoMov.setText(df.format(CaixaController.getInstance().getSaldoFinal()));
+            lblTotalPago.setText(df.format(CaixaController.getInstance().getTotalDebitos()));
+            lblTotalRecebido.setText(df.format(CaixaController.getInstance().getTotalCreditos()));
+            lblSaldoInicial.setText(df.format(CaixaController.getInstance().getCaixaAberto().getValorInicial()));
+        }
     }
 
     @FXML
