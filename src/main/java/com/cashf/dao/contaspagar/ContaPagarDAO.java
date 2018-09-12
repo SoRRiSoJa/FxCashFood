@@ -10,6 +10,8 @@ import com.cashf.model.contasPagar.ContaPagar;
 import com.cashf.model.contasPagar.StatusPagto;
 import dao.GenericDAOIMP;
 import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Projections;
@@ -36,6 +38,21 @@ public class ContaPagarDAO extends GenericDAOIMP<ContaPagar> {
         } catch (Exception e) {
             System.out.println("Erro:" + e);
             return BigDecimal.ZERO;
+        }
+    }
+    public List<ContaPagar> listByPeriodo(LocalDate dataIni, LocalDate dataFin) {
+        try (Session session = sessionFactory.openSession()) {
+            String hql = "from ContaPagar cap where cap.dataVencimento between :dataIni and :dataFin "
+                    + " ";
+
+            List<ContaPagar> roleList = session.createQuery(hql)
+                    .setParameter("dataIni", dataIni)
+                    .setParameter("dataFin", dataFin)
+                    .list();
+            return roleList;
+        } catch (Exception e) {
+            System.out.println("Erro:" + e);
+            return null;
         }
     }
 

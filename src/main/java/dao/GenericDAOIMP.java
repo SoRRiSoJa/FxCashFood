@@ -97,7 +97,7 @@ public class GenericDAOIMP<T> implements GenericDAO<T> {
     @Override
     public List<T> listAll() {
         try (Session sessionn = sessionFactory.openSession()) {
-            List<T> roleList = sessionn.createQuery("from " + clazz.getName() + "").setMaxResults(10).list();
+            List<T> roleList = sessionn.createQuery("from " + clazz.getName() + "").setMaxResults(100).list();
             return roleList;
 
         } catch (HibernateException e) {
