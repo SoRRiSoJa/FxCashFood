@@ -83,7 +83,10 @@
             <JFXComboBox fx:id="cbbTipoAjuste" focusColor="#004ba0" labelFloat="true" layoutX="90.0" layoutY="82.0" onMouseClicked="#onMouseClickedTipo" prefHeight="26.0" prefWidth="460.0" promptText="Tipo de Ajuste" />
             <Pane prefHeight="20.0" prefWidth="640.0" style="-fx-background-color: #0081cb;">
                <children>
-                  <Label layoutX="5.0" layoutY="2.0" text="Ajustar quantidade de produtos do estoque" textFill="WHITE" />
+                  <Label layoutX="5.0" layoutY="2.0" text="Ajustar quantidade de produtos do estoque" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font></Label>
                </children>
             </Pane>
             <JFXTextField fx:id="txtQtdeAtual" alignment="CENTER_RIGHT" editable="false" focusColor="#004ba0" labelFloat="true" layoutX="350.0" layoutY="287.0" prefHeight="24.0" prefWidth="200.0" promptText="Qtde. Atual">

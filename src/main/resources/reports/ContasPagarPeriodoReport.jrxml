@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
+<!-- 2018-09-13T00:44:33 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ContasPagarPeriodoReport" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="4eedbb89-b4f6-4469-9ab6-f642a1688cf7">
+	<property name="template.engine" value="tabular_template"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<style name="Title" forecolor="#FFFFFF" fontName="Times New Roman" fontSize="50" isBold="false" pdfFontName="Times-Bold"/>
+	<style name="SubTitle" forecolor="#CCCCCC" fontName="Times New Roman" fontSize="18" isBold="false" pdfFontName="Times-Roman"/>
+	<style name="Row" mode="Transparent" fontName="Times New Roman" pdfFontName="Times-Roman">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
+			<style mode="Opaque" backcolor="#EEEFF0"/>
+		</conditionalStyle>
+	</style>
+	<style name="Table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+			<topPen lineWidth="1.0" lineColor="#000000"/>
+			<leftPen lineWidth="1.0" lineColor="#000000"/>
+			<bottomPen lineWidth="1.0" lineColor="#000000"/>
+			<rightPen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="tableDataset" uuid="6c04ad05-6a06-40c3-b03d-6f24e76e3667">
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+		<queryString>
+			<![CDATA[]]>
+		</queryString>
+	</subDataset>
+	<parameter name="dataIni" class="java.time.LocalDate"/>
+	<parameter name="dataFim" class="java.time.LocalDate"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="descricao" class="java.lang.String"/>
+	<field name="favorecido" class="java.lang.String"/>
+	<field name="dataVencimento" class="java.time.LocalDate"/>
+	<field name="valorBruto" class="java.math.BigDecimal"/>
+	<field name="statusPagto" class="java.lang.Enum"/>
+	<title>
+		<band height="88" splitType="Stretch">
+			<line>
+				<reportElement x="0" y="81" width="556" height="1" uuid="806ce5df-1219-4876-ae0c-ca7405b1f246">
+					<property name="local_mesure_unitheight" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</line>
+			<staticText>
+				<reportElement x="415" y="10" width="50" height="20" uuid="0f86baff-6386-4f3f-b3fe-2388707babe8"/>
+				<box rightPadding="4"/>
+				<textElement textAlignment="Right"/>
+				<text><![CDATA[De:]]></text>
+			</staticText>
+			<image hAlign="Center">
+				<reportElement x="0" y="0" width="65" height="60" uuid="94883631-a913-43e2-b182-ab8d77d0181e"/>
+				<imageExpression><![CDATA["invoice_logo.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="415" y="30" width="50" height="20" uuid="0b3f9342-da78-4cfa-9fc5-2301c4749678"/>
+				<box rightPadding="4"/>
+				<textElement textAlignment="Right"/>
+				<text><![CDATA[Até:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="95" y="0" width="210" height="25" uuid="e622555d-198b-4ccd-a4a1-c59c53304058">
+					<property name="local_mesure_unitheight" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="19" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Mr. Taste]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="95" y="55" width="205" height="15" uuid="b8cc42fd-b569-497d-834d-7e854040ad18"/>
+				<text><![CDATA[(18) 3271-2576, www.mrtaste.com.br]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="95" y="25" width="205" height="15" uuid="c226e44d-3bb5-4145-b0b3-903bf1d79fde"/>
+				<text><![CDATA[Av.Princesa Isabelel Nº165]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="95" y="40" width="205" height="15" uuid="b96f7183-44f8-43ad-ba60-43d8fbf50b6e"/>
+				<text><![CDATA[Presidente Venceslau - SP, 19400-00
+]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="465" y="9" width="91" height="21" uuid="4e302e39-d033-4df3-9304-e29217240e3b"/>
+				<textFieldExpression><![CDATA[$P{dataIni}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="467" y="30" width="89" height="20" uuid="66639815-2110-4dac-bafe-3496c46d477f"/>
+				<textFieldExpression><![CDATA[$P{dataFim}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="24">
+			<line>
+				<reportElement x="0" y="20" width="556" height="1" uuid="f33df107-9dc6-4687-9d7d-c2e7d123a452"/>
+			</line>
+			<staticText>
+				<reportElement x="4" y="3" width="176" height="16" uuid="b2830fda-6a50-47db-a253-0f15ff6e293d"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[DESCRIÇÃO DO TÍTULO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="181" y="2" width="100" height="16" uuid="4ee7c03b-92bb-4d9c-b1b2-60e0e61bc380"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[FAVORECIDO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="286" y="2" width="123" height="16" uuid="4d6b6e3f-e7e2-4486-8578-7ac6afcceac8"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[DATA DE VENCIMENTO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="416" y="2" width="75" height="16" uuid="912d7710-744c-4a5f-b625-6506c6ccd3c5"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[VALOR BRUTO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="494" y="2" width="57" height="16" uuid="58fbcabf-3c76-4474-98d5-5d84505d8791"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[STATUS]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<summary>
+		<band height="22">
+			<textField>
+				<reportElement x="0" y="0" width="180" height="20" uuid="9b13ba4f-9d6c-4cb6-a48b-f0685b6b9cde"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{descricao}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="180" y="-3" width="100" height="23" uuid="c4f108a3-7ba3-477c-9e4c-369a24df78f7"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{favorecido}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="286" y="0" width="123" height="20" uuid="b6945e16-88d2-4587-84f6-08f78705311b"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{dataVencimento}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="410" y="0" width="81" height="20" uuid="511944fe-c36f-4aa5-9e4d-77e28ae8b85f"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{valorBruto}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="494" y="3" width="60" height="14" uuid="a1945f82-b72d-4a55-abfa-32d9fed9fec2"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{statusPagto}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>
