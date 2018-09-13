@@ -15,7 +15,6 @@ import com.cashf.model.meiopagamento.MeioPagamento;
 import controller.GenericController;
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -150,13 +149,5 @@ public class ContasPagarController implements GenericController<ContaPagar> {
         CaixaController.getInstance().movimentarCaixaDebito(descricao, valorPago);
 
     }
-    public void testarRelatorio(){
-        LocalDate ini,fim;
-        ini=LocalDate.of(2018,4,21);
-        fim=LocalDate.now();
-        List<ContaPagar> lista=contasPagarDAO.listByPeriodo(ini, fim);
-        lista.forEach((cp) -> {
-            System.out.println("--->>>"+cp.getDescricao()+"|"+cp.getDataVencimento()+"|"+cp.getStatusPagto());
-        });
-    }
+    
 }

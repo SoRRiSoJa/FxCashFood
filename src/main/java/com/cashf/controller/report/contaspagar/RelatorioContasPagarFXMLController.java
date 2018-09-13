@@ -37,13 +37,17 @@ public class RelatorioContasPagarFXMLController implements Initializable {
     private Label lblSaldo;
     @FXML
     private JFXDatePicker dtpDataFin;
-
+    @FXML
+    private JFXButton btnPesquisar;
+    //----
+    String erros="";
+    RelatorioContasPagarController relatorioController;
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        relatorioController=new RelatorioContasPagarController();
     }    
 
     @FXML
@@ -57,5 +61,17 @@ public class RelatorioContasPagarFXMLController implements Initializable {
     @FXML
     private void onKeyReleasedQtdeAjuste(KeyEvent event) {
     }
-    
+
+    @FXML
+    private void onPesquisar(ActionEvent event) {
+        getData();
+        relatorioController.gerarDados();
+        txtQtdeTitulos.setText(relatorioController.getLista().size()+"");
+        relatorioController.testarRelatorio();
+        
+    }
+    private void getData(){
+        relatorioController.setDataInicio(dtpDataIni.getValue());
+        relatorioController.setDataFim(dtpDataFin.getValue());
+    }
 }

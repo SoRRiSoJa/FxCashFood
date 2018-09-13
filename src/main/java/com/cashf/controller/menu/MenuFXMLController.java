@@ -172,7 +172,7 @@ public class MenuFXMLController implements Initializable {
 
     @FXML
     private void onRelatorioContasPagar(ActionEvent event) {
-        loadFXML("fxml/relContasPagar/RelatorioContasPagarFXML.fxml");
+        loadFXML("/fxml/relContasPagar/RelatorioContasPagarFXML.fxml");
     }
 
     @FXML

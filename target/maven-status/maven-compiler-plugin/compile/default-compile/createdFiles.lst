@@ -68,6 +68,7 @@ com/cashf/model/notafiscal/NotaFiscal.class
 com/cashf/controller/mesas/GerenciarMesasFXMLController$2.class
 com/cashf/controller/fichatecnica/GerenciarFichasTecnicasFXMLController.class
 util/ProdCalcUtil.class
+com/cashf/controller/report/contaspagar/RelatorioContasPagarController.class
 com/cashf/controller/caixa/CaixaController.class
 com/cashf/controller/fichatecnica/TabFichaTecniaNFXMLController$ButtonCellDelete.class
 com/cashf/model/funcionario/Funcionario_.class

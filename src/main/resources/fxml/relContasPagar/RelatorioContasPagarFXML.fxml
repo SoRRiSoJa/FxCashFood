@@ -13,7 +13,6 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="672.0" minWidth="1366.0" prefHeight="672.0" prefWidth="1366.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cashf.controller.report.contaspagar.RelatorioContasPagarFXMLController">
    <children>
       <Pane prefHeight="30.0" prefWidth="1366.0" style="-fx-background-color: #0081cb;">
@@ -25,7 +24,7 @@
             </Text>
          </children>
       </Pane>
-      <Pane layoutX="363.0" layoutY="79.0" prefHeight="477.0" prefWidth="640.0" style="-fx-background-color: #ffffff;">
+      <Pane layoutX="363.0" layoutY="60.0" prefHeight="477.0" prefWidth="640.0" style="-fx-background-color: #ffffff;">
          <effect>
             <DropShadow />
          </effect>
@@ -53,7 +52,7 @@
                   </JFXButton>
                </children>
             </HBox>
-            <JFXTextField fx:id="txtTotalInt" alignment="CENTER_RIGHT" focusColor="#eb0f03" labelFloat="true" layoutX="350.0" layoutY="187.0" onKeyReleased="#onKeyReleasedQtdeAjuste" prefHeight="26.0" prefWidth="200.0" promptText="Total a pagar no intervalo" />
+            <JFXTextField fx:id="txtTotalInt" alignment="CENTER_RIGHT" focusColor="#eb0f03" labelFloat="true" layoutX="350.0" layoutY="284.0" onKeyReleased="#onKeyReleasedQtdeAjuste" prefHeight="26.0" prefWidth="200.0" promptText="Total a pagar no intervalo" />
             <Pane prefHeight="20.0" prefWidth="640.0" style="-fx-background-color: #0081cb;">
                <children>
                   <Label layoutX="5.0" layoutY="2.0" text="Intervalo desejado para impressão:" textFill="WHITE">
@@ -63,24 +62,29 @@
                   </Label>
                </children>
             </Pane>
-            <JFXTextField fx:id="txtQtdeTitulos" alignment="CENTER_RIGHT" editable="false" focusColor="#004ba0" labelFloat="true" layoutX="350.0" layoutY="140.0" prefHeight="26.0" prefWidth="200.0" promptText="Nº de títulos no intervalo">
+            <JFXTextField fx:id="txtQtdeTitulos" alignment="CENTER_RIGHT" editable="false" focusColor="#004ba0" labelFloat="true" layoutX="350.0" layoutY="237.0" prefHeight="26.0" prefWidth="200.0" promptText="Nº de títulos no intervalo">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>
             </JFXTextField>
             <JFXDatePicker fx:id="dtpDataIni" defaultColor="#004ba0" editable="false" layoutX="90.0" layoutY="51.0" overLay="true" prefHeight="26.0" prefWidth="200.0" promptText="Data Inicial" />
-            <Separator layoutX="90.0" layoutY="98.0" prefHeight="3.0" prefWidth="460.0" />
+            <Separator layoutX="90.0" layoutY="185.0" prefHeight="3.0" prefWidth="460.0" />
             <Label fx:id="lblSaldo" alignment="CENTER_RIGHT" layoutX="470.0" layoutY="377.0" prefHeight="16.0" prefWidth="79.0">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>
             </Label>
-            <Label layoutX="101.0" layoutY="114.0" text="Status:">
+            <Label layoutX="91.0" layoutY="211.0" text="Status:">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>
             </Label>
             <JFXDatePicker fx:id="dtpDataFin" defaultColor="#004ba0" editable="false" layoutX="348.0" layoutY="52.0" overLay="true" prefHeight="26.0" prefWidth="200.0" promptText="Data FInal" />
+            <JFXButton fx:id="btnPesquisar" contentDisplay="GRAPHIC_ONLY" layoutX="470.0" layoutY="114.0" onAction="#onPesquisar" prefHeight="32.0" prefWidth="79.0" ripplerFill="#69e2ff" style="-fx-background-color: #0081cb;" textFill="WHITE">
+               <graphic>
+                  <FontAwesomeIconView fill="WHITE" glyphName="SEARCH" />
+               </graphic>
+            </JFXButton>
          </children>
       </Pane>
    </children>
