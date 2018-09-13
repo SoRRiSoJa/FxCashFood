@@ -34,6 +34,7 @@
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/controller/ajusteestoque/AjusteEstoqueController.java
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/controller/combos/TabComboFXMLController.java
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/model/contacorrente/ContaCorrente.java
+/home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/controller/report/contaspagar/RelatorioContasPagarFXMLController.java
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/controller/prepreparo/PrePreparoController.java
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/model/fichatecnica/ProdutoFichaTecnica.java
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/controller/cliente/FXGerenciarClientesFXMLController.java

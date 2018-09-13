@@ -23,6 +23,7 @@ com/cashf/dao/funcionario/FuncionarioDAO.class
 com/cashf/dao/parametros/ParametrosDAO.class
 com/cashf/controller/contaspagar/ContasReceberFXMLController$1.class
 com/cashf/controller/contaspagar/BoxQuitarContaPagarFXMLController.class
+com/cashf/controller/report/contaspagar/RelatorioContasPagarFXMLController.class
 com/cashf/controller/mesas/GerenciarMesasFXMLController$ButtonCellDelete$1.class
 com/cashf/controller/produto/FXGerenciarProdutosFXMLController.class
 com/cashf/controller/funcionario/FXGerenciarFuncionariosFXMLController.class

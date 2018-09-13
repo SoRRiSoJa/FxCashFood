@@ -30,7 +30,8 @@
                   </Menu>
                   <Menu mnemonicParsing="false" text="Relatórios">
                      <items>
-                        <MenuItem mnemonicParsing="false" text="Delete" />
+                        <MenuItem mnemonicParsing="false" onAction="#onRelatorioContasPagar" text="Relatório Contas a Pagar" />
+                        <MenuItem mnemonicParsing="false" onAction="#onRelatorioContasReceber" text="Relatório Contas a Receber" />
                      </items>
                   </Menu>
                   <Menu mnemonicParsing="false" text="Ajuda">

@@ -169,4 +169,13 @@ public class MenuFXMLController implements Initializable {
             System.out.println("Erro:" + ex);
         }
     }
+
+    @FXML
+    private void onRelatorioContasPagar(ActionEvent event) {
+        loadFXML("fxml/relContasPagar/RelatorioContasPagarFXML.fxml");
+    }
+
+    @FXML
+    private void onRelatorioContasReceber(ActionEvent event) {
+    }
 }
