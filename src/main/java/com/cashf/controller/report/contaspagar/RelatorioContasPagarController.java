@@ -38,8 +38,9 @@ public class RelatorioContasPagarController {
         this.contasPagarDAO = new ContaPagarDAO(ContaPagar.class);
         this.lista = FXCollections.observableList(contasPagarDAO.listAll());
         this.dataInicio = this.dataFim = LocalDate.now();
-        ///home/joao/NetBeansProjects/FXCashFood/src/main/resources/reports/ContasPagarPeriodoReport.jrxml
-        reportFilePath = "/resources/reports/ContasPagarPeriodoReport.jrxml";
+        
+        // /home/joao/NetBeansProjects/FXCashFood/src/main/resources/reports/ContasPagarPeriodoReport.jrxml
+        reportFilePath = "/home/joao/NetBeansProjects/FXCashFood/src/main/resources/reports/ContasPagarPeriodoReport.jrxml";
 
     }
 
