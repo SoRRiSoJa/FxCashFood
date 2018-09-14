@@ -21,6 +21,7 @@ import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.swing.JRViewer;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
@@ -32,7 +33,7 @@ public class RelatorioContasPagarController {
     private ObservableList<ContaPagar> lista;
     private LocalDate dataInicio;
     private LocalDate dataFim;
-    private String reportFilePath;
+    private final String reportFilePath;
 
     public RelatorioContasPagarController() {
         this.contasPagarDAO = new ContaPagarDAO(ContaPagar.class);
@@ -40,7 +41,7 @@ public class RelatorioContasPagarController {
         this.dataInicio = this.dataFim = LocalDate.now();
         
         // /home/joao/NetBeansProjects/FXCashFood/src/main/resources/reports/ContasPagarPeriodoReport.jrxml
-        reportFilePath = "/home/joao/NetBeansProjects/FXCashFood/src/main/resources/reports/ContasPagarPeriodoReport.jrxml";
+        reportFilePath = "/home/joao/NetBeansProjects/FXCashFood/src/main/resources/reports/ContasPagarPeriodoReport.jasper";
 
     }
 
@@ -80,6 +81,23 @@ public class RelatorioContasPagarController {
         } catch (JRException ex) {
             Logger.getLogger(RelatorioContasPagarController.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    public void testaDois(){
+     try {
+         lista.forEach((cp) -> {
+             System.out.println(cp.getDescricao()+"|"+cp.getFavorecido()+"|"+cp.getDataVencimento()+"|"+cp.getValorBruto());
+         });
+        JRBeanCollectionDataSource beanColDataSource = new JRBeanCollectionDataSource(lista);            
+            String RelName = JasperFillManager.fillReportToFile(reportFilePath, null, beanColDataSource);
+            JasperViewer viewer = new JasperViewer(RelName, false, false);
+            viewer.setExtendedState(JasperViewer.MAXIMIZED_BOTH);
+            viewer.setTitle("CONTAS A PAGAR");
+            viewer.setVisible(true);
+            
+        } catch (JRException ex) {
+            System.out.println("Erro-->>"+ex);
+        }
+
     }
 
 }

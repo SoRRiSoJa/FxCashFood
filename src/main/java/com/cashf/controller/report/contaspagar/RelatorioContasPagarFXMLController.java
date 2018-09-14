@@ -67,7 +67,7 @@ public class RelatorioContasPagarFXMLController implements Initializable {
         getData();
         relatorioController.gerarDados();
         txtQtdeTitulos.setText(relatorioController.getLista().size()+"");
-        relatorioController.testarRelatorio();
+        relatorioController.testaDois();
         
     }
     private void getData(){
