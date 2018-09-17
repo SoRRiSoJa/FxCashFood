@@ -67,8 +67,10 @@
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/controller/meiopagamento/MeioPagamentoController.java
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/dao/combo/ComboDAO.java
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/controller/login/LoginController.java
+/home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/controller/report/contasreceber/RelatorioContasReceberFXMLController.java
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/controller/cliente/TabListaClientesFXMLController.java
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/model/notafiscal/NotaFiscal.java
+/home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/controller/report/contasreceber/RelatorioContasReceberController.java
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/controller/mesas/NMesaController.java
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/model/prepreparo/ProdutoPrePreparo.java
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/dao/GenericDAOIMP.java
