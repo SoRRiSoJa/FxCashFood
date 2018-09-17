@@ -8,6 +8,8 @@ package com.cashf.dao.caixa;
 import com.cashf.model.caixa.Caixa;
 import com.cashf.model.caixa.TPStatusCX;
 import dao.GenericDAOIMP;
+import java.time.LocalDate;
+import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 
@@ -26,6 +28,18 @@ public class CaixaDAO extends  GenericDAOIMP<Caixa>{
             Query query = session.createQuery(hql);
             query.setParameter("status", TPStatusCX.ABERTO);
             return (Caixa) query.getSingleResult();
+        } catch (Exception e) {
+            System.out.println("Erro:" + e);
+            return null;
+        }
+
+    }
+    public List<Caixa> listByDate(LocalDate data) {
+        try (Session session = sessionFactory.openSession()) {
+            String hql = "from Caixa cx where cx.dataAbertura = :dataA";
+            Query query = session.createQuery(hql);
+            query.setParameter("dataA", data);
+            return query.list();
         } catch (Exception e) {
             System.out.println("Erro:" + e);
             return null;

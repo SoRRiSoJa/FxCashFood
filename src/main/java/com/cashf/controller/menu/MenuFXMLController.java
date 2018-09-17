@@ -179,4 +179,9 @@ public class MenuFXMLController implements Initializable {
     private void onRelatorioContasReceber(ActionEvent event) {
     loadFXML("/fxml/relContasReceber/RelatorioContasReceberFXML.fxml");
     }
+
+    @FXML
+    private void onRelatorioFluxoCaixa(ActionEvent event) {
+        loadFXML("/fxml/relFluxoCaixa/RelatorioFluxoCaixaFXML.fxml");
+    }
 }

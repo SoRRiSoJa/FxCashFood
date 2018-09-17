@@ -140,6 +140,7 @@ com/cashf/controller/mesas/AbrirMesaFXMLController.class
 com/cashf/model/estado/Estado_.class
 com/cashf/controller/contacorrente/GerenciarContasFXMLController.class
 com/cashf/model/parametros/ParametrosFiscais_.class
+com/cashf/controller/report/fluxocaixa/RelatorioFLuxoCaixaController.class
 com/cashf/model/fichatecnica/ProdutoFichaTecnica_.class
 dao/GenericDAO.class
 com/cashf/model/prepreparo/PrePreparo_.class
@@ -183,6 +184,7 @@ com/cashf/controller/prepreparo/TabPrePreparoNFXMLController.class
 com/cashf/controller/mesas/RegistrarConsumoComboFXMLController$ButtonCellDelete.class
 com/cashf/controller/funcionario/TabFuncionarioFXMLController.class
 com/cashf/model/ajusteestoque/AjusteEstoque.class
+com/cashf/controller/report/fluxocaixa/RelatorioFluxoCaixaFXMLController.class
 com/cashf/model/notafiscal/ProdutoNotaFiscal.class
 com/cashf/controller/prepreparo/GerenciarPrePreparoFXMLController.class
 com/cashf/model/cliente/Cliente.class

@@ -25,6 +25,7 @@
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/controller/parametrizacao/ParametrosController.java
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/controller/menu/MenuSistemaFXMLController.java
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/model/estado/Estado.java
+/home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/controller/report/fluxocaixa/RelatorioFluxoCaixaFXMLController.java
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/model/pessoa/Sexo.java
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/model/produto/SituacaoTributaria.java
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/util/ProdCalcUtil.java
@@ -73,6 +74,7 @@
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/controller/report/contasreceber/RelatorioContasReceberController.java
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/controller/mesas/NMesaController.java
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/model/prepreparo/ProdutoPrePreparo.java
+/home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/controller/report/fluxocaixa/RelatorioFLuxoCaixaController.java
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/dao/GenericDAOIMP.java
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/controller/mesas/RegistrarConsumoFXMLController.java
 /home/joao/NetBeansProjects/FXCashFood/src/main/java/com/cashf/model/funcionario/Funcionario.java
