@@ -7,8 +7,11 @@ package com.cashf.controller.report.contaspagar;
 
 import com.cashf.dao.contaspagar.ContaPagarDAO;
 import com.cashf.model.contasPagar.ContaPagar;
+import com.cashf.model.contasPagar.StatusPagto;
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import static java.util.Collections.list;
+import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -31,6 +34,7 @@ public class RelatorioContasPagarController {
 
     private final ContaPagarDAO contasPagarDAO;
     private ObservableList<ContaPagar> lista;
+    private StatusPagto statusPagto;
     private LocalDate dataInicio;
     private LocalDate dataFim;
     private final String reportFilePath;
@@ -39,11 +43,20 @@ public class RelatorioContasPagarController {
         this.contasPagarDAO = new ContaPagarDAO(ContaPagar.class);
         this.lista = FXCollections.observableList(contasPagarDAO.listAll());
         this.dataInicio = this.dataFim = LocalDate.now();
-        
+
         // /home/joao/NetBeansProjects/FXCashFood/src/main/resources/reports/ContasPagarPeriodoReport.jrxml
         reportFilePath = "/home/joao/NetBeansProjects/FXCashFood/src/main/resources/reports/ContasPagarPeriodoReport.jasper";
 
     }
+
+    public StatusPagto getStatusPagto() {
+        return statusPagto;
+    }
+
+    public void setStatusPagto(StatusPagto statusPagto) {
+        this.statusPagto = statusPagto;
+    }
+    
 
     public ObservableList<ContaPagar> getLista() {
         return lista;
@@ -65,37 +78,33 @@ public class RelatorioContasPagarController {
         this.dataFim = dataFim;
     }
 
-    public void gerarDados() {
-        this.lista = FXCollections.observableList(contasPagarDAO.listByPeriodo(dataInicio, dataFim));
+    public BigDecimal totalPeriodo() {
+        BigDecimal total = BigDecimal.ZERO;
+        for (ContaPagar cp : lista) {
+            total = total.add(cp.getValorBruto());
+        }
+        return total;
     }
 
-    public void testarRelatorio() {
-        try {
-            // First, compile jrxml file.
-            JasperReport jasperReport = JasperCompileManager.compileReport(reportFilePath);
-            JRBeanCollectionDataSource beanColDataSource = new JRBeanCollectionDataSource(lista);
-            JasperPrint print = JasperFillManager.fillReport(jasperReport, null, beanColDataSource);
-            JRViewer viewer = new JRViewer(print);
-            viewer.setOpaque(true);
-            viewer.setVisible(true);
-        } catch (JRException ex) {
-            Logger.getLogger(RelatorioContasPagarController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+    public void gerarDados() {
+        this.lista = FXCollections.observableList(contasPagarDAO.listByPeriodoAndStatus(dataInicio, dataFim,statusPagto));
     }
-    public void testaDois(){
-     try {
-         lista.forEach((cp) -> {
-             System.out.println(cp.getDescricao()+"|"+cp.getFavorecido()+"|"+cp.getDataVencimento()+"|"+cp.getValorBruto());
-         });
-        JRBeanCollectionDataSource beanColDataSource = new JRBeanCollectionDataSource(lista);            
+
+    
+    public void testaDois() {
+        try {
+            lista.forEach((cp) -> {
+                System.out.println(cp.getDescricao() + "|" + cp.getFavorecido() + "|" + cp.getDataVencimento() + "|" + cp.getValorBruto());
+            });
+            JRBeanCollectionDataSource beanColDataSource = new JRBeanCollectionDataSource(lista);
             String RelName = JasperFillManager.fillReportToFile(reportFilePath, null, beanColDataSource);
             JasperViewer viewer = new JasperViewer(RelName, false, false);
             viewer.setExtendedState(JasperViewer.MAXIMIZED_BOTH);
             viewer.setTitle("CONTAS A PAGAR");
             viewer.setVisible(true);
-            
+
         } catch (JRException ex) {
-            System.out.println("Erro-->>"+ex);
+            System.out.println("Erro-->>" + ex);
         }
 
     }

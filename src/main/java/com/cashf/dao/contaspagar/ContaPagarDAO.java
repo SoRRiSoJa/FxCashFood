@@ -40,14 +40,16 @@ public class ContaPagarDAO extends GenericDAOIMP<ContaPagar> {
             return BigDecimal.ZERO;
         }
     }
-    public List<ContaPagar> listByPeriodo(LocalDate dataIni, LocalDate dataFin) {
+    
+    public List<ContaPagar> listByPeriodoAndStatus(LocalDate dataIni, LocalDate dataFin,StatusPagto status) {
         try (Session session = sessionFactory.openSession()) {
-            String hql = "from ContaPagar cap where cap.dataVencimento between :dataIni and :dataFin "
+            String hql = "from ContaPagar cap WHERE cap.dataVencimento BETWEEN :dataIni AND :dataFin AND cap.statusPagto LIKE :status "
                     + " ";
 
             List<ContaPagar> roleList = session.createQuery(hql)
                     .setParameter("dataIni", dataIni)
                     .setParameter("dataFin", dataFin)
+                    .setParameter("status", status)
                     .list();
             return roleList;
         } catch (Exception e) {
