@@ -81,6 +81,7 @@ com/cashf/model/meiopagamento/MeioPagamento.class
 com/cashf/model/fichatecnica/FichaTecnica_.class
 com/cashf/controller/combos/ComboController.class
 com/cashf/dao/fornecedor/FornecedorDAO.class
+com/cashf/controller/report/prepreparo/RelatorioPrePreparoController.class
 com/cashf/model/cidade/Cidade.class
 com/cashf/controller/ajusteestoque/AjustarEstoqueFXMLController.class
 controller/GenericViewController.class
@@ -155,6 +156,7 @@ com/cashf/controller/menu/FXMenuFXMLController.class
 com/cashf/dao/caixamovimento/CaixaMovimentoDAO.class
 util/SafePass.class
 com/cashf/controller/login/LoginController.class
+com/cashf/controller/report/prepreparo/RelatorioPrePreparoFXMLController.class
 com/cashf/model/fichatecnica/ProdutoFichaTecnica.class
 com/cashf/core/venda/VendaController.class
 com/cashf/controller/menu/MenuSistemaFXMLController.class
