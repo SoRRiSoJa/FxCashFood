@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.cashf.controller.report.prepreparo;
+package com.cashf.controller.report.fichatecnica;
 
-import com.cashf.model.prepreparo.PrePreparo;
+import com.cashf.model.fichatecnica.FichaTecnica;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
@@ -23,8 +23,10 @@ import javafx.scene.layout.Pane;
  *
  * @author joao
  */
-public class RelatorioPrePreparoFXMLController implements Initializable {
+public class RelatorioFichaTecnicaFXMLController implements Initializable {
 
+    @FXML
+    private Pane paneRoot;
     @FXML
     private JFXButton btnImprimir;
     @FXML
@@ -38,11 +40,7 @@ public class RelatorioPrePreparoFXMLController implements Initializable {
     @FXML
     private JFXButton btnPesquisar;
     @FXML
-    private JFXComboBox<PrePreparo> cbbPrepreparo;
-    //----
-    RelatorioPrePreparoController relatorioController;
-    @FXML
-    private Pane paneRoot;
+    private JFXComboBox<FichaTecnica> cbbFicha;
 
     /**
      * Initializes the controller class.
@@ -50,13 +48,10 @@ public class RelatorioPrePreparoFXMLController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        this.relatorioController = new RelatorioPrePreparoController();
-        loadCbb();
-    }
+    }    
 
     @FXML
     private void onSalvar(ActionEvent event) {
-        relatorioController.gerarRelatorio();
     }
 
     @FXML
@@ -69,19 +64,10 @@ public class RelatorioPrePreparoFXMLController implements Initializable {
 
     @FXML
     private void onPesquisar(ActionEvent event) {
-        
-        txtTotal.setText("R$ "+relatorioController.getPrePreparo().getCustoTotal().toString());
-        txtVAlorIncial.setText(relatorioController.getPrePreparo().getRendimento()+"");
     }
 
     @FXML
-    private void onPrepreparo(ActionEvent event) {
-        if (cbbPrepreparo.getSelectionModel().getSelectedItem() != null) {
-            relatorioController.setPrePreparo(cbbPrepreparo.getItems().get(cbbPrepreparo.getSelectionModel().getSelectedIndex()));
-        }
+    private void onFicha(ActionEvent event) {
     }
-
-    private void loadCbb() {
-        cbbPrepreparo.setItems(relatorioController.getLista());
-    }
+    
 }

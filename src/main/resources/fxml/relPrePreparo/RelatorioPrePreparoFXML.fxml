@@ -13,8 +13,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="672.0" minWidth="1366.0" prefHeight="672.0" prefWidth="1366.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cashf.controller.report.prepreparo.RelatorioPrePreparoFXMLController">
+<Pane fx:id="paneRoot" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="672.0" minWidth="1366.0" prefHeight="672.0" prefWidth="1366.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cashf.controller.report.prepreparo.RelatorioPrePreparoFXMLController">
    <children>
       <Pane prefHeight="30.0" prefWidth="1366.0" style="-fx-background-color: #0081cb;">
          <children>
