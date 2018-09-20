@@ -190,4 +190,9 @@ public class MenuFXMLController implements Initializable {
         loadFXML("/fxml/relPrePreparo/RelatorioPrePreparoFXML.fxml");
         
     }
+
+    @FXML
+    private void onRelatorioFichaTecnica(ActionEvent event) {
+    loadFXML("/fxml/relFichaTecnica/RelatorioFichaTecnicaFXML.fxml");
+    }
 }

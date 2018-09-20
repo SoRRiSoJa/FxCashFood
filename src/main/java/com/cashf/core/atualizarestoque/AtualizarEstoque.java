@@ -115,6 +115,9 @@ public class AtualizarEstoque {
             produto.setUnidadeMedida(unidadeMEdida);
             produto.setPreco_custo(prePreparo.getCustoTotal().divide(prePreparo.getRendimento()));
             produto.setPreco_venda(prePreparo.getCustoTotal().divide(prePreparo.getRendimento()));
+            System.out.println("PVenda:"+produto.getPreco_venda());
+            System.out.println("PCusto:"+produto.getPreco_custo());
+            System.out.println("Estoque:"+produto.getUnidadesEstoque());
             produtoDAO.update(produto);
         } catch (Exception ex) {
             System.out.println("Erro ao adicionar Pre-preparo:--->>>> " + ex);

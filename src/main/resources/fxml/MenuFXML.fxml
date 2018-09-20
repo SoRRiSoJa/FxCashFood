@@ -34,6 +34,7 @@
                         <MenuItem mnemonicParsing="false" onAction="#onRelatorioContasReceber" text="Relatório Contas a Receber" />
                         <MenuItem mnemonicParsing="false" onAction="#onRelatorioFluxoCaixa" text="Relatório Fluxo de Caixa" />
                         <MenuItem mnemonicParsing="false" onAction="#onRelatorioPrePreparo" text="Ficha de Pré-Preparo" />
+                        <MenuItem mnemonicParsing="false" onAction="#onRelatorioFichaTecnica" text="Ficha Tecnica de Produto" />
                      </items>
                   </Menu>
                   <Menu mnemonicParsing="false" text="Ajuda">

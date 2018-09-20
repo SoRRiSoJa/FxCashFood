@@ -128,6 +128,7 @@ com/cashf/controller/menu/GavetasERPFXMLController.class
 com/cashf/controller/contaspagar/ContasPagarFXMLController$2.class
 com/cashf/model/produto/Produto.class
 com/cashf/controller/mesas/GerenciarMesasFXMLController$ButtonCellShift$1.class
+com/cashf/controller/report/fichatecnica/RelatorioFichaTecnicaFXMLController.class
 com/cashf/controller/contaspagar/ContasReceberFXMLController$ButtonCellPay.class
 com/cashf/controller/mesas/RegistrarConsumoFXMLController$ButtonCellDelete.class
 com/cashf/controller/mesas/FecharMesaFXMLController.class
@@ -241,6 +242,7 @@ com/cashf/model/telefone/Telefone.class
 com/cashf/controller/funcionario/TabFuncionarioFXMLController$1.class
 com/cashf/controller/receberpedido/ReceberPedidoFXMLController$1.class
 com/cashf/model/caixa/CaixaMovimento.class
+com/cashf/controller/report/fichatecnica/RelatorioFichaTecnicaController.class
 com/cashf/controller/produto/GerenciarGruposFXMLController.class
 com/cashf/controller/receberpedido/ReceberPedidoFXMLController$ButtonCellDelete.class
 com/cashf/controller/mesas/MesaController.class

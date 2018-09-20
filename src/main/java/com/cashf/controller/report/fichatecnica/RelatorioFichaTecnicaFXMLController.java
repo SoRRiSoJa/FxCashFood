@@ -41,17 +41,20 @@ public class RelatorioFichaTecnicaFXMLController implements Initializable {
     private JFXButton btnPesquisar;
     @FXML
     private JFXComboBox<FichaTecnica> cbbFicha;
-
+    //----
+    private RelatorioFichaTecnicaController relatorioController;
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        this.relatorioController=new RelatorioFichaTecnicaController();
+        loadCbb();
     }    
 
     @FXML
     private void onSalvar(ActionEvent event) {
+        relatorioController.gerarRelatorio();
     }
 
     @FXML
@@ -64,10 +67,18 @@ public class RelatorioFichaTecnicaFXMLController implements Initializable {
 
     @FXML
     private void onPesquisar(ActionEvent event) {
+        txtTotal.setText("R$ "+relatorioController.getFichaTecnica().getCustoTotal().toString());
+        txtVAlorIncial.setText(relatorioController.getFichaTecnica().getDataProducao().toString());
     }
 
     @FXML
     private void onFicha(ActionEvent event) {
+         if (cbbFicha.getSelectionModel().getSelectedItem() != null) {
+            relatorioController.setFichaTecnica(cbbFicha.getItems().get(cbbFicha.getSelectionModel().getSelectedIndex()));
+        }
+    }
+    private void loadCbb(){
+        cbbFicha.setItems(relatorioController.getLista());
     }
     
 }
