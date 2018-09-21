@@ -208,6 +208,7 @@ util/ImageHandler.class
 com/cashf/model/meiopagamento/MeioPagamento_.class
 com/cashf/model/banco/Banco_.class
 com/cashf/controller/combos/GerenciarCombosFXMLController.class
+com/cahsf/model/dto/dtoraking/RankingDTO.class
 controller/GenericController.class
 com/cashf/model/telefone/Operadora.class
 com/cashf/model/fornecedor/Fornecedor_.class
