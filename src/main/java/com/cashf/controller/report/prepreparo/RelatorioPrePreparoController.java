@@ -6,8 +6,10 @@
 package com.cashf.controller.report.prepreparo;
 
 import com.cashf.dao.prepreparo.PrePreparoDAO;
+import com.cashf.dao.venda.VendaDAO;
 import com.cashf.model.prepreparo.PrePreparo;
 import com.cashf.model.prepreparo.ProdutoPrePreparo;
+import com.cashf.model.venda.Venda;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -25,12 +27,14 @@ import net.sf.jasperreports.view.JasperViewer;
 public class RelatorioPrePreparoController {
 
     private final PrePreparoDAO prePreparoDAO;
+    private final VendaDAO vendaDAO;
     private ObservableList<PrePreparo> lista;
     private ObservableList<ProdutoPrePreparo> listaProd;
     private PrePreparo prePreparo;
     private final String reportFilePath;
     private Map<String, Object> parameters;
     public RelatorioPrePreparoController() {
+        this.vendaDAO=new VendaDAO(Venda.class);
         this.prePreparoDAO = new PrePreparoDAO(PrePreparo.class);
         this.lista = FXCollections.observableList(prePreparoDAO.listAll());
         this.prePreparo = new PrePreparo();
@@ -39,6 +43,7 @@ public class RelatorioPrePreparoController {
         this.prePreparo.setListaProdutos(FXCollections.observableList(new ArrayList<>()));
         this.reportFilePath="/home/joao/NetBeansProjects/FXCashFood/src/main/resources/reports/RelPrePreparo.jasper";
         this.parameters= new HashMap<>();
+        vendaDAO.rankingProdutos();
     }
 
     public ObservableList<PrePreparo> getLista() {
